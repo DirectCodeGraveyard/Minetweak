@@ -40,11 +40,6 @@ public class DedicatedServer extends MinecraftServer implements IServer
         var1.start();
         this.getLogAgent().func_98233_a("Starting minecraft server version 1.5.2");
 
-        if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L)
-        {
-            this.getLogAgent().func_98236_b("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
-        }
-
         this.getLogAgent().func_98233_a("Loading properties");
         this.settings = new PropertyManager(new File("server.properties"), this.getLogAgent());
 
