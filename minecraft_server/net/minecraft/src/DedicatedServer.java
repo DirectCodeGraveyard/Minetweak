@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
+import com.directmyfile.betterthanbukkit.BetterThanBukkit;
 import net.minecraft.server.MinecraftServer;
 
 public class DedicatedServer extends MinecraftServer implements IServer
@@ -159,6 +161,11 @@ public class DedicatedServer extends MinecraftServer implements IServer
         long var12 = System.nanoTime() - var4;
         String var14 = String.format("%.3fs", new Object[] {Double.valueOf((double)var12 / 1.0E9D)});
         this.getLogAgent().func_98233_a("Done (" + var14 + ")! For help, type \"help\" or \"?\"");
+
+        /**
+         * Tell BetterThanBukkit that we are done loading the server
+         */
+        BetterThanBukkit.setServerDoneLoading();
 
         if (this.settings.getBooleanProperty("enable-query", false))
         {
