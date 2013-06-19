@@ -45,4 +45,11 @@ public class BetterThanBukkit {
         isServerDoneLoading = true;
     }
 
+    public static boolean hadRamWarning() {
+        return hadRamWarning;
+    }
+
+    public static void registerPlayer(String playerUsername) {
+        
+    }
 }
