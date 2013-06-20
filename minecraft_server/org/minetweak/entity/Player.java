@@ -15,19 +15,11 @@ public class Player {
     }
 
     public boolean kickPlayer() {
-        if (Server.kickPlayer(playerDisplayName)) {
-            return true;
-        } else {
-            return false;
-        }
+        return Server.kickPlayer(playerDisplayName);
     }
 
     public boolean banPlayer() {
-        if (Server.banPlayer(playerDisplayName)) {
-            return true;
-        } else {
-            return false;
-        }
+        return Server.banPlayer(playerDisplayName);
     }
 
 }
