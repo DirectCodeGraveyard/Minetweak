@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import com.directmyfile.betterthanbukkit.BetterThanBukkit;
+import org.minetweak.Minetweak;
 import net.minecraft.server.MinecraftServer;
 
 public class DedicatedServer extends MinecraftServer implements IServer
@@ -158,9 +158,9 @@ public class DedicatedServer extends MinecraftServer implements IServer
         this.getLogAgent().func_98233_a("Done (" + var14 + ")! For help, type \"help\" or \"?\"");
 
         /**
-         * Tell BetterThanBukkit that we are done loading the server
+         * Tell Minetweak that we are done loading the server
          */
-        BetterThanBukkit.setServerDoneLoading();
+        Minetweak.setServerDoneLoading();
 
         if (this.settings.getBooleanProperty("enable-query", false))
         {

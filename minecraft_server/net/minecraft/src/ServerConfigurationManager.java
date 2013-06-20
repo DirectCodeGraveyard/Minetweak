@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
 
 public abstract class ServerConfigurationManager
 {
@@ -81,7 +82,7 @@ public abstract class ServerConfigurationManager
         var7.sendPacket(new Packet6SpawnPosition(var6.posX, var6.posY, var6.posZ));
         var7.sendPacket(new Packet202PlayerAbilities(par2EntityPlayerMP.capabilities));
         var7.sendPacket(new Packet16BlockItemSwitch(par2EntityPlayerMP.inventory.currentItem));
-        this.func_96456_a((ServerScoreboard)var5.getScoreboard(), par2EntityPlayerMP);
+        this.func_96456_a((ServerScoreboard) var5.getScoreboard(), par2EntityPlayerMP);
         this.updateTimeAndWeatherForPlayer(par2EntityPlayerMP, var5);
         this.sendPacketToAllPlayers(new Packet3Chat(EnumChatFormatting.YELLOW + par2EntityPlayerMP.getTranslatedEntityName() + EnumChatFormatting.YELLOW + " joined the game."));
         this.playerLoggedIn(par2EntityPlayerMP);
@@ -116,6 +117,7 @@ public abstract class ServerConfigurationManager
                 var10.field_98038_p = false;
             }
         }
+        Minetweak.registerPlayer(par2EntityPlayerMP.getEntityName());
     }
 
     protected void func_96456_a(ServerScoreboard par1ServerScoreboard, EntityPlayerMP par2EntityPlayerMP)
