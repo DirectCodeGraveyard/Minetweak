@@ -7,11 +7,13 @@ import java.util.ArrayList;
 
 public class Minetweak {
 
-    private static String minecraftVersion = "1.5.2";
-    private static String serverVersion = "0.0.1";
+    //TODO: Write JavaDocs for every public method
+
+    private static final String minecraftVersion = "1.5.2";
+    private static final String serverVersion = "0.0.1";
 
     private static boolean isServerDoneLoading = false;
-    private static boolean hadRamWarning;
+    private static boolean hadRamWarning = false;
     private static boolean lockdownEnabled = false;
 
     private static ArrayList<String> playerUsernameList = new ArrayList<String>();
@@ -36,6 +38,10 @@ public class Minetweak {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static String getMinecraftVersion() {
         return minecraftVersion;
     }
