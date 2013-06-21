@@ -39,37 +39,56 @@ public class Minetweak {
     }
 
     /**
-     *
-     * @return
+     * What Minecraft version are we running?
+     * @return Minecraft Version
      */
     public static String getMinecraftVersion() {
         return minecraftVersion;
     }
 
+    /**
+     * What Minetweak server version are we running?
+     * @return Minetweak Server Version
+     */
     public static String getServerVersion() {
         return serverVersion;
     }
 
+    /**
+     * Is the server done loading?
+     * @return
+     */
     public static boolean isServerDoneLoading() {
         return isServerDoneLoading;
     }
 
+    /**
+     * Tell Minetweak that the Minecraft server itself has finished loading
+     */
     public static void setServerDoneLoading() {
         isServerDoneLoading = true;
     }
 
+    /**
+     * Return true if the server had a RAM warning showing that we need to use more of it
+     * @return If the server had a RAM warning
+     */
     public static boolean hadRamWarning() {
         return hadRamWarning;
     }
 
-    public static void registerPlayer(String playerUsername) {
+    /**
+     * Register a player into Minetweak
+     * @param playerUsername Player name we are registering
+     */
+    public static boolean registerPlayer(String playerUsername) {
         Player targetPlayerInstance = new Player(playerUsername);
         for (String s : playerUsernameList) {
             if (s == playerUsername) {
                 System.out.println(playerUsername + " was already registered!");
                 // TODO: Add a kick message of Internal server error or something
                 targetPlayerInstance.kickPlayer();
-                return;
+                return false;
             }
         }
         playerArrayList.add(targetPlayerInstance);
@@ -77,10 +96,14 @@ public class Minetweak {
         System.out.println(playerUsername + " has been registered successfully!");
         if (lockdownEnabled) {
             targetPlayerInstance.kickPlayer();
+            return false;
         }
+        return true;
     }
 
-    public static void unregisterPlayer(String playerUsername) {
-        //Player
-    }
+    /**
+     * Unregister a player out of Minetweak
+     * @param playerUsername Player name we are unregistering
+     */
+    public static void unregisterPlayer(String playerUsername) {}
 }
