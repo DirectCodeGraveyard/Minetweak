@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class Minetweak {
 
-    //TODO: Write JavaDocs for every public method
-
     private static final String minecraftVersion = "1.5.2";
     private static final String serverVersion = "0.0.1";
 
