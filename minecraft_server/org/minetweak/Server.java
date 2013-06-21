@@ -81,4 +81,8 @@ public class Server {
         }
     }
 
+    public static void shutdownServer() {
+        MinecraftServer.getServer().initiateShutdown();
+    }
+
 }
