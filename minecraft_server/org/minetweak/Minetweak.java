@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Minetweak {
 
     private static final String minecraftVersion = "1.5.2";
-    private static final String serverVersion = "0.0.1";
+    private static final String serverVersion = "0.0.2";
 
     private static boolean isServerDoneLoading = false;
     private static boolean hadRamWarning = false;
