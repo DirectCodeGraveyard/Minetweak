@@ -2,6 +2,7 @@ package org.minetweak;
 
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.entity.Player;
+import org.minetweak.permissions.PermissionNode;
 
 import java.util.ArrayList;
 
@@ -14,7 +15,6 @@ public class Minetweak {
     private static boolean hadRamWarning = false;
     private static boolean lockdownEnabled = false;
 
-    private static ArrayList<String> playerUsernameList = new ArrayList<String>();
     private static ArrayList<Player> playerArrayList = new ArrayList<Player>();
 
     public static void main(String[] args) {
@@ -81,16 +81,13 @@ public class Minetweak {
      */
     public static boolean registerPlayer(String playerUsername) {
         Player targetPlayerInstance = new Player(playerUsername);
-        for (String s : playerUsernameList) {
-            if (s == playerUsername) {
+        /*{
                 System.out.println(playerUsername + " was already registered!");
                 // TODO: Add a kick message of Internal server error or something
                 targetPlayerInstance.kickPlayer();
                 return false;
-            }
-        }
+        }*/
         playerArrayList.add(targetPlayerInstance);
-        playerUsernameList.add(playerUsername);
         System.out.println(playerUsername + " has been registered successfully!");
         if (lockdownEnabled) {
             targetPlayerInstance.kickPlayer();
