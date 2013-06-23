@@ -1,0 +1,18 @@
+apply plugin: 'java'
+
+jar {
+    manifest {
+        attributes('Main-class': 'org.minetweak.Minetweak')
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'minecraft_server'
+        }
+        resources {
+            srcDir 'resources'
+        }
+    }
+}
