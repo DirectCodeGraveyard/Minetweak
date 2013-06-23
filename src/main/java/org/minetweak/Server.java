@@ -10,12 +10,12 @@ public class Server {
     /**
      * Broadcast a message to the server, this allows you to tell everyone something at the same time easily
      * @param message The message you want to broadcast to every player and to the console
-     * @return if the message was properly broadcasted
+     * @return if the message was properly broadcast
      */
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
             String var3 = CommandBase.func_82361_a(null, new String[]{message}, 0, true);
-            MinecraftServer.getServer().getConfigurationManager().sendChatMsg(String.format("[%s] %s", new Object[] {"SERVER", var3}));
+            MinecraftServer.getServer().getConfigurationManager().sendChatMsg(String.format("[%s] %s", "SERVER", var3));
             return true;
         } else {
             return false;
@@ -91,8 +91,7 @@ public class Server {
     public static void handleCommand(EntityPlayerMP player, String command) {
         System.out.println(player.getEntityName() + " " + command);
 
-        if (command.startsWith("/"))
-        {
+        if (command.startsWith("/")) {
             command = command.substring(1);
         }
 
@@ -108,9 +107,7 @@ public class Server {
         }
 
 
-        if (!Minetweak.doesCommandExist(commandWithArgs[0])) {
-            return;
-        } else {
+        if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
         }
     }

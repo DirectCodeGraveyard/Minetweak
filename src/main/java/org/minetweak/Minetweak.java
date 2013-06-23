@@ -60,7 +60,7 @@ public class Minetweak {
 
     /**
      * Is the server done loading?
-     * @return
+     * @return true if the server is done loading
      */
     public static boolean isServerDoneLoading() {
         return isServerDoneLoading;
@@ -118,8 +118,7 @@ public class Minetweak {
     }
 
     public static boolean doesCommandExist(String command) {
-        if (commandExecutors.containsKey(command)) return true;
-        return false;
+        return commandExecutors.containsKey(command);
     }
 
     public static CommandExecutor getCommandByName(String command) {

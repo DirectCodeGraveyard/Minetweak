@@ -14,13 +14,4 @@ public class PlayerChatEvent extends PlayerEvent {
     public String getMessage() {
         return message;
     }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
 }

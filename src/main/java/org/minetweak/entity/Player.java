@@ -4,12 +4,13 @@ import org.minetweak.Server;
 import org.minetweak.command.CommandSender;
 import org.minetweak.permissions.PermissionNode;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 public class Player implements CommandSender {
 
     private String playerDisplayName;
-    private ArrayList<PermissionNode> playerPermissions = new ArrayList<PermissionNode>();
+    private HashMap<String, PermissionNode> playerPermissions = new HashMap<String, PermissionNode>();
 
     public Player(String playerDisplayName) {
         this.playerDisplayName = playerDisplayName;
@@ -42,23 +43,24 @@ public class Player implements CommandSender {
     /**
      * Give permission to the player
      * @param permissionNode Node of the permission that you want to give the player
-     * @return
+     * @return if the permission was added
      */
     protected boolean givePermission(String permissionNode) {
-        if (!playerPermissions.contains(permissionNode)) {
-            playerPermissions.add(new PermissionNode(permissionNode));
+        if (!playerPermissions.containsKey(permissionNode)) {
+            playerPermissions.put(permissionNode, new PermissionNode(permissionNode));
             return true;
         }
         return false;
     }
 
     public Object[] getPlayerPermissions() {
-        return playerPermissions.toArray();
+        Set<String> perms = playerPermissions.keySet();
+        return perms.toArray(new String[perms.size()]);
     }
 
     public boolean hasPermission(String permissionNode) {
-        for (PermissionNode p : playerPermissions) {
-            if (p.getPermissionNode() == permissionNode) {
+        for (PermissionNode p : playerPermissions.values()) {
+            if (p.getPermissionNode().equals(permissionNode)) {
                 return true;
             }
         }

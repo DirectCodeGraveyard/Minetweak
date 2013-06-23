@@ -1,4 +1,9 @@
 package org.minetweak.event;
 
-public interface Listener {
+import org.minetweak.event.player.PlayerChatEvent;
+
+public class Listener {
+    public void onPlayerChat(PlayerChatEvent event) {
+        
+    }
 }

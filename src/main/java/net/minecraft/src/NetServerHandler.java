@@ -2,6 +2,9 @@ package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Server;
+import org.minetweak.entity.Player;
+import org.minetweak.event.Listeners;
+import org.minetweak.event.player.PlayerChatEvent;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -638,6 +641,7 @@ public class NetServerHandler extends NetHandler
                         return;
                     }
 
+                    Listeners.execute(new PlayerChatEvent(new Player(this.playerEntity.getCommandSenderName()), var2));
                     var2 = "<" + this.playerEntity.getTranslatedEntityName() + "> " + var2;
                     this.mcServer.getLogAgent().func_98233_a(var2);
                     this.mcServer.getConfigurationManager().sendPacketToAllPlayers(new Packet3Chat(var2, false));
