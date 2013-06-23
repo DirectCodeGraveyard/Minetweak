@@ -81,8 +81,38 @@ public class Server {
         }
     }
 
+    /**
+     * Shutdown the server immediately
+     */
     public static void shutdownServer() {
         MinecraftServer.getServer().initiateShutdown();
+    }
+
+    public static void handleCommand(EntityPlayerMP player, String command) {
+        System.out.println(player.getEntityName() + " " + command);
+
+        if (command.startsWith("/"))
+        {
+            command = command.substring(1);
+        }
+
+        System.out.println(command);
+        String[] commandWithArgs = command.split(" ");
+        String commandOnly = commandWithArgs[0];
+        String[] args = new String[]{};
+
+        if (commandWithArgs.length <= 1) {
+            for (int i = 1; i < commandWithArgs.length; i++) {
+                commandWithArgs[commandWithArgs.length] = commandWithArgs[i];
+            }
+        }
+
+
+        if (!Minetweak.doesCommandExist(commandWithArgs[0])) {
+            return;
+        } else {
+            Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
+        }
     }
 
 }

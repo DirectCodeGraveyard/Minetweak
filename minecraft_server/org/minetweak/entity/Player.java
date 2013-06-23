@@ -1,11 +1,12 @@
 package org.minetweak.entity;
 
 import org.minetweak.Server;
+import org.minetweak.command.CommandSender;
 import org.minetweak.permissions.PermissionNode;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements CommandSender {
 
     private String playerDisplayName;
     private ArrayList<PermissionNode> playerPermissions = new ArrayList<PermissionNode>();
@@ -62,5 +63,15 @@ public class Player {
             }
         }
         return false;
+    }
+
+    @Override
+    public void sendMessage(String message) {
+
+    }
+
+    @Override
+    public String getName() {
+        return getDisplayName();
     }
 }

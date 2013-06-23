@@ -1,10 +1,12 @@
 package org.minetweak;
 
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.command.CommandExecutor;
+import org.minetweak.command.CommandHelp;
+import org.minetweak.command.CommandStop;
 import org.minetweak.entity.Player;
-import org.minetweak.permissions.PermissionNode;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Minetweak {
 
@@ -15,11 +17,15 @@ public class Minetweak {
     private static boolean hadRamWarning = false;
     private static boolean lockdownEnabled = false;
 
-    private static ArrayList<Player> playerArrayList = new ArrayList<Player>();
+    private static HashMap<String, Player> playerArrayList = new HashMap<String, Player>();
+    private static HashMap<String, CommandExecutor> commandExecutors = new HashMap<String, CommandExecutor>();
 
     public static void main(String[] args) {
         System.out.println("Success is very tasty.");
         System.out.println("Minetweak v" + getServerVersion() + " using Minecraft v" + getMinecraftVersion());
+
+        commandExecutors.put("help", new CommandHelp());
+        commandExecutors.put("stop", new CommandStop());
 
         ramCheck();
 
@@ -87,7 +93,7 @@ public class Minetweak {
                 targetPlayerInstance.kickPlayer();
                 return false;
         }*/
-        playerArrayList.add(targetPlayerInstance);
+        playerArrayList.put(playerUsername, targetPlayerInstance);
         System.out.println(playerUsername + " has been registered successfully!");
         if (lockdownEnabled) {
             targetPlayerInstance.kickPlayer();
@@ -100,5 +106,28 @@ public class Minetweak {
      * Unregister a player out of Minetweak
      * @param playerUsername Player name we are unregistering
      */
-    public static void unregisterPlayer(String playerUsername) {}
+    public static void unregisterPlayer(String playerUsername) {
+
+    }
+
+    public static Player getPlayerByName(String playerName) {
+        if (playerArrayList.containsKey(playerName)) {
+            return playerArrayList.get(playerName);
+        }
+        return null;
+    }
+
+    public static boolean doesCommandExist(String command) {
+        if (commandExecutors.containsKey(command)) return true;
+        return false;
+    }
+
+    public static CommandExecutor getCommandByName(String command) {
+        if (commandExecutors.containsKey(command)) {
+            return commandExecutors.get(command);
+        } else {
+            return null;
+        }
+    }
+
 }
