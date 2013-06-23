@@ -12,7 +12,7 @@ sourceSets {
             srcDir 'minecraft_server'
         }
         resources {
-            srcDir 'minecraft_server/lang/'
+            srcDir 'resources/'
         }
     }
 }
