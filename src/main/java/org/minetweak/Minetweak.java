@@ -5,6 +5,7 @@ import org.minetweak.command.CommandExecutor;
 import org.minetweak.command.CommandHelp;
 import org.minetweak.command.CommandStop;
 import org.minetweak.entity.Player;
+import org.minetweak.plugins.PluginLoader;
 
 import java.util.HashMap;
 
@@ -26,6 +27,9 @@ public class Minetweak {
 
         commandExecutors.put("help", new CommandHelp());
         commandExecutors.put("stop", new CommandStop());
+
+        PluginLoader.initialize();
+        PluginLoader.enablePlugins();
 
         ramCheck();
 

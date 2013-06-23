@@ -1,7 +1,18 @@
 package org.minetweak.plugins;
 
 /**
- * Just a placeholder for the future Plugin class. Move along now.
+ * The base of all Plugin
  */
 
-public class Plugin {}
+public abstract class Plugin {
+    public abstract String getName();
+    public abstract String getVersion();
+
+    public void onEnable() {
+
+    }
+
+    public void onDisable() {
+
+    }
+}
