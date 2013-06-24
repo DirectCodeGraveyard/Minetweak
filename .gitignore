@@ -3,5 +3,4 @@
 out/
 jar/
 lib/
-build/
-.gradle
+lib/
