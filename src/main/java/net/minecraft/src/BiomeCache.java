@@ -17,7 +17,7 @@ public class BiomeCache
     private LongHashMap cacheMap = new LongHashMap();
 
     /** The list of cached BiomeCacheBlocks */
-    private List cache = new ArrayList();
+    private List<BiomeCacheBlock> cache = new ArrayList<BiomeCacheBlock>();
 
     public BiomeCache(WorldChunkManager par1WorldChunkManager)
     {

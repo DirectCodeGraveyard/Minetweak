@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
-import java.awt.GraphicsEnvironment;
+import net.minecraft.src.*;
+
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.security.KeyPair;
@@ -11,64 +13,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.minecraft.src.AnvilSaveConverter;
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.CallableIsServerModded;
-import net.minecraft.src.CallableServerMemoryStats;
-import net.minecraft.src.CallableServerProfiler;
-import net.minecraft.src.ChunkCoordinates;
-import net.minecraft.src.CommandBase;
-import net.minecraft.src.ConvertingProgressUpdate;
-import net.minecraft.src.CrashReport;
-import net.minecraft.src.DedicatedServer;
-import net.minecraft.src.DemoWorldServer;
-import net.minecraft.src.DispenserBehaviors;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.EnumGameType;
-import net.minecraft.src.ICommandManager;
-import net.minecraft.src.ICommandSender;
-import net.minecraft.src.ILogAgent;
-import net.minecraft.src.IPlayerUsage;
-import net.minecraft.src.IProgressUpdate;
-import net.minecraft.src.ISaveFormat;
-import net.minecraft.src.ISaveHandler;
-import net.minecraft.src.IUpdatePlayerListBox;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.MinecraftException;
-import net.minecraft.src.NetworkListenThread;
-import net.minecraft.src.Packet;
-import net.minecraft.src.Packet4UpdateTime;
-import net.minecraft.src.PlayerUsageSnooper;
-import net.minecraft.src.Profiler;
-import net.minecraft.src.RConConsoleSource;
-import net.minecraft.src.ReportedException;
-import net.minecraft.src.ServerCommandManager;
-import net.minecraft.src.ServerConfigurationManager;
-import net.minecraft.src.StatList;
-import net.minecraft.src.StringTranslate;
-import net.minecraft.src.StringUtils;
-import net.minecraft.src.ThreadDedicatedServer;
-import net.minecraft.src.ThreadMinecraftServer;
-import net.minecraft.src.World;
-import net.minecraft.src.WorldInfo;
-import net.minecraft.src.WorldManager;
-import net.minecraft.src.WorldServer;
-import net.minecraft.src.WorldServerMulti;
-import net.minecraft.src.WorldSettings;
-import net.minecraft.src.WorldType;
 
-public abstract class MinecraftServer implements ICommandSender, Runnable, IPlayerUsage
+public abstract class MinecraftServer implements ICommandSender, Runnable
 {
     /** Instance of Minecraft Server. */
     private static MinecraftServer mcServer = null;
     private final ISaveFormat anvilConverterForAnvilFile;
 
-    /** The PlayerUsageSnooper instance. */
-    private final PlayerUsageSnooper usageSnooper = new PlayerUsageSnooper("server", this);
     private final File anvilFile;
 
     /** List of names of players who are online. */
-    private final List playersOnline = new ArrayList();
+    private final List<IUpdatePlayerListBox> playersOnline = new ArrayList<IUpdatePlayerListBox>();
     private final ICommandManager commandManager;
     public final Profiler theProfiler = new Profiler();
 
@@ -391,11 +346,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 WorldServer var2 = this.worldServers[var1];
                 var2.flush();
             }
-
-            if (this.usageSnooper != null && this.usageSnooper.isSnooperRunning())
-            {
-                this.usageSnooper.stopSnooper();
-            }
         }
     }
 
@@ -473,7 +423,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             }
             else
             {
-                this.finalTick((CrashReport)null);
+                this.finalTick(null);
             }
         }
         catch (Throwable var48)
@@ -574,19 +524,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.lastReceivedID = Packet.receivedID;
         this.receivedPacketSizeArray[this.tickCounter % 100] = Packet.receivedSize - this.lastReceivedSize;
         this.lastReceivedSize = Packet.receivedSize;
-        this.theProfiler.endSection();
-        this.theProfiler.startSection("snooper");
-
-        if (!this.usageSnooper.isSnooperRunning() && this.tickCounter > 100)
-        {
-            this.usageSnooper.startSnooper();
-        }
-
-        if (this.tickCounter % 6000 == 0)
-        {
-            this.usageSnooper.addMemoryStatsToSnooper();
-        }
-
         this.theProfiler.endSection();
         this.theProfiler.endSection();
     }
@@ -962,7 +899,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      */
     public List getPossibleCompletions(ICommandSender par1ICommandSender, String par2Str)
     {
-        ArrayList var3 = new ArrayList();
+        ArrayList<String> var3 = new ArrayList<String>();
 
         if (par2Str.startsWith("/"))
         {
@@ -1200,59 +1137,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     public void setTexturePack(String par1Str)
     {
         this.texturePack = par1Str;
-    }
-
-    public void addServerStatsToSnooper(PlayerUsageSnooper par1PlayerUsageSnooper)
-    {
-        par1PlayerUsageSnooper.addData("whitelist_enabled", Boolean.valueOf(false));
-        par1PlayerUsageSnooper.addData("whitelist_count", Integer.valueOf(0));
-        par1PlayerUsageSnooper.addData("players_current", Integer.valueOf(this.getCurrentPlayerCount()));
-        par1PlayerUsageSnooper.addData("players_max", Integer.valueOf(this.getMaxPlayers()));
-        par1PlayerUsageSnooper.addData("players_seen", Integer.valueOf(this.serverConfigManager.getAvailablePlayerDat().length));
-        par1PlayerUsageSnooper.addData("uses_auth", Boolean.valueOf(this.onlineMode));
-        par1PlayerUsageSnooper.addData("gui_state", this.getGuiEnabled() ? "enabled" : "disabled");
-        par1PlayerUsageSnooper.addData("avg_tick_ms", Integer.valueOf((int)(MathHelper.average(this.tickTimeArray) * 1.0E-6D)));
-        par1PlayerUsageSnooper.addData("avg_sent_packet_count", Integer.valueOf((int)MathHelper.average(this.sentPacketCountArray)));
-        par1PlayerUsageSnooper.addData("avg_sent_packet_size", Integer.valueOf((int)MathHelper.average(this.sentPacketSizeArray)));
-        par1PlayerUsageSnooper.addData("avg_rec_packet_count", Integer.valueOf((int)MathHelper.average(this.receivedPacketCountArray)));
-        par1PlayerUsageSnooper.addData("avg_rec_packet_size", Integer.valueOf((int)MathHelper.average(this.receivedPacketSizeArray)));
-        int var2 = 0;
-
-        for (int var3 = 0; var3 < this.worldServers.length; ++var3)
-        {
-            if (this.worldServers[var3] != null)
-            {
-                WorldServer var4 = this.worldServers[var3];
-                WorldInfo var5 = var4.getWorldInfo();
-                par1PlayerUsageSnooper.addData("world[" + var2 + "][dimension]", Integer.valueOf(var4.provider.dimensionId));
-                par1PlayerUsageSnooper.addData("world[" + var2 + "][mode]", var5.getGameType());
-                par1PlayerUsageSnooper.addData("world[" + var2 + "][difficulty]", Integer.valueOf(var4.difficultySetting));
-                par1PlayerUsageSnooper.addData("world[" + var2 + "][hardcore]", Boolean.valueOf(var5.isHardcoreModeEnabled()));
-                par1PlayerUsageSnooper.addData("world[" + var2 + "][generator_name]", var5.getTerrainType().getWorldTypeName());
-                par1PlayerUsageSnooper.addData("world[" + var2 + "][generator_version]", Integer.valueOf(var5.getTerrainType().getGeneratorVersion()));
-                par1PlayerUsageSnooper.addData("world[" + var2 + "][height]", Integer.valueOf(this.buildLimit));
-                par1PlayerUsageSnooper.addData("world[" + var2 + "][chunks_loaded]", Integer.valueOf(var4.getChunkProvider().getLoadedChunkCount()));
-                ++var2;
-            }
-        }
-
-        par1PlayerUsageSnooper.addData("worlds", Integer.valueOf(var2));
-    }
-
-    public void addServerTypeToSnooper(PlayerUsageSnooper par1PlayerUsageSnooper)
-    {
-        par1PlayerUsageSnooper.addData("singleplayer", Boolean.valueOf(this.isSinglePlayer()));
-        par1PlayerUsageSnooper.addData("server_brand", this.getServerModName());
-        par1PlayerUsageSnooper.addData("gui_supported", GraphicsEnvironment.isHeadless() ? "headless" : "supported");
-        par1PlayerUsageSnooper.addData("dedicated", Boolean.valueOf(this.isDedicatedServer()));
-    }
-
-    /**
-     * Returns whether snooping is enabled or not.
-     */
-    public boolean isSnooperEnabled()
-    {
-        return true;
     }
 
     /**

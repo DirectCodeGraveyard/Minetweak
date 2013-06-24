@@ -4,15 +4,11 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
 {
-    private List chunksToRemove = new ArrayList();
+    private List<AnvilChunkLoaderPending> chunksToRemove = new ArrayList<AnvilChunkLoaderPending>();
     private Set pendingAnvilChunksCoordinates = new HashSet();
     private Object syncLockObject = new Object();
 

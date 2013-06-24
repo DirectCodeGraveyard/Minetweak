@@ -1,5 +1,8 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -7,9 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import org.minetweak.Minetweak;
-import net.minecraft.server.MinecraftServer;
 
 public class DedicatedServer extends MinecraftServer implements IServer
 {
@@ -258,21 +258,6 @@ public class DedicatedServer extends MinecraftServer implements IServer
     public boolean allowSpawnMonsters()
     {
         return this.settings.getBooleanProperty("spawn-monsters", true);
-    }
-
-    public void addServerStatsToSnooper(PlayerUsageSnooper par1PlayerUsageSnooper)
-    {
-        par1PlayerUsageSnooper.addData("whitelist_enabled", Boolean.valueOf(this.getDedicatedPlayerList().isWhiteListEnabled()));
-        par1PlayerUsageSnooper.addData("whitelist_count", Integer.valueOf(this.getDedicatedPlayerList().getWhiteListedPlayers().size()));
-        super.addServerStatsToSnooper(par1PlayerUsageSnooper);
-    }
-
-    /**
-     * Returns whether snooping is enabled or not.
-     */
-    public boolean isSnooperEnabled()
-    {
-        return this.settings.getBooleanProperty("snooper-enabled", true);
     }
 
     public void addPendingCommand(String par1Str, ICommandSender par2ICommandSender)

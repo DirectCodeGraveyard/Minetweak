@@ -16,7 +16,7 @@ public class AABBPool
     private final int numEntriesToRemove;
 
     /** List of AABB stored in this Pool */
-    private final List listAABB = new ArrayList();
+    private final List<AxisAlignedBB> listAABB = new ArrayList<AxisAlignedBB>();
 
     /** Next index to use when adding a Pool Entry. */
     private int nextPoolIndex = 0;
