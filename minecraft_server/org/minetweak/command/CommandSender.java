@@ -6,4 +6,6 @@ public interface CommandSender {
 
     public String getName();
 
+    public boolean isKickable();
+
 }

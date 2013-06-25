@@ -1,6 +1,9 @@
 package org.minetweak.entity;
 
-import org.minetweak.Server;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.src.BanEntry;
+import net.minecraft.src.EntityPlayerMP;
+import net.minecraft.src.NetServerHandler;
 import org.minetweak.command.CommandSender;
 import org.minetweak.permissions.PermissionNode;
 
@@ -11,8 +14,11 @@ public class Player implements CommandSender {
     private String playerDisplayName;
     private ArrayList<PermissionNode> playerPermissions = new ArrayList<PermissionNode>();
 
+    private EntityPlayerMP entityPlayerMP;
+
     public Player(String playerDisplayName) {
         this.playerDisplayName = playerDisplayName;
+        entityPlayerMP = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerDisplayName);
     }
 
     /**
@@ -25,18 +31,26 @@ public class Player implements CommandSender {
 
     /**
      * Kick the player from the server
-     * @return True if the player was kicked successfully
      */
-    public boolean kickPlayer() {
-        return Server.kickPlayer(playerDisplayName);
+    public void kickPlayer() {
+        kickPlayer("You have been kicked from the server.");
+    }
+
+    public void kickPlayer(String kickReason) {
+        getNetServerHandler().kickPlayer(kickReason);
     }
 
     /**
      * Ban the player from the server
-     * @return True if the player was banned successfully
      */
-    public boolean banPlayer() {
-        return Server.banPlayer(playerDisplayName);
+    public void banPlayer() {
+        banPlayer("You have been banned from the server.");
+    }
+
+    public void banPlayer(String banReason) {
+        BanEntry banEntry = new BanEntry(playerDisplayName);
+        MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().put(banEntry);
+        getNetServerHandler().kickPlayer(banReason);
     }
 
     /**
@@ -67,11 +81,25 @@ public class Player implements CommandSender {
 
     @Override
     public void sendMessage(String message) {
-
+        getPlayerMP().sendChatToPlayer(message);
     }
 
     @Override
     public String getName() {
         return getDisplayName();
     }
+
+    @Override
+    public boolean isKickable() {
+        return true;
+    }
+
+    public EntityPlayerMP getPlayerMP() {
+        return entityPlayerMP;
+    }
+
+    public NetServerHandler getNetServerHandler() {
+        return entityPlayerMP.playerNetServerHandler;
+    }
+
 }

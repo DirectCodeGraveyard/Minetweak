@@ -14,4 +14,9 @@ public class Console implements CommandSender {
     public String getName() {
         return "SERVER";
     }
+
+    @Override
+    public boolean isKickable() {
+        return false;
+    }
 }

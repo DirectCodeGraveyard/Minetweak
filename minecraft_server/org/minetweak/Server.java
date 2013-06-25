@@ -1,17 +1,12 @@
 package org.minetweak;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.BanEntry;
 import net.minecraft.src.CommandBase;
 import net.minecraft.src.EntityPlayerMP;
+import org.minetweak.entity.Player;
 
 public class Server {
 
-    /**
-     * Broadcast a message to the server, this allows you to tell everyone something at the same time easily
-     * @param message The message you want to broadcast to every player and to the console
-     * @return if the message was properly broadcasted
-     */
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
             String var3 = CommandBase.func_82361_a(null, new String[]{message}, 0, true);
@@ -22,91 +17,49 @@ public class Server {
         }
     }
 
-    /**
-     * Kick a player
-     * @param playerName Player's name
-     * @return true on successful kick
-     */
     public static boolean kickPlayer(String playerName) {
-        EntityPlayerMP targetPlayer = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerName);
-        if (targetPlayer == null) {
-            System.out.println("The target player is null!");
-            return false;
-        } else {
-            targetPlayer.playerNetServerHandler.kickPlayer("You have been kicked from the server.");
-            return true;
-        }
+        Player targetPlayer = Minetweak.getPlayerByName(playerName);
+        if(targetPlayer == null) return false;
+        targetPlayer.kickPlayer();
+        return true;
     }
 
-    /**
-     * Kick a player with a custom kick message
-     * @param playerName Player's name
-     * @param kickReason Custom kick message
-     * @return true on successful kick
-     */
     public static boolean kickPlayer(String playerName, String kickReason) {
-        EntityPlayerMP targetPlayer = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerName);
-        if (targetPlayer == null) {
-            System.out.println("The target player is null!");
-            return false;
-        } else {
-            targetPlayer.playerNetServerHandler.kickPlayer("You have been kicked from the server.");
-            return true;
-        }
+        Player targetPlayer = Minetweak.getPlayerByName(playerName);
+        if(targetPlayer == null) return false;
+        targetPlayer.kickPlayer(kickReason);
+        return true;
     }
 
     public static boolean banPlayer(String playerName) {
-        EntityPlayerMP targetPlayer = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerName);
-        if (targetPlayer == null) {
-            System.out.println("The target player is null!");
-            return false;
-        } else {
-            targetPlayer.playerNetServerHandler.kickPlayer("You are banned from this server.");
-            BanEntry banEntry = new BanEntry(playerName);
-            MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().put(banEntry);
-            return true;
-        }
+        Player targetPlayer = Minetweak.getPlayerByName(playerName);
+        if(targetPlayer == null) return false;
+        targetPlayer.banPlayer();
+        return true;
     }
 
     public static boolean banPlayer(String playerName, String banReason) {
-        EntityPlayerMP targetPlayer = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerName);
-        if (targetPlayer == null) {
-            System.out.println("The target player is null!");
-            return false;
-        } else {
-            targetPlayer.playerNetServerHandler.kickPlayer(banReason);
-            BanEntry banEntry = new BanEntry(playerName);
-            MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().put(banEntry);
-            return true;
-        }
+        Player targetPlayer = Minetweak.getPlayerByName(playerName);
+        if(targetPlayer == null) return false;
+        targetPlayer.kickPlayer(banReason);
+        return true;
     }
 
-    /**
-     * Shutdown the server immediately
-     */
     public static void shutdownServer() {
         MinecraftServer.getServer().initiateShutdown();
     }
 
     public static void handleCommand(EntityPlayerMP player, String command) {
-        System.out.println(player.getEntityName() + " " + command);
-
         if (command.startsWith("/"))
         {
             command = command.substring(1);
+        } else {
+            return;
         }
 
-        System.out.println(command);
         String[] commandWithArgs = command.split(" ");
         String commandOnly = commandWithArgs[0];
-        String[] args = new String[]{};
-
-        if (commandWithArgs.length <= 1) {
-            for (int i = 1; i < commandWithArgs.length; i++) {
-                commandWithArgs[commandWithArgs.length] = commandWithArgs[i];
-            }
-        }
-
+        String[] args = dropFirstString(commandWithArgs);
 
         if (!Minetweak.doesCommandExist(commandWithArgs[0])) {
             return;
@@ -115,4 +68,15 @@ public class Server {
         }
     }
 
+    public static String[] dropFirstString(String[] par0ArrayOfStr)
+    {
+        String[] var1 = new String[par0ArrayOfStr.length - 1];
+
+        for (int var2 = 1; var2 < par0ArrayOfStr.length; ++var2)
+        {
+            var1[var2 - 1] = par0ArrayOfStr[var2];
+        }
+
+        return var1;
+    }
 }

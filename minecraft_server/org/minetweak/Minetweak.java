@@ -3,6 +3,7 @@ package org.minetweak;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.command.CommandExecutor;
 import org.minetweak.command.CommandHelp;
+import org.minetweak.command.CommandKick;
 import org.minetweak.command.CommandStop;
 import org.minetweak.entity.Player;
 
@@ -17,7 +18,7 @@ public class Minetweak {
     private static boolean hadRamWarning = false;
     private static boolean lockdownEnabled = false;
 
-    private static HashMap<String, Player> playerArrayList = new HashMap<String, Player>();
+    private static HashMap<String, Player> playerHashMap = new HashMap<String, Player>();
     private static HashMap<String, CommandExecutor> commandExecutors = new HashMap<String, CommandExecutor>();
 
     public static void main(String[] args) {
@@ -26,6 +27,7 @@ public class Minetweak {
 
         commandExecutors.put("help", new CommandHelp());
         commandExecutors.put("stop", new CommandStop());
+        commandExecutors.put("kick", new CommandKick());
 
         ramCheck();
 
@@ -60,7 +62,7 @@ public class Minetweak {
 
     /**
      * Is the server done loading?
-     * @return
+     * @return Server done loading
      */
     public static boolean isServerDoneLoading() {
         return isServerDoneLoading;
@@ -73,12 +75,8 @@ public class Minetweak {
         isServerDoneLoading = true;
     }
 
-    /**
-     * Return true if the server had a RAM warning showing that we need to use more of it
-     * @return If the server had a RAM warning
-     */
-    public static boolean hadRamWarning() {
-        return hadRamWarning;
+    public static boolean isServerLockedDown() {
+        return lockdownEnabled;
     }
 
     /**
@@ -87,19 +85,20 @@ public class Minetweak {
      */
     public static boolean registerPlayer(String playerUsername) {
         Player targetPlayerInstance = new Player(playerUsername);
-        /*{
-                System.out.println(playerUsername + " was already registered!");
-                // TODO: Add a kick message of Internal server error or something
-                targetPlayerInstance.kickPlayer();
-                return false;
-        }*/
-        playerArrayList.put(playerUsername, targetPlayerInstance);
-        System.out.println(playerUsername + " has been registered successfully!");
-        if (lockdownEnabled) {
-            targetPlayerInstance.kickPlayer();
+        if (isServerLockedDown()) {
+            targetPlayerInstance.kickPlayer("This server is currently under lockdown.");
             return false;
+        } else {
+            if (playerHashMap.containsKey(playerUsername)) {
+                targetPlayerInstance.kickPlayer("There was a problem connecting you to the server");
+                return false;
+
+            }
+            playerHashMap.put(playerUsername, targetPlayerInstance);
+            targetPlayerInstance.sendMessage("You were registered within Minetweak. Please check within the console for errors.");
+
+            return true;
         }
-        return true;
     }
 
     /**
@@ -107,12 +106,11 @@ public class Minetweak {
      * @param playerUsername Player name we are unregistering
      */
     public static void unregisterPlayer(String playerUsername) {
-
     }
 
     public static Player getPlayerByName(String playerName) {
-        if (playerArrayList.containsKey(playerName)) {
-            return playerArrayList.get(playerName);
+        if (playerHashMap.containsKey(playerName)) {
+            return playerHashMap.get(playerName);
         }
         return null;
     }
