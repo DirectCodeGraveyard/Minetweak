@@ -2,6 +2,7 @@ package org.minetweak.command;
 
 import net.minecraft.src.EnumChatFormatting;
 import org.minetweak.Minetweak;
+import org.minetweak.Server;
 import org.minetweak.entity.Player;
 
 public class CommandKick extends CommandExecutor {
@@ -22,13 +23,9 @@ public class CommandKick extends CommandExecutor {
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);
         if (args.length == 1) {
             targetPlayer.kickPlayer();
-        } else if (args.length <= 2) {
-            //TODO: Ask Sam wtf is going on here.
-            String reason = createString(args, 1);
-            System.out.println(reason);
-            for (String s : args) {
-                System.out.println(s);
-            }
+        } else if (args.length >= 2) {
+            args = Server.dropFirstString(args);
+            String reason = mergeArgs(args);
             targetPlayer.kickPlayer(reason);
         }
     }

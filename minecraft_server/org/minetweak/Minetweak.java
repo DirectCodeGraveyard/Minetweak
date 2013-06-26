@@ -96,7 +96,7 @@ public class Minetweak {
             }
             playerHashMap.put(playerUsername, targetPlayerInstance);
             targetPlayerInstance.sendMessage("You were registered within Minetweak. Please check within the console for errors.");
-
+            if (targetPlayerInstance.isOperator()) targetPlayerInstance.sendMessage("You are an op.");
             return true;
         }
     }

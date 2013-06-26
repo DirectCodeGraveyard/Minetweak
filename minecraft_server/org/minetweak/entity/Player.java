@@ -102,4 +102,8 @@ public class Player implements CommandSender {
         return entityPlayerMP.playerNetServerHandler;
     }
 
+    public boolean isOperator() {
+        return MinecraftServer.getServer().getConfigurationManager().getOps().contains(playerDisplayName);
+    }
+
 }
