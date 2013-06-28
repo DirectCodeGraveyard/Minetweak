@@ -4,11 +4,12 @@ import com.google.common.eventbus.EventBus;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.command.*;
 import org.minetweak.entity.Player;
+import org.minetweak.plugins.PluginLoader;
 
 import java.util.HashMap;
 
 /**
- * Main entrypoint for Minetweak, basically defines fields
+ * Main EntryPoint for Minetweak, basically defines fields
  * for use throughout the internal server, and even the API
  * itself. It gives most of the basic methods that you will
  * need to create a plugin, like registering a command,
@@ -66,6 +67,10 @@ public class Minetweak {
         registerCommand("op", new CommandOp());
         registerCommand("deop", new CommandDeop());
         registerCommand("kill", new CommandKill());
+        registerCommand("ban", new CommandBan());
+
+        // Load Plugins after registering commands to allow overriding
+        PluginLoader.initialize();
 
         ramCheck();
 

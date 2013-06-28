@@ -10,7 +10,7 @@ public class Server {
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
             String var3 = CommandBase.func_82361_a(null, new String[]{message}, 0, true);
-            MinecraftServer.getServer().getConfigurationManager().sendChatMsg(String.format("[%s] %s", new Object[] {"SERVER", var3}));
+            MinecraftServer.getServer().getConfigurationManager().sendChatMsg(String.format("[%s] %s", "SERVER", var3));
             return true;
         } else {
             return false;
@@ -50,8 +50,7 @@ public class Server {
     }
 
     public static void handleCommand(EntityPlayerMP player, String command) {
-        if (command.startsWith("/"))
-        {
+        if (command.startsWith("/")) {
             command = command.substring(1);
         } else {
             return;
@@ -61,21 +60,15 @@ public class Server {
         String commandOnly = commandWithArgs[0];
         String[] args = dropFirstString(commandWithArgs);
 
-        if (!Minetweak.doesCommandExist(commandWithArgs[0])) {
-            return;
-        } else {
+        if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
         }
     }
 
-    public static String[] dropFirstString(String[] par0ArrayOfStr)
-    {
-        String[] var1 = new String[par0ArrayOfStr.length - 1];
+    public static String[] dropFirstString(String[] strings) {
+        String[] var1 = new String[strings.length - 1];
 
-        for (int var2 = 1; var2 < par0ArrayOfStr.length; ++var2)
-        {
-            var1[var2 - 1] = par0ArrayOfStr[var2];
-        }
+        System.arraycopy(strings, 1, var1, 0, strings.length - 1);
 
         return var1;
     }

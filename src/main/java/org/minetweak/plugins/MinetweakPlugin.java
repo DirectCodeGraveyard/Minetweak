@@ -1,8 +1,28 @@
 package org.minetweak.plugins;
 
 /**
- * Just a placeholder for the future Plugin class. Move along now.
+ * Base Class for Plugins
  */
-public class MinetweakPlugin {
+public abstract class MinetweakPlugin {
 
+    /**
+     * Returns the name of this plugin
+     * @return name of plugin
+     */
+
+    public abstract String getName();
+
+    /**
+     * Called when Plugins are loaded before server is started.
+     */
+    public void onEnable() {
+
+    }
+
+    /**
+     * Called when plugins are unloaded before server is stopped.
+     */
+    public void onDisable() {
+
+    }
 }
