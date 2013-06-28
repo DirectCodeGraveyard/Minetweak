@@ -9,13 +9,6 @@ public class CommandBan extends CommandExecutor {
 
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
-
-        System.out.println(overallCommand);
-
-        for (String s : args) {
-            System.out.println(s + " ");
-        }
-
         if (args.length == 0) {
             sender.sendMessage(EnumChatFormatting.AQUA + "Usage: /ban <player> [reason]");
             return;

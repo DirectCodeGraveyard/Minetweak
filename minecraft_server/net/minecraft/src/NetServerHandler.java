@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
 import org.minetweak.Server;
 
 import java.io.ByteArrayInputStream;
@@ -314,6 +315,7 @@ public class NetServerHandler extends NetHandler
 
                         if (this.playerInAirTime > 80)
                         {
+                            //TODO: Remove all of this horrid cheating code and replace it with somewhat good code. Preferrably from NoCheat or something.
                             this.mcServer.getLogAgent().func_98236_b(this.playerEntity.username + " was kicked for floating too long!");
                             this.kickPlayer("Flying is not enabled on this server");
                             return;
@@ -534,12 +536,13 @@ public class NetServerHandler extends NetHandler
         this.mcServer.getConfigurationManager().sendPacketToAllPlayers(new Packet3Chat(EnumChatFormatting.YELLOW + this.playerEntity.getTranslatedEntityName() + " left the game."));
         this.mcServer.getConfigurationManager().playerLoggedOut(this.playerEntity);
         this.connectionClosed = true;
+        Minetweak.unregisterPlayer(this.playerEntity.getEntityName());
 
-        if (this.mcServer.isSinglePlayer() && this.playerEntity.username.equals(this.mcServer.getServerOwner()))
+        /*if (this.mcServer.isSinglePlayer() && this.playerEntity.username.equals(this.mcServer.getServerOwner()))
         {
             this.mcServer.getLogAgent().func_98233_a("Stopping singleplayer server as player logged out");
             this.mcServer.initiateShutdown();
-        }
+        }*/
     }
 
     /**

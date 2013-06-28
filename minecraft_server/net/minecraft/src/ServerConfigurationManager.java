@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.Map.Entry;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
+import org.minetweak.event.player.PlayerJoinEvent;
 
 public abstract class ServerConfigurationManager
 {
@@ -118,6 +119,7 @@ public abstract class ServerConfigurationManager
             }
         }
         Minetweak.registerPlayer(par2EntityPlayerMP.getEntityName());
+        Minetweak.getEventBus().post(new PlayerJoinEvent(Minetweak.getPlayerByName(par2EntityPlayerMP.getEntityName())));
     }
 
     protected void func_96456_a(ServerScoreboard par1ServerScoreboard, EntityPlayerMP par2EntityPlayerMP)

@@ -10,6 +10,7 @@ import java.util.Random;
 
 import org.minetweak.Minetweak;
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.event.server.ServerFinishedStartupEvent;
 
 public class DedicatedServer extends MinecraftServer implements IServer
 {
@@ -161,6 +162,11 @@ public class DedicatedServer extends MinecraftServer implements IServer
          * Tell Minetweak that we are done loading the server
          */
         Minetweak.setServerDoneLoading();
+
+        /**
+         * Trigger the ServerFinishedStartup event
+         */
+        Minetweak.getEventBus().post(new ServerFinishedStartupEvent());
 
         if (this.settings.getBooleanProperty("enable-query", false))
         {

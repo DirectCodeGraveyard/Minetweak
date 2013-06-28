@@ -9,13 +9,6 @@ public class CommandKick extends CommandExecutor {
 
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
-
-        System.out.println(overallCommand);
-
-        for (String s : args) {
-            System.out.println(s + " ");
-        }
-
         if (args.length == 0) {
             sender.sendMessage(EnumChatFormatting.AQUA + "Usage: /kick <player> [reason]");
             return;
