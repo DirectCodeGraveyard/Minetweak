@@ -69,16 +69,12 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
             var5 = false;
         }
 
-        if (var5)
-        {
-            Iterator var6 = MinecraftServer.getServer().getConfigurationManager().playerEntityList.iterator();
+        if (var5) {
 
-            while (var6.hasNext())
-            {
-                EntityPlayerMP var7 = (EntityPlayerMP)var6.next();
+            for (Object aPlayerEntityList : MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
+                EntityPlayerMP var7 = (EntityPlayerMP) aPlayerEntityList;
 
-                if (var7 != par1ICommandSender && MinecraftServer.getServer().getConfigurationManager().areCommandsAllowed(var7.username))
-                {
+                if (var7 != par1ICommandSender && MinecraftServer.getServer().getConfigurationManager().areCommandsAllowed(var7.username)) {
                     var7.sendChatToPlayer("" + EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "[" + par1ICommandSender.getCommandSenderName() + ": " + var7.translateString(par3Str, par4ArrayOfObj) + "]");
                 }
             }
