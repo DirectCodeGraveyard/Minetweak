@@ -11,7 +11,7 @@ public class Server {
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
             String var3 = CommandBase.func_82361_a(null, new String[]{message}, 0, true);
-            MinecraftServer.getServer().getConfigurationManager().sendChatMsg(String.format("[%s] %s", new Object[] {"SERVER", var3}));
+            MinecraftServer.getServer().getConfigurationManager().sendChatMsg(String.format("[%s] %s", new Object[] {"Server", var3}));
             return true;
         } else {
             return false;

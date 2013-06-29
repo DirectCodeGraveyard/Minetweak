@@ -11,7 +11,7 @@ public class Console implements CommandSender {
 
     @Override
     public String getName() {
-        return "SERVER";
+        return "Server";
     }
 
     @Override
