@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
-import java.awt.GraphicsEnvironment;
+import net.minecraft.src.*;
+
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.security.KeyPair;
@@ -11,51 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.minecraft.src.AnvilSaveConverter;
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.CallableIsServerModded;
-import net.minecraft.src.CallableServerMemoryStats;
-import net.minecraft.src.CallableServerProfiler;
-import net.minecraft.src.ChunkCoordinates;
-import net.minecraft.src.CommandBase;
-import net.minecraft.src.ConvertingProgressUpdate;
-import net.minecraft.src.CrashReport;
-import net.minecraft.src.DedicatedServer;
-import net.minecraft.src.DemoWorldServer;
-import net.minecraft.src.DispenserBehaviors;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.EnumGameType;
-import net.minecraft.src.ICommandManager;
-import net.minecraft.src.ICommandSender;
-import net.minecraft.src.ILogAgent;
-import net.minecraft.src.IPlayerUsage;
-import net.minecraft.src.IProgressUpdate;
-import net.minecraft.src.ISaveFormat;
-import net.minecraft.src.ISaveHandler;
-import net.minecraft.src.IUpdatePlayerListBox;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.MinecraftException;
-import net.minecraft.src.NetworkListenThread;
-import net.minecraft.src.Packet;
-import net.minecraft.src.Packet4UpdateTime;
-import net.minecraft.src.PlayerUsageSnooper;
-import net.minecraft.src.Profiler;
-import net.minecraft.src.RConConsoleSource;
-import net.minecraft.src.ReportedException;
-import net.minecraft.src.ServerCommandManager;
-import net.minecraft.src.ServerConfigurationManager;
-import net.minecraft.src.StatList;
-import net.minecraft.src.StringTranslate;
-import net.minecraft.src.StringUtils;
-import net.minecraft.src.ThreadDedicatedServer;
-import net.minecraft.src.ThreadMinecraftServer;
-import net.minecraft.src.World;
-import net.minecraft.src.WorldInfo;
-import net.minecraft.src.WorldManager;
-import net.minecraft.src.WorldServer;
-import net.minecraft.src.WorldServerMulti;
-import net.minecraft.src.WorldSettings;
-import net.minecraft.src.WorldType;
 
 public abstract class MinecraftServer implements ICommandSender, Runnable, IPlayerUsage
 {
@@ -480,7 +437,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         {
             var48.printStackTrace();
             this.getLogAgent().logSevereException("Encountered an unexpected exception " + var48.getClass().getSimpleName(), var48);
-            CrashReport var2 = null;
+            CrashReport var2;
 
             if (var48 instanceof ReportedException)
             {
@@ -681,7 +638,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
         try
         {
-            boolean var2 = !GraphicsEnvironment.isHeadless();
             String var3 = null;
             String var4 = ".";
             String var5 = null;
@@ -695,48 +651,41 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 String var11 = var9 == par0ArrayOfStr.length - 1 ? null : par0ArrayOfStr[var9 + 1];
                 boolean var12 = false;
 
-                if (!var10.equals("nogui") && !var10.equals("--nogui"))
+                if (var10.equals("--port") && var11 != null)
                 {
-                    if (var10.equals("--port") && var11 != null)
-                    {
-                        var12 = true;
+                    var12 = true;
 
-                        try
-                        {
-                            var8 = Integer.parseInt(var11);
-                        }
-                        catch (NumberFormatException var14)
-                        {
-                            ;
-                        }
-                    }
-                    else if (var10.equals("--singleplayer") && var11 != null)
+                    try
                     {
-                        var12 = true;
-                        var3 = var11;
+                        var8 = Integer.parseInt(var11);
                     }
-                    else if (var10.equals("--universe") && var11 != null)
+                    catch (NumberFormatException var14)
                     {
-                        var12 = true;
-                        var4 = var11;
-                    }
-                    else if (var10.equals("--world") && var11 != null)
-                    {
-                        var12 = true;
-                        var5 = var11;
-                    }
-                    else if (var10.equals("--demo"))
-                    {
-                        var6 = true;
-                    }
-                    else if (var10.equals("--bonusChest"))
-                    {
-                        var7 = true;
+                        ;
                     }
                 }
-                else
+                else if (var10.equals("--singleplayer") && var11 != null)
                 {
-                    var2 = false;
+                    var12 = true;
+                    var3 = var11;
+                }
+                else if (var10.equals("--universe") && var11 != null)
+                {
+                    var12 = true;
+                    var4 = var11;
+                }
+                else if (var10.equals("--world") && var11 != null)
+                {
+                    var12 = true;
+                    var5 = var11;
+                }
+                else if (var10.equals("--demo"))
+                {
+                    var6 = true;
+                }
+                else if (var10.equals("--bonusChest"))
+                {
+                    var7 = true;
                 }
 
                 if (var12)
@@ -771,11 +720,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             if (var7)
             {
                 var16.canCreateBonusChest(true);
-            }
-
-            if (var2)
-            {
-                var16.enableGui();
             }
 
             var16.startServerThread();

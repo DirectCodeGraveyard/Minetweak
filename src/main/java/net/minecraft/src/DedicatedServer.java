@@ -24,7 +24,6 @@ public class DedicatedServer extends MinecraftServer implements IServer
     private boolean canSpawnStructures;
     private EnumGameType gameType;
     private NetworkListenThread networkThread;
-    private boolean guiIsEnabled = false;
 
     public DedicatedServer(File par1File)
     {
@@ -283,7 +282,7 @@ public class DedicatedServer extends MinecraftServer implements IServer
         return this.settings.getBooleanProperty("snooper-enabled", true);
     }
 
-    public void addPendingCommand(String par1Str, ICommandSender par2ICommandSender)
+    public void addPendingCommand(String par1Str)
     {
         Console console = new Console();
         if (Minetweak.doesCommandExist(par1Str.split(" ")[0])) {
@@ -291,7 +290,6 @@ public class DedicatedServer extends MinecraftServer implements IServer
         } else {
             console.sendMessage("That command doesn't exist. Type help for help.");
         }
-        //this.pendingCommandList.add(new ServerCommand(par1Str, par2ICommandSender));
     }
 
     public void executePendingCommands()
@@ -365,17 +363,6 @@ public class DedicatedServer extends MinecraftServer implements IServer
     {
         File var1 = this.settings.getPropertiesFile();
         return var1 != null ? var1.getAbsolutePath() : "No settings file";
-    }
-
-    public void enableGui()
-    {
-        ServerGUI.initGUI(this);
-        this.guiIsEnabled = true;
-    }
-
-    public boolean getGuiEnabled()
-    {
-        return this.guiIsEnabled;
     }
 
     /**
