@@ -15,7 +15,7 @@ public class CommandKill extends CommandExecutor {
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);
 
         if (Minetweak.isPlayerOnline(args[0])) {
-            sender.sendMessage(EnumChatFormatting.AQUA + "You have killed " + targetPlayer.getName());
+            sender.sendMessage(EnumChatFormatting.AQUA + "You have killed " + args[0]);
             targetPlayer.sendMessage(EnumChatFormatting.RED + "Ouch, that must have hurt");
             targetPlayer.killPlayer();
         } else {

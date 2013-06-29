@@ -17,11 +17,11 @@ public class CommandDeop extends CommandExecutor {
 
         Server.deopPlayer(args[0]);
 
-        if (Minetweak.isPlayerOnline(targetPlayer.getName())) {
+        if (Minetweak.isPlayerOnline(args[0])) {
             targetPlayer.sendMessage("You have been deopped by: " + sender.getName());
-            sender.sendMessage("You deopped " + targetPlayer.getName());
+            sender.sendMessage("You deopped " + args[0]);
         } else {
-            sender.sendMessage("You deopped " + targetPlayer.getName() + " which is offline at the moment");
+            sender.sendMessage("You deopped " + args[0] + " which is offline at the moment");
         }
     }
 

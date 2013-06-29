@@ -17,11 +17,11 @@ public class CommandOp extends CommandExecutor {
 
         Server.opPlayer(args[0]);
 
-        if (Minetweak.isPlayerOnline(targetPlayer.getName())) {
+        if (Minetweak.isPlayerOnline(args[0])) {
             targetPlayer.sendMessage("You have been opped by: " + sender.getName());
-            sender.sendMessage("You opped " + targetPlayer.getName());
+            sender.sendMessage("You opped " + args[0]);
         } else {
-            sender.sendMessage("You opped " + targetPlayer.getName() + " which is offline at the moment");
+            sender.sendMessage("You opped " + args[0] + " which is offline at the moment");
         }
     }
 
