@@ -3,6 +3,7 @@ package org.minetweak;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.CommandBase;
 import net.minecraft.src.EntityPlayerMP;
+import org.minetweak.command.Console;
 import org.minetweak.entity.Player;
 
 public class Server {
@@ -68,6 +69,23 @@ public class Server {
         }
     }
 
+    public static void handleCommand(Console console, String command) {
+        if (command.startsWith("/"))
+        {
+            command = command.substring(1);
+        }
+
+        String[] commandWithArgs = command.split(" ");
+        String commandOnly = commandWithArgs[0];
+        String[] args = dropFirstString(commandWithArgs);
+
+        if (!Minetweak.doesCommandExist(commandWithArgs[0])) {
+            return;
+        } else {
+            Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(console, commandOnly, args);
+        }
+    }
+
     public static String[] dropFirstString(String[] par0ArrayOfStr)
     {
         String[] var1 = new String[par0ArrayOfStr.length - 1];
@@ -79,4 +97,13 @@ public class Server {
 
         return var1;
     }
+
+    public static void opPlayer(String playerUsername) {
+        MinecraftServer.getServer().getConfigurationManager().addOp(playerUsername);
+    }
+
+    public static void deopPlayer(String playerUsername) {
+        MinecraftServer.getServer().getConfigurationManager().removeOp(playerUsername);
+    }
+
 }

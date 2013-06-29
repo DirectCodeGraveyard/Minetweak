@@ -1,5 +1,11 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
+import org.minetweak.Server;
+import org.minetweak.command.Console;
+import org.minetweak.event.server.ServerFinishedStartupEvent;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -7,10 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import org.minetweak.Minetweak;
-import net.minecraft.server.MinecraftServer;
-import org.minetweak.event.server.ServerFinishedStartupEvent;
 
 public class DedicatedServer extends MinecraftServer implements IServer
 {
@@ -283,7 +285,13 @@ public class DedicatedServer extends MinecraftServer implements IServer
 
     public void addPendingCommand(String par1Str, ICommandSender par2ICommandSender)
     {
-        this.pendingCommandList.add(new ServerCommand(par1Str, par2ICommandSender));
+        Console console = new Console();
+        if (Minetweak.doesCommandExist(par1Str.split(" ")[0])) {
+            Server.handleCommand(console, par1Str);
+        } else {
+            console.sendMessage("That command doesn't exist. Type help for help.");
+        }
+        //this.pendingCommandList.add(new ServerCommand(par1Str, par2ICommandSender));
     }
 
     public void executePendingCommands()

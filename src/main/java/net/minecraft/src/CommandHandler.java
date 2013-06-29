@@ -1,12 +1,6 @@
 package net.minecraft.src;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class CommandHandler implements ICommandManager
@@ -19,7 +13,7 @@ public class CommandHandler implements ICommandManager
 
     public int executeCommand(ICommandSender par1ICommandSender, String par2Str)
     {
-        par2Str = par2Str.trim();
+        /*par2Str = par2Str.trim();
 
         if (par2Str.startsWith("/"))
         {
@@ -92,7 +86,9 @@ public class CommandHandler implements ICommandManager
             var18.printStackTrace();
         }
 
-        return var7;
+        return var7;*/
+
+        return 0;
     }
 
     /**

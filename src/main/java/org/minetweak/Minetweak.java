@@ -66,6 +66,7 @@ public class Minetweak {
         registerCommand("op", new CommandOp());
         registerCommand("deop", new CommandDeop());
         registerCommand("kill", new CommandKill());
+        registerCommand("players", new CommandListPlayers());
 
         ramCheck();
 
@@ -130,10 +131,13 @@ public class Minetweak {
             return false;
         } else {
             if (playerHashMap.containsKey(playerUsername)) {
-                targetPlayerInstance.kickPlayer("There was a problem connecting you to the server");
-                return false;
+                if (isPlayerOnline(playerUsername)) {
+                    targetPlayerInstance.kickPlayer("There was a problem connecting you to the server");
+                    return false;
+                }
+            } else {
+                playerHashMap.put(playerUsername, targetPlayerInstance);
             }
-            playerHashMap.put(playerUsername, targetPlayerInstance);
             targetPlayerInstance.sendMessage("You were registered within Minetweak. Please check within the console for errors.");
             if (targetPlayerInstance.isOperator()) targetPlayerInstance.sendMessage("You are an op.");
             return true;
@@ -141,12 +145,11 @@ public class Minetweak {
     }
 
     /**
-     * Take the target player and mark them as offline
+     * Take the target player and unregister them
      * @param playerUsername Player name we marking as offline
      */
     public static void unregisterPlayer(String playerUsername) {
-        Player targetPlayerInstance = new Player(playerUsername);
-        targetPlayerInstance.setOffline(true);
+        playerHashMap.remove(playerUsername);
     }
 
     /**
@@ -156,10 +159,7 @@ public class Minetweak {
      */
     public static Player getPlayerByName(String playerName) {
         if (playerHashMap.containsKey(playerName)) return playerHashMap.get(playerName);
-        else {
-            playerHashMap.put(playerName, new Player(playerName, false));
-            return playerHashMap.get(playerName);
-        }
+        return null;
     }
 
     /**
@@ -201,6 +201,10 @@ public class Minetweak {
 
     public static void registerListener(Class clazz) {
         eventBus.register(clazz);
+    }
+
+    public static boolean isPlayerOnline(String playerUsername) {
+        return playerHashMap.containsKey(playerUsername);
     }
 
 }

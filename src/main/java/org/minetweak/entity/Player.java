@@ -26,24 +26,13 @@ public class Player implements CommandSender {
     private ArrayList<PermissionNode> playerPermissions = new ArrayList<PermissionNode>();
 
     private EntityPlayerMP entityPlayerMP;
-    private boolean isOnline;
 
     /**
      * Initialize a player
      * @param playerDisplayName Player's username
      */
     public Player(String playerDisplayName) {
-        this(playerDisplayName, true);
-    }
-
-    /**
-     * Initialize a player, but allow customization whether the player is online or offline
-     * @param playerDisplayName Player's username
-     * @param isOnline True if the player is online
-     */
-    public Player(String playerDisplayName, boolean isOnline) {
         this.playerDisplayName = playerDisplayName;
-        this.isOnline = isOnline;
         entityPlayerMP = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerDisplayName);
     }
 
@@ -188,26 +177,10 @@ public class Player implements CommandSender {
     }
 
     /**
-     * Check to see if this player is on or offline
-     * @return True if the player is online
-     */
-    public boolean isOnline() {
-        return isOnline;
-    }
-
-    /**
      * Kill the player
      */
     public void killPlayer() {
         getPlayerMP().attackEntityFrom(DamageSource.outOfWorld, 5000);
-    }
-
-    /**
-     * Set the player to be offline, doesn't kick the player, just makes it appear that he is offline
-     * @param toggle Boolean for toggle
-     */
-    public void setOffline(boolean toggle) {
-        this.isOnline = toggle;
     }
 
     public boolean isPlayerSleeping() {

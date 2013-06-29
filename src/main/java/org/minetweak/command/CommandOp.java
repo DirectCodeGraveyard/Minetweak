@@ -2,6 +2,7 @@ package org.minetweak.command;
 
 import net.minecraft.src.EnumChatFormatting;
 import org.minetweak.Minetweak;
+import org.minetweak.Server;
 import org.minetweak.entity.Player;
 
 public class CommandOp extends CommandExecutor {
@@ -14,9 +15,9 @@ public class CommandOp extends CommandExecutor {
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);
 
-        targetPlayer.opPlayer();
+        Server.opPlayer(args[0]);
 
-        if (targetPlayer.isOnline()) {
+        if (Minetweak.isPlayerOnline(targetPlayer.getName())) {
             targetPlayer.sendMessage("You have been opped by: " + sender.getName());
             sender.sendMessage("You opped " + targetPlayer.getName());
         } else {
