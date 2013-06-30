@@ -9,20 +9,15 @@ public abstract class MinetweakPlugin {
      * Returns the name of this plugin
      * @return name of plugin
      */
-
     public abstract String getName();
 
     /**
      * Called when Plugins are loaded before server is started.
      */
-    public void onEnable() {
-
-    }
+    public void onEnable() {}
 
     /**
      * Called when plugins are unloaded before server is stopped.
      */
-    public void onDisable() {
-
-    }
+    public void onDisable() {}
 }
