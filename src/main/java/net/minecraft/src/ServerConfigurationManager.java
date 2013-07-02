@@ -995,4 +995,13 @@ public abstract class ServerConfigurationManager
     {
         this.func_110459_a(par1ChatMessageComponent, true);
     }
+
+    /**
+     * Sends the given string to every player as chat message.
+     */
+    public void sendChatMsg(String par1Str)
+    {
+        this.mcServer.logInfo(par1Str);
+        this.sendPacketToAllPlayers(new Packet3Chat(par1Str));
+    }
 }
