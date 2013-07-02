@@ -2,9 +2,6 @@ package org.minetweak;
 
 import com.google.common.eventbus.EventBus;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.Block;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
 import org.minetweak.command.*;
 import org.minetweak.entity.Player;
 import org.minetweak.plugins.PluginLoader;
@@ -28,7 +25,7 @@ public class Minetweak {
     /**
      * This is the Minetweak version we are currently running on.
      */
-    private static final String serverVersion = "0.0.4";
+    private static final String serverVersion = "0.5-";
 
     /**
      * This boolean will return true if the server has finished loading, will

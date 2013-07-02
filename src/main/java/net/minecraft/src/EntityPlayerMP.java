@@ -924,12 +924,6 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
 
         this.chatVisibility = par1Packet204ClientInfo.getChatVisibility();
         this.chatColours = par1Packet204ClientInfo.getChatColours();
-
-        if (this.mcServer.isSinglePlayer() && this.mcServer.getServerOwner().equals(this.username))
-        {
-            this.mcServer.setDifficultyForAllWorlds(par1Packet204ClientInfo.getDifficulty());
-        }
-
         this.setHideCape(1, !par1Packet204ClientInfo.getShowCape());
     }
 

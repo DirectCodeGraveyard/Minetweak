@@ -178,16 +178,7 @@ public abstract class ServerConfigurationManager
         NBTTagCompound var2 = this.mcServer.worldServers[0].getWorldInfo().getPlayerNBTTagCompound();
         NBTTagCompound var3;
 
-        if (par1EntityPlayerMP.getCommandSenderName().equals(this.mcServer.getServerOwner()) && var2 != null)
-        {
-            par1EntityPlayerMP.readFromNBT(var2);
-            var3 = var2;
-            System.out.println("loading single player");
-        }
-        else
-        {
-            var3 = this.playerNBTManagerObj.readPlayerData(par1EntityPlayerMP);
-        }
+        var3 = this.playerNBTManagerObj.readPlayerData(par1EntityPlayerMP);
 
         return var3;
     }
@@ -628,7 +619,7 @@ public abstract class ServerConfigurationManager
      */
     public boolean areCommandsAllowed(String par1Str)
     {
-        return this.ops.contains(par1Str.trim().toLowerCase()) || this.mcServer.isSinglePlayer() && this.mcServer.worldServers[0].getWorldInfo().areCommandsAllowed() && this.mcServer.getServerOwner().equalsIgnoreCase(par1Str) || this.commandsAllowedForAll;
+        return this.ops.contains(par1Str.trim().toLowerCase());
     }
 
     /**

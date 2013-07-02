@@ -9,7 +9,7 @@ public class CommandShowSeed extends CommandBase
      */
     public boolean canCommandSenderUseCommand(ICommandSender par1ICommandSender)
     {
-        return MinecraftServer.getServer().isSinglePlayer() || super.canCommandSenderUseCommand(par1ICommandSender);
+        return super.canCommandSenderUseCommand(par1ICommandSender);
     }
 
     public String getCommandName()

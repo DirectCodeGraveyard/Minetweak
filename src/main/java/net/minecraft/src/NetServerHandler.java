@@ -267,7 +267,7 @@ public class NetServerHandler extends NetHandler
                 double var23 = Math.min(Math.abs(var17), Math.abs(this.playerEntity.motionZ));
                 double var25 = var19 * var19 + var21 * var21 + var23 * var23;
 
-                if (var25 > 100.0D && (!this.mcServer.isSinglePlayer() || !this.mcServer.getServerOwner().equals(this.playerEntity.getCommandSenderName())))
+                if (var25 > 100.0D)
                 {
                     this.mcServer.getLogAgent().func_98236_b(this.playerEntity.getCommandSenderName() + " moved too quickly! " + var13 + "," + var15 + "," + var17 + " (" + var19 + ", " + var21 + ", " + var23 + ")");
                     this.setPlayerLocation(this.lastPosX, this.lastPosY, this.lastPosZ, this.playerEntity.rotationYaw, this.playerEntity.rotationPitch);
@@ -547,12 +547,6 @@ public class NetServerHandler extends NetHandler
         this.mcServer.getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("multiplayer.player.left", new Object[] {this.playerEntity.getTranslatedEntityName()}).func_111059_a(EnumChatFormatting.YELLOW));
         this.mcServer.getConfigurationManager().playerLoggedOut(this.playerEntity);
         this.connectionClosed = true;
-
-        if (this.mcServer.isSinglePlayer() && this.playerEntity.getCommandSenderName().equals(this.mcServer.getServerOwner()))
-        {
-            this.mcServer.getLogAgent().func_98233_a("Stopping singleplayer server as player logged out");
-            this.mcServer.initiateShutdown();
-        }
     }
 
     /**
@@ -772,18 +766,10 @@ public class NetServerHandler extends NetHandler
             }
             else if (this.playerEntity.getServerForPlayer().getWorldInfo().isHardcoreModeEnabled())
             {
-                if (this.mcServer.isSinglePlayer() && this.playerEntity.getCommandSenderName().equals(this.mcServer.getServerOwner()))
-                {
-                    this.playerEntity.playerNetServerHandler.kickPlayer("You have died. Game over, man, it\'s game over!");
-                    this.mcServer.deleteWorldAndStopServer();
-                }
-                else
-                {
-                    BanEntry var2 = new BanEntry(this.playerEntity.getCommandSenderName());
-                    var2.setBanReason("Death in Hardcore");
-                    this.mcServer.getConfigurationManager().getBannedPlayers().put(var2);
-                    this.playerEntity.playerNetServerHandler.kickPlayer("You have died. Game over, man, it\'s game over!");
-                }
+                BanEntry var2 = new BanEntry(this.playerEntity.getCommandSenderName());
+                var2.setBanReason("Death in Hardcore");
+                this.mcServer.getConfigurationManager().getBannedPlayers().put(var2);
+                this.playerEntity.playerNetServerHandler.kickPlayer("You have died. Game over, man, it\'s game over!");
             }
             else
             {

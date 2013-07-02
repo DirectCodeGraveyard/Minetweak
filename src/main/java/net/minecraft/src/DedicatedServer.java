@@ -1,6 +1,8 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
+import org.minetweak.event.server.ServerFinishedStartupEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,17 +48,8 @@ public class DedicatedServer extends MinecraftServer implements IServer
 
         this.getLogAgent().func_98233_a("Loading properties");
         this.settings = new PropertyManager(new File("server.properties"), this.getLogAgent());
-
-        if (this.isSinglePlayer())
-        {
-            this.setHostname("127.0.0.1");
-        }
-        else
-        {
-            this.setOnlineMode(this.settings.getBooleanProperty("online-mode", true));
-            this.setHostname(this.settings.getStringProperty("server-ip", ""));
-        }
-
+        this.setOnlineMode(this.settings.getBooleanProperty("online-mode", true));
+        this.setHostname(this.settings.getStringProperty("server-ip", ""));
         this.setCanSpawnAnimals(this.settings.getBooleanProperty("spawn-animals", true));
         this.setCanSpawnNPCs(this.settings.getBooleanProperty("spawn-npcs", true));
         this.setAllowPvp(this.settings.getBooleanProperty("pvp", true));
@@ -159,7 +152,9 @@ public class DedicatedServer extends MinecraftServer implements IServer
         this.loadAllWorlds(this.getFolderName(), this.getFolderName(), var9, var17, var8);
         long var12 = System.nanoTime() - var4;
         String var14 = String.format("%.3fs", new Object[] {Double.valueOf((double)var12 / 1.0E9D)});
-        this.getLogAgent().func_98233_a("Done (" + var14 + ")! For help, type \"help\" or \"?\"");
+        this.getLogAgent().func_98233_a("Done (" + var14 + ")! For help, type help");
+
+        Minetweak.getEventBus().post(new ServerFinishedStartupEvent());
 
         if (this.settings.getBooleanProperty("enable-query", false))
         {

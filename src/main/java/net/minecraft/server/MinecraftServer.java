@@ -94,8 +94,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     public long[][] timeOfLastDimensionTick;
     private KeyPair serverKeyPair;
 
-    /** Username of the server owner (for integrated servers) */
-    private String serverOwner;
     private String folderName;
     private boolean isDemo;
     private boolean enableBonusChest;
@@ -219,10 +217,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
             this.worldServers[var10].addWorldAccess(new WorldManager(this, this.worldServers[var10]));
 
-            if (!this.isSinglePlayer())
-            {
-                this.worldServers[var10].getWorldInfo().setGameType(this.getGameType());
-            }
+            this.worldServers[var10].getWorldInfo().setGameType(this.getGameType());
 
             this.serverConfigManager.setPlayerManager(this.worldServers);
         }
@@ -668,21 +663,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
                         }
                     }
-                    else if (var10.equals("--singleplayer") && var11 != null)
-                    {
-                        var12 = true;
-                        var3 = var11;
-                    }
-                    else if (var10.equals("--universe") && var11 != null)
-                    {
-                        var12 = true;
-                        var4 = var11;
-                    }
-                    else if (var10.equals("--world") && var11 != null)
-                    {
-                        var12 = true;
-                        var5 = var11;
-                    }
                     else if (var10.equals("--demo"))
                     {
                         var6 = true;
@@ -705,11 +685,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
             DedicatedServer var16 = new DedicatedServer(new File(var4));
             var1 = var16.getLogAgent();
-
-            if (var3 != null)
-            {
-                var16.setServerOwner(var3);
-            }
 
             if (var5 != null)
             {
@@ -892,7 +867,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     public String getServerModName()
     {
-        return "vanilla";
+        return "minetweak";
     }
 
     /**
@@ -1015,27 +990,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.serverPort = par1;
     }
 
-    /**
-     * Returns the username of the server owner (for integrated servers)
-     */
-    public String getServerOwner()
-    {
-        return this.serverOwner;
-    }
-
-    /**
-     * Sets the username of the owner of this server (in the case of an integrated server)
-     */
-    public void setServerOwner(String par1Str)
-    {
-        this.serverOwner = par1Str;
-    }
-
-    public boolean isSinglePlayer()
-    {
-        return this.serverOwner != null;
-    }
-
     public String getFolderName()
     {
         return this.folderName;
@@ -1058,9 +1012,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 if (var3.getWorldInfo().isHardcoreModeEnabled()) {
                     var3.difficultySetting = 3;
                     var3.setAllowedSpawnTypes(true, true);
-                } else if (this.isSinglePlayer()) {
-                    var3.difficultySetting = par1;
-                    var3.setAllowedSpawnTypes(var3.difficultySetting > 0, true);
                 } else {
                     var3.difficultySetting = par1;
                     var3.setAllowedSpawnTypes(this.allowSpawnMonsters(), this.canSpawnAnimals);
@@ -1166,7 +1117,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     public void addServerTypeToSnooper(PlayerUsageSnooper par1PlayerUsageSnooper)
     {
-        par1PlayerUsageSnooper.addData("singleplayer", this.isSinglePlayer());
         par1PlayerUsageSnooper.addData("server_brand", this.getServerModName());
         par1PlayerUsageSnooper.addData("gui_supported", GraphicsEnvironment.isHeadless() ? "headless" : "supported");
         par1PlayerUsageSnooper.addData("dedicated", this.isDedicatedServer());

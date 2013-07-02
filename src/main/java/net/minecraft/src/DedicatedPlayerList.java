@@ -1,12 +1,9 @@
 package net.minecraft.src;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.Iterator;
 import net.minecraft.server.MinecraftServer;
+
+import java.io.*;
+import java.util.Iterator;
 
 public class DedicatedPlayerList extends ServerConfigurationManager
 {
@@ -21,13 +18,8 @@ public class DedicatedPlayerList extends ServerConfigurationManager
         this.viewDistance = par1DedicatedServer.getIntProperty("view-distance", 10);
         this.maxPlayers = par1DedicatedServer.getIntProperty("max-players", 20);
         this.setWhiteListEnabled(par1DedicatedServer.getBooleanProperty("white-list", false));
-
-        if (!par1DedicatedServer.isSinglePlayer())
-        {
-            this.getBannedPlayers().setListActive(true);
-            this.getBannedIPs().setListActive(true);
-        }
-
+        this.getBannedPlayers().setListActive(true);
+        this.getBannedIPs().setListActive(true);
         this.getBannedPlayers().loadBanList();
         this.getBannedPlayers().saveToFileWithHeader();
         this.getBannedIPs().loadBanList();
