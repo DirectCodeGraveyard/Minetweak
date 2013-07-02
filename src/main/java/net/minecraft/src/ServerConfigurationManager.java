@@ -1,6 +1,11 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
+import org.minetweak.entity.Player;
+import org.minetweak.event.player.PlayerDeopEvent;
+import org.minetweak.event.player.PlayerJoinEvent;
+import org.minetweak.event.player.PlayerOpEvent;
 
 import java.io.File;
 import java.net.SocketAddress;
@@ -111,6 +116,8 @@ public abstract class ServerConfigurationManager
                 var10.field_98038_p = false;
             }
         }
+        Minetweak.registerPlayer(par2EntityPlayerMP.getEntityName());
+        Minetweak.getEventBus().post(new PlayerJoinEvent(Minetweak.getPlayerByName(par2EntityPlayerMP.getEntityName())));
     }
 
     protected void func_96456_a(ServerScoreboard par1ServerScoreboard, EntityPlayerMP par2EntityPlayerMP)
@@ -595,6 +602,11 @@ public abstract class ServerConfigurationManager
     public void addOp(String par1Str)
     {
         this.ops.add(par1Str.toLowerCase());
+        Player player = Minetweak.getPlayerByName(par1Str);
+        if (player == null) {
+            Minetweak.getEventBus().post(new PlayerOpEvent(par1Str));
+            return;
+        } else Minetweak.getEventBus().post(new PlayerOpEvent(player));
     }
 
     /**
@@ -603,6 +615,11 @@ public abstract class ServerConfigurationManager
     public void removeOp(String par1Str)
     {
         this.ops.remove(par1Str.toLowerCase());
+        Player player = Minetweak.getPlayerByName(par1Str);
+        if (player == null) {
+            Minetweak.getEventBus().post(new PlayerDeopEvent(par1Str));
+            return;
+        } else Minetweak.getEventBus().post(new PlayerDeopEvent(player));
     }
 
     /**

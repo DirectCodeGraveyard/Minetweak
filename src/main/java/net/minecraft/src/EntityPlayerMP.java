@@ -883,11 +883,6 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         this.playerNetServerHandler.sendPacket(new Packet70GameEvent(3, par1EnumGameType.getID()));
     }
 
-    public void sendChatToPlayer(String par1Str)
-    {
-        this.playerNetServerHandler.sendPacket(new Packet3Chat(par1Str));
-    }
-
     public void func_110122_a(ChatMessageComponent par1ChatMessageComponent)
     {
         this.playerNetServerHandler.sendPacket(new Packet3Chat(par1ChatMessageComponent));

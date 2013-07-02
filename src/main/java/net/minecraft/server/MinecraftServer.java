@@ -648,33 +648,26 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 String var11 = var9 == par0ArrayOfStr.length - 1 ? null : par0ArrayOfStr[var9 + 1];
                 boolean var12 = false;
 
-                if (!var10.equals("nogui") && !var10.equals("--nogui"))
+                if (var10.equals("--port") && var11 != null)
                 {
-                    if (var10.equals("--port") && var11 != null)
-                    {
-                        var12 = true;
+                    var12 = true;
 
-                        try
-                        {
-                            var8 = Integer.parseInt(var11);
-                        }
-                        catch (NumberFormatException ignored)
-                        {
+                    try
+                    {
+                        var8 = Integer.parseInt(var11);
+                    }
+                    catch (NumberFormatException ignored)
+                    {
 
-                        }
-                    }
-                    else if (var10.equals("--demo"))
-                    {
-                        var6 = true;
-                    }
-                    else if (var10.equals("--bonusChest"))
-                    {
-                        var7 = true;
                     }
                 }
-                else
+                else if (var10.equals("--demo"))
                 {
-                    var2 = false;
+                    var6 = true;
+                }
+                else if (var10.equals("--bonusChest"))
+                {
+                    var7 = true;
                 }
 
                 if (var12)
@@ -704,11 +697,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             if (var7)
             {
                 var16.canCreateBonusChest(true);
-            }
-
-            if (var2)
-            {
-                var16.func_120011_ar();
             }
 
             var16.startServerThread();
@@ -1088,7 +1076,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         par1PlayerUsageSnooper.addData("players_max", this.getMaxPlayers());
         par1PlayerUsageSnooper.addData("players_seen", this.serverConfigManager.getAvailablePlayerDat().length);
         par1PlayerUsageSnooper.addData("uses_auth", this.onlineMode);
-        par1PlayerUsageSnooper.addData("gui_state", this.getGuiEnabled() ? "enabled" : "disabled");
         par1PlayerUsageSnooper.addData("run_time", (func_130071_aq() - par1PlayerUsageSnooper.func_130105_g()) / 60L * 1000L);
         par1PlayerUsageSnooper.addData("avg_tick_ms", (int) (MathHelper.average(this.tickTimeArray) * 1.0E-6D));
         par1PlayerUsageSnooper.addData("avg_sent_packet_count", (int) MathHelper.average(this.sentPacketCountArray));
@@ -1118,7 +1105,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     public void addServerTypeToSnooper(PlayerUsageSnooper par1PlayerUsageSnooper)
     {
         par1PlayerUsageSnooper.addData("server_brand", this.getServerModName());
-        par1PlayerUsageSnooper.addData("gui_supported", GraphicsEnvironment.isHeadless() ? "headless" : "supported");
         par1PlayerUsageSnooper.addData("dedicated", this.isDedicatedServer());
     }
 
@@ -1242,11 +1228,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public abstract NetworkListenThread getNetworkThread();
-
-    public boolean getGuiEnabled()
-    {
-        return false;
-    }
 
     /**
      * On dedicated does nothing. On integrated, sets commandsAllowedForAll, gameType and allows external connections.

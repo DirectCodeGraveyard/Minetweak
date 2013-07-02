@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.Server;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -662,9 +663,10 @@ public class NetServerHandler extends NetHandler
     /**
      * Processes a / command
      */
-    private void handleSlashCommand(String par1Str)
+    private void handleSlashCommand(String targetCommand)
     {
-        this.mcServer.getCommandManager().executeCommand(this.playerEntity, par1Str);
+        //this.mcServer.getCommandManager().executeCommand(this.playerEntity, par1Str);
+        Server.handleCommand(this.playerEntity, targetCommand);
     }
 
     public void handleAnimation(Packet18Animation par1Packet18Animation)

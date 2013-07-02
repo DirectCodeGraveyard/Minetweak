@@ -114,7 +114,8 @@ public class Player implements CommandSender {
      */
     @Override
     public void sendMessage(String message) {
-        getPlayerMP().sendChatToPlayer(message);
+        /* Old code that doesn't work anymore. getPlayerMP().sendChatToPlayer(message);*/
+        getPlayerMP().addChatMessage(message);
     }
 
     /**
