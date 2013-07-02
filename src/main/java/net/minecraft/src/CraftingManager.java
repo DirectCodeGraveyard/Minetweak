@@ -141,7 +141,6 @@ public class CraftingManager
         this.addRecipe(new ItemStack(Block.daylightSensor), new Object[] {"GGG", "QQQ", "WWW", 'G', Block.glass, 'Q', Item.netherQuartz, 'W', Block.woodSingleSlab});
         this.addRecipe(new ItemStack(Block.hopperBlock), new Object[] {"I I", "ICI", " I ", 'I', Item.ingotIron, 'C', Block.chest});
         Collections.sort(this.recipes, new RecipeSorter(this));
-        System.out.println(this.recipes.size() + " recipes");
     }
 
     ShapedRecipes addRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
