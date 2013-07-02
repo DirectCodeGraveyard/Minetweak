@@ -2,6 +2,8 @@ package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
+import org.minetweak.Server;
+import org.minetweak.command.Console;
 import org.minetweak.event.server.ServerFinishedStartupEvent;
 
 import java.io.File;
@@ -22,7 +24,6 @@ public class DedicatedServer extends MinecraftServer implements IServer
     private boolean canSpawnStructures;
     private EnumGameType gameType;
     private NetworkListenThread networkThread;
-    private boolean guiIsEnabled;
 
     public DedicatedServer(File par1File)
     {
@@ -154,6 +155,7 @@ public class DedicatedServer extends MinecraftServer implements IServer
         String var14 = String.format("%.3fs", new Object[] {Double.valueOf((double)var12 / 1.0E9D)});
         this.getLogAgent().func_98233_a("Done (" + var14 + ")! For help, type help");
 
+        Minetweak.setServerDoneLoading();
         Minetweak.getEventBus().post(new ServerFinishedStartupEvent());
 
         if (this.settings.getBooleanProperty("enable-query", false))
@@ -271,7 +273,13 @@ public class DedicatedServer extends MinecraftServer implements IServer
 
     public void addPendingCommand(String par1Str, ICommandSender par2ICommandSender)
     {
-        this.pendingCommandList.add(new ServerCommand(par1Str, par2ICommandSender));
+        Console console = new Console();
+        if (Minetweak.doesCommandExist(par1Str.split(" ")[0])) {
+            Server.handleCommand(console, par1Str);
+        } else {
+            console.sendMessage("That command doesn't exist. Type help for help.");
+        }
+        //this.pendingCommandList.add(new ServerCommand(par1Str, par2ICommandSender));
     }
 
     public void executePendingCommands()
@@ -345,17 +353,6 @@ public class DedicatedServer extends MinecraftServer implements IServer
     {
         File var1 = this.settings.getPropertiesFile();
         return var1 != null ? var1.getAbsolutePath() : "No settings file";
-    }
-
-    public void func_120011_ar()
-    {
-        MinecraftServerGui.func_120016_a(this);
-        this.guiIsEnabled = true;
-    }
-
-    public boolean getGuiEnabled()
-    {
-        return this.guiIsEnabled;
     }
 
     /**
