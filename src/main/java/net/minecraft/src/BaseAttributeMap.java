@@ -34,33 +34,27 @@ public abstract class BaseAttributeMap
 
     public void func_111148_a(Multimap par1Multimap)
     {
-        Iterator var2 = par1Multimap.entries().iterator();
 
-        while (var2.hasNext())
-        {
-            Entry var3 = (Entry)var2.next();
-            AttributeInstance var4 = this.func_111152_a((String)var3.getKey());
+        for (Object o : par1Multimap.entries()) {
+            Entry var3 = (Entry) o;
+            AttributeInstance var4 = this.func_111152_a((String) var3.getKey());
 
-            if (var4 != null)
-            {
-                var4.func_111124_b((AttributeModifier)var3.getValue());
+            if (var4 != null) {
+                var4.func_111124_b((AttributeModifier) var3.getValue());
             }
         }
     }
 
     public void func_111147_b(Multimap par1Multimap)
     {
-        Iterator var2 = par1Multimap.entries().iterator();
 
-        while (var2.hasNext())
-        {
-            Entry var3 = (Entry)var2.next();
-            AttributeInstance var4 = this.func_111152_a((String)var3.getKey());
+        for (Object o : par1Multimap.entries()) {
+            Entry var3 = (Entry) o;
+            AttributeInstance var4 = this.func_111152_a((String) var3.getKey());
 
-            if (var4 != null)
-            {
-                var4.func_111124_b((AttributeModifier)var3.getValue());
-                var4.func_111121_a((AttributeModifier)var3.getValue());
+            if (var4 != null) {
+                var4.func_111124_b((AttributeModifier) var3.getValue());
+                var4.func_111121_a((AttributeModifier) var3.getValue());
             }
         }
     }

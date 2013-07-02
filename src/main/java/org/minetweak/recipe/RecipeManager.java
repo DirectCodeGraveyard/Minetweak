@@ -1,10 +1,7 @@
 package org.minetweak.recipe;
 
 import com.google.common.eventbus.Subscribe;
-import net.minecraft.src.Block;
-import net.minecraft.src.CraftingManager;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
+import net.minecraft.src.*;
 import org.minetweak.event.server.CraftingReadyEvent;
 
 public class RecipeManager {
@@ -21,6 +18,10 @@ public class RecipeManager {
 
     public void addShapelessRecipe(ItemStack output, Object... inputs) {
         craftingManager.addShapelessRecipe(output, inputs);
+    }
+
+    public void addFurnaceRecipe(int amount, ItemStack output, float xp) {
+        FurnaceRecipes.smelting().addSmelting(amount, output, xp);
     }
 
     @Subscribe
