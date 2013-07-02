@@ -102,7 +102,7 @@ public class CraftingManager
         this.addRecipe(new ItemStack(Block.stairsWoodOak, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 0)});
         this.addRecipe(new ItemStack(Block.stairsWoodBirch, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 2)});
         this.addRecipe(new ItemStack(Block.stairsWoodSpruce, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 1)});
-        this.addRecipe(new ItemStack(Block.stairsWoodJungle, 4), new Object[] {"#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 3)});
+        this.addRecipe(new ItemStack(Block.stairsWoodJungle, 4), new Object[]{"#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 3)});
         this.addRecipe(new ItemStack(Item.fishingRod, 1), new Object[] {"  #", " #X", "# X", '#', Item.stick, 'X', Item.silk});
         this.addRecipe(new ItemStack(Item.carrotOnAStick, 1), new Object[] {"# ", " X", '#', Item.fishingRod, 'X', Item.carrot}).func_92100_c();
         this.addRecipe(new ItemStack(Block.stairsCobblestone, 4), new Object[] {"#  ", "## ", "###", '#', Block.cobblestone});
@@ -135,18 +135,18 @@ public class CraftingManager
         this.addRecipe(new ItemStack(Block.dropper, 1), new Object[] {"###", "# #", "#R#", '#', Block.cobblestone, 'R', Item.redstone});
         this.addRecipe(new ItemStack(Block.pistonBase, 1), new Object[] {"TTT", "#X#", "#R#", '#', Block.cobblestone, 'X', Item.ingotIron, 'R', Item.redstone, 'T', Block.planks});
         this.addRecipe(new ItemStack(Block.pistonStickyBase, 1), new Object[] {"S", "P", 'S', Item.slimeBall, 'P', Block.pistonBase});
-        this.addRecipe(new ItemStack(Item.bed, 1), new Object[] {"###", "XXX", '#', Block.cloth, 'X', Block.planks});
-        this.addRecipe(new ItemStack(Block.enchantmentTable, 1), new Object[] {" B ", "D#D", "###", '#', Block.obsidian, 'B', Item.book, 'D', Item.diamond});
-        this.addRecipe(new ItemStack(Block.anvil, 1), new Object[] {"III", " i ", "iii", 'I', Block.blockIron, 'i', Item.ingotIron});
-        this.addShapelessRecipe(new ItemStack(Item.eyeOfEnder, 1), new Object[] {Item.enderPearl, Item.blazePowder});
-        this.addShapelessRecipe(new ItemStack(Item.fireballCharge, 3), new Object[] {Item.gunpowder, Item.blazePowder, Item.coal});
-        this.addShapelessRecipe(new ItemStack(Item.fireballCharge, 3), new Object[] {Item.gunpowder, Item.blazePowder, new ItemStack(Item.coal, 1, 1)});
+        this.addRecipe(new ItemStack(Item.bed, 1), new Object[]{"###", "XXX", '#', Block.cloth, 'X', Block.planks});
+        this.addRecipe(new ItemStack(Block.enchantmentTable, 1), new Object[]{" B ", "D#D", "###", '#', Block.obsidian, 'B', Item.book, 'D', Item.diamond});
+        this.addRecipe(new ItemStack(Block.anvil, 1), new Object[]{"III", " i ", "iii", 'I', Block.blockIron, 'i', Item.ingotIron});
+        this.addShapelessRecipe(new ItemStack(Item.eyeOfEnder, 1), new Object[]{Item.enderPearl, Item.blazePowder});
+        this.addShapelessRecipe(new ItemStack(Item.fireballCharge, 3), new Object[]{Item.gunpowder, Item.blazePowder, Item.coal});
+        this.addShapelessRecipe(new ItemStack(Item.fireballCharge, 3), new Object[]{Item.gunpowder, Item.blazePowder, new ItemStack(Item.coal, 1, 1)});
         this.addRecipe(new ItemStack(Block.daylightSensor), new Object[] {"GGG", "QQQ", "WWW", 'G', Block.glass, 'Q', Item.netherQuartz, 'W', Block.woodSingleSlab});
         this.addRecipe(new ItemStack(Block.hopperBlock), new Object[] {"I I", "ICI", " I ", 'I', Item.ingotIron, 'C', Block.chest});
         Collections.sort(this.recipes, new RecipeSorter(this));
     }
 
-    ShapedRecipes addRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
+    public ShapedRecipes addRecipe(ItemStack par1ItemStack, Object... par2ArrayOfObj)
     {
         String var3 = "";
         int var4 = 0;
@@ -220,7 +220,7 @@ public class CraftingManager
         return var17;
     }
 
-    void addShapelessRecipe(ItemStack par1ItemStack, Object ... par2ArrayOfObj)
+    public void addShapelessRecipe(ItemStack par1ItemStack, Object... par2ArrayOfObj)
     {
         ArrayList var3 = new ArrayList();
         Object[] var4 = par2ArrayOfObj;
