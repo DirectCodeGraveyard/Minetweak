@@ -12,7 +12,7 @@ public abstract class MinetweakPlugin {
     public abstract String getName();
 
     /**
-     * Called when Plugins are loaded before server is started.
+     * Called when plugins are loaded before server is started.
      */
     public void onEnable() {}
 
