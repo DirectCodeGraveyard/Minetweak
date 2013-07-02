@@ -155,7 +155,7 @@ public class DedicatedServer extends MinecraftServer implements IServer
         this.loadAllWorlds(this.getFolderName(), this.getFolderName(), var9, var17, var8);
         long var12 = System.nanoTime() - var4;
         String var14 = String.format("%.3fs", (double) var12 / 1.0E9D);
-        this.getLogAgent().func_98233_a("Done (" + var14 + ")! For help, type \"help\" or \"?\"");
+        this.getLogAgent().func_98233_a("Done (" + var14 + ")! For help, type help");
 
         /**
          * Tell Minetweak that we are done loading the server
