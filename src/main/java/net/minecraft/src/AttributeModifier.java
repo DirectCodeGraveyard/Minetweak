@@ -24,8 +24,8 @@ public class AttributeModifier
         this.field_111173_c = par2Str;
         this.field_111174_a = par3;
         this.field_111172_b = par5;
-        Validate.notEmpty(par2Str, "Modifier name cannot be empty", new Object[0]);
-        Validate.inclusiveBetween(Integer.valueOf(0), Integer.valueOf(2), Integer.valueOf(par5), "Invalid operation", new Object[0]);
+        Validate.notEmpty(par2Str, "Modifier name cannot be empty");
+        Validate.inclusiveBetween(0, 2, par5, "Invalid operation");
     }
 
     public UUID func_111167_a()

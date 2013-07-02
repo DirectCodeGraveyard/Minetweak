@@ -17,7 +17,7 @@ public class ChatMessageComponent
     private Boolean field_111083_f;
     private String field_111084_g;
     private String field_111090_h;
-    private List field_111091_i;
+    private List<ChatMessageComponent> field_111091_i;
 
     public ChatMessageComponent() {}
 
@@ -105,7 +105,7 @@ public class ChatMessageComponent
         return this.field_111090_h;
     }
 
-    protected List func_111069_h()
+    protected List<ChatMessageComponent> func_111069_h()
     {
         return this.field_111091_i;
     }
@@ -120,12 +120,12 @@ public class ChatMessageComponent
             }
             else
             {
-                this.field_111091_i = Lists.newArrayList(new ChatMessageComponent[] {par1ChatMessageComponent});
+                this.field_111091_i = Lists.newArrayList(par1ChatMessageComponent);
             }
         }
         else
         {
-            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent[] {new ChatMessageComponent(this), par1ChatMessageComponent});
+            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent(this), par1ChatMessageComponent);
             this.field_111084_g = null;
             this.field_111090_h = null;
         }
@@ -148,7 +148,7 @@ public class ChatMessageComponent
         }
         else
         {
-            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent[] {new ChatMessageComponent(this), func_111066_d(par1Str)});
+            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent(this), func_111066_d(par1Str));
             this.field_111084_g = null;
             this.field_111090_h = null;
         }
@@ -171,7 +171,7 @@ public class ChatMessageComponent
         }
         else
         {
-            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent[] {new ChatMessageComponent(this), func_111077_e(par1Str)});
+            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent(this), func_111077_e(par1Str));
             this.field_111084_g = null;
             this.field_111090_h = null;
         }
@@ -191,19 +191,11 @@ public class ChatMessageComponent
             {
                 this.field_111090_h = par1Str;
                 this.field_111091_i = Lists.newArrayList();
-                Object[] var3 = par2ArrayOfObj;
-                int var4 = par2ArrayOfObj.length;
 
-                for (int var5 = 0; var5 < var4; ++var5)
-                {
-                    Object var6 = var3[var5];
-
-                    if (var6 instanceof ChatMessageComponent)
-                    {
-                        this.field_111091_i.add((ChatMessageComponent)var6);
-                    }
-                    else
-                    {
+                for (Object var6 : par2ArrayOfObj) {
+                    if (var6 instanceof ChatMessageComponent) {
+                        this.field_111091_i.add((ChatMessageComponent) var6);
+                    } else {
                         this.field_111091_i.add(func_111066_d(var6.toString()));
                     }
                 }
@@ -211,7 +203,7 @@ public class ChatMessageComponent
         }
         else
         {
-            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent[] {new ChatMessageComponent(this), func_111082_b(par1Str, par2ArrayOfObj)});
+            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent(this), func_111082_b(par1Str, par2ArrayOfObj));
             this.field_111084_g = null;
             this.field_111090_h = null;
         }
@@ -226,17 +218,17 @@ public class ChatMessageComponent
 
     public String func_111068_a(boolean par1)
     {
-        return this.func_111070_a(par1, (EnumChatFormatting)null, false, false, false, false);
+        return this.func_111070_a(par1, null, false, false, false, false);
     }
 
     public String func_111070_a(boolean par1, EnumChatFormatting par2EnumChatFormatting, boolean par3, boolean par4, boolean par5, boolean par6)
     {
         StringBuilder var7 = new StringBuilder();
         EnumChatFormatting var8 = this.field_111087_b == null ? par2EnumChatFormatting : this.field_111087_b;
-        boolean var9 = this.field_111088_c == null ? par3 : this.field_111088_c.booleanValue();
-        boolean var10 = this.field_111085_d == null ? par4 : this.field_111085_d.booleanValue();
-        boolean var11 = this.field_111086_e == null ? par5 : this.field_111086_e.booleanValue();
-        boolean var12 = this.field_111083_f == null ? par6 : this.field_111083_f.booleanValue();
+        boolean var9 = this.field_111088_c == null ? par3 : this.field_111088_c;
+        boolean var10 = this.field_111085_d == null ? par4 : this.field_111085_d;
+        boolean var11 = this.field_111086_e == null ? par5 : this.field_111086_e;
+        boolean var12 = this.field_111083_f == null ? par6 : this.field_111083_f;
 
         if (this.field_111090_h != null)
         {
@@ -251,7 +243,7 @@ public class ChatMessageComponent
 
                 for (int var14 = 0; var14 < this.field_111091_i.size(); ++var14)
                 {
-                    var13[var14] = ((ChatMessageComponent)this.field_111091_i.get(var14)).toString();
+                    var13[var14] = (this.field_111091_i.get(var14)).toString();
                 }
 
                 var7.append(StatCollector.translateToLocalFormatted(this.field_111090_h, var13));
@@ -276,9 +268,9 @@ public class ChatMessageComponent
 
             if (this.field_111091_i != null)
             {
-                for (Iterator var15 = this.field_111091_i.iterator(); var15.hasNext(); var7.append(var16.toString()))
+                for (Iterator<ChatMessageComponent> var15 = this.field_111091_i.iterator(); var15.hasNext(); var7.append(var16.toString()))
                 {
-                    var16 = (ChatMessageComponent)var15.next();
+                    var16 = var15.next();
 
                     if (par1)
                     {
