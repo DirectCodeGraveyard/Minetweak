@@ -2071,4 +2071,12 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     {
         return this.getDataWatcher().func_111145_d(17);
     }
+
+    public void setSpeedOnGround(float speedFloat) {
+        speedOnGround = speedFloat;
+    }
+
+    public float getSpeedOnGround() {
+        return speedOnGround;
+    }
 }
