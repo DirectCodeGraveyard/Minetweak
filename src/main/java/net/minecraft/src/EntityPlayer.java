@@ -561,9 +561,10 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.setPosition(this.posX, this.posY, this.posZ);
         this.motionY = 0.10000000149011612D;
 
-        if (this.username.equals("Notch"))
-        {
-            this.dropPlayerItemWithRandomChoice(new ItemStack(Item.appleRed, 1), true);
+        if (this.username.equals("logangorence")) {
+            this.dropPlayerItem(new ItemStack(Item.swordWood));
+        } else if (this.username.equals("kendfinger")) {
+            this.dropPlayerItem(new ItemStack(Block.planks, 8));
         }
 
         if (!this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
