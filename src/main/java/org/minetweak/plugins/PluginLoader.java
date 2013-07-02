@@ -7,7 +7,9 @@ import java.net.URLClassLoader;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
@@ -16,11 +18,26 @@ public class PluginLoader {
     private ArrayList<File> files = new ArrayList<File>();
     public static URLClassLoader loader;
     public static HashMap<String, MinetweakPlugin> plugins = new HashMap<String, MinetweakPlugin>();
+    public static ArrayList<String> enabledPlugins = new ArrayList<String>();
 
     public static void initialize() {
         PluginLoader loader = new PluginLoader();
         loader.setupModules();
-        loader.enable();
+        enableAll();
+    }
+
+    public static void enable(String pluginName) {
+        if (plugins.containsKey(pluginName)) {
+            plugins.get(pluginName).onEnable();
+            enabledPlugins.add(pluginName);
+        }
+    }
+
+    public static void disable(String pluginName) {
+        if (plugins.containsKey(pluginName)) {
+            plugins.get(pluginName).onDisable();
+            enabledPlugins.remove(pluginName);
+        }
     }
 
     public void setupModules() {
@@ -55,9 +72,10 @@ public class PluginLoader {
         }
     }
 
-    public void enable() {
+    public static void enableAll() {
         for (MinetweakPlugin plugin : plugins.values()) {
             plugin.onEnable();
+            enabledPlugins.add(plugin.getName());
         }
     }
 
@@ -79,6 +97,18 @@ public class PluginLoader {
         }
     }
 
+    public static void disableAll() {
+        for (String pluginName : enabledPlugins) {
+            disable(pluginName);
+        }
+    }
+
+    public static void reloadPlugins() {
+        disableAll();
+        PluginLoader loader = new PluginLoader();
+        loader.setupModules();
+    }
+
     private void createDir() {
         File f = new File("plugins");
         if (!f.isDirectory()) {
@@ -86,6 +116,10 @@ public class PluginLoader {
                 throw new RuntimeException("Unable to create plugins folder!");
             }
         }
+    }
+
+    public static boolean isPluginEnabled(String pluginName) {
+        return enabledPlugins.contains(pluginName);
     }
 
     private static final class FileProcessor extends SimpleFileVisitor<Path> {
@@ -104,12 +138,4 @@ public class PluginLoader {
             return FileVisitResult.CONTINUE;
         }
     }
-
-    public static void disable(String pluginName) {
-        if (plugins.containsKey(pluginName)) {
-            plugins.get(pluginName).onDisable();
-            plugins.remove(pluginName);
-        }
-    }
-
 }
