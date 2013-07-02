@@ -47,7 +47,7 @@ public class PluginLoader {
         ArrayList<URL> urls = new ArrayList<URL>();
         for (File f : files) {
             Manifest mf = getManifest(f);
-            String pluginClass = mf.getMainAttributes().getValue("Plugin-class");
+            String pluginClass = mf.getMainAttributes().getValue("Plugin-Class");
             if (pluginClass == null) {
                 continue;
             }
