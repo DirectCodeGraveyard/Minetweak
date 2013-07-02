@@ -4,6 +4,7 @@ import com.google.common.eventbus.EventBus;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.command.*;
 import org.minetweak.entity.Player;
+import org.minetweak.plugins.PluginLoader;
 
 import java.util.HashMap;
 
@@ -67,6 +68,8 @@ public class Minetweak {
         registerCommand("deop", new CommandDeop());
         registerCommand("kill", new CommandKill());
         registerCommand("players", new CommandListPlayers());
+
+        PluginLoader.initialize();
 
         ramCheck();
 
