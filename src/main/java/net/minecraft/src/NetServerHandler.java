@@ -753,18 +753,10 @@ public class NetServerHandler extends NetHandler
             }
             else if (this.playerEntity.getServerForPlayer().getWorldInfo().isHardcoreModeEnabled())
             {
-                if (this.mcServer.isSinglePlayer() && this.playerEntity.username.equals(this.mcServer.getServerOwner()))
-                {
-                    this.playerEntity.playerNetServerHandler.kickPlayer("You have died. Game over, man, it\'s game over!");
-                    this.mcServer.deleteWorldAndStopServer();
-                }
-                else
-                {
-                    BanEntry var2 = new BanEntry(this.playerEntity.username);
-                    var2.setBanReason("Death in Hardcore");
-                    this.mcServer.getConfigurationManager().getBannedPlayers().put(var2);
-                    this.playerEntity.playerNetServerHandler.kickPlayer("You have died. Game over, man, it\'s game over!");
-                }
+                BanEntry var2 = new BanEntry(this.playerEntity.username);
+                var2.setBanReason("Death in Hardcore");
+                this.mcServer.getConfigurationManager().getBannedPlayers().put(var2);
+                this.playerEntity.playerNetServerHandler.kickPlayer("You have died. Game over, man, it\'s game over!");
             }
             else
             {
