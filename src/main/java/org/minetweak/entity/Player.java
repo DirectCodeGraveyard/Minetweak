@@ -189,4 +189,12 @@ public class Player implements CommandSender {
         getPlayerMP().setGameType(gameType);
     }
 
+    public void setSpeedOnGround(float speedFloat) {
+        getPlayerMP().setSpeedOnGround(speedFloat);
+    }
+
+    public float getSpeedOnGround() {
+        return getPlayerMP().getSpeedOnGround();
+    }
+
 }
