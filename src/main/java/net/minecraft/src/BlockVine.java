@@ -125,28 +125,6 @@ public class BlockVine extends Block
     }
 
     /**
-     * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
-     */
-    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
-    {
-        switch (par5)
-        {
-            case 1:
-                return this.canBePlacedOn(par1World.getBlockId(par2, par3 + 1, par4));
-            case 2:
-                return this.canBePlacedOn(par1World.getBlockId(par2, par3, par4 + 1));
-            case 3:
-                return this.canBePlacedOn(par1World.getBlockId(par2, par3, par4 - 1));
-            case 4:
-                return this.canBePlacedOn(par1World.getBlockId(par2 + 1, par3, par4));
-            case 5:
-                return this.canBePlacedOn(par1World.getBlockId(par2 - 1, par3, par4));
-            default:
-                return false;
-        }
-    }
-
-    /**
      * returns true if a vine can be placed on that block (checks for render as normal block and if it is solid)
      */
     private boolean canBePlacedOn(int par1)

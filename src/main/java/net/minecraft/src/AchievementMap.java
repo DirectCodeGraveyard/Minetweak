@@ -24,7 +24,8 @@ public class AchievementMap
             {
                 String[] var3 = var2.split(",");
                 int var4 = Integer.parseInt(var3[0]);
-                this.guidMap.put(Integer.valueOf(var4), var3[1]);
+
+                this.guidMap.put(var4, var3[1]);
             }
 
             var1.close();
@@ -40,6 +41,6 @@ public class AchievementMap
      */
     public static String getGuid(int par0)
     {
-        return (String)instance.guidMap.get(Integer.valueOf(par0));
+        return (String)instance.guidMap.get(par0);
     }
 }

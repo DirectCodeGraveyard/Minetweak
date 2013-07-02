@@ -76,18 +76,18 @@ public abstract class BiomeGenBase
     /**
      * Holds the classes of IMobs (hostile mobs) that can be spawned in the biome.
      */
-    protected List spawnableMonsterList;
+    protected List<SpawnListEntry> spawnableMonsterList;
 
     /**
      * Holds the classes of any creature that can be spawned in the biome as friendly creature.
      */
-    protected List spawnableCreatureList;
+    protected List<SpawnListEntry> spawnableCreatureList;
 
     /**
      * Holds the classes of any aquatic creature that can be spawned in the water of the biome.
      */
-    protected List spawnableWaterCreatureList;
-    protected List spawnableCaveCreatureList;
+    protected List<SpawnListEntry> spawnableWaterCreatureList;
+    protected List<SpawnListEntry> spawnableCaveCreatureList;
 
     /** Set to true if snow is enabled for this biome. */
     private boolean enableSnow;
@@ -122,10 +122,10 @@ public abstract class BiomeGenBase
         this.temperature = 0.5F;
         this.rainfall = 0.5F;
         this.waterColorMultiplier = 16777215;
-        this.spawnableMonsterList = new ArrayList();
-        this.spawnableCreatureList = new ArrayList();
-        this.spawnableWaterCreatureList = new ArrayList();
-        this.spawnableCaveCreatureList = new ArrayList();
+        this.spawnableMonsterList = new ArrayList<SpawnListEntry>();
+        this.spawnableCreatureList = new ArrayList<SpawnListEntry>();
+        this.spawnableWaterCreatureList = new ArrayList<SpawnListEntry>();
+        this.spawnableCaveCreatureList = new ArrayList<SpawnListEntry>();
         this.enableRain = true;
         this.worldGeneratorTrees = new WorldGenTrees(false);
         this.worldGeneratorBigTree = new WorldGenBigTree(false);
@@ -134,6 +134,7 @@ public abstract class BiomeGenBase
         this.biomeID = par1;
         biomeList[par1] = this;
         this.theBiomeDecorator = this.createBiomeDecorator();
+
         this.spawnableCreatureList.add(new SpawnListEntry(EntitySheep.class, 12, 4, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(EntityPig.class, 10, 4, 4));
         this.spawnableCreatureList.add(new SpawnListEntry(EntityChicken.class, 10, 4, 4));
@@ -197,7 +198,7 @@ public abstract class BiomeGenBase
      */
     public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
     {
-        return (WorldGenerator)(par1Random.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees);
+        return par1Random.nextInt(10) == 0 ? this.worldGeneratorBigTree : this.worldGeneratorTrees;
     }
 
     /**
@@ -256,7 +257,7 @@ public abstract class BiomeGenBase
      */
     public boolean canSpawnLightningBolt()
     {
-        return this.enableSnow ? false : this.enableRain;
+        return !this.enableSnow && this.enableRain;
     }
 
     /**

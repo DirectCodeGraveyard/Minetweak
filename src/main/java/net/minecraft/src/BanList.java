@@ -1,17 +1,12 @@
 package net.minecraft.src;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import net.minecraft.server.MinecraftServer;
+
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
-import net.minecraft.server.MinecraftServer;
 
 public class BanList
 {
@@ -150,11 +145,9 @@ public class BanList
                 var2.println();
             }
 
-            Iterator var3 = this.theBanList.values().iterator();
 
-            while (var3.hasNext())
-            {
-                BanEntry var4 = (BanEntry)var3.next();
+            for (Object o : this.theBanList.values()) {
+                BanEntry var4 = (BanEntry) o;
                 var2.println(var4.buildBanString());
             }
 

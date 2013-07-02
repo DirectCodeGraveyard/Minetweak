@@ -73,14 +73,6 @@ public class BlockPistonExtension extends Block
     }
 
     /**
-     * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
-     */
-    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
-    {
-        return false;
-    }
-
-    /**
      * Returns the quantity of items to drop on block destruction.
      */
     public int quantityDropped(Random par1Random)

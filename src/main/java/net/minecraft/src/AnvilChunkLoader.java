@@ -4,17 +4,13 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
 {
-    private List chunksToRemove = new ArrayList();
-    private Set pendingAnvilChunksCoordinates = new HashSet();
-    private Object syncLockObject = new Object();
+    private List<AnvilChunkLoaderPending> chunksToRemove = new ArrayList<AnvilChunkLoaderPending>();
+    private Set<ChunkCoordIntPair> pendingAnvilChunksCoordinates = new HashSet<ChunkCoordIntPair>();
+    private final Object syncLockObject = new Object();
 
     /** Save directory for chunks using the Anvil format */
     private final File chunkSaveLocation;
@@ -31,17 +27,16 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
     {
         NBTTagCompound var4 = null;
         ChunkCoordIntPair var5 = new ChunkCoordIntPair(par2, par3);
-        Object var6 = this.syncLockObject;
+        final Object var6;
+        var6 = this.syncLockObject;
 
         synchronized (this.syncLockObject)
         {
             if (this.pendingAnvilChunksCoordinates.contains(var5))
             {
-                for (int var7 = 0; var7 < this.chunksToRemove.size(); ++var7)
-                {
-                    if (((AnvilChunkLoaderPending)this.chunksToRemove.get(var7)).chunkCoordinate.equals(var5))
-                    {
-                        var4 = ((AnvilChunkLoaderPending)this.chunksToRemove.get(var7)).nbtTags;
+                for (Object aChunksToRemove : this.chunksToRemove) {
+                    if (((AnvilChunkLoaderPending) aChunksToRemove).chunkCoordinate.equals(var5)) {
+                        var4 = ((AnvilChunkLoaderPending) aChunksToRemove).nbtTags;
                         break;
                     }
                 }
@@ -52,10 +47,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         {
             DataInputStream var10 = RegionFileCache.getChunkInputStream(this.chunkSaveLocation, par2, par3);
 
-            if (var10 == null)
-            {
-                return null;
-            }
+            if (var10 == null) return null;
 
             var4 = CompressedStreamTools.read(var10);
         }
@@ -114,15 +106,13 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
 
     protected void addChunkToPending(ChunkCoordIntPair par1ChunkCoordIntPair, NBTTagCompound par2NBTTagCompound)
     {
-        Object var3 = this.syncLockObject;
-
         synchronized (this.syncLockObject)
         {
             if (this.pendingAnvilChunksCoordinates.contains(par1ChunkCoordIntPair))
             {
                 for (int var4 = 0; var4 < this.chunksToRemove.size(); ++var4)
                 {
-                    if (((AnvilChunkLoaderPending)this.chunksToRemove.get(var4)).chunkCoordinate.equals(par1ChunkCoordIntPair))
+                    if ((this.chunksToRemove.get(var4)).chunkCoordinate.equals(par1ChunkCoordIntPair))
                     {
                         this.chunksToRemove.set(var4, new AnvilChunkLoaderPending(par1ChunkCoordIntPair, par2NBTTagCompound));
                         return;
@@ -151,7 +141,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
                 return false;
             }
 
-            var1 = (AnvilChunkLoaderPending)this.chunksToRemove.remove(0);
+            var1 = this.chunksToRemove.remove(0);
             this.pendingAnvilChunksCoordinates.remove(var1.chunkCoordinate);
         }
 
@@ -194,9 +184,10 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
      */
     public void saveExtraData()
     {
-        while (this.writeNextIO())
-        {
-            ;
+        if (true) {
+            do {
+                if (!(this.writeNextIO())) break;
+            } while (true);
         }
     }
 
@@ -214,13 +205,12 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         ExtendedBlockStorage[] var4 = par1Chunk.getBlockStorageArray();
         NBTTagList var5 = new NBTTagList("Sections");
         boolean var6 = !par2World.provider.hasNoSky;
-        ExtendedBlockStorage[] var7 = var4;
         int var8 = var4.length;
         NBTTagCompound var11;
 
         for (int var9 = 0; var9 < var8; ++var9)
         {
-            ExtendedBlockStorage var10 = var7[var9];
+            ExtendedBlockStorage var10 = var4[var9];
 
             if (var10 != null)
             {
@@ -291,17 +281,15 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         {
             long var19 = par2World.getTotalWorldTime();
             NBTTagList var12 = new NBTTagList();
-            Iterator var13 = var20.iterator();
 
-            while (var13.hasNext())
-            {
-                NextTickListEntry var14 = (NextTickListEntry)var13.next();
+            for (Object aVar20 : var20) {
+                NextTickListEntry var14 = (NextTickListEntry) aVar20;
                 NBTTagCompound var15 = new NBTTagCompound();
                 var15.setInteger("i", var14.blockID);
                 var15.setInteger("x", var14.xCoord);
                 var15.setInteger("y", var14.yCoord);
                 var15.setInteger("z", var14.zCoord);
-                var15.setInteger("t", (int)(var14.scheduledTime - var19));
+                var15.setInteger("t", (int) (var14.scheduledTime - var19));
                 var15.setInteger("p", var14.field_82754_f);
                 var12.appendTag(var15);
             }

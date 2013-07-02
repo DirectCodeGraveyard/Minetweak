@@ -343,7 +343,7 @@ public class Block
     public static boolean isNormalCube(int par0)
     {
         Block var1 = blocksList[par0];
-        return var1 == null ? false : var1.blockMaterial.isOpaque() && var1.renderAsNormalBlock() && !var1.canProvidePower();
+        return var1 != null && var1.blockMaterial.isOpaque() && var1.renderAsNormalBlock() && !var1.canProvidePower();
     }
 
     /**
@@ -394,7 +394,7 @@ public class Block
     /**
      * Returns the block hardness at a location. Args: world, x, y, z
      */
-    public float getBlockHardness(World par1World, int par2, int par3, int par4)
+    public float getBlockHardness()
     {
         return this.blockHardness;
     }
@@ -546,9 +546,9 @@ public class Block
      * Gets the hardness of block at the given coordinates in the given world, relative to the ability of the given
      * EntityPlayer.
      */
-    public float getPlayerRelativeBlockHardness(EntityPlayer par1EntityPlayer, World par2World, int par3, int par4, int par5)
+    public float getPlayerRelativeBlockHardness(EntityPlayer par1EntityPlayer)
     {
-        float var6 = this.getBlockHardness(par2World, par3, par4, par5);
+        float var6 = this.getBlockHardness();
         return var6 < 0.0F ? 0.0F : (!par1EntityPlayer.canHarvestBlock(this) ? par1EntityPlayer.getCurrentPlayerStrVsBlock(this, false) / var6 / 100.0F : par1EntityPlayer.getCurrentPlayerStrVsBlock(this, true) / var6 / 30.0F);
     }
 
@@ -758,7 +758,7 @@ public class Block
      */
     private boolean isVecInsideYZBounds(Vec3 par1Vec3)
     {
-        return par1Vec3 == null ? false : par1Vec3.yCoord >= this.minY && par1Vec3.yCoord <= this.maxY && par1Vec3.zCoord >= this.minZ && par1Vec3.zCoord <= this.maxZ;
+        return par1Vec3 != null && par1Vec3.yCoord >= this.minY && par1Vec3.yCoord <= this.maxY && par1Vec3.zCoord >= this.minZ && par1Vec3.zCoord <= this.maxZ;
     }
 
     /**
@@ -766,7 +766,7 @@ public class Block
      */
     private boolean isVecInsideXZBounds(Vec3 par1Vec3)
     {
-        return par1Vec3 == null ? false : par1Vec3.xCoord >= this.minX && par1Vec3.xCoord <= this.maxX && par1Vec3.zCoord >= this.minZ && par1Vec3.zCoord <= this.maxZ;
+        return par1Vec3 != null && par1Vec3.xCoord >= this.minX && par1Vec3.xCoord <= this.maxX && par1Vec3.zCoord >= this.minZ && par1Vec3.zCoord <= this.maxZ;
     }
 
     /**
@@ -774,26 +774,13 @@ public class Block
      */
     private boolean isVecInsideXYBounds(Vec3 par1Vec3)
     {
-        return par1Vec3 == null ? false : par1Vec3.xCoord >= this.minX && par1Vec3.xCoord <= this.maxX && par1Vec3.yCoord >= this.minY && par1Vec3.yCoord <= this.maxY;
+        return par1Vec3 != null && par1Vec3.xCoord >= this.minX && par1Vec3.xCoord <= this.maxX && par1Vec3.yCoord >= this.minY && par1Vec3.yCoord <= this.maxY;
     }
 
     /**
      * Called upon the block being destroyed by an explosion
      */
     public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {}
-
-    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5, ItemStack par6ItemStack)
-    {
-        return this.canPlaceBlockOnSide(par1World, par2, par3, par4, par5);
-    }
-
-    /**
-     * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
-     */
-    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
-    {
-        return this.canPlaceBlockAt(par1World, par2, par3, par4);
-    }
 
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z

@@ -1,10 +1,7 @@
 package org.minetweak.entity;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.BanEntry;
-import net.minecraft.src.DamageSource;
-import net.minecraft.src.EntityPlayerMP;
-import net.minecraft.src.NetServerHandler;
+import net.minecraft.src.*;
 import org.minetweak.command.CommandSender;
 import org.minetweak.permissions.PermissionNode;
 
@@ -185,6 +182,10 @@ public class Player implements CommandSender {
 
     public boolean isPlayerSleeping() {
         return getNetServerHandler().playerEntity.isPlayerSleeping();
+    }
+
+    public void setGameMode(EnumGameType gameType) {
+        getPlayerMP().setGameType(gameType);
     }
 
 }

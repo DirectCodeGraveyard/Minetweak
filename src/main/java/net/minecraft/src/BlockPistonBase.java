@@ -334,7 +334,7 @@ public class BlockPistonBase extends Block
         {
             if (par0 != Block.pistonBase.blockID && par0 != Block.pistonStickyBase.blockID)
             {
-                if (Block.blocksList[par0].getBlockHardness(par1World, par2, par3, par4) == -1.0F)
+                if (Block.blocksList[par0].getBlockHardness() == -1.0F)
                 {
                     return false;
                 }

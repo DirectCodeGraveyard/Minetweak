@@ -87,7 +87,7 @@ public class ItemInWorldManager
             else
             {
                 Block var3 = Block.blocksList[var2];
-                var4 = var3.getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, this.posX, this.posY, this.posZ) * (float)(var1 + 1);
+                var4 = var3.getPlayerRelativeBlockHardness(this.thisPlayerMP) * (float)(var1 + 1);
                 var5 = (int)(var4 * 10.0F);
 
                 if (var5 != this.durabilityRemainingOnBlock)
@@ -117,7 +117,7 @@ public class ItemInWorldManager
             else
             {
                 int var7 = this.curblockDamage - this.initialDamage;
-                var4 = var6.getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, this.curBlockX, this.curBlockY, this.curBlockZ) * (float)(var7 + 1);
+                var4 = var6.getPlayerRelativeBlockHardness(this.thisPlayerMP) * (float)(var7 + 1);
                 var5 = (int)(var4 * 10.0F);
 
                 if (var5 != this.durabilityRemainingOnBlock)
@@ -154,7 +154,7 @@ public class ItemInWorldManager
                 if (var6 > 0)
                 {
                     Block.blocksList[var6].onBlockClicked(this.theWorld, par1, par2, par3, this.thisPlayerMP);
-                    var5 = Block.blocksList[var6].getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, par1, par2, par3);
+                    var5 = Block.blocksList[var6].getPlayerRelativeBlockHardness(this.thisPlayerMP);
                 }
 
                 if (var6 > 0 && var5 >= 1.0F)
@@ -185,7 +185,7 @@ public class ItemInWorldManager
             if (var5 != 0)
             {
                 Block var6 = Block.blocksList[var5];
-                float var7 = var6.getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, par1, par2, par3) * (float)(var4 + 1);
+                float var7 = var6.getPlayerRelativeBlockHardness(this.thisPlayerMP) * (float)(var4 + 1);
 
                 if (var7 >= 0.7F)
                 {

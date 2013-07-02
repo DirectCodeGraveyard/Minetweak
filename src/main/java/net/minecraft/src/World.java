@@ -1,13 +1,6 @@
 package net.minecraft.src;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public abstract class World implements IBlockAccess
 {
@@ -3210,7 +3203,7 @@ public abstract class World implements IBlockAccess
                 var10 = null;
             }
 
-            return var10 != null && var10.blockMaterial == Material.circuits && var11 == Block.anvil ? true : par1 > 0 && var10 == null && var11.canPlaceBlockOnSide(this, par2, par3, par4, par6, par8ItemStack);
+            return var10 != null && var10.blockMaterial == Material.circuits && var11 == Block.anvil ? true : par1 > 0 && var10 == null && var11.canPlaceBlockAt(this, par2, par3, par4);
         }
     }
 

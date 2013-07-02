@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
-final class AABBLocalPool extends ThreadLocal
+final class
+        AABBLocalPool extends ThreadLocal
 {
     protected AABBPool createNewDefaultPool()
     {

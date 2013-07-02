@@ -16,7 +16,7 @@ public class AABBPool
     private final int numEntriesToRemove;
 
     /** List of AABB stored in this Pool */
-    private final List listAABB = new ArrayList();
+    private final List<AxisAlignedBB> listAABB = new ArrayList<AxisAlignedBB>();
 
     /** Next index to use when adding a Pool Entry. */
     private int nextPoolIndex = 0;
@@ -50,7 +50,7 @@ public class AABBPool
         }
         else
         {
-            var13 = (AxisAlignedBB)this.listAABB.get(this.nextPoolIndex);
+            var13 = this.listAABB.get(this.nextPoolIndex);
             var13.setBounds(par1, par3, par5, par7, par9, par11);
         }
 

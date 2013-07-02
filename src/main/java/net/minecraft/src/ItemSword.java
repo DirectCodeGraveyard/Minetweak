@@ -49,7 +49,7 @@ public class ItemSword extends Item
 
     public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
     {
-        if ((double)Block.blocksList[par3].getBlockHardness(par2World, par4, par5, par6) != 0.0D)
+        if ((double)Block.blocksList[par3].getBlockHardness() != 0.0D)
         {
             par1ItemStack.damageItem(2, par7EntityLiving);
         }
