@@ -1090,16 +1090,15 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
         for (WorldServer worldServer : this.worldServers) {
             if (worldServer != null) {
-                WorldServer var4 = worldServer;
-                WorldInfo var5 = var4.getWorldInfo();
-                par1PlayerUsageSnooper.addData("world[" + var2 + "][dimension]", var4.provider.dimensionId);
+                WorldInfo var5 = worldServer.getWorldInfo();
+                par1PlayerUsageSnooper.addData("world[" + var2 + "][dimension]", worldServer.provider.dimensionId);
                 par1PlayerUsageSnooper.addData("world[" + var2 + "][mode]", var5.getGameType());
-                par1PlayerUsageSnooper.addData("world[" + var2 + "][difficulty]", var4.difficultySetting);
+                par1PlayerUsageSnooper.addData("world[" + var2 + "][difficulty]", worldServer.difficultySetting);
                 par1PlayerUsageSnooper.addData("world[" + var2 + "][hardcore]", var5.isHardcoreModeEnabled());
                 par1PlayerUsageSnooper.addData("world[" + var2 + "][generator_name]", var5.getTerrainType().getWorldTypeName());
                 par1PlayerUsageSnooper.addData("world[" + var2 + "][generator_version]", var5.getTerrainType().getGeneratorVersion());
                 par1PlayerUsageSnooper.addData("world[" + var2 + "][height]", this.buildLimit);
-                par1PlayerUsageSnooper.addData("world[" + var2 + "][chunks_loaded]", var4.getChunkProvider().getLoadedChunkCount());
+                par1PlayerUsageSnooper.addData("world[" + var2 + "][chunks_loaded]", worldServer.getChunkProvider().getLoadedChunkCount());
                 ++var2;
             }
         }

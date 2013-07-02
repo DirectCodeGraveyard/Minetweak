@@ -42,7 +42,7 @@ public class Minetweak {
      * This is where we store the player's information at, inside of the Player
      * class contains their NetServerHandler and EntityPlayerMP.
      */
-    private static HashMap<String, Player> playerHashMap = new HashMap<String, Player>();
+    private static HashMap<String, Player> players = new HashMap<String, Player>();
 
     /**
      * This is where we store the command executors for our base commands, and even
@@ -133,13 +133,13 @@ public class Minetweak {
             targetPlayerInstance.kickPlayer("This server is currently under lockdown.");
             return false;
         } else {
-            if (playerHashMap.containsKey(playerUsername)) {
+            if (players.containsKey(playerUsername)) {
                 if (isPlayerOnline(playerUsername)) {
                     targetPlayerInstance.kickPlayer("There was a problem connecting you to the server");
                     return false;
                 }
             } else {
-                playerHashMap.put(playerUsername, targetPlayerInstance);
+                players.put(playerUsername, targetPlayerInstance);
             }
             targetPlayerInstance.sendMessage("You were registered within Minetweak. Please check within the console for errors.");
             if (targetPlayerInstance.isOperator()) targetPlayerInstance.sendMessage("You are an op.");
@@ -152,7 +152,7 @@ public class Minetweak {
      * @param playerUsername Player name we marking as offline
      */
     public static void unregisterPlayer(String playerUsername) {
-        playerHashMap.remove(playerUsername);
+        players.remove(playerUsername);
     }
 
     /**
@@ -161,7 +161,7 @@ public class Minetweak {
      * @return Instance of player
      */
     public static Player getPlayerByName(String playerName) {
-        if (playerHashMap.containsKey(playerName)) return playerHashMap.get(playerName);
+        if (players.containsKey(playerName)) return players.get(playerName);
         return null;
     }
 
@@ -209,10 +209,14 @@ public class Minetweak {
         eventBus.register(clazz);
     }
 
+    /**
+     *
+     * @param playerUsername The players username
+     * @return if the player is online
+     */
     public static boolean isPlayerOnline(String playerUsername) {
-        return playerHashMap.containsKey(playerUsername);
+        return players.containsKey(playerUsername);
     }
-
 
     /**
      * Log Info to Console
@@ -221,5 +225,4 @@ public class Minetweak {
     public static void info(String line) {
         MinecraftServer.getServer().logInfo(line);
     }
-
 }
