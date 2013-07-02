@@ -171,8 +171,7 @@ public class Minetweak {
      * @return True if the command does exist
      */
     public static boolean doesCommandExist(String command) {
-        if (commandExecutors.containsKey(command)) return true;
-        return false;
+        return commandExecutors.containsKey(command);
     }
 
     /**
@@ -202,12 +201,25 @@ public class Minetweak {
         return eventBus;
     }
 
+    /**
+     * Registers a Guava Event Listener
+     * @param clazz the listener class
+     */
     public static void registerListener(Class clazz) {
         eventBus.register(clazz);
     }
 
     public static boolean isPlayerOnline(String playerUsername) {
         return playerHashMap.containsKey(playerUsername);
+    }
+
+
+    /**
+     * Log Info to Console
+     * @param line line to log
+     */
+    public static void info(String line) {
+        MinecraftServer.getServer().logInfo(line);
     }
 
 }

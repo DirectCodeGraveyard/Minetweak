@@ -11,7 +11,7 @@ public class Server {
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
             String var3 = CommandBase.func_82361_a(null, new String[]{message}, 0, true);
-            MinecraftServer.getServer().getConfigurationManager().sendChatMsg(String.format("[%s] %s", new Object[] {"Server", var3}));
+            MinecraftServer.getServer().getConfigurationManager().sendChatMsg(String.format("[%s] %s", "Server", var3));
             return true;
         } else {
             return false;
@@ -62,16 +62,13 @@ public class Server {
         String commandOnly = commandWithArgs[0];
         String[] args = dropFirstString(commandWithArgs);
 
-        if (!Minetweak.doesCommandExist(commandWithArgs[0])) {
-            return;
-        } else {
+        if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
         }
     }
 
     public static void handleCommand(Console console, String command) {
-        if (command.startsWith("/"))
-        {
+        if (command.startsWith("/")) {
             command = command.substring(1);
         }
 
@@ -79,22 +76,14 @@ public class Server {
         String commandOnly = commandWithArgs[0];
         String[] args = dropFirstString(commandWithArgs);
 
-        if (!Minetweak.doesCommandExist(commandWithArgs[0])) {
-            return;
-        } else {
+        if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(console, commandOnly, args);
         }
     }
 
-    public static String[] dropFirstString(String[] par0ArrayOfStr)
-    {
+    public static String[] dropFirstString(String[] par0ArrayOfStr) {
         String[] var1 = new String[par0ArrayOfStr.length - 1];
-
-        for (int var2 = 1; var2 < par0ArrayOfStr.length; ++var2)
-        {
-            var1[var2 - 1] = par0ArrayOfStr[var2];
-        }
-
+        System.arraycopy(par0ArrayOfStr, 1, var1, 0, par0ArrayOfStr.length - 1);
         return var1;
     }
 

@@ -20,22 +20,23 @@ public class PluginLoader {
     public static void initialize() {
         PluginLoader loader = new PluginLoader();
         loader.setupModules();
+        loader.enable();
     }
 
     public void setupModules() {
         createDir();
-        getModuleFiles();
+        getPluginFiles();
         ArrayList<String> classes = new ArrayList<String>();
         ArrayList<URL> urls = new ArrayList<URL>();
         for (File f : files) {
             Manifest mf = getManifest(f);
-            String moduleClass = mf.getMainAttributes().getValue("Plugin-class");
-            if (moduleClass == null) {
+            String pluginClass = mf.getMainAttributes().getValue("Plugin-class");
+            if (pluginClass == null) {
                 continue;
             }
             try {
                 urls.add(f.toURI().toURL());
-                classes.add(moduleClass);
+                classes.add(pluginClass);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -46,12 +47,17 @@ public class PluginLoader {
             try {
                 Class mc = Class.forName(c, true, loader);
                 MinetweakPlugin plugin = (MinetweakPlugin) mc.newInstance();
-                if (plugins.get(plugin.getName()) != null)
-                    throw new RuntimeException("Duplicate modules detected: " + plugin.getName());
+                // Note that we override plugins even if they exist. This allows for alphabetical file-name plugin overriding
                 plugins.put(plugin.getName(), plugin);
             } catch (Exception e) {
                 throw new RuntimeException("Error loading plugin", e);
             }
+        }
+    }
+
+    public void enable() {
+        for (MinetweakPlugin plugin : plugins.values()) {
+            plugin.onEnable();
         }
     }
 
@@ -64,7 +70,7 @@ public class PluginLoader {
         }
     }
 
-    private void getModuleFiles() {
+    private void getPluginFiles() {
         try {
             FileVisitor<Path> visitor = new FileProcessor(this);
             Files.walkFileTree(Paths.get("plugins"), visitor);
@@ -96,6 +102,13 @@ public class PluginLoader {
                 instance.files.add(path.toFile());
             }
             return FileVisitResult.CONTINUE;
+        }
+    }
+
+    public static void disable(String pluginName) {
+        if (plugins.containsKey(pluginName)) {
+            plugins.get(pluginName).onDisable();
+            plugins.remove(pluginName);
         }
     }
 
