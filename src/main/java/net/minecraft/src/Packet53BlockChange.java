@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet53BlockChange extends Packet
@@ -39,25 +39,25 @@ public class Packet53BlockChange extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.xPosition = par1DataInputStream.readInt();
-        this.yPosition = par1DataInputStream.read();
-        this.zPosition = par1DataInputStream.readInt();
-        this.type = par1DataInputStream.readShort();
-        this.metadata = par1DataInputStream.read();
+        this.xPosition = par1DataInput.readInt();
+        this.yPosition = par1DataInput.readUnsignedByte();
+        this.zPosition = par1DataInput.readInt();
+        this.type = par1DataInput.readShort();
+        this.metadata = par1DataInput.readUnsignedByte();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.xPosition);
-        par1DataOutputStream.write(this.yPosition);
-        par1DataOutputStream.writeInt(this.zPosition);
-        par1DataOutputStream.writeShort(this.type);
-        par1DataOutputStream.write(this.metadata);
+        par1DataOutput.writeInt(this.xPosition);
+        par1DataOutput.write(this.yPosition);
+        par1DataOutput.writeInt(this.zPosition);
+        par1DataOutput.writeShort(this.type);
+        par1DataOutput.write(this.metadata);
     }
 
     /**

@@ -8,8 +8,8 @@ public class EntityAIAvoidEntity extends EntityAIBase
 
     /** The entity we are attached to */
     private EntityCreature theEntity;
-    private float farSpeed;
-    private float nearSpeed;
+    private double farSpeed;
+    private double nearSpeed;
     private Entity closestLivingEntity;
     private float distanceFromEntity;
 
@@ -22,13 +22,13 @@ public class EntityAIAvoidEntity extends EntityAIBase
     /** The class of the entity we should avoid */
     private Class targetEntityClass;
 
-    public EntityAIAvoidEntity(EntityCreature par1EntityCreature, Class par2Class, float par3, float par4, float par5)
+    public EntityAIAvoidEntity(EntityCreature par1EntityCreature, Class par2Class, float par3, double par4, double par6)
     {
         this.theEntity = par1EntityCreature;
         this.targetEntityClass = par2Class;
         this.distanceFromEntity = par3;
         this.farSpeed = par4;
-        this.nearSpeed = par5;
+        this.nearSpeed = par6;
         this.entityPathNavigate = par1EntityCreature.getNavigator();
         this.setMutexBits(1);
     }

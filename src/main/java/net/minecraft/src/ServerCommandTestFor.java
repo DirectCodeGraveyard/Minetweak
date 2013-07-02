@@ -15,6 +15,11 @@ public class ServerCommandTestFor extends CommandBase
         return 2;
     }
 
+    public String getCommandUsage(ICommandSender par1ICommandSender)
+    {
+        return "commands.testfor.usage";
+    }
+
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
     {
         if (par2ArrayOfStr.length != 1)

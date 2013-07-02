@@ -35,7 +35,7 @@ public class BlockJukeBox extends BlockContainer
 
             if (var6 != null)
             {
-                var6.func_96098_a(par5ItemStack.copy());
+                var6.func_110135_a(par5ItemStack.copy());
                 par1World.setBlockMetadata(par2, par3, par4, 1, 2);
             }
         }
@@ -52,13 +52,13 @@ public class BlockJukeBox extends BlockContainer
 
             if (var5 != null)
             {
-                ItemStack var6 = var5.func_96097_a();
+                ItemStack var6 = var5.func_110136_a();
 
                 if (var6 != null)
                 {
                     par1World.playAuxSFX(1005, par2, par3, par4, 0);
                     par1World.playRecord((String)null, par2, par3, par4);
-                    var5.func_96098_a((ItemStack)null);
+                    var5.func_110135_a((ItemStack)null);
                     par1World.setBlockMetadata(par2, par3, par4, 0, 2);
                     float var7 = 0.7F;
                     double var8 = (double)(par1World.rand.nextFloat() * var7) + (double)(1.0F - var7) * 0.5D;
@@ -116,7 +116,7 @@ public class BlockJukeBox extends BlockContainer
      */
     public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
     {
-        ItemStack var6 = ((TileEntityRecordPlayer)par1World.getBlockTileEntity(par2, par3, par4)).func_96097_a();
+        ItemStack var6 = ((TileEntityRecordPlayer)par1World.getBlockTileEntity(par2, par3, par4)).func_110136_a();
         return var6 == null ? 0 : var6.itemID + 1 - Item.record13.itemID;
     }
 }

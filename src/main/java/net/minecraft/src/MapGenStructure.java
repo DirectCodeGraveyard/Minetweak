@@ -1,10 +1,6 @@
 package net.minecraft.src;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public abstract class MapGenStructure extends MapGenBase
 {
@@ -129,7 +125,7 @@ public abstract class MapGenStructure extends MapGenBase
                 var20 = var19.x - par2;
                 var21 = var19.y - par3;
                 var22 = var19.z - par4;
-                var23 = (double)(var20 + var20 * var21 * var21 + var22 * var22);
+                var23 = (double)(var20 * var20 + var21 * var21 + var22 * var22);
 
                 if (var23 < var13)
                 {
@@ -158,7 +154,7 @@ public abstract class MapGenStructure extends MapGenBase
                     var20 = var19.x - par2;
                     var21 = var19.y - par3;
                     var22 = var19.z - par4;
-                    var23 = (double)(var20 + var20 * var21 * var21 + var22 * var22);
+                    var23 = (double)(var20 * var20 + var21 * var21 + var22 * var22);
 
                     if (var23 < var13)
                     {

@@ -12,15 +12,15 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
     private ItemStack[] furnaceItemStacks = new ItemStack[3];
 
     /** The number of ticks that the furnace will keep burning */
-    public int furnaceBurnTime = 0;
+    public int furnaceBurnTime;
 
     /**
      * The number of ticks that a fresh copy of the currently-burning item would keep the furnace burning for
      */
-    public int currentItemBurnTime = 0;
+    public int currentItemBurnTime;
 
     /** The number of ticks that the current item has been cooking for */
-    public int furnaceCookTime = 0;
+    public int furnaceCookTime;
     private String field_94130_e;
 
     /**
@@ -338,6 +338,11 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory
                 if (var3.blockMaterial == Material.wood)
                 {
                     return 300;
+                }
+
+                if (var3 == Block.field_111034_cE)
+                {
+                    return 16000;
                 }
             }
 

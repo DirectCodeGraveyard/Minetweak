@@ -15,11 +15,13 @@ public class PlayerManager
 
     /** the playerInstances(chunks) that need to be updated */
     private final List playerInstancesToUpdate = new ArrayList();
+    private final List field_111193_e = new ArrayList();
 
     /**
      * Number of chunks the server sends to the client. Valid 3<=x<=15. In server.properties.
      */
     private final int playerViewRadius;
+    private long field_111192_g;
 
     /** x, z direction vectors: east, south, west, north */
     private final int[][] xzDirectionsConst = new int[][] {{1, 0}, {0, 1}, { -1, 0}, {0, -1}};
@@ -54,18 +56,37 @@ public class PlayerManager
      */
     public void updatePlayerInstances()
     {
-        for (int var1 = 0; var1 < this.playerInstancesToUpdate.size(); ++var1)
+        long var1 = this.theWorldServer.getTotalWorldTime();
+        int var3;
+        PlayerInstance var4;
+
+        if (var1 - this.field_111192_g > 8000L)
         {
-            ((PlayerInstance)this.playerInstancesToUpdate.get(var1)).onUpdate();
+            this.field_111192_g = var1;
+
+            for (var3 = 0; var3 < this.field_111193_e.size(); ++var3)
+            {
+                var4 = (PlayerInstance)this.field_111193_e.get(var3);
+                var4.onUpdate();
+                var4.func_111194_a();
+            }
+        }
+        else
+        {
+            for (var3 = 0; var3 < this.playerInstancesToUpdate.size(); ++var3)
+            {
+                var4 = (PlayerInstance)this.playerInstancesToUpdate.get(var3);
+                var4.onUpdate();
+            }
         }
 
         this.playerInstancesToUpdate.clear();
 
         if (this.players.isEmpty())
         {
-            WorldProvider var2 = this.theWorldServer.provider;
+            WorldProvider var5 = this.theWorldServer.provider;
 
-            if (!var2.canRespawnHere())
+            if (!var5.canRespawnHere())
             {
                 this.theWorldServer.theChunkProviderServer.unloadAllChunks();
             }
@@ -84,6 +105,7 @@ public class PlayerManager
         {
             var6 = new PlayerInstance(this, par1, par2);
             this.playerInstances.add(var4, var6);
+            this.field_111193_e.add(var6);
         }
 
         return var6;
@@ -282,6 +304,11 @@ public class PlayerManager
     static LongHashMap getChunkWatchers(PlayerManager par0PlayerManager)
     {
         return par0PlayerManager.playerInstances;
+    }
+
+    static List func_111191_d(PlayerManager par0PlayerManager)
+    {
+        return par0PlayerManager.field_111193_e;
     }
 
     static List getChunkWatchersWithPlayers(PlayerManager par0PlayerManager)

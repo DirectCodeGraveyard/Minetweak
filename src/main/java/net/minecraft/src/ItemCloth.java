@@ -23,6 +23,6 @@ public class ItemCloth extends ItemBlock
      */
     public String getUnlocalizedName(ItemStack par1ItemStack)
     {
-        return super.getUnlocalizedName() + "." + ItemDye.dyeColorNames[BlockCloth.getBlockFromDye(par1ItemStack.getItemDamage())];
+        return super.getUnlocalizedName() + "." + ItemDye.dyeColorNames[BlockColored.getBlockFromDye(par1ItemStack.getItemDamage())];
     }
 }

@@ -1,10 +1,10 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import javax.crypto.SecretKey;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 import java.security.PrivateKey;
-import javax.crypto.SecretKey;
 
 public class Packet252SharedKey extends Packet
 {
@@ -19,19 +19,19 @@ public class Packet252SharedKey extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.sharedSecret = readBytesFromStream(par1DataInputStream);
-        this.verifyToken = readBytesFromStream(par1DataInputStream);
+        this.sharedSecret = readBytesFromStream(par1DataInput);
+        this.verifyToken = readBytesFromStream(par1DataInput);
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        writeByteArray(par1DataOutputStream, this.sharedSecret);
-        writeByteArray(par1DataOutputStream, this.verifyToken);
+        writeByteArray(par1DataOutput, this.sharedSecret);
+        writeByteArray(par1DataOutput, this.verifyToken);
     }
 
     /**

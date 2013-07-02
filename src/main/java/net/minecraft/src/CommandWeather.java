@@ -1,8 +1,9 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.util.List;
 import java.util.Random;
-import net.minecraft.server.MinecraftServer;
 
 public class CommandWeather extends CommandBase
 {
@@ -19,13 +20,14 @@ public class CommandWeather extends CommandBase
         return 2;
     }
 
+    public String getCommandUsage(ICommandSender par1ICommandSender)
+    {
+        return "commands.weather.usage";
+    }
+
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
     {
-        if (par2ArrayOfStr.length < 1)
-        {
-            throw new WrongUsageException("commands.weather.usage", new Object[0]);
-        }
-        else
+        if (par2ArrayOfStr.length >= 1 && par2ArrayOfStr.length <= 2)
         {
             int var3 = (300 + (new Random()).nextInt(600)) * 20;
 
@@ -51,12 +53,21 @@ public class CommandWeather extends CommandBase
                 var5.setThundering(false);
                 notifyAdmins(par1ICommandSender, "commands.weather.rain", new Object[0]);
             }
-            else if ("thunder".equalsIgnoreCase(par2ArrayOfStr[0]))
+            else
             {
+                if (!"thunder".equalsIgnoreCase(par2ArrayOfStr[0]))
+                {
+                    throw new WrongUsageException("commands.weather.usage", new Object[0]);
+                }
+
                 var5.setRaining(true);
                 var5.setThundering(true);
                 notifyAdmins(par1ICommandSender, "commands.weather.thunder", new Object[0]);
             }
+        }
+        else
+        {
+            throw new WrongUsageException("commands.weather.usage", new Object[0]);
         }
     }
 

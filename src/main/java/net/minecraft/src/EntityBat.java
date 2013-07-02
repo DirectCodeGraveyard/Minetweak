@@ -10,7 +10,6 @@ public class EntityBat extends EntityAmbientCreature
     public EntityBat(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/bat.png";
         this.setSize(0.5F, 0.9F);
         this.setIsBatHanging(true);
     }
@@ -73,9 +72,10 @@ public class EntityBat extends EntityAmbientCreature
 
     protected void func_85033_bc() {}
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 6;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(6.0D);
     }
 
     public boolean getIsBatHanging()
@@ -209,7 +209,7 @@ public class EntityBat extends EntityAmbientCreature
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -278,9 +278,4 @@ public class EntityBat extends EntityAmbientCreature
             return var4 > this.rand.nextInt(var5) ? false : super.getCanSpawnHere();
         }
     }
-
-    /**
-     * Initialize this creature.
-     */
-    public void initCreature() {}
 }

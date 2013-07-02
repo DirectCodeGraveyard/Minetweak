@@ -86,11 +86,6 @@ public class PotionEffect
         return this.amplifier;
     }
 
-    public boolean isSplashPotionEffect()
-    {
-        return this.isSplashPotion;
-    }
-
     /**
      * Set whether this potion is a splash potion.
      */
@@ -107,13 +102,13 @@ public class PotionEffect
         return this.isAmbient;
     }
 
-    public boolean onUpdate(EntityLiving par1EntityLiving)
+    public boolean onUpdate(EntityLivingBase par1EntityLivingBase)
     {
         if (this.duration > 0)
         {
             if (Potion.potionTypes[this.potionID].isReady(this.duration, this.amplifier))
             {
-                this.performEffect(par1EntityLiving);
+                this.performEffect(par1EntityLivingBase);
             }
 
             this.deincrementDuration();
@@ -127,11 +122,11 @@ public class PotionEffect
         return --this.duration;
     }
 
-    public void performEffect(EntityLiving par1EntityLiving)
+    public void performEffect(EntityLivingBase par1EntityLivingBase)
     {
         if (this.duration > 0)
         {
-            Potion.potionTypes[this.potionID].performEffect(par1EntityLiving, this.amplifier);
+            Potion.potionTypes[this.potionID].performEffect(par1EntityLivingBase, this.amplifier);
         }
     }
 

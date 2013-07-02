@@ -1,12 +1,6 @@
 package net.minecraft.src;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Scoreboard
 {
@@ -125,16 +119,12 @@ public class Scoreboard
     {
         Collection var1 = this.field_96544_c.values();
         ArrayList var2 = new ArrayList();
+        Iterator var3 = var1.iterator();
 
-        if (var1 != null)
+        while (var3.hasNext())
         {
-            Iterator var3 = var1.iterator();
-
-            while (var3.hasNext())
-            {
-                Map var4 = (Map)var3.next();
-                var2.addAll(var4.values());
-            }
+            Map var4 = (Map)var3.next();
+            var2.addAll(var4.values());
         }
 
         return var2;
@@ -314,10 +304,13 @@ public class Scoreboard
         {
             case 0:
                 return "list";
+
             case 1:
                 return "sidebar";
+
             case 2:
                 return "belowName";
+
             default:
                 return null;
         }

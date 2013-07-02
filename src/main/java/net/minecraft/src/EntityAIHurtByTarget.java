@@ -7,12 +7,9 @@ public class EntityAIHurtByTarget extends EntityAITarget
 {
     boolean field_75312_a;
 
-    /** The PathNavigate of our entity. */
-    EntityLiving entityPathNavigate;
-
-    public EntityAIHurtByTarget(EntityLiving par1EntityLiving, boolean par2)
+    public EntityAIHurtByTarget(EntityCreature par1EntityCreature, boolean par2)
     {
-        super(par1EntityLiving, 16.0F, false);
+        super(par1EntityCreature, false);
         this.field_75312_a = par2;
         this.setMutexBits(1);
     }
@@ -22,15 +19,7 @@ public class EntityAIHurtByTarget extends EntityAITarget
      */
     public boolean shouldExecute()
     {
-        return this.isSuitableTarget(this.taskOwner.getAITarget(), true);
-    }
-
-    /**
-     * Returns whether an in-progress EntityAIBase should continue executing
-     */
-    public boolean continueExecuting()
-    {
-        return this.taskOwner.getAITarget() != null && this.taskOwner.getAITarget() != this.entityPathNavigate;
+        return this.isSuitableTarget(this.taskOwner.getAITarget(), false);
     }
 
     /**
@@ -39,35 +28,24 @@ public class EntityAIHurtByTarget extends EntityAITarget
     public void startExecuting()
     {
         this.taskOwner.setAttackTarget(this.taskOwner.getAITarget());
-        this.entityPathNavigate = this.taskOwner.getAITarget();
 
         if (this.field_75312_a)
         {
-            List var1 = this.taskOwner.worldObj.getEntitiesWithinAABB(this.taskOwner.getClass(), AxisAlignedBB.getAABBPool().getAABB(this.taskOwner.posX, this.taskOwner.posY, this.taskOwner.posZ, this.taskOwner.posX + 1.0D, this.taskOwner.posY + 1.0D, this.taskOwner.posZ + 1.0D).expand((double)this.targetDistance, 10.0D, (double)this.targetDistance));
-            Iterator var2 = var1.iterator();
+            double var1 = this.func_111175_f();
+            List var3 = this.taskOwner.worldObj.getEntitiesWithinAABB(this.taskOwner.getClass(), AxisAlignedBB.getAABBPool().getAABB(this.taskOwner.posX, this.taskOwner.posY, this.taskOwner.posZ, this.taskOwner.posX + 1.0D, this.taskOwner.posY + 1.0D, this.taskOwner.posZ + 1.0D).expand(var1, 10.0D, var1));
+            Iterator var4 = var3.iterator();
 
-            while (var2.hasNext())
+            while (var4.hasNext())
             {
-                EntityLiving var3 = (EntityLiving)var2.next();
+                EntityCreature var5 = (EntityCreature)var4.next();
 
-                if (this.taskOwner != var3 && var3.getAttackTarget() == null)
+                if (this.taskOwner != var5 && var5.getAttackTarget() == null)
                 {
-                    var3.setAttackTarget(this.taskOwner.getAITarget());
+                    var5.setAttackTarget(this.taskOwner.getAITarget());
                 }
             }
         }
 
         super.startExecuting();
-    }
-
-    /**
-     * Resets the task
-     */
-    public void resetTask()
-    {
-        if (this.taskOwner.getAttackTarget() != null && this.taskOwner.getAttackTarget() instanceof EntityPlayer && ((EntityPlayer)this.taskOwner.getAttackTarget()).capabilities.disableDamage)
-        {
-            super.resetTask();
-        }
     }
 }

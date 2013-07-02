@@ -1,14 +1,11 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet3Chat extends Packet
 {
-    /** Maximum number of characters allowed in chat string in each packet. */
-    public static int maxChatLength = 119;
-
     /** The message being sent. */
     public String message;
     private boolean isServer;
@@ -16,6 +13,16 @@ public class Packet3Chat extends Packet
     public Packet3Chat()
     {
         this.isServer = true;
+    }
+
+    public Packet3Chat(ChatMessageComponent par1ChatMessageComponent)
+    {
+        this(par1ChatMessageComponent.func_111062_i());
+    }
+
+    public Packet3Chat(ChatMessageComponent par1ChatMessageComponent, boolean par2)
+    {
+        this(par1ChatMessageComponent.func_111062_i(), par2);
     }
 
     public Packet3Chat(String par1Str)
@@ -27,9 +34,9 @@ public class Packet3Chat extends Packet
     {
         this.isServer = true;
 
-        if (par1Str.length() > maxChatLength)
+        if (par1Str.length() > 32767)
         {
-            par1Str = par1Str.substring(0, maxChatLength);
+            par1Str = par1Str.substring(0, 32767);
         }
 
         this.message = par1Str;
@@ -39,17 +46,17 @@ public class Packet3Chat extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.message = readString(par1DataInputStream, maxChatLength);
+        this.message = readString(par1DataInput, 32767);
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        writeString(this.message, par1DataOutputStream);
+        writeString(this.message, par1DataOutput);
     }
 
     /**
@@ -74,14 +81,5 @@ public class Packet3Chat extends Packet
     public boolean getIsServer()
     {
         return this.isServer;
-    }
-
-    /**
-     * If this returns true, the packet may be processed on any thread; otherwise it is queued for the main thread to
-     * handle.
-     */
-    public boolean canProcessAsync()
-    {
-        return !this.message.startsWith("/");
     }
 }

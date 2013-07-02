@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 import java.util.List;
 
@@ -40,20 +40,20 @@ public class Packet24MobSpawn extends Packet
 
     public Packet24MobSpawn() {}
 
-    public Packet24MobSpawn(EntityLiving par1EntityLiving)
+    public Packet24MobSpawn(EntityLivingBase par1EntityLivingBase)
     {
-        this.entityId = par1EntityLiving.entityId;
-        this.type = (byte)EntityList.getEntityID(par1EntityLiving);
-        this.xPosition = par1EntityLiving.myEntitySize.multiplyBy32AndRound(par1EntityLiving.posX);
-        this.yPosition = MathHelper.floor_double(par1EntityLiving.posY * 32.0D);
-        this.zPosition = par1EntityLiving.myEntitySize.multiplyBy32AndRound(par1EntityLiving.posZ);
-        this.yaw = (byte)((int)(par1EntityLiving.rotationYaw * 256.0F / 360.0F));
-        this.pitch = (byte)((int)(par1EntityLiving.rotationPitch * 256.0F / 360.0F));
-        this.headYaw = (byte)((int)(par1EntityLiving.rotationYawHead * 256.0F / 360.0F));
+        this.entityId = par1EntityLivingBase.entityId;
+        this.type = (byte)EntityList.getEntityID(par1EntityLivingBase);
+        this.xPosition = par1EntityLivingBase.myEntitySize.multiplyBy32AndRound(par1EntityLivingBase.posX);
+        this.yPosition = MathHelper.floor_double(par1EntityLivingBase.posY * 32.0D);
+        this.zPosition = par1EntityLivingBase.myEntitySize.multiplyBy32AndRound(par1EntityLivingBase.posZ);
+        this.yaw = (byte)((int)(par1EntityLivingBase.rotationYaw * 256.0F / 360.0F));
+        this.pitch = (byte)((int)(par1EntityLivingBase.rotationPitch * 256.0F / 360.0F));
+        this.headYaw = (byte)((int)(par1EntityLivingBase.rotationYawHead * 256.0F / 360.0F));
         double var2 = 3.9D;
-        double var4 = par1EntityLiving.motionX;
-        double var6 = par1EntityLiving.motionY;
-        double var8 = par1EntityLiving.motionZ;
+        double var4 = par1EntityLivingBase.motionX;
+        double var6 = par1EntityLivingBase.motionY;
+        double var8 = par1EntityLivingBase.motionZ;
 
         if (var4 < -var2)
         {
@@ -88,45 +88,45 @@ public class Packet24MobSpawn extends Packet
         this.velocityX = (int)(var4 * 8000.0D);
         this.velocityY = (int)(var6 * 8000.0D);
         this.velocityZ = (int)(var8 * 8000.0D);
-        this.metaData = par1EntityLiving.getDataWatcher();
+        this.metaData = par1EntityLivingBase.getDataWatcher();
     }
 
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.entityId = par1DataInputStream.readInt();
-        this.type = par1DataInputStream.readByte() & 255;
-        this.xPosition = par1DataInputStream.readInt();
-        this.yPosition = par1DataInputStream.readInt();
-        this.zPosition = par1DataInputStream.readInt();
-        this.yaw = par1DataInputStream.readByte();
-        this.pitch = par1DataInputStream.readByte();
-        this.headYaw = par1DataInputStream.readByte();
-        this.velocityX = par1DataInputStream.readShort();
-        this.velocityY = par1DataInputStream.readShort();
-        this.velocityZ = par1DataInputStream.readShort();
-        this.metadata = DataWatcher.readWatchableObjects(par1DataInputStream);
+        this.entityId = par1DataInput.readInt();
+        this.type = par1DataInput.readByte() & 255;
+        this.xPosition = par1DataInput.readInt();
+        this.yPosition = par1DataInput.readInt();
+        this.zPosition = par1DataInput.readInt();
+        this.yaw = par1DataInput.readByte();
+        this.pitch = par1DataInput.readByte();
+        this.headYaw = par1DataInput.readByte();
+        this.velocityX = par1DataInput.readShort();
+        this.velocityY = par1DataInput.readShort();
+        this.velocityZ = par1DataInput.readShort();
+        this.metadata = DataWatcher.readWatchableObjects(par1DataInput);
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.entityId);
-        par1DataOutputStream.writeByte(this.type & 255);
-        par1DataOutputStream.writeInt(this.xPosition);
-        par1DataOutputStream.writeInt(this.yPosition);
-        par1DataOutputStream.writeInt(this.zPosition);
-        par1DataOutputStream.writeByte(this.yaw);
-        par1DataOutputStream.writeByte(this.pitch);
-        par1DataOutputStream.writeByte(this.headYaw);
-        par1DataOutputStream.writeShort(this.velocityX);
-        par1DataOutputStream.writeShort(this.velocityY);
-        par1DataOutputStream.writeShort(this.velocityZ);
-        this.metaData.writeWatchableObjects(par1DataOutputStream);
+        par1DataOutput.writeInt(this.entityId);
+        par1DataOutput.writeByte(this.type & 255);
+        par1DataOutput.writeInt(this.xPosition);
+        par1DataOutput.writeInt(this.yPosition);
+        par1DataOutput.writeInt(this.zPosition);
+        par1DataOutput.writeByte(this.yaw);
+        par1DataOutput.writeByte(this.pitch);
+        par1DataOutput.writeByte(this.headYaw);
+        par1DataOutput.writeShort(this.velocityX);
+        par1DataOutput.writeShort(this.velocityY);
+        par1DataOutput.writeShort(this.velocityZ);
+        this.metaData.writeWatchableObjects(par1DataOutput);
     }
 
     /**

@@ -1,11 +1,6 @@
 package net.minecraft.src;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Profiler
 {
@@ -16,7 +11,7 @@ public class Profiler
     private final List timestampList = new ArrayList();
 
     /** Flag profiling enabled */
-    public boolean profilingEnabled = false;
+    public boolean profilingEnabled;
 
     /** Current profiling section */
     private String profilingSection = "";

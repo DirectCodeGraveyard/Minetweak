@@ -19,7 +19,7 @@ public abstract class NBTBase
     /**
      * Read the actual data contents of the tag, implemented in NBT extension classes
      */
-    abstract void load(DataInput var1) throws IOException;
+    abstract void load(DataInput var1, int var2) throws IOException;
 
     /**
      * Gets the type byte for the tag.
@@ -68,29 +68,34 @@ public abstract class NBTBase
      */
     public static NBTBase readNamedTag(DataInput par0DataInput) throws IOException
     {
-        byte var1 = par0DataInput.readByte();
+        return func_130104_b(par0DataInput, 0);
+    }
 
-        if (var1 == 0)
+    public static NBTBase func_130104_b(DataInput par0DataInput, int par1) throws IOException
+    {
+        byte var2 = par0DataInput.readByte();
+
+        if (var2 == 0)
         {
             return new NBTTagEnd();
         }
         else
         {
-            String var2 = par0DataInput.readUTF();
-            NBTBase var3 = newTag(var1, var2);
+            String var3 = par0DataInput.readUTF();
+            NBTBase var4 = newTag(var2, var3);
 
             try
             {
-                var3.load(par0DataInput);
-                return var3;
+                var4.load(par0DataInput, par1);
+                return var4;
             }
-            catch (IOException var7)
+            catch (IOException var8)
             {
-                CrashReport var5 = CrashReport.makeCrashReport(var7, "Loading NBT data");
-                CrashReportCategory var6 = var5.makeCategory("NBT Tag");
-                var6.addCrashSection("Tag name", var2);
-                var6.addCrashSection("Tag type", Byte.valueOf(var1));
-                throw new ReportedException(var5);
+                CrashReport var6 = CrashReport.makeCrashReport(var8, "Loading NBT data");
+                CrashReportCategory var7 = var6.makeCategory("NBT Tag");
+                var7.addCrashSection("Tag name", var3);
+                var7.addCrashSection("Tag type", Byte.valueOf(var2));
+                throw new ReportedException(var6);
             }
         }
     }
@@ -119,28 +124,40 @@ public abstract class NBTBase
         {
             case 0:
                 return new NBTTagEnd();
+
             case 1:
                 return new NBTTagByte(par1Str);
+
             case 2:
                 return new NBTTagShort(par1Str);
+
             case 3:
                 return new NBTTagInt(par1Str);
+
             case 4:
                 return new NBTTagLong(par1Str);
+
             case 5:
                 return new NBTTagFloat(par1Str);
+
             case 6:
                 return new NBTTagDouble(par1Str);
+
             case 7:
                 return new NBTTagByteArray(par1Str);
+
             case 8:
                 return new NBTTagString(par1Str);
+
             case 9:
                 return new NBTTagList(par1Str);
+
             case 10:
                 return new NBTTagCompound(par1Str);
+
             case 11:
                 return new NBTTagIntArray(par1Str);
+
             default:
                 return null;
         }
@@ -155,28 +172,40 @@ public abstract class NBTBase
         {
             case 0:
                 return "TAG_End";
+
             case 1:
                 return "TAG_Byte";
+
             case 2:
                 return "TAG_Short";
+
             case 3:
                 return "TAG_Int";
+
             case 4:
                 return "TAG_Long";
+
             case 5:
                 return "TAG_Float";
+
             case 6:
                 return "TAG_Double";
+
             case 7:
                 return "TAG_Byte_Array";
+
             case 8:
                 return "TAG_String";
+
             case 9:
                 return "TAG_List";
+
             case 10:
                 return "TAG_Compound";
+
             case 11:
                 return "TAG_Int_Array";
+
             default:
                 return "UNKNOWN";
         }

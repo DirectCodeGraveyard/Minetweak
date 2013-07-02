@@ -47,14 +47,6 @@ public class ContainerBeacon extends Container
     }
 
     /**
-     * Looks for changes made in the container, sends them to every listener.
-     */
-    public void detectAndSendChanges()
-    {
-        super.detectAndSendChanges();
-    }
-
-    /**
      * Returns the Tile Entity behind this beacon inventory / container
      */
     public TileEntityBeacon getBeacon()

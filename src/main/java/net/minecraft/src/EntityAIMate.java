@@ -13,12 +13,12 @@ public class EntityAIMate extends EntityAIBase
     /**
      * Delay preventing a baby from spawning immediately when two mate-able animals find each other.
      */
-    int spawnBabyDelay = 0;
+    int spawnBabyDelay;
 
     /** The speed the creature moves at during mating behavior. */
-    float moveSpeed;
+    double moveSpeed;
 
-    public EntityAIMate(EntityAnimal par1EntityAnimal, float par2)
+    public EntityAIMate(EntityAnimal par1EntityAnimal, double par2)
     {
         this.theAnimal = par1EntityAnimal;
         this.theWorld = par1EntityAnimal.worldObj;

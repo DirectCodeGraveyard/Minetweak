@@ -8,18 +8,16 @@ public class EntityPig extends EntityAnimal
     public EntityPig(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/pig.png";
         this.setSize(0.9F, 0.9F);
         this.getNavigator().setAvoidsWater(true);
-        float var2 = 0.25F;
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-        this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.34F));
-        this.tasks.addTask(3, new EntityAIMate(this, var2));
-        this.tasks.addTask(4, new EntityAITempt(this, 0.3F, Item.carrotOnAStick.itemID, false));
-        this.tasks.addTask(4, new EntityAITempt(this, 0.3F, Item.carrot.itemID, false));
-        this.tasks.addTask(5, new EntityAIFollowParent(this, 0.28F));
-        this.tasks.addTask(6, new EntityAIWander(this, var2));
+        this.tasks.addTask(1, new EntityAIPanic(this, 1.25D));
+        this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.3F));
+        this.tasks.addTask(3, new EntityAIMate(this, 1.0D));
+        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Item.carrotOnAStick.itemID, false));
+        this.tasks.addTask(4, new EntityAITempt(this, 1.2D, Item.carrot.itemID, false));
+        this.tasks.addTask(5, new EntityAIFollowParent(this, 1.1D));
+        this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
     }
@@ -32,9 +30,11 @@ public class EntityPig extends EntityAnimal
         return true;
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 10;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(10.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.25D);
     }
 
     protected void updateAITasks()

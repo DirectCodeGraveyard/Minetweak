@@ -1,12 +1,8 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import net.minecraft.server.MinecraftServer;
+
+import java.io.*;
 
 public class SaveHandler implements ISaveHandler, IPlayerFileData
 {
@@ -20,7 +16,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData
     /**
      * The time in milliseconds when this field was initialized. Stored in the session lock file.
      */
-    private final long initializationTime = System.currentTimeMillis();
+    private final long initializationTime = MinecraftServer.func_130071_aq();
 
     /** The directory name of the world */
     private final String saveDirectoryName;
@@ -245,8 +241,8 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData
         {
             NBTTagCompound var2 = new NBTTagCompound();
             par1EntityPlayer.writeToNBT(var2);
-            File var3 = new File(this.playersDirectory, par1EntityPlayer.username + ".dat.tmp");
-            File var4 = new File(this.playersDirectory, par1EntityPlayer.username + ".dat");
+            File var3 = new File(this.playersDirectory, par1EntityPlayer.getCommandSenderName() + ".dat.tmp");
+            File var4 = new File(this.playersDirectory, par1EntityPlayer.getCommandSenderName() + ".dat");
             CompressedStreamTools.writeCompressed(var2, new FileOutputStream(var3));
 
             if (var4.exists())
@@ -258,7 +254,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData
         }
         catch (Exception var5)
         {
-            MinecraftServer.getServer().getLogAgent().func_98236_b("Failed to save player data for " + par1EntityPlayer.username);
+            MinecraftServer.getServer().getLogAgent().func_98236_b("Failed to save player data for " + par1EntityPlayer.getCommandSenderName());
         }
     }
 
@@ -267,7 +263,7 @@ public class SaveHandler implements ISaveHandler, IPlayerFileData
      */
     public NBTTagCompound readPlayerData(EntityPlayer par1EntityPlayer)
     {
-        NBTTagCompound var2 = this.getPlayerData(par1EntityPlayer.username);
+        NBTTagCompound var2 = this.getPlayerData(par1EntityPlayer.getCommandSenderName());
 
         if (var2 != null)
         {

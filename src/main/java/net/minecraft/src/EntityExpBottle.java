@@ -7,9 +7,9 @@ public class EntityExpBottle extends EntityThrowable
         super(par1World);
     }
 
-    public EntityExpBottle(World par1World, EntityLiving par2EntityLiving)
+    public EntityExpBottle(World par1World, EntityLivingBase par2EntityLivingBase)
     {
-        super(par1World, par2EntityLiving);
+        super(par1World, par2EntityLivingBase);
     }
 
     public EntityExpBottle(World par1World, double par2, double par4, double par6)

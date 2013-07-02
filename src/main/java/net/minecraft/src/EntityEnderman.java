@@ -1,28 +1,34 @@
 package net.minecraft.src;
 
+import java.util.UUID;
+
 public class EntityEnderman extends EntityMob
 {
+    private static final UUID field_110192_bp = UUID.fromString("020E0DFB-87AE-4653-9556-831010E291A0");
+    private static final AttributeModifier field_110193_bq = (new AttributeModifier(field_110192_bp, "Attacking speed boost", 6.199999809265137D, 0)).func_111168_a(false);
     private static boolean[] carriableBlocks = new boolean[256];
 
     /**
      * Counter to delay the teleportation of an enderman towards the currently attacked target
      */
-    private int teleportDelay = 0;
-    private int field_70826_g = 0;
+    private int teleportDelay;
+    private int field_70826_g;
+    private Entity field_110194_bu;
     private boolean field_104003_g;
 
     public EntityEnderman(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/enderman.png";
-        this.moveSpeed = 0.2F;
         this.setSize(0.6F, 2.9F);
         this.stepHeight = 1.0F;
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 40;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(40.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.30000001192092896D);
+        this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(7.0D);
     }
 
     protected void entityInit()
@@ -118,11 +124,22 @@ public class EntityEnderman extends EntityMob
     {
         if (this.isWet())
         {
-            this.attackEntityFrom(DamageSource.drown, 1);
+            this.attackEntityFrom(DamageSource.drown, 1.0F);
         }
 
-        this.moveSpeed = this.entityToAttack != null ? 6.5F : 0.3F;
-        int var1;
+        if (this.field_110194_bu != this.entityToAttack)
+        {
+            AttributeInstance var1 = this.func_110148_a(SharedMonsterAttributes.field_111263_d);
+            var1.func_111124_b(field_110193_bq);
+
+            if (this.entityToAttack != null)
+            {
+                var1.func_111121_a(field_110193_bq);
+            }
+        }
+
+        this.field_110194_bu = this.entityToAttack;
+        int var6;
 
         if (!this.worldObj.isRemote && this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"))
         {
@@ -134,45 +151,45 @@ public class EntityEnderman extends EntityMob
             {
                 if (this.rand.nextInt(20) == 0)
                 {
-                    var1 = MathHelper.floor_double(this.posX - 2.0D + this.rand.nextDouble() * 4.0D);
+                    var6 = MathHelper.floor_double(this.posX - 2.0D + this.rand.nextDouble() * 4.0D);
                     var2 = MathHelper.floor_double(this.posY + this.rand.nextDouble() * 3.0D);
                     var3 = MathHelper.floor_double(this.posZ - 2.0D + this.rand.nextDouble() * 4.0D);
-                    var4 = this.worldObj.getBlockId(var1, var2, var3);
+                    var4 = this.worldObj.getBlockId(var6, var2, var3);
 
                     if (carriableBlocks[var4])
                     {
-                        this.setCarried(this.worldObj.getBlockId(var1, var2, var3));
-                        this.setCarryingData(this.worldObj.getBlockMetadata(var1, var2, var3));
-                        this.worldObj.setBlock(var1, var2, var3, 0);
+                        this.setCarried(this.worldObj.getBlockId(var6, var2, var3));
+                        this.setCarryingData(this.worldObj.getBlockMetadata(var6, var2, var3));
+                        this.worldObj.setBlock(var6, var2, var3, 0);
                     }
                 }
             }
             else if (this.rand.nextInt(2000) == 0)
             {
-                var1 = MathHelper.floor_double(this.posX - 1.0D + this.rand.nextDouble() * 2.0D);
+                var6 = MathHelper.floor_double(this.posX - 1.0D + this.rand.nextDouble() * 2.0D);
                 var2 = MathHelper.floor_double(this.posY + this.rand.nextDouble() * 2.0D);
                 var3 = MathHelper.floor_double(this.posZ - 1.0D + this.rand.nextDouble() * 2.0D);
-                var4 = this.worldObj.getBlockId(var1, var2, var3);
-                int var5 = this.worldObj.getBlockId(var1, var2 - 1, var3);
+                var4 = this.worldObj.getBlockId(var6, var2, var3);
+                int var5 = this.worldObj.getBlockId(var6, var2 - 1, var3);
 
                 if (var4 == 0 && var5 > 0 && Block.blocksList[var5].renderAsNormalBlock())
                 {
-                    this.worldObj.setBlock(var1, var2, var3, this.getCarried(), this.getCarryingData(), 3);
+                    this.worldObj.setBlock(var6, var2, var3, this.getCarried(), this.getCarryingData(), 3);
                     this.setCarried(0);
                 }
             }
         }
 
-        for (var1 = 0; var1 < 2; ++var1)
+        for (var6 = 0; var6 < 2; ++var6)
         {
             this.worldObj.spawnParticle("portal", this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height - 0.25D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D);
         }
 
         if (this.worldObj.isDaytime() && !this.worldObj.isRemote)
         {
-            float var6 = this.getBrightness(1.0F);
+            float var7 = this.getBrightness(1.0F);
 
-            if (var6 > 0.5F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)) && this.rand.nextFloat() * 30.0F < (var6 - 0.4F) * 2.0F)
+            if (var7 > 0.5F && this.worldObj.canBlockSeeTheSky(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)) && this.rand.nextFloat() * 30.0F < (var7 - 0.4F) * 2.0F)
             {
                 this.entityToAttack = null;
                 this.setScreaming(false);
@@ -207,9 +224,6 @@ public class EntityEnderman extends EntityMob
             {
                 if (this.entityToAttack instanceof EntityPlayer && this.shouldAttackPlayer((EntityPlayer)this.entityToAttack))
                 {
-                    this.moveStrafing = this.moveForward = 0.0F;
-                    this.moveSpeed = 0.0F;
-
                     if (this.entityToAttack.getDistanceSqToEntity(this) < 16.0D)
                     {
                         this.teleportRandomly();
@@ -416,7 +430,7 @@ public class EntityEnderman extends EntityMob
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -460,14 +474,6 @@ public class EntityEnderman extends EntityMob
     public void setScreaming(boolean par1)
     {
         this.dataWatcher.updateObject(18, Byte.valueOf((byte)(par1 ? 1 : 0)));
-    }
-
-    /**
-     * Returns the amount of damage a mob should deal.
-     */
-    public int getAttackStrength(Entity par1Entity)
-    {
-        return 7;
     }
 
     static

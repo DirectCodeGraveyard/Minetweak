@@ -44,9 +44,9 @@ public class BlockPistonBase extends Block
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int var7 = determineOrientation(par1World, par2, par3, par4, par5EntityLiving);
+        int var7 = determineOrientation(par1World, par2, par3, par4, par5EntityLivingBase);
         par1World.setBlockMetadata(par2, par3, par4, var7, 2);
 
         if (!par1World.isRemote)
@@ -218,23 +218,30 @@ public class BlockPistonBase extends Block
 
         if (isExtended(var5))
         {
+            float var6 = 0.25F;
+
             switch (getOrientation(var5))
             {
                 case 0:
                     this.setBlockBounds(0.0F, 0.25F, 0.0F, 1.0F, 1.0F, 1.0F);
                     break;
+
                 case 1:
                     this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.75F, 1.0F);
                     break;
+
                 case 2:
                     this.setBlockBounds(0.0F, 0.0F, 0.25F, 1.0F, 1.0F, 1.0F);
                     break;
+
                 case 3:
                     this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.75F);
                     break;
+
                 case 4:
                     this.setBlockBounds(0.25F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
                     break;
+
                 case 5:
                     this.setBlockBounds(0.0F, 0.0F, 0.0F, 0.75F, 1.0F, 1.0F);
             }
@@ -300,11 +307,11 @@ public class BlockPistonBase extends Block
     /**
      * gets the way this piston should face for that entity that placed it.
      */
-    public static int determineOrientation(World par0World, int par1, int par2, int par3, EntityLiving par4EntityLiving)
+    public static int determineOrientation(World par0World, int par1, int par2, int par3, EntityLivingBase par4EntityLivingBase)
     {
-        if (MathHelper.abs((float)par4EntityLiving.posX - (float)par1) < 2.0F && MathHelper.abs((float)par4EntityLiving.posZ - (float)par3) < 2.0F)
+        if (MathHelper.abs((float)par4EntityLivingBase.posX - (float)par1) < 2.0F && MathHelper.abs((float)par4EntityLivingBase.posZ - (float)par3) < 2.0F)
         {
-            double var5 = par4EntityLiving.posY + 1.82D - (double)par4EntityLiving.yOffset;
+            double var5 = par4EntityLivingBase.posY + 1.82D - (double)par4EntityLivingBase.yOffset;
 
             if (var5 - (double)par2 > 2.0D)
             {
@@ -317,7 +324,7 @@ public class BlockPistonBase extends Block
             }
         }
 
-        int var7 = MathHelper.floor_double((double)(par4EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int var7 = MathHelper.floor_double((double)(par4EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
         return var7 == 0 ? 2 : (var7 == 1 ? 5 : (var7 == 2 ? 3 : (var7 == 3 ? 4 : 0)));
     }
 
@@ -334,7 +341,7 @@ public class BlockPistonBase extends Block
         {
             if (par0 != Block.pistonBase.blockID && par0 != Block.pistonStickyBase.blockID)
             {
-                if (Block.blocksList[par0].getBlockHardness() == -1.0F)
+                if (Block.blocksList[par0].getBlockHardness(par1World, par2, par3, par4) == -1.0F)
                 {
                     return false;
                 }

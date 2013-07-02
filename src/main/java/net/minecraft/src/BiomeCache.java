@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class BiomeCache
     private final WorldChunkManager chunkManager;
 
     /** The last time this BiomeCache was cleaned, in milliseconds. */
-    private long lastCleanupTime = 0L;
+    private long lastCleanupTime;
 
     /**
      * The map of keys to BiomeCacheBlocks. Keys are based on the chunk x, z coordinates as (x | z << 32).
@@ -17,7 +19,7 @@ public class BiomeCache
     private LongHashMap cacheMap = new LongHashMap();
 
     /** The list of cached BiomeCacheBlocks */
-    private List<BiomeCacheBlock> cache = new ArrayList<BiomeCacheBlock>();
+    private List cache = new ArrayList();
 
     public BiomeCache(WorldChunkManager par1WorldChunkManager)
     {
@@ -41,7 +43,7 @@ public class BiomeCache
             this.cache.add(var5);
         }
 
-        var5.lastAccessTime = System.currentTimeMillis();
+        var5.lastAccessTime = MinecraftServer.func_130071_aq();
         return var5;
     }
 
@@ -58,7 +60,7 @@ public class BiomeCache
      */
     public void cleanupCache()
     {
-        long var1 = System.currentTimeMillis();
+        long var1 = MinecraftServer.func_130071_aq();
         long var3 = var1 - this.lastCleanupTime;
 
         if (var3 > 7500L || var3 < 0L)
@@ -67,7 +69,7 @@ public class BiomeCache
 
             for (int var5 = 0; var5 < this.cache.size(); ++var5)
             {
-                BiomeCacheBlock var6 = this.cache.get(var5);
+                BiomeCacheBlock var6 = (BiomeCacheBlock)this.cache.get(var5);
                 long var7 = var1 - var6.lastAccessTime;
 
                 if (var7 > 30000L || var7 < 0L)

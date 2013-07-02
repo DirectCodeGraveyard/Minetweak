@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet28EntityVelocity extends Packet
@@ -61,23 +61,23 @@ public class Packet28EntityVelocity extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.entityId = par1DataInputStream.readInt();
-        this.motionX = par1DataInputStream.readShort();
-        this.motionY = par1DataInputStream.readShort();
-        this.motionZ = par1DataInputStream.readShort();
+        this.entityId = par1DataInput.readInt();
+        this.motionX = par1DataInput.readShort();
+        this.motionY = par1DataInput.readShort();
+        this.motionZ = par1DataInput.readShort();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.entityId);
-        par1DataOutputStream.writeShort(this.motionX);
-        par1DataOutputStream.writeShort(this.motionY);
-        par1DataOutputStream.writeShort(this.motionZ);
+        par1DataOutput.writeInt(this.entityId);
+        par1DataOutput.writeShort(this.motionX);
+        par1DataOutput.writeShort(this.motionY);
+        par1DataOutput.writeShort(this.motionZ);
     }
 
     /**

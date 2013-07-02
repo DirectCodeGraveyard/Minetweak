@@ -1,7 +1,8 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.List;
 
 public class CommandEnchant extends CommandBase
 {
@@ -20,7 +21,7 @@ public class CommandEnchant extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.enchant.usage", new Object[0]);
+        return "commands.enchant.usage";
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
@@ -38,7 +39,7 @@ public class CommandEnchant extends CommandBase
 
             if (var6 == null)
             {
-                notifyAdmins(par1ICommandSender, "commands.enchant.noItem", new Object[0]);
+                throw new CommandException("commands.enchant.noItem", new Object[0]);
             }
             else
             {
@@ -50,7 +51,7 @@ public class CommandEnchant extends CommandBase
                 }
                 else if (!var7.func_92089_a(var6))
                 {
-                    notifyAdmins(par1ICommandSender, "commands.enchant.cantEnchant", new Object[0]);
+                    throw new CommandException("commands.enchant.cantEnchant", new Object[0]);
                 }
                 else
                 {
@@ -75,8 +76,7 @@ public class CommandEnchant extends CommandBase
 
                                     if (!var11.canApplyTogether(var7))
                                     {
-                                        notifyAdmins(par1ICommandSender, "commands.enchant.cantCombine", new Object[] {var7.getTranslatedName(var5), var11.getTranslatedName(((NBTTagCompound)var8.tagAt(var9)).getShort("lvl"))});
-                                        return;
+                                        throw new CommandException("commands.enchant.cantCombine", new Object[] {var7.getTranslatedName(var5), var11.getTranslatedName(((NBTTagCompound)var8.tagAt(var9)).getShort("lvl"))});
                                     }
                                 }
                             }

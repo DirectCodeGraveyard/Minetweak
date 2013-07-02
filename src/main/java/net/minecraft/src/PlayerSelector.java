@@ -1,13 +1,10 @@
 package net.minecraft.src;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import net.minecraft.server.MinecraftServer;
+
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import net.minecraft.server.MinecraftServer;
 
 public class PlayerSelector
 {
@@ -19,12 +16,12 @@ public class PlayerSelector
     /**
      * This matches things like "-1,,4", and is used for getting x,y,z,range from the token's argument list.
      */
-    private static final Pattern intListPattern = Pattern.compile("\\G([-!]?\\w*)(?:$|,)");
+    private static final Pattern intListPattern = Pattern.compile("\\G([-!]?[\\w-]*)(?:$|,)");
 
     /**
      * This matches things like "rm=4,c=2" and is used for handling named token arguments.
      */
-    private static final Pattern keyValueListPattern = Pattern.compile("\\G(\\w+)=([-!]?\\w*)(?:$|,)");
+    private static final Pattern keyValueListPattern = Pattern.compile("\\G(\\w+)=([-!]?[\\w-]*)(?:$|,)");
 
     /**
      * Returns the one player that matches the given at-token.  Returns null if more than one player matches.
@@ -66,7 +63,11 @@ public class PlayerSelector
     {
         Matcher var2 = tokenPattern.matcher(par1Str);
 
-        if (var2.matches())
+        if (!var2.matches())
+        {
+            return null;
+        }
+        else
         {
             Map var3 = getArgumentMap(var2.group(2));
             String var4 = var2.group(1);
@@ -80,15 +81,18 @@ public class PlayerSelector
             Map var12 = func_96560_a(var3);
             String var13 = null;
             String var14 = null;
+            boolean var15 = false;
 
             if (var3.containsKey("rm"))
             {
                 var5 = MathHelper.parseIntWithDefault((String)var3.get("rm"), var5);
+                var15 = true;
             }
 
             if (var3.containsKey("r"))
             {
                 var6 = MathHelper.parseIntWithDefault((String)var3.get("r"), var6);
+                var15 = true;
             }
 
             if (var3.containsKey("lm"))
@@ -104,16 +108,19 @@ public class PlayerSelector
             if (var3.containsKey("x"))
             {
                 var11.posX = MathHelper.parseIntWithDefault((String)var3.get("x"), var11.posX);
+                var15 = true;
             }
 
             if (var3.containsKey("y"))
             {
                 var11.posY = MathHelper.parseIntWithDefault((String)var3.get("y"), var11.posY);
+                var15 = true;
             }
 
             if (var3.containsKey("z"))
             {
                 var11.posZ = MathHelper.parseIntWithDefault((String)var3.get("z"), var11.posZ);
+                var15 = true;
             }
 
             if (var3.containsKey("m"))
@@ -136,7 +143,8 @@ public class PlayerSelector
                 var13 = (String)var3.get("name");
             }
 
-            List var15;
+            World var16 = var15 ? par0ICommandSender.func_130014_f_() : null;
+            List var17;
 
             if (!var4.equals("p") && !var4.equals("a"))
             {
@@ -146,21 +154,17 @@ public class PlayerSelector
                 }
                 else
                 {
-                    var15 = MinecraftServer.getServer().getConfigurationManager().findPlayers(var11, var5, var6, 0, var10, var7, var8, var12, var13, var14);
-                    Collections.shuffle(var15);
-                    var15 = var15.subList(0, Math.min(var9, var15.size()));
-                    return var15 != null && !var15.isEmpty() ? (EntityPlayerMP[])var15.toArray(new EntityPlayerMP[0]) : new EntityPlayerMP[0];
+                    var17 = MinecraftServer.getServer().getConfigurationManager().findPlayers(var11, var5, var6, 0, var10, var7, var8, var12, var13, var14, var16);
+                    Collections.shuffle(var17);
+                    var17 = var17.subList(0, Math.min(var9, var17.size()));
+                    return var17 != null && !var17.isEmpty() ? (EntityPlayerMP[])var17.toArray(new EntityPlayerMP[0]) : new EntityPlayerMP[0];
                 }
             }
             else
             {
-                var15 = MinecraftServer.getServer().getConfigurationManager().findPlayers(var11, var5, var6, var9, var10, var7, var8, var12, var13, var14);
-                return var15 != null && !var15.isEmpty() ? (EntityPlayerMP[])var15.toArray(new EntityPlayerMP[0]) : new EntityPlayerMP[0];
+                var17 = MinecraftServer.getServer().getConfigurationManager().findPlayers(var11, var5, var6, var9, var10, var7, var8, var12, var13, var14, var16);
+                return var17 != null && !var17.isEmpty() ? (EntityPlayerMP[])var17.toArray(new EntityPlayerMP[0]) : new EntityPlayerMP[0];
             }
-        }
-        else
-        {
-            return null;
         }
     }
 
@@ -301,12 +305,15 @@ public class PlayerSelector
                     case 0:
                         var5 = "x";
                         break;
+
                     case 1:
                         var5 = "y";
                         break;
+
                     case 2:
                         var5 = "z";
                         break;
+
                     case 3:
                         var5 = "r";
                 }

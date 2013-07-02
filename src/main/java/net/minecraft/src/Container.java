@@ -1,10 +1,6 @@
 package net.minecraft.src;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public abstract class Container
 {
@@ -13,10 +9,9 @@ public abstract class Container
 
     /** the list of all slots in the inventory */
     public List inventorySlots = new ArrayList();
-    public int windowId = 0;
-    private short transactionID = 0;
+    public int windowId;
     private int field_94535_f = -1;
-    private int field_94536_g = 0;
+    private int field_94536_g;
     private final Set field_94537_h = new HashSet();
 
     /**
@@ -306,7 +301,10 @@ public abstract class Container
                                     var21 = var16.getSlotStackLimit();
                                 }
 
-                                var16.putStack(var19.splitStack(var21));
+                                if (var19.stackSize >= var21)
+                                {
+                                    var16.putStack(var19.splitStack(var21));
+                                }
 
                                 if (var19.stackSize == 0)
                                 {
@@ -689,6 +687,7 @@ public abstract class Container
             case 0:
                 par2ItemStack.stackSize = MathHelper.floor_float((float)par2ItemStack.stackSize / (float)par0Set.size());
                 break;
+
             case 1:
                 par2ItemStack.stackSize = 1;
         }

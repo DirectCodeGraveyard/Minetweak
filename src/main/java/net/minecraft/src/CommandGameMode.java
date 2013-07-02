@@ -1,7 +1,8 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.List;
 
 public class CommandGameMode extends CommandBase
 {
@@ -20,7 +21,7 @@ public class CommandGameMode extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.gamemode.usage", new Object[0]);
+        return "commands.gamemode.usage";
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
@@ -31,7 +32,7 @@ public class CommandGameMode extends CommandBase
             EntityPlayerMP var4 = par2ArrayOfStr.length >= 2 ? func_82359_c(par1ICommandSender, par2ArrayOfStr[1]) : getCommandSenderAsPlayer(par1ICommandSender);
             var4.setGameType(var3);
             var4.fallDistance = 0.0F;
-            String var5 = StatCollector.translateToLocal("gameMode." + var3.getName());
+            ChatMessageComponent var5 = ChatMessageComponent.func_111077_e("gameMode." + var3.getName());
 
             if (var4 != par1ICommandSender)
             {

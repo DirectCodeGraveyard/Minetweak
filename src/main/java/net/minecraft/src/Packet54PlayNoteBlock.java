@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet54PlayNoteBlock extends Packet
@@ -36,27 +36,27 @@ public class Packet54PlayNoteBlock extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.xLocation = par1DataInputStream.readInt();
-        this.yLocation = par1DataInputStream.readShort();
-        this.zLocation = par1DataInputStream.readInt();
-        this.instrumentType = par1DataInputStream.read();
-        this.pitch = par1DataInputStream.read();
-        this.blockId = par1DataInputStream.readShort() & 4095;
+        this.xLocation = par1DataInput.readInt();
+        this.yLocation = par1DataInput.readShort();
+        this.zLocation = par1DataInput.readInt();
+        this.instrumentType = par1DataInput.readUnsignedByte();
+        this.pitch = par1DataInput.readUnsignedByte();
+        this.blockId = par1DataInput.readShort() & 4095;
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.xLocation);
-        par1DataOutputStream.writeShort(this.yLocation);
-        par1DataOutputStream.writeInt(this.zLocation);
-        par1DataOutputStream.write(this.instrumentType);
-        par1DataOutputStream.write(this.pitch);
-        par1DataOutputStream.writeShort(this.blockId & 4095);
+        par1DataOutput.writeInt(this.xLocation);
+        par1DataOutput.writeShort(this.yLocation);
+        par1DataOutput.writeInt(this.zLocation);
+        par1DataOutput.write(this.instrumentType);
+        par1DataOutput.write(this.pitch);
+        par1DataOutput.writeShort(this.blockId & 4095);
     }
 
     /**

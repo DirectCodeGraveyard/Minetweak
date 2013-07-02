@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryBasic implements IInventory
@@ -16,6 +17,21 @@ public class InventoryBasic implements IInventory
         this.field_94051_e = par2;
         this.slotsCount = par3;
         this.inventoryContents = new ItemStack[par3];
+    }
+
+    public void func_110134_a(IInvBasic par1IInvBasic)
+    {
+        if (this.field_70480_d == null)
+        {
+            this.field_70480_d = new ArrayList();
+        }
+
+        this.field_70480_d.add(par1IInvBasic);
+    }
+
+    public void func_110132_b(IInvBasic par1IInvBasic)
+    {
+        this.field_70480_d.remove(par1IInvBasic);
     }
 
     /**
@@ -118,6 +134,12 @@ public class InventoryBasic implements IInventory
     public boolean isInvNameLocalized()
     {
         return this.field_94051_e;
+    }
+
+    public void func_110133_a(String par1Str)
+    {
+        this.field_94051_e = true;
+        this.inventoryTitle = par1Str;
     }
 
     /**

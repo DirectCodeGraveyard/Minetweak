@@ -19,6 +19,7 @@ public class ComponentVillageWell extends ComponentVillage
             case 2:
                 this.boundingBox = new StructureBoundingBox(par4, 64, par5, par4 + 6 - 1, 78, par5 + 6 - 1);
                 break;
+
             default:
                 this.boundingBox = new StructureBoundingBox(par4, 64, par5, par4 + 6 - 1, 78, par5 + 6 - 1);
         }

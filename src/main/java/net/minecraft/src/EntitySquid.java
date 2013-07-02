@@ -2,36 +2,36 @@ package net.minecraft.src;
 
 public class EntitySquid extends EntityWaterMob
 {
-    public float field_70861_d = 0.0F;
-    public float field_70862_e = 0.0F;
-    public float field_70859_f = 0.0F;
-    public float field_70860_g = 0.0F;
-    public float field_70867_h = 0.0F;
-    public float field_70868_i = 0.0F;
+    public float field_70861_d;
+    public float field_70862_e;
+    public float field_70859_f;
+    public float field_70860_g;
+    public float field_70867_h;
+    public float field_70868_i;
 
     /** angle of the tentacles in radians */
-    public float tentacleAngle = 0.0F;
+    public float tentacleAngle;
 
     /** the last calculated angle of the tentacles in radians */
-    public float lastTentacleAngle = 0.0F;
-    private float randomMotionSpeed = 0.0F;
-    private float field_70864_bA = 0.0F;
-    private float field_70871_bB = 0.0F;
-    private float randomMotionVecX = 0.0F;
-    private float randomMotionVecY = 0.0F;
-    private float randomMotionVecZ = 0.0F;
+    public float lastTentacleAngle;
+    private float randomMotionSpeed;
+    private float field_70864_bA;
+    private float field_70871_bB;
+    private float randomMotionVecX;
+    private float randomMotionVecY;
+    private float randomMotionVecZ;
 
     public EntitySquid(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/squid.png";
         this.setSize(0.95F, 0.95F);
         this.field_70864_bA = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 10;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(10.0D);
     }
 
     /**
@@ -72,6 +72,15 @@ public class EntitySquid extends EntityWaterMob
     protected int getDropItemId()
     {
         return 0;
+    }
+
+    /**
+     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
+     * prevent them from trampling crops
+     */
+    protected boolean canTriggerWalking()
+    {
+        return false;
     }
 
     /**

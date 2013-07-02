@@ -24,13 +24,9 @@ public class EntityFallingSand extends Entity
     public EntityFallingSand(World par1World)
     {
         super(par1World);
-        this.fallTime = 0;
         this.shouldDropItem = true;
-        this.isBreakingAnvil = false;
-        this.isAnvil = false;
         this.fallHurtMax = 40;
         this.fallHurtAmount = 2.0F;
-        this.fallingBlockTileEntityData = null;
     }
 
     public EntityFallingSand(World par1World, double par2, double par4, double par6, int par8)
@@ -41,13 +37,9 @@ public class EntityFallingSand extends Entity
     public EntityFallingSand(World par1World, double par2, double par4, double par6, int par8, int par9)
     {
         super(par1World);
-        this.fallTime = 0;
         this.shouldDropItem = true;
-        this.isBreakingAnvil = false;
-        this.isAnvil = false;
         this.fallHurtMax = 40;
         this.fallHurtAmount = 2.0F;
-        this.fallingBlockTileEntityData = null;
         this.blockID = par8;
         this.metadata = par9;
         this.preventEntitySpawning = true;
@@ -198,7 +190,7 @@ public class EntityFallingSand extends Entity
                 while (var5.hasNext())
                 {
                     Entity var6 = (Entity)var5.next();
-                    var6.attackEntityFrom(var4, Math.min(MathHelper.floor_float((float)var2 * this.fallHurtAmount), this.fallHurtMax));
+                    var6.attackEntityFrom(var4, (float)Math.min(MathHelper.floor_float((float)var2 * this.fallHurtAmount), this.fallHurtMax));
                 }
 
                 if (this.blockID == Block.anvil.blockID && (double)this.rand.nextFloat() < 0.05000000074505806D + (double)var2 * 0.05D)

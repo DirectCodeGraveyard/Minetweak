@@ -16,16 +16,16 @@ public class BlockBaseRailLogic
 
     final BlockRailBase theRail;
 
-    public BlockBaseRailLogic(BlockRailBase par1, World par2, int par3, int par4, int par5)
+    public BlockBaseRailLogic(BlockRailBase par1BlockRailBase, World par2World, int par3, int par4, int par5)
     {
-        this.theRail = par1;
+        this.theRail = par1BlockRailBase;
         this.connectedTracks = new ArrayList();
-        this.logicWorld = par2;
+        this.logicWorld = par2World;
         this.railX = par3;
         this.railY = par4;
         this.railZ = par5;
-        int var6 = par2.getBlockId(par3, par4, par5);
-        int var7 = par2.getBlockMetadata(par3, par4, par5);
+        int var6 = par2World.getBlockId(par3, par4, par5);
+        int var7 = par2World.getBlockMetadata(par3, par4, par5);
 
         if (((BlockRailBase)Block.blocksList[var6]).isPowered)
         {

@@ -4,8 +4,7 @@ public class BlockAnvil extends BlockSand
 {
     /** List of types/statues the Anvil can be in. */
     public static final String[] statuses = new String[] {"intact", "slightlyDamaged", "veryDamaged"};
-    private static final String[] anvilIconNames = new String[] {"anvil_top", "anvil_top_damaged_1", "anvil_top_damaged_2"};
-    public int field_82521_b = 0;
+    private static final String[] anvilIconNames = new String[] {"anvil_top_damaged_0", "anvil_top_damaged_1", "anvil_top_damaged_2"};
 
     protected BlockAnvil(int par1)
     {
@@ -34,9 +33,9 @@ public class BlockAnvil extends BlockSand
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int var7 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int var7 = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
         int var8 = par1World.getBlockMetadata(par2, par3, par4) >> 2;
         ++var7;
         var7 %= 4;

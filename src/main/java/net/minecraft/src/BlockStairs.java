@@ -10,8 +10,8 @@ public class BlockStairs extends Block
     /** The block that is used as model for the stair. */
     private final Block modelBlock;
     private final int modelBlockMetadata;
-    private boolean field_72156_cr = false;
-    private int field_72160_cs = 0;
+    private boolean field_72156_cr;
+    private int field_72160_cs;
 
     protected BlockStairs(int par1, Block par2Block, int par3)
     {
@@ -468,9 +468,9 @@ public class BlockStairs extends Block
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int var7 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int var7 = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
         int var8 = par1World.getBlockMetadata(par2, par3, par4) & 4;
 
         if (var7 == 0)

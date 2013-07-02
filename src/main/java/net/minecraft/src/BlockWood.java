@@ -4,7 +4,6 @@ public class BlockWood extends Block
 {
     /** The type of tree this block came from. */
     public static final String[] woodType = new String[] {"oak", "spruce", "birch", "jungle"};
-    public static final String[] woodTextureTypes = new String[] {"wood", "wood_spruce", "wood_birch", "wood_jungle"};
 
     public BlockWood(int par1)
     {

@@ -49,6 +49,14 @@ public class BlockPistonMoving extends BlockContainer
     }
 
     /**
+     * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
+     */
+    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
+    {
+        return false;
+    }
+
+    /**
      * The type of render function that is called for this block
      */
     public int getRenderType()
@@ -119,9 +127,9 @@ public class BlockPistonMoving extends BlockContainer
      */
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
     {
-        if (!par1World.isRemote && par1World.getBlockTileEntity(par2, par3, par4) == null)
+        if (!par1World.isRemote)
         {
-            ;
+            par1World.getBlockTileEntity(par2, par3, par4);
         }
     }
 

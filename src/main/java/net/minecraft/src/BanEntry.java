@@ -1,10 +1,11 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
-import net.minecraft.server.MinecraftServer;
 
 public class BanEntry
 {
@@ -12,7 +13,7 @@ public class BanEntry
     private final String username;
     private Date banStartDate = new Date();
     private String bannedBy = "(Unknown)";
-    private Date banEndDate = null;
+    private Date banEndDate;
     private String reason = "Banned by an operator.";
 
     public BanEntry(String par1Str)

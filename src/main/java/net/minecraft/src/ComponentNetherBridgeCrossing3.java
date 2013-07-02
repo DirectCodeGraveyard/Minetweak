@@ -23,6 +23,7 @@ public class ComponentNetherBridgeCrossing3 extends ComponentNetherBridgePiece
             case 2:
                 this.boundingBox = new StructureBoundingBox(par2, 64, par3, par2 + 19 - 1, 73, par3 + 19 - 1);
                 break;
+
             default:
                 this.boundingBox = new StructureBoundingBox(par2, 64, par3, par2 + 19 - 1, 73, par3 + 19 - 1);
         }

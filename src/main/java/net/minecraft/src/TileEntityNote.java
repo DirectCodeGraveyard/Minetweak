@@ -3,10 +3,10 @@ package net.minecraft.src;
 public class TileEntityNote extends TileEntity
 {
     /** Note to play */
-    public byte note = 0;
+    public byte note;
 
     /** stores the latest redstone state */
-    public boolean previousRedstoneState = false;
+    public boolean previousRedstoneState;
 
     /**
      * Writes a tile entity to NBT.

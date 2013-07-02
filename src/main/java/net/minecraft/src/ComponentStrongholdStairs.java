@@ -21,6 +21,7 @@ public class ComponentStrongholdStairs extends ComponentStronghold
             case 2:
                 this.boundingBox = new StructureBoundingBox(par3, 64, par4, par3 + 5 - 1, 74, par4 + 5 - 1);
                 break;
+
             default:
                 this.boundingBox = new StructureBoundingBox(par3, 64, par4, par3 + 5 - 1, 74, par4 + 5 - 1);
         }

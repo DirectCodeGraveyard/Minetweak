@@ -6,7 +6,7 @@ public class Path
     private PathPoint[] pathPoints = new PathPoint[1024];
 
     /** The number of points in this path */
-    private int count = 0;
+    private int count;
 
     /**
      * Adds a point to the path

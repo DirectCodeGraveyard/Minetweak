@@ -16,7 +16,7 @@ public class BlockFurnace extends BlockContainer
      * This flag is used to prevent the furnace inventory to be dropped upon block removal, is used internally when the
      * furnace block changes from idle to active and vice-versa.
      */
-    private static boolean keepFurnaceInventory = false;
+    private static boolean keepFurnaceInventory;
 
     protected BlockFurnace(int par1, boolean par2)
     {
@@ -139,9 +139,9 @@ public class BlockFurnace extends BlockContainer
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int var7 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int var7 = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
         if (var7 == 0)
         {

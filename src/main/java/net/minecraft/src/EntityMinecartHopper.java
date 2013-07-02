@@ -41,10 +41,7 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements Hop
         return 5;
     }
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
-    public boolean interact(EntityPlayer par1EntityPlayer)
+    public boolean func_130002_c(EntityPlayer par1EntityPlayer)
     {
         if (!this.worldObj.isRemote)
         {

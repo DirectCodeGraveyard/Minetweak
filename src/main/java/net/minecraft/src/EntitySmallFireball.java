@@ -8,9 +8,9 @@ public class EntitySmallFireball extends EntityFireball
         this.setSize(0.3125F, 0.3125F);
     }
 
-    public EntitySmallFireball(World par1World, EntityLiving par2EntityLiving, double par3, double par5, double par7)
+    public EntitySmallFireball(World par1World, EntityLivingBase par2EntityLivingBase, double par3, double par5, double par7)
     {
-        super(par1World, par2EntityLiving, par3, par5, par7);
+        super(par1World, par2EntityLivingBase, par3, par5, par7);
         this.setSize(0.3125F, 0.3125F);
     }
 
@@ -29,7 +29,7 @@ public class EntitySmallFireball extends EntityFireball
         {
             if (par1MovingObjectPosition.entityHit != null)
             {
-                if (!par1MovingObjectPosition.entityHit.isImmuneToFire() && par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 5))
+                if (!par1MovingObjectPosition.entityHit.isImmuneToFire() && par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeFireballDamage(this, this.shootingEntity), 5.0F))
                 {
                     par1MovingObjectPosition.entityHit.setFire(5);
                 }
@@ -45,18 +45,23 @@ public class EntitySmallFireball extends EntityFireball
                     case 0:
                         --var3;
                         break;
+
                     case 1:
                         ++var3;
                         break;
+
                     case 2:
                         --var4;
                         break;
+
                     case 3:
                         ++var4;
                         break;
+
                     case 4:
                         --var2;
                         break;
+
                     case 5:
                         ++var2;
                 }
@@ -82,7 +87,7 @@ public class EntitySmallFireball extends EntityFireball
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         return false;
     }

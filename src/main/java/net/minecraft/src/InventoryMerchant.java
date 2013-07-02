@@ -228,6 +228,8 @@ public class InventoryMerchant implements IInventory
                 }
             }
         }
+
+        this.theMerchant.func_110297_a_(this.getStackInSlot(2));
     }
 
     public MerchantRecipe getCurrentRecipe()

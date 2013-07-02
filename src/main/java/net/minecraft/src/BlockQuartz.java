@@ -3,7 +3,7 @@ package net.minecraft.src;
 public class BlockQuartz extends Block
 {
     public static final String[] quartzBlockTypes = new String[] {"default", "chiseled", "lines"};
-    private static final String[] quartzBlockTextureTypes = new String[] {"quartzblock_side", "quartzblock_chiseled", "quartzblock_lines", null, null};
+    private static final String[] quartzBlockTextureTypes = new String[] {"side", "chiseled", "lines", null, null};
 
     public BlockQuartz(int par1)
     {
@@ -24,10 +24,12 @@ public class BlockQuartz extends Block
                 case 1:
                     par9 = 2;
                     break;
+
                 case 2:
                 case 3:
                     par9 = 4;
                     break;
+
                 case 4:
                 case 5:
                     par9 = 3;

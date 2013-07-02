@@ -7,7 +7,7 @@ public class ContainerPlayer extends Container
     public IInventory craftResult = new InventoryCraftResult();
 
     /** Determines if inventory manipulation should be handled. */
-    public boolean isLocalWorld = false;
+    public boolean isLocalWorld;
     private final EntityPlayer thePlayer;
 
     public ContainerPlayer(InventoryPlayer par1InventoryPlayer, boolean par2, EntityPlayer par3EntityPlayer)

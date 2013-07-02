@@ -8,10 +8,7 @@ import java.util.Random;
 public final class SpawnerAnimals
 {
     /** The 17x17 area around the player where mobs can spawn */
-    private static HashMap eligibleChunksForSpawning = new HashMap();
-
-    /** An array of entity classes that spawn at night. */
-    protected static final Class[] nightSpawnEntities = new Class[] {EntitySpider.class, EntityZombie.class, EntitySkeleton.class};
+    private HashMap eligibleChunksForSpawning = new HashMap();
 
     /**
      * Given a chunk, find a random position in it.
@@ -29,155 +26,156 @@ public final class SpawnerAnimals
      * adds all chunks within the spawn radius of the players to eligibleChunksForSpawning. pars: the world,
      * hostileCreatures, passiveCreatures. returns number of eligible chunks.
      */
-    public static final int findChunksForSpawning(WorldServer par0WorldServer, boolean par1, boolean par2, boolean par3)
+    public int findChunksForSpawning(WorldServer par1WorldServer, boolean par2, boolean par3, boolean par4)
     {
-        if (!par1 && !par2)
+        if (!par2 && !par3)
         {
             return 0;
         }
         else
         {
-            eligibleChunksForSpawning.clear();
-            int var4;
-            int var7;
+            this.eligibleChunksForSpawning.clear();
+            int var5;
+            int var8;
 
-            for (var4 = 0; var4 < par0WorldServer.playerEntities.size(); ++var4)
+            for (var5 = 0; var5 < par1WorldServer.playerEntities.size(); ++var5)
             {
-                EntityPlayer var5 = (EntityPlayer)par0WorldServer.playerEntities.get(var4);
-                int var6 = MathHelper.floor_double(var5.posX / 16.0D);
-                var7 = MathHelper.floor_double(var5.posZ / 16.0D);
-                byte var8 = 8;
+                EntityPlayer var6 = (EntityPlayer)par1WorldServer.playerEntities.get(var5);
+                int var7 = MathHelper.floor_double(var6.posX / 16.0D);
+                var8 = MathHelper.floor_double(var6.posZ / 16.0D);
+                byte var9 = 8;
 
-                for (int var9 = -var8; var9 <= var8; ++var9)
+                for (int var10 = -var9; var10 <= var9; ++var10)
                 {
-                    for (int var10 = -var8; var10 <= var8; ++var10)
+                    for (int var11 = -var9; var11 <= var9; ++var11)
                     {
-                        boolean var11 = var9 == -var8 || var9 == var8 || var10 == -var8 || var10 == var8;
-                        ChunkCoordIntPair var12 = new ChunkCoordIntPair(var9 + var6, var10 + var7);
+                        boolean var12 = var10 == -var9 || var10 == var9 || var11 == -var9 || var11 == var9;
+                        ChunkCoordIntPair var13 = new ChunkCoordIntPair(var10 + var7, var11 + var8);
 
-                        if (!var11)
+                        if (!var12)
                         {
-                            eligibleChunksForSpawning.put(var12, Boolean.valueOf(false));
+                            this.eligibleChunksForSpawning.put(var13, Boolean.valueOf(false));
                         }
-                        else if (!eligibleChunksForSpawning.containsKey(var12))
+                        else if (!this.eligibleChunksForSpawning.containsKey(var13))
                         {
-                            eligibleChunksForSpawning.put(var12, Boolean.valueOf(true));
+                            this.eligibleChunksForSpawning.put(var13, Boolean.valueOf(true));
                         }
                     }
                 }
             }
 
-            var4 = 0;
-            ChunkCoordinates var32 = par0WorldServer.getSpawnPoint();
-            EnumCreatureType[] var33 = EnumCreatureType.values();
-            var7 = var33.length;
+            var5 = 0;
+            ChunkCoordinates var34 = par1WorldServer.getSpawnPoint();
+            EnumCreatureType[] var35 = EnumCreatureType.values();
+            var8 = var35.length;
 
-            for (int var34 = 0; var34 < var7; ++var34)
+            for (int var36 = 0; var36 < var8; ++var36)
             {
-                EnumCreatureType var35 = var33[var34];
+                EnumCreatureType var37 = var35[var36];
 
-                if ((!var35.getPeacefulCreature() || par2) && (var35.getPeacefulCreature() || par1) && (!var35.getAnimal() || par3) && par0WorldServer.countEntities(var35.getCreatureClass()) <= var35.getMaxNumberOfCreature() * eligibleChunksForSpawning.size() / 256)
+                if ((!var37.getPeacefulCreature() || par3) && (var37.getPeacefulCreature() || par2) && (!var37.getAnimal() || par4) && par1WorldServer.countEntities(var37.getCreatureClass()) <= var37.getMaxNumberOfCreature() * this.eligibleChunksForSpawning.size() / 256)
                 {
-                    Iterator var37 = eligibleChunksForSpawning.keySet().iterator();
+                    Iterator var39 = this.eligibleChunksForSpawning.keySet().iterator();
                     label110:
 
-                    while (var37.hasNext())
+                    while (var39.hasNext())
                     {
-                        ChunkCoordIntPair var36 = (ChunkCoordIntPair)var37.next();
+                        ChunkCoordIntPair var38 = (ChunkCoordIntPair)var39.next();
 
-                        if (!((Boolean)eligibleChunksForSpawning.get(var36)).booleanValue())
+                        if (!((Boolean)this.eligibleChunksForSpawning.get(var38)).booleanValue())
                         {
-                            ChunkPosition var38 = getRandomSpawningPointInChunk(par0WorldServer, var36.chunkXPos, var36.chunkZPos);
-                            int var13 = var38.x;
-                            int var14 = var38.y;
-                            int var15 = var38.z;
+                            ChunkPosition var40 = getRandomSpawningPointInChunk(par1WorldServer, var38.chunkXPos, var38.chunkZPos);
+                            int var14 = var40.x;
+                            int var15 = var40.y;
+                            int var16 = var40.z;
 
-                            if (!par0WorldServer.isBlockNormalCube(var13, var14, var15) && par0WorldServer.getBlockMaterial(var13, var14, var15) == var35.getCreatureMaterial())
+                            if (!par1WorldServer.isBlockNormalCube(var14, var15, var16) && par1WorldServer.getBlockMaterial(var14, var15, var16) == var37.getCreatureMaterial())
                             {
-                                int var16 = 0;
                                 int var17 = 0;
+                                int var18 = 0;
 
-                                while (var17 < 3)
+                                while (var18 < 3)
                                 {
-                                    int var18 = var13;
                                     int var19 = var14;
                                     int var20 = var15;
-                                    byte var21 = 6;
-                                    SpawnListEntry var22 = null;
-                                    int var23 = 0;
+                                    int var21 = var16;
+                                    byte var22 = 6;
+                                    SpawnListEntry var23 = null;
+                                    EntityLivingData var24 = null;
+                                    int var25 = 0;
 
                                     while (true)
                                     {
-                                        if (var23 < 4)
+                                        if (var25 < 4)
                                         {
                                             label103:
                                             {
-                                                var18 += par0WorldServer.rand.nextInt(var21) - par0WorldServer.rand.nextInt(var21);
-                                                var19 += par0WorldServer.rand.nextInt(1) - par0WorldServer.rand.nextInt(1);
-                                                var20 += par0WorldServer.rand.nextInt(var21) - par0WorldServer.rand.nextInt(var21);
+                                                var19 += par1WorldServer.rand.nextInt(var22) - par1WorldServer.rand.nextInt(var22);
+                                                var20 += par1WorldServer.rand.nextInt(1) - par1WorldServer.rand.nextInt(1);
+                                                var21 += par1WorldServer.rand.nextInt(var22) - par1WorldServer.rand.nextInt(var22);
 
-                                                if (canCreatureTypeSpawnAtLocation(var35, par0WorldServer, var18, var19, var20))
+                                                if (canCreatureTypeSpawnAtLocation(var37, par1WorldServer, var19, var20, var21))
                                                 {
-                                                    float var24 = (float)var18 + 0.5F;
-                                                    float var25 = (float)var19;
-                                                    float var26 = (float)var20 + 0.5F;
+                                                    float var26 = (float)var19 + 0.5F;
+                                                    float var27 = (float)var20;
+                                                    float var28 = (float)var21 + 0.5F;
 
-                                                    if (par0WorldServer.getClosestPlayer((double)var24, (double)var25, (double)var26, 24.0D) == null)
+                                                    if (par1WorldServer.getClosestPlayer((double)var26, (double)var27, (double)var28, 24.0D) == null)
                                                     {
-                                                        float var27 = var24 - (float)var32.posX;
-                                                        float var28 = var25 - (float)var32.posY;
-                                                        float var29 = var26 - (float)var32.posZ;
-                                                        float var30 = var27 * var27 + var28 * var28 + var29 * var29;
+                                                        float var29 = var26 - (float)var34.posX;
+                                                        float var30 = var27 - (float)var34.posY;
+                                                        float var31 = var28 - (float)var34.posZ;
+                                                        float var32 = var29 * var29 + var30 * var30 + var31 * var31;
 
-                                                        if (var30 >= 576.0F)
+                                                        if (var32 >= 576.0F)
                                                         {
-                                                            if (var22 == null)
+                                                            if (var23 == null)
                                                             {
-                                                                var22 = par0WorldServer.spawnRandomCreature(var35, var18, var19, var20);
+                                                                var23 = par1WorldServer.spawnRandomCreature(var37, var19, var20, var21);
 
-                                                                if (var22 == null)
+                                                                if (var23 == null)
                                                                 {
                                                                     break label103;
                                                                 }
                                                             }
 
-                                                            EntityLiving var39;
+                                                            EntityLiving var41;
 
                                                             try
                                                             {
-                                                                var39 = (EntityLiving)var22.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par0WorldServer});
+                                                                var41 = (EntityLiving)var23.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par1WorldServer});
                                                             }
-                                                            catch (Exception var31)
+                                                            catch (Exception var33)
                                                             {
-                                                                var31.printStackTrace();
-                                                                return var4;
+                                                                var33.printStackTrace();
+                                                                return var5;
                                                             }
 
-                                                            var39.setLocationAndAngles((double)var24, (double)var25, (double)var26, par0WorldServer.rand.nextFloat() * 360.0F, 0.0F);
+                                                            var41.setLocationAndAngles((double)var26, (double)var27, (double)var28, par1WorldServer.rand.nextFloat() * 360.0F, 0.0F);
 
-                                                            if (var39.getCanSpawnHere())
+                                                            if (var41.getCanSpawnHere())
                                                             {
-                                                                ++var16;
-                                                                par0WorldServer.spawnEntityInWorld(var39);
-                                                                creatureSpecificInit(var39, par0WorldServer, var24, var25, var26);
+                                                                ++var17;
+                                                                par1WorldServer.spawnEntityInWorld(var41);
+                                                                var24 = var41.func_110161_a(var24);
 
-                                                                if (var16 >= var39.getMaxSpawnedInChunk())
+                                                                if (var17 >= var41.getMaxSpawnedInChunk())
                                                                 {
                                                                     continue label110;
                                                                 }
                                                             }
 
-                                                            var4 += var16;
+                                                            var5 += var17;
                                                         }
                                                     }
                                                 }
 
-                                                ++var23;
+                                                ++var25;
                                                 continue;
                                             }
                                         }
 
-                                        ++var17;
+                                        ++var18;
                                         break;
                                     }
                                 }
@@ -187,7 +185,7 @@ public final class SpawnerAnimals
                 }
             }
 
-            return var4;
+            return var5;
         }
     }
 
@@ -212,14 +210,6 @@ public final class SpawnerAnimals
     }
 
     /**
-     * determines if a skeleton spawns on a spider, and if a sheep is a different color
-     */
-    private static void creatureSpecificInit(EntityLiving par0EntityLiving, World par1World, float par2, float par3, float par4)
-    {
-        par0EntityLiving.initCreature();
-    }
-
-    /**
      * Called during chunk generation to spawn initial creatures.
      */
     public static void performWorldGenSpawning(World par0World, BiomeGenBase par1BiomeGenBase, int par2, int par3, int par4, int par5, Random par6Random)
@@ -231,48 +221,49 @@ public final class SpawnerAnimals
             while (par6Random.nextFloat() < par1BiomeGenBase.getSpawningChance())
             {
                 SpawnListEntry var8 = (SpawnListEntry)WeightedRandom.getRandomItem(par0World.rand, var7);
-                int var9 = var8.minGroupCount + par6Random.nextInt(1 + var8.maxGroupCount - var8.minGroupCount);
-                int var10 = par2 + par6Random.nextInt(par4);
-                int var11 = par3 + par6Random.nextInt(par5);
-                int var12 = var10;
+                EntityLivingData var9 = null;
+                int var10 = var8.minGroupCount + par6Random.nextInt(1 + var8.maxGroupCount - var8.minGroupCount);
+                int var11 = par2 + par6Random.nextInt(par4);
+                int var12 = par3 + par6Random.nextInt(par5);
                 int var13 = var11;
+                int var14 = var12;
 
-                for (int var14 = 0; var14 < var9; ++var14)
+                for (int var15 = 0; var15 < var10; ++var15)
                 {
-                    boolean var15 = false;
+                    boolean var16 = false;
 
-                    for (int var16 = 0; !var15 && var16 < 4; ++var16)
+                    for (int var17 = 0; !var16 && var17 < 4; ++var17)
                     {
-                        int var17 = par0World.getTopSolidOrLiquidBlock(var10, var11);
+                        int var18 = par0World.getTopSolidOrLiquidBlock(var11, var12);
 
-                        if (canCreatureTypeSpawnAtLocation(EnumCreatureType.creature, par0World, var10, var17, var11))
+                        if (canCreatureTypeSpawnAtLocation(EnumCreatureType.creature, par0World, var11, var18, var12))
                         {
-                            float var18 = (float)var10 + 0.5F;
-                            float var19 = (float)var17;
-                            float var20 = (float)var11 + 0.5F;
-                            EntityLiving var21;
+                            float var19 = (float)var11 + 0.5F;
+                            float var20 = (float)var18;
+                            float var21 = (float)var12 + 0.5F;
+                            EntityLiving var22;
 
                             try
                             {
-                                var21 = (EntityLiving)var8.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par0World});
+                                var22 = (EntityLiving)var8.entityClass.getConstructor(new Class[] {World.class}).newInstance(new Object[] {par0World});
                             }
-                            catch (Exception var23)
+                            catch (Exception var24)
                             {
-                                var23.printStackTrace();
+                                var24.printStackTrace();
                                 continue;
                             }
 
-                            var21.setLocationAndAngles((double)var18, (double)var19, (double)var20, par6Random.nextFloat() * 360.0F, 0.0F);
-                            par0World.spawnEntityInWorld(var21);
-                            creatureSpecificInit(var21, par0World, var18, var19, var20);
-                            var15 = true;
+                            var22.setLocationAndAngles((double)var19, (double)var20, (double)var21, par6Random.nextFloat() * 360.0F, 0.0F);
+                            par0World.spawnEntityInWorld(var22);
+                            var9 = var22.func_110161_a(var9);
+                            var16 = true;
                         }
 
-                        var10 += par6Random.nextInt(5) - par6Random.nextInt(5);
+                        var11 += par6Random.nextInt(5) - par6Random.nextInt(5);
 
-                        for (var11 += par6Random.nextInt(5) - par6Random.nextInt(5); var10 < par2 || var10 >= par2 + par4 || var11 < par3 || var11 >= par3 + par4; var11 = var13 + par6Random.nextInt(5) - par6Random.nextInt(5))
+                        for (var12 += par6Random.nextInt(5) - par6Random.nextInt(5); var11 < par2 || var11 >= par2 + par4 || var12 < par3 || var12 >= par3 + par4; var12 = var14 + par6Random.nextInt(5) - par6Random.nextInt(5))
                         {
-                            var10 = var12 + par6Random.nextInt(5) - par6Random.nextInt(5);
+                            var11 = var13 + par6Random.nextInt(5) - par6Random.nextInt(5);
                         }
                     }
                 }

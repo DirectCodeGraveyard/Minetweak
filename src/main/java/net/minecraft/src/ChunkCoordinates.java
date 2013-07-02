@@ -64,10 +64,10 @@ public class ChunkCoordinates implements Comparable
      */
     public float getDistanceSquared(int par1, int par2, int par3)
     {
-        int var4 = this.posX - par1;
-        int var5 = this.posY - par2;
-        int var6 = this.posZ - par3;
-        return (float)(var4 * var4 + var5 * var5 + var6 * var6);
+        float var4 = (float)(this.posX - par1);
+        float var5 = (float)(this.posY - par2);
+        float var6 = (float)(this.posZ - par3);
+        return var4 * var4 + var5 * var5 + var6 * var6;
     }
 
     /**

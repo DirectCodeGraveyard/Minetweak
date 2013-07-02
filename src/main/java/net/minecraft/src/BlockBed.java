@@ -247,7 +247,7 @@ public class BlockBed extends BlockDirectional
             {
                 for (int var13 = var9; var13 <= var11; ++var13)
                 {
-                    if (par0World.doesBlockHaveSolidTopSurface(var12, par2 - 1, var13) && par0World.isAirBlock(var12, par2, var13) && par0World.isAirBlock(var12, par2 + 1, var13))
+                    if (par0World.doesBlockHaveSolidTopSurface(var12, par2 - 1, var13) && !par0World.getBlockMaterial(var12, par2, var13).isOpaque() && !par0World.getBlockMaterial(var12, par2 + 1, var13).isOpaque())
                     {
                         if (par4 <= 0)
                         {

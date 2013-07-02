@@ -106,14 +106,14 @@ public class BlockChest extends BlockContainer
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
         int var7 = par1World.getBlockId(par2, par3, par4 - 1);
         int var8 = par1World.getBlockId(par2, par3, par4 + 1);
         int var9 = par1World.getBlockId(par2 - 1, par3, par4);
         int var10 = par1World.getBlockId(par2 + 1, par3, par4);
         byte var11 = 0;
-        int var12 = MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int var12 = MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
         if (var12 == 0)
         {

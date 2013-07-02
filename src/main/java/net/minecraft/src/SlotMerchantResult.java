@@ -73,6 +73,8 @@ public class SlotMerchantResult extends Slot
 
             if (this.func_75230_a(var3, var4, var5) || this.func_75230_a(var3, var5, var4))
             {
+                this.theMerchant.useRecipe(var3);
+
                 if (var4 != null && var4.stackSize <= 0)
                 {
                     var4 = null;
@@ -85,7 +87,6 @@ public class SlotMerchantResult extends Slot
 
                 this.theMerchantInventory.setInventorySlotContents(0, var4);
                 this.theMerchantInventory.setInventorySlotContents(1, var5);
-                this.theMerchant.useRecipe(var3);
             }
         }
     }

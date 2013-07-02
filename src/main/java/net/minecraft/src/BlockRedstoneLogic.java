@@ -187,9 +187,11 @@ public abstract class BlockRedstoneLogic extends BlockDirectional
             case 0:
             case 2:
                 return Math.max(this.func_94488_g(par1IBlockAccess, par2 - 1, par3, par4, 4), this.func_94488_g(par1IBlockAccess, par2 + 1, par3, par4, 5));
+
             case 1:
             case 3:
                 return Math.max(this.func_94488_g(par1IBlockAccess, par2, par3, par4 + 1, 3), this.func_94488_g(par1IBlockAccess, par2, par3, par4 - 1, 2));
+
             default:
                 return 0;
         }
@@ -212,9 +214,9 @@ public abstract class BlockRedstoneLogic extends BlockDirectional
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int var7 = ((MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
+        int var7 = ((MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
         par1World.setBlockMetadata(par2, par3, par4, var7, 3);
         boolean var8 = this.func_94478_d(par1World, par2, par3, par4, var7);
 

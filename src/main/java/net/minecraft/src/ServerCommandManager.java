@@ -1,7 +1,8 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.Iterator;
 
 public class ServerCommandManager extends CommandHandler implements IAdminCommand
 {
@@ -29,6 +30,8 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
         this.registerCommand(new CommandGameRule());
         this.registerCommand(new CommandClearInventory());
         this.registerCommand(new ServerCommandTestFor());
+        this.registerCommand(new CommandSpreadPlayers());
+        this.registerCommand(new CommandPlaySound());
         this.registerCommand(new ServerCommandScoreboard());
 
         if (MinecraftServer.getServer().isDedicatedServer())
@@ -69,25 +72,33 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
             var5 = false;
         }
 
-        if (var5) {
+        ChatMessageComponent var6 = ChatMessageComponent.func_111082_b("chat.type.admin", new Object[] {par1ICommandSender.getCommandSenderName(), ChatMessageComponent.func_111082_b(par3Str, par4ArrayOfObj)});
+        var6.func_111059_a(EnumChatFormatting.GRAY);
+        var6.func_111063_b(Boolean.valueOf(true));
 
-            for (Object aPlayerEntityList : MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
-                EntityPlayerMP var7 = (EntityPlayerMP) aPlayerEntityList;
+        if (var5)
+        {
+            Iterator var7 = MinecraftServer.getServer().getConfigurationManager().playerEntityList.iterator();
 
-                if (var7 != par1ICommandSender && MinecraftServer.getServer().getConfigurationManager().areCommandsAllowed(var7.username)) {
-                    var7.sendChatToPlayer("" + EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "[" + par1ICommandSender.getCommandSenderName() + ": " + var7.translateString(par3Str, par4ArrayOfObj) + "]");
+            while (var7.hasNext())
+            {
+                EntityPlayerMP var8 = (EntityPlayerMP)var7.next();
+
+                if (var8 != par1ICommandSender && MinecraftServer.getServer().getConfigurationManager().areCommandsAllowed(var8.getCommandSenderName()))
+                {
+                    var8.func_110122_a(var6);
                 }
             }
         }
 
         if (par1ICommandSender != MinecraftServer.getServer())
         {
-            MinecraftServer.getServer().getLogAgent().func_98233_a("[" + par1ICommandSender.getCommandSenderName() + ": " + MinecraftServer.getServer().translateString(par3Str, par4ArrayOfObj) + "]");
+            MinecraftServer.getServer().func_110122_a(var6);
         }
 
         if ((par2 & 1) != 1)
         {
-            par1ICommandSender.sendChatToPlayer(par1ICommandSender.translateString(par3Str, par4ArrayOfObj));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b(par3Str, par4ArrayOfObj));
         }
     }
 }

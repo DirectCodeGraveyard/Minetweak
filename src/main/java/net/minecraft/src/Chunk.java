@@ -1,12 +1,6 @@
 package net.minecraft.src;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class Chunk
 {
@@ -80,12 +74,12 @@ public class Chunk
 
     /** Lowest value in the heightmap. */
     public int heightMapMinimum;
+    public long field_111204_q;
 
     /**
      * Contains the current round-robin relight check index, and is implied as the relight check location as well.
      */
     private int queuedLightChecks;
-    boolean field_76653_p;
 
     public Chunk(World par1World, int par2, int par3)
     {
@@ -93,16 +87,8 @@ public class Chunk
         this.blockBiomeArray = new byte[256];
         this.precipitationHeightMap = new int[256];
         this.updateSkylightColumns = new boolean[256];
-        this.isGapLightingUpdated = false;
         this.chunkTileEntityMap = new HashMap();
-        this.isTerrainPopulated = false;
-        this.isModified = false;
-        this.hasEntities = false;
-        this.lastSaveTime = 0L;
-        this.sendUpdates = false;
-        this.heightMapMinimum = 0;
         this.queuedLightChecks = 4096;
-        this.field_76653_p = false;
         this.entityLists = new List[16];
         this.worldObj = par1World;
         this.xPosition = par2;
@@ -921,6 +907,14 @@ public class Chunk
 
         for (int var1 = 0; var1 < this.entityLists.length; ++var1)
         {
+            Iterator var2 = this.entityLists[var1].iterator();
+
+            while (var2.hasNext())
+            {
+                Entity var3 = (Entity)var2.next();
+                var3.func_110123_P();
+            }
+
             this.worldObj.addLoadedEntities(this.entityLists[var1]);
         }
     }

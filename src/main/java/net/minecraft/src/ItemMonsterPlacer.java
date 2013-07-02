@@ -49,7 +49,7 @@ public class ItemMonsterPlacer extends Item
 
             if (var14 != null)
             {
-                if (var14 instanceof EntityLiving && par1ItemStack.hasDisplayName())
+                if (var14 instanceof EntityLivingBase && par1ItemStack.hasDisplayName())
                 {
                     ((EntityLiving)var14).func_94058_c(par1ItemStack.getDisplayName());
                 }
@@ -61,6 +61,65 @@ public class ItemMonsterPlacer extends Item
             }
 
             return true;
+        }
+    }
+
+    /**
+     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+     */
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    {
+        if (par2World.isRemote)
+        {
+            return par1ItemStack;
+        }
+        else
+        {
+            MovingObjectPosition var4 = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, true);
+
+            if (var4 == null)
+            {
+                return par1ItemStack;
+            }
+            else
+            {
+                if (var4.typeOfHit == EnumMovingObjectType.TILE)
+                {
+                    int var5 = var4.blockX;
+                    int var6 = var4.blockY;
+                    int var7 = var4.blockZ;
+
+                    if (!par2World.canMineBlock(par3EntityPlayer, var5, var6, var7))
+                    {
+                        return par1ItemStack;
+                    }
+
+                    if (!par3EntityPlayer.canPlayerEdit(var5, var6, var7, var4.sideHit, par1ItemStack))
+                    {
+                        return par1ItemStack;
+                    }
+
+                    if (par2World.getBlockMaterial(var5, var6, var7) == Material.water)
+                    {
+                        Entity var8 = spawnCreature(par2World, par1ItemStack.getItemDamage(), (double)var5, (double)var6, (double)var7);
+
+                        if (var8 != null)
+                        {
+                            if (var8 instanceof EntityLivingBase && par1ItemStack.hasDisplayName())
+                            {
+                                ((EntityLiving)var8).func_94058_c(par1ItemStack.getDisplayName());
+                            }
+
+                            if (!par3EntityPlayer.capabilities.isCreativeMode)
+                            {
+                                --par1ItemStack.stackSize;
+                            }
+                        }
+                    }
+                }
+
+                return par1ItemStack;
+            }
         }
     }
 
@@ -82,13 +141,13 @@ public class ItemMonsterPlacer extends Item
             {
                 var8 = EntityList.createEntityByID(par1, par0World);
 
-                if (var8 != null && var8 instanceof EntityLiving)
+                if (var8 != null && var8 instanceof EntityLivingBase)
                 {
                     EntityLiving var10 = (EntityLiving)var8;
                     var8.setLocationAndAngles(par2, par4, par6, MathHelper.wrapAngleTo180_float(par0World.rand.nextFloat() * 360.0F), 0.0F);
                     var10.rotationYawHead = var10.rotationYaw;
                     var10.renderYawOffset = var10.rotationYaw;
-                    var10.initCreature();
+                    var10.func_110161_a((EntityLivingData)null);
                     par0World.spawnEntityInWorld(var8);
                     var10.playLivingSound();
                 }

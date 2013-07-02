@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import java.io.UnsupportedEncodingException;
+
 public class RConUtils
 {
     /** Translation array of decimal to hex digits */
@@ -18,7 +20,15 @@ public class RConUtils
             ;
         }
 
-        return new String(par0ArrayOfByte, par1, var4 - par1);
+        try
+        {
+            return new String(par0ArrayOfByte, par1, var4 - par1, "UTF-8");
+        }
+        catch (UnsupportedEncodingException var6)
+        {
+            var6.printStackTrace();
+            return null;
+        }
     }
 
     /**

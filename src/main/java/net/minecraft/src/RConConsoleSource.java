@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 public class RConConsoleSource implements ICommandSender
 {
     /** Single instance of RConConsoleSource */
@@ -32,9 +34,9 @@ public class RConConsoleSource implements ICommandSender
         return "Rcon";
     }
 
-    public void sendChatToPlayer(String par1Str)
+    public void func_110122_a(ChatMessageComponent par1ChatMessageComponent)
     {
-        this.buffer.append(par1Str);
+        this.buffer.append(par1ChatMessageComponent.toString());
     }
 
     /**
@@ -46,18 +48,15 @@ public class RConConsoleSource implements ICommandSender
     }
 
     /**
-     * Translates and formats the given string key with the given arguments.
-     */
-    public String translateString(String par1Str, Object ... par2ArrayOfObj)
-    {
-        return StringTranslate.getInstance().translateKeyFormat(par1Str, par2ArrayOfObj);
-    }
-
-    /**
      * Return the position for this command sender.
      */
     public ChunkCoordinates getCommandSenderPosition()
     {
         return new ChunkCoordinates(0, 0, 0);
+    }
+
+    public World func_130014_f_()
+    {
+        return MinecraftServer.getServer().func_130014_f_();
     }
 }

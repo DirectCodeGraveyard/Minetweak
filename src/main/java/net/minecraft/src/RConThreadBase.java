@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class RConThreadBase implements Runnable
 {
     /** True if the Thread is running, false otherwise */
-    protected boolean running = false;
+    protected boolean running;
 
     /** Reference to the IServer object. */
     protected IServer server;

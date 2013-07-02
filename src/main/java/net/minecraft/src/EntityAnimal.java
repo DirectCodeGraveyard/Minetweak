@@ -10,7 +10,7 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimals
      * This is representation of a counter for reproduction progress. (Note that this is different from the inLove which
      * represent being in Love-Mode)
      */
-    private int breeding = 0;
+    private int breeding;
 
     public EntityAnimal(World par1World)
     {
@@ -167,7 +167,7 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimals
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -176,6 +176,17 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimals
         else
         {
             this.fleeingTick = 60;
+
+            if (!this.isAIEnabled())
+            {
+                AttributeInstance var3 = this.func_110148_a(SharedMonsterAttributes.field_111263_d);
+
+                if (var3.func_111127_a(field_110179_h) == null)
+                {
+                    var3.func_111121_a(field_110181_i);
+                }
+            }
+
             this.entityToAttack = null;
             this.inLove = 0;
             return super.attackEntityFrom(par1DamageSource, par2);
@@ -336,23 +347,20 @@ public abstract class EntityAnimal extends EntityAgeable implements IAnimals
                 }
             }
 
-            this.inLove = 600;
-            this.entityToAttack = null;
-
-            for (int var3 = 0; var3 < 7; ++var3)
-            {
-                double var4 = this.rand.nextGaussian() * 0.02D;
-                double var6 = this.rand.nextGaussian() * 0.02D;
-                double var8 = this.rand.nextGaussian() * 0.02D;
-                this.worldObj.spawnParticle("heart", this.posX + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, this.posY + 0.5D + (double)(this.rand.nextFloat() * this.height), this.posZ + (double)(this.rand.nextFloat() * this.width * 2.0F) - (double)this.width, var4, var6, var8);
-            }
-
+            this.func_110196_bT();
             return true;
         }
         else
         {
             return super.interact(par1EntityPlayer);
         }
+    }
+
+    public void func_110196_bT()
+    {
+        this.inLove = 600;
+        this.entityToAttack = null;
+        this.worldObj.setEntityState(this, (byte)18);
     }
 
     /**

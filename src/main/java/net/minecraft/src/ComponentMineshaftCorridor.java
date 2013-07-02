@@ -47,14 +47,17 @@ public class ComponentMineshaftCorridor extends StructureComponent
                     var6.maxX = par2 + 2;
                     var6.maxZ = par4 + (var8 - 1);
                     break;
+
                 case 1:
                     var6.minX = par2 - (var8 - 1);
                     var6.maxZ = par4 + 2;
                     break;
+
                 case 2:
                     var6.maxX = par2 + 2;
                     var6.minZ = par4 - (var8 - 1);
                     break;
+
                 case 3:
                     var6.maxX = par2 + (var8 - 1);
                     var6.maxZ = par4 + 2;
@@ -80,7 +83,6 @@ public class ComponentMineshaftCorridor extends StructureComponent
         switch (this.coordBaseMode)
         {
             case 0:
-
                 if (var5 <= 1)
                 {
                     StructureMineshaftPieces.getNextComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX, this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.maxZ + 1, this.coordBaseMode, var4);
@@ -95,8 +97,8 @@ public class ComponentMineshaftCorridor extends StructureComponent
                 }
 
                 break;
-            case 1:
 
+            case 1:
                 if (var5 <= 1)
                 {
                     StructureMineshaftPieces.getNextComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ, this.coordBaseMode, var4);
@@ -111,8 +113,8 @@ public class ComponentMineshaftCorridor extends StructureComponent
                 }
 
                 break;
-            case 2:
 
+            case 2:
                 if (var5 <= 1)
                 {
                     StructureMineshaftPieces.getNextComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.minX, this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ - 1, this.coordBaseMode, var4);
@@ -127,8 +129,8 @@ public class ComponentMineshaftCorridor extends StructureComponent
                 }
 
                 break;
-            case 3:
 
+            case 3:
                 if (var5 <= 1)
                 {
                     StructureMineshaftPieces.getNextComponent(par1StructureComponent, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY - 1 + par3Random.nextInt(3), this.boundingBox.minZ, this.coordBaseMode, var4);
@@ -218,6 +220,10 @@ public class ComponentMineshaftCorridor extends StructureComponent
         }
         else
         {
+            boolean var4 = false;
+            boolean var5 = true;
+            boolean var6 = false;
+            boolean var7 = true;
             int var8 = this.sectionCount * 5 - 1;
             this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 2, 1, var8, 0, 0, false);
             this.randomlyFillWithBlocks(par1World, par3StructureBoundingBox, par2Random, 0.8F, 0, 2, 0, 2, 2, var8, 0, 0, false);

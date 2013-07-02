@@ -1,9 +1,15 @@
 package net.minecraft.src;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public final class ItemStack
 {
+    public static final DecimalFormat field_111284_a = new DecimalFormat("#.###");
+
     /** Size of the stack. */
     public int stackSize;
 
@@ -58,8 +64,6 @@ public final class ItemStack
 
     public ItemStack(int par1, int par2, int par3)
     {
-        this.stackSize = 0;
-        this.itemFrame = null;
         this.itemID = par1;
         this.stackSize = par2;
         this.itemDamage = par3;
@@ -77,11 +81,7 @@ public final class ItemStack
         return var1.getItem() != null ? var1 : null;
     }
 
-    public ItemStack()
-    {
-        this.stackSize = 0;
-        this.itemFrame = null;
-    }
+    private ItemStack() {}
 
     /**
      * Remove the argument from the stack size. Return a new stack object with argument size.
@@ -289,22 +289,27 @@ public final class ItemStack
     /**
      * Damages the item in the ItemStack
      */
-    public void damageItem(int par1, EntityLiving par2EntityLiving)
+    public void damageItem(int par1, EntityLivingBase par2EntityLivingBase)
     {
-        if (!(par2EntityLiving instanceof EntityPlayer) || !((EntityPlayer)par2EntityLiving).capabilities.isCreativeMode)
+        if (!(par2EntityLivingBase instanceof EntityPlayer) || !((EntityPlayer)par2EntityLivingBase).capabilities.isCreativeMode)
         {
             if (this.isItemStackDamageable())
             {
-                if (this.func_96631_a(par1, par2EntityLiving.getRNG()))
+                if (this.func_96631_a(par1, par2EntityLivingBase.getRNG()))
                 {
-                    par2EntityLiving.renderBrokenItemStack(this);
-
-                    if (par2EntityLiving instanceof EntityPlayer)
-                    {
-                        ((EntityPlayer)par2EntityLiving).addStat(StatList.objectBreakStats[this.itemID], 1);
-                    }
-
+                    par2EntityLivingBase.renderBrokenItemStack(this);
                     --this.stackSize;
+
+                    if (par2EntityLivingBase instanceof EntityPlayer)
+                    {
+                        EntityPlayer var3 = (EntityPlayer)par2EntityLivingBase;
+                        var3.addStat(StatList.objectBreakStats[this.itemID], 1);
+
+                        if (this.stackSize == 0 && this.getItem() instanceof ItemBow)
+                        {
+                            var3.destroyCurrentEquippedItem();
+                        }
+                    }
 
                     if (this.stackSize < 0)
                     {
@@ -320,9 +325,9 @@ public final class ItemStack
     /**
      * Calls the corresponding fct in di
      */
-    public void hitEntity(EntityLiving par1EntityLiving, EntityPlayer par2EntityPlayer)
+    public void hitEntity(EntityLivingBase par1EntityLivingBase, EntityPlayer par2EntityPlayer)
     {
-        boolean var3 = Item.itemsList[this.itemID].hitEntity(this, par1EntityLiving, par2EntityPlayer);
+        boolean var3 = Item.itemsList[this.itemID].hitEntity(this, par1EntityLivingBase, par2EntityPlayer);
 
         if (var3)
         {
@@ -341,14 +346,6 @@ public final class ItemStack
     }
 
     /**
-     * Returns the damage against a given entity.
-     */
-    public int getDamageVsEntity(Entity par1Entity)
-    {
-        return Item.itemsList[this.itemID].getDamageVsEntity(par1Entity);
-    }
-
-    /**
      * Checks if the itemStack object can harvest a specified block
      */
     public boolean canHarvestBlock(Block par1Block)
@@ -356,9 +353,9 @@ public final class ItemStack
         return Item.itemsList[this.itemID].canHarvestBlock(par1Block);
     }
 
-    public boolean interactWith(EntityLiving par1EntityLiving)
+    public boolean func_111282_a(EntityPlayer par1EntityPlayer, EntityLivingBase par2EntityLivingBase)
     {
-        return Item.itemsList[this.itemID].useItemOnEntity(this, par1EntityLiving);
+        return Item.itemsList[this.itemID].func_111207_a(this, par1EntityPlayer, par2EntityLivingBase);
     }
 
     /**
@@ -529,6 +526,28 @@ public final class ItemStack
         this.stackTagCompound.getCompoundTag("display").setString("Name", par1Str);
     }
 
+    public void func_135074_t()
+    {
+        if (this.stackTagCompound != null)
+        {
+            if (this.stackTagCompound.hasKey("display"))
+            {
+                NBTTagCompound var1 = this.stackTagCompound.getCompoundTag("display");
+                var1.removeTag("Name");
+
+                if (var1.hasNoTags())
+                {
+                    this.stackTagCompound.removeTag("display");
+
+                    if (this.stackTagCompound.hasNoTags())
+                    {
+                        this.setTagCompound((NBTTagCompound)null);
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Returns true if the itemstack has a display name
      */
@@ -633,5 +652,33 @@ public final class ItemStack
         }
 
         this.stackTagCompound.setInteger("RepairCost", par1);
+    }
+
+    public Multimap func_111283_C()
+    {
+        Object var1;
+
+        if (this.hasTagCompound() && this.stackTagCompound.hasKey("AttributeModifiers"))
+        {
+            var1 = HashMultimap.create();
+            NBTTagList var2 = this.stackTagCompound.getTagList("AttributeModifiers");
+
+            for (int var3 = 0; var3 < var2.tagCount(); ++var3)
+            {
+                NBTTagCompound var4 = (NBTTagCompound)var2.tagAt(var3);
+                AttributeModifier var5 = SharedMonsterAttributes.func_111259_a(var4);
+
+                if (var5.func_111167_a().getLeastSignificantBits() != 0L && var5.func_111167_a().getMostSignificantBits() != 0L)
+                {
+                    ((Multimap)var1).put(var4.getString("AttributeName"), var5);
+                }
+            }
+        }
+        else
+        {
+            var1 = this.getItem().func_111205_h();
+        }
+
+        return (Multimap)var1;
     }
 }

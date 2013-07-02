@@ -1,19 +1,15 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import net.minecraft.server.MinecraftServer;
+import java.util.*;
 
 public class EntityPlayerMP extends EntityPlayer implements ICrafting
 {
-    private StringTranslate translator = new StringTranslate("en_US");
+    private String translator = "en_US";
 
     /**
      * The NetServerHandler assigned to this player by the ServerConfigurationManager.
@@ -37,9 +33,10 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
 
     /** entities added to this list will  be packet29'd to the player */
     public final List destroyedItemsNetCache = new LinkedList();
+    private float field_130068_bO = Float.MIN_VALUE;
 
     /** amount of health the client was last set to */
-    private int lastHealth = -99999999;
+    private float lastHealth = -1.0E8F;
 
     /** set to foodStats.GetFoodLevel */
     private int lastFoodLevel = -99999999;
@@ -54,14 +51,14 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
     private int ticksOfInvuln = 60;
 
     /** must be between 3>x>15 (strictly between) */
-    private int renderDistance = 0;
-    private int chatVisibility = 0;
+    private int renderDistance;
+    private int chatVisibility;
     private boolean chatColours = true;
 
     /**
      * The currently in use window ID. Incremented every time a window is opened.
      */
-    private int currentWindowId = 0;
+    private int currentWindowId;
 
     /**
      * set to true when player is moving quantity of items from one inventory to another(crafting) but item in either
@@ -74,11 +71,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
      * Set when a player beats the ender dragon, used to respawn the player at the spawn point while retaining inventory
      * and XP
      */
-    public boolean playerConqueredTheEnd = false;
+    public boolean playerConqueredTheEnd;
 
     public EntityPlayerMP(MinecraftServer par1MinecraftServer, World par2World, String par3Str, ItemInWorldManager par4ItemInWorldManager)
     {
-        super(par2World);
+        super(par2World, par3Str);
         par4ItemInWorldManager.thisPlayerMP = this;
         this.theItemInWorldManager = par4ItemInWorldManager;
         this.renderDistance = par1MinecraftServer.getConfigurationManager().getViewDistance();
@@ -97,7 +94,6 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
 
         this.mcServer = par1MinecraftServer;
         this.stepHeight = 0.0F;
-        this.username = par3Str;
         this.yOffset = 0.0F;
         this.setLocationAndAngles((double)var6 + 0.5D, (double)var8, (double)var7 + 0.5D, 0.0F, 0.0F);
 
@@ -172,6 +168,12 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         --this.ticksOfInvuln;
         this.openContainer.detectAndSendChanges();
 
+        if (!this.worldObj.isRemote && !this.openContainer.canInteractWith(this))
+        {
+            this.closeScreen();
+            this.openContainer = this.inventoryContainer;
+        }
+
         while (!this.destroyedItemsNetCache.isEmpty())
         {
             int var1 = Math.min(this.destroyedItemsNetCache.size(), 127);
@@ -228,19 +230,6 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         }
     }
 
-    public void setEntityHealth(int par1)
-    {
-        super.setEntityHealth(par1);
-        Collection var2 = this.getWorldScoreboard().func_96520_a(ScoreObjectiveCriteria.field_96638_f);
-        Iterator var3 = var2.iterator();
-
-        while (var3.hasNext())
-        {
-            ScoreObjective var4 = (ScoreObjective)var3.next();
-            this.getWorldScoreboard().func_96529_a(this.getEntityName(), var4).func_96651_a(Arrays.asList(new EntityPlayer[] {this}));
-        }
-    }
-
     public void onUpdateEntity()
     {
         try
@@ -249,25 +238,38 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
 
             for (int var1 = 0; var1 < this.inventory.getSizeInventory(); ++var1)
             {
-                ItemStack var5 = this.inventory.getStackInSlot(var1);
+                ItemStack var6 = this.inventory.getStackInSlot(var1);
 
-                if (var5 != null && Item.itemsList[var5.itemID].isMap() && this.playerNetServerHandler.getNumChunkDataPackets() <= 5)
+                if (var6 != null && Item.itemsList[var6.itemID].isMap() && this.playerNetServerHandler.getNumChunkDataPackets() <= 5)
                 {
-                    Packet var6 = ((ItemMapBase)Item.itemsList[var5.itemID]).getUpdatePacket(var5, this.worldObj, this);
+                    Packet var8 = ((ItemMapBase)Item.itemsList[var6.itemID]).getUpdatePacket(var6, this.worldObj, this);
 
-                    if (var6 != null)
+                    if (var8 != null)
                     {
-                        this.playerNetServerHandler.sendPacket(var6);
+                        this.playerNetServerHandler.sendPacket(var8);
                     }
                 }
             }
 
-            if (this.getHealth() != this.lastHealth || this.lastFoodLevel != this.foodStats.getFoodLevel() || this.foodStats.getSaturationLevel() == 0.0F != this.wasHungry)
+            if (this.func_110143_aJ() != this.lastHealth || this.lastFoodLevel != this.foodStats.getFoodLevel() || this.foodStats.getSaturationLevel() == 0.0F != this.wasHungry)
             {
-                this.playerNetServerHandler.sendPacket(new Packet8UpdateHealth(this.getHealth(), this.foodStats.getFoodLevel(), this.foodStats.getSaturationLevel()));
-                this.lastHealth = this.getHealth();
+                this.playerNetServerHandler.sendPacket(new Packet8UpdateHealth(this.func_110143_aJ(), this.foodStats.getFoodLevel(), this.foodStats.getSaturationLevel()));
+                this.lastHealth = this.func_110143_aJ();
                 this.lastFoodLevel = this.foodStats.getFoodLevel();
                 this.wasHungry = this.foodStats.getSaturationLevel() == 0.0F;
+            }
+
+            if (this.func_110143_aJ() + this.func_110139_bj() != this.field_130068_bO)
+            {
+                this.field_130068_bO = this.func_110143_aJ() + this.func_110139_bj();
+                Collection var5 = this.getWorldScoreboard().func_96520_a(ScoreObjectiveCriteria.field_96638_f);
+                Iterator var7 = var5.iterator();
+
+                while (var7.hasNext())
+                {
+                    ScoreObjective var9 = (ScoreObjective)var7.next();
+                    this.getWorldScoreboard().func_96529_a(this.getEntityName(), var9).func_96651_a(Arrays.asList(new EntityPlayer[] {this}));
+                }
             }
 
             if (this.experienceTotal != this.lastExperience)
@@ -290,7 +292,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
      */
     public void onDeath(DamageSource par1DamageSource)
     {
-        this.mcServer.getConfigurationManager().sendChatMsg(this.field_94063_bt.func_94546_b());
+        this.mcServer.getConfigurationManager().func_110460_a(this.func_110142_aN().func_111182_b());
 
         if (!this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory"))
         {
@@ -307,18 +309,20 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
             var5.func_96648_a();
         }
 
-        EntityLiving var6 = this.func_94060_bK();
+        EntityLivingBase var6 = this.func_94060_bK();
 
         if (var6 != null)
         {
             var6.addToPlayerScore(this, this.scoreValue);
         }
+
+        this.addStat(StatList.deathsStat, 1);
     }
 
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -375,7 +379,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         }
         else
         {
-            if (this.dimension == 1 && par1 == 0)
+            if (this.dimension == 0 && par1 == 1)
             {
                 this.triggerAchievement(AchievementList.theEnd);
                 ChunkCoordinates var2 = this.mcServer.worldServerForDimension(par1).getEntrancePortalLocation();
@@ -394,7 +398,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
 
             this.mcServer.getConfigurationManager().transferPlayerToDimension(this, par1);
             this.lastExperience = -1;
-            this.lastHealth = -1;
+            this.lastHealth = -1.0F;
             this.lastFoodLevel = -1;
         }
     }
@@ -466,7 +470,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
     public void mountEntity(Entity par1Entity)
     {
         super.mountEntity(par1Entity);
-        this.playerNetServerHandler.sendPacket(new Packet39AttachEntity(this, this.ridingEntity));
+        this.playerNetServerHandler.sendPacket(new Packet39AttachEntity(0, this, this.ridingEntity));
         this.playerNetServerHandler.setPlayerLocation(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
     }
 
@@ -635,6 +639,20 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         }
     }
 
+    public void func_110298_a(EntityHorse par1EntityHorse, IInventory par2IInventory)
+    {
+        if (this.openContainer != this.inventoryContainer)
+        {
+            this.closeScreen();
+        }
+
+        this.getNextWindowId();
+        this.playerNetServerHandler.sendPacket(new Packet100OpenWindow(this.currentWindowId, 11, par2IInventory.getInvName(), par2IInventory.getSizeInventory(), par2IInventory.isInvNameLocalized(), par1EntityHorse.entityId));
+        this.openContainer = new ContainerHorseInventory(this.inventory, par2IInventory, par1EntityHorse);
+        this.openContainer.windowId = this.currentWindowId;
+        this.openContainer.onCraftGuiOpened(this);
+    }
+
     /**
      * Sends the contents of an inventory slot to the client-side Container. This doesn't have to match the actual
      * contents of that slot. Args: Container, slot number, slot contents
@@ -703,6 +721,25 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         this.openContainer = this.inventoryContainer;
     }
 
+    public void func_110430_a(float par1, float par2, boolean par3, boolean par4)
+    {
+        if (this.ridingEntity != null)
+        {
+            if (par1 >= -1.0F && par1 <= 1.0F)
+            {
+                this.moveStrafing = par1;
+            }
+
+            if (par2 >= -1.0F && par2 <= 1.0F)
+            {
+                this.moveForward = par2;
+            }
+
+            this.isJumping = par3;
+            this.setSneaking(par4);
+        }
+    }
+
     /**
      * Adds a value to a statistic field.
      */
@@ -712,12 +749,6 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         {
             if (!par1StatBase.isIndependent)
             {
-                while (par2 > 100)
-                {
-                    this.playerNetServerHandler.sendPacket(new Packet200Statistic(par1StatBase.statId, 100));
-                    par2 -= 100;
-                }
-
                 this.playerNetServerHandler.sendPacket(new Packet200Statistic(par1StatBase.statId, par2));
             }
         }
@@ -742,7 +773,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
      */
     public void setPlayerHealthUpdated()
     {
-        this.lastHealth = -99999999;
+        this.lastHealth = -1.0E8F;
     }
 
     /**
@@ -750,9 +781,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
      */
     public void addChatMessage(String par1Str)
     {
-        StringTranslate var2 = StringTranslate.getInstance();
-        String var3 = var2.translateKey(par1Str);
-        this.playerNetServerHandler.sendPacket(new Packet3Chat(var3));
+        this.playerNetServerHandler.sendPacket(new Packet3Chat(ChatMessageComponent.func_111077_e(par1Str)));
     }
 
     /**
@@ -760,7 +789,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
      */
     protected void onItemUseFinish()
     {
-        this.playerNetServerHandler.sendPacket(new Packet38EntityStatus(this.entityId, (byte)9));
+        this.playerNetServerHandler.sendPacket(new Packet38EntityStatus(this.entityId, (byte) 9));
         super.onItemUseFinish();
     }
 
@@ -785,9 +814,9 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
     {
         super.clonePlayer(par1EntityPlayer, par2);
         this.lastExperience = -1;
-        this.lastHealth = -1;
+        this.lastHealth = -1.0F;
         this.lastFoodLevel = -1;
-        this.destroyedItemsNetCache.addAll(((EntityPlayerMP)par1EntityPlayer).destroyedItemsNetCache);
+        this.destroyedItemsNetCache.addAll(((EntityPlayerMP) par1EntityPlayer).destroyedItemsNetCache);
     }
 
     protected void onNewPotionEffect(PotionEffect par1PotionEffect)
@@ -854,9 +883,9 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         this.playerNetServerHandler.sendPacket(new Packet70GameEvent(3, par1EnumGameType.getID()));
     }
 
-    public void sendChatToPlayer(String par1Str)
+    public void func_110122_a(ChatMessageComponent par1ChatMessageComponent)
     {
-        this.playerNetServerHandler.sendPacket(new Packet3Chat(par1Str));
+        this.playerNetServerHandler.sendPacket(new Packet3Chat(par1ChatMessageComponent));
     }
 
     /**
@@ -864,7 +893,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
      */
     public boolean canCommandSenderUseCommand(int par1, String par2Str)
     {
-        return "seed".equals(par2Str) && !this.mcServer.isDedicatedServer() ? true : (!"tell".equals(par2Str) && !"help".equals(par2Str) && !"me".equals(par2Str) ? this.mcServer.getConfigurationManager().areCommandsAllowed(this.username) : true);
+        return "seed".equals(par2Str) && !this.mcServer.isDedicatedServer() ? true : (!"tell".equals(par2Str) && !"help".equals(par2Str) && !"me".equals(par2Str) ? (this.mcServer.getConfigurationManager().areCommandsAllowed(this.username) ? this.mcServer.func_110455_j() >= par1 : false) : true);
     }
 
     /**
@@ -880,11 +909,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
 
     public void updateClientInfo(Packet204ClientInfo par1Packet204ClientInfo)
     {
-        if (this.translator.getLanguageList().containsKey(par1Packet204ClientInfo.getLanguage()))
-        {
-            this.translator.setLanguage(par1Packet204ClientInfo.getLanguage(), false);
-        }
-
+        this.translator = par1Packet204ClientInfo.getLanguage();
         int var2 = 256 >> par1Packet204ClientInfo.getRenderDistance();
 
         if (var2 > 3 && var2 < 15)
@@ -901,11 +926,6 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         }
 
         this.setHideCape(1, !par1Packet204ClientInfo.getShowCape());
-    }
-
-    public StringTranslate getTranslator()
-    {
-        return this.translator;
     }
 
     public int getChatVisibility()

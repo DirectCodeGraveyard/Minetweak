@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet63WorldParticles extends Packet
@@ -44,33 +44,33 @@ public class Packet63WorldParticles extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.particleName = readString(par1DataInputStream, 64);
-        this.posX = par1DataInputStream.readFloat();
-        this.posY = par1DataInputStream.readFloat();
-        this.posZ = par1DataInputStream.readFloat();
-        this.offsetX = par1DataInputStream.readFloat();
-        this.offsetY = par1DataInputStream.readFloat();
-        this.offsetZ = par1DataInputStream.readFloat();
-        this.speed = par1DataInputStream.readFloat();
-        this.quantity = par1DataInputStream.readInt();
+        this.particleName = readString(par1DataInput, 64);
+        this.posX = par1DataInput.readFloat();
+        this.posY = par1DataInput.readFloat();
+        this.posZ = par1DataInput.readFloat();
+        this.offsetX = par1DataInput.readFloat();
+        this.offsetY = par1DataInput.readFloat();
+        this.offsetZ = par1DataInput.readFloat();
+        this.speed = par1DataInput.readFloat();
+        this.quantity = par1DataInput.readInt();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        writeString(this.particleName, par1DataOutputStream);
-        par1DataOutputStream.writeFloat(this.posX);
-        par1DataOutputStream.writeFloat(this.posY);
-        par1DataOutputStream.writeFloat(this.posZ);
-        par1DataOutputStream.writeFloat(this.offsetX);
-        par1DataOutputStream.writeFloat(this.offsetY);
-        par1DataOutputStream.writeFloat(this.offsetZ);
-        par1DataOutputStream.writeFloat(this.speed);
-        par1DataOutputStream.writeInt(this.quantity);
+        writeString(this.particleName, par1DataOutput);
+        par1DataOutput.writeFloat(this.posX);
+        par1DataOutput.writeFloat(this.posY);
+        par1DataOutput.writeFloat(this.posZ);
+        par1DataOutput.writeFloat(this.offsetX);
+        par1DataOutput.writeFloat(this.offsetY);
+        par1DataOutput.writeFloat(this.offsetZ);
+        par1DataOutput.writeFloat(this.speed);
+        par1DataOutput.writeInt(this.quantity);
     }
 
     /**

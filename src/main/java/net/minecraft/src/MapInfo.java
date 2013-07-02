@@ -30,9 +30,6 @@ public class MapInfo
         this.mapDataObj = par1MapData;
         this.field_76209_b = new int[128];
         this.field_76210_c = new int[128];
-        this.currentRandomNumber = 0;
-        this.ticksUntilPlayerLocationMapUpdate = 0;
-        this.field_82570_i = false;
         this.entityplayerObj = par2EntityPlayer;
 
         for (int var3 = 0; var3 < this.field_76209_b.length; ++var3)

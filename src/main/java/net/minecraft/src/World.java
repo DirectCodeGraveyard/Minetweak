@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.util.*;
 
 public abstract class World implements IBlockAccess
@@ -7,7 +9,7 @@ public abstract class World implements IBlockAccess
     /**
      * boolean; if true updates scheduled by scheduleBlockUpdate happen immediately
      */
-    public boolean scheduledUpdatesAreImmediate = false;
+    public boolean scheduledUpdatesAreImmediate;
 
     /** A list of all Entities in all currently-loaded chunks */
     public List loadedEntityList = new ArrayList();
@@ -28,7 +30,7 @@ public abstract class World implements IBlockAccess
     private long cloudColour = 16777215L;
 
     /** How much light is subtracted from full daylight */
-    public int skylightSubtracted = 0;
+    public int skylightSubtracted;
 
     /**
      * Contains the current Linear Congruential Generator seed for block updates. Used with an A value of 3 and a C
@@ -50,7 +52,7 @@ public abstract class World implements IBlockAccess
      * Set to 2 whenever a lightning bolt is generated in SSP. Decrements if > 0 in updateWeather(). Value appears to be
      * unused.
      */
-    public int lastLightningBolt = 0;
+    public int lastLightningBolt;
 
     /** Whether monsters are enabled or not. (1 = on, 0 = off) */
     public int difficultySetting;
@@ -141,7 +143,6 @@ public abstract class World implements IBlockAccess
     {
         this.ambientTickCountdown = this.rand.nextInt(12000);
         this.lightUpdateBlockList = new int[32768];
-        this.isRemote = false;
         this.saveHandler = par1ISaveHandler;
         this.theProfiler = par5Profiler;
         this.mapStorage = new MapStorage(par1ISaveHandler);
@@ -1508,9 +1509,9 @@ public abstract class World implements IBlockAccess
         return this.provider.calculateCelestialAngle(this.worldInfo.getWorldTime(), par1);
     }
 
-    public int getMoonPhase()
+    public float getMoonPhase()
     {
-        return this.provider.func_76559_b(this.worldInfo.getWorldTime());
+        return WorldProvider.field_111203_a[this.provider.func_76559_b(this.worldInfo.getWorldTime())];
     }
 
     /**
@@ -3203,7 +3204,7 @@ public abstract class World implements IBlockAccess
                 var10 = null;
             }
 
-            return var10 != null && var10.blockMaterial == Material.circuits && var11 == Block.anvil ? true : par1 > 0 && var10 == null && var11.canPlaceBlockAt(this, par2, par3, par4);
+            return var10 != null && var10.blockMaterial == Material.circuits && var11 == Block.anvil ? true : par1 > 0 && var10 == null && var11.canPlaceBlockOnSide(this, par2, par3, par4, par6, par8ItemStack);
         }
     }
 
@@ -3458,7 +3459,7 @@ public abstract class World implements IBlockAccess
     {
         for (int var2 = 0; var2 < this.playerEntities.size(); ++var2)
         {
-            if (par1Str.equals(((EntityPlayer)this.playerEntities.get(var2)).username))
+            if (par1Str.equals(((EntityPlayer)this.playerEntities.get(var2)).getCommandSenderName()))
             {
                 return (EntityPlayer)this.playerEntities.get(var2);
             }
@@ -3787,7 +3788,7 @@ public abstract class World implements IBlockAccess
     {
         if (this.getTotalWorldTime() % 600L == 0L)
         {
-            this.theCalendar.setTimeInMillis(System.currentTimeMillis());
+            this.theCalendar.setTimeInMillis(MinecraftServer.func_130071_aq());
         }
 
         return this.theCalendar;
@@ -3833,5 +3834,30 @@ public abstract class World implements IBlockAccess
     public ILogAgent getWorldLogAgent()
     {
         return this.worldLogAgent;
+    }
+
+    public float func_110746_b(double par1, double par3, double par5)
+    {
+        return this.func_110750_I(MathHelper.floor_double(par1), MathHelper.floor_double(par3), MathHelper.floor_double(par5));
+    }
+
+    public float func_110750_I(int par1, int par2, int par3)
+    {
+        float var4 = 0.0F;
+        boolean var5 = this.difficultySetting == 3;
+
+        if (this.blockExists(par1, par2, par3))
+        {
+            float var6 = this.getMoonPhase();
+            var4 += MathHelper.func_76131_a((float)this.getChunkFromBlockCoords(par1, par3).field_111204_q / 3600000.0F, 0.0F, 1.0F) * (var5 ? 1.0F : 0.75F);
+            var4 += var6 * 0.25F;
+        }
+
+        if (this.difficultySetting < 2)
+        {
+            var4 *= (float)this.difficultySetting / 2.0F;
+        }
+
+        return MathHelper.func_76131_a(var4, 0.0F, var5 ? 1.5F : 1.0F);
     }
 }

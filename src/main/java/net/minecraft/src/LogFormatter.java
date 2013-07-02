@@ -43,7 +43,7 @@ class LogFormatter extends Formatter
         return var2.toString();
     }
 
-    LogFormatter(LogAgent par1LogAgent, LogAgentINNER1 par2LogAgentINNER1)
+    LogFormatter(LogAgent par1LogAgent, LogAgentEmptyAnon par2LogAgentEmptyAnon)
     {
         this(par1LogAgent);
     }

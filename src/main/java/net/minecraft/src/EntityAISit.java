@@ -5,7 +5,7 @@ public class EntityAISit extends EntityAIBase
     private EntityTameable theEntity;
 
     /** If the EntityTameable is sitting. */
-    private boolean isSitting = false;
+    private boolean isSitting;
 
     public EntityAISit(EntityTameable par1EntityTameable)
     {
@@ -32,7 +32,7 @@ public class EntityAISit extends EntityAIBase
         }
         else
         {
-            EntityLiving var1 = this.theEntity.getOwner();
+            EntityLivingBase var1 = this.theEntity.func_130012_q();
             return var1 == null ? true : (this.theEntity.getDistanceSqToEntity(var1) < 144.0D && var1.getAITarget() != null ? false : this.isSitting);
         }
     }

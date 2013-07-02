@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet9Respawn extends Packet
@@ -40,13 +40,13 @@ public class Packet9Respawn extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.respawnDimension = par1DataInputStream.readInt();
-        this.difficulty = par1DataInputStream.readByte();
-        this.gameType = EnumGameType.getByID(par1DataInputStream.readByte());
-        this.worldHeight = par1DataInputStream.readShort();
-        String var2 = readString(par1DataInputStream, 16);
+        this.respawnDimension = par1DataInput.readInt();
+        this.difficulty = par1DataInput.readByte();
+        this.gameType = EnumGameType.getByID(par1DataInput.readByte());
+        this.worldHeight = par1DataInput.readShort();
+        String var2 = readString(par1DataInput, 16);
         this.terrainType = WorldType.parseWorldType(var2);
 
         if (this.terrainType == null)
@@ -58,13 +58,13 @@ public class Packet9Respawn extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.respawnDimension);
-        par1DataOutputStream.writeByte(this.difficulty);
-        par1DataOutputStream.writeByte(this.gameType.getID());
-        par1DataOutputStream.writeShort(this.worldHeight);
-        writeString(this.terrainType.getWorldTypeName(), par1DataOutputStream);
+        par1DataOutput.writeInt(this.respawnDimension);
+        par1DataOutput.writeByte(this.difficulty);
+        par1DataOutput.writeByte(this.gameType.getID());
+        par1DataOutput.writeShort(this.worldHeight);
+        writeString(this.terrainType.getWorldTypeName(), par1DataOutput);
     }
 
     /**

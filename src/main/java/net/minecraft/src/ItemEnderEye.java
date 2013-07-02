@@ -26,6 +26,7 @@ public class ItemEnderEye extends Item
             else
             {
                 par3World.setBlockMetadata(par4, par5, par6, var12 + 4, 2);
+                par3World.func_96440_m(par4, par5, par6, Block.endPortalFrame.blockID);
                 --par1ItemStack.stackSize;
                 int var13;
 

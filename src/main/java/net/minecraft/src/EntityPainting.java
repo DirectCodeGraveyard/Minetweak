@@ -84,11 +84,18 @@ public class EntityPainting extends EntityHanging
         return this.art.sizeY;
     }
 
-    /**
-     * Drop the item currently on this item frame.
-     */
-    public void dropItemStack()
+    public void func_110128_b(Entity par1Entity)
     {
+        if (par1Entity instanceof EntityPlayer)
+        {
+            EntityPlayer var2 = (EntityPlayer)par1Entity;
+
+            if (var2.capabilities.isCreativeMode)
+            {
+                return;
+            }
+        }
+
         this.entityDropItem(new ItemStack(Item.painting), 0.0F);
     }
 }

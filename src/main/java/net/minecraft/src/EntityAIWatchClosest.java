@@ -40,6 +40,11 @@ public class EntityAIWatchClosest extends EntityAIBase
         }
         else
         {
+            if (this.theWatcher.getAttackTarget() != null)
+            {
+                this.closestEntity = this.theWatcher.getAttackTarget();
+            }
+
             if (this.watchedClass == EntityPlayer.class)
             {
                 this.closestEntity = this.theWatcher.worldObj.getClosestPlayerToEntity(this.theWatcher, (double)this.field_75333_c);

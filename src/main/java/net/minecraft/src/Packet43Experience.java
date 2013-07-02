@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet43Experience extends Packet
@@ -27,21 +27,21 @@ public class Packet43Experience extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.experience = par1DataInputStream.readFloat();
-        this.experienceLevel = par1DataInputStream.readShort();
-        this.experienceTotal = par1DataInputStream.readShort();
+        this.experience = par1DataInput.readFloat();
+        this.experienceLevel = par1DataInput.readShort();
+        this.experienceTotal = par1DataInput.readShort();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeFloat(this.experience);
-        par1DataOutputStream.writeShort(this.experienceLevel);
-        par1DataOutputStream.writeShort(this.experienceTotal);
+        par1DataOutput.writeFloat(this.experience);
+        par1DataOutput.writeShort(this.experienceLevel);
+        par1DataOutput.writeShort(this.experienceTotal);
     }
 
     /**

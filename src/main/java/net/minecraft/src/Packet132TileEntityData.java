@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet132TileEntityData extends Packet
@@ -39,25 +39,25 @@ public class Packet132TileEntityData extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.xPosition = par1DataInputStream.readInt();
-        this.yPosition = par1DataInputStream.readShort();
-        this.zPosition = par1DataInputStream.readInt();
-        this.actionType = par1DataInputStream.readByte();
-        this.customParam1 = readNBTTagCompound(par1DataInputStream);
+        this.xPosition = par1DataInput.readInt();
+        this.yPosition = par1DataInput.readShort();
+        this.zPosition = par1DataInput.readInt();
+        this.actionType = par1DataInput.readByte();
+        this.customParam1 = readNBTTagCompound(par1DataInput);
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.xPosition);
-        par1DataOutputStream.writeShort(this.yPosition);
-        par1DataOutputStream.writeInt(this.zPosition);
-        par1DataOutputStream.writeByte((byte)this.actionType);
-        writeNBTTagCompound(this.customParam1, par1DataOutputStream);
+        par1DataOutput.writeInt(this.xPosition);
+        par1DataOutput.writeShort(this.yPosition);
+        par1DataOutput.writeInt(this.zPosition);
+        par1DataOutput.writeByte((byte)this.actionType);
+        writeNBTTagCompound(this.customParam1, par1DataOutput);
     }
 
     /**

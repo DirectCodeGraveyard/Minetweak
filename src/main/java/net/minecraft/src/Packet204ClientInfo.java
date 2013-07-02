@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet204ClientInfo extends Packet
@@ -16,27 +16,27 @@ public class Packet204ClientInfo extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.language = readString(par1DataInputStream, 7);
-        this.renderDistance = par1DataInputStream.readByte();
-        byte var2 = par1DataInputStream.readByte();
+        this.language = readString(par1DataInput, 7);
+        this.renderDistance = par1DataInput.readByte();
+        byte var2 = par1DataInput.readByte();
         this.chatVisisble = var2 & 7;
         this.chatColours = (var2 & 8) == 8;
-        this.gameDifficulty = par1DataInputStream.readByte();
-        this.showCape = par1DataInputStream.readBoolean();
+        this.gameDifficulty = par1DataInput.readByte();
+        this.showCape = par1DataInput.readBoolean();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        writeString(this.language, par1DataOutputStream);
-        par1DataOutputStream.writeByte(this.renderDistance);
-        par1DataOutputStream.writeByte(this.chatVisisble | (this.chatColours ? 1 : 0) << 3);
-        par1DataOutputStream.writeByte(this.gameDifficulty);
-        par1DataOutputStream.writeBoolean(this.showCape);
+        writeString(this.language, par1DataOutput);
+        par1DataOutput.writeByte(this.renderDistance);
+        par1DataOutput.writeByte(this.chatVisisble | (this.chatColours ? 1 : 0) << 3);
+        par1DataOutput.writeByte(this.gameDifficulty);
+        par1DataOutput.writeBoolean(this.showCape);
     }
 
     /**

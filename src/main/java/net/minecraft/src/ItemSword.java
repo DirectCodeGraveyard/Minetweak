@@ -1,8 +1,10 @@
 package net.minecraft.src;
 
+import com.google.common.collect.Multimap;
+
 public class ItemSword extends Item
 {
-    private int weaponDamage;
+    private float weaponDamage;
     private final EnumToolMaterial toolMaterial;
 
     public ItemSword(int par1, EnumToolMaterial par2EnumToolMaterial)
@@ -12,10 +14,10 @@ public class ItemSword extends Item
         this.maxStackSize = 1;
         this.setMaxDamage(par2EnumToolMaterial.getMaxUses());
         this.setCreativeTab(CreativeTabs.tabCombat);
-        this.weaponDamage = 4 + par2EnumToolMaterial.getDamageVsEntity();
+        this.weaponDamage = 4.0F + par2EnumToolMaterial.getDamageVsEntity();
     }
 
-    public int func_82803_g()
+    public float func_82803_g()
     {
         return this.toolMaterial.getDamageVsEntity();
     }
@@ -41,28 +43,20 @@ public class ItemSword extends Item
      * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
      * the damage on the stack.
      */
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
     {
-        par1ItemStack.damageItem(1, par3EntityLiving);
+        par1ItemStack.damageItem(1, par3EntityLivingBase);
         return true;
     }
 
-    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLiving par7EntityLiving)
+    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLivingBase par7EntityLivingBase)
     {
-        if ((double)Block.blocksList[par3].getBlockHardness() != 0.0D)
+        if ((double)Block.blocksList[par3].getBlockHardness(par2World, par4, par5, par6) != 0.0D)
         {
-            par1ItemStack.damageItem(2, par7EntityLiving);
+            par1ItemStack.damageItem(2, par7EntityLivingBase);
         }
 
         return true;
-    }
-
-    /**
-     * Returns the damage against a given entity.
-     */
-    public int getDamageVsEntity(Entity par1Entity)
-    {
-        return this.weaponDamage;
     }
 
     /**
@@ -120,5 +114,12 @@ public class ItemSword extends Item
     public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
     {
         return this.toolMaterial.getToolCraftingMaterial() == par2ItemStack.itemID ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
+    }
+
+    public Multimap func_111205_h()
+    {
+        Multimap var1 = super.func_111205_h();
+        var1.put(SharedMonsterAttributes.field_111264_e.func_111108_a(), new AttributeModifier(field_111210_e, "Weapon modifier", (double)this.weaponDamage, 0));
+        return var1;
     }
 }

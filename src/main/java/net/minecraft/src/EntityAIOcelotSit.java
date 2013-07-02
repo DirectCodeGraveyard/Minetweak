@@ -3,25 +3,25 @@ package net.minecraft.src;
 public class EntityAIOcelotSit extends EntityAIBase
 {
     private final EntityOcelot theOcelot;
-    private final float field_75404_b;
+    private final double field_75404_b;
 
     /** Tracks for how long the task has been executing */
-    private int currentTick = 0;
-    private int field_75402_d = 0;
+    private int currentTick;
+    private int field_75402_d;
 
     /** For how long the Ocelot should be sitting */
-    private int maxSittingTicks = 0;
+    private int maxSittingTicks;
 
     /** X Coordinate of a nearby sitable block */
-    private int sitableBlockX = 0;
+    private int sitableBlockX;
 
     /** Y Coordinate of a nearby sitable block */
-    private int sitableBlockY = 0;
+    private int sitableBlockY;
 
     /** Z Coordinate of a nearby sitable block */
-    private int sitableBlockZ = 0;
+    private int sitableBlockZ;
 
-    public EntityAIOcelotSit(EntityOcelot par1EntityOcelot, float par2)
+    public EntityAIOcelotSit(EntityOcelot par1EntityOcelot, double par2)
     {
         this.theOcelot = par1EntityOcelot;
         this.field_75404_b = par2;

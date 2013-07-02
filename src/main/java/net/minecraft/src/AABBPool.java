@@ -16,18 +16,18 @@ public class AABBPool
     private final int numEntriesToRemove;
 
     /** List of AABB stored in this Pool */
-    private final List<AxisAlignedBB> listAABB = new ArrayList<AxisAlignedBB>();
+    private final List listAABB = new ArrayList();
 
     /** Next index to use when adding a Pool Entry. */
-    private int nextPoolIndex = 0;
+    private int nextPoolIndex;
 
     /**
      * Largest index reached by this Pool (can be reset to 0 upon calling cleanPool)
      */
-    private int maxPoolIndex = 0;
+    private int maxPoolIndex;
 
     /** Number of times this Pool has been cleaned */
-    private int numCleans = 0;
+    private int numCleans;
 
     public AABBPool(int par1, int par2)
     {
@@ -50,7 +50,7 @@ public class AABBPool
         }
         else
         {
-            var13 = this.listAABB.get(this.nextPoolIndex);
+            var13 = (AxisAlignedBB)this.listAABB.get(this.nextPoolIndex);
             var13.setBounds(par1, par3, par5, par7, par9, par11);
         }
 

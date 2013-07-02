@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-public abstract class EntityTameable extends EntityAnimal
+public abstract class EntityTameable extends EntityAnimal implements EntityOwnable
 {
     protected EntityAISit aiSit = new EntityAISit(this);
 
@@ -122,7 +122,7 @@ public abstract class EntityTameable extends EntityAnimal
         this.dataWatcher.updateObject(17, par1Str);
     }
 
-    public EntityLiving getOwner()
+    public EntityLivingBase func_130012_q()
     {
         return this.worldObj.getPlayerEntityByName(this.getOwnerName());
     }
@@ -130,5 +130,10 @@ public abstract class EntityTameable extends EntityAnimal
     public EntityAISit func_70907_r()
     {
         return this.aiSit;
+    }
+
+    public Entity getOwner()
+    {
+        return this.func_130012_q();
     }
 }

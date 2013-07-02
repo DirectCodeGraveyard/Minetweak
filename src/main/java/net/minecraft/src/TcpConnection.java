@@ -1,10 +1,9 @@
 package net.minecraft.src;
 
-import java.io.BufferedOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import net.minecraft.server.MinecraftServer;
+
+import javax.crypto.SecretKey;
+import java.io.*;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.SocketException;
@@ -14,7 +13,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import javax.crypto.SecretKey;
 
 public class TcpConnection implements INetworkManager
 {
@@ -43,7 +41,7 @@ public class TcpConnection implements INetworkManager
     /**
      * Whether this network manager is currently terminating (and should ignore further errors).
      */
-    private volatile boolean isTerminating = false;
+    private volatile boolean isTerminating;
 
     /**
      * Linked list of packets that have been read and are awaiting processing.
@@ -62,7 +60,7 @@ public class TcpConnection implements INetworkManager
     /**
      * Whether this server is currently terminating. If this is a client, this is always false.
      */
-    private boolean isServerTerminating = false;
+    private boolean isServerTerminating;
 
     /** The thread used for writing. */
     private Thread writeThread;
@@ -73,19 +71,19 @@ public class TcpConnection implements INetworkManager
     /** A String indicating why the network has shutdown. */
     private String terminationReason = "";
     private Object[] field_74480_w;
-    private int field_74490_x = 0;
+    private int field_74490_x;
 
     /**
      * The length in bytes of the packets in both send queues (data and chunkData).
      */
-    private int sendQueueByteLength = 0;
+    private int sendQueueByteLength;
     public static int[] field_74470_c = new int[256];
     public static int[] field_74467_d = new int[256];
-    public int field_74468_e = 0;
-    boolean isInputBeingDecrypted = false;
-    boolean isOutputEncrypted = false;
-    private SecretKey sharedKeyForEncryption = null;
-    private PrivateKey field_74463_A = null;
+    public int field_74468_e;
+    boolean isInputBeingDecrypted;
+    boolean isOutputEncrypted;
+    private SecretKey sharedKeyForEncryption;
+    private PrivateKey field_74463_A;
 
     /**
      * Delay for sending pending chunk data packets (as opposed to pending non-chunk data packets)
@@ -157,7 +155,7 @@ public class TcpConnection implements INetworkManager
             int var10001;
             int[] var10000;
 
-            if (this.field_74468_e == 0 || !this.dataPackets.isEmpty() && System.currentTimeMillis() - ((Packet)this.dataPackets.get(0)).creationTimeMillis >= (long)this.field_74468_e)
+            if (this.field_74468_e == 0 || !this.dataPackets.isEmpty() && MinecraftServer.func_130071_aq() - ((Packet)this.dataPackets.get(0)).creationTimeMillis >= (long)this.field_74468_e)
             {
                 var2 = this.func_74460_a(false);
 
@@ -182,7 +180,7 @@ public class TcpConnection implements INetworkManager
                 }
             }
 
-            if (this.chunkDataPacketsDelay-- <= 0 && (this.field_74468_e == 0 || !this.chunkDataPackets.isEmpty() && System.currentTimeMillis() - ((Packet)this.chunkDataPackets.get(0)).creationTimeMillis >= (long)this.field_74468_e))
+            if (this.chunkDataPacketsDelay-- <= 0 && (this.field_74468_e == 0 || !this.chunkDataPackets.isEmpty() && MinecraftServer.func_130071_aq() - ((Packet)this.chunkDataPackets.get(0)).creationTimeMillis >= (long)this.field_74468_e))
             {
                 var2 = this.func_74460_a(true);
 

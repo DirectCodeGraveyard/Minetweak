@@ -1,12 +1,8 @@
 package net.minecraft.src;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
-public class EntityVillager extends EntityAgeable implements INpc, IMerchant
+public class EntityVillager extends EntityAgeable implements IMerchant, INpc
 {
     private int randomTickDivider;
     private boolean isMating;
@@ -43,31 +39,31 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
     public EntityVillager(World par1World, int par2)
     {
         super(par1World);
-        this.randomTickDivider = 0;
-        this.isMating = false;
-        this.isPlaying = false;
-        this.villageObj = null;
         this.setProfession(par2);
-        this.texture = "/mob/villager/villager.png";
-        this.moveSpeed = 0.5F;
         this.setSize(0.6F, 1.8F);
         this.getNavigator().setBreakDoors(true);
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8.0F, 0.3F, 0.35F));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8.0F, 0.6D, 0.6D));
         this.tasks.addTask(1, new EntityAITradePlayer(this));
         this.tasks.addTask(1, new EntityAILookAtTradePlayer(this));
         this.tasks.addTask(2, new EntityAIMoveIndoors(this));
         this.tasks.addTask(3, new EntityAIRestrictOpenDoor(this));
         this.tasks.addTask(4, new EntityAIOpenDoor(this, true));
-        this.tasks.addTask(5, new EntityAIMoveTwardsRestriction(this, 0.3F));
+        this.tasks.addTask(5, new EntityAIMoveTwardsRestriction(this, 0.6D));
         this.tasks.addTask(6, new EntityAIVillagerMate(this));
         this.tasks.addTask(7, new EntityAIFollowGolem(this));
-        this.tasks.addTask(8, new EntityAIPlay(this, 0.32F));
+        this.tasks.addTask(8, new EntityAIPlay(this, 0.32D));
         this.tasks.addTask(9, new EntityAIWatchClosest2(this, EntityPlayer.class, 3.0F, 1.0F));
         this.tasks.addTask(9, new EntityAIWatchClosest2(this, EntityVillager.class, 5.0F, 0.02F));
-        this.tasks.addTask(9, new EntityAIWander(this, 0.3F));
+        this.tasks.addTask(9, new EntityAIWander(this, 0.6D));
         this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
+    }
+
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.5D);
     }
 
     /**
@@ -91,12 +87,12 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
 
             if (this.villageObj == null)
             {
-                this.detachHome();
+                this.func_110177_bN();
             }
             else
             {
                 ChunkCoordinates var1 = this.villageObj.getCenter();
-                this.setHomeArea(var1.posX, var1.posY, var1.posZ, (int)((float)this.villageObj.getVillageRadius() * 0.6F));
+                this.func_110171_b(var1.posX, var1.posY, var1.posZ, (int)((float)this.villageObj.getVillageRadius() * 0.6F));
 
                 if (this.field_82190_bM)
                 {
@@ -176,11 +172,6 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
         this.dataWatcher.addObject(16, Integer.valueOf(0));
     }
 
-    public int getMaxHealth()
-    {
-        return 20;
-    }
-
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
@@ -225,7 +216,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
      */
     protected String getLivingSound()
     {
-        return "mob.villager.default";
+        return this.isTrading() ? "mob.villager.haggle" : "mob.villager.idle";
     }
 
     /**
@@ -233,7 +224,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
      */
     protected String getHurtSound()
     {
-        return "mob.villager.defaulthurt";
+        return "mob.villager.hit";
     }
 
     /**
@@ -241,7 +232,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
      */
     protected String getDeathSound()
     {
-        return "mob.villager.defaultdeath";
+        return "mob.villager.death";
     }
 
     public void setProfession(int par1)
@@ -274,15 +265,15 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
         return this.isPlaying;
     }
 
-    public void setRevengeTarget(EntityLiving par1EntityLiving)
+    public void setRevengeTarget(EntityLivingBase par1EntityLivingBase)
     {
-        super.setRevengeTarget(par1EntityLiving);
+        super.setRevengeTarget(par1EntityLivingBase);
 
-        if (this.villageObj != null && par1EntityLiving != null)
+        if (this.villageObj != null && par1EntityLivingBase != null)
         {
-            this.villageObj.addOrRenewAgressor(par1EntityLiving);
+            this.villageObj.addOrRenewAgressor(par1EntityLivingBase);
 
-            if (par1EntityLiving instanceof EntityPlayer)
+            if (par1EntityLivingBase instanceof EntityPlayer)
             {
                 byte var2 = -1;
 
@@ -291,7 +282,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
                     var2 = -3;
                 }
 
-                this.villageObj.setReputationForPlayer(((EntityPlayer)par1EntityLiving).getCommandSenderName(), var2);
+                this.villageObj.setReputationForPlayer(((EntityPlayer)par1EntityLivingBase).getCommandSenderName(), var2);
 
                 if (this.isEntityAlive())
                 {
@@ -353,6 +344,8 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
     public void useRecipe(MerchantRecipe par1MerchantRecipe)
     {
         par1MerchantRecipe.incrementToolUses();
+        this.livingSoundTime = -this.getTalkInterval();
+        this.playSound("mob.villager.yes", this.getSoundVolume(), this.getSoundPitch());
 
         if (par1MerchantRecipe.hasSameIDsAs((MerchantRecipe)this.buyingList.get(this.buyingList.size() - 1)))
         {
@@ -372,6 +365,23 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
         if (par1MerchantRecipe.getItemToBuy().itemID == Item.emerald.itemID)
         {
             this.wealth += par1MerchantRecipe.getItemToBuy().stackSize;
+        }
+    }
+
+    public void func_110297_a_(ItemStack par1ItemStack)
+    {
+        if (!this.worldObj.isRemote && this.livingSoundTime > -this.getTalkInterval() + 20)
+        {
+            this.livingSoundTime = -this.getTalkInterval();
+
+            if (par1ItemStack != null)
+            {
+                this.playSound("mob.villager.yes", this.getSoundVolume(), this.getSoundPitch());
+            }
+            else
+            {
+                this.playSound("mob.villager.no", this.getSoundVolume(), this.getSoundPitch());
+            }
         }
     }
 
@@ -433,6 +443,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
                 }
 
                 break;
+
             case 1:
                 addMerchantItem(var2, Item.paper.itemID, this.rand, this.func_82188_j(0.8F));
                 addMerchantItem(var2, Item.book.itemID, this.rand, this.func_82188_j(0.8F));
@@ -452,6 +463,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
                 }
 
                 break;
+
             case 2:
                 addBlacksmithItem(var2, Item.eyeOfEnder.itemID, this.rand, this.func_82188_j(0.3F));
                 addBlacksmithItem(var2, Item.expBottle.itemID, this.rand, this.func_82188_j(0.2F));
@@ -507,6 +519,7 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
                 addBlacksmithItem(var2, Item.plateChain.itemID, this.rand, this.func_82188_j(0.1F));
                 addBlacksmithItem(var2, Item.legsChain.itemID, this.rand, this.func_82188_j(0.1F));
                 break;
+
             case 4:
                 addMerchantItem(var2, Item.coal.itemID, this.rand, this.func_82188_j(0.7F));
                 addMerchantItem(var2, Item.porkRaw.itemID, this.rand, this.func_82188_j(0.5F));
@@ -592,12 +605,11 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
         return var2 == null ? 1 : (((Integer)var2.getFirst()).intValue() >= ((Integer)var2.getSecond()).intValue() ? ((Integer)var2.getFirst()).intValue() : ((Integer)var2.getFirst()).intValue() + par1Random.nextInt(((Integer)var2.getSecond()).intValue() - ((Integer)var2.getFirst()).intValue()));
     }
 
-    /**
-     * Initialize this creature.
-     */
-    public void initCreature()
+    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData)
     {
+        par1EntityLivingData = super.func_110161_a(par1EntityLivingData);
         this.setProfession(this.worldObj.rand.nextInt(5));
+        return par1EntityLivingData;
     }
 
     public void func_82187_q()
@@ -608,8 +620,13 @@ public class EntityVillager extends EntityAgeable implements INpc, IMerchant
     public EntityVillager func_90012_b(EntityAgeable par1EntityAgeable)
     {
         EntityVillager var2 = new EntityVillager(this.worldObj);
-        var2.initCreature();
+        var2.func_110161_a((EntityLivingData)null);
         return var2;
+    }
+
+    public boolean func_110164_bC()
+    {
+        return false;
     }
 
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable)

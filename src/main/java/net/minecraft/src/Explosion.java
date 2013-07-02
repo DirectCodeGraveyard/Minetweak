@@ -1,17 +1,11 @@
 package net.minecraft.src;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class Explosion
 {
     /** whether or not the explosion sets fire to blocks around it */
-    public boolean isFlaming = false;
+    public boolean isFlaming;
 
     /** whether or not this explosion spawns smoke particles */
     public boolean isSmoking = true;
@@ -130,7 +124,7 @@ public class Explosion
                     var19 /= var34;
                     double var33 = (double)this.worldObj.getBlockDensity(var31, var32.boundingBox);
                     double var35 = (1.0D - var13) * var33;
-                    var32.attackEntityFrom(DamageSource.setExplosionSource(this), (int)((var35 * var35 + var35) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D));
+                    var32.attackEntityFrom(DamageSource.setExplosionSource(this), (float)((int)((var35 * var35 + var35) / 2.0D * 8.0D * (double)this.explosionSize + 1.0D)));
                     double var36 = EnchantmentProtection.func_92092_a(var32, var35);
                     var32.motionX += var15 * var36;
                     var32.motionY += var17 * var36;
@@ -244,8 +238,8 @@ public class Explosion
         return this.field_77288_k;
     }
 
-    public EntityLiving func_94613_c()
+    public EntityLivingBase func_94613_c()
     {
-        return this.exploder == null ? null : (this.exploder instanceof EntityTNTPrimed ? ((EntityTNTPrimed)this.exploder).getTntPlacedBy() : (this.exploder instanceof EntityLiving ? (EntityLiving)this.exploder : null));
+        return this.exploder == null ? null : (this.exploder instanceof EntityTNTPrimed ? ((EntityTNTPrimed)this.exploder).getTntPlacedBy() : (this.exploder instanceof EntityLivingBase ? (EntityLivingBase)this.exploder : null));
     }
 }

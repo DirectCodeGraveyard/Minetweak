@@ -44,14 +44,21 @@ public class NBTTagCompound extends NBTBase
     /**
      * Read the actual data contents of the tag, implemented in NBT extension classes
      */
-    void load(DataInput par1DataInput) throws IOException
+    void load(DataInput par1DataInput, int par2) throws IOException
     {
-        this.tagMap.clear();
-        NBTBase var2;
-
-        while ((var2 = NBTBase.readNamedTag(par1DataInput)).getId() != 0)
+        if (par2 > 512)
         {
-            this.tagMap.put(var2.getName(), var2);
+            throw new RuntimeException("Tried to read NBT tag with too high complexity, depth > 512");
+        }
+        else
+        {
+            this.tagMap.clear();
+            NBTBase var3;
+
+            while ((var3 = NBTBase.func_130104_b(par1DataInput, par2 + 1)).getId() != 0)
+            {
+                this.tagMap.put(var3.getName(), var3);
+            }
         }
     }
 

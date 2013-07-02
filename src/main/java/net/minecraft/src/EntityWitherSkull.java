@@ -8,9 +8,9 @@ public class EntityWitherSkull extends EntityFireball
         this.setSize(0.3125F, 0.3125F);
     }
 
-    public EntityWitherSkull(World par1World, EntityLiving par2EntityLiving, double par3, double par5, double par7)
+    public EntityWitherSkull(World par1World, EntityLivingBase par2EntityLivingBase, double par3, double par5, double par7)
     {
-        super(par1World, par2EntityLiving, par3, par5, par7);
+        super(par1World, par2EntityLivingBase, par3, par5, par7);
         this.setSize(0.3125F, 0.3125F);
     }
 
@@ -53,17 +53,17 @@ public class EntityWitherSkull extends EntityFireball
             {
                 if (this.shootingEntity != null)
                 {
-                    if (par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeMobDamage(this.shootingEntity), 8) && !par1MovingObjectPosition.entityHit.isEntityAlive())
+                    if (par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeMobDamage(this.shootingEntity), 8.0F) && !par1MovingObjectPosition.entityHit.isEntityAlive())
                     {
-                        this.shootingEntity.heal(5);
+                        this.shootingEntity.heal(5.0F);
                     }
                 }
                 else
                 {
-                    par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.magic, 5);
+                    par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.magic, 5.0F);
                 }
 
-                if (par1MovingObjectPosition.entityHit instanceof EntityLiving)
+                if (par1MovingObjectPosition.entityHit instanceof EntityLivingBase)
                 {
                     byte var2 = 0;
 
@@ -81,7 +81,7 @@ public class EntityWitherSkull extends EntityFireball
 
                     if (var2 > 0)
                     {
-                        ((EntityLiving)par1MovingObjectPosition.entityHit).addPotionEffect(new PotionEffect(Potion.wither.id, 20 * var2, 1));
+                        ((EntityLivingBase)par1MovingObjectPosition.entityHit).addPotionEffect(new PotionEffect(Potion.wither.id, 20 * var2, 1));
                     }
                 }
             }
@@ -102,7 +102,7 @@ public class EntityWitherSkull extends EntityFireball
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         return false;
     }

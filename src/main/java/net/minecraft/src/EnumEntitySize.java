@@ -16,7 +16,6 @@ public enum EnumEntitySize
         switch (EnumEntitySizeHelper.field_96565_a[this.ordinal()])
         {
             case 1:
-
                 if (var3 < 0.0D)
                 {
                     if (var3 < -0.3125D)
@@ -30,8 +29,8 @@ public enum EnumEntitySize
                 }
 
                 return MathHelper.floor_double(par1 * 32.0D);
-            case 2:
 
+            case 2:
                 if (var3 < 0.0D)
                 {
                     if (var3 < -0.3125D)
@@ -45,16 +44,16 @@ public enum EnumEntitySize
                 }
 
                 return MathHelper.ceiling_double_int(par1 * 32.0D);
-            case 3:
 
+            case 3:
                 if (var3 > 0.0D)
                 {
                     return MathHelper.floor_double(par1 * 32.0D);
                 }
 
                 return MathHelper.ceiling_double_int(par1 * 32.0D);
-            case 4:
 
+            case 4:
                 if (var3 < 0.0D)
                 {
                     if (var3 < -0.1875D)
@@ -68,8 +67,8 @@ public enum EnumEntitySize
                 }
 
                 return MathHelper.floor_double(par1 * 32.0D);
-            case 5:
 
+            case 5:
                 if (var3 < 0.0D)
                 {
                     if (var3 < -0.1875D)
@@ -83,9 +82,9 @@ public enum EnumEntitySize
                 }
 
                 return MathHelper.ceiling_double_int(par1 * 32.0D);
+
             case 6:
             default:
-
                 if (var3 > 0.0D)
                 {
                     return MathHelper.ceiling_double_int(par1 * 32.0D);

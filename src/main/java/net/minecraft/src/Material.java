@@ -21,6 +21,7 @@ public class Material
     public static final Material fire = (new MaterialTransparent(MapColor.airColor)).setNoPushMobility();
     public static final Material sand = new Material(MapColor.sandColor);
     public static final Material circuits = (new MaterialLogic(MapColor.airColor)).setNoPushMobility();
+    public static final Material field_111018_r = (new MaterialLogic(MapColor.clothColor)).setBurning();
     public static final Material glass = (new Material(MapColor.airColor)).setTranslucent().setAlwaysHarvested();
     public static final Material redstoneLight = (new Material(MapColor.airColor)).setAlwaysHarvested();
     public static final Material tnt = (new Material(MapColor.tntColor)).setBurning().setTranslucent();

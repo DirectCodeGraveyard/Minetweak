@@ -2,15 +2,15 @@ package net.minecraft.src;
 
 class VillageAgressor
 {
-    public EntityLiving agressor;
+    public EntityLivingBase agressor;
     public int agressionTime;
 
     final Village villageObj;
 
-    VillageAgressor(Village par1Village, EntityLiving par2EntityLiving, int par3)
+    VillageAgressor(Village par1Village, EntityLivingBase par2EntityLivingBase, int par3)
     {
         this.villageObj = par1Village;
-        this.agressor = par2EntityLiving;
+        this.agressor = par2EntityLivingBase;
         this.agressionTime = par3;
     }
 }

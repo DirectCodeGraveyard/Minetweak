@@ -51,7 +51,7 @@ public abstract class EntityMob extends EntityCreature implements IMob
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -83,24 +83,13 @@ public abstract class EntityMob extends EntityCreature implements IMob
 
     public boolean attackEntityAsMob(Entity par1Entity)
     {
-        int var2 = this.getAttackStrength(par1Entity);
-
-        if (this.isPotionActive(Potion.damageBoost))
-        {
-            var2 += 3 << this.getActivePotionEffect(Potion.damageBoost).getAmplifier();
-        }
-
-        if (this.isPotionActive(Potion.weakness))
-        {
-            var2 -= 2 << this.getActivePotionEffect(Potion.weakness).getAmplifier();
-        }
-
+        float var2 = (float)this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111126_e();
         int var3 = 0;
 
-        if (par1Entity instanceof EntityLiving)
+        if (par1Entity instanceof EntityLivingBase)
         {
-            var2 += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLiving)par1Entity);
-            var3 += EnchantmentHelper.getKnockbackModifier(this, (EntityLiving)par1Entity);
+            var2 += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase)par1Entity);
+            var3 += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase)par1Entity);
         }
 
         boolean var4 = par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
@@ -121,9 +110,9 @@ public abstract class EntityMob extends EntityCreature implements IMob
                 par1Entity.setFire(var5 * 4);
             }
 
-            if (par1Entity instanceof EntityLiving)
+            if (par1Entity instanceof EntityLivingBase)
             {
-                EnchantmentThorns.func_92096_a(this, (EntityLiving)par1Entity, this.rand);
+                EnchantmentThorns.func_92096_a(this, (EntityLivingBase)par1Entity, this.rand);
             }
         }
 
@@ -185,14 +174,12 @@ public abstract class EntityMob extends EntityCreature implements IMob
      */
     public boolean getCanSpawnHere()
     {
-        return this.isValidLightLevel() && super.getCanSpawnHere();
+        return this.worldObj.difficultySetting > 0 && this.isValidLightLevel() && super.getCanSpawnHere();
     }
 
-    /**
-     * Returns the amount of damage a mob should deal.
-     */
-    public int getAttackStrength(Entity par1Entity)
+    protected void func_110147_ax()
     {
-        return 2;
+        super.func_110147_ax();
+        this.func_110140_aT().func_111150_b(SharedMonsterAttributes.field_111264_e);
     }
 }

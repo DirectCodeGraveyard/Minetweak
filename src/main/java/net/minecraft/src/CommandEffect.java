@@ -1,7 +1,8 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.List;
 
 public class CommandEffect extends CommandBase
 {
@@ -20,21 +21,41 @@ public class CommandEffect extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.effect.usage", new Object[0]);
+        return "commands.effect.usage";
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
     {
-        if (par2ArrayOfStr.length >= 2)
+        if (par2ArrayOfStr.length < 2)
+        {
+            throw new WrongUsageException("commands.effect.usage", new Object[0]);
+        }
+        else
         {
             EntityPlayerMP var3 = func_82359_c(par1ICommandSender, par2ArrayOfStr[0]);
-            int var4 = parseIntWithMin(par1ICommandSender, par2ArrayOfStr[1], 1);
-            int var5 = 600;
-            int var6 = 30;
-            int var7 = 0;
 
-            if (var4 >= 0 && var4 < Potion.potionTypes.length && Potion.potionTypes[var4] != null)
+            if (par2ArrayOfStr[1].equals("clear"))
             {
+                if (var3.getActivePotionEffects().isEmpty())
+                {
+                    throw new CommandException("commands.effect.failure.notActive.all", new Object[] {var3.getEntityName()});
+                }
+
+                var3.clearActivePotions();
+                notifyAdmins(par1ICommandSender, "commands.effect.success.removed.all", new Object[] {var3.getEntityName()});
+            }
+            else
+            {
+                int var4 = parseIntWithMin(par1ICommandSender, par2ArrayOfStr[1], 1);
+                int var5 = 600;
+                int var6 = 30;
+                int var7 = 0;
+
+                if (var4 < 0 || var4 >= Potion.potionTypes.length || Potion.potionTypes[var4] == null)
+                {
+                    throw new NumberInvalidException("commands.effect.notFound", new Object[] {Integer.valueOf(var4)});
+                }
+
                 if (par2ArrayOfStr.length >= 3)
                 {
                     var6 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[2], 0, 1000000);
@@ -62,27 +83,19 @@ public class CommandEffect extends CommandBase
                 {
                     if (!var3.isPotionActive(var4))
                     {
-                        throw new CommandException("commands.effect.failure.notActive", new Object[] {StatCollector.translateToLocal(Potion.potionTypes[var4].getName()), var3.getEntityName()});
+                        throw new CommandException("commands.effect.failure.notActive", new Object[] {ChatMessageComponent.func_111077_e(Potion.potionTypes[var4].getName()), var3.getEntityName()});
                     }
 
                     var3.removePotionEffect(var4);
-                    notifyAdmins(par1ICommandSender, "commands.effect.success.removed", new Object[] {StatCollector.translateToLocal(Potion.potionTypes[var4].getName()), var3.getEntityName()});
+                    notifyAdmins(par1ICommandSender, "commands.effect.success.removed", new Object[] {ChatMessageComponent.func_111077_e(Potion.potionTypes[var4].getName()), var3.getEntityName()});
                 }
                 else
                 {
                     PotionEffect var8 = new PotionEffect(var4, var5, var7);
                     var3.addPotionEffect(var8);
-                    notifyAdmins(par1ICommandSender, "commands.effect.success", new Object[] {StatCollector.translateToLocal(var8.getEffectName()), Integer.valueOf(var4), Integer.valueOf(var7), var3.getEntityName(), Integer.valueOf(var6)});
+                    notifyAdmins(par1ICommandSender, "commands.effect.success", new Object[] {ChatMessageComponent.func_111077_e(var8.getEffectName()), Integer.valueOf(var4), Integer.valueOf(var7), var3.getEntityName(), Integer.valueOf(var6)});
                 }
             }
-            else
-            {
-                throw new NumberInvalidException("commands.effect.notFound", new Object[] {Integer.valueOf(var4)});
-            }
-        }
-        else
-        {
-            throw new WrongUsageException("commands.effect.usage", new Object[0]);
         }
     }
 

@@ -1,8 +1,9 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.util.List;
 import java.util.regex.Matcher;
-import net.minecraft.server.MinecraftServer;
 
 public class CommandServerPardonIp extends CommandBase
 {
@@ -29,7 +30,7 @@ public class CommandServerPardonIp extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.unbanip.usage", new Object[0]);
+        return "commands.unbanip.usage";
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)

@@ -3,7 +3,7 @@ package net.minecraft.src;
 public class NextTickListEntry implements Comparable
 {
     /** The id number for the next tick entry */
-    private static long nextTickEntryID = 0L;
+    private static long nextTickEntryID;
 
     /** X position this tick is occuring at */
     public int xCoord;

@@ -37,14 +37,14 @@ public class NBTTagIntArray extends NBTBase
     /**
      * Read the actual data contents of the tag, implemented in NBT extension classes
      */
-    void load(DataInput par1DataInput) throws IOException
+    void load(DataInput par1DataInput, int par2) throws IOException
     {
-        int var2 = par1DataInput.readInt();
-        this.intArray = new int[var2];
+        int var3 = par1DataInput.readInt();
+        this.intArray = new int[var3];
 
-        for (int var3 = 0; var3 < var2; ++var3)
+        for (int var4 = 0; var4 < var3; ++var4)
         {
-            this.intArray[var3] = par1DataInput.readInt();
+            this.intArray[var4] = par1DataInput.readInt();
         }
     }
 

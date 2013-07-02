@@ -19,39 +19,46 @@ public abstract class EntityAgeable extends EntityCreature
     {
         ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 
-        if (var2 != null && var2.itemID == Item.monsterPlacer.itemID && !this.worldObj.isRemote)
+        if (var2 != null && var2.itemID == Item.monsterPlacer.itemID)
         {
-            Class var3 = EntityList.getClassFromID(var2.getItemDamage());
-
-            if (var3 != null && var3.isAssignableFrom(this.getClass()))
+            if (!this.worldObj.isRemote)
             {
-                EntityAgeable var4 = this.createChild(this);
+                Class var3 = EntityList.getClassFromID(var2.getItemDamage());
 
-                if (var4 != null)
+                if (var3 != null && var3.isAssignableFrom(this.getClass()))
                 {
-                    var4.setGrowingAge(-24000);
-                    var4.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
-                    this.worldObj.spawnEntityInWorld(var4);
+                    EntityAgeable var4 = this.createChild(this);
 
-                    if (var2.hasDisplayName())
+                    if (var4 != null)
                     {
-                        var4.func_94058_c(var2.getDisplayName());
-                    }
+                        var4.setGrowingAge(-24000);
+                        var4.setLocationAndAngles(this.posX, this.posY, this.posZ, 0.0F, 0.0F);
+                        this.worldObj.spawnEntityInWorld(var4);
 
-                    if (!par1EntityPlayer.capabilities.isCreativeMode)
-                    {
-                        --var2.stackSize;
-
-                        if (var2.stackSize <= 0)
+                        if (var2.hasDisplayName())
                         {
-                            par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
+                            var4.func_94058_c(var2.getDisplayName());
+                        }
+
+                        if (!par1EntityPlayer.capabilities.isCreativeMode)
+                        {
+                            --var2.stackSize;
+
+                            if (var2.stackSize <= 0)
+                            {
+                                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
+                            }
                         }
                     }
                 }
             }
-        }
 
-        return super.interact(par1EntityPlayer);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     protected void entityInit()
@@ -68,6 +75,19 @@ public abstract class EntityAgeable extends EntityCreature
     public int getGrowingAge()
     {
         return this.dataWatcher.getWatchableObjectInt(12);
+    }
+
+    public void func_110195_a(int par1)
+    {
+        int var2 = this.getGrowingAge();
+        var2 += par1 * 20;
+
+        if (var2 > 0)
+        {
+            var2 = 0;
+        }
+
+        this.setGrowingAge(var2);
     }
 
     /**
@@ -155,7 +175,7 @@ public abstract class EntityAgeable extends EntityCreature
         }
     }
 
-    private void func_98055_j(float par1)
+    protected final void func_98055_j(float par1)
     {
         super.setSize(this.field_98056_d * par1, this.field_98057_e * par1);
     }

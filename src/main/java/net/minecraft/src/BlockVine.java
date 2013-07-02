@@ -49,6 +49,7 @@ public class BlockVine extends Block
      */
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
+        float var5 = 0.0625F;
         int var6 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         float var7 = 1.0F;
         float var8 = 1.0F;
@@ -122,6 +123,33 @@ public class BlockVine extends Block
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         return null;
+    }
+
+    /**
+     * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
+     */
+    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
+    {
+        switch (par5)
+        {
+            case 1:
+                return this.canBePlacedOn(par1World.getBlockId(par2, par3 + 1, par4));
+
+            case 2:
+                return this.canBePlacedOn(par1World.getBlockId(par2, par3, par4 + 1));
+
+            case 3:
+                return this.canBePlacedOn(par1World.getBlockId(par2, par3, par4 - 1));
+
+            case 4:
+                return this.canBePlacedOn(par1World.getBlockId(par2 + 1, par3, par4));
+
+            case 5:
+                return this.canBePlacedOn(par1World.getBlockId(par2 - 1, par3, par4));
+
+            default:
+                return false;
+        }
     }
 
     /**
@@ -342,12 +370,15 @@ public class BlockVine extends Block
             case 2:
                 var10 = 1;
                 break;
+
             case 3:
                 var10 = 4;
                 break;
+
             case 4:
                 var10 = 8;
                 break;
+
             case 5:
                 var10 = 2;
         }

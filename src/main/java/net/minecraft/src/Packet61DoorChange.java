@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet61DoorChange extends Packet
@@ -28,27 +28,27 @@ public class Packet61DoorChange extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.sfxID = par1DataInputStream.readInt();
-        this.posX = par1DataInputStream.readInt();
-        this.posY = par1DataInputStream.readByte() & 255;
-        this.posZ = par1DataInputStream.readInt();
-        this.auxData = par1DataInputStream.readInt();
-        this.disableRelativeVolume = par1DataInputStream.readBoolean();
+        this.sfxID = par1DataInput.readInt();
+        this.posX = par1DataInput.readInt();
+        this.posY = par1DataInput.readByte() & 255;
+        this.posZ = par1DataInput.readInt();
+        this.auxData = par1DataInput.readInt();
+        this.disableRelativeVolume = par1DataInput.readBoolean();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.sfxID);
-        par1DataOutputStream.writeInt(this.posX);
-        par1DataOutputStream.writeByte(this.posY & 255);
-        par1DataOutputStream.writeInt(this.posZ);
-        par1DataOutputStream.writeInt(this.auxData);
-        par1DataOutputStream.writeBoolean(this.disableRelativeVolume);
+        par1DataOutput.writeInt(this.sfxID);
+        par1DataOutput.writeInt(this.posX);
+        par1DataOutput.writeByte(this.posY & 255);
+        par1DataOutput.writeInt(this.posZ);
+        par1DataOutput.writeInt(this.auxData);
+        par1DataOutput.writeBoolean(this.disableRelativeVolume);
     }
 
     /**

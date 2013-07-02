@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -45,13 +45,13 @@ public class Packet60Explosion extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.explosionX = par1DataInputStream.readDouble();
-        this.explosionY = par1DataInputStream.readDouble();
-        this.explosionZ = par1DataInputStream.readDouble();
-        this.explosionSize = par1DataInputStream.readFloat();
-        int var2 = par1DataInputStream.readInt();
+        this.explosionX = par1DataInput.readDouble();
+        this.explosionY = par1DataInput.readDouble();
+        this.explosionZ = par1DataInput.readDouble();
+        this.explosionSize = par1DataInput.readFloat();
+        int var2 = par1DataInput.readInt();
         this.chunkPositionRecords = new ArrayList(var2);
         int var3 = (int)this.explosionX;
         int var4 = (int)this.explosionY;
@@ -59,27 +59,27 @@ public class Packet60Explosion extends Packet
 
         for (int var6 = 0; var6 < var2; ++var6)
         {
-            int var7 = par1DataInputStream.readByte() + var3;
-            int var8 = par1DataInputStream.readByte() + var4;
-            int var9 = par1DataInputStream.readByte() + var5;
+            int var7 = par1DataInput.readByte() + var3;
+            int var8 = par1DataInput.readByte() + var4;
+            int var9 = par1DataInput.readByte() + var5;
             this.chunkPositionRecords.add(new ChunkPosition(var7, var8, var9));
         }
 
-        this.playerVelocityX = par1DataInputStream.readFloat();
-        this.playerVelocityY = par1DataInputStream.readFloat();
-        this.playerVelocityZ = par1DataInputStream.readFloat();
+        this.playerVelocityX = par1DataInput.readFloat();
+        this.playerVelocityY = par1DataInput.readFloat();
+        this.playerVelocityZ = par1DataInput.readFloat();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeDouble(this.explosionX);
-        par1DataOutputStream.writeDouble(this.explosionY);
-        par1DataOutputStream.writeDouble(this.explosionZ);
-        par1DataOutputStream.writeFloat(this.explosionSize);
-        par1DataOutputStream.writeInt(this.chunkPositionRecords.size());
+        par1DataOutput.writeDouble(this.explosionX);
+        par1DataOutput.writeDouble(this.explosionY);
+        par1DataOutput.writeDouble(this.explosionZ);
+        par1DataOutput.writeFloat(this.explosionSize);
+        par1DataOutput.writeInt(this.chunkPositionRecords.size());
         int var2 = (int)this.explosionX;
         int var3 = (int)this.explosionY;
         int var4 = (int)this.explosionZ;
@@ -91,14 +91,14 @@ public class Packet60Explosion extends Packet
             int var7 = var6.x - var2;
             int var8 = var6.y - var3;
             int var9 = var6.z - var4;
-            par1DataOutputStream.writeByte(var7);
-            par1DataOutputStream.writeByte(var8);
-            par1DataOutputStream.writeByte(var9);
+            par1DataOutput.writeByte(var7);
+            par1DataOutput.writeByte(var8);
+            par1DataOutput.writeByte(var9);
         }
 
-        par1DataOutputStream.writeFloat(this.playerVelocityX);
-        par1DataOutputStream.writeFloat(this.playerVelocityY);
-        par1DataOutputStream.writeFloat(this.playerVelocityZ);
+        par1DataOutput.writeFloat(this.playerVelocityX);
+        par1DataOutput.writeFloat(this.playerVelocityY);
+        par1DataOutput.writeFloat(this.playerVelocityZ);
     }
 
     /**

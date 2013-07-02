@@ -33,10 +33,10 @@ public class NBTTagByteArray extends NBTBase
     /**
      * Read the actual data contents of the tag, implemented in NBT extension classes
      */
-    void load(DataInput par1DataInput) throws IOException
+    void load(DataInput par1DataInput, int par2) throws IOException
     {
-        int var2 = par1DataInput.readInt();
-        this.byteArray = new byte[var2];
+        int var3 = par1DataInput.readInt();
+        this.byteArray = new byte[var3];
         par1DataInput.readFully(this.byteArray);
     }
 

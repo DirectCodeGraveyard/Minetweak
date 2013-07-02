@@ -6,7 +6,7 @@ public class EntityAILeapAtTarget extends EntityAIBase
     EntityLiving leaper;
 
     /** The entity that the leaper is leaping towards. */
-    EntityLiving leapTarget;
+    EntityLivingBase leapTarget;
 
     /** The entity's motionY after leaping. */
     float leapMotionY;

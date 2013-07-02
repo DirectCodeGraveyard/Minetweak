@@ -3,7 +3,7 @@ package net.minecraft.src;
 public class BlockSandStone extends Block
 {
     public static final String[] SAND_STONE_TYPES = new String[] {"default", "chiseled", "smooth"};
-    private static final String[] field_94405_b = new String[] {"sandstone_side", "sandstone_carved", "sandstone_smooth"};
+    private static final String[] field_94405_b = new String[] {"normal", "carved", "smooth"};
 
     public BlockSandStone(int par1)
     {

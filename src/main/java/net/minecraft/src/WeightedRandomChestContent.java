@@ -5,7 +5,7 @@ import java.util.Random;
 public class WeightedRandomChestContent extends WeightedRandomItem
 {
     /** The Item/Block ID to generate in the Chest. */
-    private ItemStack theItemId = null;
+    private ItemStack theItemId;
 
     /** The minimum chance of item generating. */
     private int theMinimumChanceToGenerateItem;

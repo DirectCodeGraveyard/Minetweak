@@ -1,7 +1,8 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.List;
 
 public class CommandServerPardon extends CommandBase
 {
@@ -20,7 +21,7 @@ public class CommandServerPardon extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.unban.usage", new Object[0]);
+        return "commands.unban.usage";
     }
 
     /**

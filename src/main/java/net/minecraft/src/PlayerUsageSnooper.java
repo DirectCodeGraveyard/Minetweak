@@ -4,12 +4,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-import java.util.UUID;
+import java.util.*;
 
 public class PlayerUsageSnooper
 {
@@ -24,24 +19,25 @@ public class PlayerUsageSnooper
     /** set to fire the snooperThread every 15 mins */
     private final Timer threadTrigger = new Timer("Snooper Timer", true);
     private final Object syncLock = new Object();
-    private final long field_98224_g = System.currentTimeMillis();
-    private boolean isRunning = false;
+    private final long field_98224_g;
+    private boolean isRunning;
 
     /** incremented on every getSelfCounterFor */
-    private int selfCounter = 0;
+    private int selfCounter;
 
-    public PlayerUsageSnooper(String par1Str, IPlayerUsage par2IPlayerUsage)
+    public PlayerUsageSnooper(String par1Str, IPlayerUsage par2IPlayerUsage, long par3)
     {
         try
         {
             this.serverUrl = new URL("http://snoop.minecraft.net/" + par1Str + "?version=" + 1);
         }
-        catch (MalformedURLException var4)
+        catch (MalformedURLException var6)
         {
             throw new IllegalArgumentException();
         }
 
         this.playerStatsCollector = par2IPlayerUsage;
+        this.field_98224_g = par3;
     }
 
     /**
@@ -65,7 +61,7 @@ public class PlayerUsageSnooper
         this.addData("os_version", System.getProperty("os.version"));
         this.addData("os_architecture", System.getProperty("os.arch"));
         this.addData("java_version", System.getProperty("java.version"));
-        this.addData("version", "1.5.2");
+        this.addData("version", "1.6.1");
         this.playerStatsCollector.addServerTypeToSnooper(this);
     }
 
@@ -95,7 +91,6 @@ public class PlayerUsageSnooper
         this.addData("memory_max", Long.valueOf(Runtime.getRuntime().maxMemory()));
         this.addData("memory_free", Long.valueOf(Runtime.getRuntime().freeMemory()));
         this.addData("cpu_cores", Integer.valueOf(Runtime.getRuntime().availableProcessors()));
-        this.addData("run_time", Long.valueOf((System.currentTimeMillis() - this.field_98224_g) / 60L * 1000L));
         this.playerStatsCollector.addServerStatsToSnooper(this);
     }
 
@@ -120,6 +115,11 @@ public class PlayerUsageSnooper
     public void stopSnooper()
     {
         this.threadTrigger.cancel();
+    }
+
+    public long func_130105_g()
+    {
+        return this.field_98224_g;
     }
 
     static IPlayerUsage getStatsCollectorFor(PlayerUsageSnooper par0PlayerUsageSnooper)

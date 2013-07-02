@@ -169,9 +169,9 @@ public class BlockDispenser extends BlockContainer
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int var7 = BlockPistonBase.determineOrientation(par1World, par2, par3, par4, par5EntityLiving);
+        int var7 = BlockPistonBase.determineOrientation(par1World, par2, par3, par4, par5EntityLivingBase);
         par1World.setBlockMetadata(par2, par3, par4, var7, 2);
 
         if (par6ItemStack.hasDisplayName())

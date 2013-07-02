@@ -31,7 +31,7 @@ public class NBTTagFloat extends NBTBase
     /**
      * Read the actual data contents of the tag, implemented in NBT extension classes
      */
-    void load(DataInput par1DataInput) throws IOException
+    void load(DataInput par1DataInput, int par2) throws IOException
     {
         this.data = par1DataInput.readFloat();
     }

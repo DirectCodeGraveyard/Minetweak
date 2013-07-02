@@ -101,7 +101,7 @@ public class BlockCommandBlock extends BlockContainer
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
         TileEntityCommandBlock var7 = (TileEntityCommandBlock)par1World.getBlockTileEntity(par2, par3, par4);
 
@@ -109,5 +109,13 @@ public class BlockCommandBlock extends BlockContainer
         {
             var7.setCommandSenderName(par6ItemStack.getDisplayName());
         }
+    }
+
+    /**
+     * Returns the quantity of items to drop on block destruction.
+     */
+    public int quantityDropped(Random par1Random)
+    {
+        return 0;
     }
 }

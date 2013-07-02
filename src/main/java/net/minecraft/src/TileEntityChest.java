@@ -8,7 +8,7 @@ public class TileEntityChest extends TileEntity implements IInventory
     private ItemStack[] chestContents = new ItemStack[36];
 
     /** Determines if the check for adjacent chests has taken place. */
-    public boolean adjacentChestChecked = false;
+    public boolean adjacentChestChecked;
 
     /** Contains the chest tile located adjacent to this one (if any) */
     public TileEntityChest adjacentChestZNeg;
@@ -234,31 +234,30 @@ public class TileEntityChest extends TileEntity implements IInventory
             switch (par2)
             {
                 case 0:
-
                     if (this.adjacentChestZPosition != par1TileEntityChest)
                     {
                         this.adjacentChestChecked = false;
                     }
 
                     break;
-                case 1:
 
+                case 1:
                     if (this.adjacentChestXNeg != par1TileEntityChest)
                     {
                         this.adjacentChestChecked = false;
                     }
 
                     break;
-                case 2:
 
+                case 2:
                     if (this.adjacentChestZNeg != par1TileEntityChest)
                     {
                         this.adjacentChestChecked = false;
                     }
 
                     break;
-                case 3:
 
+                case 3:
                     if (this.adjacentChestXPos != par1TileEntityChest)
                     {
                         this.adjacentChestChecked = false;

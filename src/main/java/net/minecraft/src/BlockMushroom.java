@@ -4,14 +4,11 @@ import java.util.Random;
 
 public class BlockMushroom extends BlockFlower
 {
-    private final String field_94374_a;
-
-    protected BlockMushroom(int par1, String par2Str)
+    protected BlockMushroom(int par1)
     {
         super(par1);
-        this.field_94374_a = par2Str;
-        float var3 = 0.2F;
-        this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var3 * 2.0F, 0.5F + var3);
+        float var2 = 0.2F;
+        this.setBlockBounds(0.5F - var2, 0.0F, 0.5F - var2, 0.5F + var2, var2 * 2.0F, 0.5F + var2);
         this.setTickRandomly(true);
     }
 
@@ -67,7 +64,7 @@ public class BlockMushroom extends BlockFlower
 
             if (par1World.isAirBlock(var8, var9, var10) && this.canBlockStay(par1World, var8, var9, var10))
             {
-                par1World.setBlock(var8, var9, var10, this.blockID);
+                par1World.setBlock(var8, var9, var10, this.blockID, 0, 2);
             }
         }
     }

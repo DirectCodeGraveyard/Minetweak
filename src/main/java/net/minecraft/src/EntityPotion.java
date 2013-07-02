@@ -15,14 +15,14 @@ public class EntityPotion extends EntityThrowable
         super(par1World);
     }
 
-    public EntityPotion(World par1World, EntityLiving par2EntityLiving, int par3)
+    public EntityPotion(World par1World, EntityLivingBase par2EntityLivingBase, int par3)
     {
-        this(par1World, par2EntityLiving, new ItemStack(Item.potion, 1, par3));
+        this(par1World, par2EntityLivingBase, new ItemStack(Item.potion, 1, par3));
     }
 
-    public EntityPotion(World par1World, EntityLiving par2EntityLiving, ItemStack par3ItemStack)
+    public EntityPotion(World par1World, EntityLivingBase par2EntityLivingBase, ItemStack par3ItemStack)
     {
-        super(par1World, par2EntityLiving);
+        super(par1World, par2EntityLivingBase);
         this.potionDamage = par3ItemStack;
     }
 
@@ -85,7 +85,7 @@ public class EntityPotion extends EntityThrowable
             if (var2 != null && !var2.isEmpty())
             {
                 AxisAlignedBB var3 = this.boundingBox.expand(4.0D, 2.0D, 4.0D);
-                List var4 = this.worldObj.getEntitiesWithinAABB(EntityLiving.class, var3);
+                List var4 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, var3);
 
                 if (var4 != null && !var4.isEmpty())
                 {
@@ -93,7 +93,7 @@ public class EntityPotion extends EntityThrowable
 
                     while (var5.hasNext())
                     {
-                        EntityLiving var6 = (EntityLiving)var5.next();
+                        EntityLivingBase var6 = (EntityLivingBase)var5.next();
                         double var7 = this.getDistanceSqToEntity(var6);
 
                         if (var7 < 16.0D)

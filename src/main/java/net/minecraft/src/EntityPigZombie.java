@@ -1,21 +1,32 @@
 package net.minecraft.src;
 
 import java.util.List;
+import java.util.UUID;
 
 public class EntityPigZombie extends EntityZombie
 {
+    private static final UUID field_110189_bq = UUID.fromString("49455A49-7EC5-45BA-B886-3B90B23A1718");
+    private static final AttributeModifier field_110190_br = (new AttributeModifier(field_110189_bq, "Attacking speed boost", 0.45D, 0)).func_111168_a(false);
+
     /** Above zero if this PigZombie is Angry. */
-    private int angerLevel = 0;
+    private int angerLevel;
 
     /** A random delay until this PigZombie next makes a sound. */
-    private int randomSoundDelay = 0;
+    private int randomSoundDelay;
+    private Entity field_110191_bu;
 
     public EntityPigZombie(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/pigzombie.png";
-        this.moveSpeed = 0.5F;
         this.isImmuneToFire = true;
+    }
+
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(field_110186_bp).func_111128_a(0.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.5D);
+        this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(5.0D);
     }
 
     /**
@@ -31,7 +42,18 @@ public class EntityPigZombie extends EntityZombie
      */
     public void onUpdate()
     {
-        this.moveSpeed = this.entityToAttack != null ? 0.95F : 0.5F;
+        if (this.field_110191_bu != this.entityToAttack && !this.worldObj.isRemote)
+        {
+            AttributeInstance var1 = this.func_110148_a(SharedMonsterAttributes.field_111263_d);
+            var1.func_111124_b(field_110190_br);
+
+            if (this.entityToAttack != null)
+            {
+                var1.func_111121_a(field_110190_br);
+            }
+        }
+
+        this.field_110191_bu = this.entityToAttack;
 
         if (this.randomSoundDelay > 0 && --this.randomSoundDelay == 0)
         {
@@ -79,7 +101,7 @@ public class EntityPigZombie extends EntityZombie
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -195,28 +217,10 @@ public class EntityPigZombie extends EntityZombie
         this.setCurrentItemOrArmor(0, new ItemStack(Item.swordGold));
     }
 
-    /**
-     * Initialize this creature.
-     */
-    public void initCreature()
+    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData)
     {
-        super.initCreature();
+        super.func_110161_a(par1EntityLivingData);
         this.setVillager(false);
-    }
-
-    /**
-     * Returns the amount of damage a mob should deal.
-     */
-    public int getAttackStrength(Entity par1Entity)
-    {
-        ItemStack var2 = this.getHeldItem();
-        int var3 = 5;
-
-        if (var2 != null)
-        {
-            var3 += var2.getDamageVsEntity(this);
-        }
-
-        return var3;
+        return par1EntityLivingData;
     }
 }

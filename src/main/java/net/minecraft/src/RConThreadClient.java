@@ -12,7 +12,7 @@ public class RConThreadClient extends RConThreadBase
     /**
      * True if the client has succefssfully logged into the RCon, otherwise false
      */
-    private boolean loggedIn = false;
+    private boolean loggedIn;
 
     /** The client's Socket connection */
     private Socket clientSocket;
@@ -74,7 +74,6 @@ public class RConThreadClient extends RConThreadBase
                     switch (var6)
                     {
                         case 2:
-
                             if (this.loggedIn)
                             {
                                 String var8 = RConUtils.getBytesAsString(this.buffer, var21, var2);
@@ -93,6 +92,7 @@ public class RConThreadClient extends RConThreadBase
 
                             this.sendLoginFailedResponse();
                             continue;
+
                         case 3:
                             String var7 = RConUtils.getBytesAsString(this.buffer, var21, var2);
                             int var10000 = var21 + var7.length();
@@ -107,6 +107,7 @@ public class RConThreadClient extends RConThreadBase
                             this.loggedIn = false;
                             this.sendLoginFailedResponse();
                             continue;
+
                         default:
                             this.sendMultipacketResponse(var5, String.format("Unknown request %s", new Object[] {Integer.toHexString(var6)}));
                             continue;
@@ -137,10 +138,11 @@ public class RConThreadClient extends RConThreadBase
     {
         ByteArrayOutputStream var4 = new ByteArrayOutputStream(1248);
         DataOutputStream var5 = new DataOutputStream(var4);
-        var5.writeInt(Integer.reverseBytes(par3Str.length() + 10));
+        byte[] var6 = par3Str.getBytes("UTF-8");
+        var5.writeInt(Integer.reverseBytes(var6.length + 10));
         var5.writeInt(Integer.reverseBytes(par1));
         var5.writeInt(Integer.reverseBytes(par2));
-        var5.writeBytes(par3Str);
+        var5.write(var6);
         var5.write(0);
         var5.write(0);
         this.clientSocket.getOutputStream().write(var4.toByteArray());

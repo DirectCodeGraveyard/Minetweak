@@ -4,7 +4,7 @@ public class EntityAITempt extends EntityAIBase
 {
     /** The entity using this AI that is tempted by the player. */
     private EntityCreature temptedEntity;
-    private float field_75282_b;
+    private double field_75282_b;
     private double field_75283_c;
     private double field_75280_d;
     private double field_75281_e;
@@ -18,7 +18,7 @@ public class EntityAITempt extends EntityAIBase
      * A counter that is decremented each time the shouldExecute method is called. The shouldExecute method will always
      * return false if delayTemptCounter is greater than 0.
      */
-    private int delayTemptCounter = 0;
+    private int delayTemptCounter;
     private boolean field_75287_j;
 
     /**
@@ -32,12 +32,12 @@ public class EntityAITempt extends EntityAIBase
     private boolean scaredByPlayerMovement;
     private boolean field_75286_m;
 
-    public EntityAITempt(EntityCreature par1EntityCreature, float par2, int par3, boolean par4)
+    public EntityAITempt(EntityCreature par1EntityCreature, double par2, int par4, boolean par5)
     {
         this.temptedEntity = par1EntityCreature;
         this.field_75282_b = par2;
-        this.breedingFood = par3;
-        this.scaredByPlayerMovement = par4;
+        this.breedingFood = par4;
+        this.scaredByPlayerMovement = par5;
         this.setMutexBits(3);
     }
 

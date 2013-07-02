@@ -5,7 +5,6 @@ public class EntityMooshroom extends EntityCow
     public EntityMooshroom(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/redcow.png";
         this.setSize(0.9F, 1.3F);
     }
 
@@ -40,7 +39,7 @@ public class EntityMooshroom extends EntityCow
             {
                 EntityCow var3 = new EntityCow(this.worldObj);
                 var3.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-                var3.setEntityHealth(this.getHealth());
+                var3.setEntityHealth(this.func_110143_aJ());
                 var3.renderYawOffset = this.renderYawOffset;
                 this.worldObj.spawnEntityInWorld(var3);
 

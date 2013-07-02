@@ -1,11 +1,6 @@
 package net.minecraft.src;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class StatList
 {
@@ -70,10 +65,10 @@ public class StatList
     public static StatBase dropStat = (new StatBasic(2011, "stat.drop")).initIndependentStat().registerStat();
 
     /** the amount of damage you've dealt */
-    public static StatBase damageDealtStat = (new StatBasic(2020, "stat.damageDealt")).registerStat();
+    public static StatBase damageDealtStat = (new StatBasic(2020, "stat.damageDealt", StatBase.field_111202_k)).registerStat();
 
     /** the amount of damage you have taken */
-    public static StatBase damageTakenStat = (new StatBasic(2021, "stat.damageTaken")).registerStat();
+    public static StatBase damageTakenStat = (new StatBasic(2021, "stat.damageTaken", StatBase.field_111202_k)).registerStat();
 
     /** the number of times you have died */
     public static StatBase deathsStat = (new StatBasic(2022, "stat.deaths")).registerStat();
@@ -277,7 +272,5 @@ public class StatList
     static
     {
         AchievementList.init();
-        blockStatsInitialized = false;
-        itemStatsInitialized = false;
     }
 }

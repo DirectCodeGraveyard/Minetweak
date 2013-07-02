@@ -165,4 +165,12 @@ public class BlockFence extends Block
     {
         return par0 == Block.fence.blockID || par0 == Block.netherFence.blockID;
     }
+
+    /**
+     * Called upon block activation (right click on the block.)
+     */
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
+    {
+        return par1World.isRemote ? true : ItemLeash.func_135066_a(par5EntityPlayer, par1World, par2, par3, par4);
+    }
 }

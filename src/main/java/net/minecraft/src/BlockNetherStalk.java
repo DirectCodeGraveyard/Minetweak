@@ -4,8 +4,6 @@ import java.util.Random;
 
 public class BlockNetherStalk extends BlockFlower
 {
-    private static final String[] field_94373_a = new String[] {"netherStalk_0", "netherStalk_1", "netherStalk_2"};
-
     protected BlockNetherStalk(int par1)
     {
         super(par1);

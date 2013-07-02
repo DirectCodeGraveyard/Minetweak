@@ -7,7 +7,7 @@ public class ItemPickaxe extends ItemTool
 
     protected ItemPickaxe(int par1, EnumToolMaterial par2EnumToolMaterial)
     {
-        super(par1, 2, par2EnumToolMaterial, blocksEffectiveAgainst);
+        super(par1, 2.0F, par2EnumToolMaterial, blocksEffectiveAgainst);
     }
 
     /**

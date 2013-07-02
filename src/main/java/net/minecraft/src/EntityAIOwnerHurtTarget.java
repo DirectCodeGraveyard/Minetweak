@@ -3,11 +3,11 @@ package net.minecraft.src;
 public class EntityAIOwnerHurtTarget extends EntityAITarget
 {
     EntityTameable theEntityTameable;
-    EntityLiving theTarget;
+    EntityLivingBase theTarget;
 
     public EntityAIOwnerHurtTarget(EntityTameable par1EntityTameable)
     {
-        super(par1EntityTameable, 32.0F, false);
+        super(par1EntityTameable, false);
         this.theEntityTameable = par1EntityTameable;
         this.setMutexBits(1);
     }
@@ -23,7 +23,7 @@ public class EntityAIOwnerHurtTarget extends EntityAITarget
         }
         else
         {
-            EntityLiving var1 = this.theEntityTameable.getOwner();
+            EntityLivingBase var1 = this.theEntityTameable.func_130012_q();
 
             if (var1 == null)
             {
@@ -31,7 +31,7 @@ public class EntityAIOwnerHurtTarget extends EntityAITarget
             }
             else
             {
-                this.theTarget = var1.getLastAttackingEntity();
+                this.theTarget = var1.func_110144_aD();
                 return this.isSuitableTarget(this.theTarget, false);
             }
         }

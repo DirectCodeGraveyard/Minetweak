@@ -83,9 +83,11 @@ public class EntityList
                 case 0:
                     par0NBTTagCompound.setString("id", "MinecartRideable");
                     break;
+
                 case 1:
                     par0NBTTagCompound.setString("id", "MinecartChest");
                     break;
+
                 case 2:
                     par0NBTTagCompound.setString("id", "MinecartFurnace");
             }
@@ -186,6 +188,7 @@ public class EntityList
     {
         addMapping(EntityItem.class, "Item", 1);
         addMapping(EntityXPOrb.class, "XPOrb", 2);
+        addMapping(EntityLeashKnot.class, "LeashKnot", 8);
         addMapping(EntityPainting.class, "Painting", 9);
         addMapping(EntityArrow.class, "Arrow", 10);
         addMapping(EntitySnowball.class, "Snowball", 11);
@@ -236,6 +239,7 @@ public class EntityList
         addMapping(EntitySnowman.class, "SnowMan", 97);
         addMapping(EntityOcelot.class, "Ozelot", 98, 15720061, 5653556);
         addMapping(EntityIronGolem.class, "VillagerGolem", 99);
+        addMapping(EntityHorse.class, "EntityHorse", 100, 12623485, 15656192);
         addMapping(EntityVillager.class, "Villager", 120, 5651507, 12422002);
         addMapping(EntityEnderCrystal.class, "EnderCrystal", 200);
     }

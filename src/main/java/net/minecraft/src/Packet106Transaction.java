@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet106Transaction extends Packet
@@ -31,21 +31,21 @@ public class Packet106Transaction extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.windowId = par1DataInputStream.readByte();
-        this.shortWindowId = par1DataInputStream.readShort();
-        this.accepted = par1DataInputStream.readByte() != 0;
+        this.windowId = par1DataInput.readByte();
+        this.shortWindowId = par1DataInput.readShort();
+        this.accepted = par1DataInput.readByte() != 0;
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeByte(this.windowId);
-        par1DataOutputStream.writeShort(this.shortWindowId);
-        par1DataOutputStream.writeByte(this.accepted ? 1 : 0);
+        par1DataOutput.writeByte(this.windowId);
+        par1DataOutput.writeShort(this.shortWindowId);
+        par1DataOutput.writeByte(this.accepted ? 1 : 0);
     }
 
     /**

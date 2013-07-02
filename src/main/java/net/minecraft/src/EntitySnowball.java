@@ -7,9 +7,9 @@ public class EntitySnowball extends EntityThrowable
         super(par1World);
     }
 
-    public EntitySnowball(World par1World, EntityLiving par2EntityLiving)
+    public EntitySnowball(World par1World, EntityLivingBase par2EntityLivingBase)
     {
-        super(par1World, par2EntityLiving);
+        super(par1World, par2EntityLivingBase);
     }
 
     public EntitySnowball(World par1World, double par2, double par4, double par6)
@@ -31,7 +31,7 @@ public class EntitySnowball extends EntityThrowable
                 var2 = 3;
             }
 
-            par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), var2);
+            par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)var2);
         }
 
         for (int var3 = 0; var3 < 8; ++var3)

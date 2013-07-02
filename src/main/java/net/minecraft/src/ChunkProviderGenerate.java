@@ -487,7 +487,7 @@ public class ChunkProviderGenerate implements IChunkProvider
         int var13;
         int var14;
 
-        if (!var11 && this.rand.nextInt(4) == 0)
+        if (var6 != BiomeGenBase.desert && var6 != BiomeGenBase.desertHills && !var11 && this.rand.nextInt(4) == 0)
         {
             var12 = var4 + this.rand.nextInt(16) + 8;
             var13 = this.rand.nextInt(128);
@@ -512,11 +512,7 @@ public class ChunkProviderGenerate implements IChunkProvider
             var13 = var4 + this.rand.nextInt(16) + 8;
             var14 = this.rand.nextInt(128);
             int var15 = var5 + this.rand.nextInt(16) + 8;
-
-            if ((new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15))
-            {
-                ;
-            }
+            (new WorldGenDungeons()).generate(this.worldObj, this.rand, var13, var14, var15);
         }
 
         var6.decorate(this.worldObj, this.rand, var4, var5);

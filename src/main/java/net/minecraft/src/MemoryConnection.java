@@ -2,14 +2,12 @@ package net.minecraft.src;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MemoryConnection implements INetworkManager
 {
     private static final SocketAddress mySocketAddress = new InetSocketAddress("127.0.0.1", 0);
-    private final List readPacketCache = Collections.synchronizedList(new ArrayList());
+    private final List readPacketCache  = java.util.Collections.synchronizedList(new java.util.ArrayList());
     private final ILogAgent field_98214_c;
     private MemoryConnection pairedConnection;
     private NetHandler myNetHandler;
@@ -19,10 +17,10 @@ public class MemoryConnection implements INetworkManager
     private String shutdownReason;
     private Object[] field_74439_g;
 
-    public MemoryConnection(ILogAgent par1ILogAgent, NetHandler par2NetHandler)
+    public MemoryConnection(ILogAgent p_i1392_1_, NetHandler p_i1392_2_)
     {
-        this.myNetHandler = par2NetHandler;
-        this.field_98214_c = par1ILogAgent;
+        this.myNetHandler = p_i1392_2_;
+        this.field_98214_c = p_i1392_1_;
     }
 
     /**

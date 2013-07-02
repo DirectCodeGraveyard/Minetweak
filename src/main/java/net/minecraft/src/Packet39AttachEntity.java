@@ -1,20 +1,22 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet39AttachEntity extends Packet
 {
-    public int entityId;
+    public int field_111007_a;
+    public int field_111006_b;
     public int vehicleEntityId;
 
     public Packet39AttachEntity() {}
 
-    public Packet39AttachEntity(Entity par1Entity, Entity par2Entity)
+    public Packet39AttachEntity(int par1, Entity par2Entity, Entity par3Entity)
     {
-        this.entityId = par1Entity.entityId;
-        this.vehicleEntityId = par2Entity != null ? par2Entity.entityId : -1;
+        this.field_111007_a = par1;
+        this.field_111006_b = par2Entity.entityId;
+        this.vehicleEntityId = par3Entity != null ? par3Entity.entityId : -1;
     }
 
     /**
@@ -28,19 +30,21 @@ public class Packet39AttachEntity extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.entityId = par1DataInputStream.readInt();
-        this.vehicleEntityId = par1DataInputStream.readInt();
+        this.field_111006_b = par1DataInput.readInt();
+        this.vehicleEntityId = par1DataInput.readInt();
+        this.field_111007_a = par1DataInput.readUnsignedByte();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.entityId);
-        par1DataOutputStream.writeInt(this.vehicleEntityId);
+        par1DataOutput.writeInt(this.field_111006_b);
+        par1DataOutput.writeInt(this.vehicleEntityId);
+        par1DataOutput.writeByte(this.field_111007_a);
     }
 
     /**
@@ -66,6 +70,6 @@ public class Packet39AttachEntity extends Packet
     public boolean containsSameEntityIDAs(Packet par1Packet)
     {
         Packet39AttachEntity var2 = (Packet39AttachEntity)par1Packet;
-        return var2.entityId == this.entityId;
+        return var2.field_111006_b == this.field_111006_b;
     }
 }

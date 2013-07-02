@@ -4,7 +4,7 @@ public class ItemDye extends Item
 {
     /** List of dye color names */
     public static final String[] dyeColorNames = new String[] {"black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "gray", "pink", "lime", "yellow", "lightBlue", "magenta", "orange", "white"};
-    public static final String[] field_94595_b = new String[] {"dyePowder_black", "dyePowder_red", "dyePowder_green", "dyePowder_brown", "dyePowder_blue", "dyePowder_purple", "dyePowder_cyan", "dyePowder_silver", "dyePowder_gray", "dyePowder_pink", "dyePowder_lime", "dyePowder_yellow", "dyePowder_lightBlue", "dyePowder_magenta", "dyePowder_orange", "dyePowder_white"};
+    public static final String[] field_94595_b = new String[] {"black", "red", "green", "brown", "blue", "purple", "cyan", "silver", "gray", "pink", "lime", "yellow", "light_blue", "magenta", "orange", "white"};
     public static final int[] dyeColors = new int[] {1973019, 11743532, 3887386, 5320730, 2437522, 8073150, 2651799, 11250603, 4408131, 14188952, 4312372, 14602026, 6719955, 12801229, 15435844, 15790320};
 
     public ItemDye(int par1)
@@ -260,19 +260,16 @@ public class ItemDye extends Item
         }
     }
 
-    /**
-     * Called when a player right clicks an entity with an item.
-     */
-    public boolean useItemOnEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving)
+    public boolean func_111207_a(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
     {
-        if (par2EntityLiving instanceof EntitySheep)
+        if (par3EntityLivingBase instanceof EntitySheep)
         {
-            EntitySheep var3 = (EntitySheep)par2EntityLiving;
-            int var4 = BlockCloth.getBlockFromDye(par1ItemStack.getItemDamage());
+            EntitySheep var4 = (EntitySheep)par3EntityLivingBase;
+            int var5 = BlockColored.getBlockFromDye(par1ItemStack.getItemDamage());
 
-            if (!var3.getSheared() && var3.getFleeceColor() != var4)
+            if (!var4.getSheared() && var4.getFleeceColor() != var5)
             {
-                var3.setFleeceColor(var4);
+                var4.setFleeceColor(var5);
                 --par1ItemStack.stackSize;
             }
 

@@ -28,6 +28,7 @@ abstract class ComponentScatteredFeature extends StructureComponent
             case 2:
                 this.boundingBox = new StructureBoundingBox(par2, par3, par4, par2 + par5 - 1, par3 + par6 - 1, par4 + par7 - 1);
                 break;
+
             default:
                 this.boundingBox = new StructureBoundingBox(par2, par3, par4, par2 + par7 - 1, par3 + par6 - 1, par4 + par5 - 1);
         }

@@ -21,7 +21,6 @@ public class BlockRailPowered extends BlockRailBase
             switch (var8)
             {
                 case 0:
-
                     if (par6)
                     {
                         ++par4;
@@ -32,8 +31,8 @@ public class BlockRailPowered extends BlockRailBase
                     }
 
                     break;
+
                 case 1:
-
                     if (par6)
                     {
                         --par2;
@@ -44,8 +43,8 @@ public class BlockRailPowered extends BlockRailBase
                     }
 
                     break;
+
                 case 2:
-
                     if (par6)
                     {
                         --par2;
@@ -59,8 +58,8 @@ public class BlockRailPowered extends BlockRailBase
 
                     var8 = 1;
                     break;
+
                 case 3:
-
                     if (par6)
                     {
                         --par2;
@@ -74,8 +73,8 @@ public class BlockRailPowered extends BlockRailBase
 
                     var8 = 1;
                     break;
-                case 4:
 
+                case 4:
                     if (par6)
                     {
                         ++par4;
@@ -89,8 +88,8 @@ public class BlockRailPowered extends BlockRailBase
 
                     var8 = 0;
                     break;
-                case 5:
 
+                case 5:
                     if (par6)
                     {
                         ++par4;

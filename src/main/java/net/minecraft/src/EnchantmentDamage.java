@@ -59,9 +59,9 @@ public class EnchantmentDamage extends Enchantment
     /**
      * Calculates de (magic) damage done by the enchantment on a living entity based on level and entity passed.
      */
-    public int calcModifierLiving(int par1, EntityLiving par2EntityLiving)
+    public float calcModifierLiving(int par1, EntityLivingBase par2EntityLivingBase)
     {
-        return this.damageType == 0 ? MathHelper.floor_float((float)par1 * 2.75F) : (this.damageType == 1 && par2EntityLiving.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD ? MathHelper.floor_float((float)par1 * 4.5F) : (this.damageType == 2 && par2EntityLiving.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD ? MathHelper.floor_float((float)par1 * 4.5F) : 0));
+        return this.damageType == 0 ? (float)par1 * 1.25F : (this.damageType == 1 && par2EntityLivingBase.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD ? (float)par1 * 2.5F : (this.damageType == 2 && par2EntityLivingBase.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD ? (float)par1 * 2.5F : 0.0F));
     }
 
     /**

@@ -1,7 +1,8 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.List;
 
 public abstract class EntityMinecart extends Entity
 {
@@ -23,7 +24,6 @@ public abstract class EntityMinecart extends Entity
     public EntityMinecart(World par1World)
     {
         super(par1World);
-        this.isInReverse = false;
         this.preventEntitySpawning = true;
         this.setSize(0.98F, 0.7F);
         this.yOffset = this.height / 2.0F;
@@ -42,14 +42,19 @@ public abstract class EntityMinecart extends Entity
         {
             case 1:
                 return new EntityMinecartChest(par0World, par1, par3, par5);
+
             case 2:
                 return new EntityMinecartFurnace(par0World, par1, par3, par5);
+
             case 3:
                 return new EntityMinecartTNT(par0World, par1, par3, par5);
+
             case 4:
                 return new EntityMinecartMobSpawner(par0World, par1, par3, par5);
+
             case 5:
                 return new EntityMinecartHopper(par0World, par1, par3, par5);
+
             default:
                 return new EntityMinecartEmpty(par0World, par1, par3, par5);
         }
@@ -68,7 +73,7 @@ public abstract class EntityMinecart extends Entity
     {
         this.dataWatcher.addObject(17, new Integer(0));
         this.dataWatcher.addObject(18, new Integer(1));
-        this.dataWatcher.addObject(19, new Integer(0));
+        this.dataWatcher.addObject(19, new Float(0.0F));
         this.dataWatcher.addObject(20, new Integer(0));
         this.dataWatcher.addObject(21, new Integer(6));
         this.dataWatcher.addObject(22, Byte.valueOf((byte)0));
@@ -102,7 +107,7 @@ public abstract class EntityMinecart extends Entity
     public EntityMinecart(World par1World, double par2, double par4, double par6)
     {
         this(par1World);
-        this.setPosition(par2, par4 + (double)this.yOffset, par6);
+        this.setPosition(par2, par4, par6);
         this.motionX = 0.0D;
         this.motionY = 0.0D;
         this.motionZ = 0.0D;
@@ -122,7 +127,7 @@ public abstract class EntityMinecart extends Entity
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (!this.worldObj.isRemote && !this.isDead)
         {
@@ -135,10 +140,10 @@ public abstract class EntityMinecart extends Entity
                 this.setRollingDirection(-this.getRollingDirection());
                 this.setRollingAmplitude(10);
                 this.setBeenAttacked();
-                this.setDamage(this.getDamage() + par2 * 10);
+                this.setDamage(this.getDamage() + par2 * 10.0F);
                 boolean var3 = par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getEntity()).capabilities.isCreativeMode;
 
-                if (var3 || this.getDamage() > 40)
+                if (var3 || this.getDamage() > 40.0F)
                 {
                     if (this.riddenByEntity != null)
                     {
@@ -213,9 +218,9 @@ public abstract class EntityMinecart extends Entity
             this.setRollingAmplitude(this.getRollingAmplitude() - 1);
         }
 
-        if (this.getDamage() > 0)
+        if (this.getDamage() > 0.0F)
         {
-            this.setDamage(this.getDamage() - 1);
+            this.setDamage(this.getDamage() - 1.0F);
         }
 
         if (this.posY < -64.0D)
@@ -493,17 +498,25 @@ public abstract class EntityMinecart extends Entity
         this.motionZ = var22 * var16 / var18;
         double var24;
         double var26;
+        double var28;
+        double var30;
 
-        if (this.riddenByEntity != null)
+        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase)
         {
-            var24 = this.riddenByEntity.motionX * this.riddenByEntity.motionX + this.riddenByEntity.motionZ * this.riddenByEntity.motionZ;
-            var26 = this.motionX * this.motionX + this.motionZ * this.motionZ;
+            var24 = (double)((EntityLivingBase)this.riddenByEntity).moveForward;
 
-            if (var24 > 1.0E-4D && var26 < 0.01D)
+            if (var24 > 0.0D)
             {
-                this.motionX += this.riddenByEntity.motionX * 0.1D;
-                this.motionZ += this.riddenByEntity.motionZ * 0.1D;
-                var12 = false;
+                var26 = -Math.sin((double)(this.riddenByEntity.rotationYaw * (float)Math.PI / 180.0F));
+                var28 = Math.cos((double)(this.riddenByEntity.rotationYaw * (float)Math.PI / 180.0F));
+                var30 = this.motionX * this.motionX + this.motionZ * this.motionZ;
+
+                if (var30 < 0.01D)
+                {
+                    this.motionX += var26 * 0.1D;
+                    this.motionZ += var28 * 0.1D;
+                    var12 = false;
+                }
             }
         }
 
@@ -527,8 +540,8 @@ public abstract class EntityMinecart extends Entity
 
         var24 = 0.0D;
         var26 = (double)par1 + 0.5D + (double)var13[0][0] * 0.5D;
-        double var28 = (double)par3 + 0.5D + (double)var13[0][2] * 0.5D;
-        double var30 = (double)par1 + 0.5D + (double)var13[1][0] * 0.5D;
+        var28 = (double)par3 + 0.5D + (double)var13[0][2] * 0.5D;
+        var30 = (double)par1 + 0.5D + (double)var13[1][0] * 0.5D;
         double var32 = (double)par3 + 0.5D + (double)var13[1][2] * 0.5D;
         var14 = var30 - var26;
         var16 = var32 - var28;
@@ -798,7 +811,7 @@ public abstract class EntityMinecart extends Entity
         {
             if (par1Entity != this.riddenByEntity)
             {
-                if (par1Entity instanceof EntityLiving && !(par1Entity instanceof EntityPlayer) && !(par1Entity instanceof EntityIronGolem) && this.getMinecartType() == 0 && this.motionX * this.motionX + this.motionZ * this.motionZ > 0.01D && this.riddenByEntity == null && par1Entity.ridingEntity == null)
+                if (par1Entity instanceof EntityLivingBase && !(par1Entity instanceof EntityPlayer) && !(par1Entity instanceof EntityIronGolem) && this.getMinecartType() == 0 && this.motionX * this.motionX + this.motionZ * this.motionZ > 0.01D && this.riddenByEntity == null && par1Entity.ridingEntity == null)
                 {
                     par1Entity.mountEntity(this);
                 }
@@ -886,18 +899,18 @@ public abstract class EntityMinecart extends Entity
      * Sets the current amount of damage the minecart has taken. Decreases over time. The cart breaks when this is over
      * 40.
      */
-    public void setDamage(int par1)
+    public void setDamage(float par1)
     {
-        this.dataWatcher.updateObject(19, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(19, Float.valueOf(par1));
     }
 
     /**
      * Gets the current amount of damage the minecart has taken. Decreases over time. The cart breaks when this is over
      * 40.
      */
-    public int getDamage()
+    public float getDamage()
     {
-        return this.dataWatcher.getWatchableObjectInt(19);
+        return this.dataWatcher.func_111145_d(19);
     }
 
     /**

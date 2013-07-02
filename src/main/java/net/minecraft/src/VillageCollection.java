@@ -15,7 +15,7 @@ public class VillageCollection extends WorldSavedData
     private final List villagerPositionsList = new ArrayList();
     private final List newDoors = new ArrayList();
     private final List villageList = new ArrayList();
-    private int tickCounter = 0;
+    private int tickCounter;
 
     public VillageCollection(String par1Str)
     {
@@ -121,9 +121,9 @@ public class VillageCollection extends WorldSavedData
 
             if (var9 < var6)
             {
-                int var10 = par4 + var8.getVillageRadius();
+                float var10 = (float)(par4 + var8.getVillageRadius());
 
-                if (var9 <= (float)(var10 * var10))
+                if (var9 <= var10 * var10)
                 {
                     var5 = var8;
                     var6 = var9;

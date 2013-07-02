@@ -15,9 +15,6 @@ public class FlatLayerInfo
     public FlatLayerInfo(int par1, int par2)
     {
         this.layerCount = 1;
-        this.layerFillBlock = 0;
-        this.layerFillBlockMeta = 0;
-        this.layerMinimumY = 0;
         this.layerCount = par1;
         this.layerFillBlock = par2;
     }

@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet203AutoComplete extends Packet
@@ -22,17 +22,17 @@ public class Packet203AutoComplete extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.text = readString(par1DataInputStream, Packet3Chat.maxChatLength);
+        this.text = readString(par1DataInput, 32767);
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        writeString(this.text, par1DataOutputStream);
+        writeString(org.apache.commons.lang3.StringUtils.substring(this.text, 0, 32767), par1DataOutput);
     }
 
     /**

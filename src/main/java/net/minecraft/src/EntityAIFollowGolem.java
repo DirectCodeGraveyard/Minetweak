@@ -8,7 +8,7 @@ public class EntityAIFollowGolem extends EntityAIBase
     private EntityVillager theVillager;
     private EntityIronGolem theGolem;
     private int takeGolemRoseTick;
-    private boolean tookGolemRose = false;
+    private boolean tookGolemRose;
 
     public EntityAIFollowGolem(EntityVillager par1EntityVillager)
     {
@@ -93,7 +93,7 @@ public class EntityAIFollowGolem extends EntityAIBase
 
         if (this.theGolem.getHoldRoseTick() == this.takeGolemRoseTick)
         {
-            this.theVillager.getNavigator().tryMoveToEntityLiving(this.theGolem, 0.15F);
+            this.theVillager.getNavigator().tryMoveToEntityLiving(this.theGolem, 0.5D);
             this.tookGolemRose = true;
         }
 

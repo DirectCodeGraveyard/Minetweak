@@ -5,15 +5,16 @@ public class EntityGiantZombie extends EntityMob
     public EntityGiantZombie(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/zombie.png";
-        this.moveSpeed = 0.5F;
         this.yOffset *= 6.0F;
         this.setSize(this.width * 6.0F, this.height * 6.0F);
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 100;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(100.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.5D);
+        this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(50.0D);
     }
 
     /**
@@ -23,13 +24,5 @@ public class EntityGiantZombie extends EntityMob
     public float getBlockPathWeight(int par1, int par2, int par3)
     {
         return this.worldObj.getLightBrightness(par1, par2, par3) - 0.5F;
-    }
-
-    /**
-     * Returns the amount of damage a mob should deal.
-     */
-    public int getAttackStrength(Entity par1Entity)
-    {
-        return 50;
     }
 }

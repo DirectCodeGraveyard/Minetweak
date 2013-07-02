@@ -12,14 +12,14 @@ public class EntityBlaze extends EntityMob
     public EntityBlaze(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/fire.png";
         this.isImmuneToFire = true;
         this.experienceValue = 10;
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 20;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(6.0D);
     }
 
     protected void entityInit()
@@ -70,7 +70,7 @@ public class EntityBlaze extends EntityMob
         {
             if (this.isWet())
             {
-                this.attackEntityFrom(DamageSource.drown, 1);
+                this.attackEntityFrom(DamageSource.drown, 1.0F);
             }
 
             --this.heightOffsetUpdateTime;
@@ -224,13 +224,5 @@ public class EntityBlaze extends EntityMob
     protected boolean isValidLightLevel()
     {
         return true;
-    }
-
-    /**
-     * Returns the amount of damage a mob should deal.
-     */
-    public int getAttackStrength(Entity par1Entity)
-    {
-        return 6;
     }
 }

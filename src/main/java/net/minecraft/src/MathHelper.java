@@ -96,6 +96,11 @@ public class MathHelper
         return par0 < par1 ? par1 : (par0 > par2 ? par2 : par0);
     }
 
+    public static float func_76131_a(float par0, float par1, float par2)
+    {
+        return par0 < par1 ? par1 : (par0 > par2 ? par2 : par0);
+    }
+
     /**
      * Maximum of the absolute value of two numbers.
      */

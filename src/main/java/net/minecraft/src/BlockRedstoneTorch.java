@@ -1,15 +1,11 @@
 package net.minecraft.src;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class BlockRedstoneTorch extends BlockTorch
 {
     /** Whether the redstone torch is currently active or not. */
-    private boolean torchActive = false;
+    private boolean torchActive;
 
     /** Map of ArrayLists of RedstoneUpdateInfo. Key of map is World. */
     private static Map redstoneUpdateInfoCache = new HashMap();

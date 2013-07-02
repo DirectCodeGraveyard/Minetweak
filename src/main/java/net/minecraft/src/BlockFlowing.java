@@ -8,7 +8,7 @@ public class BlockFlowing extends BlockFluid
      * Number of horizontally adjacent liquid source blocks. Diagonal doesn't count. Only source blocks of the same
      * liquid as the block using the field are counted.
      */
-    int numAdjacentSources = 0;
+    int numAdjacentSources;
 
     /**
      * Indicates whether the flow direction is optimal. Each array index corresponds to one of the four cardinal
@@ -55,34 +55,35 @@ public class BlockFlowing extends BlockFluid
         }
 
         boolean var8 = true;
-        int var10;
+        int var9 = this.tickRate(par1World);
+        int var11;
 
         if (var6 > 0)
         {
-            byte var9 = -100;
+            byte var10 = -100;
             this.numAdjacentSources = 0;
-            int var12 = this.getSmallestFlowDecay(par1World, par2 - 1, par3, par4, var9);
-            var12 = this.getSmallestFlowDecay(par1World, par2 + 1, par3, par4, var12);
-            var12 = this.getSmallestFlowDecay(par1World, par2, par3, par4 - 1, var12);
-            var12 = this.getSmallestFlowDecay(par1World, par2, par3, par4 + 1, var12);
-            var10 = var12 + var7;
+            int var13 = this.getSmallestFlowDecay(par1World, par2 - 1, par3, par4, var10);
+            var13 = this.getSmallestFlowDecay(par1World, par2 + 1, par3, par4, var13);
+            var13 = this.getSmallestFlowDecay(par1World, par2, par3, par4 - 1, var13);
+            var13 = this.getSmallestFlowDecay(par1World, par2, par3, par4 + 1, var13);
+            var11 = var13 + var7;
 
-            if (var10 >= 8 || var12 < 0)
+            if (var11 >= 8 || var13 < 0)
             {
-                var10 = -1;
+                var11 = -1;
             }
 
             if (this.getFlowDecay(par1World, par2, par3 + 1, par4) >= 0)
             {
-                int var11 = this.getFlowDecay(par1World, par2, par3 + 1, par4);
+                int var12 = this.getFlowDecay(par1World, par2, par3 + 1, par4);
 
-                if (var11 >= 8)
+                if (var12 >= 8)
                 {
-                    var10 = var11;
+                    var11 = var12;
                 }
                 else
                 {
-                    var10 = var11 + 8;
+                    var11 = var12 + 8;
                 }
             }
 
@@ -90,21 +91,20 @@ public class BlockFlowing extends BlockFluid
             {
                 if (par1World.getBlockMaterial(par2, par3 - 1, par4).isSolid())
                 {
-                    var10 = 0;
+                    var11 = 0;
                 }
                 else if (par1World.getBlockMaterial(par2, par3 - 1, par4) == this.blockMaterial && par1World.getBlockMetadata(par2, par3 - 1, par4) == 0)
                 {
-                    var10 = 0;
+                    var11 = 0;
                 }
             }
 
-            if (this.blockMaterial == Material.lava && var6 < 8 && var10 < 8 && var10 > var6 && par5Random.nextInt(4) != 0)
+            if (this.blockMaterial == Material.lava && var6 < 8 && var11 < 8 && var11 > var6 && par5Random.nextInt(4) != 0)
             {
-                var10 = var6;
-                var8 = false;
+                var9 *= 4;
             }
 
-            if (var10 == var6)
+            if (var11 == var6)
             {
                 if (var8)
                 {
@@ -113,16 +113,16 @@ public class BlockFlowing extends BlockFluid
             }
             else
             {
-                var6 = var10;
+                var6 = var11;
 
-                if (var10 < 0)
+                if (var11 < 0)
                 {
                     par1World.setBlockToAir(par2, par3, par4);
                 }
                 else
                 {
-                    par1World.setBlockMetadata(par2, par3, par4, var10, 2);
-                    par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
+                    par1World.setBlockMetadata(par2, par3, par4, var11, 2);
+                    par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, var9);
                     par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
                 }
             }
@@ -152,37 +152,37 @@ public class BlockFlowing extends BlockFluid
         }
         else if (var6 >= 0 && (var6 == 0 || this.blockBlocksFlow(par1World, par2, par3 - 1, par4)))
         {
-            boolean[] var13 = this.getOptimalFlowDirections(par1World, par2, par3, par4);
-            var10 = var6 + var7;
+            boolean[] var14 = this.getOptimalFlowDirections(par1World, par2, par3, par4);
+            var11 = var6 + var7;
 
             if (var6 >= 8)
             {
-                var10 = 1;
+                var11 = 1;
             }
 
-            if (var10 >= 8)
+            if (var11 >= 8)
             {
                 return;
             }
 
-            if (var13[0])
+            if (var14[0])
             {
-                this.flowIntoBlock(par1World, par2 - 1, par3, par4, var10);
+                this.flowIntoBlock(par1World, par2 - 1, par3, par4, var11);
             }
 
-            if (var13[1])
+            if (var14[1])
             {
-                this.flowIntoBlock(par1World, par2 + 1, par3, par4, var10);
+                this.flowIntoBlock(par1World, par2 + 1, par3, par4, var11);
             }
 
-            if (var13[2])
+            if (var14[2])
             {
-                this.flowIntoBlock(par1World, par2, par3, par4 - 1, var10);
+                this.flowIntoBlock(par1World, par2, par3, par4 - 1, var11);
             }
 
-            if (var13[3])
+            if (var14[3])
             {
-                this.flowIntoBlock(par1World, par2, par3, par4 + 1, var10);
+                this.flowIntoBlock(par1World, par2, par3, par4 + 1, var11);
             }
         }
     }
@@ -418,6 +418,6 @@ public class BlockFlowing extends BlockFluid
 
     public boolean func_82506_l()
     {
-        return false;
+        return true;
     }
 }

@@ -18,8 +18,8 @@ public class DamageSource
     public static DamageSource fallingBlock = new DamageSource("fallingBlock");
 
     /** This kind of damage can be blocked or not. */
-    private boolean isUnblockable = false;
-    private boolean isDamageAllowedInCreativeMode = false;
+    private boolean isUnblockable;
+    private boolean isDamageAllowedInCreativeMode;
     private float hungerDamage = 0.3F;
 
     /** This kind of damage is based on fire or not. */
@@ -34,13 +34,13 @@ public class DamageSource
     private boolean difficultyScaled;
 
     /** Whether the damage is magic based. */
-    private boolean magicDamage = false;
-    private boolean explosion = false;
+    private boolean magicDamage;
+    private boolean explosion;
     public String damageType;
 
-    public static DamageSource causeMobDamage(EntityLiving par0EntityLiving)
+    public static DamageSource causeMobDamage(EntityLivingBase par0EntityLivingBase)
     {
-        return new EntityDamageSource("mob", par0EntityLiving);
+        return new EntityDamageSource("mob", par0EntityLivingBase);
     }
 
     /**
@@ -173,15 +173,12 @@ public class DamageSource
         return this;
     }
 
-    /**
-     * Returns the message to be displayed on player death.
-     */
-    public String getDeathMessage(EntityLiving par1EntityLiving)
+    public ChatMessageComponent func_111181_b(EntityLivingBase par1EntityLivingBase)
     {
-        EntityLiving var2 = par1EntityLiving.func_94060_bK();
+        EntityLivingBase var2 = par1EntityLivingBase.func_94060_bK();
         String var3 = "death.attack." + this.damageType;
         String var4 = var3 + ".player";
-        return var2 != null && StatCollector.func_94522_b(var4) ? StatCollector.translateToLocalFormatted(var4, new Object[] {par1EntityLiving.getTranslatedEntityName(), var2.getTranslatedEntityName()}): StatCollector.translateToLocalFormatted(var3, new Object[] {par1EntityLiving.getTranslatedEntityName()});
+        return var2 != null && StatCollector.func_94522_b(var4) ? ChatMessageComponent.func_111082_b(var4, new Object[] {par1EntityLivingBase.getTranslatedEntityName(), var2.getTranslatedEntityName()}): ChatMessageComponent.func_111082_b(var3, new Object[] {par1EntityLivingBase.getTranslatedEntityName()});
     }
 
     /**

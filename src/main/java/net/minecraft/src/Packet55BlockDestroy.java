@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet55BlockDestroy extends Packet
@@ -35,25 +35,25 @@ public class Packet55BlockDestroy extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.entityId = par1DataInputStream.readInt();
-        this.posX = par1DataInputStream.readInt();
-        this.posY = par1DataInputStream.readInt();
-        this.posZ = par1DataInputStream.readInt();
-        this.destroyedStage = par1DataInputStream.read();
+        this.entityId = par1DataInput.readInt();
+        this.posX = par1DataInput.readInt();
+        this.posY = par1DataInput.readInt();
+        this.posZ = par1DataInput.readInt();
+        this.destroyedStage = par1DataInput.readUnsignedByte();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.entityId);
-        par1DataOutputStream.writeInt(this.posX);
-        par1DataOutputStream.writeInt(this.posY);
-        par1DataOutputStream.writeInt(this.posZ);
-        par1DataOutputStream.write(this.destroyedStage);
+        par1DataOutput.writeInt(this.entityId);
+        par1DataOutput.writeInt(this.posX);
+        par1DataOutput.writeInt(this.posY);
+        par1DataOutput.writeInt(this.posZ);
+        par1DataOutput.write(this.destroyedStage);
     }
 
     /**

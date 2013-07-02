@@ -15,7 +15,7 @@ public class EntityLookHelper
     private float deltaLookPitch;
 
     /** Whether or not the entity is trying to look at something. */
-    private boolean isLooking = false;
+    private boolean isLooking;
     private double posX;
     private double posY;
     private double posZ;
@@ -32,7 +32,7 @@ public class EntityLookHelper
     {
         this.posX = par1Entity.posX;
 
-        if (par1Entity instanceof EntityLiving)
+        if (par1Entity instanceof EntityLivingBase)
         {
             this.posY = par1Entity.posY + (double)par1Entity.getEyeHeight();
         }

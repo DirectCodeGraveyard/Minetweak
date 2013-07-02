@@ -8,7 +8,7 @@ public class BlockEndPortal extends BlockContainer
     /**
      * true if the enderdragon has been killed - allows end portal blocks to be created in the end
      */
-    public static boolean bossDefeated = false;
+    public static boolean bossDefeated;
 
     protected BlockEndPortal(int par1, Material par2Material)
     {

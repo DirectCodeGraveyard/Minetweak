@@ -3,7 +3,7 @@ package net.minecraft.src;
 public class EntityEnderCrystal extends Entity
 {
     /** Used to create the rotation animation when rendering the crystal. */
-    public int innerRotation = 0;
+    public int innerRotation;
     public int health;
 
     public EntityEnderCrystal(World par1World)
@@ -71,7 +71,7 @@ public class EntityEnderCrystal extends Entity
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {

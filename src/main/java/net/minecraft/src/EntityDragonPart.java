@@ -8,12 +8,12 @@ public class EntityDragonPart extends Entity
     /** The name of the Dragon Part */
     public final String name;
 
-    public EntityDragonPart(IEntityMultiPart par1, String par2, float par3, float par4)
+    public EntityDragonPart(IEntityMultiPart par1IEntityMultiPart, String par2Str, float par3, float par4)
     {
-        super(par1.func_82194_d());
+        super(par1IEntityMultiPart.func_82194_d());
         this.setSize(par3, par4);
-        this.entityDragonObj = par1;
-        this.name = par2;
+        this.entityDragonObj = par1IEntityMultiPart;
+        this.name = par2Str;
     }
 
     protected void entityInit() {}
@@ -39,7 +39,7 @@ public class EntityDragonPart extends Entity
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         return this.isEntityInvulnerable() ? false : this.entityDragonObj.attackEntityFromPart(this, par1DamageSource, par2);
     }

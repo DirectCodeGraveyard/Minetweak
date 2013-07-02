@@ -1,7 +1,5 @@
 package net.minecraft.src;
 
-import static net.minecraft.src.AchievementList.*;
-
 public class Achievement extends StatBase
 {
     /**
@@ -53,24 +51,24 @@ public class Achievement extends StatBase
         this.displayColumn = par3;
         this.displayRow = par4;
 
-        if (par3 < minDisplayColumn)
+        if (par3 < AchievementList.minDisplayColumn)
         {
-            minDisplayColumn = par3;
+            AchievementList.minDisplayColumn = par3;
         }
 
-        if (par4 < minDisplayRow)
+        if (par4 < AchievementList.minDisplayRow)
         {
-            minDisplayRow = par4;
+            AchievementList.minDisplayRow = par4;
         }
 
-        if (par3 > maxDisplayColumn)
+        if (par3 > AchievementList.maxDisplayColumn)
         {
-            maxDisplayColumn = par3;
+            AchievementList.maxDisplayColumn = par3;
         }
 
-        if (par4 > maxDisplayRow)
+        if (par4 > AchievementList.maxDisplayRow)
         {
-            maxDisplayRow = par4;
+            AchievementList.maxDisplayRow = par4;
         }
 
         this.parentAchievement = par6Achievement;
@@ -102,7 +100,7 @@ public class Achievement extends StatBase
     public Achievement registerAchievement()
     {
         super.registerStat();
-        achievementList.add(this);
+        AchievementList.achievementList.add(this);
         return this;
     }
 

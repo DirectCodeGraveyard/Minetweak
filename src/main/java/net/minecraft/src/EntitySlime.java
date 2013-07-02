@@ -2,19 +2,16 @@ package net.minecraft.src;
 
 public class EntitySlime extends EntityLiving implements IMob
 {
-    /** Chances for slimes to spawn in swamps for every moon phase. */
-    private static final float[] spawnChances = new float[] {1.0F, 0.75F, 0.5F, 0.25F, 0.0F, 0.25F, 0.5F, 0.75F};
     public float field_70813_a;
     public float field_70811_b;
     public float field_70812_c;
 
     /** ticks until this slime jumps again */
-    private int slimeJumpDelay = 0;
+    private int slimeJumpDelay;
 
     public EntitySlime(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/slime.png";
         int var2 = 1 << this.rand.nextInt(3);
         this.yOffset = 0.0F;
         this.slimeJumpDelay = this.rand.nextInt(20) + 10;
@@ -32,14 +29,9 @@ public class EntitySlime extends EntityLiving implements IMob
         this.dataWatcher.updateObject(16, new Byte((byte)par1));
         this.setSize(0.6F * (float)par1, 0.6F * (float)par1);
         this.setPosition(this.posX, this.posY, this.posZ);
-        this.setEntityHealth(this.getMaxHealth());
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a((double)(par1 * par1));
+        this.setEntityHealth(this.func_110138_aP());
         this.experienceValue = par1;
-    }
-
-    public int getMaxHealth()
-    {
-        int var1 = this.getSlimeSize();
-        return var1 * var1;
     }
 
     /**
@@ -199,7 +191,7 @@ public class EntitySlime extends EntityLiving implements IMob
     {
         int var1 = this.getSlimeSize();
 
-        if (!this.worldObj.isRemote && var1 > 1 && this.getHealth() <= 0)
+        if (!this.worldObj.isRemote && var1 > 1 && this.func_110143_aJ() <= 0.0F)
         {
             int var2 = 2 + this.rand.nextInt(3);
 
@@ -226,7 +218,7 @@ public class EntitySlime extends EntityLiving implements IMob
         {
             int var2 = this.getSlimeSize();
 
-            if (this.canEntityBeSeen(par1EntityPlayer) && this.getDistanceSqToEntity(par1EntityPlayer) < 0.6D * (double)var2 * 0.6D * (double)var2 && par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), this.getAttackStrength()))
+            if (this.canEntityBeSeen(par1EntityPlayer) && this.getDistanceSqToEntity(par1EntityPlayer) < 0.6D * (double)var2 * 0.6D * (double)var2 && par1EntityPlayer.attackEntityFrom(DamageSource.causeMobDamage(this), (float)this.getAttackStrength()))
             {
                 this.playSound("mob.attack", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             }
@@ -290,7 +282,7 @@ public class EntitySlime extends EntityLiving implements IMob
             {
                 BiomeGenBase var2 = this.worldObj.getBiomeGenForCoords(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posZ));
 
-                if (var2 == BiomeGenBase.swampland && this.posY > 50.0D && this.posY < 70.0D && this.rand.nextFloat() < 0.5F && this.rand.nextFloat() < spawnChances[this.worldObj.getMoonPhase()] && this.worldObj.getBlockLightValue(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)) <= this.rand.nextInt(8))
+                if (var2 == BiomeGenBase.swampland && this.posY > 50.0D && this.posY < 70.0D && this.rand.nextFloat() < 0.5F && this.rand.nextFloat() < this.worldObj.getMoonPhase() && this.worldObj.getBlockLightValue(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)) <= this.rand.nextInt(8))
                 {
                     return super.getCanSpawnHere();
                 }

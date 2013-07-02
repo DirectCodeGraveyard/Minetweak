@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet2ClientProtocol extends Packet
@@ -14,23 +14,23 @@ public class Packet2ClientProtocol extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.protocolVersion = par1DataInputStream.readByte();
-        this.username = readString(par1DataInputStream, 16);
-        this.serverHost = readString(par1DataInputStream, 255);
-        this.serverPort = par1DataInputStream.readInt();
+        this.protocolVersion = par1DataInput.readByte();
+        this.username = readString(par1DataInput, 16);
+        this.serverHost = readString(par1DataInput, 255);
+        this.serverPort = par1DataInput.readInt();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeByte(this.protocolVersion);
-        writeString(this.username, par1DataOutputStream);
-        writeString(this.serverHost, par1DataOutputStream);
-        par1DataOutputStream.writeInt(this.serverPort);
+        par1DataOutput.writeByte(this.protocolVersion);
+        writeString(this.username, par1DataOutput);
+        writeString(this.serverHost, par1DataOutput);
+        par1DataOutput.writeInt(this.serverPort);
     }
 
     /**

@@ -232,6 +232,45 @@ public class BlockTrapDoor extends Block
         return var10;
     }
 
+    /**
+     * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
+     */
+    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
+    {
+        if (par5 == 0)
+        {
+            return false;
+        }
+        else if (par5 == 1)
+        {
+            return false;
+        }
+        else
+        {
+            if (par5 == 2)
+            {
+                ++par4;
+            }
+
+            if (par5 == 3)
+            {
+                --par4;
+            }
+
+            if (par5 == 4)
+            {
+                ++par2;
+            }
+
+            if (par5 == 5)
+            {
+                --par2;
+            }
+
+            return isValidSupportBlock(par1World.getBlockId(par2, par3, par4));
+        }
+    }
+
     public static boolean isTrapdoorOpen(int par0)
     {
         return (par0 & 4) != 0;

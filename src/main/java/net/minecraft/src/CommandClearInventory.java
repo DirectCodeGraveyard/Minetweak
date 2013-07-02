@@ -1,7 +1,8 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.List;
 
 public class CommandClearInventory extends CommandBase
 {
@@ -12,7 +13,7 @@ public class CommandClearInventory extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.clear.usage", new Object[0]);
+        return "commands.clear.usage";
     }
 
     /**
@@ -29,7 +30,7 @@ public class CommandClearInventory extends CommandBase
         int var4 = par2ArrayOfStr.length >= 2 ? parseIntWithMin(par1ICommandSender, par2ArrayOfStr[1], 1) : -1;
         int var5 = par2ArrayOfStr.length >= 3 ? parseIntWithMin(par1ICommandSender, par2ArrayOfStr[2], 0) : -1;
         int var6 = var3.inventory.clearInventory(var4, var5);
-        var3.inventoryContainer.detectAndSendChanges();
+        var3.sendContainerToPlayer(var3.inventoryContainer);
 
         if (var6 == 0)
         {

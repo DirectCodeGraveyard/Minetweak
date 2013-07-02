@@ -265,10 +265,7 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
         }
     }
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
-    public boolean interact(EntityPlayer par1EntityPlayer)
+    public boolean func_130002_c(EntityPlayer par1EntityPlayer)
     {
         if (!this.worldObj.isRemote)
         {

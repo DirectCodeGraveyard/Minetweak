@@ -7,11 +7,11 @@ public class EntityAIDefendVillage extends EntityAITarget
     /**
      * The aggressor of the iron golem's village which is now the golem's attack target.
      */
-    EntityLiving villageAgressorTarget;
+    EntityLivingBase villageAgressorTarget;
 
     public EntityAIDefendVillage(EntityIronGolem par1EntityIronGolem)
     {
-        super(par1EntityIronGolem, 16.0F, false, true);
+        super(par1EntityIronGolem, false, true);
         this.irongolem = par1EntityIronGolem;
         this.setMutexBits(1);
     }

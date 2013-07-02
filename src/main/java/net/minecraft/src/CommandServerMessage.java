@@ -1,8 +1,9 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.util.Arrays;
 import java.util.List;
-import net.minecraft.server.MinecraftServer;
 
 public class CommandServerMessage extends CommandBase
 {
@@ -22,6 +23,11 @@ public class CommandServerMessage extends CommandBase
     public int getRequiredPermissionLevel()
     {
         return 0;
+    }
+
+    public String getCommandUsage(ICommandSender par1ICommandSender)
+    {
+        return "commands.message.usage";
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
@@ -45,8 +51,8 @@ public class CommandServerMessage extends CommandBase
             else
             {
                 String var4 = func_82361_a(par1ICommandSender, par2ArrayOfStr, 1, !(par1ICommandSender instanceof EntityPlayer));
-                var3.sendChatToPlayer(EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + var3.translateString("commands.message.display.incoming", new Object[] {par1ICommandSender.getCommandSenderName(), var4}));
-                par1ICommandSender.sendChatToPlayer(EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + par1ICommandSender.translateString("commands.message.display.outgoing", new Object[] {var3.getCommandSenderName(), var4}));
+                var3.func_110122_a(ChatMessageComponent.func_111082_b("commands.message.display.incoming", new Object[] {par1ICommandSender.getCommandSenderName(), var4}).func_111059_a(EnumChatFormatting.GRAY).func_111063_b(Boolean.valueOf(true)));
+                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.message.display.outgoing", new Object[] {var3.getCommandSenderName(), var4}).func_111059_a(EnumChatFormatting.GRAY).func_111063_b(Boolean.valueOf(true)));
             }
         }
     }

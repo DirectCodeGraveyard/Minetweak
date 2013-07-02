@@ -9,18 +9,15 @@ public class ItemSaddle extends Item
         this.setCreativeTab(CreativeTabs.tabTransport);
     }
 
-    /**
-     * Called when a player right clicks an entity with an item.
-     */
-    public boolean useItemOnEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving)
+    public boolean func_111207_a(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
     {
-        if (par2EntityLiving instanceof EntityPig)
+        if (par3EntityLivingBase instanceof EntityPig)
         {
-            EntityPig var3 = (EntityPig)par2EntityLiving;
+            EntityPig var4 = (EntityPig)par3EntityLivingBase;
 
-            if (!var3.getSaddled() && !var3.isChild())
+            if (!var4.getSaddled() && !var4.isChild())
             {
-                var3.setSaddled(true);
+                var4.setSaddled(true);
                 --par1ItemStack.stackSize;
             }
 
@@ -36,9 +33,9 @@ public class ItemSaddle extends Item
      * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
      * the damage on the stack.
      */
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving)
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
     {
-        this.useItemOnEntity(par1ItemStack, par2EntityLiving);
+        this.func_111207_a(par1ItemStack, (EntityPlayer)null, par2EntityLivingBase);
         return true;
     }
 }

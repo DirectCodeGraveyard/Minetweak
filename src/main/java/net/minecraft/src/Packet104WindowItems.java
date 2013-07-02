@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 import java.util.List;
 
@@ -32,29 +32,29 @@ public class Packet104WindowItems extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.windowId = par1DataInputStream.readByte();
-        short var2 = par1DataInputStream.readShort();
+        this.windowId = par1DataInput.readByte();
+        short var2 = par1DataInput.readShort();
         this.itemStack = new ItemStack[var2];
 
         for (int var3 = 0; var3 < var2; ++var3)
         {
-            this.itemStack[var3] = readItemStack(par1DataInputStream);
+            this.itemStack[var3] = readItemStack(par1DataInput);
         }
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeByte(this.windowId);
-        par1DataOutputStream.writeShort(this.itemStack.length);
+        par1DataOutput.writeByte(this.windowId);
+        par1DataOutput.writeShort(this.itemStack.length);
 
         for (int var2 = 0; var2 < this.itemStack.length; ++var2)
         {
-            writeItemStack(this.itemStack[var2], par1DataOutputStream);
+            writeItemStack(this.itemStack[var2], par1DataOutput);
         }
     }
 

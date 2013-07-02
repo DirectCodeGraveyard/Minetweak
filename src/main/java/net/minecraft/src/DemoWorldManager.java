@@ -2,10 +2,10 @@ package net.minecraft.src;
 
 public class DemoWorldManager extends ItemInWorldManager
 {
-    private boolean field_73105_c = false;
-    private boolean demoTimeExpired = false;
-    private int field_73104_e = 0;
-    private int field_73102_f = 0;
+    private boolean field_73105_c;
+    private boolean demoTimeExpired;
+    private int field_73104_e;
+    private int field_73102_f;
 
     public DemoWorldManager(World par1World)
     {
@@ -36,7 +36,7 @@ public class DemoWorldManager extends ItemInWorldManager
         {
             if (var3 <= 6L)
             {
-                this.thisPlayerMP.sendChatToPlayer(this.thisPlayerMP.translateString("demo.day." + var3, new Object[0]));
+                this.thisPlayerMP.func_110122_a(ChatMessageComponent.func_111077_e("demo.day." + var3));
             }
         }
         else if (var3 == 1L)
@@ -56,7 +56,7 @@ public class DemoWorldManager extends ItemInWorldManager
         }
         else if (var3 == 5L && var1 % 24000L == 22000L)
         {
-            this.thisPlayerMP.sendChatToPlayer(this.thisPlayerMP.translateString("demo.day.warning", new Object[0]));
+            this.thisPlayerMP.func_110122_a(ChatMessageComponent.func_111077_e("demo.day.warning"));
         }
     }
 
@@ -67,7 +67,7 @@ public class DemoWorldManager extends ItemInWorldManager
     {
         if (this.field_73104_e > 100)
         {
-            this.thisPlayerMP.sendChatToPlayer(this.thisPlayerMP.translateString("demo.reminder", new Object[0]));
+            this.thisPlayerMP.func_110122_a(ChatMessageComponent.func_111077_e("demo.reminder"));
             this.field_73104_e = 0;
         }
     }

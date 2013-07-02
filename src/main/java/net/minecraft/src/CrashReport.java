@@ -1,10 +1,6 @@
 package net.minecraft.src;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,7 +20,7 @@ public class CrashReport
     private final List crashReportSections = new ArrayList();
 
     /** File of crash report. */
-    private File crashReportFile = null;
+    private File crashReportFile;
     private boolean field_85059_f = true;
     private StackTraceElement[] field_85060_g = new StackTraceElement[0];
 

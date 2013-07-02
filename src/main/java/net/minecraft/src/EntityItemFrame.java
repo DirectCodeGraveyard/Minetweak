@@ -32,19 +32,42 @@ public class EntityItemFrame extends EntityHanging
         return 9;
     }
 
-    /**
-     * Drop the item currently on this item frame.
-     */
-    public void dropItemStack()
+    public void func_110128_b(Entity par1Entity)
     {
-        this.entityDropItem(new ItemStack(Item.itemFrame), 0.0F);
-        ItemStack var1 = this.getDisplayedItem();
+        ItemStack var2 = this.getDisplayedItem();
 
-        if (var1 != null && this.rand.nextFloat() < this.itemDropChance)
+        if (par1Entity instanceof EntityPlayer)
         {
-            var1 = var1.copy();
-            var1.setItemFrame((EntityItemFrame)null);
-            this.entityDropItem(var1, 0.0F);
+            EntityPlayer var3 = (EntityPlayer)par1Entity;
+
+            if (var3.capabilities.isCreativeMode)
+            {
+                this.func_110131_b(var2);
+                return;
+            }
+        }
+
+        this.entityDropItem(new ItemStack(Item.itemFrame), 0.0F);
+
+        if (var2 != null && this.rand.nextFloat() < this.itemDropChance)
+        {
+            var2 = var2.copy();
+            this.func_110131_b(var2);
+            this.entityDropItem(var2, 0.0F);
+        }
+    }
+
+    private void func_110131_b(ItemStack par1ItemStack)
+    {
+        if (par1ItemStack != null)
+        {
+            if (par1ItemStack.itemID == Item.map.itemID)
+            {
+                MapData var2 = ((ItemMap)par1ItemStack.getItem()).getMapData(par1ItemStack, this.worldObj);
+                var2.playersVisibleOnMap.remove("frame-" + this.entityId);
+            }
+
+            par1ItemStack.setItemFrame((EntityItemFrame)null);
         }
     }
 
@@ -111,10 +134,7 @@ public class EntityItemFrame extends EntityHanging
         super.readEntityFromNBT(par1NBTTagCompound);
     }
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
-    public boolean interact(EntityPlayer par1EntityPlayer)
+    public boolean func_130002_c(EntityPlayer par1EntityPlayer)
     {
         if (this.getDisplayedItem() == null)
         {

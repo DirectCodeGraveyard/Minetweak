@@ -1,10 +1,6 @@
 package net.minecraft.src;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 public class LogAgent implements ILogAgent
 {
@@ -37,7 +33,7 @@ public class LogAgent implements ILogAgent
             this.serverLogger.removeHandler(var4);
         }
 
-        LogFormatter var6 = new LogFormatter(this, (LogAgentINNER1)null);
+        LogFormatter var6 = new LogFormatter(this, (LogAgentEmptyAnon)null);
         ConsoleHandler var7 = new ConsoleHandler();
         var7.setFormatter(var6);
         this.serverLogger.addHandler(var7);
@@ -54,7 +50,7 @@ public class LogAgent implements ILogAgent
         }
     }
 
-    public Logger getServerLogger()
+    public Logger func_120013_a()
     {
         return this.serverLogger;
     }

@@ -10,21 +10,20 @@ public class EntityOcelot extends EntityTameable
     public EntityOcelot(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/ozelot.png";
         this.setSize(0.6F, 0.8F);
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
-        this.tasks.addTask(3, this.aiTempt = new EntityAITempt(this, 0.18F, Item.fishRaw.itemID, true));
-        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityPlayer.class, 16.0F, 0.23F, 0.4F));
-        this.tasks.addTask(5, new EntityAIFollowOwner(this, 0.3F, 10.0F, 5.0F));
-        this.tasks.addTask(6, new EntityAIOcelotSit(this, 0.4F));
+        this.tasks.addTask(3, this.aiTempt = new EntityAITempt(this, 0.6D, Item.fishRaw.itemID, true));
+        this.tasks.addTask(4, new EntityAIAvoidEntity(this, EntityPlayer.class, 16.0F, 0.8D, 1.33D));
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 5.0F));
+        this.tasks.addTask(6, new EntityAIOcelotSit(this, 1.33D));
         this.tasks.addTask(7, new EntityAILeapAtTarget(this, 0.3F));
         this.tasks.addTask(8, new EntityAIOcelotAttack(this));
-        this.tasks.addTask(9, new EntityAIMate(this, 0.23F));
-        this.tasks.addTask(10, new EntityAIWander(this, 0.23F));
+        this.tasks.addTask(9, new EntityAIMate(this, 0.8D));
+        this.tasks.addTask(10, new EntityAIWander(this, 0.8D));
         this.tasks.addTask(11, new EntityAIWatchClosest(this, EntityPlayer.class, 10.0F));
-        this.targetTasks.addTask(1, new EntityAITargetNonTamed(this, EntityChicken.class, 14.0F, 750, false));
+        this.targetTasks.addTask(1, new EntityAITargetNonTamed(this, EntityChicken.class, 750, false));
     }
 
     protected void entityInit()
@@ -40,14 +39,14 @@ public class EntityOcelot extends EntityTameable
     {
         if (this.getMoveHelper().isUpdating())
         {
-            float var1 = this.getMoveHelper().getSpeed();
+            double var1 = this.getMoveHelper().getSpeed();
 
-            if (var1 == 0.18F)
+            if (var1 == 0.6D)
             {
                 this.setSneaking(true);
                 this.setSprinting(false);
             }
-            else if (var1 == 0.4F)
+            else if (var1 == 1.33D)
             {
                 this.setSneaking(false);
                 this.setSprinting(true);
@@ -70,7 +69,7 @@ public class EntityOcelot extends EntityTameable
      */
     protected boolean canDespawn()
     {
-        return !this.isTamed();
+        return !this.isTamed() && this.ticksExisted > 2400;
     }
 
     /**
@@ -81,9 +80,11 @@ public class EntityOcelot extends EntityTameable
         return true;
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 10;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(10.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.30000001192092896D);
     }
 
     /**
@@ -151,13 +152,13 @@ public class EntityOcelot extends EntityTameable
 
     public boolean attackEntityAsMob(Entity par1Entity)
     {
-        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3);
+        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), 3.0F);
     }
 
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -184,7 +185,7 @@ public class EntityOcelot extends EntityTameable
 
         if (this.isTamed())
         {
-            if (par1EntityPlayer.username.equalsIgnoreCase(this.getOwnerName()) && !this.worldObj.isRemote && !this.isBreedingItem(var2))
+            if (par1EntityPlayer.getCommandSenderName().equalsIgnoreCase(this.getOwnerName()) && !this.worldObj.isRemote && !this.isBreedingItem(var2))
             {
                 this.aiSit.setSitting(!this.isSitting());
             }
@@ -207,7 +208,7 @@ public class EntityOcelot extends EntityTameable
                 {
                     this.setTamed(true);
                     this.setTameSkin(1 + this.worldObj.rand.nextInt(3));
-                    this.setOwner(par1EntityPlayer.username);
+                    this.setOwner(par1EntityPlayer.getCommandSenderName());
                     this.playTameEffect(true);
                     this.aiSit.setSitting(true);
                     this.worldObj.setEntityState(this, (byte)7);
@@ -327,21 +328,22 @@ public class EntityOcelot extends EntityTameable
         return this.func_94056_bM() ? this.func_94057_bL() : (this.isTamed() ? "entity.Cat.name" : super.getEntityName());
     }
 
-    /**
-     * Initialize this creature.
-     */
-    public void initCreature()
+    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData)
     {
+        par1EntityLivingData = super.func_110161_a(par1EntityLivingData);
+
         if (this.worldObj.rand.nextInt(7) == 0)
         {
-            for (int var1 = 0; var1 < 2; ++var1)
+            for (int var2 = 0; var2 < 2; ++var2)
             {
-                EntityOcelot var2 = new EntityOcelot(this.worldObj);
-                var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-                var2.setGrowingAge(-24000);
-                this.worldObj.spawnEntityInWorld(var2);
+                EntityOcelot var3 = new EntityOcelot(this.worldObj);
+                var3.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
+                var3.setGrowingAge(-24000);
+                this.worldObj.spawnEntityInWorld(var3);
             }
         }
+
+        return par1EntityLivingData;
     }
 
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable)

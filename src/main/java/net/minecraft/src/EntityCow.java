@@ -5,15 +5,14 @@ public class EntityCow extends EntityAnimal
     public EntityCow(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/cow.png";
         this.setSize(0.9F, 1.3F);
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-        this.tasks.addTask(2, new EntityAIMate(this, 0.2F));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.25F, Item.wheat.itemID, false));
-        this.tasks.addTask(4, new EntityAIFollowParent(this, 0.25F));
-        this.tasks.addTask(5, new EntityAIWander(this, 0.2F));
+        this.tasks.addTask(1, new EntityAIPanic(this, 2.0D));
+        this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
+        this.tasks.addTask(3, new EntityAITempt(this, 1.25D, Item.wheat.itemID, false));
+        this.tasks.addTask(4, new EntityAIFollowParent(this, 1.25D));
+        this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
     }
@@ -26,9 +25,11 @@ public class EntityCow extends EntityAnimal
         return true;
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 10;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(10.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.20000000298023224D);
     }
 
     /**
@@ -114,9 +115,9 @@ public class EntityCow extends EntityAnimal
     {
         ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 
-        if (var2 != null && var2.itemID == Item.bucketEmpty.itemID)
+        if (var2 != null && var2.itemID == Item.bucketEmpty.itemID && !par1EntityPlayer.capabilities.isCreativeMode)
         {
-            if (--var2.stackSize <= 0)
+            if (var2.stackSize-- == 1)
             {
                 par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(Item.bucketMilk));
             }

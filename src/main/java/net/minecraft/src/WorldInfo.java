@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 public class WorldInfo
 {
     /** Holds the seed of the currently world. */
@@ -249,7 +251,7 @@ public class WorldInfo
         par1NBTTagCompound.setLong("Time", this.totalTime);
         par1NBTTagCompound.setLong("DayTime", this.worldTime);
         par1NBTTagCompound.setLong("SizeOnDisk", this.sizeOnDisk);
-        par1NBTTagCompound.setLong("LastPlayed", System.currentTimeMillis());
+        par1NBTTagCompound.setLong("LastPlayed", MinecraftServer.func_130071_aq());
         par1NBTTagCompound.setString("LevelName", this.levelName);
         par1NBTTagCompound.setInteger("version", this.saveVersion);
         par1NBTTagCompound.setInteger("rainTime", this.rainTime);

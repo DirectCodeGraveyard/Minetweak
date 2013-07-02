@@ -52,7 +52,7 @@ public abstract class EntityWaterMob extends EntityCreature implements IAnimals
         int var1 = this.getAir();
         super.onEntityUpdate();
 
-        if (this.isEntityAlive() && !this.isInsideOfMaterial(Material.water))
+        if (this.isEntityAlive() && !this.isInWater())
         {
             --var1;
             this.setAir(var1);
@@ -60,7 +60,7 @@ public abstract class EntityWaterMob extends EntityCreature implements IAnimals
             if (this.getAir() == -20)
             {
                 this.setAir(0);
-                this.attackEntityFrom(DamageSource.drown, 2);
+                this.attackEntityFrom(DamageSource.drown, 2.0F);
             }
         }
         else

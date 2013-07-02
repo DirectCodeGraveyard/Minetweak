@@ -4,18 +4,18 @@ public class EntityAIControlledByPlayer extends EntityAIBase
 {
     private final EntityLiving thisEntity;
     private final float maxSpeed;
-    private float currentSpeed = 0.0F;
+    private float currentSpeed;
 
     /** Whether the entity's speed is boosted. */
-    private boolean speedBoosted = false;
+    private boolean speedBoosted;
 
     /**
      * Counter for speed boosting, upon reaching maxSpeedBoostTime the speed boost will be disabled
      */
-    private int speedBoostTime = 0;
+    private int speedBoostTime;
 
     /** Maximum time the entity's speed should be boosted for. */
-    private int maxSpeedBoostTime = 0;
+    private int maxSpeedBoostTime;
 
     public EntityAIControlledByPlayer(EntityLiving par1EntityLiving, float par2)
     {

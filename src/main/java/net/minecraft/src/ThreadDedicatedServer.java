@@ -4,9 +4,9 @@ public final class ThreadDedicatedServer extends Thread
 {
     final DedicatedServer field_96244_a;
 
-    public ThreadDedicatedServer(DedicatedServer par1)
+    public ThreadDedicatedServer(DedicatedServer par1DedicatedServer)
     {
-        this.field_96244_a = par1;
+        this.field_96244_a = par1DedicatedServer;
     }
 
     public void run()

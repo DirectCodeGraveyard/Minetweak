@@ -10,9 +10,9 @@ public class Vec3Pool
 
     /** items at and above nextFreeSpace are assumed to be available */
     private final List vec3Cache = new ArrayList();
-    private int nextFreeSpace = 0;
-    private int maximumSizeSinceLastTruncation = 0;
-    private int resetCount = 0;
+    private int nextFreeSpace;
+    private int maximumSizeSinceLastTruncation;
+    private int resetCount;
 
     public Vec3Pool(int par1, int par2)
     {

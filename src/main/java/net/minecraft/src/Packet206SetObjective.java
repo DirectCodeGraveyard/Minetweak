@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet206SetObjective extends Packet
@@ -16,31 +16,31 @@ public class Packet206SetObjective extends Packet
 
     public Packet206SetObjective() {}
 
-    public Packet206SetObjective(ScoreObjective par1, int par2)
+    public Packet206SetObjective(ScoreObjective par1ScoreObjective, int par2)
     {
-        this.objectiveName = par1.getName();
-        this.objectiveDisplayName = par1.getDisplayName();
+        this.objectiveName = par1ScoreObjective.getName();
+        this.objectiveDisplayName = par1ScoreObjective.getDisplayName();
         this.change = par2;
     }
 
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.objectiveName = readString(par1DataInputStream, 16);
-        this.objectiveDisplayName = readString(par1DataInputStream, 32);
-        this.change = par1DataInputStream.readByte();
+        this.objectiveName = readString(par1DataInput, 16);
+        this.objectiveDisplayName = readString(par1DataInput, 32);
+        this.change = par1DataInput.readByte();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        writeString(this.objectiveName, par1DataOutputStream);
-        writeString(this.objectiveDisplayName, par1DataOutputStream);
-        par1DataOutputStream.writeByte(this.change);
+        writeString(this.objectiveName, par1DataOutput);
+        writeString(this.objectiveDisplayName, par1DataOutput);
+        par1DataOutput.writeByte(this.change);
     }
 
     /**

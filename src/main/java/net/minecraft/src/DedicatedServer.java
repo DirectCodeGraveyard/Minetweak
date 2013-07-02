@@ -1,10 +1,6 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
-import org.minetweak.Minetweak;
-import org.minetweak.Server;
-import org.minetweak.command.Console;
-import org.minetweak.event.server.ServerFinishedStartupEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,15 +14,18 @@ public class DedicatedServer extends MinecraftServer implements IServer
 {
     private final List pendingCommandList = Collections.synchronizedList(new ArrayList());
     private final ILogAgent field_98131_l;
+    private RConThreadQuery theRConThreadQuery;
+    private RConThreadMain theRConThreadMain;
     private PropertyManager settings;
     private boolean canSpawnStructures;
     private EnumGameType gameType;
     private NetworkListenThread networkThread;
+    private boolean guiIsEnabled;
 
     public DedicatedServer(File par1File)
     {
         super(par1File);
-        this.field_98131_l = new LogAgent("Minecraft-Server", null, (new File(par1File, "server.log")).getAbsolutePath());
+        this.field_98131_l = new LogAgent("Minecraft-Server", (String)null, (new File(par1File, "server.log")).getAbsolutePath());
         new DedicatedServerSleepThread(this);
     }
 
@@ -38,7 +37,12 @@ public class DedicatedServer extends MinecraftServer implements IServer
         DedicatedServerCommandThread var1 = new DedicatedServerCommandThread(this);
         var1.setDaemon(true);
         var1.start();
-        this.getLogAgent().func_98233_a("Starting minecraft server version 1.5.2");
+        this.getLogAgent().func_98233_a("Starting minecraft server version 1.6.1");
+
+        if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L)
+        {
+            this.getLogAgent().func_98236_b("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
+        }
 
         this.getLogAgent().func_98233_a("Loading properties");
         this.settings = new PropertyManager(new File("server.properties"), this.getLogAgent());
@@ -63,11 +67,11 @@ public class DedicatedServer extends MinecraftServer implements IServer
 
         if (this.settings.getIntProperty("difficulty", 1) < 0)
         {
-            this.settings.setProperty("difficulty", 0);
+            this.settings.setProperty("difficulty", Integer.valueOf(0));
         }
         else if (this.settings.getIntProperty("difficulty", 1) > 3)
         {
-            this.settings.setProperty("difficulty", 3);
+            this.settings.setProperty("difficulty", Integer.valueOf(3));
         }
 
         this.canSpawnStructures = this.settings.getBooleanProperty("generate-structures", true);
@@ -97,7 +101,7 @@ public class DedicatedServer extends MinecraftServer implements IServer
         catch (IOException var16)
         {
             this.getLogAgent().func_98236_b("**** FAILED TO BIND TO PORT!");
-            this.getLogAgent().logWarningFormatted("The exception was: {0}", var16.toString());
+            this.getLogAgent().logWarningFormatted("The exception was: {0}", new Object[] {var16.toString()});
             this.getLogAgent().func_98236_b("Perhaps a server is already running on that port?");
             return false;
         }
@@ -150,30 +154,25 @@ public class DedicatedServer extends MinecraftServer implements IServer
         this.setBuildLimit(this.settings.getIntProperty("max-build-height", 256));
         this.setBuildLimit((this.getBuildLimit() + 8) / 16 * 16);
         this.setBuildLimit(MathHelper.clamp_int(this.getBuildLimit(), 64, 256));
-        this.settings.setProperty("max-build-height", this.getBuildLimit());
+        this.settings.setProperty("max-build-height", Integer.valueOf(this.getBuildLimit()));
         this.getLogAgent().func_98233_a("Preparing level \"" + this.getFolderName() + "\"");
         this.loadAllWorlds(this.getFolderName(), this.getFolderName(), var9, var17, var8);
         long var12 = System.nanoTime() - var4;
-        String var14 = String.format("%.3fs", (double) var12 / 1.0E9D);
-        this.getLogAgent().func_98233_a("Done (" + var14 + ")! For help, type help");
-
-        /**
-         * Tell Minetweak that we are done loading the server
-         */
-        Minetweak.setServerDoneLoading();
+        String var14 = String.format("%.3fs", new Object[] {Double.valueOf((double)var12 / 1.0E9D)});
+        this.getLogAgent().func_98233_a("Done (" + var14 + ")! For help, type \"help\" or \"?\"");
 
         if (this.settings.getBooleanProperty("enable-query", false))
         {
             this.getLogAgent().func_98233_a("Starting GS4 status listener");
-            RConThreadQuery theRConThreadQuery = new RConThreadQuery(this);
-            theRConThreadQuery.startThread();
+            this.theRConThreadQuery = new RConThreadQuery(this);
+            this.theRConThreadQuery.startThread();
         }
 
         if (this.settings.getBooleanProperty("enable-rcon", false))
         {
             this.getLogAgent().func_98233_a("Starting remote control listener");
-            RConThreadMain theRConThreadMain = new RConThreadMain(this);
-            theRConThreadMain.startThread();
+            this.theRConThreadMain = new RConThreadMain(this);
+            this.theRConThreadMain.startThread();
         }
 
         return true;
@@ -262,8 +261,8 @@ public class DedicatedServer extends MinecraftServer implements IServer
 
     public void addServerStatsToSnooper(PlayerUsageSnooper par1PlayerUsageSnooper)
     {
-        par1PlayerUsageSnooper.addData("whitelist_enabled", this.getDedicatedPlayerList().isWhiteListEnabled());
-        par1PlayerUsageSnooper.addData("whitelist_count", this.getDedicatedPlayerList().getWhiteListedPlayers().size());
+        par1PlayerUsageSnooper.addData("whitelist_enabled", Boolean.valueOf(this.getDedicatedPlayerList().isWhiteListEnabled()));
+        par1PlayerUsageSnooper.addData("whitelist_count", Integer.valueOf(this.getDedicatedPlayerList().getWhiteListedPlayers().size()));
         super.addServerStatsToSnooper(par1PlayerUsageSnooper);
     }
 
@@ -275,15 +274,9 @@ public class DedicatedServer extends MinecraftServer implements IServer
         return this.settings.getBooleanProperty("snooper-enabled", true);
     }
 
-    public void addPendingCommand(String par1Str)
+    public void addPendingCommand(String par1Str, ICommandSender par2ICommandSender)
     {
-        Console console = new Console();
-        if (Minetweak.doesCommandExist(par1Str.split(" ")[0])) {
-            Server.handleCommand(console, par1Str);
-        } else {
-            console.sendMessage("That command doesn't exist. Type help for help.");
-        }
-        //this.pendingCommandList.add(new ServerCommand(par1Str, par2ICommandSender));
+        this.pendingCommandList.add(new ServerCommand(par1Str, par2ICommandSender));
     }
 
     public void executePendingCommands()
@@ -359,14 +352,15 @@ public class DedicatedServer extends MinecraftServer implements IServer
         return var1 != null ? var1.getAbsolutePath() : "No settings file";
     }
 
-    @Override
-    public String getPlugins() {
-        return "";
+    public void func_120011_ar()
+    {
+        MinecraftServerGui.func_120016_a(this);
+        this.guiIsEnabled = true;
     }
 
-    @Override
-    public String handleRConCommand(String var1) {
-        return null;
+    public boolean getGuiEnabled()
+    {
+        return this.guiIsEnabled;
     }
 
     /**
@@ -403,7 +397,7 @@ public class DedicatedServer extends MinecraftServer implements IServer
         {
             return false;
         }
-        else if (this.getDedicatedPlayerList().areCommandsAllowed(par5EntityPlayer.username))
+        else if (this.getDedicatedPlayerList().areCommandsAllowed(par5EntityPlayer.getCommandSenderName()))
         {
             return false;
         }
@@ -424,6 +418,11 @@ public class DedicatedServer extends MinecraftServer implements IServer
     public ILogAgent getLogAgent()
     {
         return this.field_98131_l;
+    }
+
+    public int func_110455_j()
+    {
+        return this.settings.getIntProperty("op-permission-level", 4);
     }
 
     public ServerConfigurationManager getConfigurationManager()

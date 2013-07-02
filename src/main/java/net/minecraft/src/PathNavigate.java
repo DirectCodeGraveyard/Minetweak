@@ -7,13 +7,13 @@ public class PathNavigate
 
     /** The PathEntity being followed. */
     private PathEntity currentPath;
-    private float speed;
+    private double speed;
 
     /**
      * The number of blocks (extra) +/- in each axis that get pulled out as cache for the pathfinder's search space
      */
-    private float pathSearchRange;
-    private boolean noSunPathfind = false;
+    private AttributeInstance pathSearchRange;
+    private boolean noSunPathfind;
 
     /** Time, in number of ticks, following the current path */
     private int totalTicks;
@@ -34,22 +34,22 @@ public class PathNavigate
     private boolean canPassOpenWoodenDoors = true;
 
     /** If door blocks are considered passable even when closed */
-    private boolean canPassClosedWoodenDoors = false;
+    private boolean canPassClosedWoodenDoors;
 
     /** If water blocks are avoided (at least by the pathfinder) */
-    private boolean avoidsWater = false;
+    private boolean avoidsWater;
 
     /**
      * If the entity can swim. Swimming AI enables this and the pathfinder will also cause the entity to swim straight
      * upwards when underwater
      */
-    private boolean canSwim = false;
+    private boolean canSwim;
 
-    public PathNavigate(EntityLiving par1EntityLiving, World par2World, float par3)
+    public PathNavigate(EntityLiving par1EntityLiving, World par2World)
     {
         this.theEntity = par1EntityLiving;
         this.worldObj = par2World;
-        this.pathSearchRange = par3;
+        this.pathSearchRange = par1EntityLiving.func_110148_a(SharedMonsterAttributes.field_111265_b);
     }
 
     public void setAvoidsWater(boolean par1)
@@ -94,7 +94,7 @@ public class PathNavigate
     /**
      * Sets the speed
      */
-    public void setSpeed(float par1)
+    public void setSpeed(double par1)
     {
         this.speed = par1;
     }
@@ -107,45 +107,50 @@ public class PathNavigate
         this.canSwim = par1;
     }
 
+    public float func_111269_d()
+    {
+        return (float)this.pathSearchRange.func_111126_e();
+    }
+
     /**
      * Returns the path to the given coordinates
      */
     public PathEntity getPathToXYZ(double par1, double par3, double par5)
     {
-        return !this.canNavigate() ? null : this.worldObj.getEntityPathToXYZ(this.theEntity, MathHelper.floor_double(par1), (int)par3, MathHelper.floor_double(par5), this.pathSearchRange, this.canPassOpenWoodenDoors, this.canPassClosedWoodenDoors, this.avoidsWater, this.canSwim);
+        return !this.canNavigate() ? null : this.worldObj.getEntityPathToXYZ(this.theEntity, MathHelper.floor_double(par1), (int)par3, MathHelper.floor_double(par5), this.func_111269_d(), this.canPassOpenWoodenDoors, this.canPassClosedWoodenDoors, this.avoidsWater, this.canSwim);
     }
 
     /**
      * Try to find and set a path to XYZ. Returns true if successful.
      */
-    public boolean tryMoveToXYZ(double par1, double par3, double par5, float par7)
+    public boolean tryMoveToXYZ(double par1, double par3, double par5, double par7)
     {
-        PathEntity var8 = this.getPathToXYZ((double)MathHelper.floor_double(par1), (double)((int)par3), (double)MathHelper.floor_double(par5));
-        return this.setPath(var8, par7);
+        PathEntity var9 = this.getPathToXYZ((double)MathHelper.floor_double(par1), (double)((int)par3), (double)MathHelper.floor_double(par5));
+        return this.setPath(var9, par7);
     }
 
     /**
      * Returns the path to the given EntityLiving
      */
-    public PathEntity getPathToEntityLiving(EntityLiving par1EntityLiving)
+    public PathEntity getPathToEntityLiving(Entity par1Entity)
     {
-        return !this.canNavigate() ? null : this.worldObj.getPathEntityToEntity(this.theEntity, par1EntityLiving, this.pathSearchRange, this.canPassOpenWoodenDoors, this.canPassClosedWoodenDoors, this.avoidsWater, this.canSwim);
+        return !this.canNavigate() ? null : this.worldObj.getPathEntityToEntity(this.theEntity, par1Entity, this.func_111269_d(), this.canPassOpenWoodenDoors, this.canPassClosedWoodenDoors, this.avoidsWater, this.canSwim);
     }
 
     /**
      * Try to find and set a path to EntityLiving. Returns true if successful.
      */
-    public boolean tryMoveToEntityLiving(EntityLiving par1EntityLiving, float par2)
+    public boolean tryMoveToEntityLiving(Entity par1Entity, double par2)
     {
-        PathEntity var3 = this.getPathToEntityLiving(par1EntityLiving);
-        return var3 != null ? this.setPath(var3, par2) : false;
+        PathEntity var4 = this.getPathToEntityLiving(par1Entity);
+        return var4 != null ? this.setPath(var4, par2) : false;
     }
 
     /**
      * sets the active path data if path is 100% unique compared to old path, checks to adjust path for sun avoiding
      * ents and stores end coords
      */
-    public boolean setPath(PathEntity par1PathEntity, float par2)
+    public boolean setPath(PathEntity par1PathEntity, double par2)
     {
         if (par1PathEntity == null)
         {
@@ -171,11 +176,11 @@ public class PathNavigate
             else
             {
                 this.speed = par2;
-                Vec3 var3 = this.getEntityPosition();
+                Vec3 var4 = this.getEntityPosition();
                 this.ticksAtLastPos = this.totalTicks;
-                this.lastPosCheck.xCoord = var3.xCoord;
-                this.lastPosCheck.yCoord = var3.yCoord;
-                this.lastPosCheck.zCoord = var3.zCoord;
+                this.lastPosCheck.xCoord = var4.xCoord;
+                this.lastPosCheck.yCoord = var4.yCoord;
+                this.lastPosCheck.zCoord = var4.zCoord;
                 return true;
             }
         }

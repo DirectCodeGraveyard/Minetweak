@@ -10,14 +10,15 @@ public class EntitySilverfish extends EntityMob
     public EntitySilverfish(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/silverfish.png";
         this.setSize(0.3F, 0.7F);
-        this.moveSpeed = 0.6F;
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 8;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(8.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.6000000238418579D);
+        this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(1.0D);
     }
 
     /**
@@ -66,7 +67,7 @@ public class EntitySilverfish extends EntityMob
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -152,7 +153,28 @@ public class EntitySilverfish extends EntityMob
 
                                 if (var8 == Block.silverfish.blockID)
                                 {
-                                    this.worldObj.destroyBlock(var1 + var6, var2 + var5, var3 + var7, false);
+                                    if (!this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"))
+                                    {
+                                        int var9 = this.worldObj.getBlockMetadata(var1 + var6, var2 + var5, var3 + var7);
+                                        Block var10 = Block.stone;
+
+                                        if (var9 == 1)
+                                        {
+                                            var10 = Block.cobblestone;
+                                        }
+
+                                        if (var9 == 2)
+                                        {
+                                            var10 = Block.stoneBrick;
+                                        }
+
+                                        this.worldObj.setBlock(var1 + var6, var2 + var5, var3 + var7, var10.blockID, 0, 3);
+                                    }
+                                    else
+                                    {
+                                        this.worldObj.destroyBlock(var1 + var6, var2 + var5, var3 + var7, false);
+                                    }
+
                                     Block.silverfish.onBlockDestroyedByPlayer(this.worldObj, var1 + var6, var2 + var5, var3 + var7, 0);
 
                                     if (this.rand.nextBoolean())
@@ -172,12 +194,12 @@ public class EntitySilverfish extends EntityMob
                 var1 = MathHelper.floor_double(this.posX);
                 var2 = MathHelper.floor_double(this.posY + 0.5D);
                 var3 = MathHelper.floor_double(this.posZ);
-                int var9 = this.rand.nextInt(6);
-                var5 = this.worldObj.getBlockId(var1 + Facing.offsetsXForSide[var9], var2 + Facing.offsetsYForSide[var9], var3 + Facing.offsetsZForSide[var9]);
+                int var11 = this.rand.nextInt(6);
+                var5 = this.worldObj.getBlockId(var1 + Facing.offsetsXForSide[var11], var2 + Facing.offsetsYForSide[var11], var3 + Facing.offsetsZForSide[var11]);
 
                 if (BlockSilverfish.getPosingIdByMetadata(var5))
                 {
-                    this.worldObj.setBlock(var1 + Facing.offsetsXForSide[var9], var2 + Facing.offsetsYForSide[var9], var3 + Facing.offsetsZForSide[var9], Block.silverfish.blockID, BlockSilverfish.getMetadataForBlockType(var5), 3);
+                    this.worldObj.setBlock(var1 + Facing.offsetsXForSide[var11], var2 + Facing.offsetsYForSide[var11], var3 + Facing.offsetsZForSide[var11], Block.silverfish.blockID, BlockSilverfish.getMetadataForBlockType(var5), 3);
                     this.spawnExplosionParticle();
                     this.setDead();
                 }
@@ -224,14 +246,6 @@ public class EntitySilverfish extends EntityMob
         {
             return false;
         }
-    }
-
-    /**
-     * Returns the amount of damage a mob should deal.
-     */
-    public int getAttackStrength(Entity par1Entity)
-    {
-        return 1;
     }
 
     /**

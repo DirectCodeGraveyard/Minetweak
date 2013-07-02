@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet102WindowClick extends Packet
@@ -33,27 +33,27 @@ public class Packet102WindowClick extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.window_Id = par1DataInputStream.readByte();
-        this.inventorySlot = par1DataInputStream.readShort();
-        this.mouseClick = par1DataInputStream.readByte();
-        this.action = par1DataInputStream.readShort();
-        this.holdingShift = par1DataInputStream.readByte();
-        this.itemStack = readItemStack(par1DataInputStream);
+        this.window_Id = par1DataInput.readByte();
+        this.inventorySlot = par1DataInput.readShort();
+        this.mouseClick = par1DataInput.readByte();
+        this.action = par1DataInput.readShort();
+        this.holdingShift = par1DataInput.readByte();
+        this.itemStack = readItemStack(par1DataInput);
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeByte(this.window_Id);
-        par1DataOutputStream.writeShort(this.inventorySlot);
-        par1DataOutputStream.writeByte(this.mouseClick);
-        par1DataOutputStream.writeShort(this.action);
-        par1DataOutputStream.writeByte(this.holdingShift);
-        writeItemStack(this.itemStack, par1DataOutputStream);
+        par1DataOutput.writeByte(this.window_Id);
+        par1DataOutput.writeShort(this.inventorySlot);
+        par1DataOutput.writeByte(this.mouseClick);
+        par1DataOutput.writeShort(this.action);
+        par1DataOutput.writeByte(this.holdingShift);
+        writeItemStack(this.itemStack, par1DataOutput);
     }
 
     /**

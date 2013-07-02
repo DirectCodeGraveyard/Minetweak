@@ -1,19 +1,20 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import net.minecraft.server.MinecraftServer;
 
 public class CommandDebug extends CommandBase
 {
     /** Time the debugging started in milliseconds. */
-    private long startTime = 0L;
+    private long startTime;
 
     /** The number of ticks when debugging started. */
-    private int startTicks = 0;
+    private int startTicks;
 
     public String getCommandName()
     {
@@ -28,6 +29,11 @@ public class CommandDebug extends CommandBase
         return 3;
     }
 
+    public String getCommandUsage(ICommandSender par1ICommandSender)
+    {
+        return "commands.debug.usage";
+    }
+
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
     {
         if (par2ArrayOfStr.length == 1)
@@ -36,7 +42,7 @@ public class CommandDebug extends CommandBase
             {
                 notifyAdmins(par1ICommandSender, "commands.debug.start", new Object[0]);
                 MinecraftServer.getServer().enableProfiling();
-                this.startTime = System.currentTimeMillis();
+                this.startTime = MinecraftServer.func_130071_aq();
                 this.startTicks = MinecraftServer.getServer().getTickCounter();
                 return;
             }
@@ -48,7 +54,7 @@ public class CommandDebug extends CommandBase
                     throw new CommandException("commands.debug.notStarted", new Object[0]);
                 }
 
-                long var3 = System.currentTimeMillis();
+                long var3 = MinecraftServer.func_130071_aq();
                 int var5 = MinecraftServer.getServer().getTickCounter();
                 long var6 = var3 - this.startTime;
                 int var8 = var5 - this.startTicks;

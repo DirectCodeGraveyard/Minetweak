@@ -8,10 +8,10 @@ public class EntityAIFollowParent extends EntityAIBase
     /** The child that is following its parent. */
     EntityAnimal childAnimal;
     EntityAnimal parentAnimal;
-    float field_75347_c;
+    double field_75347_c;
     private int field_75345_d;
 
-    public EntityAIFollowParent(EntityAnimal par1EntityAnimal, float par2)
+    public EntityAIFollowParent(EntityAnimal par1EntityAnimal, double par2)
     {
         this.childAnimal = par1EntityAnimal;
         this.field_75347_c = par2;

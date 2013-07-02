@@ -14,8 +14,6 @@ public abstract class EntityHanging extends Entity
     public EntityHanging(World par1World)
     {
         super(par1World);
-        this.tickCounter1 = 0;
-        this.hangingDirection = 0;
         this.yOffset = 0.0F;
         this.setSize(0.5F, 0.5F);
     }
@@ -112,6 +110,10 @@ public abstract class EntityHanging extends Entity
      */
     public void onUpdate()
     {
+        this.prevPosX = this.posX;
+        this.prevPosY = this.posY;
+        this.prevPosZ = this.posZ;
+
         if (this.tickCounter1++ == 100 && !this.worldObj.isRemote)
         {
             this.tickCounter1 = 0;
@@ -119,7 +121,7 @@ public abstract class EntityHanging extends Entity
             if (!this.isDead && !this.onValidSurface())
             {
                 this.setDead();
-                this.dropItemStack();
+                this.func_110128_b((Entity)null);
             }
         }
     }
@@ -214,13 +216,13 @@ public abstract class EntityHanging extends Entity
 
     public boolean func_85031_j(Entity par1Entity)
     {
-        return par1Entity instanceof EntityPlayer ? this.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)par1Entity), 0) : false;
+        return par1Entity instanceof EntityPlayer ? this.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)par1Entity), 0.0F) : false;
     }
 
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -232,19 +234,7 @@ public abstract class EntityHanging extends Entity
             {
                 this.setDead();
                 this.setBeenAttacked();
-                EntityPlayer var3 = null;
-
-                if (par1DamageSource.getEntity() instanceof EntityPlayer)
-                {
-                    var3 = (EntityPlayer)par1DamageSource.getEntity();
-                }
-
-                if (var3 != null && var3.capabilities.isCreativeMode)
-                {
-                    return true;
-                }
-
-                this.dropItemStack();
+                this.func_110128_b(par1DamageSource.getEntity());
             }
 
             return true;
@@ -259,7 +249,7 @@ public abstract class EntityHanging extends Entity
         if (!this.worldObj.isRemote && !this.isDead && par1 * par1 + par3 * par3 + par5 * par5 > 0.0D)
         {
             this.setDead();
-            this.dropItemStack();
+            this.func_110128_b((Entity)null);
         }
     }
 
@@ -271,7 +261,7 @@ public abstract class EntityHanging extends Entity
         if (!this.worldObj.isRemote && !this.isDead && par1 * par1 + par3 * par3 + par5 * par5 > 0.0D)
         {
             this.setDead();
-            this.dropItemStack();
+            this.func_110128_b((Entity)null);
         }
     }
 
@@ -290,12 +280,15 @@ public abstract class EntityHanging extends Entity
             case 0:
                 par1NBTTagCompound.setByte("Dir", (byte)2);
                 break;
+
             case 1:
                 par1NBTTagCompound.setByte("Dir", (byte)1);
                 break;
+
             case 2:
                 par1NBTTagCompound.setByte("Dir", (byte)0);
                 break;
+
             case 3:
                 par1NBTTagCompound.setByte("Dir", (byte)3);
         }
@@ -317,12 +310,15 @@ public abstract class EntityHanging extends Entity
                 case 0:
                     this.hangingDirection = 2;
                     break;
+
                 case 1:
                     this.hangingDirection = 1;
                     break;
+
                 case 2:
                     this.hangingDirection = 0;
                     break;
+
                 case 3:
                     this.hangingDirection = 3;
             }
@@ -338,8 +334,5 @@ public abstract class EntityHanging extends Entity
 
     public abstract int func_82330_g();
 
-    /**
-     * Drop the item currently on this item frame.
-     */
-    public abstract void dropItemStack();
+    public abstract void func_110128_b(Entity var1);
 }

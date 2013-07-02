@@ -5,8 +5,8 @@ final class EnchantmentModifierLiving implements IEnchantmentModifier
     /**
      * Used to calculate the (magic) extra damage based on enchantments of current equipped player item.
      */
-    public int livingModifier;
-    public EntityLiving entityLiving;
+    public float livingModifier;
+    public EntityLivingBase entityLiving;
 
     private EnchantmentModifierLiving() {}
 

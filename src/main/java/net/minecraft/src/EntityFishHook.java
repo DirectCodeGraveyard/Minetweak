@@ -12,18 +12,18 @@ public class EntityFishHook extends Entity
 
     /** The tile this entity is on, Z position */
     private int zTile = -1;
-    private int inTile = 0;
-    private boolean inGround = false;
-    public int shake = 0;
+    private int inTile;
+    private boolean inGround;
+    public int shake;
     public EntityPlayer angler;
     private int ticksInGround;
-    private int ticksInAir = 0;
+    private int ticksInAir;
 
     /** the number of ticks remaining until this fish can no longer be caught */
-    private int ticksCatchable = 0;
+    private int ticksCatchable;
 
     /** the bobber that the fish hit */
-    public Entity bobber = null;
+    public Entity bobber;
     private int fishPosRotationIncrements;
     private double fishX;
     private double fishY;
@@ -208,7 +208,7 @@ public class EntityFishHook extends Entity
             {
                 if (var3.entityHit != null)
                 {
-                    if (var3.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.angler), 0))
+                    if (var3.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.angler), 0.0F))
                     {
                         this.bobber = var3.entityHit;
                     }

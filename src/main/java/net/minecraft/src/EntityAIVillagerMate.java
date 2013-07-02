@@ -5,7 +5,7 @@ public class EntityAIVillagerMate extends EntityAIBase
     private EntityVillager villagerObj;
     private EntityVillager mate;
     private World worldObj;
-    private int matingTimeout = 0;
+    private int matingTimeout;
     Village villageObj;
 
     public EntityAIVillagerMate(EntityVillager par1EntityVillager)
@@ -94,7 +94,7 @@ public class EntityAIVillagerMate extends EntityAIBase
 
         if (this.villagerObj.getDistanceSqToEntity(this.mate) > 2.25D)
         {
-            this.villagerObj.getNavigator().tryMoveToEntityLiving(this.mate, 0.25F);
+            this.villagerObj.getNavigator().tryMoveToEntityLiving(this.mate, 0.25D);
         }
         else if (this.matingTimeout == 0 && this.mate.isMating())
         {

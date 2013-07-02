@@ -6,7 +6,7 @@ public class WorldGenHellLava extends WorldGenerator
 {
     /** Stores the ID for WorldGenHellLava */
     private int hellLavaID;
-    private boolean field_94524_b = false;
+    private boolean field_94524_b;
 
     public WorldGenHellLava(int par1, boolean par2)
     {

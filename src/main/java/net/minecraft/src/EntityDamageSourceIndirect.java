@@ -20,15 +20,12 @@ public class EntityDamageSourceIndirect extends EntityDamageSource
         return this.indirectEntity;
     }
 
-    /**
-     * Returns the message to be displayed on player death.
-     */
-    public String getDeathMessage(EntityLiving par1EntityLiving)
+    public ChatMessageComponent func_111181_b(EntityLivingBase par1EntityLivingBase)
     {
         String var2 = this.indirectEntity == null ? this.damageSourceEntity.getTranslatedEntityName() : this.indirectEntity.getTranslatedEntityName();
-        ItemStack var3 = this.indirectEntity instanceof EntityLiving ? ((EntityLiving)this.indirectEntity).getHeldItem() : null;
+        ItemStack var3 = this.indirectEntity instanceof EntityLivingBase ? ((EntityLivingBase)this.indirectEntity).getHeldItem() : null;
         String var4 = "death.attack." + this.damageType;
         String var5 = var4 + ".item";
-        return var3 != null && var3.hasDisplayName() && StatCollector.func_94522_b(var5) ? StatCollector.translateToLocalFormatted(var5, new Object[] {par1EntityLiving.getTranslatedEntityName(), var2, var3.getDisplayName()}): StatCollector.translateToLocalFormatted(var4, new Object[] {par1EntityLiving.getTranslatedEntityName(), var2});
+        return var3 != null && var3.hasDisplayName() && StatCollector.func_94522_b(var5) ? ChatMessageComponent.func_111082_b(var5, new Object[] {par1EntityLivingBase.getTranslatedEntityName(), var2, var3.getDisplayName()}): ChatMessageComponent.func_111082_b(var4, new Object[] {par1EntityLivingBase.getTranslatedEntityName(), var2});
     }
 }

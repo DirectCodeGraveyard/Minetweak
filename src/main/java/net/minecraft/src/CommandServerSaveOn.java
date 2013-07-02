@@ -17,19 +17,37 @@ public class CommandServerSaveOn extends CommandBase
         return 4;
     }
 
+    public String getCommandUsage(ICommandSender par1ICommandSender)
+    {
+        return "commands.save-on.usage";
+    }
+
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
     {
         MinecraftServer var3 = MinecraftServer.getServer();
+        boolean var4 = false;
 
-        for (int var4 = 0; var4 < var3.worldServers.length; ++var4)
+        for (int var5 = 0; var5 < var3.worldServers.length; ++var5)
         {
-            if (var3.worldServers[var4] != null)
+            if (var3.worldServers[var5] != null)
             {
-                WorldServer var5 = var3.worldServers[var4];
-                var5.levelSaving = false;
+                WorldServer var6 = var3.worldServers[var5];
+
+                if (var6.levelSaving)
+                {
+                    var6.levelSaving = false;
+                    var4 = true;
+                }
             }
         }
 
-        notifyAdmins(par1ICommandSender, "commands.save.enabled", new Object[0]);
+        if (var4)
+        {
+            notifyAdmins(par1ICommandSender, "commands.save.enabled", new Object[0]);
+        }
+        else
+        {
+            throw new CommandException("commands.save-on.alreadyOn", new Object[0]);
+        }
     }
 }

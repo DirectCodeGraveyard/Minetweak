@@ -23,9 +23,11 @@ public class WeightedRandomMinecart extends WeightedRandomItem
                     case 0:
                         var4 = "MinecartRideable";
                         break;
+
                     case 1:
                         var4 = "MinecartChest";
                         break;
+
                     case 2:
                         var4 = "MinecartFurnace";
                 }
@@ -54,9 +56,11 @@ public class WeightedRandomMinecart extends WeightedRandomItem
                     case 0:
                         par3Str = "MinecartRideable";
                         break;
+
                     case 1:
                         par3Str = "MinecartChest";
                         break;
+
                     case 2:
                         par3Str = "MinecartFurnace";
                 }

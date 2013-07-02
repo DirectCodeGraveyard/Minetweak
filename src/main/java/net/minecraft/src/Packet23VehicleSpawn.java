@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet23VehicleSpawn extends Packet
@@ -109,44 +109,44 @@ public class Packet23VehicleSpawn extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.entityId = par1DataInputStream.readInt();
-        this.type = par1DataInputStream.readByte();
-        this.xPosition = par1DataInputStream.readInt();
-        this.yPosition = par1DataInputStream.readInt();
-        this.zPosition = par1DataInputStream.readInt();
-        this.pitch = par1DataInputStream.readByte();
-        this.yaw = par1DataInputStream.readByte();
-        this.throwerEntityId = par1DataInputStream.readInt();
+        this.entityId = par1DataInput.readInt();
+        this.type = par1DataInput.readByte();
+        this.xPosition = par1DataInput.readInt();
+        this.yPosition = par1DataInput.readInt();
+        this.zPosition = par1DataInput.readInt();
+        this.pitch = par1DataInput.readByte();
+        this.yaw = par1DataInput.readByte();
+        this.throwerEntityId = par1DataInput.readInt();
 
         if (this.throwerEntityId > 0)
         {
-            this.speedX = par1DataInputStream.readShort();
-            this.speedY = par1DataInputStream.readShort();
-            this.speedZ = par1DataInputStream.readShort();
+            this.speedX = par1DataInput.readShort();
+            this.speedY = par1DataInput.readShort();
+            this.speedZ = par1DataInput.readShort();
         }
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.entityId);
-        par1DataOutputStream.writeByte(this.type);
-        par1DataOutputStream.writeInt(this.xPosition);
-        par1DataOutputStream.writeInt(this.yPosition);
-        par1DataOutputStream.writeInt(this.zPosition);
-        par1DataOutputStream.writeByte(this.pitch);
-        par1DataOutputStream.writeByte(this.yaw);
-        par1DataOutputStream.writeInt(this.throwerEntityId);
+        par1DataOutput.writeInt(this.entityId);
+        par1DataOutput.writeByte(this.type);
+        par1DataOutput.writeInt(this.xPosition);
+        par1DataOutput.writeInt(this.yPosition);
+        par1DataOutput.writeInt(this.zPosition);
+        par1DataOutput.writeByte(this.pitch);
+        par1DataOutput.writeByte(this.yaw);
+        par1DataOutput.writeInt(this.throwerEntityId);
 
         if (this.throwerEntityId > 0)
         {
-            par1DataOutputStream.writeShort(this.speedX);
-            par1DataOutputStream.writeShort(this.speedY);
-            par1DataOutputStream.writeShort(this.speedZ);
+            par1DataOutput.writeShort(this.speedX);
+            par1DataOutput.writeShort(this.speedY);
+            par1DataOutput.writeShort(this.speedZ);
         }
     }
 

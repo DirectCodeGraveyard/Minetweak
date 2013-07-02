@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet34EntityTeleport extends Packet
@@ -49,27 +49,27 @@ public class Packet34EntityTeleport extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.entityId = par1DataInputStream.readInt();
-        this.xPosition = par1DataInputStream.readInt();
-        this.yPosition = par1DataInputStream.readInt();
-        this.zPosition = par1DataInputStream.readInt();
-        this.yaw = (byte)par1DataInputStream.read();
-        this.pitch = (byte)par1DataInputStream.read();
+        this.entityId = par1DataInput.readInt();
+        this.xPosition = par1DataInput.readInt();
+        this.yPosition = par1DataInput.readInt();
+        this.zPosition = par1DataInput.readInt();
+        this.yaw = par1DataInput.readByte();
+        this.pitch = par1DataInput.readByte();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.entityId);
-        par1DataOutputStream.writeInt(this.xPosition);
-        par1DataOutputStream.writeInt(this.yPosition);
-        par1DataOutputStream.writeInt(this.zPosition);
-        par1DataOutputStream.write(this.yaw);
-        par1DataOutputStream.write(this.pitch);
+        par1DataOutput.writeInt(this.entityId);
+        par1DataOutput.writeInt(this.xPosition);
+        par1DataOutput.writeInt(this.yPosition);
+        par1DataOutput.writeInt(this.zPosition);
+        par1DataOutput.write(this.yaw);
+        par1DataOutput.write(this.pitch);
     }
 
     /**

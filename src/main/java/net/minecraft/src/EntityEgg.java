@@ -7,9 +7,9 @@ public class EntityEgg extends EntityThrowable
         super(par1World);
     }
 
-    public EntityEgg(World par1World, EntityLiving par2EntityLiving)
+    public EntityEgg(World par1World, EntityLivingBase par2EntityLivingBase)
     {
-        super(par1World, par2EntityLiving);
+        super(par1World, par2EntityLivingBase);
     }
 
     public EntityEgg(World par1World, double par2, double par4, double par6)
@@ -24,7 +24,7 @@ public class EntityEgg extends EntityThrowable
     {
         if (par1MovingObjectPosition.entityHit != null)
         {
-            par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 0);
+            par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 0.0F);
         }
 
         if (!this.worldObj.isRemote && this.rand.nextInt(8) == 0)

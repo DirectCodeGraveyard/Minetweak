@@ -6,9 +6,9 @@ public class EntityAIMoveTwardsRestriction extends EntityAIBase
     private double movePosX;
     private double movePosY;
     private double movePosZ;
-    private float movementSpeed;
+    private double movementSpeed;
 
-    public EntityAIMoveTwardsRestriction(EntityCreature par1EntityCreature, float par2)
+    public EntityAIMoveTwardsRestriction(EntityCreature par1EntityCreature, double par2)
     {
         this.theEntity = par1EntityCreature;
         this.movementSpeed = par2;
@@ -20,13 +20,13 @@ public class EntityAIMoveTwardsRestriction extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-        if (this.theEntity.isWithinHomeDistanceCurrentPosition())
+        if (this.theEntity.func_110173_bK())
         {
             return false;
         }
         else
         {
-            ChunkCoordinates var1 = this.theEntity.getHomePosition();
+            ChunkCoordinates var1 = this.theEntity.func_110172_bL();
             Vec3 var2 = RandomPositionGenerator.findRandomTargetBlockTowards(this.theEntity, 16, 7, this.theEntity.worldObj.getWorldVec3Pool().getVecFromPool((double)var1.posX, (double)var1.posY, (double)var1.posZ));
 
             if (var2 == null)

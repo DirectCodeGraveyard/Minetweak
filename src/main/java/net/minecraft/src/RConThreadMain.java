@@ -22,7 +22,7 @@ public class RConThreadMain extends RConThreadBase
     private String hostname;
 
     /** The RCon ServerSocket. */
-    private ServerSocket serverSocket = null;
+    private ServerSocket serverSocket;
 
     /** The RCon password */
     private String rconPassword;

@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet250CustomPayload extends Packet
@@ -36,29 +36,29 @@ public class Packet250CustomPayload extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.channel = readString(par1DataInputStream, 20);
-        this.length = par1DataInputStream.readShort();
+        this.channel = readString(par1DataInput, 20);
+        this.length = par1DataInput.readShort();
 
         if (this.length > 0 && this.length < 32767)
         {
             this.data = new byte[this.length];
-            par1DataInputStream.readFully(this.data);
+            par1DataInput.readFully(this.data);
         }
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        writeString(this.channel, par1DataOutputStream);
-        par1DataOutputStream.writeShort((short)this.length);
+        writeString(this.channel, par1DataOutput);
+        par1DataOutput.writeShort((short)this.length);
 
         if (this.data != null)
         {
-            par1DataOutputStream.write(this.data);
+            par1DataOutput.write(this.data);
         }
     }
 

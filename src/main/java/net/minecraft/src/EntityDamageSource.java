@@ -15,15 +15,12 @@ public class EntityDamageSource extends DamageSource
         return this.damageSourceEntity;
     }
 
-    /**
-     * Returns the message to be displayed on player death.
-     */
-    public String getDeathMessage(EntityLiving par1EntityLiving)
+    public ChatMessageComponent func_111181_b(EntityLivingBase par1EntityLivingBase)
     {
-        ItemStack var2 = this.damageSourceEntity instanceof EntityLiving ? ((EntityLiving)this.damageSourceEntity).getHeldItem() : null;
+        ItemStack var2 = this.damageSourceEntity instanceof EntityLivingBase ? ((EntityLivingBase)this.damageSourceEntity).getHeldItem() : null;
         String var3 = "death.attack." + this.damageType;
         String var4 = var3 + ".item";
-        return var2 != null && var2.hasDisplayName() && StatCollector.func_94522_b(var4) ? StatCollector.translateToLocalFormatted(var4, new Object[] {par1EntityLiving.getTranslatedEntityName(), this.damageSourceEntity.getTranslatedEntityName(), var2.getDisplayName()}): StatCollector.translateToLocalFormatted(var3, new Object[] {par1EntityLiving.getTranslatedEntityName(), this.damageSourceEntity.getTranslatedEntityName()});
+        return var2 != null && var2.hasDisplayName() && StatCollector.func_94522_b(var4) ? ChatMessageComponent.func_111082_b(var4, new Object[] {par1EntityLivingBase.getTranslatedEntityName(), this.damageSourceEntity.getTranslatedEntityName(), var2.getDisplayName()}): ChatMessageComponent.func_111082_b(var3, new Object[] {par1EntityLivingBase.getTranslatedEntityName(), this.damageSourceEntity.getTranslatedEntityName()});
     }
 
     /**
@@ -31,6 +28,6 @@ public class EntityDamageSource extends DamageSource
      */
     public boolean isDifficultyScaled()
     {
-        return this.damageSourceEntity != null && this.damageSourceEntity instanceof EntityLiving && !(this.damageSourceEntity instanceof EntityPlayer);
+        return this.damageSourceEntity != null && this.damageSourceEntity instanceof EntityLivingBase && !(this.damageSourceEntity instanceof EntityPlayer);
     }
 }

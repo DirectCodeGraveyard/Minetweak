@@ -17,6 +17,7 @@ class PlayerInstance
     /** the number of blocks that need to be updated next tick */
     private int numBlocksToUpdate;
     private int field_73260_f;
+    private long field_111198_g;
 
     final PlayerManager thePlayerManager;
 
@@ -25,7 +26,6 @@ class PlayerInstance
         this.thePlayerManager = par1PlayerManager;
         this.players = new ArrayList();
         this.blocksToUpdate = new short[64];
-        this.numBlocksToUpdate = 0;
         this.currentChunk = new ChunkCoordIntPair(par2, par3);
         par1PlayerManager.getMinecraftServer().theChunkProviderServer.loadChunk(par2, par3);
     }
@@ -41,6 +41,11 @@ class PlayerInstance
         }
         else
         {
+            if (this.players.isEmpty())
+            {
+                this.field_111198_g = PlayerManager.getWorldServer(this.thePlayerManager).getTotalWorldTime();
+            }
+
             this.players.add(par1EntityPlayerMP);
             par1EntityPlayerMP.loadedChunks.add(this.currentChunk);
         }
@@ -53,14 +58,17 @@ class PlayerInstance
     {
         if (this.players.contains(par1EntityPlayerMP))
         {
-            par1EntityPlayerMP.playerNetServerHandler.sendPacket(new Packet51MapChunk(PlayerManager.getWorldServer(this.thePlayerManager).getChunkFromChunkCoords(this.currentChunk.chunkXPos, this.currentChunk.chunkZPos), true, 0));
+            Chunk var2 = PlayerManager.getWorldServer(this.thePlayerManager).getChunkFromChunkCoords(this.currentChunk.chunkXPos, this.currentChunk.chunkZPos);
+            par1EntityPlayerMP.playerNetServerHandler.sendPacket(new Packet51MapChunk(var2, true, 0));
             this.players.remove(par1EntityPlayerMP);
             par1EntityPlayerMP.loadedChunks.remove(this.currentChunk);
 
             if (this.players.isEmpty())
             {
-                long var2 = (long)this.currentChunk.chunkXPos + 2147483647L | (long)this.currentChunk.chunkZPos + 2147483647L << 32;
-                PlayerManager.getChunkWatchers(this.thePlayerManager).remove(var2);
+                long var3 = (long)this.currentChunk.chunkXPos + 2147483647L | (long)this.currentChunk.chunkZPos + 2147483647L << 32;
+                this.func_111196_a(var2);
+                PlayerManager.getChunkWatchers(this.thePlayerManager).remove(var3);
+                PlayerManager.func_111191_d(this.thePlayerManager).remove(this);
 
                 if (this.numBlocksToUpdate > 0)
                 {
@@ -70,6 +78,17 @@ class PlayerInstance
                 this.thePlayerManager.getMinecraftServer().theChunkProviderServer.dropChunk(this.currentChunk.chunkXPos, this.currentChunk.chunkZPos);
             }
         }
+    }
+
+    public void func_111194_a()
+    {
+        this.func_111196_a(PlayerManager.getWorldServer(this.thePlayerManager).getChunkFromChunkCoords(this.currentChunk.chunkXPos, this.currentChunk.chunkZPos));
+    }
+
+    private void func_111196_a(Chunk par1Chunk)
+    {
+        par1Chunk.field_111204_q += PlayerManager.getWorldServer(this.thePlayerManager).getTotalWorldTime() - this.field_111198_g;
+        this.field_111198_g = PlayerManager.getWorldServer(this.thePlayerManager).getTotalWorldTime();
     }
 
     /**

@@ -17,7 +17,7 @@ public class ServerListenThread extends Thread
      * This map stores a list of InetAddresses and the last time which they connected at
      */
     private final HashMap recentConnections = new HashMap();
-    private int connectionCounter = 0;
+    private int connectionCounter;
     private final ServerSocket myServerSocket;
     private NetworkListenThread myNetworkListenThread;
     private final InetAddress myServerAddress;

@@ -4,14 +4,11 @@ import java.util.Comparator;
 
 public class EntityAINearestAttackableTargetSorter implements Comparator
 {
-    private Entity theEntity;
+    private final Entity theEntity;
 
-    final EntityAINearestAttackableTarget parent;
-
-    public EntityAINearestAttackableTargetSorter(EntityAINearestAttackableTarget par1EntityAINearestAttackableTarget, Entity par2Entity)
+    public EntityAINearestAttackableTargetSorter(Entity par1Entity)
     {
-        this.parent = par1EntityAINearestAttackableTarget;
-        this.theEntity = par2Entity;
+        this.theEntity = par1Entity;
     }
 
     public int compareDistanceSq(Entity par1Entity, Entity par2Entity)

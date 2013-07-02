@@ -1,12 +1,19 @@
 package net.minecraft.src;
 
+import com.google.common.collect.Maps;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegistrySimple implements IRegistry
 {
     /** Objects registered on this registry. */
-    protected final Map registryObjects = new HashMap();
+    protected final Map registryObjects = this.func_111054_a();
+
+    protected HashMap func_111054_a()
+    {
+        return Maps.newHashMap();
+    }
 
     public Object func_82594_a(Object par1Obj)
     {

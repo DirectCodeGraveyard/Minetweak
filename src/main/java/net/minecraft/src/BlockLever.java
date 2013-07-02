@@ -43,6 +43,14 @@ public class BlockLever extends Block
     }
 
     /**
+     * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
+     */
+    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
+    {
+        return par5 == 0 && par1World.isBlockNormalCube(par2, par3 + 1, par4) ? true : (par5 == 1 && par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) ? true : (par5 == 2 && par1World.isBlockNormalCube(par2, par3, par4 + 1) ? true : (par5 == 3 && par1World.isBlockNormalCube(par2, par3, par4 - 1) ? true : (par5 == 4 && par1World.isBlockNormalCube(par2 + 1, par3, par4) ? true : par5 == 5 && par1World.isBlockNormalCube(par2 - 1, par3, par4)))));
+    }
+
+    /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
@@ -95,7 +103,7 @@ public class BlockLever extends Block
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
         int var7 = par1World.getBlockMetadata(par2, par3, par4);
         int var8 = var7 & 7;
@@ -103,7 +111,7 @@ public class BlockLever extends Block
 
         if (var8 == invertMetadata(1))
         {
-            if ((MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 1) == 0)
+            if ((MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 1) == 0)
             {
                 par1World.setBlockMetadata(par2, par3, par4, 5 | var9, 2);
             }
@@ -114,7 +122,7 @@ public class BlockLever extends Block
         }
         else if (var8 == invertMetadata(0))
         {
-            if ((MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 1) == 0)
+            if ((MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 1) == 0)
             {
                 par1World.setBlockMetadata(par2, par3, par4, 7 | var9, 2);
             }
@@ -134,16 +142,22 @@ public class BlockLever extends Block
         {
             case 0:
                 return 0;
+
             case 1:
                 return 5;
+
             case 2:
                 return 4;
+
             case 3:
                 return 3;
+
             case 4:
                 return 2;
+
             case 5:
                 return 1;
+
             default:
                 return -1;
         }

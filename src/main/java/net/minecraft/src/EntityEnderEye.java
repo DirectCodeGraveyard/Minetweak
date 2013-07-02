@@ -2,8 +2,6 @@ package net.minecraft.src;
 
 public class EntityEnderEye extends Entity
 {
-    public int field_70226_a = 0;
-
     /** 'x' location the eye should float towards. */
     private double targetX;
 

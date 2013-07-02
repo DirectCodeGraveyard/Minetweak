@@ -1,24 +1,24 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet202PlayerAbilities extends Packet
 {
     /** Disables player damage. */
-    private boolean disableDamage = false;
+    private boolean disableDamage;
 
     /** Indicates whether the player is flying or not. */
-    private boolean isFlying = false;
+    private boolean isFlying;
 
     /** Whether or not to allow the player to fly when they double jump. */
-    private boolean allowFlying = false;
+    private boolean allowFlying;
 
     /**
      * Used to determine if creative mode is enabled, and therefore if items should be depleted on usage
      */
-    private boolean isCreativeMode = false;
+    private boolean isCreativeMode;
     private float flySpeed;
     private float walkSpeed;
 
@@ -37,21 +37,21 @@ public class Packet202PlayerAbilities extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        byte var2 = par1DataInputStream.readByte();
+        byte var2 = par1DataInput.readByte();
         this.setDisableDamage((var2 & 1) > 0);
         this.setFlying((var2 & 2) > 0);
         this.setAllowFlying((var2 & 4) > 0);
         this.setCreativeMode((var2 & 8) > 0);
-        this.setFlySpeed((float)par1DataInputStream.readByte() / 255.0F);
-        this.setWalkSpeed((float)par1DataInputStream.readByte() / 255.0F);
+        this.setFlySpeed(par1DataInput.readFloat());
+        this.setWalkSpeed(par1DataInput.readFloat());
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
         byte var2 = 0;
 
@@ -75,9 +75,9 @@ public class Packet202PlayerAbilities extends Packet
             var2 = (byte)(var2 | 8);
         }
 
-        par1DataOutputStream.writeByte(var2);
-        par1DataOutputStream.writeByte((int)(this.flySpeed * 255.0F));
-        par1DataOutputStream.writeByte((int)(this.walkSpeed * 255.0F));
+        par1DataOutput.writeByte(var2);
+        par1DataOutput.writeFloat(this.flySpeed);
+        par1DataOutput.writeFloat(this.walkSpeed);
     }
 
     /**

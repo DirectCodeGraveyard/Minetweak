@@ -30,7 +30,7 @@ public class PathPoint
     PathPoint previous;
 
     /** Indicates this is the origin */
-    public boolean isFirst = false;
+    public boolean isFirst;
 
     public PathPoint(int par1, int par2, int par3)
     {

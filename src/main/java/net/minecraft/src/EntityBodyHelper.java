@@ -3,13 +3,13 @@ package net.minecraft.src;
 public class EntityBodyHelper
 {
     /** Instance of EntityLiving. */
-    private EntityLiving theLiving;
-    private int field_75666_b = 0;
-    private float field_75667_c = 0.0F;
+    private EntityLivingBase theLiving;
+    private int field_75666_b;
+    private float field_75667_c;
 
-    public EntityBodyHelper(EntityLiving par1EntityLiving)
+    public EntityBodyHelper(EntityLivingBase par1EntityLivingBase)
     {
-        this.theLiving = par1EntityLiving;
+        this.theLiving = par1EntityLivingBase;
     }
 
     public void func_75664_a()
@@ -36,6 +36,7 @@ public class EntityBodyHelper
             else
             {
                 ++this.field_75666_b;
+                boolean var6 = true;
 
                 if (this.field_75666_b > 10)
                 {

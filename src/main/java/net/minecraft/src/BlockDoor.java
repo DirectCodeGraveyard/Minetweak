@@ -4,24 +4,9 @@ import java.util.Random;
 
 public class BlockDoor extends Block
 {
-    private static final String[] doorIconNames = new String[] {"doorWood_lower", "doorWood_upper", "doorIron_lower", "doorIron_upper"};
-
-    /** Used for pointing at icon names. */
-    private final int doorTypeForIcon;
-
     protected BlockDoor(int par1, Material par2Material)
     {
         super(par1, par2Material);
-
-        if (par2Material == Material.iron)
-        {
-            this.doorTypeForIcon = 2;
-        }
-        else
-        {
-            this.doorTypeForIcon = 0;
-        }
-
         float var3 = 0.5F;
         float var4 = 1.0F;
         this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, var4, 0.5F + var3);

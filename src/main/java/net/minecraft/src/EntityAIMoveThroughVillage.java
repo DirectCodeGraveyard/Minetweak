@@ -7,7 +7,7 @@ import java.util.List;
 public class EntityAIMoveThroughVillage extends EntityAIBase
 {
     private EntityCreature theEntity;
-    private float movementSpeed;
+    private double movementSpeed;
 
     /** The PathNavigate of our entity. */
     private PathEntity entityPathNavigate;
@@ -15,11 +15,11 @@ public class EntityAIMoveThroughVillage extends EntityAIBase
     private boolean isNocturnal;
     private List doorList = new ArrayList();
 
-    public EntityAIMoveThroughVillage(EntityCreature par1EntityCreature, float par2, boolean par3)
+    public EntityAIMoveThroughVillage(EntityCreature par1EntityCreature, double par2, boolean par4)
     {
         this.theEntity = par1EntityCreature;
         this.movementSpeed = par2;
-        this.isNocturnal = par3;
+        this.isNocturnal = par4;
         this.setMutexBits(1);
     }
 

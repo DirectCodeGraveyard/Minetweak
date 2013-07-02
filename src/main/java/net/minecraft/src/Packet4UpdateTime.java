@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet4UpdateTime extends Packet
@@ -14,28 +14,38 @@ public class Packet4UpdateTime extends Packet
 
     public Packet4UpdateTime() {}
 
-    public Packet4UpdateTime(long par1, long par3)
+    public Packet4UpdateTime(long par1, long par3, boolean par5)
     {
         this.worldAge = par1;
         this.time = par3;
+
+        if (!par5)
+        {
+            this.time = -this.time;
+
+            if (this.time == 0L)
+            {
+                this.time = -1L;
+            }
+        }
     }
 
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.worldAge = par1DataInputStream.readLong();
-        this.time = par1DataInputStream.readLong();
+        this.worldAge = par1DataInput.readLong();
+        this.time = par1DataInput.readLong();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeLong(this.worldAge);
-        par1DataOutputStream.writeLong(this.time);
+        par1DataOutput.writeLong(this.worldAge);
+        par1DataOutput.writeLong(this.time);
     }
 
     /**

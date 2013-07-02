@@ -5,9 +5,13 @@ public class EntityMagmaCube extends EntitySlime
     public EntityMagmaCube(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/lava.png";
         this.isImmuneToFire = true;
-        this.landMovementFactor = 0.2F;
+    }
+
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.20000000298023224D);
     }
 
     /**

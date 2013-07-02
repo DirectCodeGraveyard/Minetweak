@@ -6,7 +6,7 @@ public abstract class EntityAIBase
      * A bitmask telling which other tasks may not run concurrently. The test is a simple bitwise AND - if it yields
      * zero, the two tasks may run concurrently, if not - they must run exclusively from each other.
      */
-    private int mutexBits = 0;
+    private int mutexBits;
 
     /**
      * Returns whether the EntityAIBase should begin execution.

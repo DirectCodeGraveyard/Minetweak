@@ -11,17 +11,17 @@ public class ContainerRepair extends Container
     /**
      * The 2slots where you put your items in that you want to merge and/or rename.
      */
-    private IInventory inputSlots = new InventoryRepair(this, "Repair", true, 2);
+    private IInventory inputSlots = new ContainerRepairINNER1(this, "Repair", true, 2);
     private World theWorld;
     private int field_82861_i;
     private int field_82858_j;
     private int field_82859_k;
 
     /** The maximum cost of repairing/renaming in the anvil. */
-    public int maximumCost = 0;
+    public int maximumCost;
 
     /** determined by damage of input item and stackSize of repair materials */
-    private int stackSizeToBeUsedInRepair = 0;
+    private int stackSizeToBeUsedInRepair;
     private String repairedItemName;
 
     /** The player that has this container open. */
@@ -36,7 +36,7 @@ public class ContainerRepair extends Container
         this.thePlayer = par6EntityPlayer;
         this.addSlotToContainer(new Slot(this.inputSlots, 0, 27, 47));
         this.addSlotToContainer(new Slot(this.inputSlots, 1, 76, 47));
-        this.addSlotToContainer(new SlotRepair(this, this.outputSlot, 2, 134, 47, par2World, par3, par4, par5));
+        this.addSlotToContainer(new ContainerRepairINNER2(this, this.outputSlot, 2, 134, 47, par2World, par3, par4, par5));
         int var7;
 
         for (var7 = 0; var7 < 3; ++var7)
@@ -210,8 +210,10 @@ public class ContainerRepair extends Container
                                 case 1:
                                     var23 = 8;
                                     break;
+
                                 case 2:
                                     var23 = 4;
+
                                 case 3:
                                 case 4:
                                 case 6:
@@ -220,9 +222,11 @@ public class ContainerRepair extends Container
                                 case 9:
                                 default:
                                     break;
+
                                 case 5:
                                     var23 = 2;
                                     break;
+
                                 case 10:
                                     var23 = 1;
                             }
@@ -238,7 +242,16 @@ public class ContainerRepair extends Container
                 }
             }
 
-            if (this.repairedItemName != null && this.repairedItemName.length() > 0 && !this.repairedItemName.equalsIgnoreCase(this.thePlayer.getTranslator().translateNamedKey(var1.getItemName())) && !this.repairedItemName.equals(var1.getDisplayName()))
+            if (org.apache.commons.lang3.StringUtils.isBlank(this.repairedItemName))
+            {
+                if (var1.hasDisplayName())
+                {
+                    var4 = var1.isItemStackDamageable() ? 7 : var1.stackSize * 5;
+                    var2 += var4;
+                    var5.func_135074_t();
+                }
+            }
+            else if (!this.repairedItemName.equals(var1.getDisplayName()))
             {
                 var4 = var1.isItemStackDamageable() ? 7 : var1.stackSize * 5;
                 var2 += var4;
@@ -266,8 +279,10 @@ public class ContainerRepair extends Container
                     case 1:
                         var14 = 8;
                         break;
+
                     case 2:
                         var14 = 4;
+
                     case 3:
                     case 4:
                     case 6:
@@ -276,9 +291,11 @@ public class ContainerRepair extends Container
                     case 9:
                     default:
                         break;
+
                     case 5:
                         var14 = 2;
                         break;
+
                     case 10:
                         var14 = 1;
                 }
@@ -303,7 +320,6 @@ public class ContainerRepair extends Container
 
             if (var4 == var2 && var4 > 0 && this.maximumCost >= 40)
             {
-                this.theWorld.getWorldLogAgent().func_98233_a("Naming an item only, cost too high; giving discount to cap cost to 39 levels");
                 this.maximumCost = 39;
             }
 
@@ -436,18 +452,27 @@ public class ContainerRepair extends Container
 
         if (this.getSlot(2).getHasStack())
         {
-            this.getSlot(2).getStack().setItemName(this.repairedItemName);
+            ItemStack var2 = this.getSlot(2).getStack();
+
+            if (org.apache.commons.lang3.StringUtils.isBlank(par1Str))
+            {
+                var2.func_135074_t();
+            }
+            else
+            {
+                var2.setItemName(this.repairedItemName);
+            }
         }
 
         this.updateRepairOutput();
     }
 
-    static IInventory getRepairInputInventory(ContainerRepair par0ContainerRepair)
+    static IInventory func_135073_a(ContainerRepair par0ContainerRepair)
     {
         return par0ContainerRepair.inputSlots;
     }
 
-    static int getStackSizeUsedInRepair(ContainerRepair par0ContainerRepair)
+    static int func_135072_b(ContainerRepair par0ContainerRepair)
     {
         return par0ContainerRepair.stackSizeToBeUsedInRepair;
     }

@@ -18,10 +18,6 @@ public class ItemEnderPearl extends Item
         {
             return par1ItemStack;
         }
-        else if (par3EntityPlayer.ridingEntity != null)
-        {
-            return par1ItemStack;
-        }
         else
         {
             --par1ItemStack.stackSize;

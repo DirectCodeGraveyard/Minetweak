@@ -7,15 +7,12 @@ public class EntityMinecartEmpty extends EntityMinecart
         super(par1World);
     }
 
-    public EntityMinecartEmpty(World par1, double par2, double par4, double par6)
+    public EntityMinecartEmpty(World par1World, double par2, double par4, double par6)
     {
-        super(par1, par2, par4, par6);
+        super(par1World, par2, par4, par6);
     }
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
-    public boolean interact(EntityPlayer par1EntityPlayer)
+    public boolean func_130002_c(EntityPlayer par1EntityPlayer)
     {
         if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != par1EntityPlayer)
         {

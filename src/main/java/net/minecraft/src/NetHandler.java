@@ -270,6 +270,11 @@ public abstract class NetHandler
         this.unexpectedPacket(par1Packet17Sleep);
     }
 
+    public void func_110774_a(Packet27PlayerInput par1Packet27PlayerInput)
+    {
+        this.unexpectedPacket(par1Packet27PlayerInput);
+    }
+
     public void handleGameEvent(Packet70GameEvent par1Packet70GameEvent)
     {
         this.unexpectedPacket(par1Packet70GameEvent);
@@ -457,5 +462,10 @@ public abstract class NetHandler
     public void handleWorldParticles(Packet63WorldParticles par1Packet63WorldParticles)
     {
         this.unexpectedPacket(par1Packet63WorldParticles);
+    }
+
+    public void func_110773_a(Packet44UpdateAttributes par1Packet44UpdateAttributes)
+    {
+        this.unexpectedPacket(par1Packet44UpdateAttributes);
     }
 }

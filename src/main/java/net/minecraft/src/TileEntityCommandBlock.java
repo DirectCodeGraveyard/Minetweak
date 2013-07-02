@@ -4,7 +4,7 @@ import net.minecraft.server.MinecraftServer;
 
 public class TileEntityCommandBlock extends TileEntity implements ICommandSender
 {
-    private int succesCount = 0;
+    private int succesCount;
 
     /** The command this block will execute when powered. */
     private String command = "";
@@ -62,7 +62,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         this.commandSenderName = par1Str;
     }
 
-    public void sendChatToPlayer(String par1Str) {}
+    public void func_110122_a(ChatMessageComponent par1ChatMessageComponent) {}
 
     /**
      * Returns true if the command sender is allowed to use the given command.
@@ -70,14 +70,6 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     public boolean canCommandSenderUseCommand(int par1, String par2Str)
     {
         return par1 <= 2;
-    }
-
-    /**
-     * Translates and formats the given string key with the given arguments.
-     */
-    public String translateString(String par1Str, Object ... par2ArrayOfObj)
-    {
-        return par1Str;
     }
 
     /**
@@ -112,6 +104,11 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     public ChunkCoordinates getCommandSenderPosition()
     {
         return new ChunkCoordinates(this.xCoord, this.yCoord, this.zCoord);
+    }
+
+    public World func_130014_f_()
+    {
+        return this.getWorldObj();
     }
 
     /**

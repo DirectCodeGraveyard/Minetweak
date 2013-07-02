@@ -7,7 +7,7 @@ public interface ICommandSender
      */
     String getCommandSenderName();
 
-    void sendChatToPlayer(String var1);
+    void func_110122_a(ChatMessageComponent var1);
 
     /**
      * Returns true if the command sender is allowed to use the given command.
@@ -15,12 +15,9 @@ public interface ICommandSender
     boolean canCommandSenderUseCommand(int var1, String var2);
 
     /**
-     * Translates and formats the given string key with the given arguments.
-     */
-    String translateString(String var1, Object ... var2);
-
-    /**
      * Return the position for this command sender.
      */
     ChunkCoordinates getCommandSenderPosition();
+
+    World func_130014_f_();
 }

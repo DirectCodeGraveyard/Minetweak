@@ -4,27 +4,31 @@ import java.util.Calendar;
 
 public class EntitySkeleton extends EntityMob implements IRangedAttackMob
 {
-    private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 0.25F, 20, 60, 15.0F);
-    private EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 0.31F, false);
+    private EntityAIArrowAttack aiArrowAttack = new EntityAIArrowAttack(this, 1.0D, 20, 60, 15.0F);
+    private EntityAIAttackOnCollide aiAttackOnCollide = new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.2D, false);
 
     public EntitySkeleton(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/skeleton.png";
-        this.moveSpeed = 0.25F;
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIRestrictSun(this));
-        this.tasks.addTask(3, new EntityAIFleeSun(this, this.moveSpeed));
-        this.tasks.addTask(5, new EntityAIWander(this, this.moveSpeed));
+        this.tasks.addTask(3, new EntityAIFleeSun(this, 1.0D));
+        this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
 
         if (par1World != null && !par1World.isRemote)
         {
             this.setCombatTask();
         }
+    }
+
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.25D);
     }
 
     protected void entityInit()
@@ -39,11 +43,6 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
     public boolean isAIEnabled()
     {
         return true;
-    }
-
-    public int getMaxHealth()
-    {
-        return 20;
     }
 
     /**
@@ -82,9 +81,9 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
     {
         if (super.attackEntityAsMob(par1Entity))
         {
-            if (this.getSkeletonType() == 1 && par1Entity instanceof EntityLiving)
+            if (this.getSkeletonType() == 1 && par1Entity instanceof EntityLivingBase)
             {
-                ((EntityLiving)par1Entity).addPotionEffect(new PotionEffect(Potion.wither.id, 200));
+                ((EntityLivingBase)par1Entity).addPotionEffect(new PotionEffect(Potion.wither.id, 200));
             }
 
             return true;
@@ -92,29 +91,6 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         else
         {
             return false;
-        }
-    }
-
-    /**
-     * Returns the amount of damage a mob should deal.
-     */
-    public int getAttackStrength(Entity par1Entity)
-    {
-        if (this.getSkeletonType() == 1)
-        {
-            ItemStack var2 = this.getHeldItem();
-            int var3 = 4;
-
-            if (var2 != null)
-            {
-                var3 += var2.getDamageVsEntity(this);
-            }
-
-            return var3;
-        }
-        else
-        {
-            return super.getAttackStrength(par1Entity);
         }
     }
 
@@ -170,6 +146,20 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         }
 
         super.onLivingUpdate();
+    }
+
+    /**
+     * Handles updating while being ridden by an entity
+     */
+    public void updateRidden()
+    {
+        super.updateRidden();
+
+        if (this.ridingEntity instanceof EntityCreature)
+        {
+            EntityCreature var1 = (EntityCreature)this.ridingEntity;
+            this.renderYawOffset = var1.renderYawOffset;
+        }
     }
 
     /**
@@ -252,16 +242,16 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         this.setCurrentItemOrArmor(0, new ItemStack(Item.bow));
     }
 
-    /**
-     * Initialize this creature.
-     */
-    public void initCreature()
+    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData)
     {
+        par1EntityLivingData = super.func_110161_a(par1EntityLivingData);
+
         if (this.worldObj.provider instanceof WorldProviderHell && this.getRNG().nextInt(5) > 0)
         {
             this.tasks.addTask(4, this.aiAttackOnCollide);
             this.setSkeletonType(1);
             this.setCurrentItemOrArmor(0, new ItemStack(Item.swordStone));
+            this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(4.0D);
         }
         else
         {
@@ -270,18 +260,20 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
             this.func_82162_bC();
         }
 
-        this.setCanPickUpLoot(this.rand.nextFloat() < pickUpLootProability[this.worldObj.difficultySetting]);
+        this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * this.worldObj.func_110746_b(this.posX, this.posY, this.posZ));
 
         if (this.getEquipmentInSlot(4) == null)
         {
-            Calendar var1 = this.worldObj.getCurrentDate();
+            Calendar var2 = this.worldObj.getCurrentDate();
 
-            if (var1.get(2) + 1 == 10 && var1.get(5) == 31 && this.rand.nextFloat() < 0.25F)
+            if (var2.get(2) + 1 == 10 && var2.get(5) == 31 && this.rand.nextFloat() < 0.25F)
             {
                 this.setCurrentItemOrArmor(4, new ItemStack(this.rand.nextFloat() < 0.1F ? Block.pumpkinLantern : Block.pumpkin));
                 this.equipmentDropChances[4] = 0.0F;
             }
         }
+
+        return par1EntityLivingData;
     }
 
     /**
@@ -306,9 +298,9 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
     /**
      * Attack the specified entity using a ranged attack.
      */
-    public void attackEntityWithRangedAttack(EntityLiving par1EntityLiving, float par2)
+    public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2)
     {
-        EntityArrow var3 = new EntityArrow(this.worldObj, this, par1EntityLiving, 1.6F, (float)(14 - this.worldObj.difficultySetting * 4));
+        EntityArrow var3 = new EntityArrow(this.worldObj, this, par1EntityLivingBase, 1.6F, (float)(14 - this.worldObj.difficultySetting * 4));
         int var4 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, this.getHeldItem());
         int var5 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, this.getHeldItem());
         var3.setDamage((double)(par2 * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.worldObj.difficultySetting * 0.11F));
@@ -394,5 +386,13 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob
         {
             this.setCombatTask();
         }
+    }
+
+    /**
+     * Returns the Y Offset of this entity.
+     */
+    public double getYOffset()
+    {
+        return super.getYOffset() - 0.5D;
     }
 }

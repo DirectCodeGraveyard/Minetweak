@@ -1,7 +1,8 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.List;
 
 public class CommandSetSpawnpoint extends CommandBase
 {
@@ -20,7 +21,7 @@ public class CommandSetSpawnpoint extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.spawnpoint.usage", new Object[0]);
+        return "commands.spawnpoint.usage";
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)

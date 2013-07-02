@@ -1,8 +1,10 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.server.MinecraftServer;
+import java.util.Set;
 
 public class CommandServerWhitelist extends CommandBase
 {
@@ -21,7 +23,7 @@ public class CommandServerWhitelist extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.whitelist.usage", new Object[0]);
+        return "commands.whitelist.usage";
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
@@ -44,8 +46,9 @@ public class CommandServerWhitelist extends CommandBase
 
             if (par2ArrayOfStr[0].equals("list"))
             {
-                par1ICommandSender.sendChatToPlayer(par1ICommandSender.translateString("commands.whitelist.list", new Object[] {Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getWhiteListedPlayers().size()), Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getAvailablePlayerDat().length)}));
-                par1ICommandSender.sendChatToPlayer(joinNiceString(MinecraftServer.getServer().getConfigurationManager().getWhiteListedPlayers().toArray(new String[0])));
+                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.whitelist.list", new Object[] {Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getWhiteListedPlayers().size()), Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getAvailablePlayerDat().length)}));
+                Set var3 = MinecraftServer.getServer().getConfigurationManager().getWhiteListedPlayers();
+                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111066_d(joinNiceString(var3.toArray(new String[var3.size()]))));
                 return;
             }
 

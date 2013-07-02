@@ -9,8 +9,8 @@ public class EntityMoveHelper
     private double posZ;
 
     /** The speed at which the entity should move */
-    private float speed;
-    private boolean update = false;
+    private double speed;
+    private boolean update;
 
     public EntityMoveHelper(EntityLiving par1EntityLiving)
     {
@@ -25,7 +25,7 @@ public class EntityMoveHelper
         return this.update;
     }
 
-    public float getSpeed()
+    public double getSpeed()
     {
         return this.speed;
     }
@@ -33,7 +33,7 @@ public class EntityMoveHelper
     /**
      * Sets the speed and location to move to
      */
-    public void setMoveTo(double par1, double par3, double par5, float par7)
+    public void setMoveTo(double par1, double par3, double par5, double par7)
     {
         this.posX = par1;
         this.posY = par3;
@@ -59,7 +59,7 @@ public class EntityMoveHelper
             {
                 float var10 = (float)(Math.atan2(var4, var2) * 180.0D / Math.PI) - 90.0F;
                 this.entity.rotationYaw = this.limitAngle(this.entity.rotationYaw, var10, 30.0F);
-                this.entity.setAIMoveSpeed(this.speed * this.entity.getSpeedModifier());
+                this.entity.setAIMoveSpeed((float)(this.speed * this.entity.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111126_e()));
 
                 if (var6 > 0.0D && var2 * var2 + var4 * var4 < 1.0D)
                 {

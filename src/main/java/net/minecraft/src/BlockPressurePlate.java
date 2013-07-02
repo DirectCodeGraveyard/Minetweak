@@ -45,7 +45,7 @@ public class BlockPressurePlate extends BlockBasePressurePlate
 
         if (this.triggerMobType == EnumMobType.mobs)
         {
-            var5 = par1World.getEntitiesWithinAABB(EntityLiving.class, this.getSensitiveAABB(par2, par3, par4));
+            var5 = par1World.getEntitiesWithinAABB(EntityLivingBase.class, this.getSensitiveAABB(par2, par3, par4));
         }
 
         if (this.triggerMobType == EnumMobType.players)
@@ -53,7 +53,7 @@ public class BlockPressurePlate extends BlockBasePressurePlate
             var5 = par1World.getEntitiesWithinAABB(EntityPlayer.class, this.getSensitiveAABB(par2, par3, par4));
         }
 
-        if (!var5.isEmpty())
+        if (var5 != null && !var5.isEmpty())
         {
             Iterator var6 = var5.iterator();
 

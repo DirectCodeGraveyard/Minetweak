@@ -1,8 +1,9 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.server.MinecraftServer;
 
 public class CommandServerOp extends CommandBase
 {
@@ -21,7 +22,7 @@ public class CommandServerOp extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.op.usage", new Object[0]);
+        return "commands.op.usage";
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)

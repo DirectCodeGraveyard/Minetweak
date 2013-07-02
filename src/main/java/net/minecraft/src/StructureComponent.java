@@ -156,10 +156,13 @@ public abstract class StructureComponent
             case 0:
             case 2:
                 return this.boundingBox.minX + par1;
+
             case 1:
                 return this.boundingBox.maxX - par2;
+
             case 3:
                 return this.boundingBox.minX + par2;
+
             default:
                 return par1;
         }
@@ -176,11 +179,14 @@ public abstract class StructureComponent
         {
             case 0:
                 return this.boundingBox.minZ + par2;
+
             case 1:
             case 3:
                 return this.boundingBox.minZ + par1;
+
             case 2:
                 return this.boundingBox.maxZ - par2;
+
             default:
                 return par2;
         }

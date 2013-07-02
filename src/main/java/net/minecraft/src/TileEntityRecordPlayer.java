@@ -14,11 +14,11 @@ public class TileEntityRecordPlayer extends TileEntity
 
         if (par1NBTTagCompound.hasKey("RecordItem"))
         {
-            this.func_96098_a(ItemStack.loadItemStackFromNBT(par1NBTTagCompound.getCompoundTag("RecordItem")));
+            this.func_110135_a(ItemStack.loadItemStackFromNBT(par1NBTTagCompound.getCompoundTag("RecordItem")));
         }
         else if (par1NBTTagCompound.getInteger("Record") > 0)
         {
-            this.func_96098_a(new ItemStack(par1NBTTagCompound.getInteger("Record"), 1, 0));
+            this.func_110135_a(new ItemStack(par1NBTTagCompound.getInteger("Record"), 1, 0));
         }
     }
 
@@ -29,19 +29,19 @@ public class TileEntityRecordPlayer extends TileEntity
     {
         super.writeToNBT(par1NBTTagCompound);
 
-        if (this.func_96097_a() != null)
+        if (this.func_110136_a() != null)
         {
-            par1NBTTagCompound.setCompoundTag("RecordItem", this.func_96097_a().writeToNBT(new NBTTagCompound()));
-            par1NBTTagCompound.setInteger("Record", this.func_96097_a().itemID);
+            par1NBTTagCompound.setCompoundTag("RecordItem", this.func_110136_a().writeToNBT(new NBTTagCompound()));
+            par1NBTTagCompound.setInteger("Record", this.func_110136_a().itemID);
         }
     }
 
-    public ItemStack func_96097_a()
+    public ItemStack func_110136_a()
     {
         return this.record;
     }
 
-    public void func_96098_a(ItemStack par1ItemStack)
+    public void func_110135_a(ItemStack par1ItemStack)
     {
         this.record = par1ItemStack;
         this.onInventoryChanged();

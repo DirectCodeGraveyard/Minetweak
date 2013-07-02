@@ -21,10 +21,10 @@ public class StatBase
     private static DecimalFormat decimalFormat = new DecimalFormat("########0.00");
     public static IStatType timeStatType = new StatTypeTime();
     public static IStatType distanceStatType = new StatTypeDistance();
+    public static IStatType field_111202_k = new StatTypeFloat();
 
     public StatBase(int par1, String par2Str, IStatType par3IStatType)
     {
-        this.isIndependent = false;
         this.statId = par1;
         this.statName = par2Str;
         this.type = par3IStatType;

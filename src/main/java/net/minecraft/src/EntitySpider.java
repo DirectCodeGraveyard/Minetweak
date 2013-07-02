@@ -5,9 +5,7 @@ public class EntitySpider extends EntityMob
     public EntitySpider(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/spider.png";
         this.setSize(1.4F, 0.9F);
-        this.moveSpeed = 0.8F;
     }
 
     protected void entityInit()
@@ -29,17 +27,11 @@ public class EntitySpider extends EntityMob
         }
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 16;
-    }
-
-    /**
-     * Returns the Y offset from the entity's position for any entity riding this one.
-     */
-    public double getMountedYOffset()
-    {
-        return (double)this.height * 0.75D - 0.5D;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(16.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.800000011920929D);
     }
 
     /**
@@ -201,18 +193,39 @@ public class EntitySpider extends EntityMob
         this.dataWatcher.updateObject(16, Byte.valueOf(var2));
     }
 
-    /**
-     * Initialize this creature.
-     */
-    public void initCreature()
+    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData)
     {
+        Object par1EntityLivingData1 = super.func_110161_a(par1EntityLivingData);
+
         if (this.worldObj.rand.nextInt(100) == 0)
         {
-            EntitySkeleton var1 = new EntitySkeleton(this.worldObj);
-            var1.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-            var1.initCreature();
-            this.worldObj.spawnEntityInWorld(var1);
-            var1.mountEntity(this);
+            EntitySkeleton var2 = new EntitySkeleton(this.worldObj);
+            var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
+            var2.func_110161_a((EntityLivingData)null);
+            this.worldObj.spawnEntityInWorld(var2);
+            var2.mountEntity(this);
         }
+
+        if (par1EntityLivingData1 == null)
+        {
+            par1EntityLivingData1 = new SpiderEffectsGroupData();
+
+            if (this.worldObj.difficultySetting > 2 && this.worldObj.rand.nextFloat() < 0.1F * this.worldObj.func_110746_b(this.posX, this.posY, this.posZ))
+            {
+                ((SpiderEffectsGroupData)par1EntityLivingData1).func_111104_a(this.worldObj.rand);
+            }
+        }
+
+        if (par1EntityLivingData1 instanceof SpiderEffectsGroupData)
+        {
+            int var4 = ((SpiderEffectsGroupData)par1EntityLivingData1).field_111105_a;
+
+            if (var4 > 0 && Potion.potionTypes[var4] != null)
+            {
+                this.addPotionEffect(new PotionEffect(var4, Integer.MAX_VALUE));
+            }
+        }
+
+        return (EntityLivingData)par1EntityLivingData1;
     }
 }

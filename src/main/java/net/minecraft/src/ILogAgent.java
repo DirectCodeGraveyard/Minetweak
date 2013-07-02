@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 public interface ILogAgent
 {
-    Logger getServerLogger();
+    Logger func_120013_a();
 
     void func_98233_a(String var1);
 

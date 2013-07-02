@@ -22,12 +22,6 @@ public class BiomeEndDecorator extends BiomeDecorator
             int var1 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             int var2 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             int var3 = this.currentWorld.getTopSolidOrLiquidBlock(var1, var2);
-
-            if (var3 > 0)
-            {
-                ;
-            }
-
             this.spikeGen.generate(this.currentWorld, this.randomGenerator, var1, var3, var2);
         }
 

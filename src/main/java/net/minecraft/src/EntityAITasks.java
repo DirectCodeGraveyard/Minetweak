@@ -14,7 +14,7 @@ public class EntityAITasks
 
     /** Instance of Profiler. */
     private final Profiler theProfiler;
-    private int field_75778_d = 0;
+    private int field_75778_d;
     private int field_75779_e = 3;
 
     public EntityAITasks(Profiler par1Profiler)

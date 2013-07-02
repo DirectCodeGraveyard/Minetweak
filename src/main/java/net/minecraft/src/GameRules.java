@@ -17,6 +17,8 @@ public class GameRules
         this.addGameRule("doMobLoot", "true");
         this.addGameRule("doTileDrops", "true");
         this.addGameRule("commandBlockOutput", "true");
+        this.addGameRule("naturalRegeneration", "true");
+        this.addGameRule("doDaylightCycle", "true");
     }
 
     /**

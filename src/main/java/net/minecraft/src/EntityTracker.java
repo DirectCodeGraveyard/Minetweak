@@ -126,7 +126,7 @@ public class EntityTracker
         {
             this.trackEntity(par1Entity, 160, 20, true);
         }
-        else if (par1Entity instanceof EntityPainting)
+        else if (par1Entity instanceof EntityHanging)
         {
             this.trackEntity(par1Entity, 160, Integer.MAX_VALUE, false);
         }
@@ -137,10 +137,6 @@ public class EntityTracker
         else if (par1Entity instanceof EntityEnderCrystal)
         {
             this.trackEntity(par1Entity, 256, Integer.MAX_VALUE, false);
-        }
-        else if (par1Entity instanceof EntityItemFrame)
-        {
-            this.trackEntity(par1Entity, 160, Integer.MAX_VALUE, false);
         }
     }
 

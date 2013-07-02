@@ -11,7 +11,7 @@ public class InventoryPlayer implements IInventory
     public ItemStack[] armorInventory = new ItemStack[4];
 
     /** The index of the currently held item (0-8). */
-    public int currentItem = 0;
+    public int currentItem;
 
     /** The player whose inventory this is. */
     public EntityPlayer player;
@@ -21,7 +21,7 @@ public class InventoryPlayer implements IInventory
      * Set true whenever the inventory changes. Nothing sets it false so you will have to write your own code to check
      * it and reset the value.
      */
-    public boolean inventoryChanged = false;
+    public boolean inventoryChanged;
 
     public InventoryPlayer(EntityPlayer par1EntityPlayer)
     {
@@ -121,6 +121,22 @@ public class InventoryPlayer implements IInventory
                 var3 += var5.stackSize;
                 this.armorInventory[var4] = null;
             }
+        }
+
+        if (this.itemStack != null)
+        {
+            if (par1 > -1 && this.itemStack.itemID != par1)
+            {
+                return var3;
+            }
+
+            if (par2 > -1 && this.itemStack.getItemDamage() != par2)
+            {
+                return var3;
+            }
+
+            var3 += this.itemStack.stackSize;
+            this.setItemStack((ItemStack)null);
         }
 
         return var3;
@@ -258,6 +274,10 @@ public class InventoryPlayer implements IInventory
     public boolean addItemStackToInventory(ItemStack par1ItemStack)
     {
         if (par1ItemStack == null)
+        {
+            return false;
+        }
+        else if (par1ItemStack.stackSize == 0)
         {
             return false;
         }
@@ -533,15 +553,6 @@ public class InventoryPlayer implements IInventory
     }
 
     /**
-     * Return damage vs an entity done by the current held weapon, or 1 if nothing is held
-     */
-    public int getDamageVsEntity(Entity par1Entity)
-    {
-        ItemStack var2 = this.getStackInSlot(this.currentItem);
-        return var2 != null ? var2.getDamageVsEntity(par1Entity) : 1;
-    }
-
-    /**
      * Returns whether the current item (tool) can harvest from the specified block (actually get a result).
      */
     public boolean canHarvestBlock(Block par1Block)
@@ -587,20 +598,20 @@ public class InventoryPlayer implements IInventory
     /**
      * Damages armor in each slot by the specified amount.
      */
-    public void damageArmor(int par1)
+    public void damageArmor(float par1)
     {
-        par1 /= 4;
+        par1 /= 4.0F;
 
-        if (par1 < 1)
+        if (par1 < 1.0F)
         {
-            par1 = 1;
+            par1 = 1.0F;
         }
 
         for (int var2 = 0; var2 < this.armorInventory.length; ++var2)
         {
             if (this.armorInventory[var2] != null && this.armorInventory[var2].getItem() instanceof ItemArmor)
             {
-                this.armorInventory[var2].damageItem(par1, this.player);
+                this.armorInventory[var2].damageItem((int)par1, this.player);
 
                 if (this.armorInventory[var2].stackSize == 0)
                 {

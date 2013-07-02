@@ -10,8 +10,6 @@ public class AxisAlignedBB
     public double maxX;
     public double maxY;
     public double maxZ;
-    private Vec3 par1Vec3;
-    private Vec3 par2Vec3;
 
     /**
      * Returns a bounding box with the specified bounds. Args: minX, minY, minZ, maxX, maxY, maxZ
@@ -111,6 +109,17 @@ public class AxisAlignedBB
         double var15 = this.maxY + par3;
         double var17 = this.maxZ + par5;
         return getAABBPool().getAABB(var7, var9, var11, var13, var15, var17);
+    }
+
+    public AxisAlignedBB func_111270_a(AxisAlignedBB par1AxisAlignedBB)
+    {
+        double var2 = Math.min(this.minX, par1AxisAlignedBB.minX);
+        double var4 = Math.min(this.minY, par1AxisAlignedBB.minY);
+        double var6 = Math.min(this.minZ, par1AxisAlignedBB.minZ);
+        double var8 = Math.max(this.maxX, par1AxisAlignedBB.maxX);
+        double var10 = Math.max(this.maxY, par1AxisAlignedBB.maxY);
+        double var12 = Math.max(this.maxZ, par1AxisAlignedBB.maxZ);
+        return getAABBPool().getAABB(var2, var4, var6, var8, var10, var12);
     }
 
     /**
@@ -265,7 +274,7 @@ public class AxisAlignedBB
      */
     public boolean intersectsWith(AxisAlignedBB par1AxisAlignedBB)
     {
-        return (par1AxisAlignedBB.maxX > this.minX) && (par1AxisAlignedBB.minX < this.maxX) && (((par1AxisAlignedBB.maxY > this.minY) && (par1AxisAlignedBB.minY < this.maxY)) ? ((par1AxisAlignedBB.maxZ > this.minZ) && (par1AxisAlignedBB.minZ < this.maxZ)) : false);
+        return par1AxisAlignedBB.maxX > this.minX && par1AxisAlignedBB.minX < this.maxX ? (par1AxisAlignedBB.maxY > this.minY && par1AxisAlignedBB.minY < this.maxY ? par1AxisAlignedBB.maxZ > this.minZ && par1AxisAlignedBB.minZ < this.maxZ : false) : false;
     }
 
     /**
@@ -287,7 +296,7 @@ public class AxisAlignedBB
      */
     public boolean isVecInside(Vec3 par1Vec3)
     {
-        return par1Vec3.xCoord > this.minX && par1Vec3.xCoord < this.maxX && (par1Vec3.yCoord > this.minY && par1Vec3.yCoord < this.maxY ? par1Vec3.zCoord > this.minZ && par1Vec3.zCoord < this.maxZ : false);
+        return par1Vec3.xCoord > this.minX && par1Vec3.xCoord < this.maxX ? (par1Vec3.yCoord > this.minY && par1Vec3.yCoord < this.maxY ? par1Vec3.zCoord > this.minZ && par1Vec3.zCoord < this.maxZ : false) : false;
     }
 
     /**
@@ -325,8 +334,6 @@ public class AxisAlignedBB
 
     public MovingObjectPosition calculateIntercept(Vec3 par1Vec3, Vec3 par2Vec3)
     {
-        this.par1Vec3 = par1Vec3;
-        this.par2Vec3 = par2Vec3;
         Vec3 var3 = par1Vec3.getIntermediateWithXValue(par2Vec3, this.minX);
         Vec3 var4 = par1Vec3.getIntermediateWithXValue(par2Vec3, this.maxX);
         Vec3 var5 = par1Vec3.getIntermediateWithYValue(par2Vec3, this.minY);

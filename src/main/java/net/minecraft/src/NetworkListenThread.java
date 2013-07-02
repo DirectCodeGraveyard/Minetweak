@@ -1,10 +1,11 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import net.minecraft.server.MinecraftServer;
 
 public abstract class NetworkListenThread
 {
@@ -13,7 +14,7 @@ public abstract class NetworkListenThread
     private final List connections = Collections.synchronizedList(new ArrayList());
 
     /** Whether the network listener object is listening. */
-    public volatile boolean isListening = false;
+    public volatile boolean isListening;
 
     public NetworkListenThread(MinecraftServer par1MinecraftServer) throws IOException
     {
@@ -47,15 +48,17 @@ public abstract class NetworkListenThread
             {
                 var2.handlePackets();
             }
-            catch (Exception var5)
+            catch (Exception var6)
             {
                 if (var2.netManager instanceof MemoryConnection)
                 {
-                    CrashReport var4 = CrashReport.makeCrashReport(var5, "Ticking memory connection");
+                    CrashReport var4 = CrashReport.makeCrashReport(var6, "Ticking memory connection");
+                    CrashReportCategory var5 = var4.makeCategory("Ticking connection");
+                    var5.addCrashSectionCallable("Connection", new CallableConnectionName(this, var2));
                     throw new ReportedException(var4);
                 }
 
-                this.mcServer.getLogAgent().logWarningException("Failed to handle packet for " + var2.playerEntity.getEntityName() + "/" + var2.playerEntity.getPlayerIP() + ": " + var5, var5);
+                this.mcServer.getLogAgent().logWarningException("Failed to handle packet for " + var2.playerEntity.getEntityName() + "/" + var2.playerEntity.getPlayerIP() + ": " + var6, var6);
                 var2.kickPlayer("Internal server error");
             }
 

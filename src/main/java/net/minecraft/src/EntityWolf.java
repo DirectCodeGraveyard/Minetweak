@@ -1,5 +1,8 @@
 package net.minecraft.src;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class EntityWolf extends EntityTameable
 {
     private float field_70926_e;
@@ -18,24 +21,38 @@ public class EntityWolf extends EntityTameable
     public EntityWolf(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/wolf.png";
         this.setSize(0.6F, 0.8F);
-        this.moveSpeed = 0.3F;
         this.getNavigator().setAvoidsWater(true);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(2, this.aiSit);
         this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
-        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, this.moveSpeed, true));
-        this.tasks.addTask(5, new EntityAIFollowOwner(this, this.moveSpeed, 10.0F, 2.0F));
-        this.tasks.addTask(6, new EntityAIMate(this, this.moveSpeed));
-        this.tasks.addTask(7, new EntityAIWander(this, this.moveSpeed));
+        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
+        this.tasks.addTask(6, new EntityAIMate(this, 1.0D));
+        this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIBeg(this, 8.0F));
         this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
         this.targetTasks.addTask(2, new EntityAIOwnerHurtTarget(this));
         this.targetTasks.addTask(3, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheep.class, 16.0F, 200, false));
+        this.targetTasks.addTask(4, new EntityAITargetNonTamed(this, EntitySheep.class, 200, false));
+        this.setTamed(false);
+    }
+
+    protected void func_110147_ax()
+    {
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.30000001192092896D);
+
+        if (this.isTamed())
+        {
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20.0D);
+        }
+        else
+        {
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(8.0D);
+        }
     }
 
     /**
@@ -49,11 +66,32 @@ public class EntityWolf extends EntityTameable
     /**
      * Sets the active target the Task system uses for tracking
      */
-    public void setAttackTarget(EntityLiving par1EntityLiving)
+    public void setAttackTarget(EntityLivingBase par1EntityLivingBase)
     {
-        super.setAttackTarget(par1EntityLiving);
+        super.setAttackTarget(par1EntityLivingBase);
 
-        if (par1EntityLiving instanceof EntityPlayer)
+        if (par1EntityLivingBase == null)
+        {
+            if (!this.isAngry())
+            {
+                return;
+            }
+
+            this.setAngry(false);
+            List var2 = this.worldObj.getEntitiesWithinAABB(this.getClass(), AxisAlignedBB.getAABBPool().getAABB(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).expand(16.0D, 10.0D, 16.0D));
+            Iterator var3 = var2.iterator();
+
+            while (var3.hasNext())
+            {
+                EntityWolf var4 = (EntityWolf)var3.next();
+
+                if (this != var4)
+                {
+                    var4.setAngry(false);
+                }
+            }
+        }
+        else
         {
             this.setAngry(true);
         }
@@ -64,20 +102,15 @@ public class EntityWolf extends EntityTameable
      */
     protected void updateAITick()
     {
-        this.dataWatcher.updateObject(18, Integer.valueOf(this.getHealth()));
-    }
-
-    public int getMaxHealth()
-    {
-        return this.isTamed() ? 20 : 8;
+        this.dataWatcher.updateObject(18, Float.valueOf(this.func_110143_aJ()));
     }
 
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(18, new Integer(this.getHealth()));
+        this.dataWatcher.addObject(18, new Float(this.func_110143_aJ()));
         this.dataWatcher.addObject(19, new Byte((byte)0));
-        this.dataWatcher.addObject(20, new Byte((byte)BlockCloth.getBlockFromDye(1)));
+        this.dataWatcher.addObject(20, new Byte((byte)BlockColored.getBlockFromDye(1)));
     }
 
     /**
@@ -113,19 +146,11 @@ public class EntityWolf extends EntityTameable
     }
 
     /**
-     * Determines if an entity can be despawned, used on idle far away entities
-     */
-    protected boolean canDespawn()
-    {
-        return this.isAngry() && !this.isTamed();
-    }
-
-    /**
      * Returns the sound this mob makes while it's alive.
      */
     protected String getLivingSound()
     {
-        return this.isAngry() ? "mob.wolf.growl" : (this.rand.nextInt(3) == 0 ? (this.isTamed() && this.dataWatcher.getWatchableObjectInt(18) < 10 ? "mob.wolf.whine" : "mob.wolf.panting") : "mob.wolf.bark");
+        return this.isAngry() ? "mob.wolf.growl" : (this.rand.nextInt(3) == 0 ? (this.isTamed() && this.dataWatcher.func_111145_d(18) < 10.0F ? "mob.wolf.whine" : "mob.wolf.panting") : "mob.wolf.bark");
     }
 
     /**
@@ -256,7 +281,7 @@ public class EntityWolf extends EntityTameable
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -269,7 +294,7 @@ public class EntityWolf extends EntityTameable
 
             if (var3 != null && !(var3 instanceof EntityPlayer) && !(var3 instanceof EntityArrow))
             {
-                par2 = (par2 + 1) / 2;
+                par2 = (par2 + 1.0F) / 2.0F;
             }
 
             return super.attackEntityFrom(par1DamageSource, par2);
@@ -279,7 +304,21 @@ public class EntityWolf extends EntityTameable
     public boolean attackEntityAsMob(Entity par1Entity)
     {
         int var2 = this.isTamed() ? 4 : 2;
-        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
+        return par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)var2);
+    }
+
+    public void setTamed(boolean par1)
+    {
+        super.setTamed(par1);
+
+        if (par1)
+        {
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(20.0D);
+        }
+        else
+        {
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(8.0D);
+        }
     }
 
     /**
@@ -297,14 +336,14 @@ public class EntityWolf extends EntityTameable
                 {
                     ItemFood var3 = (ItemFood)Item.itemsList[var2.itemID];
 
-                    if (var3.isWolfsFavoriteMeat() && this.dataWatcher.getWatchableObjectInt(18) < 20)
+                    if (var3.isWolfsFavoriteMeat() && this.dataWatcher.func_111145_d(18) < 20.0F)
                     {
                         if (!par1EntityPlayer.capabilities.isCreativeMode)
                         {
                             --var2.stackSize;
                         }
 
-                        this.heal(var3.getHealAmount());
+                        this.heal((float)var3.getHealAmount());
 
                         if (var2.stackSize <= 0)
                         {
@@ -316,7 +355,7 @@ public class EntityWolf extends EntityTameable
                 }
                 else if (var2.itemID == Item.dyePowder.itemID)
                 {
-                    int var4 = BlockCloth.getBlockFromDye(var2.getItemDamage());
+                    int var4 = BlockColored.getBlockFromDye(var2.getItemDamage());
 
                     if (var4 != this.getCollarColor())
                     {
@@ -332,7 +371,7 @@ public class EntityWolf extends EntityTameable
                 }
             }
 
-            if (par1EntityPlayer.username.equalsIgnoreCase(this.getOwnerName()) && !this.worldObj.isRemote && !this.isBreedingItem(var2))
+            if (par1EntityPlayer.getCommandSenderName().equalsIgnoreCase(this.getOwnerName()) && !this.worldObj.isRemote && !this.isBreedingItem(var2))
             {
                 this.aiSit.setSitting(!this.isSitting());
                 this.isJumping = false;
@@ -357,10 +396,10 @@ public class EntityWolf extends EntityTameable
                 {
                     this.setTamed(true);
                     this.setPathToEntity((PathEntity)null);
-                    this.setAttackTarget((EntityLiving)null);
+                    this.setAttackTarget((EntityLivingBase)null);
                     this.aiSit.setSitting(true);
-                    this.setEntityHealth(20);
-                    this.setOwner(par1EntityPlayer.username);
+                    this.setEntityHealth(20.0F);
+                    this.setOwner(par1EntityPlayer.getCommandSenderName());
                     this.playTameEffect(true);
                     this.worldObj.setEntityState(this, (byte)7);
                 }
@@ -454,8 +493,6 @@ public class EntityWolf extends EntityTameable
 
     public void func_70918_i(boolean par1)
     {
-        byte var2 = this.dataWatcher.getWatchableObjectByte(19);
-
         if (par1)
         {
             this.dataWatcher.updateObject(19, Byte.valueOf((byte)1));
@@ -493,6 +530,14 @@ public class EntityWolf extends EntityTameable
     public boolean func_70922_bv()
     {
         return this.dataWatcher.getWatchableObjectByte(19) == 1;
+    }
+
+    /**
+     * Determines if an entity can be despawned, used on idle far away entities
+     */
+    protected boolean canDespawn()
+    {
+        return !this.isTamed() && this.ticksExisted > 2400;
     }
 
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable)

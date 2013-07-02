@@ -6,7 +6,7 @@ public class EntityAIEatGrass extends EntityAIBase
     private World theWorld;
 
     /** A decrementing tick used for the sheep's head offset and animation. */
-    int eatGrassTick = 0;
+    int eatGrassTick;
 
     public EntityAIEatGrass(EntityLiving par1EntityLiving)
     {

@@ -17,6 +17,11 @@ public class CommandServerPublishLocal extends CommandBase
         return 4;
     }
 
+    public String getCommandUsage(ICommandSender par1ICommandSender)
+    {
+        return "commands.publish.usage";
+    }
+
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
     {
         String var3 = MinecraftServer.getServer().shareToLAN(EnumGameType.SURVIVAL, false);

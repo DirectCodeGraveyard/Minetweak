@@ -2,16 +2,16 @@ package net.minecraft.src;
 
 public class EntityGhast extends EntityFlying implements IMob
 {
-    public int courseChangeCooldown = 0;
+    public int courseChangeCooldown;
     public double waypointX;
     public double waypointY;
     public double waypointZ;
-    private Entity targetedEntity = null;
+    private Entity targetedEntity;
 
     /** Cooldown time between target loss and new target aquirement. */
-    private int aggroCooldown = 0;
-    public int prevAttackCounter = 0;
-    public int attackCounter = 0;
+    private int aggroCooldown;
+    public int prevAttackCounter;
+    public int attackCounter;
 
     /** The explosion radius of spawned fireballs. */
     private int explosionStrength = 1;
@@ -19,7 +19,6 @@ public class EntityGhast extends EntityFlying implements IMob
     public EntityGhast(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/ghast.png";
         this.setSize(4.0F, 4.0F);
         this.isImmuneToFire = true;
         this.experienceValue = 5;
@@ -28,7 +27,7 @@ public class EntityGhast extends EntityFlying implements IMob
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -36,7 +35,7 @@ public class EntityGhast extends EntityFlying implements IMob
         }
         else if ("fireball".equals(par1DamageSource.getDamageType()) && par1DamageSource.getEntity() instanceof EntityPlayer)
         {
-            super.attackEntityFrom(par1DamageSource, 1000);
+            super.attackEntityFrom(par1DamageSource, 1000.0F);
             ((EntityPlayer)par1DamageSource.getEntity()).triggerAchievement(AchievementList.ghast);
             return true;
         }
@@ -52,19 +51,10 @@ public class EntityGhast extends EntityFlying implements IMob
         this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 10;
-    }
-
-    /**
-     * Called to update the entity's position/logic.
-     */
-    public void onUpdate()
-    {
-        super.onUpdate();
-        byte var1 = this.dataWatcher.getWatchableObjectByte(16);
-        this.texture = var1 == 1 ? "/mob/ghast_fire.png" : "/mob/ghast.png";
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(10.0D);
     }
 
     protected void updateEntityActionState()

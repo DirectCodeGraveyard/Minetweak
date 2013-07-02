@@ -1,14 +1,9 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.PortUnreachableException;
-import java.net.SocketAddress;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,13 +31,13 @@ public class RConThreadQuery extends RConThreadBase
     private String worldName;
 
     /** The remote socket querying the server */
-    private DatagramSocket querySocket = null;
+    private DatagramSocket querySocket;
 
     /** A buffer for incoming DatagramPackets */
     private byte[] buffer = new byte[1460];
 
     /** Storage for incoming DatagramPackets */
-    private DatagramPacket incomingPacket = null;
+    private DatagramPacket incomingPacket;
     private Map field_72644_p;
 
     /** The hostname of this query server */
@@ -136,7 +131,6 @@ public class RConThreadQuery extends RConThreadBase
             switch (var2[2])
             {
                 case 0:
-
                     if (!this.verifyClientAuth(par1DatagramPacket).booleanValue())
                     {
                         this.logDebug("Invalid challenge [" + var4 + "]");
@@ -167,6 +161,7 @@ public class RConThreadQuery extends RConThreadBase
                     this.sendAuthChallenge(par1DatagramPacket);
                     this.logDebug("Challenge [" + var4 + "]");
                     return true;
+
                 default:
                     return true;
             }
@@ -183,7 +178,7 @@ public class RConThreadQuery extends RConThreadBase
      */
     private byte[] createQueryResponse(DatagramPacket par1DatagramPacket) throws IOException
     {
-        long var2 = System.currentTimeMillis();
+        long var2 = MinecraftServer.func_130071_aq();
 
         if (var2 < this.lastQueryResponseTime + 5000L)
         {
@@ -284,7 +279,7 @@ public class RConThreadQuery extends RConThreadBase
     {
         if (this.running)
         {
-            long var1 = System.currentTimeMillis();
+            long var1 = MinecraftServer.func_130071_aq();
 
             if (var1 >= this.lastAuthCheckTime + 30000L)
             {
@@ -307,7 +302,7 @@ public class RConThreadQuery extends RConThreadBase
     public void run()
     {
         this.logInfo("Query running on " + this.serverHostname + ":" + this.queryPort);
-        this.lastAuthCheckTime = System.currentTimeMillis();
+        this.lastAuthCheckTime = MinecraftServer.func_130071_aq();
         this.incomingPacket = new DatagramPacket(this.buffer, this.buffer.length);
 
         try

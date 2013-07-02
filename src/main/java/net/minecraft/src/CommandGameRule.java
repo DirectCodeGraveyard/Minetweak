@@ -1,7 +1,8 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.List;
 
 public class CommandGameRule extends CommandBase
 {
@@ -20,7 +21,7 @@ public class CommandGameRule extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.gamerule.usage", new Object[0]);
+        return "commands.gamerule.usage";
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
@@ -51,7 +52,7 @@ public class CommandGameRule extends CommandBase
             if (var4.hasRule(var6))
             {
                 String var5 = var4.getGameRuleStringValue(var6);
-                par1ICommandSender.sendChatToPlayer(var6 + " = " + var5);
+                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111066_d(var6).func_111079_a(" = ").func_111079_a(var5));
             }
             else
             {
@@ -61,7 +62,7 @@ public class CommandGameRule extends CommandBase
         else if (par2ArrayOfStr.length == 0)
         {
             GameRules var3 = this.getGameRules();
-            par1ICommandSender.sendChatToPlayer(joinNiceString(var3.getRules()));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111066_d(joinNiceString(var3.getRules())));
         }
         else
         {

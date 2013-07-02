@@ -1,13 +1,8 @@
 package net.minecraft.src;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeSet;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.*;
 
 public class WorldServer extends World
 {
@@ -25,8 +20,9 @@ public class WorldServer extends World
 
     /** is false if there are no players */
     private boolean allPlayersSleeping;
-    private int updateEntityTick = 0;
+    private int updateEntityTick;
     private final Teleporter field_85177_Q;
+    private final SpawnerAnimals field_135059_Q = new SpawnerAnimals();
 
     /**
      * Double buffer of ServerBlockEventList[] for holding pending BlockEventData's
@@ -37,9 +33,9 @@ public class WorldServer extends World
      * The index into the blockEventCache; either 0, or 1, toggled in sendBlockEventPackets  where all BlockEvent are
      * applied locally and send to clients.
      */
-    private int blockEventCacheIndex = 0;
+    private int blockEventCacheIndex;
     private static final WeightedRandomChestContent[] bonusChestContent = new WeightedRandomChestContent[] {new WeightedRandomChestContent(Item.stick.itemID, 0, 1, 3, 10), new WeightedRandomChestContent(Block.planks.blockID, 0, 1, 3, 10), new WeightedRandomChestContent(Block.wood.blockID, 0, 1, 3, 10), new WeightedRandomChestContent(Item.axeStone.itemID, 0, 1, 1, 3), new WeightedRandomChestContent(Item.axeWood.itemID, 0, 1, 1, 5), new WeightedRandomChestContent(Item.pickaxeStone.itemID, 0, 1, 1, 3), new WeightedRandomChestContent(Item.pickaxeWood.itemID, 0, 1, 1, 5), new WeightedRandomChestContent(Item.appleRed.itemID, 0, 2, 3, 5), new WeightedRandomChestContent(Item.bread.itemID, 0, 2, 3, 3)};
-    private ArrayList field_94579_S = new ArrayList();
+    private List field_94579_S = new ArrayList();
 
     /** An IntHashMap of entity IDs (integers) to their Entity objects. */
     private IntHashMap entityIdMap;
@@ -96,39 +92,38 @@ public class WorldServer extends World
 
         if (this.areAllPlayersAsleep())
         {
-            boolean var1 = false;
-
-            if (this.spawnHostileMobs && this.difficultySetting >= 1)
+            if (this.getGameRules().getGameRuleBooleanValue("doDaylightCycle"))
             {
-                ;
+                long var1 = this.worldInfo.getWorldTime() + 24000L;
+                this.worldInfo.setWorldTime(var1 - var1 % 24000L);
             }
 
-            if (!var1)
-            {
-                long var2 = this.worldInfo.getWorldTime() + 24000L;
-                this.worldInfo.setWorldTime(var2 - var2 % 24000L);
-                this.wakeAllPlayers();
-            }
+            this.wakeAllPlayers();
         }
 
         this.theProfiler.startSection("mobSpawner");
 
         if (this.getGameRules().getGameRuleBooleanValue("doMobSpawning"))
         {
-            SpawnerAnimals.findChunksForSpawning(this, this.spawnHostileMobs, this.spawnPeacefulMobs, this.worldInfo.getWorldTotalTime() % 400L == 0L);
+            this.field_135059_Q.findChunksForSpawning(this, this.spawnHostileMobs, this.spawnPeacefulMobs, this.worldInfo.getWorldTotalTime() % 400L == 0L);
         }
 
         this.theProfiler.endStartSection("chunkSource");
         this.chunkProvider.unloadQueuedChunks();
-        int var4 = this.calculateSkylightSubtracted(1.0F);
+        int var3 = this.calculateSkylightSubtracted(1.0F);
 
-        if (var4 != this.skylightSubtracted)
+        if (var3 != this.skylightSubtracted)
         {
-            this.skylightSubtracted = var4;
+            this.skylightSubtracted = var3;
         }
 
         this.worldInfo.incrementTotalWorldTime(this.worldInfo.getWorldTotalTime() + 1L);
-        this.worldInfo.setWorldTime(this.worldInfo.getWorldTime() + 1L);
+
+        if (this.getGameRules().getGameRuleBooleanValue("doDaylightCycle"))
+        {
+            this.worldInfo.setWorldTime(this.worldInfo.getWorldTime() + 1L);
+        }
+
         this.theProfiler.endStartSection("tickPending");
         this.tickUpdates(false);
         this.theProfiler.endStartSection("tickTiles");
@@ -363,6 +358,8 @@ public class WorldServer extends World
         {
             if (Block.blocksList[par4].func_82506_l())
             {
+                var8 = 8;
+
                 if (this.checkChunksExist(var7.xCoord - var8, var7.yCoord - var8, var7.zCoord - var8, var7.xCoord + var8, var7.yCoord + var8, var7.zCoord + var8))
                 {
                     int var9 = this.getBlockId(var7.xCoord, var7.yCoord, var7.zCoord);
@@ -609,7 +606,17 @@ public class WorldServer extends World
      */
     public void uncheckedUpdateEntity(Entity par1Entity, boolean par2)
     {
-        super.updateEntityWithOptionalForce(par1Entity, par2);
+        try
+        {
+            super.updateEntityWithOptionalForce(par1Entity, par2);
+        }
+        catch (Throwable var6)
+        {
+            CrashReport var4 = CrashReport.makeCrashReport(var6, "Forcefully ticking entity");
+            CrashReportCategory var5 = var4.makeCategory("Entity being force ticked");
+            par1Entity.func_85029_a(var5);
+            throw new ReportedException(var4);
+        }
     }
 
     /**

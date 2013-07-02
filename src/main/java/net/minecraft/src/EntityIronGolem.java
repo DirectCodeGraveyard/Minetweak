@@ -3,28 +3,27 @@ package net.minecraft.src;
 public class EntityIronGolem extends EntityGolem
 {
     /** deincrements, and a distance-to-home check is done at 0 */
-    private int homeCheckTimer = 0;
-    Village villageObj = null;
+    private int homeCheckTimer;
+    Village villageObj;
     private int attackTimer;
     private int holdRoseTick;
 
     public EntityIronGolem(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/villager_golem.png";
         this.setSize(1.4F, 2.9F);
         this.getNavigator().setAvoidsWater(true);
-        this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 0.25F, true));
-        this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.22F, 32.0F));
-        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.16F, true));
-        this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, 0.16F));
+        this.tasks.addTask(1, new EntityAIAttackOnCollide(this, 1.0D, true));
+        this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
+        this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
+        this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, 1.0D));
         this.tasks.addTask(5, new EntityAILookAtVillager(this));
-        this.tasks.addTask(6, new EntityAIWander(this, 0.16F));
+        this.tasks.addTask(6, new EntityAIWander(this, 0.6D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIDefendVillage(this));
         this.targetTasks.addTask(2, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, true, IMob.mobSelector));
     }
 
     protected void entityInit()
@@ -53,21 +52,23 @@ public class EntityIronGolem extends EntityGolem
 
             if (this.villageObj == null)
             {
-                this.detachHome();
+                this.func_110177_bN();
             }
             else
             {
                 ChunkCoordinates var1 = this.villageObj.getCenter();
-                this.setHomeArea(var1.posX, var1.posY, var1.posZ, (int)((float)this.villageObj.getVillageRadius() * 0.6F));
+                this.func_110171_b(var1.posX, var1.posY, var1.posZ, (int)((float)this.villageObj.getVillageRadius() * 0.6F));
             }
         }
 
         super.updateAITick();
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 100;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(100.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.25D);
     }
 
     /**
@@ -82,7 +83,7 @@ public class EntityIronGolem extends EntityGolem
     {
         if (par1Entity instanceof IMob && this.getRNG().nextInt(20) == 0)
         {
-            this.setAttackTarget((EntityLiving)par1Entity);
+            this.setAttackTarget((EntityLivingBase)par1Entity);
         }
 
         super.collideWithEntity(par1Entity);
@@ -150,7 +151,7 @@ public class EntityIronGolem extends EntityGolem
     {
         this.attackTimer = 10;
         this.worldObj.setEntityState(this, (byte)4);
-        boolean var2 = par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), 7 + this.rand.nextInt(15));
+        boolean var2 = par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), (float)(7 + this.rand.nextInt(15)));
 
         if (var2)
         {

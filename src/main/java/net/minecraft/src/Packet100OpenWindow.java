@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet100OpenWindow extends Packet
@@ -16,6 +16,7 @@ public class Packet100OpenWindow extends Packet
      * provides.
      */
     public boolean useProvidedWindowTitle;
+    public int field_111008_f;
 
     public Packet100OpenWindow() {}
 
@@ -26,6 +27,12 @@ public class Packet100OpenWindow extends Packet
         this.windowTitle = par3Str;
         this.slotsCount = par4;
         this.useProvidedWindowTitle = par5;
+    }
+
+    public Packet100OpenWindow(int par1, int par2, String par3Str, int par4, boolean par5, int par6)
+    {
+        this(par1, par2, par3Str, par4, par5);
+        this.field_111008_f = par6;
     }
 
     /**
@@ -39,25 +46,35 @@ public class Packet100OpenWindow extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.windowId = par1DataInputStream.readByte() & 255;
-        this.inventoryType = par1DataInputStream.readByte() & 255;
-        this.windowTitle = readString(par1DataInputStream, 32);
-        this.slotsCount = par1DataInputStream.readByte() & 255;
-        this.useProvidedWindowTitle = par1DataInputStream.readBoolean();
+        this.windowId = par1DataInput.readByte() & 255;
+        this.inventoryType = par1DataInput.readByte() & 255;
+        this.windowTitle = readString(par1DataInput, 32);
+        this.slotsCount = par1DataInput.readByte() & 255;
+        this.useProvidedWindowTitle = par1DataInput.readBoolean();
+
+        if (this.inventoryType == 11)
+        {
+            this.field_111008_f = par1DataInput.readInt();
+        }
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeByte(this.windowId & 255);
-        par1DataOutputStream.writeByte(this.inventoryType & 255);
-        writeString(this.windowTitle, par1DataOutputStream);
-        par1DataOutputStream.writeByte(this.slotsCount & 255);
-        par1DataOutputStream.writeBoolean(this.useProvidedWindowTitle);
+        par1DataOutput.writeByte(this.windowId & 255);
+        par1DataOutput.writeByte(this.inventoryType & 255);
+        writeString(this.windowTitle, par1DataOutput);
+        par1DataOutput.writeByte(this.slotsCount & 255);
+        par1DataOutput.writeBoolean(this.useProvidedWindowTitle);
+
+        if (this.inventoryType == 11)
+        {
+            par1DataOutput.writeInt(this.field_111008_f);
+        }
     }
 
     /**
@@ -65,6 +82,6 @@ public class Packet100OpenWindow extends Packet
      */
     public int getPacketSize()
     {
-        return 4 + this.windowTitle.length();
+        return this.inventoryType == 11 ? 8 + this.windowTitle.length() : 4 + this.windowTitle.length();
     }
 }

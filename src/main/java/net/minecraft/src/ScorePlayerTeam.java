@@ -118,16 +118,15 @@ public class ScorePlayerTeam
     public int func_98299_i()
     {
         int var1 = 0;
-        int var2 = 0;
 
         if (this.func_96665_g())
         {
-            var1 |= 1 << var2++;
+            var1 |= 1;
         }
 
         if (this.func_98297_h())
         {
-            var1 |= 1 << var2++;
+            var1 |= 2;
         }
 
         return var1;

@@ -1,7 +1,8 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.List;
 
 public class CommandServerEmote extends CommandBase
 {
@@ -20,7 +21,7 @@ public class CommandServerEmote extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.me.usage", new Object[0]);
+        return "commands.me.usage";
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
@@ -28,7 +29,7 @@ public class CommandServerEmote extends CommandBase
         if (par2ArrayOfStr.length > 0)
         {
             String var3 = func_82361_a(par1ICommandSender, par2ArrayOfStr, 0, par1ICommandSender.canCommandSenderUseCommand(1, "me"));
-            MinecraftServer.getServer().getConfigurationManager().sendPacketToAllPlayers(new Packet3Chat("* " + par1ICommandSender.getCommandSenderName() + " " + var3));
+            MinecraftServer.getServer().getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("chat.type.emote", new Object[] {par1ICommandSender.getCommandSenderName(), var3}));
         }
         else
         {

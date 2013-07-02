@@ -1,10 +1,6 @@
 package net.minecraft.src;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class FlatGeneratorInfo
@@ -14,7 +10,7 @@ public class FlatGeneratorInfo
 
     /** List of world features enabled on this preset. */
     private final Map worldFeatures = new HashMap();
-    private int biomeToUse = 0;
+    private int biomeToUse;
 
     /**
      * Return the biome used on this preset.

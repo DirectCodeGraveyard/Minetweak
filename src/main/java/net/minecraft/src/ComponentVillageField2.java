@@ -31,8 +31,10 @@ public class ComponentVillageField2 extends ComponentVillage
         {
             case 0:
                 return Block.carrot.blockID;
+
             case 1:
                 return Block.potato.blockID;
+
             default:
                 return Block.crops.blockID;
         }

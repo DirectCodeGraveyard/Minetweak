@@ -83,10 +83,11 @@ public class BlockCauldron extends Block
             else
             {
                 int var11 = par1World.getBlockMetadata(par2, par3, par4);
+                int var12 = func_111045_h_(var11);
 
                 if (var10.itemID == Item.bucketWater.itemID)
                 {
-                    if (var11 < 3)
+                    if (var12 < 3)
                     {
                         if (!par5EntityPlayer.capabilities.isCreativeMode)
                         {
@@ -94,6 +95,7 @@ public class BlockCauldron extends Block
                         }
 
                         par1World.setBlockMetadata(par2, par3, par4, 3, 2);
+                        par1World.func_96440_m(par2, par3, par4, this.blockID);
                     }
 
                     return true;
@@ -102,13 +104,13 @@ public class BlockCauldron extends Block
                 {
                     if (var10.itemID == Item.glassBottle.itemID)
                     {
-                        if (var11 > 0)
+                        if (var12 > 0)
                         {
-                            ItemStack var12 = new ItemStack(Item.potion, 1, 0);
+                            ItemStack var13 = new ItemStack(Item.potion, 1, 0);
 
-                            if (!par5EntityPlayer.inventory.addItemStackToInventory(var12))
+                            if (!par5EntityPlayer.inventory.addItemStackToInventory(var13))
                             {
-                                par1World.spawnEntityInWorld(new EntityItem(par1World, (double)par2 + 0.5D, (double)par3 + 1.5D, (double)par4 + 0.5D, var12));
+                                par1World.spawnEntityInWorld(new EntityItem(par1World, (double)par2 + 0.5D, (double)par3 + 1.5D, (double)par4 + 0.5D, var13));
                             }
                             else if (par5EntityPlayer instanceof EntityPlayerMP)
                             {
@@ -122,14 +124,16 @@ public class BlockCauldron extends Block
                                 par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, (ItemStack)null);
                             }
 
-                            par1World.setBlockMetadata(par2, par3, par4, var11 - 1, 2);
+                            par1World.setBlockMetadata(par2, par3, par4, var12 - 1, 2);
+                            par1World.func_96440_m(par2, par3, par4, this.blockID);
                         }
                     }
-                    else if (var11 > 0 && var10.getItem() instanceof ItemArmor && ((ItemArmor)var10.getItem()).getArmorMaterial() == EnumArmorMaterial.CLOTH)
+                    else if (var12 > 0 && var10.getItem() instanceof ItemArmor && ((ItemArmor)var10.getItem()).getArmorMaterial() == EnumArmorMaterial.CLOTH)
                     {
-                        ItemArmor var13 = (ItemArmor)var10.getItem();
-                        var13.removeColor(var10);
-                        par1World.setBlockMetadata(par2, par3, par4, var11 - 1, 2);
+                        ItemArmor var14 = (ItemArmor)var10.getItem();
+                        var14.removeColor(var10);
+                        par1World.setBlockMetadata(par2, par3, par4, var12 - 1, 2);
+                        par1World.func_96440_m(par2, par3, par4, this.blockID);
                         return true;
                     }
 
@@ -161,5 +165,29 @@ public class BlockCauldron extends Block
     public int idDropped(int par1, Random par2Random, int par3)
     {
         return Item.cauldron.itemID;
+    }
+
+    /**
+     * If this returns true, then comparators facing away from this block will use the value from
+     * getComparatorInputOverride instead of the actual redstone signal strength.
+     */
+    public boolean hasComparatorInputOverride()
+    {
+        return true;
+    }
+
+    /**
+     * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
+     * strength when this block inputs to a comparator.
+     */
+    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
+    {
+        int var6 = par1World.getBlockMetadata(par2, par3, par4);
+        return func_111045_h_(var6);
+    }
+
+    public static int func_111045_h_(int par0)
+    {
+        return par0;
     }
 }

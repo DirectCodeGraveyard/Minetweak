@@ -86,14 +86,17 @@ public class ComponentStrongholdPortalRoom extends ComponentStronghold
                 var14 = 0;
                 var7 = 2;
                 break;
+
             case 1:
                 var14 = 1;
                 var7 = 3;
                 var8 = 0;
                 var9 = 2;
+
             case 2:
             default:
                 break;
+
             case 3:
                 var14 = 3;
                 var7 = 1;

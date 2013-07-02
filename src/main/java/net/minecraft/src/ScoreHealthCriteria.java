@@ -13,24 +13,11 @@ public class ScoreHealthCriteria extends ScoreDummyCriteria
     public int func_96635_a(List par1List)
     {
         float var2 = 0.0F;
-        int var5;
-        float var6;
+        EntityPlayer var4;
 
-        for (Iterator var3 = par1List.iterator(); var3.hasNext(); var2 += (float)var5 / var6)
+        for (Iterator var3 = par1List.iterator(); var3.hasNext(); var2 += var4.func_110143_aJ() + var4.func_110139_bj())
         {
-            EntityPlayer var4 = (EntityPlayer)var3.next();
-            var5 = var4.getHealth();
-            var6 = (float)var4.getMaxHealth();
-
-            if (var5 < 0)
-            {
-                var5 = 0;
-            }
-
-            if ((float)var5 > var6)
-            {
-                var5 = var4.getMaxHealth();
-            }
+            var4 = (EntityPlayer)var3.next();
         }
 
         if (par1List.size() > 0)
@@ -38,7 +25,7 @@ public class ScoreHealthCriteria extends ScoreDummyCriteria
             var2 /= (float)par1List.size();
         }
 
-        return MathHelper.floor_float(var2 * 19.0F) + (var2 > 0.0F ? 1 : 0);
+        return MathHelper.ceiling_float_int(var2);
     }
 
     public boolean isReadOnly()

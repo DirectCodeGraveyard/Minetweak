@@ -18,26 +18,23 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
     public EntityWither(World par1World)
     {
         super(par1World);
-        this.setEntityHealth(this.getMaxHealth());
-        this.texture = "/mob/wither.png";
+        this.setEntityHealth(this.func_110138_aP());
         this.setSize(0.9F, 4.0F);
         this.isImmuneToFire = true;
-        this.moveSpeed = 0.6F;
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIArrowAttack(this, this.moveSpeed, 40, 20.0F));
-        this.tasks.addTask(5, new EntityAIWander(this, this.moveSpeed));
+        this.tasks.addTask(2, new EntityAIArrowAttack(this, 1.0D, 40, 20.0F));
+        this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 30.0F, 0, false, false, attackEntitySelector));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, false, attackEntitySelector));
         this.experienceValue = 50;
     }
 
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(16, new Integer(100));
         this.dataWatcher.addObject(17, new Integer(0));
         this.dataWatcher.addObject(18, new Integer(0));
         this.dataWatcher.addObject(19, new Integer(0));
@@ -60,7 +57,6 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
     {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.func_82215_s(par1NBTTagCompound.getInteger("Invul"));
-        this.dataWatcher.updateObject(16, Integer.valueOf(this.health));
     }
 
     /**
@@ -93,11 +89,6 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
      */
     public void onLivingUpdate()
     {
-        if (!this.worldObj.isRemote)
-        {
-            this.dataWatcher.updateObject(16, Integer.valueOf(this.health));
-        }
-
         this.motionY *= 0.6000000238418579D;
         double var4;
         double var6;
@@ -220,7 +211,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
 
             if (this.ticksExisted % 10 == 0)
             {
-                this.heal(10);
+                this.heal(10.0F);
             }
         }
         else
@@ -260,7 +251,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
 
                         if (var14 != null && var14.isEntityAlive() && this.getDistanceSqToEntity(var14) <= 900.0D && this.canEntityBeSeen(var14))
                         {
-                            this.func_82216_a(var1 + 1, (EntityLiving)var14);
+                            this.func_82216_a(var1 + 1, (EntityLivingBase)var14);
                             this.field_82223_h[var1 - 1] = this.ticksExisted + 40 + this.rand.nextInt(20);
                             this.field_82224_i[var1 - 1] = 0;
                         }
@@ -271,11 +262,11 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
                     }
                     else
                     {
-                        List var13 = this.worldObj.selectEntitiesWithinAABB(EntityLiving.class, this.boundingBox.expand(20.0D, 8.0D, 20.0D), attackEntitySelector);
+                        List var13 = this.worldObj.selectEntitiesWithinAABB(EntityLivingBase.class, this.boundingBox.expand(20.0D, 8.0D, 20.0D), attackEntitySelector);
 
                         for (int var16 = 0; var16 < 10 && !var13.isEmpty(); ++var16)
                         {
-                            EntityLiving var5 = (EntityLiving)var13.get(this.rand.nextInt(var13.size()));
+                            EntityLivingBase var5 = (EntityLivingBase)var13.get(this.rand.nextInt(var13.size()));
 
                             if (var5 != this && var5.isEntityAlive() && this.canEntityBeSeen(var5))
                             {
@@ -348,7 +339,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
 
             if (this.ticksExisted % 20 == 0)
             {
-                this.heal(1);
+                this.heal(1.0F);
             }
         }
     }
@@ -356,7 +347,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
     public void func_82206_m()
     {
         this.func_82215_s(220);
-        this.setEntityHealth(this.getMaxHealth() / 3);
+        this.setEntityHealth(this.func_110138_aP() / 3.0F);
     }
 
     /**
@@ -422,9 +413,9 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
         return par1 + var4;
     }
 
-    private void func_82216_a(int par1, EntityLiving par2EntityLiving)
+    private void func_82216_a(int par1, EntityLivingBase par2EntityLivingBase)
     {
-        this.func_82209_a(par1, par2EntityLiving.posX, par2EntityLiving.posY + (double)par2EntityLiving.getEyeHeight() * 0.5D, par2EntityLiving.posZ, par1 == 0 && this.rand.nextFloat() < 0.001F);
+        this.func_82209_a(par1, par2EntityLivingBase.posX, par2EntityLivingBase.posY + (double)par2EntityLivingBase.getEyeHeight() * 0.5D, par2EntityLivingBase.posZ, par1 == 0 && this.rand.nextFloat() < 0.001F);
     }
 
     private void func_82209_a(int par1, double par2, double par4, double par6, boolean par8)
@@ -452,15 +443,15 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
     /**
      * Attack the specified entity using a ranged attack.
      */
-    public void attackEntityWithRangedAttack(EntityLiving par1EntityLiving, float par2)
+    public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2)
     {
-        this.func_82216_a(0, par1EntityLiving);
+        this.func_82216_a(0, par1EntityLivingBase);
     }
 
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -490,7 +481,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
 
             var3 = par1DamageSource.getEntity();
 
-            if (var3 != null && !(var3 instanceof EntityPlayer) && var3 instanceof EntityLiving && ((EntityLiving)var3).getCreatureAttribute() == this.getCreatureAttribute())
+            if (var3 != null && !(var3 instanceof EntityPlayer) && var3 instanceof EntityLivingBase && ((EntityLivingBase)var3).getCreatureAttribute() == this.getCreatureAttribute())
             {
                 return false;
             }
@@ -536,14 +527,6 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
     }
 
     /**
-     * Returns the health points of the dragon.
-     */
-    public int getBossHealth()
-    {
-        return this.dataWatcher.getWatchableObjectInt(16);
-    }
-
-    /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
     protected void fall(float par1) {}
@@ -561,9 +544,12 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
         return true;
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 300;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(300.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.6000000238418579D);
+        this.func_110148_a(SharedMonsterAttributes.field_111265_b).func_111128_a(40.0D);
     }
 
     public int func_82212_n()
@@ -595,7 +581,7 @@ public class EntityWither extends EntityMob implements IRangedAttackMob
      */
     public boolean isArmored()
     {
-        return this.getBossHealth() <= this.getMaxHealth() / 2;
+        return this.func_110143_aJ() <= this.func_110138_aP() / 2.0F;
     }
 
     /**

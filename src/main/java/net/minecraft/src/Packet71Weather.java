@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet71Weather extends Packet
@@ -30,25 +30,25 @@ public class Packet71Weather extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.entityID = par1DataInputStream.readInt();
-        this.isLightningBolt = par1DataInputStream.readByte();
-        this.posX = par1DataInputStream.readInt();
-        this.posY = par1DataInputStream.readInt();
-        this.posZ = par1DataInputStream.readInt();
+        this.entityID = par1DataInput.readInt();
+        this.isLightningBolt = par1DataInput.readByte();
+        this.posX = par1DataInput.readInt();
+        this.posY = par1DataInput.readInt();
+        this.posZ = par1DataInput.readInt();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeInt(this.entityID);
-        par1DataOutputStream.writeByte(this.isLightningBolt);
-        par1DataOutputStream.writeInt(this.posX);
-        par1DataOutputStream.writeInt(this.posY);
-        par1DataOutputStream.writeInt(this.posZ);
+        par1DataOutput.writeInt(this.entityID);
+        par1DataOutput.writeByte(this.isLightningBolt);
+        par1DataOutput.writeInt(this.posX);
+        par1DataOutput.writeInt(this.posY);
+        par1DataOutput.writeInt(this.posZ);
     }
 
     /**

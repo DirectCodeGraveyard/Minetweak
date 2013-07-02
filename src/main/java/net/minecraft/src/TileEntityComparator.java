@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 public class TileEntityComparator extends TileEntity
 {
-    private int field_96101_a = 0;
+    private int field_96101_a;
 
     /**
      * Writes a tile entity to NBT.

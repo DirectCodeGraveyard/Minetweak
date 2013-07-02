@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet131MapData extends Packet
@@ -34,23 +34,23 @@ public class Packet131MapData extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.itemID = par1DataInputStream.readShort();
-        this.uniqueID = par1DataInputStream.readShort();
-        this.itemData = new byte[par1DataInputStream.readUnsignedShort()];
-        par1DataInputStream.readFully(this.itemData);
+        this.itemID = par1DataInput.readShort();
+        this.uniqueID = par1DataInput.readShort();
+        this.itemData = new byte[par1DataInput.readUnsignedShort()];
+        par1DataInput.readFully(this.itemData);
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeShort(this.itemID);
-        par1DataOutputStream.writeShort(this.uniqueID);
-        par1DataOutputStream.writeShort(this.itemData.length);
-        par1DataOutputStream.write(this.itemData);
+        par1DataOutput.writeShort(this.itemID);
+        par1DataOutput.writeShort(this.uniqueID);
+        par1DataOutput.writeShort(this.itemData.length);
+        par1DataOutput.write(this.itemData);
     }
 
     /**

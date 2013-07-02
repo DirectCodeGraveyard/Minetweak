@@ -3,14 +3,13 @@ package net.minecraft.src;
 public class EntityAIAttackOnCollide extends EntityAIBase
 {
     World worldObj;
-    EntityLiving attacker;
-    EntityLiving entityTarget;
+    EntityCreature attacker;
 
     /**
      * An amount of decrementing ticks that allows the entity to attack once the tick reaches 0.
      */
     int attackTick;
-    float field_75440_e;
+    double field_75440_e;
     boolean field_75437_f;
 
     /** The PathEntity of our entity. */
@@ -18,19 +17,18 @@ public class EntityAIAttackOnCollide extends EntityAIBase
     Class classTarget;
     private int field_75445_i;
 
-    public EntityAIAttackOnCollide(EntityLiving par1EntityLiving, Class par2Class, float par3, boolean par4)
+    public EntityAIAttackOnCollide(EntityCreature par1EntityCreature, Class par2Class, double par3, boolean par5)
     {
-        this(par1EntityLiving, par3, par4);
+        this(par1EntityCreature, par3, par5);
         this.classTarget = par2Class;
     }
 
-    public EntityAIAttackOnCollide(EntityLiving par1EntityLiving, float par2, boolean par3)
+    public EntityAIAttackOnCollide(EntityCreature par1EntityCreature, double par2, boolean par4)
     {
-        this.attackTick = 0;
-        this.attacker = par1EntityLiving;
-        this.worldObj = par1EntityLiving.worldObj;
+        this.attacker = par1EntityCreature;
+        this.worldObj = par1EntityCreature.worldObj;
         this.field_75440_e = par2;
-        this.field_75437_f = par3;
+        this.field_75437_f = par4;
         this.setMutexBits(3);
     }
 
@@ -39,9 +37,13 @@ public class EntityAIAttackOnCollide extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-        EntityLiving var1 = this.attacker.getAttackTarget();
+        EntityLivingBase var1 = this.attacker.getAttackTarget();
 
         if (var1 == null)
+        {
+            return false;
+        }
+        else if (!var1.isEntityAlive())
         {
             return false;
         }
@@ -51,8 +53,7 @@ public class EntityAIAttackOnCollide extends EntityAIBase
         }
         else
         {
-            this.entityTarget = var1;
-            this.entityPathEntity = this.attacker.getNavigator().getPathToEntityLiving(this.entityTarget);
+            this.entityPathEntity = this.attacker.getNavigator().getPathToEntityLiving(var1);
             return this.entityPathEntity != null;
         }
     }
@@ -62,8 +63,8 @@ public class EntityAIAttackOnCollide extends EntityAIBase
      */
     public boolean continueExecuting()
     {
-        EntityLiving var1 = this.attacker.getAttackTarget();
-        return var1 == null ? false : (!this.entityTarget.isEntityAlive() ? false : (!this.field_75437_f ? !this.attacker.getNavigator().noPath() : this.attacker.isWithinHomeDistance(MathHelper.floor_double(this.entityTarget.posX), MathHelper.floor_double(this.entityTarget.posY), MathHelper.floor_double(this.entityTarget.posZ))));
+        EntityLivingBase var1 = this.attacker.getAttackTarget();
+        return var1 == null ? false : (!var1.isEntityAlive() ? false : (!this.field_75437_f ? !this.attacker.getNavigator().noPath() : this.attacker.func_110176_b(MathHelper.floor_double(var1.posX), MathHelper.floor_double(var1.posY), MathHelper.floor_double(var1.posZ))));
     }
 
     /**
@@ -80,7 +81,6 @@ public class EntityAIAttackOnCollide extends EntityAIBase
      */
     public void resetTask()
     {
-        this.entityTarget = null;
         this.attacker.getNavigator().clearPathEntity();
     }
 
@@ -89,18 +89,19 @@ public class EntityAIAttackOnCollide extends EntityAIBase
      */
     public void updateTask()
     {
-        this.attacker.getLookHelper().setLookPositionWithEntity(this.entityTarget, 30.0F, 30.0F);
+        EntityLivingBase var1 = this.attacker.getAttackTarget();
+        this.attacker.getLookHelper().setLookPositionWithEntity(var1, 30.0F, 30.0F);
 
-        if ((this.field_75437_f || this.attacker.getEntitySenses().canSee(this.entityTarget)) && --this.field_75445_i <= 0)
+        if ((this.field_75437_f || this.attacker.getEntitySenses().canSee(var1)) && --this.field_75445_i <= 0)
         {
             this.field_75445_i = 4 + this.attacker.getRNG().nextInt(7);
-            this.attacker.getNavigator().tryMoveToEntityLiving(this.entityTarget, this.field_75440_e);
+            this.attacker.getNavigator().tryMoveToEntityLiving(var1, this.field_75440_e);
         }
 
         this.attackTick = Math.max(this.attackTick - 1, 0);
-        double var1 = (double)(this.attacker.width * 2.0F * this.attacker.width * 2.0F);
+        double var2 = (double)(this.attacker.width * 2.0F * this.attacker.width * 2.0F + var1.width);
 
-        if (this.attacker.getDistanceSq(this.entityTarget.posX, this.entityTarget.boundingBox.minY, this.entityTarget.posZ) <= var1)
+        if (this.attacker.getDistanceSq(var1.posX, var1.boundingBox.minY, var1.posZ) <= var2)
         {
             if (this.attackTick <= 0)
             {
@@ -111,7 +112,7 @@ public class EntityAIAttackOnCollide extends EntityAIBase
                     this.attacker.swingItem();
                 }
 
-                this.attacker.attackEntityAsMob(this.entityTarget);
+                this.attacker.attackEntityAsMob(var1);
             }
         }
     }

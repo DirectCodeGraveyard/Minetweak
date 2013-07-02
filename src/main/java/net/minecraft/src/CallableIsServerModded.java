@@ -1,16 +1,17 @@
 package net.minecraft.src;
 
-import java.util.concurrent.Callable;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.concurrent.Callable;
 
 public class CallableIsServerModded implements Callable
 {
     /** Reference to the MinecraftServer object. */
     final MinecraftServer mcServer;
 
-    public CallableIsServerModded(MinecraftServer par1)
+    public CallableIsServerModded(MinecraftServer par1MinecraftServer)
     {
-        this.mcServer = par1;
+        this.mcServer = par1MinecraftServer;
     }
 
     public String func_96558_a()

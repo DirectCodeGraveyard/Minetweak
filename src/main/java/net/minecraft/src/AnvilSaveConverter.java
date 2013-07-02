@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 
 public class AnvilSaveConverter extends SaveFormatOld
 {
@@ -72,7 +73,7 @@ public class AnvilSaveConverter extends SaveFormatOld
         int var9 = var3.size() + var4.size() + var5.size();
         MinecraftServer.getServer().getLogAgent().func_98233_a("Total conversion count is " + var9);
         WorldInfo var10 = this.getWorldInfo(par1Str);
-        Object var11;
+        Object var11 = null;
 
         if (var10.getTerrainType() == WorldType.FLAT)
         {
@@ -132,11 +133,14 @@ public class AnvilSaveConverter extends SaveFormatOld
 
     private void convertFile(File par1File, Iterable par2Iterable, WorldChunkManager par3WorldChunkManager, int par4, int par5, IProgressUpdate par6IProgressUpdate)
     {
-        for (Object aPar2Iterable : par2Iterable) {
-            File var8 = (File) aPar2Iterable;
+        Iterator var7 = par2Iterable.iterator();
+
+        while (var7.hasNext())
+        {
+            File var8 = (File)var7.next();
             this.convertChunks(par1File, var8, par3WorldChunkManager, par4, par5, par6IProgressUpdate);
             ++par4;
-            int var9 = (int) Math.round(100.0D * (double) par4 / (double) par5);
+            int var9 = (int)Math.round(100.0D * (double)par4 / (double)par5);
             par6IProgressUpdate.setLoadingProgress(var9);
         }
     }

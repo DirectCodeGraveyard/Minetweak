@@ -3,23 +3,23 @@ package net.minecraft.src;
 public class EntityAIFollowOwner extends EntityAIBase
 {
     private EntityTameable thePet;
-    private EntityLiving theOwner;
+    private EntityLivingBase theOwner;
     World theWorld;
-    private float field_75336_f;
+    private double field_75336_f;
     private PathNavigate petPathfinder;
     private int field_75343_h;
     float maxDist;
     float minDist;
     private boolean field_75344_i;
 
-    public EntityAIFollowOwner(EntityTameable par1EntityTameable, float par2, float par3, float par4)
+    public EntityAIFollowOwner(EntityTameable par1EntityTameable, double par2, float par4, float par5)
     {
         this.thePet = par1EntityTameable;
         this.theWorld = par1EntityTameable.worldObj;
         this.field_75336_f = par2;
         this.petPathfinder = par1EntityTameable.getNavigator();
-        this.minDist = par3;
-        this.maxDist = par4;
+        this.minDist = par4;
+        this.maxDist = par5;
         this.setMutexBits(3);
     }
 
@@ -28,7 +28,7 @@ public class EntityAIFollowOwner extends EntityAIBase
      */
     public boolean shouldExecute()
     {
-        EntityLiving var1 = this.thePet.getOwner();
+        EntityLivingBase var1 = this.thePet.func_130012_q();
 
         if (var1 == null)
         {
@@ -92,21 +92,24 @@ public class EntityAIFollowOwner extends EntityAIBase
 
                 if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.field_75336_f))
                 {
-                    if (this.thePet.getDistanceSqToEntity(this.theOwner) >= 144.0D)
+                    if (!this.thePet.func_110167_bD())
                     {
-                        int var1 = MathHelper.floor_double(this.theOwner.posX) - 2;
-                        int var2 = MathHelper.floor_double(this.theOwner.posZ) - 2;
-                        int var3 = MathHelper.floor_double(this.theOwner.boundingBox.minY);
-
-                        for (int var4 = 0; var4 <= 4; ++var4)
+                        if (this.thePet.getDistanceSqToEntity(this.theOwner) >= 144.0D)
                         {
-                            for (int var5 = 0; var5 <= 4; ++var5)
+                            int var1 = MathHelper.floor_double(this.theOwner.posX) - 2;
+                            int var2 = MathHelper.floor_double(this.theOwner.posZ) - 2;
+                            int var3 = MathHelper.floor_double(this.theOwner.boundingBox.minY);
+
+                            for (int var4 = 0; var4 <= 4; ++var4)
                             {
-                                if ((var4 < 1 || var5 < 1 || var4 > 3 || var5 > 3) && this.theWorld.doesBlockHaveSolidTopSurface(var1 + var4, var3 - 1, var2 + var5) && !this.theWorld.isBlockNormalCube(var1 + var4, var3, var2 + var5) && !this.theWorld.isBlockNormalCube(var1 + var4, var3 + 1, var2 + var5))
+                                for (int var5 = 0; var5 <= 4; ++var5)
                                 {
-                                    this.thePet.setLocationAndAngles((double)((float)(var1 + var4) + 0.5F), (double)var3, (double)((float)(var2 + var5) + 0.5F), this.thePet.rotationYaw, this.thePet.rotationPitch);
-                                    this.petPathfinder.clearPathEntity();
-                                    return;
+                                    if ((var4 < 1 || var5 < 1 || var4 > 3 || var5 > 3) && this.theWorld.doesBlockHaveSolidTopSurface(var1 + var4, var3 - 1, var2 + var5) && !this.theWorld.isBlockNormalCube(var1 + var4, var3, var2 + var5) && !this.theWorld.isBlockNormalCube(var1 + var4, var3 + 1, var2 + var5))
+                                    {
+                                        this.thePet.setLocationAndAngles((double)((float)(var1 + var4) + 0.5F), (double)var3, (double)((float)(var2 + var5) + 0.5F), this.thePet.rotationYaw, this.thePet.rotationPitch);
+                                        this.petPathfinder.clearPathEntity();
+                                        return;
+                                    }
                                 }
                             }
                         }

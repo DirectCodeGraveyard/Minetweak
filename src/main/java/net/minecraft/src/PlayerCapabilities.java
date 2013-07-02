@@ -3,18 +3,18 @@ package net.minecraft.src;
 public class PlayerCapabilities
 {
     /** Disables player damage. */
-    public boolean disableDamage = false;
+    public boolean disableDamage;
 
     /** Sets/indicates whether the player is flying. */
-    public boolean isFlying = false;
+    public boolean isFlying;
 
     /** whether or not to allow the player to fly when they double jump. */
-    public boolean allowFlying = false;
+    public boolean allowFlying;
 
     /**
      * Used to determine if creative mode is enabled, and therefore if items should be depleted on usage
      */
-    public boolean isCreativeMode = false;
+    public boolean isCreativeMode;
 
     /** Indicates whether the player is allowed to modify the surroundings */
     public boolean allowEdit = true;

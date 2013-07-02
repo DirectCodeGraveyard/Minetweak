@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class BlockMushroomCap extends Block
 {
-    private static final String[] field_94429_a = new String[] {"mushroom_skin_brown", "mushroom_skin_red"};
+    private static final String[] field_94429_a = new String[] {"skin_brown", "skin_red"};
 
     /** The mushroom type. 0 for brown, 1 for red. */
     private final int mushroomType;

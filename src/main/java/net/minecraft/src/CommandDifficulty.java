@@ -1,7 +1,8 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.server.MinecraftServer;
+
+import java.util.List;
 
 public class CommandDifficulty extends CommandBase
 {
@@ -22,7 +23,7 @@ public class CommandDifficulty extends CommandBase
 
     public String getCommandUsage(ICommandSender par1ICommandSender)
     {
-        return par1ICommandSender.translateString("commands.difficulty.usage", new Object[0]);
+        return "commands.difficulty.usage";
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
@@ -31,8 +32,7 @@ public class CommandDifficulty extends CommandBase
         {
             int var3 = this.getDifficultyForName(par1ICommandSender, par2ArrayOfStr[0]);
             MinecraftServer.getServer().setDifficultyForAllWorlds(var3);
-            String var4 = StatCollector.translateToLocal(difficulties[var3]);
-            notifyAdmins(par1ICommandSender, "commands.difficulty.success", new Object[] {var4});
+            notifyAdmins(par1ICommandSender, "commands.difficulty.success", new Object[] {ChatMessageComponent.func_111077_e(difficulties[var3])});
         }
         else
         {

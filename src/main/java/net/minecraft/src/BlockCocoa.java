@@ -4,8 +4,6 @@ import java.util.Random;
 
 public class BlockCocoa extends BlockDirectional
 {
-    public static final String[] cocoaIcons = new String[] {"cocoa_0", "cocoa_1", "cocoa_2"};
-
     public BlockCocoa(int par1)
     {
         super(par1, Material.plants);
@@ -20,7 +18,7 @@ public class BlockCocoa extends BlockDirectional
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlockToAir(par2, par3, par4);
+            par1World.setBlock(par2, par3, par4, 0, 0, 2);
         }
         else if (par1World.rand.nextInt(5) == 0)
         {
@@ -99,12 +97,15 @@ public class BlockCocoa extends BlockDirectional
             case 0:
                 this.setBlockBounds((8.0F - var10) / 16.0F, (12.0F - (float)var9) / 16.0F, (15.0F - (float)var8) / 16.0F, (8.0F + var10) / 16.0F, 0.75F, 0.9375F);
                 break;
+
             case 1:
                 this.setBlockBounds(0.0625F, (12.0F - (float)var9) / 16.0F, (8.0F - var10) / 16.0F, (1.0F + (float)var8) / 16.0F, 0.75F, (8.0F + var10) / 16.0F);
                 break;
+
             case 2:
                 this.setBlockBounds((8.0F - var10) / 16.0F, (12.0F - (float)var9) / 16.0F, 0.0625F, (8.0F + var10) / 16.0F, 0.75F, (1.0F + (float)var8) / 16.0F);
                 break;
+
             case 3:
                 this.setBlockBounds((15.0F - (float)var8) / 16.0F, (12.0F - (float)var9) / 16.0F, (8.0F - var10) / 16.0F, 0.9375F, 0.75F, (8.0F + var10) / 16.0F);
         }
@@ -113,9 +114,9 @@ public class BlockCocoa extends BlockDirectional
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLiving par5EntityLiving, ItemStack par6ItemStack)
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
     {
-        int var7 = ((MathHelper.floor_double((double)(par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) + 0) % 4;
+        int var7 = ((MathHelper.floor_double((double)(par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) + 0) % 4;
         par1World.setBlockMetadata(par2, par3, par4, var7, 2);
     }
 
@@ -141,7 +142,7 @@ public class BlockCocoa extends BlockDirectional
         if (!this.canBlockStay(par1World, par2, par3, par4))
         {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
-            par1World.setBlockToAir(par2, par3, par4);
+            par1World.setBlock(par2, par3, par4, 0, 0, 2);
         }
     }
 

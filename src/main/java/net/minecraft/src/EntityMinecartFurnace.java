@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 public class EntityMinecartFurnace extends EntityMinecart
 {
-    private int fuel = 0;
+    private int fuel;
     public double pushX;
     public double pushZ;
 
@@ -112,16 +112,13 @@ public class EntityMinecartFurnace extends EntityMinecart
         super.applyDrag();
     }
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
-    public boolean interact(EntityPlayer par1EntityPlayer)
+    public boolean func_130002_c(EntityPlayer par1EntityPlayer)
     {
         ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 
         if (var2 != null && var2.itemID == Item.coal.itemID)
         {
-            if (--var2.stackSize == 0)
+            if (!par1EntityPlayer.capabilities.isCreativeMode && --var2.stackSize == 0)
             {
                 par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
             }

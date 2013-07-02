@@ -14,7 +14,7 @@ public class WorldGenVines extends WorldGenerator
             {
                 for (int var8 = 2; var8 <= 5; ++var8)
                 {
-                    if (Block.vine.canPlaceBlockAt(par1World, par3, par4, par5))
+                    if (Block.vine.canPlaceBlockOnSide(par1World, par3, par4, par5, var8))
                     {
                         par1World.setBlock(par3, par4, par5, Block.vine.blockID, 1 << Direction.facingToDirection[Facing.oppositeSide[var8]], 2);
                         break;

@@ -19,7 +19,6 @@ public class EntityItem extends Entity
     public EntityItem(World par1World, double par2, double par4, double par6)
     {
         super(par1World);
-        this.age = 0;
         this.health = 5;
         this.hoverStart = (float)(Math.random() * Math.PI * 2.0D);
         this.setSize(0.25F, 0.25F);
@@ -49,7 +48,6 @@ public class EntityItem extends Entity
     public EntityItem(World par1World)
     {
         super(par1World);
-        this.age = 0;
         this.health = 5;
         this.hoverStart = (float)(Math.random() * Math.PI * 2.0D);
         this.setSize(0.25F, 0.25F);
@@ -219,13 +217,13 @@ public class EntityItem extends Entity
      */
     protected void dealFireDamage(int par1)
     {
-        this.attackEntityFrom(DamageSource.inFire, par1);
+        this.attackEntityFrom(DamageSource.inFire, (float)par1);
     }
 
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -238,7 +236,7 @@ public class EntityItem extends Entity
         else
         {
             this.setBeenAttacked();
-            this.health -= par2;
+            this.health = (int)((float)this.health - par2);
 
             if (this.health <= 0)
             {

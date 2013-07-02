@@ -36,7 +36,7 @@ public class EntityBoat extends Entity
     {
         this.dataWatcher.addObject(17, new Integer(0));
         this.dataWatcher.addObject(18, new Integer(1));
-        this.dataWatcher.addObject(19, new Integer(0));
+        this.dataWatcher.addObject(19, new Float(0.0F));
     }
 
     /**
@@ -87,7 +87,7 @@ public class EntityBoat extends Entity
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         if (this.isEntityInvulnerable())
         {
@@ -97,11 +97,11 @@ public class EntityBoat extends Entity
         {
             this.setForwardDirection(-this.getForwardDirection());
             this.setTimeSinceHit(10);
-            this.setDamageTaken(this.getDamageTaken() + par2 * 10);
+            this.setDamageTaken(this.getDamageTaken() + par2 * 10.0F);
             this.setBeenAttacked();
             boolean var3 = par1DamageSource.getEntity() instanceof EntityPlayer && ((EntityPlayer)par1DamageSource.getEntity()).capabilities.isCreativeMode;
 
-            if (var3 || this.getDamageTaken() > 40)
+            if (var3 || this.getDamageTaken() > 40.0F)
             {
                 if (this.riddenByEntity != null)
                 {
@@ -144,9 +144,9 @@ public class EntityBoat extends Entity
             this.setTimeSinceHit(this.getTimeSinceHit() - 1);
         }
 
-        if (this.getDamageTaken() > 0)
+        if (this.getDamageTaken() > 0.0F)
         {
-            this.setDamageTaken(this.getDamageTaken() - 1);
+            this.setDamageTaken(this.getDamageTaken() - 1.0F);
         }
 
         this.prevPosX = this.posX;
@@ -251,10 +251,17 @@ public class EntityBoat extends Entity
                 this.motionY += 0.007000000216066837D;
             }
 
-            if (this.riddenByEntity != null)
+            if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase)
             {
-                this.motionX += this.riddenByEntity.motionX * this.speedMultiplier;
-                this.motionZ += this.riddenByEntity.motionZ * this.speedMultiplier;
+                var6 = (double)((EntityLivingBase)this.riddenByEntity).moveForward;
+
+                if (var6 > 0.0D)
+                {
+                    var8 = -Math.sin((double)(this.riddenByEntity.rotationYaw * (float)Math.PI / 180.0F));
+                    var25 = Math.cos((double)(this.riddenByEntity.rotationYaw * (float)Math.PI / 180.0F));
+                    this.motionX += var8 * this.speedMultiplier * 0.05000000074505806D;
+                    this.motionZ += var25 * this.speedMultiplier * 0.05000000074505806D;
+                }
             }
 
             var6 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
@@ -412,10 +419,7 @@ public class EntityBoat extends Entity
      */
     protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
-    public boolean interact(EntityPlayer par1EntityPlayer)
+    public boolean func_130002_c(EntityPlayer par1EntityPlayer)
     {
         if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityPlayer && this.riddenByEntity != par1EntityPlayer)
         {
@@ -435,17 +439,17 @@ public class EntityBoat extends Entity
     /**
      * Sets the damage taken from the last hit.
      */
-    public void setDamageTaken(int par1)
+    public void setDamageTaken(float par1)
     {
-        this.dataWatcher.updateObject(19, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(19, Float.valueOf(par1));
     }
 
     /**
      * Gets the damage taken from the last hit.
      */
-    public int getDamageTaken()
+    public float getDamageTaken()
     {
-        return this.dataWatcher.getWatchableObjectInt(19);
+        return this.dataWatcher.func_111145_d(19);
     }
 
     /**

@@ -16,7 +16,7 @@ public class WorldGenBigTree extends WorldGenerator
     /** Reference to the World object. */
     World worldObj;
     int[] basePos = new int[] {0, 0, 0};
-    int heightLimit = 0;
+    int heightLimit;
     int height;
     double heightAttenuation = 0.618D;
     double branchDensity = 1.0D;

@@ -1,46 +1,44 @@
 package net.minecraft.src;
 
 import java.util.Calendar;
+import java.util.UUID;
 
 public class EntityZombie extends EntityMob
 {
+    protected static final Attribute field_110186_bp = (new RangedAttribute("zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D)).func_111117_a("Spawn Reinforcements Chance");
+    private static final UUID field_110187_bq = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
+    private static final AttributeModifier field_110188_br = new AttributeModifier(field_110187_bq, "Baby speed boost", 0.5D, 0);
+
     /**
      * Ticker used to determine the time remaining for this zombie to convert into a villager when cured.
      */
-    private int conversionTime = 0;
+    private int conversionTime;
 
     public EntityZombie(World par1World)
     {
         super(par1World);
-        this.texture = "/mob/zombie.png";
-        this.moveSpeed = 0.23F;
         this.getNavigator().setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIBreakDoor(this));
-        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.moveSpeed, false));
-        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityVillager.class, this.moveSpeed, true));
-        this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, this.moveSpeed));
-        this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, this.moveSpeed, false));
-        this.tasks.addTask(6, new EntityAIWander(this, this.moveSpeed));
+        this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityVillager.class, 1.0D, true));
+        this.tasks.addTask(4, new EntityAIMoveTwardsRestriction(this, 1.0D));
+        this.tasks.addTask(5, new EntityAIMoveThroughVillage(this, 1.0D, false));
+        this.tasks.addTask(6, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 16.0F, 0, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 16.0F, 0, false));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
     }
 
-    protected int func_96121_ay()
+    protected void func_110147_ax()
     {
-        return 40;
-    }
-
-    /**
-     * This method returns a value to be applied directly to entity speed, this factor is less than 1 when a slowdown
-     * potion effect is applied, more than 1 when a haste potion effect is applied and 2 for fleeing entities.
-     */
-    public float getSpeedModifier()
-    {
-        return super.getSpeedModifier() * (this.isChild() ? 1.5F : 1.0F);
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111265_b).func_111128_a(40.0D);
+        this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.23000000417232513D);
+        this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(3.0D);
+        this.func_110140_aT().func_111150_b(field_110186_bp).func_111128_a(this.rand.nextDouble() * 0.10000000149011612D);
     }
 
     protected void entityInit()
@@ -49,11 +47,6 @@ public class EntityZombie extends EntityMob
         this.getDataWatcher().addObject(12, Byte.valueOf((byte)0));
         this.getDataWatcher().addObject(13, Byte.valueOf((byte)0));
         this.getDataWatcher().addObject(14, Byte.valueOf((byte)0));
-    }
-
-    public int getMaxHealth()
-    {
-        return 20;
     }
 
     /**
@@ -92,7 +85,18 @@ public class EntityZombie extends EntityMob
      */
     public void setChild(boolean par1)
     {
-        this.getDataWatcher().updateObject(12, Byte.valueOf((byte)1));
+        this.getDataWatcher().updateObject(12, Byte.valueOf((byte)(par1 ? 1 : 0)));
+
+        if (this.worldObj != null && !this.worldObj.isRemote)
+        {
+            AttributeInstance var2 = this.func_110148_a(SharedMonsterAttributes.field_111263_d);
+            var2.func_111124_b(field_110188_br);
+
+            if (par1)
+            {
+                var2.func_111121_a(field_110188_br);
+            }
+        }
     }
 
     /**
@@ -153,6 +157,63 @@ public class EntityZombie extends EntityMob
     }
 
     /**
+     * Called when the entity is attacked.
+     */
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    {
+        if (!super.attackEntityFrom(par1DamageSource, par2))
+        {
+            return false;
+        }
+        else
+        {
+            EntityLivingBase var3 = this.getAttackTarget();
+
+            if (var3 == null && this.getEntityToAttack() instanceof EntityLivingBase)
+            {
+                var3 = (EntityLivingBase)this.getEntityToAttack();
+            }
+
+            if (var3 == null && par1DamageSource.getEntity() instanceof EntityLivingBase)
+            {
+                var3 = (EntityLivingBase)par1DamageSource.getEntity();
+            }
+
+            if (var3 != null && this.worldObj.difficultySetting >= 3 && (double)this.rand.nextFloat() < this.func_110148_a(field_110186_bp).func_111126_e())
+            {
+                int var4 = MathHelper.floor_double(this.posX);
+                int var5 = MathHelper.floor_double(this.posY);
+                int var6 = MathHelper.floor_double(this.posZ);
+                EntityZombie var7 = new EntityZombie(this.worldObj);
+
+                for (int var8 = 0; var8 < 50; ++var8)
+                {
+                    int var9 = var4 + MathHelper.getRandomIntegerInRange(this.rand, 7, 40) * MathHelper.getRandomIntegerInRange(this.rand, -1, 1);
+                    int var10 = var5 + MathHelper.getRandomIntegerInRange(this.rand, 7, 40) * MathHelper.getRandomIntegerInRange(this.rand, -1, 1);
+                    int var11 = var6 + MathHelper.getRandomIntegerInRange(this.rand, 7, 40) * MathHelper.getRandomIntegerInRange(this.rand, -1, 1);
+
+                    if (this.worldObj.doesBlockHaveSolidTopSurface(var9, var10 - 1, var11) && this.worldObj.getBlockLightValue(var9, var10, var11) < 10)
+                    {
+                        var7.setPosition((double)var9, (double)var10, (double)var11);
+
+                        if (this.worldObj.checkNoEntityCollision(var7.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var7, var7.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(var7.boundingBox))
+                        {
+                            this.worldObj.spawnEntityInWorld(var7);
+                            var7.setAttackTarget(var3);
+                            var7.func_110161_a((EntityLivingData)null);
+                            this.func_110148_a(field_110186_bp).func_111121_a(new AttributeModifier("Zombie reinforcement caller charge", -0.05000000074505806D, 0));
+                            var7.func_110148_a(field_110186_bp).func_111121_a(new AttributeModifier("Zombie reinforcement callee charge", -0.05000000074505806D, 0));
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return true;
+        }
+    }
+
+    /**
      * Called to update the entity's position/logic.
      */
     public void onUpdate()
@@ -181,23 +242,6 @@ public class EntityZombie extends EntityMob
         }
 
         return var2;
-    }
-
-    /**
-     * Returns the amount of damage a mob should deal.
-     */
-    public int getAttackStrength(Entity par1Entity)
-    {
-        ItemStack var2 = this.getHeldItem();
-        float var3 = (float)(this.getMaxHealth() - this.getHealth()) / (float)this.getMaxHealth();
-        int var4 = 3 + MathHelper.floor_float(var3 * 4.0F);
-
-        if (var2 != null)
-        {
-            var4 += var2.getDamageVsEntity(this);
-        }
-
-        return var4;
     }
 
     /**
@@ -255,9 +299,11 @@ public class EntityZombie extends EntityMob
             case 0:
                 this.dropItem(Item.ingotIron.itemID, 1);
                 break;
+
             case 1:
                 this.dropItem(Item.carrot.itemID, 1);
                 break;
+
             case 2:
                 this.dropItem(Item.potato.itemID, 1);
         }
@@ -331,11 +377,11 @@ public class EntityZombie extends EntityMob
     /**
      * This method gets called when the entity kills another one.
      */
-    public void onKillEntity(EntityLiving par1EntityLiving)
+    public void onKillEntity(EntityLivingBase par1EntityLivingBase)
     {
-        super.onKillEntity(par1EntityLiving);
+        super.onKillEntity(par1EntityLivingBase);
 
-        if (this.worldObj.difficultySetting >= 2 && par1EntityLiving instanceof EntityVillager)
+        if (this.worldObj.difficultySetting >= 2 && par1EntityLivingBase instanceof EntityVillager)
         {
             if (this.worldObj.difficultySetting == 2 && this.rand.nextBoolean())
             {
@@ -343,12 +389,12 @@ public class EntityZombie extends EntityMob
             }
 
             EntityZombie var2 = new EntityZombie(this.worldObj);
-            var2.func_82149_j(par1EntityLiving);
-            this.worldObj.removeEntity(par1EntityLiving);
-            var2.initCreature();
+            var2.func_82149_j(par1EntityLivingBase);
+            this.worldObj.removeEntity(par1EntityLivingBase);
+            var2.func_110161_a((EntityLivingData)null);
             var2.setVillager(true);
 
-            if (par1EntityLiving.isChild())
+            if (par1EntityLivingBase.isChild())
             {
                 var2.setChild(true);
             }
@@ -358,12 +404,11 @@ public class EntityZombie extends EntityMob
         }
     }
 
-    /**
-     * Initialize this creature.
-     */
-    public void initCreature()
+    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData)
     {
-        this.setCanPickUpLoot(this.rand.nextFloat() < pickUpLootProability[this.worldObj.difficultySetting]);
+        par1EntityLivingData = super.func_110161_a(par1EntityLivingData);
+        float var2 = this.worldObj.func_110746_b(this.posX, this.posY, this.posZ);
+        this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * var2);
 
         if (this.worldObj.rand.nextFloat() < 0.05F)
         {
@@ -375,14 +420,25 @@ public class EntityZombie extends EntityMob
 
         if (this.getEquipmentInSlot(4) == null)
         {
-            Calendar var1 = this.worldObj.getCurrentDate();
+            Calendar var3 = this.worldObj.getCurrentDate();
 
-            if (var1.get(2) + 1 == 10 && var1.get(5) == 31 && this.rand.nextFloat() < 0.25F)
+            if (var3.get(2) + 1 == 10 && var3.get(5) == 31 && this.rand.nextFloat() < 0.25F)
             {
                 this.setCurrentItemOrArmor(4, new ItemStack(this.rand.nextFloat() < 0.1F ? Block.pumpkinLantern : Block.pumpkin));
                 this.equipmentDropChances[4] = 0.0F;
             }
         }
+
+        this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111121_a(new AttributeModifier("Random spawn bonus", this.rand.nextDouble() * 0.05000000074505806D, 0));
+        this.func_110148_a(SharedMonsterAttributes.field_111265_b).func_111121_a(new AttributeModifier("Random zombie-spawn bonus", this.rand.nextDouble() * 1.5D, 2));
+
+        if (this.rand.nextFloat() < var2 * 0.05F)
+        {
+            this.func_110148_a(field_110186_bp).func_111121_a(new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 0.25D + 0.5D, 0));
+            this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111121_a(new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 3.0D + 1.0D, 2));
+        }
+
+        return par1EntityLivingData;
     }
 
     /**
@@ -431,6 +487,14 @@ public class EntityZombie extends EntityMob
     }
 
     /**
+     * Determines if an entity can be despawned, used on idle far away entities
+     */
+    protected boolean canDespawn()
+    {
+        return !this.isConverting();
+    }
+
+    /**
      * Returns whether this zombie is in the process of converting to a villager
      */
     public boolean isConverting()
@@ -445,7 +509,7 @@ public class EntityZombie extends EntityMob
     {
         EntityVillager var1 = new EntityVillager(this.worldObj);
         var1.func_82149_j(this);
-        var1.initCreature();
+        var1.func_110161_a((EntityLivingData)null);
         var1.func_82187_q();
 
         if (this.isChild())

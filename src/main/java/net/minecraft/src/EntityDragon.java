@@ -3,7 +3,7 @@ package net.minecraft.src;
 import java.util.Iterator;
 import java.util.List;
 
-public class EntityDragon extends EntityLiving implements IEntityMultiPart
+public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
 {
     public double targetX;
     public double targetY;
@@ -34,32 +34,31 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart
     public EntityDragonPart dragonPartWing2;
 
     /** Animation time at previous tick. */
-    public float prevAnimTime = 0.0F;
+    public float prevAnimTime;
 
     /**
      * Animation time, used to control the speed of the animation cycles (wings flapping, jaw opening, etc.)
      */
-    public float animTime = 0.0F;
+    public float animTime;
 
     /** Force selecting a new flight target at next tick if set to true. */
-    public boolean forceNewTarget = false;
+    public boolean forceNewTarget;
 
     /**
      * Activated if the dragon is flying though obsidian, white stone or bedrock. Slows movement and animation speed.
      */
-    public boolean slowed = false;
+    public boolean slowed;
     private Entity target;
-    public int deathTicks = 0;
+    public int deathTicks;
 
     /** The current endercrystal that is healing this dragon */
-    public EntityEnderCrystal healingEnderCrystal = null;
+    public EntityEnderCrystal healingEnderCrystal;
 
     public EntityDragon(World par1World)
     {
         super(par1World);
         this.dragonPartArray = new EntityDragonPart[] {this.dragonPartHead = new EntityDragonPart(this, "head", 6.0F, 6.0F), this.dragonPartBody = new EntityDragonPart(this, "body", 8.0F, 8.0F), this.dragonPartTail1 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.dragonPartTail2 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.dragonPartTail3 = new EntityDragonPart(this, "tail", 4.0F, 4.0F), this.dragonPartWing1 = new EntityDragonPart(this, "wing", 4.0F, 4.0F), this.dragonPartWing2 = new EntityDragonPart(this, "wing", 4.0F, 4.0F)};
-        this.setEntityHealth(this.getMaxHealth());
-        this.texture = "/mob/enderdragon/ender.png";
+        this.setEntityHealth(this.func_110138_aP());
         this.setSize(16.0F, 8.0F);
         this.noClip = true;
         this.isImmuneToFire = true;
@@ -67,15 +66,15 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart
         this.ignoreFrustumCheck = true;
     }
 
-    public int getMaxHealth()
+    protected void func_110147_ax()
     {
-        return 200;
+        super.func_110147_ax();
+        this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(200.0D);
     }
 
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(16, new Integer(this.getMaxHealth()));
     }
 
     /**
@@ -84,7 +83,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart
      */
     public double[] getMovementOffsets(int par1, float par2)
     {
-        if (this.health <= 0)
+        if (this.func_110143_aJ() <= 0.0F)
         {
             par2 = 0.0F;
         }
@@ -112,11 +111,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart
         float var1;
         float var2;
 
-        if (!this.worldObj.isRemote)
-        {
-            this.dataWatcher.updateObject(16, Integer.valueOf(this.health));
-        }
-        else
+        if (this.worldObj.isRemote)
         {
             var1 = MathHelper.cos(this.animTime * (float)Math.PI * 2.0F);
             var2 = MathHelper.cos(this.prevAnimTime * (float)Math.PI * 2.0F);
@@ -130,7 +125,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart
         this.prevAnimTime = this.animTime;
         float var3;
 
-        if (this.health <= 0)
+        if (this.func_110143_aJ() <= 0.0F)
         {
             var1 = (this.rand.nextFloat() - 0.5F) * 8.0F;
             var2 = (this.rand.nextFloat() - 0.5F) * 4.0F;
@@ -182,7 +177,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart
                 {
                     var26 = this.posX + (this.newPosX - this.posX) / (double)this.newPosRotationIncrements;
                     var4 = this.posY + (this.newPosY - this.posY) / (double)this.newPosRotationIncrements;
-                    var6 = this.posZ + (this.newPosZ - this.posZ) / (double)this.newPosRotationIncrements;
+                    var6 = this.posZ + (this.field_110152_bk - this.posZ) / (double)this.newPosRotationIncrements;
                     var8 = MathHelper.wrapAngleTo180_double(this.newRotationYaw - (double)this.rotationYaw);
                     this.rotationYaw = (float)((double)this.rotationYaw + var8 / (double)this.newPosRotationIncrements);
                     this.rotationPitch = (float)((double)this.rotationPitch + (this.newRotationPitch - (double)this.rotationPitch) / (double)this.newPosRotationIncrements);
@@ -379,14 +374,14 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart
             {
                 if (!this.worldObj.isRemote)
                 {
-                    this.attackEntityFromPart(this.dragonPartHead, DamageSource.setExplosionSource((Explosion)null), 10);
+                    this.attackEntityFromPart(this.dragonPartHead, DamageSource.setExplosionSource((Explosion)null), 10.0F);
                 }
 
                 this.healingEnderCrystal = null;
             }
-            else if (this.ticksExisted % 10 == 0 && this.getHealth() < this.getMaxHealth())
+            else if (this.ticksExisted % 10 == 0 && this.func_110143_aJ() < this.func_110138_aP())
             {
-                this.setEntityHealth(this.getHealth() + 1);
+                this.setEntityHealth(this.func_110143_aJ() + 1.0F);
             }
         }
 
@@ -427,7 +422,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart
         {
             Entity var7 = (Entity)var6.next();
 
-            if (var7 instanceof EntityLiving)
+            if (var7 instanceof EntityLivingBase)
             {
                 double var8 = var7.posX - var2;
                 double var10 = var7.posZ - var4;
@@ -446,9 +441,9 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart
         {
             Entity var3 = (Entity)par1List.get(var2);
 
-            if (var3 instanceof EntityLiving)
+            if (var3 instanceof EntityLivingBase)
             {
-                var3.attackEntityFrom(DamageSource.causeMobDamage(this), 10);
+                var3.attackEntityFrom(DamageSource.causeMobDamage(this), 10.0F);
             }
         }
     }
@@ -542,11 +537,11 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart
         return var8;
     }
 
-    public boolean attackEntityFromPart(EntityDragonPart par1EntityDragonPart, DamageSource par2DamageSource, int par3)
+    public boolean attackEntityFromPart(EntityDragonPart par1EntityDragonPart, DamageSource par2DamageSource, float par3)
     {
         if (par1EntityDragonPart != this.dragonPartHead)
         {
-            par3 = par3 / 4 + 1;
+            par3 = par3 / 4.0F + 1.0F;
         }
 
         float var4 = this.rotationYaw * (float)Math.PI / 180.0F;
@@ -568,12 +563,12 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
     {
         return false;
     }
 
-    protected boolean func_82195_e(DamageSource par1DamageSource, int par2)
+    protected boolean func_82195_e(DamageSource par1DamageSource, float par2)
     {
         return super.attackEntityFrom(par1DamageSource, par2);
     }

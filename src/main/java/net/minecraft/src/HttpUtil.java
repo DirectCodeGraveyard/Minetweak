@@ -1,10 +1,13 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
@@ -70,46 +73,53 @@ public class HttpUtil
     /**
      * Sends a HTTP POST request to the given URL with data from a string
      */
-    public static String sendPost(ILogAgent par0ILogAgent, URL par1URL, String par2Str, boolean par3)
+    private static String sendPost(ILogAgent par0ILogAgent, URL par1URL, String par2Str, boolean par3)
     {
         try
         {
-            HttpURLConnection var4 = (HttpURLConnection)par1URL.openConnection();
-            var4.setRequestMethod("POST");
-            var4.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            var4.setRequestProperty("Content-Length", "" + par2Str.getBytes().length);
-            var4.setRequestProperty("Content-Language", "en-US");
-            var4.setUseCaches(false);
-            var4.setDoInput(true);
-            var4.setDoOutput(true);
-            DataOutputStream var5 = new DataOutputStream(var4.getOutputStream());
-            var5.writeBytes(par2Str);
-            var5.flush();
-            var5.close();
-            BufferedReader var6 = new BufferedReader(new InputStreamReader(var4.getInputStream()));
-            StringBuffer var8 = new StringBuffer();
-            String var7;
+            Proxy var4 = MinecraftServer.getServer() == null ? null : MinecraftServer.getServer().func_110454_ao();
 
-            while ((var7 = var6.readLine()) != null)
+            if (var4 == null)
             {
-                var8.append(var7);
-                var8.append('\r');
+                var4 = Proxy.NO_PROXY;
             }
 
+            HttpURLConnection var5 = (HttpURLConnection)par1URL.openConnection(var4);
+            var5.setRequestMethod("POST");
+            var5.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            var5.setRequestProperty("Content-Length", "" + par2Str.getBytes().length);
+            var5.setRequestProperty("Content-Language", "en-US");
+            var5.setUseCaches(false);
+            var5.setDoInput(true);
+            var5.setDoOutput(true);
+            DataOutputStream var6 = new DataOutputStream(var5.getOutputStream());
+            var6.writeBytes(par2Str);
+            var6.flush();
             var6.close();
-            return var8.toString();
+            BufferedReader var7 = new BufferedReader(new InputStreamReader(var5.getInputStream()));
+            StringBuffer var9 = new StringBuffer();
+            String var8;
+
+            while ((var8 = var7.readLine()) != null)
+            {
+                var9.append(var8);
+                var9.append('\r');
+            }
+
+            var7.close();
+            return var9.toString();
         }
-        catch (Exception var9)
+        catch (Exception var10)
         {
             if (!par3)
             {
                 if (par0ILogAgent != null)
                 {
-                    par0ILogAgent.logSevereException("Could not post to " + par1URL, var9);
+                    par0ILogAgent.logSevereException("Could not post to " + par1URL, var10);
                 }
                 else
                 {
-                    Logger.getAnonymousLogger().log(Level.SEVERE, "Could not post to " + par1URL, var9);
+                    Logger.getAnonymousLogger().log(Level.SEVERE, "Could not post to " + par1URL, var10);
                 }
             }
 

@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.DataInput;
+import java.io.DataOutput;
 import java.io.IOException;
 
 public class Packet105UpdateProgressbar extends Packet
@@ -41,21 +41,21 @@ public class Packet105UpdateProgressbar extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
+    public void readPacketData(DataInput par1DataInput) throws IOException
     {
-        this.windowId = par1DataInputStream.readByte();
-        this.progressBar = par1DataInputStream.readShort();
-        this.progressBarValue = par1DataInputStream.readShort();
+        this.windowId = par1DataInput.readByte();
+        this.progressBar = par1DataInput.readShort();
+        this.progressBarValue = par1DataInput.readShort();
     }
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
+    public void writePacketData(DataOutput par1DataOutput) throws IOException
     {
-        par1DataOutputStream.writeByte(this.windowId);
-        par1DataOutputStream.writeShort(this.progressBar);
-        par1DataOutputStream.writeShort(this.progressBarValue);
+        par1DataOutput.writeByte(this.windowId);
+        par1DataOutput.writeShort(this.progressBar);
+        par1DataOutput.writeShort(this.progressBarValue);
     }
 
     /**
