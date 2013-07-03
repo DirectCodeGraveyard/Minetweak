@@ -7,9 +7,7 @@ import java.net.URLClassLoader;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Set;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
@@ -20,9 +18,12 @@ public class PluginLoader {
     public static HashMap<String, MinetweakPlugin> plugins = new HashMap<String, MinetweakPlugin>();
     public static ArrayList<String> enabledPlugins = new ArrayList<String>();
 
+    /**
+     * Creates an instance of PluginLoader and runs setupPlugins
+     */
     public static void initialize() {
         PluginLoader loader = new PluginLoader();
-        loader.setupModules();
+        loader.setupPlugins();
         enableAll();
     }
 
@@ -40,7 +41,7 @@ public class PluginLoader {
         }
     }
 
-    public void setupModules() {
+    public void setupPlugins() {
         createDir();
         getPluginFiles();
         ArrayList<String> classes = new ArrayList<String>();
@@ -103,10 +104,13 @@ public class PluginLoader {
         }
     }
 
+    /**
+     * Disable then re-enable all plugins
+     */
     public static void reloadPlugins() {
         disableAll();
         PluginLoader loader = new PluginLoader();
-        loader.setupModules();
+        loader.setupPlugins();
     }
 
     private void createDir() {
