@@ -58,7 +58,7 @@ public class BlockCarpet extends Block
     protected void func_111047_d(int par1)
     {
         byte var2 = 0;
-        float var3 = (float)(1 * (1 + var2)) / 16.0F;
+        float var3 = (float)((1 + var2)) / 16.0F;
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, var3, 1.0F);
     }
 

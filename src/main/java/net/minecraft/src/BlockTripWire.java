@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -206,18 +205,15 @@ public class BlockTripWire extends Block
         int var5 = par1World.getBlockMetadata(par2, par3, par4);
         boolean var6 = (var5 & 1) == 1;
         boolean var7 = false;
-        List var8 = par1World.getEntitiesWithinAABBExcludingEntity((Entity)null, AxisAlignedBB.getAABBPool().getAABB((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ));
+        List var8 = par1World.getEntitiesWithinAABBExcludingEntity(null, AxisAlignedBB.getAABBPool().getAABB((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ));
 
         if (!var8.isEmpty())
         {
-            Iterator var9 = var8.iterator();
 
-            while (var9.hasNext())
-            {
-                Entity var10 = (Entity)var9.next();
+            for (Object aVar8 : var8) {
+                Entity var10 = (Entity) aVar8;
 
-                if (!var10.doesEntityNotTriggerPressurePlate())
-                {
+                if (!var10.doesEntityNotTriggerPressurePlate()) {
                     var7 = true;
                     break;
                 }

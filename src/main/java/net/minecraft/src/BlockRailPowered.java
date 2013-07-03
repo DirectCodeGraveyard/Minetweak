@@ -104,7 +104,7 @@ public class BlockRailPowered extends BlockRailBase
                     var8 = 0;
             }
 
-            return this.func_94361_a(par1World, par2, par3, par4, par6, par7, var8) ? true : var9 && this.func_94361_a(par1World, par2, par3 - 1, par4, par6, par7, var8);
+            return this.func_94361_a(par1World, par2, par3, par4, par6, par7, var8) || var9 && this.func_94361_a(par1World, par2, par3 - 1, par4, par6, par7, var8);
         }
     }
 
@@ -129,12 +129,7 @@ public class BlockRailPowered extends BlockRailBase
 
             if ((var9 & 8) != 0)
             {
-                if (par1World.isBlockIndirectlyGettingPowered(par2, par3, par4))
-                {
-                    return true;
-                }
-
-                return this.func_94360_a(par1World, par2, par3, par4, var9, par5, par6 + 1);
+                return par1World.isBlockIndirectlyGettingPowered(par2, par3, par4) || this.func_94360_a(par1World, par2, par3, par4, var9, par5, par6 + 1);
             }
         }
 

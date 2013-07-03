@@ -92,11 +92,6 @@ public class BlockPistonExtension extends Block
     public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
     {
         int var8 = par1World.getBlockMetadata(par2, par3, par4);
-        float var9 = 0.25F;
-        float var10 = 0.375F;
-        float var11 = 0.625F;
-        float var12 = 0.25F;
-        float var13 = 0.75F;
 
         switch (getDirectionMeta(var8))
         {
@@ -151,7 +146,6 @@ public class BlockPistonExtension extends Block
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
         int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
-        float var6 = 0.25F;
 
         switch (getDirectionMeta(var5))
         {

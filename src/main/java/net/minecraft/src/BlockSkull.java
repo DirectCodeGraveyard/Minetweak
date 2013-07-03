@@ -189,14 +189,11 @@ public class BlockSkull extends BlockContainer
                     par1World.setBlock(par2, par3 - 1, par4 + var7 + 2, 0, 0, 2);
                     par1World.setBlock(par2, par3 - 2, par4 + var7 + 1, 0, 0, 2);
 
-                    if (!par1World.isRemote)
-                    {
-                        var8 = new EntityWither(par1World);
-                        var8.setLocationAndAngles((double)par2 + 0.5D, (double)par3 - 1.45D, (double)(par4 + var7) + 1.5D, 90.0F, 0.0F);
-                        var8.renderYawOffset = 90.0F;
-                        var8.func_82206_m();
-                        par1World.spawnEntityInWorld(var8);
-                    }
+                    var8 = new EntityWither(par1World);
+                    var8.setLocationAndAngles((double)par2 + 0.5D, (double)par3 - 1.45D, (double)(par4 + var7) + 1.5D, 90.0F, 0.0F);
+                    var8.renderYawOffset = 90.0F;
+                    var8.func_82206_m();
+                    par1World.spawnEntityInWorld(var8);
 
                     for (var9 = 0; var9 < 120; ++var9)
                     {
@@ -229,13 +226,10 @@ public class BlockSkull extends BlockContainer
                     par1World.setBlock(par2 + var7 + 2, par3 - 1, par4, 0, 0, 2);
                     par1World.setBlock(par2 + var7 + 1, par3 - 2, par4, 0, 0, 2);
 
-                    if (!par1World.isRemote)
-                    {
-                        var8 = new EntityWither(par1World);
-                        var8.setLocationAndAngles((double)(par2 + var7) + 1.5D, (double)par3 - 1.45D, (double)par4 + 0.5D, 0.0F, 0.0F);
-                        var8.func_82206_m();
-                        par1World.spawnEntityInWorld(var8);
-                    }
+                    var8 = new EntityWither(par1World);
+                    var8.setLocationAndAngles((double)(par2 + var7) + 1.5D, (double)par3 - 1.45D, (double)par4 + 0.5D, 0.0F, 0.0F);
+                    var8.func_82206_m();
+                    par1World.spawnEntityInWorld(var8);
 
                     for (var9 = 0; var9 < 120; ++var9)
                     {
@@ -264,7 +258,7 @@ public class BlockSkull extends BlockContainer
         else
         {
             TileEntity var6 = par1World.getBlockTileEntity(par2, par3, par4);
-            return var6 != null && var6 instanceof TileEntitySkull ? ((TileEntitySkull)var6).getSkullType() == par5 : false;
+            return var6 != null && var6 instanceof TileEntitySkull && ((TileEntitySkull) var6).getSkullType() == par5;
         }
     }
 }

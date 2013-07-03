@@ -17,7 +17,7 @@ class CallableTileEntityID implements Callable
 
         try
         {
-            return String.format("ID #%d (%s // %s)", new Object[] {Integer.valueOf(var1), Block.blocksList[var1].getUnlocalizedName(), Block.blocksList[var1].getClass().getCanonicalName()});
+            return String.format("ID #%d (%s // %s)", var1, Block.blocksList[var1].getUnlocalizedName(), Block.blocksList[var1].getClass().getCanonicalName());
         }
         catch (Throwable var3)
         {

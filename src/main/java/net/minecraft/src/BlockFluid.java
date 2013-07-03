@@ -95,7 +95,7 @@ public abstract class BlockFluid extends Block
     public boolean isBlockSolid(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
     {
         Material var6 = par1IBlockAccess.getBlockMaterial(par2, par3, par4);
-        return var6 == this.blockMaterial ? false : (par5 == 1 ? true : (var6 == Material.ice ? false : super.isBlockSolid(par1IBlockAccess, par2, par3, par4, par5)));
+        return var6 != this.blockMaterial && (par5 == 1 || (var6 != Material.ice && super.isBlockSolid(par1IBlockAccess, par2, par3, par4, par5)));
     }
 
     /**
@@ -191,7 +191,7 @@ public abstract class BlockFluid extends Block
         {
             boolean var13 = false;
 
-            if (var13 || this.isBlockSolid(par1IBlockAccess, par2, par3, par4 - 1, 2))
+            if (this.isBlockSolid(par1IBlockAccess, par2, par3, par4 - 1, 2))
             {
                 var13 = true;
             }
@@ -288,7 +288,7 @@ public abstract class BlockFluid extends Block
             {
                 boolean var5 = false;
 
-                if (var5 || par1World.getBlockMaterial(par2, par3, par4 - 1) == Material.water)
+                if (par1World.getBlockMaterial(par2, par3, par4 - 1) == Material.water)
                 {
                     var5 = true;
                 }

@@ -52,7 +52,7 @@ public abstract class CommandBase implements ICommand
         }
         catch (NumberFormatException var3)
         {
-            throw new NumberInvalidException("commands.generic.num.invalid", new Object[] {par1Str});
+            throw new NumberInvalidException("commands.generic.num.invalid", par1Str);
         }
     }
 
@@ -73,11 +73,11 @@ public abstract class CommandBase implements ICommand
 
         if (var4 < par2)
         {
-            throw new NumberInvalidException("commands.generic.num.tooSmall", new Object[] {Integer.valueOf(var4), Integer.valueOf(par2)});
+            throw new NumberInvalidException("commands.generic.num.tooSmall", var4, Integer.valueOf(par2));
         }
         else if (var4 > par3)
         {
-            throw new NumberInvalidException("commands.generic.num.tooBig", new Object[] {Integer.valueOf(var4), Integer.valueOf(par3)});
+            throw new NumberInvalidException("commands.generic.num.tooBig", var4, Integer.valueOf(par3));
         }
         else
         {
@@ -96,7 +96,7 @@ public abstract class CommandBase implements ICommand
 
             if (!Doubles.isFinite(var2))
             {
-                throw new NumberInvalidException("commands.generic.double.invalid", new Object[] {par1Str});
+                throw new NumberInvalidException("commands.generic.double.invalid", par1Str);
             }
             else
             {
@@ -105,7 +105,7 @@ public abstract class CommandBase implements ICommand
         }
         catch (NumberFormatException var4)
         {
-            throw new NumberInvalidException("commands.generic.double.invalid", new Object[] {par1Str});
+            throw new NumberInvalidException("commands.generic.double.invalid", par1Str);
         }
     }
 
@@ -120,11 +120,11 @@ public abstract class CommandBase implements ICommand
 
         if (var6 < par2)
         {
-            throw new NumberInvalidException("commands.generic.double.tooSmall", new Object[] {Double.valueOf(var6), Double.valueOf(par2)});
+            throw new NumberInvalidException("commands.generic.double.tooSmall", var6, par2);
         }
         else if (var6 > par4)
         {
-            throw new NumberInvalidException("commands.generic.double.tooBig", new Object[] {Double.valueOf(var6), Double.valueOf(par4)});
+            throw new NumberInvalidException("commands.generic.double.tooBig", var6, par4);
         }
         else
         {
@@ -138,7 +138,7 @@ public abstract class CommandBase implements ICommand
         {
             if (!par1Str.equals("false") && !par1Str.equals("0"))
             {
-                throw new CommandException("commands.generic.boolean.invalid", new Object[] {par1Str});
+                throw new CommandException("commands.generic.boolean.invalid", par1Str);
             }
             else
             {
@@ -162,7 +162,7 @@ public abstract class CommandBase implements ICommand
         }
         else
         {
-            throw new PlayerNotFoundException("You must specify which player you wish to perform this action on.", new Object[0]);
+            throw new PlayerNotFoundException("You must specify which player you wish to perform this action on.");
         }
     }
 
@@ -256,7 +256,7 @@ public abstract class CommandBase implements ICommand
 
         if (var6 && Double.isNaN(par1))
         {
-            throw new NumberInvalidException("commands.generic.num.invalid", new Object[] {Double.valueOf(par1)});
+            throw new NumberInvalidException("commands.generic.num.invalid", par1);
         }
         else
         {
@@ -283,12 +283,12 @@ public abstract class CommandBase implements ICommand
             {
                 if (var7 < (double)par4)
                 {
-                    throw new NumberInvalidException("commands.generic.double.tooSmall", new Object[] {Double.valueOf(var7), Integer.valueOf(par4)});
+                    throw new NumberInvalidException("commands.generic.double.tooSmall", var7, par4);
                 }
 
                 if (var7 > (double)par5)
                 {
-                    throw new NumberInvalidException("commands.generic.double.tooBig", new Object[] {Double.valueOf(var7), Integer.valueOf(par5)});
+                    throw new NumberInvalidException("commands.generic.double.tooBig", var7, par5);
                 }
             }
 
@@ -360,12 +360,11 @@ public abstract class CommandBase implements ICommand
     {
         String var2 = par0ArrayOfStr[par0ArrayOfStr.length - 1];
         ArrayList var3 = new ArrayList();
-        String[] var4 = par1ArrayOfStr;
         int var5 = par1ArrayOfStr.length;
 
         for (int var6 = 0; var6 < var5; ++var6)
         {
-            String var7 = var4[var6];
+            String var7 = par1ArrayOfStr[var6];
 
             if (doesStringStartWith(var2, var7))
             {
@@ -384,14 +383,11 @@ public abstract class CommandBase implements ICommand
     {
         String var2 = par0ArrayOfStr[par0ArrayOfStr.length - 1];
         ArrayList var3 = new ArrayList();
-        Iterator var4 = par1Iterable.iterator();
 
-        while (var4.hasNext())
-        {
-            String var5 = (String)var4.next();
+        for (Object aPar1Iterable : par1Iterable) {
+            String var5 = (String) aPar1Iterable;
 
-            if (doesStringStartWith(var2, var5))
-            {
+            if (doesStringStartWith(var2, var5)) {
                 var3.add(var5);
             }
         }

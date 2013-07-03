@@ -276,9 +276,10 @@ public class BiomeDecorator
             var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 
-            for (var7 = this.randomGenerator.nextInt(128); var7 > 0 && this.currentWorld.getBlockId(var3, var7 - 1, var4) == 0; --var7)
-            {
-                ;
+
+            var7 = this.randomGenerator.nextInt(128);
+            while (var7 > 0 && this.currentWorld.getBlockId(var3, var7 - 1, var4) == 0) {
+                --var7;
             }
 
             this.waterlilyGen.generate(this.currentWorld, this.randomGenerator, var3, var7, var4);

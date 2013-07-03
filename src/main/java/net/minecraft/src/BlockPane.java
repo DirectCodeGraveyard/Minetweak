@@ -72,12 +72,12 @@ public class BlockPane extends Block
 
         if ((!var10 || !var11) && (var10 || var11 || var8 || var9))
         {
-            if (var10 && !var11)
+            if (var10)
             {
                 this.setBlockBounds(0.0F, 0.0F, 0.4375F, 0.5F, 1.0F, 0.5625F);
                 super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
             }
-            else if (!var10 && var11)
+            else if (var11)
             {
                 this.setBlockBounds(0.5F, 0.0F, 0.4375F, 1.0F, 1.0F, 0.5625F);
                 super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
@@ -91,12 +91,12 @@ public class BlockPane extends Block
 
         if ((!var8 || !var9) && (var10 || var11 || var8 || var9))
         {
-            if (var8 && !var9)
+            if (var8)
             {
                 this.setBlockBounds(0.4375F, 0.0F, 0.0F, 0.5625F, 1.0F, 0.5F);
                 super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
             }
-            else if (!var8 && var9)
+            else if (var9)
             {
                 this.setBlockBounds(0.4375F, 0.0F, 0.5F, 0.5625F, 1.0F, 1.0F);
                 super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
@@ -133,11 +133,11 @@ public class BlockPane extends Block
 
         if ((!var11 || !var12) && (var11 || var12 || var9 || var10))
         {
-            if (var11 && !var12)
+            if (var11)
             {
                 var5 = 0.0F;
             }
-            else if (!var11 && var12)
+            else if (var12)
             {
                 var6 = 1.0F;
             }
@@ -150,11 +150,11 @@ public class BlockPane extends Block
 
         if ((!var9 || !var10) && (var11 || var12 || var9 || var10))
         {
-            if (var9 && !var10)
+            if (var9)
             {
                 var7 = 0.0F;
             }
-            else if (!var9 && var10)
+            else if (var10)
             {
                 var8 = 1.0F;
             }

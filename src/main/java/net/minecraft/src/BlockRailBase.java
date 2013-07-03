@@ -11,7 +11,7 @@ public abstract class BlockRailBase extends Block
      * Returns true if the block at the coordinates of world passed is a valid rail block (current is rail, powered or
      * detector).
      */
-    public static final boolean isRailBlockAt(World par0World, int par1, int par2, int par3)
+    public static boolean isRailBlockAt(World par0World, int par1, int par2, int par3)
     {
         return isRailBlock(par0World.getBlockId(par1, par2, par3));
     }
@@ -19,7 +19,7 @@ public abstract class BlockRailBase extends Block
     /**
      * Return true if the parameter is a blockID for a valid rail block (current is rail, powered or detector).
      */
-    public static final boolean isRailBlock(int par0)
+    public static boolean isRailBlock(int par0)
     {
         return par0 == Block.rail.blockID || par0 == Block.railPowered.blockID || par0 == Block.railDetector.blockID || par0 == Block.railActivator.blockID;
     }

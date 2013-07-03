@@ -88,11 +88,7 @@ public class Block
     public static final BlockFlower mushroomRed = (BlockFlower)(new BlockMushroom(40)).setHardness(0.0F).setStepSound(soundGrassFootstep).setUnlocalizedName("mushroom").func_111022_d("mushroom_red");
     public static final Block blockGold = (new BlockOreStorage(41)).setHardness(3.0F).setResistance(10.0F).setStepSound(soundMetalFootstep).setUnlocalizedName("blockGold").func_111022_d("gold_block");
     public static final Block blockIron = (new BlockOreStorage(42)).setHardness(5.0F).setResistance(10.0F).setStepSound(soundMetalFootstep).setUnlocalizedName("blockIron").func_111022_d("iron_block");
-
-    /** stoneDoubleSlab */
     public static final BlockHalfSlab stoneDoubleSlab = (BlockHalfSlab)(new BlockStep(43, true)).setHardness(2.0F).setResistance(10.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("stoneSlab");
-
-    /** stoneSingleSlab */
     public static final BlockHalfSlab stoneSingleSlab = (BlockHalfSlab)(new BlockStep(44, false)).setHardness(2.0F).setResistance(10.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("stoneSlab");
     public static final Block brick = (new Block(45, Material.rock)).setHardness(2.0F).setResistance(10.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("brick").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("brick");
     public static final Block tnt = (new BlockTNT(46)).setHardness(0.0F).setStepSound(soundGrassFootstep).setUnlocalizedName("tnt").func_111022_d("tnt");
@@ -139,17 +135,11 @@ public class Block
     public static final Block netherrack = (new BlockNetherrack(87)).setHardness(0.4F).setStepSound(soundStoneFootstep).setUnlocalizedName("hellrock").func_111022_d("netherrack");
     public static final Block slowSand = (new BlockSoulSand(88)).setHardness(0.5F).setStepSound(soundSandFootstep).setUnlocalizedName("hellsand").func_111022_d("soul_sand");
     public static final Block glowStone = (new BlockGlowStone(89, Material.glass)).setHardness(0.3F).setStepSound(soundGlassFootstep).setLightValue(1.0F).setUnlocalizedName("lightgem").func_111022_d("glowstone");
-
-    /** The purple teleport blocks inside the obsidian circle */
     public static final BlockPortal portal = (BlockPortal)(new BlockPortal(90)).setHardness(-1.0F).setStepSound(soundGlassFootstep).setLightValue(0.75F).setUnlocalizedName("portal").func_111022_d("portal");
     public static final Block pumpkinLantern = (new BlockPumpkin(91, true)).setHardness(1.0F).setStepSound(soundWoodFootstep).setLightValue(1.0F).setUnlocalizedName("litpumpkin").func_111022_d("pumpkin");
     public static final Block cake = (new BlockCake(92)).setHardness(0.5F).setStepSound(soundClothFootstep).setUnlocalizedName("cake").disableStats().func_111022_d("cake");
     public static final BlockRedstoneRepeater redstoneRepeaterIdle = (BlockRedstoneRepeater)(new BlockRedstoneRepeater(93, false)).setHardness(0.0F).setStepSound(soundWoodFootstep).setUnlocalizedName("diode").disableStats().func_111022_d("repeater_off");
     public static final BlockRedstoneRepeater redstoneRepeaterActive = (BlockRedstoneRepeater)(new BlockRedstoneRepeater(94, true)).setHardness(0.0F).setLightValue(0.625F).setStepSound(soundWoodFootstep).setUnlocalizedName("diode").disableStats().func_111022_d("repeater_on");
-
-    /**
-     * April fools secret locked chest, only spawns on new chunks on 1st April.
-     */
     public static final Block lockedChest = (new BlockLockedChest(95)).setHardness(0.0F).setLightValue(1.0F).setStepSound(soundWoodFootstep).setUnlocalizedName("lockedchest").setTickRandomly(true);
     public static final Block trapdoor = (new BlockTrapDoor(96, Material.wood)).setHardness(3.0F).setStepSound(soundWoodFootstep).setUnlocalizedName("trapdoor").disableStats().func_111022_d("trapdoor");
     public static final Block silverfish = (new BlockSilverfish(97)).setHardness(0.75F).setUnlocalizedName("monsterStoneEgg");
@@ -231,8 +221,9 @@ public class Block
 
     /**
      * set to true when Block's constructor is called through the chain of super()'s. Note: Never used
+     *
+     * protected boolean blockConstructorCalled = true;
      */
-    protected boolean blockConstructorCalled = true;
 
     /**
      * If this field is true, the block is counted for statistics (mined or placed)
@@ -349,7 +340,7 @@ public class Block
     public static boolean isNormalCube(int par0)
     {
         Block var1 = blocksList[par0];
-        return var1 == null ? false : var1.blockMaterial.isOpaque() && var1.renderAsNormalBlock() && !var1.canProvidePower();
+        return (var1 != null) && var1.blockMaterial.isOpaque() && var1.renderAsNormalBlock() && !var1.canProvidePower();
     }
 
     /**
@@ -1127,7 +1118,7 @@ public class Block
      */
     public static boolean isAssociatedBlockID(int par0, int par1)
     {
-        return par0 == par1 ? true : (par0 != 0 && par1 != 0 && blocksList[par0] != null && blocksList[par1] != null ? blocksList[par0].isAssociatedBlockID(par1) : false);
+        return par0 == par1 || (par0 != 0 && par1 != 0 && blocksList[par0] != null && blocksList[par1] != null && blocksList[par0].isAssociatedBlockID(par1));
     }
 
     /**

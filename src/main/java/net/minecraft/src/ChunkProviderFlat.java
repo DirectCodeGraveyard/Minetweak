@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -70,16 +69,13 @@ public class ChunkProviderFlat implements IChunkProvider
         }
 
         this.field_82702_h = this.field_82699_e.getWorldFeatures().containsKey("dungeon");
-        Iterator var9 = this.field_82699_e.getFlatLayers().iterator();
 
-        while (var9.hasNext())
-        {
-            FlatLayerInfo var10 = (FlatLayerInfo)var9.next();
+        for (Object o : this.field_82699_e.getFlatLayers()) {
+            FlatLayerInfo var10 = (FlatLayerInfo) o;
 
-            for (int var8 = var10.getMinY(); var8 < var10.getMinY() + var10.getLayerCount(); ++var8)
-            {
-                this.field_82700_c[var8] = (byte)(var10.getFillBlock() & 255);
-                this.field_82698_d[var8] = (byte)var10.getFillBlockMeta();
+            for (int var8 = var10.getMinY(); var8 < var10.getMinY() + var10.getLayerCount(); ++var8) {
+                this.field_82700_c[var8] = (byte) (var10.getFillBlock() & 255);
+                this.field_82698_d[var8] = (byte) var10.getFillBlockMeta();
             }
         }
     }
@@ -122,7 +118,7 @@ public class ChunkProviderFlat implements IChunkProvider
         }
 
         var3.generateSkylightMap();
-        BiomeGenBase[] var9 = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[])null, par1 * 16, par2 * 16, 16, 16);
+        BiomeGenBase[] var9 = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(null, par1 * 16, par2 * 16, 16, 16);
         byte[] var10 = var3.getBiomeArray();
 
         for (int var11 = 0; var11 < var10.length; ++var11)
@@ -130,12 +126,9 @@ public class ChunkProviderFlat implements IChunkProvider
             var10[var11] = (byte)var9[var11].biomeID;
         }
 
-        Iterator var12 = this.structureGenerators.iterator();
-
-        while (var12.hasNext())
-        {
-            MapGenStructure var13 = (MapGenStructure)var12.next();
-            var13.generate(this, this.worldObj, par1, par2, (byte[])null);
+        for (Object structureGenerator : this.structureGenerators) {
+            MapGenStructure var13 = (MapGenStructure) structureGenerator;
+            var13.generate(this, this.worldObj, par1, par2, null);
         }
 
         var3.generateSkylightMap();
@@ -163,15 +156,12 @@ public class ChunkProviderFlat implements IChunkProvider
         long var8 = this.random.nextLong() / 2L * 2L + 1L;
         long var10 = this.random.nextLong() / 2L * 2L + 1L;
         this.random.setSeed((long)par2 * var8 + (long)par3 * var10 ^ this.worldObj.getSeed());
-        Iterator var12 = this.structureGenerators.iterator();
 
-        while (var12.hasNext())
-        {
-            MapGenStructure var13 = (MapGenStructure)var12.next();
+        for (Object structureGenerator : this.structureGenerators) {
+            MapGenStructure var13 = (MapGenStructure) structureGenerator;
             boolean var14 = var13.generateStructuresInChunk(this.worldObj, this.random, par2, par3);
 
-            if (var13 instanceof MapGenVillage)
-            {
+            if (var13 instanceof MapGenVillage) {
                 var7 |= var14;
             }
         }
@@ -268,14 +258,11 @@ public class ChunkProviderFlat implements IChunkProvider
     {
         if ("Stronghold".equals(par2Str))
         {
-            Iterator var6 = this.structureGenerators.iterator();
 
-            while (var6.hasNext())
-            {
-                MapGenStructure var7 = (MapGenStructure)var6.next();
+            for (Object structureGenerator : this.structureGenerators) {
+                MapGenStructure var7 = (MapGenStructure) structureGenerator;
 
-                if (var7 instanceof MapGenStronghold)
-                {
+                if (var7 instanceof MapGenStronghold) {
                     return var7.getNearestInstance(par1World, par3, par4, par5);
                 }
             }
@@ -291,12 +278,10 @@ public class ChunkProviderFlat implements IChunkProvider
 
     public void recreateStructures(int par1, int par2)
     {
-        Iterator var3 = this.structureGenerators.iterator();
 
-        while (var3.hasNext())
-        {
-            MapGenStructure var4 = (MapGenStructure)var3.next();
-            var4.generate(this, this.worldObj, par1, par2, (byte[])null);
+        for (Object structureGenerator : this.structureGenerators) {
+            MapGenStructure var4 = (MapGenStructure) structureGenerator;
+            var4.generate(this, this.worldObj, par1, par2, null);
         }
     }
 }

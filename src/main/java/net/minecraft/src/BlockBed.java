@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import java.util.Random;
 
 public class BlockBed extends BlockDirectional
@@ -46,18 +45,14 @@ public class BlockBed extends BlockDirectional
                 if (isBedOccupied(var10))
                 {
                     EntityPlayer var20 = null;
-                    Iterator var12 = par1World.playerEntities.iterator();
 
-                    while (var12.hasNext())
-                    {
-                        EntityPlayer var21 = (EntityPlayer)var12.next();
+                    for (Object playerEntity : par1World.playerEntities) {
+                        EntityPlayer var21 = (EntityPlayer) playerEntity;
 
-                        if (var21.isPlayerSleeping())
-                        {
+                        if (var21.isPlayerSleeping()) {
                             ChunkCoordinates var14 = var21.playerLocation;
 
-                            if (var14.posX == par2 && var14.posY == par3 && var14.posZ == par4)
-                            {
+                            if (var14.posX == par2 && var14.posY == par3 && var14.posZ == par4) {
                                 var20 = var21;
                             }
                         }
@@ -106,12 +101,12 @@ public class BlockBed extends BlockDirectional
                 if (par1World.getBlockId(par2, par3, par4) == this.blockID)
                 {
                     par1World.setBlockToAir(par2, par3, par4);
-                    var18 = (var18 + (double)par2 + 0.5D) / 2.0D;
-                    var13 = (var13 + (double)par3 + 0.5D) / 2.0D;
-                    var15 = (var15 + (double)par4 + 0.5D) / 2.0D;
+                    var18 = (var18 + (double) par2 + 0.5D) / 2.0D;
+                    var13 = (var13 + (double) par3 + 0.5D) / 2.0D;
+                    var15 = (var15 + (double) par4 + 0.5D) / 2.0D;
                 }
 
-                par1World.newExplosion((Entity)null, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), 5.0F, true, true);
+                par1World.newExplosion(null, (double)((float)par2 + 0.5F), (double)((float)par3 + 0.5F), (double)((float)par4 + 0.5F), 5.0F, true, true);
                 return true;
             }
         }

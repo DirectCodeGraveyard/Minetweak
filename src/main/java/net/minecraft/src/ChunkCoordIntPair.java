@@ -30,6 +30,7 @@ public class ChunkCoordIntPair
         return var3 ^ var4;
     }
 
+    @Override
     public boolean equals(Object par1Obj)
     {
         ChunkCoordIntPair var2 = (ChunkCoordIntPair)par1Obj;

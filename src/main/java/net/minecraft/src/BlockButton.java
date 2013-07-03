@@ -55,7 +55,7 @@ public abstract class BlockButton extends Block
      */
     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5)
     {
-        return par5 == 2 && par1World.isBlockNormalCube(par2, par3, par4 + 1) ? true : (par5 == 3 && par1World.isBlockNormalCube(par2, par3, par4 - 1) ? true : (par5 == 4 && par1World.isBlockNormalCube(par2 + 1, par3, par4) ? true : par5 == 5 && par1World.isBlockNormalCube(par2 - 1, par3, par4)));
+        return par5 == 2 && par1World.isBlockNormalCube(par2, par3, par4 + 1) || (par5 == 3 && par1World.isBlockNormalCube(par2, par3, par4 - 1) || (par5 == 4 && par1World.isBlockNormalCube(par2 + 1, par3, par4) || par5 == 5 && par1World.isBlockNormalCube(par2 - 1, par3, par4)));
     }
 
     /**
@@ -63,7 +63,7 @@ public abstract class BlockButton extends Block
      */
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
-        return par1World.isBlockNormalCube(par2 - 1, par3, par4) ? true : (par1World.isBlockNormalCube(par2 + 1, par3, par4) ? true : (par1World.isBlockNormalCube(par2, par3, par4 - 1) ? true : par1World.isBlockNormalCube(par2, par3, par4 + 1)));
+        return par1World.isBlockNormalCube(par2 - 1, par3, par4) || (par1World.isBlockNormalCube(par2 + 1, par3, par4) || (par1World.isBlockNormalCube(par2, par3, par4 - 1) || par1World.isBlockNormalCube(par2, par3, par4 + 1)));
     }
 
     /**

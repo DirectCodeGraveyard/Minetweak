@@ -1,7 +1,5 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
-
 public class BlockPressurePlateWeighted extends BlockBasePressurePlate
 {
     /** The maximum number of items the plate weights. */
@@ -20,15 +18,12 @@ public class BlockPressurePlateWeighted extends BlockBasePressurePlate
     protected int getPlateState(World par1World, int par2, int par3, int par4)
     {
         int var5 = 0;
-        Iterator var6 = par1World.getEntitiesWithinAABB(EntityItem.class, this.getSensitiveAABB(par2, par3, par4)).iterator();
 
-        while (var6.hasNext())
-        {
-            EntityItem var7 = (EntityItem)var6.next();
+        for (Object o : par1World.getEntitiesWithinAABB(EntityItem.class, this.getSensitiveAABB(par2, par3, par4))) {
+            EntityItem var7 = (EntityItem) o;
             var5 += var7.getEntityItem().stackSize;
 
-            if (var5 >= this.maxItemsWeighted)
-            {
+            if (var5 >= this.maxItemsWeighted) {
                 break;
             }
         }

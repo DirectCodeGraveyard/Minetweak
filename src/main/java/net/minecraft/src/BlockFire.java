@@ -255,7 +255,7 @@ public class BlockFire extends Block
      */
     private boolean canNeighborBurn(World par1World, int par2, int par3, int par4)
     {
-        return this.canBlockCatchFire(par1World, par2 + 1, par3, par4) ? true : (this.canBlockCatchFire(par1World, par2 - 1, par3, par4) ? true : (this.canBlockCatchFire(par1World, par2, par3 - 1, par4) ? true : (this.canBlockCatchFire(par1World, par2, par3 + 1, par4) ? true : (this.canBlockCatchFire(par1World, par2, par3, par4 - 1) ? true : this.canBlockCatchFire(par1World, par2, par3, par4 + 1)))));
+        return this.canBlockCatchFire(par1World, par2 + 1, par3, par4) || (this.canBlockCatchFire(par1World, par2 - 1, par3, par4) || (this.canBlockCatchFire(par1World, par2, par3 - 1, par4) || (this.canBlockCatchFire(par1World, par2, par3 + 1, par4) || (this.canBlockCatchFire(par1World, par2, par3, par4 - 1) || this.canBlockCatchFire(par1World, par2, par3, par4 + 1)))));
     }
 
     /**

@@ -1,11 +1,7 @@
 package net.minecraft.src;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ChunkProviderServer implements IChunkProvider
 {
@@ -58,12 +54,12 @@ public class ChunkProviderServer implements IChunkProvider
 
             if (var4 < -var6 || var4 > var6 || var5 < -var6 || var5 > var6)
             {
-                this.droppedChunksSet.add(Long.valueOf(ChunkCoordIntPair.chunkXZ2Int(par1, par2)));
+                this.droppedChunksSet.add(ChunkCoordIntPair.chunkXZ2Int(par1, par2));
             }
         }
         else
         {
-            this.droppedChunksSet.add(Long.valueOf(ChunkCoordIntPair.chunkXZ2Int(par1, par2)));
+            this.droppedChunksSet.add(ChunkCoordIntPair.chunkXZ2Int(par1, par2));
         }
     }
 
@@ -110,8 +106,8 @@ public class ChunkProviderServer implements IChunkProvider
                     {
                         CrashReport var7 = CrashReport.makeCrashReport(var9, "Exception generating new chunk");
                         CrashReportCategory var8 = var7.makeCategory("Chunk to be generated");
-                        var8.addCrashSection("Location", String.format("%d,%d", new Object[] {Integer.valueOf(par1), Integer.valueOf(par2)}));
-                        var8.addCrashSection("Position hash", Long.valueOf(var3));
+                        var8.addCrashSection("Location", String.format("%d,%d", par1, par2));
+                        var8.addCrashSection("Position hash", var3);
                         var8.addCrashSection("Generator", this.serverChunkGenerator.makeString());
                         throw new ReportedException(var7);
                     }
@@ -236,23 +232,19 @@ public class ChunkProviderServer implements IChunkProvider
     {
         int var3 = 0;
 
-        for (int var4 = 0; var4 < this.loadedChunks.size(); ++var4)
-        {
-            Chunk var5 = (Chunk)this.loadedChunks.get(var4);
+        for (Object loadedChunk : this.loadedChunks) {
+            Chunk var5 = (Chunk) loadedChunk;
 
-            if (par1)
-            {
+            if (par1) {
                 this.saveChunkExtraData(var5);
             }
 
-            if (var5.needsSaving(par1))
-            {
+            if (var5.needsSaving(par1)) {
                 this.saveChunkData(var5);
                 var5.isModified = false;
                 ++var3;
 
-                if (var3 == 24 && !par1)
-                {
+                if (var3 == 24 && !par1) {
                     return false;
                 }
             }
@@ -281,12 +273,12 @@ public class ChunkProviderServer implements IChunkProvider
                 if (!this.droppedChunksSet.isEmpty())
                 {
                     Long var2 = (Long)this.droppedChunksSet.iterator().next();
-                    Chunk var3 = (Chunk)this.id2ChunkMap.getValueByKey(var2.longValue());
+                    Chunk var3 = (Chunk)this.id2ChunkMap.getValueByKey(var2);
                     var3.onChunkUnload();
                     this.saveChunkData(var3);
                     this.saveChunkExtraData(var3);
                     this.droppedChunksSet.remove(var2);
-                    this.id2ChunkMap.remove(var2.longValue());
+                    this.id2ChunkMap.remove(var2);
                     this.loadedChunks.remove(var3);
                 }
             }

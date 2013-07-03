@@ -12,7 +12,7 @@ public class BlockRedstoneWire extends Block
      * updateCurrentStrength.
      */
     private boolean wiresProvidePower = true;
-    private Set blocksNeedingUpdate = new HashSet();
+    private Set<ChunkPosition> blocksNeedingUpdate = new HashSet<ChunkPosition>();
 
     public BlockRedstoneWire(int par1)
     {
@@ -69,12 +69,10 @@ public class BlockRedstoneWire extends Block
     private void updateAndPropagateCurrentStrength(World par1World, int par2, int par3, int par4)
     {
         this.calculateCurrentChanges(par1World, par2, par3, par4, par2, par3, par4);
-        ArrayList var5 = new ArrayList(this.blocksNeedingUpdate);
+        ArrayList<ChunkPosition> var5 = new ArrayList<ChunkPosition>(this.blocksNeedingUpdate);
         this.blocksNeedingUpdate.clear();
 
-        for (int var6 = 0; var6 < var5.size(); ++var6)
-        {
-            ChunkPosition var7 = (ChunkPosition)var5.get(var6);
+        for (ChunkPosition var7 : var5) {
             par1World.notifyBlocksOfNeighborChange(var7.x, var7.y, var7.z, this.blockID);
         }
     }

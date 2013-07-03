@@ -15,7 +15,7 @@ final class CallableBlockType implements Callable
     {
         try
         {
-            return String.format("ID #%d (%s // %s)", new Object[] {Integer.valueOf(this.blockID), Block.blocksList[this.blockID].getUnlocalizedName(), Block.blocksList[this.blockID].getClass().getCanonicalName()});
+            return String.format("ID #%d (%s // %s)", this.blockID, Block.blocksList[this.blockID].getUnlocalizedName(), Block.blocksList[this.blockID].getClass().getCanonicalName());
         }
         catch (Throwable var2)
         {

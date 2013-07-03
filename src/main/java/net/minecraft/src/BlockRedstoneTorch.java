@@ -8,16 +8,16 @@ public class BlockRedstoneTorch extends BlockTorch
     private boolean torchActive;
 
     /** Map of ArrayLists of RedstoneUpdateInfo. Key of map is World. */
-    private static Map redstoneUpdateInfoCache = new HashMap();
+    private static Map<World, ArrayList<RedstoneUpdateInfo>> redstoneUpdateInfoCache = new HashMap<World, ArrayList<RedstoneUpdateInfo>>();
 
     private boolean checkForBurnout(World par1World, int par2, int par3, int par4, boolean par5)
     {
         if (!redstoneUpdateInfoCache.containsKey(par1World))
         {
-            redstoneUpdateInfoCache.put(par1World, new ArrayList());
+            redstoneUpdateInfoCache.put(par1World, new ArrayList<RedstoneUpdateInfo>());
         }
 
-        List var6 = (List)redstoneUpdateInfoCache.get(par1World);
+        List<RedstoneUpdateInfo> var6 = redstoneUpdateInfoCache.get(par1World);
 
         if (par5)
         {
@@ -26,16 +26,11 @@ public class BlockRedstoneTorch extends BlockTorch
 
         int var7 = 0;
 
-        for (int var8 = 0; var8 < var6.size(); ++var8)
-        {
-            RedstoneUpdateInfo var9 = (RedstoneUpdateInfo)var6.get(var8);
-
-            if (var9.x == par2 && var9.y == par3 && var9.z == par4)
-            {
+        for (RedstoneUpdateInfo var9 : var6) {
+            if (var9.x == par2 && var9.y == par3 && var9.z == par4) {
                 ++var7;
 
-                if (var7 >= 8)
-                {
+                if (var7 >= 8) {
                     return true;
                 }
             }
@@ -49,7 +44,7 @@ public class BlockRedstoneTorch extends BlockTorch
         super(par1);
         this.torchActive = par2;
         this.setTickRandomly(true);
-        this.setCreativeTab((CreativeTabs)null);
+        this.setCreativeTab(null);
     }
 
     /**
@@ -121,7 +116,7 @@ public class BlockRedstoneTorch extends BlockTorch
     private boolean isIndirectlyPowered(World par1World, int par2, int par3, int par4)
     {
         int var5 = par1World.getBlockMetadata(par2, par3, par4);
-        return var5 == 5 && par1World.getIndirectPowerOutput(par2, par3 - 1, par4, 0) ? true : (var5 == 3 && par1World.getIndirectPowerOutput(par2, par3, par4 - 1, 2) ? true : (var5 == 4 && par1World.getIndirectPowerOutput(par2, par3, par4 + 1, 3) ? true : (var5 == 1 && par1World.getIndirectPowerOutput(par2 - 1, par3, par4, 4) ? true : var5 == 2 && par1World.getIndirectPowerOutput(par2 + 1, par3, par4, 5))));
+        return var5 == 5 && par1World.getIndirectPowerOutput(par2, par3 - 1, par4, 0) || (var5 == 3 && par1World.getIndirectPowerOutput(par2, par3, par4 - 1, 2) || (var5 == 4 && par1World.getIndirectPowerOutput(par2, par3, par4 + 1, 3) || (var5 == 1 && par1World.getIndirectPowerOutput(par2 - 1, par3, par4, 4) || var5 == 2 && par1World.getIndirectPowerOutput(par2 + 1, par3, par4, 5))));
     }
 
     /**
@@ -130,9 +125,9 @@ public class BlockRedstoneTorch extends BlockTorch
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
     {
         boolean var6 = this.isIndirectlyPowered(par1World, par2, par3, par4);
-        List var7 = (List)redstoneUpdateInfoCache.get(par1World);
+        List<RedstoneUpdateInfo> var7 = redstoneUpdateInfoCache.get(par1World);
 
-        while (var7 != null && !var7.isEmpty() && par1World.getTotalWorldTime() - ((RedstoneUpdateInfo)var7.get(0)).updateTime > 60L)
+        while (var7 != null && !var7.isEmpty() && par1World.getTotalWorldTime() - (var7.get(0)).updateTime > 60L)
         {
             var7.remove(0);
         }

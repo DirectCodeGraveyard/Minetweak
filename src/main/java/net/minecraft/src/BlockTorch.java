@@ -66,7 +66,7 @@ public class BlockTorch extends Block
      */
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
-        return par1World.isBlockNormalCubeDefault(par2 - 1, par3, par4, true) ? true : (par1World.isBlockNormalCubeDefault(par2 + 1, par3, par4, true) ? true : (par1World.isBlockNormalCubeDefault(par2, par3, par4 - 1, true) ? true : (par1World.isBlockNormalCubeDefault(par2, par3, par4 + 1, true) ? true : this.canPlaceTorchOn(par1World, par2, par3 - 1, par4))));
+        return par1World.isBlockNormalCubeDefault(par2 - 1, par3, par4, true) || (par1World.isBlockNormalCubeDefault(par2 + 1, par3, par4, true) || (par1World.isBlockNormalCubeDefault(par2, par3, par4 - 1, true) || (par1World.isBlockNormalCubeDefault(par2, par3, par4 + 1, true) || this.canPlaceTorchOn(par1World, par2, par3 - 1, par4))));
     }
 
     /**

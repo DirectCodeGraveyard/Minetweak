@@ -136,7 +136,7 @@ public class BlockRedstoneOre extends Block
 
             if (var8 == 1 && !par1World.isBlockOpaqueCube(par2, par3 - 1, par4))
             {
-                var11 = (double)(par3 + 0) - var6;
+                var11 = (double)(par3) - var6;
             }
 
             if (var8 == 2 && !par1World.isBlockOpaqueCube(par2, par3, par4 + 1))
@@ -146,7 +146,7 @@ public class BlockRedstoneOre extends Block
 
             if (var8 == 3 && !par1World.isBlockOpaqueCube(par2, par3, par4 - 1))
             {
-                var13 = (double)(par4 + 0) - var6;
+                var13 = (double)(par4) - var6;
             }
 
             if (var8 == 4 && !par1World.isBlockOpaqueCube(par2 + 1, par3, par4))
@@ -156,7 +156,7 @@ public class BlockRedstoneOre extends Block
 
             if (var8 == 5 && !par1World.isBlockOpaqueCube(par2 - 1, par3, par4))
             {
-                var9 = (double)(par2 + 0) - var6;
+                var9 = (double)(par2) - var6;
             }
 
             if (var9 < (double)par2 || var9 > (double)(par2 + 1) || var11 < 0.0D || var11 > (double)(par3 + 1) || var13 < (double)par4 || var13 > (double)(par4 + 1))

@@ -11,7 +11,7 @@ public class AchievementMap
     public static AchievementMap instance = new AchievementMap();
 
     /** Maps a achievement id with it's unique GUID. */
-    private Map guidMap = new HashMap();
+    private Map<Integer, String> guidMap = new HashMap<Integer, String>();
 
     private AchievementMap()
     {
@@ -23,8 +23,9 @@ public class AchievementMap
             while ((var2 = var1.readLine()) != null)
             {
                 String[] var3 = var2.split(",");
-                int var4 = Integer.parseInt(var3[0]);
-                this.guidMap.put(Integer.valueOf(var4), var3[1]);
+                int var4;
+                var4 = Integer.parseInt(var3[0]);
+                this.guidMap.put(var4, var3[1]);
             }
 
             var1.close();
@@ -40,6 +41,6 @@ public class AchievementMap
      */
     public static String getGuid(int par0)
     {
-        return (String)instance.guidMap.get(Integer.valueOf(par0));
+        return instance.guidMap.get(par0);
     }
 }

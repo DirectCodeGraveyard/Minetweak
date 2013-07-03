@@ -110,7 +110,7 @@ public class BlockPistonBase extends Block
      */
     private boolean isIndirectlyPowered(World par1World, int par2, int par3, int par4, int par5)
     {
-        return par5 != 0 && par1World.getIndirectPowerOutput(par2, par3 - 1, par4, 0) ? true : (par5 != 1 && par1World.getIndirectPowerOutput(par2, par3 + 1, par4, 1) ? true : (par5 != 2 && par1World.getIndirectPowerOutput(par2, par3, par4 - 1, 2) ? true : (par5 != 3 && par1World.getIndirectPowerOutput(par2, par3, par4 + 1, 3) ? true : (par5 != 5 && par1World.getIndirectPowerOutput(par2 + 1, par3, par4, 5) ? true : (par5 != 4 && par1World.getIndirectPowerOutput(par2 - 1, par3, par4, 4) ? true : (par1World.getIndirectPowerOutput(par2, par3, par4, 0) ? true : (par1World.getIndirectPowerOutput(par2, par3 + 2, par4, 1) ? true : (par1World.getIndirectPowerOutput(par2, par3 + 1, par4 - 1, 2) ? true : (par1World.getIndirectPowerOutput(par2, par3 + 1, par4 + 1, 3) ? true : (par1World.getIndirectPowerOutput(par2 - 1, par3 + 1, par4, 4) ? true : par1World.getIndirectPowerOutput(par2 + 1, par3 + 1, par4, 5)))))))))));
+        return par5 != 0 && par1World.getIndirectPowerOutput(par2, par3 - 1, par4, 0) || (par5 != 1 && par1World.getIndirectPowerOutput(par2, par3 + 1, par4, 1) || (par5 != 2 && par1World.getIndirectPowerOutput(par2, par3, par4 - 1, 2) || (par5 != 3 && par1World.getIndirectPowerOutput(par2, par3, par4 + 1, 3) || (par5 != 5 && par1World.getIndirectPowerOutput(par2 + 1, par3, par4, 5) || (par5 != 4 && par1World.getIndirectPowerOutput(par2 - 1, par3, par4, 4) || (par1World.getIndirectPowerOutput(par2, par3, par4, 0) || (par1World.getIndirectPowerOutput(par2, par3 + 2, par4, 1) || (par1World.getIndirectPowerOutput(par2, par3 + 1, par4 - 1, 2) || (par1World.getIndirectPowerOutput(par2, par3 + 1, par4 + 1, 3) || (par1World.getIndirectPowerOutput(par2 - 1, par3 + 1, par4, 4) || par1World.getIndirectPowerOutput(par2 + 1, par3 + 1, par4, 5)))))))))));
     }
 
     /**
@@ -218,8 +218,6 @@ public class BlockPistonBase extends Block
 
         if (isExtended(var5))
         {
-            float var6 = 0.25F;
-
             switch (getOrientation(var5))
             {
                 case 0:
@@ -353,12 +351,8 @@ public class BlockPistonBase extends Block
 
                 if (Block.blocksList[par0].getMobilityFlag() == 1)
                 {
-                    if (!par5)
-                    {
-                        return false;
-                    }
+                    return par5;
 
-                    return true;
                 }
             }
             else if (isExtended(par1World.getBlockMetadata(par2, par3, par4)))
@@ -474,7 +468,7 @@ public class BlockPistonBase extends Block
             int[] var13;
             int var14;
             int var15;
-            int var16;
+            int var16 = 0;
 
             for (var13 = new int[13]; var6 != par2 || var7 != par3 || var8 != par4; var8 = var16)
             {

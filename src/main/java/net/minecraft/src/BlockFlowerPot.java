@@ -70,7 +70,7 @@ public class BlockFlowerPot extends Block
 
                 if (!par5EntityPlayer.capabilities.isCreativeMode && --var10.stackSize <= 0)
                 {
-                    par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, (ItemStack)null);
+                    par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, null);
                 }
 
                 return true;

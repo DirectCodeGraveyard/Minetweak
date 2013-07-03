@@ -27,7 +27,6 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
     {
         NBTTagCompound var4 = null;
         ChunkCoordIntPair var5 = new ChunkCoordIntPair(par2, par3);
-        Object var6 = this.syncLockObject;
 
         synchronized (this.syncLockObject)
         {

@@ -39,14 +39,12 @@ public class ChatAllowedCharacters
             var1.close();
         }
         catch (Exception var3)
-        {
-            ;
-        }
+        {}
 
         return var0;
     }
 
-    public static final boolean isAllowedCharacter(char par0)
+    public static boolean isAllowedCharacter(char par0)
     {
         return par0 != 167 && (allowedCharacters.indexOf(par0) >= 0 || par0 > 32) || par0 == ' ';
     }
@@ -58,7 +56,6 @@ public class ChatAllowedCharacters
     {
         StringBuilder var1 = new StringBuilder();
         char[] var2 = par0Str.toCharArray();
-        int var3 = var2.length;
 
         for (char var5 : var2) {
             if (isAllowedCharacter(var5)) {

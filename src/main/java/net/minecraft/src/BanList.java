@@ -145,11 +145,8 @@ public class BanList
                 var2.println();
             }
 
-            Iterator var3 = this.theBanList.values().iterator();
-
-            while (var3.hasNext())
-            {
-                BanEntry var4 = (BanEntry)var3.next();
+            for (Object o : this.theBanList.values()) {
+                BanEntry var4 = (BanEntry) o;
                 var2.println(var4.buildBanString());
             }
 

@@ -76,12 +76,12 @@ public class ChunkProviderHell implements IChunkProvider
                 for (int var11 = 0; var11 < 16; ++var11)
                 {
                     double var12 = 0.125D;
-                    double var14 = this.noiseField[((var9 + 0) * var8 + var10 + 0) * var7 + var11 + 0];
-                    double var16 = this.noiseField[((var9 + 0) * var8 + var10 + 1) * var7 + var11 + 0];
+                    double var14 = this.noiseField[((var9) * var8 + var10 + 0) * var7 + var11 + 0];
+                    double var16 = this.noiseField[((var9) * var8 + var10 + 1) * var7 + var11 + 0];
                     double var18 = this.noiseField[((var9 + 1) * var8 + var10 + 0) * var7 + var11 + 0];
                     double var20 = this.noiseField[((var9 + 1) * var8 + var10 + 1) * var7 + var11 + 0];
-                    double var22 = (this.noiseField[((var9 + 0) * var8 + var10 + 0) * var7 + var11 + 1] - var14) * var12;
-                    double var24 = (this.noiseField[((var9 + 0) * var8 + var10 + 1) * var7 + var11 + 1] - var16) * var12;
+                    double var22 = (this.noiseField[((var9) * var8 + var10 + 0) * var7 + var11 + 1] - var14) * var12;
+                    double var24 = (this.noiseField[((var9) * var8 + var10 + 1) * var7 + var11 + 1] - var16) * var12;
                     double var26 = (this.noiseField[((var9 + 1) * var8 + var10 + 0) * var7 + var11 + 1] - var18) * var12;
                     double var28 = (this.noiseField[((var9 + 1) * var8 + var10 + 1) * var7 + var11 + 1] - var20) * var12;
 
@@ -95,7 +95,7 @@ public class ChunkProviderHell implements IChunkProvider
 
                         for (int var41 = 0; var41 < 4; ++var41)
                         {
-                            int var42 = var41 + var9 * 4 << 11 | 0 + var10 * 4 << 7 | var11 * 8 + var30;
+                            int var42 = var41 + var9 * 4 << 11 | var10 * 4 << 7 | var11 * 8 + var30;
                             short var43 = 128;
                             double var44 = 0.25D;
                             double var46 = var33;
@@ -160,7 +160,7 @@ public class ChunkProviderHell implements IChunkProvider
                 {
                     int var16 = (var8 * 16 + var7) * 128 + var15;
 
-                    if (var15 < 127 - this.hellRNG.nextInt(5) && var15 > 0 + this.hellRNG.nextInt(5))
+                    if (var15 < 127 - this.hellRNG.nextInt(5) && var15 > this.hellRNG.nextInt(5))
                     {
                         byte var17 = par3ArrayOfByte[var16];
 
@@ -256,7 +256,7 @@ public class ChunkProviderHell implements IChunkProvider
         this.netherCaveGenerator.generate(this, this.worldObj, par1, par2, var3);
         this.genNetherBridge.generate(this, this.worldObj, par1, par2, var3);
         Chunk var4 = new Chunk(this.worldObj, var3, par1, par2);
-        BiomeGenBase[] var5 = this.worldObj.getWorldChunkManager().loadBlockGeneratorData((BiomeGenBase[])null, par1 * 16, par2 * 16, 16, 16);
+        BiomeGenBase[] var5 = this.worldObj.getWorldChunkManager().loadBlockGeneratorData(null, par1 * 16, par2 * 16, 16, 16);
         byte[] var6 = var4.getBiomeArray();
 
         for (int var7 = 0; var7 < var6.length; ++var7)
@@ -358,7 +358,7 @@ public class ChunkProviderHell implements IChunkProvider
 
                 for (int var23 = 0; var23 < par6; ++var23)
                 {
-                    double var24 = 0.0D;
+                    double var24;
                     double var26 = var14[var23];
                     double var28 = this.noiseData2[var12] / 512.0D;
                     double var30 = this.noiseData3[var12] / 512.0D;
@@ -575,6 +575,6 @@ public class ChunkProviderHell implements IChunkProvider
 
     public void recreateStructures(int par1, int par2)
     {
-        this.genNetherBridge.generate(this, this.worldObj, par1, par2, (byte[])null);
+        this.genNetherBridge.generate(this, this.worldObj, par1, par2, null);
     }
 }

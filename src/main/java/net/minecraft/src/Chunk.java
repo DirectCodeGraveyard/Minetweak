@@ -820,11 +820,8 @@ public class Chunk
                 return null;
             }
 
-            if (var5 == null)
-            {
-                var5 = ((ITileEntityProvider)Block.blocksList[var6]).createNewTileEntity(this.worldObj);
-                this.worldObj.setBlockTileEntity(this.xPosition * 16 + par1, par2, this.zPosition * 16 + par3, var5);
-            }
+            var5 = ((ITileEntityProvider)Block.blocksList[var6]).createNewTileEntity(this.worldObj);
+            this.worldObj.setBlockTileEntity(this.xPosition * 16 + par1, par2, this.zPosition * 16 + par3, var5);
 
             var5 = (TileEntity)this.chunkTileEntityMap.get(var4);
         }
@@ -905,17 +902,14 @@ public class Chunk
         this.isChunkLoaded = true;
         this.worldObj.addTileEntity(this.chunkTileEntityMap.values());
 
-        for (int var1 = 0; var1 < this.entityLists.length; ++var1)
-        {
-            Iterator var2 = this.entityLists[var1].iterator();
+        for (List entityList : this.entityLists) {
 
-            while (var2.hasNext())
-            {
-                Entity var3 = (Entity)var2.next();
+            for (Object anEntityList : entityList) {
+                Entity var3 = (Entity) anEntityList;
                 var3.func_110123_P();
             }
 
-            this.worldObj.addLoadedEntities(this.entityLists[var1]);
+            this.worldObj.addLoadedEntities(entityList);
         }
     }
 
@@ -925,17 +919,14 @@ public class Chunk
     public void onChunkUnload()
     {
         this.isChunkLoaded = false;
-        Iterator var1 = this.chunkTileEntityMap.values().iterator();
 
-        while (var1.hasNext())
-        {
-            TileEntity var2 = (TileEntity)var1.next();
+        for (Object o : this.chunkTileEntityMap.values()) {
+            TileEntity var2 = (TileEntity) o;
             this.worldObj.markTileEntityForDespawn(var2);
         }
 
-        for (int var3 = 0; var3 < this.entityLists.length; ++var3)
-        {
-            this.worldObj.unloadEntities(this.entityLists[var3]);
+        for (List entityList : this.entityLists) {
+            this.worldObj.unloadEntities(entityList);
         }
     }
 
@@ -972,23 +963,18 @@ public class Chunk
         {
             List var8 = this.entityLists[var7];
 
-            for (int var9 = 0; var9 < var8.size(); ++var9)
-            {
-                Entity var10 = (Entity)var8.get(var9);
+            for (Object aVar8 : var8) {
+                Entity var10 = (Entity) aVar8;
 
-                if (var10 != par1Entity && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10)))
-                {
+                if (var10 != par1Entity && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10))) {
                     par3List.add(var10);
                     Entity[] var11 = var10.getParts();
 
-                    if (var11 != null)
-                    {
-                        for (int var12 = 0; var12 < var11.length; ++var12)
-                        {
+                    if (var11 != null) {
+                        for (int var12 = 0; var12 < var11.length; ++var12) {
                             var10 = var11[var12];
 
-                            if (var10 != par1Entity && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10)))
-                            {
+                            if (var10 != par1Entity && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10))) {
                                 par3List.add(var10);
                             }
                         }
@@ -1028,12 +1014,10 @@ public class Chunk
         {
             List var8 = this.entityLists[var7];
 
-            for (int var9 = 0; var9 < var8.size(); ++var9)
-            {
-                Entity var10 = (Entity)var8.get(var9);
+            for (Object aVar8 : var8) {
+                Entity var10 = (Entity) aVar8;
 
-                if (par1Class.isAssignableFrom(var10.getClass()) && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10)))
-                {
+                if (par1Class.isAssignableFrom(var10.getClass()) && var10.boundingBox.intersectsWith(par2AxisAlignedBB) && (par4IEntitySelector == null || par4IEntitySelector.isEntityApplicable(var10))) {
                     par3List.add(var10);
                 }
             }

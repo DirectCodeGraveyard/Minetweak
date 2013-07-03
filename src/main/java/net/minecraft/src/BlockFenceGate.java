@@ -13,7 +13,7 @@ public class BlockFenceGate extends BlockDirectional
      */
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
-        return !par1World.getBlockMaterial(par2, par3 - 1, par4).isSolid() ? false : super.canPlaceBlockAt(par1World, par2, par3, par4);
+        return par1World.getBlockMaterial(par2, par3 - 1, par4).isSolid() && super.canPlaceBlockAt(par1World, par2, par3, par4);
     }
 
     /**
@@ -126,12 +126,12 @@ public class BlockFenceGate extends BlockDirectional
                 if (var7 && !isFenceGateOpen(var6))
                 {
                     par1World.setBlockMetadata(par2, par3, par4, var6 | 4, 2);
-                    par1World.playAuxSFXAtEntity((EntityPlayer)null, 1003, par2, par3, par4, 0);
+                    par1World.playAuxSFXAtEntity(null, 1003, par2, par3, par4, 0);
                 }
                 else if (!var7 && isFenceGateOpen(var6))
                 {
                     par1World.setBlockMetadata(par2, par3, par4, var6 & -5, 2);
-                    par1World.playAuxSFXAtEntity((EntityPlayer)null, 1003, par2, par3, par4, 0);
+                    par1World.playAuxSFXAtEntity(null, 1003, par2, par3, par4, 0);
                 }
             }
         }

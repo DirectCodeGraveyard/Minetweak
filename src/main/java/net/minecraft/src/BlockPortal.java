@@ -21,9 +21,9 @@ public class BlockPortal extends BlockBreakable
         {
             int var6;
 
-            for (var6 = par3; !par1World.doesBlockHaveSolidTopSurface(par2, var6, par4) && var6 > 0; --var6)
-            {
-                ;
+            var6 = par3;
+            while (!par1World.doesBlockHaveSolidTopSurface(par2, var6, par4) && var6 > 0) {
+                --var6;
             }
 
             if (var6 > 0 && !par1World.isBlockNormalCube(par2, var6 + 1, par4))
@@ -173,9 +173,9 @@ public class BlockPortal extends BlockBreakable
 
         int var8;
 
-        for (var8 = par3; par1World.getBlockId(par2, var8 - 1, par4) == this.blockID; --var8)
-        {
-            ;
+        var8 = par3;
+        while (par1World.getBlockId(par2, var8 - 1, par4) == this.blockID) {
+            --var8;
         }
 
         if (par1World.getBlockId(par2, var8 - 1, par4) != Block.obsidian.blockID)
@@ -186,9 +186,9 @@ public class BlockPortal extends BlockBreakable
         {
             int var9;
 
-            for (var9 = 1; var9 < 4 && par1World.getBlockId(par2, var8 + var9, par4) == this.blockID; ++var9)
-            {
-                ;
+            var9 = 1;
+            while (var9 < 4 && par1World.getBlockId(par2, var8 + var9, par4) == this.blockID) {
+                ++var9;
             }
 
             if (var9 == 3 && par1World.getBlockId(par2, var8 + var9, par4) == Block.obsidian.blockID)

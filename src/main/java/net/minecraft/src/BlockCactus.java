@@ -20,9 +20,9 @@ public class BlockCactus extends Block
         {
             int var6;
 
-            for (var6 = 1; par1World.getBlockId(par2, par3 - var6, par4) == this.blockID; ++var6)
-            {
-                ;
+            var6 = 1;
+            while (par1World.getBlockId(par2, par3 - var6, par4) == this.blockID) {
+                ++var6;
             }
 
             if (var6 < 3)
@@ -83,7 +83,7 @@ public class BlockCactus extends Block
      */
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
-        return !super.canPlaceBlockAt(par1World, par2, par3, par4) ? false : this.canBlockStay(par1World, par2, par3, par4);
+        return super.canPlaceBlockAt(par1World, par2, par3, par4) && this.canBlockStay(par1World, par2, par3, par4);
     }
 
     /**

@@ -136,12 +136,8 @@ public class BlockSign extends BlockContainer
         else
         {
             int var7 = par1World.getBlockMetadata(par2, par3, par4);
-            var6 = true;
 
-            if (var7 == 2 && par1World.getBlockMaterial(par2, par3, par4 + 1).isSolid())
-            {
-                var6 = false;
-            }
+            var6 = !(var7 == 2 && par1World.getBlockMaterial(par2, par3, par4 + 1).isSolid());
 
             if (var7 == 3 && par1World.getBlockMaterial(par2, par3, par4 - 1).isSolid())
             {

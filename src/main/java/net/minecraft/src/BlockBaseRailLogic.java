@@ -12,14 +12,14 @@ public class BlockBaseRailLogic
     private final boolean isStraightRail;
 
     /** The positions of connected rails */
-    private List connectedTracks;
+    private List<ChunkPosition> connectedTracks;
 
     final BlockRailBase theRail;
 
     public BlockBaseRailLogic(BlockRailBase par1BlockRailBase, World par2World, int par3, int par4, int par5)
     {
         this.theRail = par1BlockRailBase;
-        this.connectedTracks = new ArrayList();
+        this.connectedTracks = new ArrayList<ChunkPosition>();
         this.logicWorld = par2World;
         this.railX = par3;
         this.railY = par4;
@@ -100,7 +100,7 @@ public class BlockBaseRailLogic
     {
         for (int var1 = 0; var1 < this.connectedTracks.size(); ++var1)
         {
-            BlockBaseRailLogic var2 = this.getRailLogic((ChunkPosition)this.connectedTracks.get(var1));
+            BlockBaseRailLogic var2 = this.getRailLogic(this.connectedTracks.get(var1));
 
             if (var2 != null && var2.isRailChunkPositionCorrect(this))
             {
@@ -115,7 +115,7 @@ public class BlockBaseRailLogic
 
     private boolean isMinecartTrack(int par1, int par2, int par3)
     {
-        return BlockRailBase.isRailBlockAt(this.logicWorld, par1, par2, par3) ? true : (BlockRailBase.isRailBlockAt(this.logicWorld, par1, par2 + 1, par3) ? true : BlockRailBase.isRailBlockAt(this.logicWorld, par1, par2 - 1, par3));
+        return BlockRailBase.isRailBlockAt(this.logicWorld, par1, par2, par3) || (BlockRailBase.isRailBlockAt(this.logicWorld, par1, par2 + 1, par3) || BlockRailBase.isRailBlockAt(this.logicWorld, par1, par2 - 1, par3));
     }
 
     private BlockBaseRailLogic getRailLogic(ChunkPosition par1ChunkPosition)
@@ -128,12 +128,8 @@ public class BlockBaseRailLogic
      */
     private boolean isRailChunkPositionCorrect(BlockBaseRailLogic par1BlockBaseRailLogic)
     {
-        for (int var2 = 0; var2 < this.connectedTracks.size(); ++var2)
-        {
-            ChunkPosition var3 = (ChunkPosition)this.connectedTracks.get(var2);
-
-            if (var3.x == par1BlockBaseRailLogic.railX && var3.z == par1BlockBaseRailLogic.railZ)
-            {
+        for (ChunkPosition var3 : this.connectedTracks) {
+            if (var3.x == par1BlockBaseRailLogic.railX && var3.z == par1BlockBaseRailLogic.railZ) {
                 return true;
             }
         }
@@ -143,15 +139,10 @@ public class BlockBaseRailLogic
 
     private boolean isPartOfTrack(int par1, int par2, int par3)
     {
-        for (int var4 = 0; var4 < this.connectedTracks.size(); ++var4)
-        {
-            ChunkPosition var5 = (ChunkPosition)this.connectedTracks.get(var4);
-
-            if (var5.x == par1 && var5.z == par3)
-            {
+        for (ChunkPosition var5 : this.connectedTracks)
+            if (var5.x == par1 && var5.z == par3) {
                 return true;
             }
-        }
 
         return false;
     }
@@ -185,7 +176,7 @@ public class BlockBaseRailLogic
 
     private boolean canConnectTo(BlockBaseRailLogic par1BlockBaseRailLogic)
     {
-        return this.isRailChunkPositionCorrect(par1BlockBaseRailLogic) ? true : (this.connectedTracks.size() == 2 ? false : (this.connectedTracks.isEmpty() ? true : true));
+        return this.isRailChunkPositionCorrect(par1BlockBaseRailLogic) || (this.connectedTracks.size() != 2);
     }
 
     private void connectToNeighbor(BlockBaseRailLogic par1BlockBaseRailLogic)
@@ -431,16 +422,13 @@ public class BlockBaseRailLogic
         {
             this.logicWorld.setBlockMetadata(this.railX, this.railY, this.railZ, var8, 3);
 
-            for (int var9 = 0; var9 < this.connectedTracks.size(); ++var9)
-            {
-                BlockBaseRailLogic var10 = this.getRailLogic((ChunkPosition)this.connectedTracks.get(var9));
+            for (ChunkPosition connectedTrack : this.connectedTracks) {
+                BlockBaseRailLogic var10 = this.getRailLogic(connectedTrack);
 
-                if (var10 != null)
-                {
+                if (var10 != null) {
                     var10.refreshConnectedTracks();
 
-                    if (var10.canConnectTo(this))
-                    {
+                    if (var10.canConnectTo(this)) {
                         var10.connectToNeighbor(this);
                     }
                 }

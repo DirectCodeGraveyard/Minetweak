@@ -76,7 +76,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         else
         {
             int var7 = this.func_94482_f(par1World, par2, par3, par4, par5);
-            return var7 == 0 ? true : var6 >= var7;
+            return var7 == 0 || var6 >= var7;
         }
     }
 
@@ -225,7 +225,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     {
         super.onBlockEventReceived(par1World, par2, par3, par4, par5, par6);
         TileEntity var7 = par1World.getBlockTileEntity(par2, par3, par4);
-        return var7 != null ? var7.receiveClientEvent(par5, par6) : false;
+        return var7 != null && var7.receiveClientEvent(par5, par6);
     }
 
     /**

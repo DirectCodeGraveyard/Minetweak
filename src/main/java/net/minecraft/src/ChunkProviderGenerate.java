@@ -111,12 +111,12 @@ public class ChunkProviderGenerate implements IChunkProvider
                 for (int var12 = 0; var12 < var5; ++var12)
                 {
                     double var13 = 0.125D;
-                    double var15 = this.noiseArray[((var10 + 0) * var9 + var11 + 0) * var8 + var12 + 0];
-                    double var17 = this.noiseArray[((var10 + 0) * var9 + var11 + 1) * var8 + var12 + 0];
+                    double var15 = this.noiseArray[((var10) * var9 + var11 + 0) * var8 + var12 + 0];
+                    double var17 = this.noiseArray[((var10) * var9 + var11 + 1) * var8 + var12 + 0];
                     double var19 = this.noiseArray[((var10 + 1) * var9 + var11 + 0) * var8 + var12 + 0];
                     double var21 = this.noiseArray[((var10 + 1) * var9 + var11 + 1) * var8 + var12 + 0];
-                    double var23 = (this.noiseArray[((var10 + 0) * var9 + var11 + 0) * var8 + var12 + 1] - var15) * var13;
-                    double var25 = (this.noiseArray[((var10 + 0) * var9 + var11 + 1) * var8 + var12 + 1] - var17) * var13;
+                    double var23 = (this.noiseArray[((var10) * var9 + var11 + 0) * var8 + var12 + 1] - var15) * var13;
+                    double var25 = (this.noiseArray[((var10) * var9 + var11 + 1) * var8 + var12 + 1] - var17) * var13;
                     double var27 = (this.noiseArray[((var10 + 1) * var9 + var11 + 0) * var8 + var12 + 1] - var19) * var13;
                     double var29 = (this.noiseArray[((var10 + 1) * var9 + var11 + 1) * var8 + var12 + 1] - var21) * var13;
 
@@ -130,7 +130,7 @@ public class ChunkProviderGenerate implements IChunkProvider
 
                         for (int var42 = 0; var42 < 4; ++var42)
                         {
-                            int var43 = var42 + var10 * 4 << 11 | 0 + var11 * 4 << 7 | var12 * 8 + var31;
+                            int var43 = var42 + var10 * 4 << 11 | var11 * 4 << 7 | var12 * 8 + var31;
                             short var44 = 128;
                             var43 -= var44;
                             double var45 = 0.25D;
@@ -191,7 +191,7 @@ public class ChunkProviderGenerate implements IChunkProvider
                 {
                     int var17 = (var9 * 16 + var8) * 128 + var16;
 
-                    if (var16 <= 0 + this.rand.nextInt(5))
+                    if (var16 <= this.rand.nextInt(5))
                     {
                         par3ArrayOfByte[var17] = (byte)Block.bedrock.blockID;
                     }
@@ -410,7 +410,7 @@ public class ChunkProviderGenerate implements IChunkProvider
                     var48 += var47 * 0.2D;
                     var48 = var48 * (double)par6 / 16.0D;
                     double var28 = (double)par6 / 2.0D + var48 * 4.0D;
-                    double var30 = 0.0D;
+                    double var30;
                     double var32 = ((double)var46 - var28) * 12.0D * 128.0D / 128.0D / var26;
 
                     if (var32 < 0.0D)
@@ -602,10 +602,10 @@ public class ChunkProviderGenerate implements IChunkProvider
     {
         if (this.mapFeaturesEnabled)
         {
-            this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, (byte[])null);
-            this.villageGenerator.generate(this, this.worldObj, par1, par2, (byte[])null);
-            this.strongholdGenerator.generate(this, this.worldObj, par1, par2, (byte[])null);
-            this.scatteredFeatureGenerator.generate(this, this.worldObj, par1, par2, (byte[])null);
+            this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, null);
+            this.villageGenerator.generate(this, this.worldObj, par1, par2, null);
+            this.strongholdGenerator.generate(this, this.worldObj, par1, par2, null);
+            this.scatteredFeatureGenerator.generate(this, this.worldObj, par1, par2, null);
         }
     }
 }

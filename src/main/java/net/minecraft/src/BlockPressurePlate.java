@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class BlockPressurePlate extends BlockBasePressurePlate
@@ -40,7 +39,7 @@ public class BlockPressurePlate extends BlockBasePressurePlate
 
         if (this.triggerMobType == EnumMobType.everything)
         {
-            var5 = par1World.getEntitiesWithinAABBExcludingEntity((Entity)null, this.getSensitiveAABB(par2, par3, par4));
+            var5 = par1World.getEntitiesWithinAABBExcludingEntity(null, this.getSensitiveAABB(par2, par3, par4));
         }
 
         if (this.triggerMobType == EnumMobType.mobs)
@@ -55,14 +54,10 @@ public class BlockPressurePlate extends BlockBasePressurePlate
 
         if (var5 != null && !var5.isEmpty())
         {
-            Iterator var6 = var5.iterator();
+            for (Object aVar5 : var5) {
+                Entity var7 = (Entity) aVar5;
 
-            while (var6.hasNext())
-            {
-                Entity var7 = (Entity)var6.next();
-
-                if (!var7.doesEntityNotTriggerPressurePlate())
-                {
+                if (!var7.doesEntityNotTriggerPressurePlate()) {
                     return 15;
                 }
             }

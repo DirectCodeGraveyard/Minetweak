@@ -45,45 +45,39 @@ public class ChunkProviderEnd implements IChunkProvider
         for (int var9 = 0; var9 < var5; ++var9)
         {
             for (int var10 = 0; var10 < var5; ++var10)
-            {
-                for (int var11 = 0; var11 < 32; ++var11)
-                {
+                for (int var11 = 0; var11 < 32; ++var11) {
                     double var12 = 0.25D;
-                    double var14 = this.densities[((var9 + 0) * var8 + var10 + 0) * var7 + var11 + 0];
-                    double var16 = this.densities[((var9 + 0) * var8 + var10 + 1) * var7 + var11 + 0];
+                    double var14 = this.densities[((var9) * var8 + var10 + 0) * var7 + var11 + 0];
+                    double var16 = this.densities[((var9) * var8 + var10 + 1) * var7 + var11 + 0];
                     double var18 = this.densities[((var9 + 1) * var8 + var10 + 0) * var7 + var11 + 0];
                     double var20 = this.densities[((var9 + 1) * var8 + var10 + 1) * var7 + var11 + 0];
-                    double var22 = (this.densities[((var9 + 0) * var8 + var10 + 0) * var7 + var11 + 1] - var14) * var12;
-                    double var24 = (this.densities[((var9 + 0) * var8 + var10 + 1) * var7 + var11 + 1] - var16) * var12;
+                    double var22 = (this.densities[((var9) * var8 + var10 + 0) * var7 + var11 + 1] - var14) * var12;
+                    double var24 = (this.densities[((var9) * var8 + var10 + 1) * var7 + var11 + 1] - var16) * var12;
                     double var26 = (this.densities[((var9 + 1) * var8 + var10 + 0) * var7 + var11 + 1] - var18) * var12;
                     double var28 = (this.densities[((var9 + 1) * var8 + var10 + 1) * var7 + var11 + 1] - var20) * var12;
 
-                    for (int var30 = 0; var30 < 4; ++var30)
-                    {
+                    for (int var30 = 0; var30 < 4; ++var30) {
                         double var31 = 0.125D;
                         double var33 = var14;
                         double var35 = var16;
                         double var37 = (var18 - var14) * var31;
                         double var39 = (var20 - var16) * var31;
 
-                        for (int var41 = 0; var41 < 8; ++var41)
-                        {
-                            int var42 = var41 + var9 * 8 << 11 | 0 + var10 * 8 << 7 | var11 * 4 + var30;
+                        for (int var41 = 0; var41 < 8; ++var41) {
+                            int var42 = var41 + var9 * 8 << 11 | var10 * 8 << 7 | var11 * 4 + var30;
                             short var43 = 128;
                             double var44 = 0.125D;
                             double var46 = var33;
                             double var48 = (var35 - var33) * var44;
 
-                            for (int var50 = 0; var50 < 8; ++var50)
-                            {
+                            for (int var50 = 0; var50 < 8; ++var50) {
                                 int var51 = 0;
 
-                                if (var46 > 0.0D)
-                                {
+                                if (var46 > 0.0D) {
                                     var51 = Block.whiteStone.blockID;
                                 }
 
-                                par3ArrayOfByte[var42] = (byte)var51;
+                                par3ArrayOfByte[var42] = (byte) var51;
                                 var42 += var43;
                                 var46 += var48;
                             }
@@ -98,7 +92,6 @@ public class ChunkProviderEnd implements IChunkProvider
                         var20 += var28;
                     }
                 }
-            }
         }
     }
 
@@ -226,8 +219,8 @@ public class ChunkProviderEnd implements IChunkProvider
                 }
 
                 var18 = var18 * 3.0D - 2.0D;
-                float var20 = (float)(var14 + par2 - 0) / 1.0F;
-                float var21 = (float)(var15 + par4 - 0) / 1.0F;
+                float var20 = (float)(var14 + par2) / 1.0F;
+                float var21 = (float)(var15 + par4) / 1.0F;
                 float var22 = 100.0F - MathHelper.sqrt_float(var20 * var20 + var21 * var21) * 8.0F;
 
                 if (var22 > 80.0F)
@@ -260,7 +253,7 @@ public class ChunkProviderEnd implements IChunkProvider
 
                 for (int var25 = 0; var25 < par6; ++var25)
                 {
-                    double var26 = 0.0D;
+                    double var26;
                     double var28 = ((double)var25 - var23) * 8.0D / var16;
 
                     if (var28 < 0.0D)

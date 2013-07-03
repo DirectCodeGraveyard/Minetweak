@@ -2,6 +2,9 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
+import static java.lang.Integer.toBinaryString;
+import static java.lang.Integer.valueOf;
+
 class CallableTileEntityData implements Callable
 {
     final TileEntity theTileEntity;
@@ -21,8 +24,8 @@ class CallableTileEntityData implements Callable
         }
         else
         {
-            String var2 = String.format("%4s", new Object[] {Integer.toBinaryString(var1)}).replace(" ", "0");
-            return String.format("%1$d / 0x%1$X / 0b%2$s", new Object[] {Integer.valueOf(var1), var2});
+            String var2 = String.format("%4s", new Object[] {toBinaryString(var1)}).replace(" ", "0");
+            return String.format("%1$d / 0x%1$X / 0b%2$s", valueOf(var1), var2);
         }
     }
 

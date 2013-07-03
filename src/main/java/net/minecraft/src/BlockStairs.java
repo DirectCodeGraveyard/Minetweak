@@ -490,7 +490,7 @@ public class BlockStairs extends Block
 
         if (var7 == 3)
         {
-            par1World.setBlockMetadata(par2, par3, par4, 0 | var8, 2);
+            par1World.setBlockMetadata(par2, par3, par4, var8, 2);
         }
     }
 
@@ -521,12 +521,11 @@ public class BlockStairs extends Block
         for (int var12 = 0; var12 < 8; ++var12)
         {
             this.field_72160_cs = var12;
-            int[] var13 = var11;
             var14 = var11.length;
 
             for (var15 = 0; var15 < var14; ++var15)
             {
-                var16 = var13[var15];
+                var16 = var11[var15];
 
                 if (var16 == var12)
                 {
@@ -537,23 +536,21 @@ public class BlockStairs extends Block
             var7[var12] = super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
         }
 
-        int[] var21 = var11;
         int var24 = var11.length;
 
         for (var14 = 0; var14 < var24; ++var14)
         {
-            var15 = var21[var14];
+            var15 = var11[var14];
             var7[var15] = null;
         }
 
         MovingObjectPosition var23 = null;
         double var22 = 0.0D;
-        MovingObjectPosition[] var25 = var7;
         var16 = var7.length;
 
         for (int var17 = 0; var17 < var16; ++var17)
         {
-            MovingObjectPosition var18 = var25[var17];
+            MovingObjectPosition var18 = var7[var17];
 
             if (var18 != null)
             {

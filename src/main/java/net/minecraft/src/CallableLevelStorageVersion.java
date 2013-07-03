@@ -32,7 +32,7 @@ class CallableLevelStorageVersion implements Callable
             ;
         }
 
-        return String.format("0x%05X - %s", new Object[] {Integer.valueOf(WorldInfo.getSaveVersion(this.worldInfoInstance)), var1});
+        return String.format("0x%05X - %s", WorldInfo.getSaveVersion(this.worldInfoInstance), var1);
     }
 
     public Object call()

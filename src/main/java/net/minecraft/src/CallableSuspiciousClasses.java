@@ -48,7 +48,7 @@ class CallableSuspiciousClasses implements Callable
                 {
                     if (var5)
                     {
-                        if (var10.length() <= 3 || var10.equals("net.minecraft.client.main.Main") || var10.equals("net.minecraft.client.Minecraft") || var10.equals("net.minecraft.client.ClientBrandRetriever") || var10.equals("net.minecraft.server.MinecraftServer"))
+                        if (var10.length() <= 3 || var10.equals("net.minecraft.server.MinecraftServer"))
                         {
                             continue;
                         }
@@ -63,8 +63,8 @@ class CallableSuspiciousClasses implements Callable
 
                     if (var6.containsKey(var12))
                     {
-                        int var13 = ((Integer)var6.get(var12)).intValue();
-                        var6.put(var12, Integer.valueOf(var13 + 1));
+                        int var13 = (Integer) var6.get(var12);
+                        var6.put(var12, var13 + 1);
 
                         if (var13 == 3)
                         {
@@ -85,7 +85,7 @@ class CallableSuspiciousClasses implements Callable
                     }
                     else
                     {
-                        var6.put(var12, Integer.valueOf(1));
+                        var6.put(var12, 1);
                     }
 
                     if (!var7.equals(var12) && var7.length() > 0)
