@@ -1,7 +1,6 @@
 package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.EnumChatFormatting;
 
 public class CommandListPlayers extends CommandExecutor {
 
@@ -12,7 +11,7 @@ public class CommandListPlayers extends CommandExecutor {
             return;
         }
 
-        sender.sendMessage(EnumChatFormatting.AQUA + "Online Players: " + MinecraftServer.getServer().getConfigurationManager().getPlayerListAsString());
+        sender.sendMessage("Online Players: " + MinecraftServer.getServer().getConfigurationManager().getPlayerListAsString());
     }
 
 }

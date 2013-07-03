@@ -1,6 +1,5 @@
 package org.minetweak.command;
 
-import net.minecraft.src.EnumChatFormatting;
 import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;
@@ -10,7 +9,7 @@ public class CommandKick extends CommandExecutor {
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(EnumChatFormatting.AQUA + "Usage: /kick <player> [reason]");
+            sender.sendMessage("Usage: /kick <player> [reason]");
             return;
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);
