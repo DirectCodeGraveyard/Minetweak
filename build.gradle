@@ -28,3 +28,7 @@ jar {
         attributes('Main-class': 'org.minetweak.Minetweak')
     }
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.6'
+}
