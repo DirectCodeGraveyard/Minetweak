@@ -16,6 +16,7 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'org.apache.commons:commons-lang3:3.1'
     testCompile 'junit:junit:4.10'
+    compile files('libs/bcprov-jdk15on-1.47.jar')
 }
 
 javadoc {
