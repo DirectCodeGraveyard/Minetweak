@@ -118,7 +118,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
+        this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
         this.dataWatcher.addObject(17, Float.valueOf(0.0F));
         this.dataWatcher.addObject(18, Integer.valueOf(0));
     }
@@ -347,7 +347,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             int var1 = this.itemInUse.stackSize;
             ItemStack var2 = this.itemInUse.onFoodEaten(this.worldObj, this);
 
-            if (var2 != this.itemInUse || var2 != null && var2.stackSize != var1)
+            if (var2 != this.itemInUse || var2.stackSize != var1)
             {
                 this.inventory.mainInventory[this.inventory.currentItem] = var2;
 
@@ -511,12 +511,10 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
             if (var5 != null)
             {
-                for (int var6 = 0; var6 < var5.size(); ++var6)
-                {
-                    Entity var7 = (Entity)var5.get(var6);
+                for (Object aVar5 : var5) {
+                    Entity var7 = (Entity) aVar5;
 
-                    if (!var7.isDead)
-                    {
+                    if (!var7.isDead) {
                         this.collideWithPlayer(var7);
                     }
                 }
@@ -539,7 +537,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
      */
     public void setScore(int par1)
     {
-        this.dataWatcher.updateObject(18, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(18, par1);
     }
 
     /**
@@ -548,7 +546,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     public void addScore(int par1)
     {
         int var2 = this.getScore();
-        this.dataWatcher.updateObject(18, Integer.valueOf(var2 + par1));
+        this.dataWatcher.updateObject(18, var2 + par1);
     }
 
     /**
@@ -605,11 +603,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             this.addStat(StatList.mobKillsStat, 1);
         }
 
-        Iterator var4 = var3.iterator();
-
-        while (var4.hasNext())
-        {
-            ScoreObjective var5 = (ScoreObjective)var4.next();
+        for (Object aVar3 : var3) {
+            ScoreObjective var5 = (ScoreObjective) aVar3;
             Score var6 = this.getWorldScoreboard().func_96529_a(this.getEntityName(), var5);
             var6.func_96648_a();
         }
@@ -923,7 +918,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     {
         ScorePlayerTeam var2 = this.getTeam();
         ScorePlayerTeam var3 = par1EntityPlayer.getTeam();
-        return var2 != var3 ? true : (var2 != null ? var2.func_96665_g() : true);
+        return var2 != var3 || (var2 == null || var2.func_96665_g());
     }
 
     /**
@@ -949,14 +944,11 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
                 if (!(par1EntityLivingBase instanceof EntityHorse) || !((EntityHorse)par1EntityLivingBase).func_110248_bS())
                 {
                     List var6 = this.worldObj.getEntitiesWithinAABB(EntityWolf.class, AxisAlignedBB.getAABBPool().getAABB(this.posX, this.posY, this.posZ, this.posX + 1.0D, this.posY + 1.0D, this.posZ + 1.0D).expand(16.0D, 4.0D, 16.0D));
-                    Iterator var4 = var6.iterator();
 
-                    while (var4.hasNext())
-                    {
-                        EntityWolf var5 = (EntityWolf)var4.next();
+                    for (Object aVar6 : var6) {
+                        EntityWolf var5 = (EntityWolf) aVar6;
 
-                        if (var5.isTamed() && var5.getEntityToAttack() == null && this.username.equals(var5.getOwnerName()) && (!par2 || !var5.isSitting()))
-                        {
+                        if (var5.isTamed() && var5.getEntityToAttack() == null && this.username.equals(var5.getOwnerName()) && (!par2 || !var5.isSitting())) {
                             var5.setSitting(false);
                             var5.setTarget(par1EntityLivingBase);
                         }
@@ -985,12 +977,8 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         ItemStack[] var2 = this.inventory.armorInventory;
         int var3 = var2.length;
 
-        for (int var4 = 0; var4 < var3; ++var4)
-        {
-            ItemStack var5 = var2[var4];
-
-            if (var5 != null)
-            {
+        for (ItemStack var5 : var2) {
+            if (var5 != null) {
                 ++var1;
             }
         }
@@ -1117,7 +1105,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
      */
     public void destroyCurrentEquippedItem()
     {
-        this.inventory.setInventorySlotContents(this.inventory.currentItem, (ItemStack)null);
+        this.inventory.setInventorySlotContents(this.inventory.currentItem, null);
     }
 
     /**
@@ -1216,7 +1204,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
                         if (var11 != null && var11 instanceof EntityLivingBase)
                         {
-                            var10 = (EntityLivingBase)var11;
+                            var10 = var11;
                         }
                     }
 
@@ -1323,7 +1311,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
         if (this.isRiding())
         {
-            this.mountEntity((Entity)null);
+            this.mountEntity(null);
         }
 
         this.setSize(0.2F, 0.2F);
@@ -1407,7 +1395,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.setSize(0.6F, 1.8F);
         this.resetHeight();
         ChunkCoordinates var4 = this.playerLocation;
-        ChunkCoordinates var5 = this.playerLocation;
+        ChunkCoordinates var5;
 
         if (var4 != null && this.worldObj.getBlockId(var4.posX, var4.posY, var4.posZ) == Block.bed.blockID)
         {
@@ -1466,8 +1454,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
         if (par0World.getBlockId(par1ChunkCoordinates.posX, par1ChunkCoordinates.posY, par1ChunkCoordinates.posZ) == Block.bed.blockID)
         {
-            ChunkCoordinates var8 = BlockBed.getNearestEmptyChunkCoordinates(par0World, par1ChunkCoordinates.posX, par1ChunkCoordinates.posY, par1ChunkCoordinates.posZ, 0);
-            return var8;
+            return BlockBed.getNearestEmptyChunkCoordinates(par0World, par1ChunkCoordinates.posX, par1ChunkCoordinates.posY, par1ChunkCoordinates.posZ, 0);
         }
         else
         {
@@ -1501,11 +1488,11 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
         if (par2)
         {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var3 | 1 << par1)));
+            this.dataWatcher.updateObject(16, (byte) (var3 | 1 << par1));
         }
         else
         {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte)(var3 & ~(1 << par1))));
+            this.dataWatcher.updateObject(16, (byte) (var3 & ~(1 << par1)));
         }
     }
 
@@ -1898,7 +1885,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
     public boolean canPlayerEdit(int par1, int par2, int par3, int par4, ItemStack par5ItemStack)
     {
-        return this.capabilities.allowEdit ? true : (par5ItemStack != null ? par5ItemStack.func_82835_x() : false);
+        return this.capabilities.allowEdit || ((par5ItemStack != null) && par5ItemStack.func_82835_x());
     }
 
     /**
@@ -2064,7 +2051,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             par1 = 0.0F;
         }
 
-        this.getDataWatcher().updateObject(17, Float.valueOf(par1));
+        this.getDataWatcher().updateObject(17, par1);
     }
 
     public float func_110139_bj()
