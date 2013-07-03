@@ -63,13 +63,16 @@ public class Minetweak {
         System.out.println("Success is very tasty.");
         System.out.println("Minetweak v" + getServerVersion() + " using Minecraft v" + getMinecraftVersion());
 
-        registerCommand("help", new CommandHelp());
-        registerCommand("stop", new CommandStop());
-        registerCommand("kick", new CommandKick());
-        registerCommand("op", new CommandOp());
+        registerCommand("ban", new CommandBan());
         registerCommand("deop", new CommandDeop());
+        registerCommand("help", new CommandHelp());
+        registerCommand("kick", new CommandKick());
         registerCommand("kill", new CommandKill());
         registerCommand("players", new CommandListPlayers());
+        registerCommand("op", new CommandOp());
+        registerCommand("say", new CommandSay());
+        registerCommand("stop", new CommandStop());
+
         registerListener(RecipeManager.getInstance());
 
         PluginLoader.initialize();
