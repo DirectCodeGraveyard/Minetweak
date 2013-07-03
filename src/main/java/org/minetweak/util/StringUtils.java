@@ -9,7 +9,7 @@ public class StringUtils {
 
     public static String toString(String[] array) {
         StringBuilder builder = new StringBuilder();
-        int count = 1;
+        int count = 0;
         for (String string : array) {
             count++;
             if (count==array.length) {
