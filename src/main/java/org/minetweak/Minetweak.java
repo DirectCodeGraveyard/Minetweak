@@ -22,6 +22,7 @@ public class Minetweak {
      * This is the Minecraft version we are currently running on.
      */
     private static final String minecraftVersion = "1.6.1";
+
     /**
      * This is the Minetweak version we are currently running on.
      */
@@ -211,7 +212,7 @@ public class Minetweak {
     }
 
     /**
-     *
+     * Check whether a player is on by username
      * @param playerUsername The players username
      * @return if the player is online
      */
