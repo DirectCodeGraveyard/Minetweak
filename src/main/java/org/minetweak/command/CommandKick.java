@@ -2,7 +2,6 @@ package org.minetweak.command;
 
 import net.minecraft.src.EnumChatFormatting;
 import org.minetweak.Minetweak;
-import org.minetweak.Server;
 import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;
 
@@ -15,12 +14,17 @@ public class CommandKick extends CommandExecutor {
             return;
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);
-        if (args.length == 1) {
-            targetPlayer.kickPlayer();
-        } else if (args.length >= 2) {
-            args = StringUtils.dropFirstString(args);
-            String reason = mergeArgs(args);
-            targetPlayer.kickPlayer(reason);
+
+        if (Minetweak.isPlayerOnline(args[0])) {
+            sender.sendMessage("You cannot kick an offline player.");
+        } else {
+            if (args.length == 1) {
+                targetPlayer.kickPlayer();
+            } else if (args.length >= 2) {
+                args = StringUtils.dropFirstString(args);
+                String reason = mergeArgs(args);
+                targetPlayer.kickPlayer(reason);
+            }
         }
     }
 
