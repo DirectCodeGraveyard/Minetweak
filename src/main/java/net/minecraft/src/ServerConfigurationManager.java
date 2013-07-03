@@ -993,7 +993,7 @@ public abstract class ServerConfigurationManager
         }
     }
 
-    public void func_110459_a(ChatMessageComponent par1ChatMessageComponent, boolean par2)
+    public void sendChatToAllPlayers(ChatMessageComponent par1ChatMessageComponent, boolean par2)
     {
         this.mcServer.func_110122_a(par1ChatMessageComponent);
         this.sendPacketToAllPlayers(new Packet3Chat(par1ChatMessageComponent, par2));
@@ -1001,7 +1001,7 @@ public abstract class ServerConfigurationManager
 
     public void func_110460_a(ChatMessageComponent par1ChatMessageComponent)
     {
-        this.func_110459_a(par1ChatMessageComponent, true);
+        this.sendChatToAllPlayers(par1ChatMessageComponent, true);
     }
 
     /**

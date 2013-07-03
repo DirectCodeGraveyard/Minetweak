@@ -1,7 +1,9 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
 import org.minetweak.Server;
+import org.minetweak.event.player.PlayerChatEvent;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -646,8 +648,9 @@ public class NetServerHandler extends NetHandler
                         return;
                     }
 
-                    ChatMessageComponent var4 = ChatMessageComponent.func_111082_b("chat.type.text", new Object[] {this.playerEntity.getTranslatedEntityName(), var2});
-                    this.mcServer.getConfigurationManager().func_110459_a(var4, false);
+                    ChatMessageComponent var4 = ChatMessageComponent.func_111082_b("chat.type.text", this.playerEntity.getTranslatedEntityName(), var2);
+                    this.mcServer.getConfigurationManager().sendChatToAllPlayers(var4, false);
+                    Minetweak.getEventBus().post(new PlayerChatEvent(this.playerEntity.getEntityName(), var2));
                 }
 
                 this.chatSpamThresholdCount += 20;
@@ -665,7 +668,6 @@ public class NetServerHandler extends NetHandler
      */
     private void handleSlashCommand(String targetCommand)
     {
-        //this.mcServer.getCommandManager().executeCommand(this.playerEntity, par1Str);
         Server.handleCommand(this.playerEntity, targetCommand);
     }
 
