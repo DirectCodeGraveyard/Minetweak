@@ -1,7 +1,11 @@
 package org.minetweak.plugins;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.*;
@@ -10,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+import java.util.zip.ZipEntry;
 
 public class PluginLoader {
 
@@ -17,6 +22,7 @@ public class PluginLoader {
     public static URLClassLoader loader;
     public static HashMap<String, MinetweakPlugin> plugins = new HashMap<String, MinetweakPlugin>();
     public static ArrayList<String> enabledPlugins = new ArrayList<String>();
+    private Gson gson = new GsonBuilder().create();
 
     /**
      * Creates an instance of PluginLoader and runs setupPlugins
@@ -47,14 +53,13 @@ public class PluginLoader {
         ArrayList<String> classes = new ArrayList<String>();
         ArrayList<URL> urls = new ArrayList<URL>();
         for (File f : files) {
-            Manifest mf = getManifest(f);
-            String pluginClass = mf.getMainAttributes().getValue("Plugin-Class");
-            if (pluginClass == null) {
+            PluginInfo pluginInfo = getPluginInfo(f);
+            if (pluginInfo == null || pluginInfo.getMainClass()==null) {
                 continue;
             }
             try {
                 urls.add(f.toURI().toURL());
-                classes.add(pluginClass);
+                classes.add(pluginInfo.getMainClass());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -80,10 +85,14 @@ public class PluginLoader {
         }
     }
 
-    private Manifest getManifest(File f) {
+    private PluginInfo getPluginInfo(File file) {
         try {
-            JarFile jf = new JarFile(f);
-            return jf.getManifest();
+            JarFile jf = new JarFile(file);
+            ZipEntry entry = jf.getEntry("plugin.json");
+            if (entry==null) {
+                return null;
+            }
+            return gson.fromJson(new InputStreamReader(jf.getInputStream(entry)), PluginInfo.class);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
