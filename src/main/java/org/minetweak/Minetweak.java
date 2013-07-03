@@ -65,6 +65,7 @@ public class Minetweak {
 
         registerCommand("ban", new CommandBan());
         registerCommand("deop", new CommandDeop());
+        registerCommand("gamemode", new CommandDeop());
         registerCommand("help", new CommandHelp());
         registerCommand("kick", new CommandKick());
         registerCommand("kill", new CommandKill());
