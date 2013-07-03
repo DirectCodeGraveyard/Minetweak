@@ -83,7 +83,7 @@ public abstract class ServerConfigurationManager
         var7.sendPacket(new Packet16BlockItemSwitch(par2EntityPlayerMP.inventory.currentItem));
         this.func_96456_a((ServerScoreboard)var5.getScoreboard(), par2EntityPlayerMP);
         this.updateTimeAndWeatherForPlayer(par2EntityPlayerMP, var5);
-        this.func_110460_a(ChatMessageComponent.func_111082_b("multiplayer.player.joined", new Object[] {par2EntityPlayerMP.getTranslatedEntityName()}).func_111059_a(EnumChatFormatting.YELLOW));
+        this.func_110460_a(ChatMessageComponent.func_111082_b("multiplayer.player.joined", par2EntityPlayerMP.getTranslatedEntityName()).func_111059_a(EnumChatFormatting.YELLOW));
         this.playerLoggedIn(par2EntityPlayerMP);
         var7.setPlayerLocation(par2EntityPlayerMP.posX, par2EntityPlayerMP.posY, par2EntityPlayerMP.posZ, par2EntityPlayerMP.rotationYaw, par2EntityPlayerMP.rotationPitch);
         this.mcServer.getNetworkThread().addPlayer(var7);
@@ -242,6 +242,7 @@ public abstract class ServerConfigurationManager
         var2.getPlayerManager().removePlayer(par1EntityPlayerMP);
         this.playerEntityList.remove(par1EntityPlayerMP);
         this.sendPacketToAllPlayers(new Packet201PlayerInfo(par1EntityPlayerMP.getCommandSenderName(), false, 9999));
+        Minetweak.unregisterPlayer(par1EntityPlayerMP.getEntityName());
     }
 
     /**
