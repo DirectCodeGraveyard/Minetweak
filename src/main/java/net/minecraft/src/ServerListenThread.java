@@ -9,9 +9,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+@SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"})
 public class ServerListenThread extends Thread
 {
-    private final List pendingConnections = Collections.synchronizedList(new ArrayList());
+    private final List<NetLoginHandler> pendingConnections = Collections.synchronizedList(new ArrayList<NetLoginHandler>());
 
     /**
      * This map stores a list of InetAddresses and the last time which they connected at
@@ -35,13 +36,12 @@ public class ServerListenThread extends Thread
 
     public void processPendingConnections()
     {
-        List var1 = this.pendingConnections;
 
         synchronized (this.pendingConnections)
         {
             for (int var2 = 0; var2 < this.pendingConnections.size(); ++var2)
             {
-                NetLoginHandler var3 = (NetLoginHandler)this.pendingConnections.get(var2);
+                NetLoginHandler var3 = this.pendingConnections.get(var2);
 
                 try
                 {
@@ -75,7 +75,9 @@ public class ServerListenThread extends Thread
             }
             catch (IOException var3)
             {
-                var3.printStackTrace();
+                if (!var3.getMessage().equals("Socket closed")) {
+                    var3.printStackTrace();
+                }
             }
         }
 
@@ -86,11 +88,10 @@ public class ServerListenThread extends Thread
     {
         if (par1NetLoginHandler == null)
         {
-            throw new IllegalArgumentException("Got null pendingconnection!");
+            throw new IllegalArgumentException("Got null pending connection!");
         }
         else
         {
-            List var2 = this.pendingConnections;
 
             synchronized (this.pendingConnections)
             {
@@ -118,9 +119,9 @@ public class ServerListenThread extends Thread
         {
             this.myServerSocket.close();
         }
-        catch (Throwable var2)
+        catch (Throwable ignored)
         {
-            ;
+
         }
     }
 }
