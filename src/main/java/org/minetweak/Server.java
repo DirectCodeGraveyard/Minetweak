@@ -7,6 +7,7 @@ import org.minetweak.command.Console;
 import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;
 
+@SuppressWarnings("UnusedDeclaration")
 public class Server {
 
     public static boolean broadcastMessage(String message) {

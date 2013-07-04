@@ -11,12 +11,13 @@ import org.minetweak.thread.ManagementThread;
 import java.util.HashMap;
 
 /**
- * Main entrypoint for Minetweak, basically defines fields
+ * Main entry point for Minetweak, basically defines fields
  * for use throughout the internal server, and even the API
  * itself. It gives most of the basic methods that you will
  * need to create a plugin, like registering a command,
  * or an event.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class Minetweak {
 
     /**
