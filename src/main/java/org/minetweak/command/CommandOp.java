@@ -11,6 +11,9 @@ public class CommandOp extends CommandExecutor {
         if (args.length != 1) {
             sender.sendMessage("Usage: /op <player>");
             return;
+        } else if (!sender.hasPermission("minetweak.command.op")) {
+            sender.sendMessage("You don't have the permissions to do that.");
+            return;
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);
 

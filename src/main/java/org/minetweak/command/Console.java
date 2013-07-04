@@ -18,4 +18,9 @@ public class Console implements CommandSender {
     public boolean isKickable() {
         return false;
     }
+
+    @Override
+    public boolean hasPermission(String permission) {
+        return true;
+    }
 }

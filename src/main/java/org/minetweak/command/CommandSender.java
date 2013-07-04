@@ -8,4 +8,5 @@ public interface CommandSender {
 
     public boolean isKickable();
 
+    public boolean hasPermission(String permission);
 }
