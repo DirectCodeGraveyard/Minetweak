@@ -105,8 +105,9 @@ public class PluginLoader {
     }
 
     public static void disableAll() {
-        for (String pluginName : enabledPlugins) {
-            disable(pluginName);
+        for (MinetweakPlugin plugin : plugins.values()) {
+            plugin.onDisable();
+            enabledPlugins.remove(plugin.getName());
         }
     }
 
@@ -115,8 +116,7 @@ public class PluginLoader {
      */
     public static void reloadPlugins() {
         disableAll();
-        PluginLoader loader = new PluginLoader();
-        loader.setupPlugins();
+        initialize();
     }
 
     private void createDir() {
