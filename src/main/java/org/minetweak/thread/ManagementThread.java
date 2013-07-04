@@ -8,8 +8,12 @@ public class ManagementThread extends Thread {
     @Override
     public void run() {
         while (true) {
-
             loadBans();
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                break;
+            }
         }
     }
 

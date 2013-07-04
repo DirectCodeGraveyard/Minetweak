@@ -6,6 +6,7 @@ import org.minetweak.command.*;
 import org.minetweak.entity.Player;
 import org.minetweak.plugins.PluginLoader;
 import org.minetweak.recipe.RecipeManager;
+import org.minetweak.thread.ManagementThread;
 
 import java.util.HashMap;
 
@@ -75,6 +76,7 @@ public class Minetweak {
         registerCommand("stop", new CommandStop());
 
         registerListener(RecipeManager.getInstance());
+        registerListener(new ManagementThread());
 
         PluginLoader.initialize();
 

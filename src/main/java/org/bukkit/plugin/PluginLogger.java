@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"})
 public class PluginLogger extends Logger {
     private String pluginName;
 

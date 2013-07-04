@@ -75,7 +75,9 @@ public class ServerListenThread extends Thread
             }
             catch (IOException var3)
             {
-                var3.printStackTrace();
+                if (!var3.getMessage().equals("Socket closed")) {
+                    var3.printStackTrace();
+                }
             }
         }
 
