@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class EntityLeashKnot extends EntityHanging
@@ -65,14 +64,11 @@ public class EntityLeashKnot extends EntityHanging
 
             if (var6 != null)
             {
-                Iterator var7 = var6.iterator();
 
-                while (var7.hasNext())
-                {
-                    EntityLiving var8 = (EntityLiving)var7.next();
+                for (Object aVar6 : var6) {
+                    EntityLiving var8 = (EntityLiving) aVar6;
 
-                    if (var8.func_110167_bD() && var8.func_110166_bE() == par1EntityPlayer)
-                    {
+                    if (var8.func_110167_bD() && var8.func_110166_bE() == par1EntityPlayer) {
                         var8.func_110162_b(this, true);
                         var3 = true;
                     }
@@ -108,18 +104,14 @@ public class EntityLeashKnot extends EntityHanging
     public static EntityLeashKnot func_110130_b(World par0World, int par1, int par2, int par3)
     {
         List var4 = par0World.getEntitiesWithinAABB(EntityLeashKnot.class, AxisAlignedBB.getAABBPool().getAABB((double)par1 - 1.0D, (double)par2 - 1.0D, (double)par3 - 1.0D, (double)par1 + 1.0D, (double)par2 + 1.0D, (double)par3 + 1.0D));
-        Object var5 = null;
 
         if (var4 != null)
         {
-            Iterator var6 = var4.iterator();
 
-            while (var6.hasNext())
-            {
-                EntityLeashKnot var7 = (EntityLeashKnot)var6.next();
+            for (Object aVar4 : var4) {
+                EntityLeashKnot var7 = (EntityLeashKnot) aVar4;
 
-                if (var7.xPosition == par1 && var7.yPosition == par2 && var7.zPosition == par3)
-                {
+                if (var7.xPosition == par1 && var7.yPosition == par2 && var7.zPosition == par3) {
                     return var7;
                 }
             }

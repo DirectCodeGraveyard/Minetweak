@@ -51,5 +51,6 @@ public class RecipeManager {
     @Subscribe
     public void craftingReadyCallback(CraftingReadyEvent event) {
         this.craftingManager = event.getCraftingManager();
+        addShapelessRecipe(new ItemStack(Item.appleRed), new ItemStack(Item.stick));
     }
 }

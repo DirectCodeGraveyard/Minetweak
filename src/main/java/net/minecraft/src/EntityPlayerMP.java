@@ -7,7 +7,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.*;
 
-@SuppressWarnings("FieldCanBeLocal")
+@SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"})
 public class EntityPlayerMP extends EntityPlayer implements ICrafting
 {
     private String translator = "en_US";
@@ -30,10 +30,10 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
     public double managedPosZ;
 
     /** LinkedList that holds the loaded chunks. */
-    public final List loadedChunks = new LinkedList();
+    public final List<ChunkCoordIntPair> loadedChunks = new LinkedList<ChunkCoordIntPair>();
 
     /** entities added to this list will  be packet29'd to the player */
-    public final List destroyedItemsNetCache = new LinkedList();
+    public final List<Integer> destroyedItemsNetCache = new LinkedList<Integer>();
     private float field_130068_bO = Float.MIN_VALUE;
 
     /** amount of health the client was last set to */
@@ -179,12 +179,12 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         {
             int var1 = Math.min(this.destroyedItemsNetCache.size(), 127);
             int[] var2 = new int[var1];
-            Iterator var3 = this.destroyedItemsNetCache.iterator();
+            Iterator<Integer> var3 = this.destroyedItemsNetCache.iterator();
             int var4 = 0;
 
             while (var3.hasNext() && var4 < var1)
             {
-                var2[var4++] = ((Integer)var3.next()).intValue();
+                var2[var4++] = var3.next();
                 var3.remove();
             }
 
@@ -194,12 +194,12 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         if (!this.loadedChunks.isEmpty())
         {
             ArrayList var6 = new ArrayList();
-            Iterator var7 = this.loadedChunks.iterator();
+            Iterator<ChunkCoordIntPair> var7 = this.loadedChunks.iterator();
             ArrayList var8 = new ArrayList();
 
             while (var7.hasNext() && var6.size() < 5)
             {
-                ChunkCoordIntPair var9 = (ChunkCoordIntPair)var7.next();
+                ChunkCoordIntPair var9 = var7.next();
                 var7.remove();
 
                 if (var9 != null && this.worldObj.blockExists(var9.chunkXPos << 4, 0, var9.chunkZPos << 4))
@@ -264,12 +264,10 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
             {
                 this.field_130068_bO = this.func_110143_aJ() + this.func_110139_bj();
                 Collection var5 = this.getWorldScoreboard().func_96520_a(ScoreObjectiveCriteria.field_96638_f);
-                Iterator var7 = var5.iterator();
 
-                while (var7.hasNext())
-                {
-                    ScoreObjective var9 = (ScoreObjective)var7.next();
-                    this.getWorldScoreboard().func_96529_a(this.getEntityName(), var9).func_96651_a(Arrays.asList(new EntityPlayer[] {this}));
+                for (Object aVar5 : var5) {
+                    ScoreObjective var9 = (ScoreObjective) aVar5;
+                    this.getWorldScoreboard().func_96529_a(this.getEntityName(), var9).func_96651_a(Arrays.asList(this));
                 }
             }
 
@@ -301,11 +299,9 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         }
 
         Collection var2 = this.worldObj.getScoreboard().func_96520_a(ScoreObjectiveCriteria.field_96642_c);
-        Iterator var3 = var2.iterator();
 
-        while (var3.hasNext())
-        {
-            ScoreObjective var4 = (ScoreObjective)var3.next();
+        for (Object aVar2 : var2) {
+            ScoreObjective var4 = (ScoreObjective) aVar2;
             Score var5 = this.getWorldScoreboard().func_96529_a(this.getEntityName(), var4);
             var5.func_96648_a();
         }
@@ -366,7 +362,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
 
     public boolean func_96122_a(EntityPlayer par1EntityPlayer)
     {
-        return !this.mcServer.isPVPEnabled() ? false : super.func_96122_a(par1EntityPlayer);
+        return this.mcServer.isPVPEnabled() && super.func_96122_a(par1EntityPlayer);
     }
 
     public void travelToTheEnd(int par1)
@@ -894,7 +890,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
      */
     public boolean canCommandSenderUseCommand(int par1, String par2Str)
     {
-        return "seed".equals(par2Str) && !this.mcServer.isDedicatedServer() ? true : (!"tell".equals(par2Str) && !"help".equals(par2Str) && !"me".equals(par2Str) ? (this.mcServer.getConfigurationManager().areCommandsAllowed(this.username) ? this.mcServer.func_110455_j() >= par1 : false) : true);
+        return "seed".equals(par2Str) && !this.mcServer.isDedicatedServer() || (!(!"tell".equals(par2Str) && !"help".equals(par2Str) && !"me".equals(par2Str)) || (this.mcServer.getConfigurationManager().areCommandsAllowed(this.username) && this.mcServer.func_110455_j() >= par1));
     }
 
     /**
