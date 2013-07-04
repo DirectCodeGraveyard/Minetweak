@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'project-report'
 apply plugin: 'idea'
+apply plugin: 'eclipse'
 
 repositories {
     mavenCentral()
