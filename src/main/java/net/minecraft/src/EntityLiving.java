@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -132,7 +131,7 @@ public abstract class EntityLiving extends EntityLivingBase
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(11, Byte.valueOf((byte)0));
+        this.dataWatcher.addObject(11, (byte) 0);
         this.dataWatcher.addObject(10, "");
     }
 
@@ -291,13 +290,11 @@ public abstract class EntityLiving extends EntityLivingBase
         NBTTagList var2 = new NBTTagList();
         NBTTagCompound var4;
 
-        for (int var3 = 0; var3 < this.equipment.length; ++var3)
-        {
+        for (ItemStack anEquipment : this.equipment) {
             var4 = new NBTTagCompound();
 
-            if (this.equipment[var3] != null)
-            {
-                this.equipment[var3].writeToNBT(var4);
+            if (anEquipment != null) {
+                anEquipment.writeToNBT(var4);
             }
 
             var2.appendTag(var4);
@@ -409,77 +406,52 @@ public abstract class EntityLiving extends EntityLivingBase
         if (!this.worldObj.isRemote && this.canPickUpLoot() && !this.dead && this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing"))
         {
             List var1 = this.worldObj.getEntitiesWithinAABB(EntityItem.class, this.boundingBox.expand(1.0D, 0.0D, 1.0D));
-            Iterator var2 = var1.iterator();
 
-            while (var2.hasNext())
-            {
-                EntityItem var3 = (EntityItem)var2.next();
+            for (Object aVar1 : var1) {
+                EntityItem var3 = (EntityItem) aVar1;
 
-                if (!var3.isDead && var3.getEntityItem() != null)
-                {
+                if (!var3.isDead && var3.getEntityItem() != null) {
                     ItemStack var4 = var3.getEntityItem();
                     int var5 = getArmorPosition(var4);
 
-                    if (var5 > -1)
-                    {
+                    if (var5 > -1) {
                         boolean var6 = true;
                         ItemStack var7 = this.getEquipmentInSlot(var5);
 
-                        if (var7 != null)
-                        {
-                            if (var5 == 0)
-                            {
-                                if (var4.getItem() instanceof ItemSword && !(var7.getItem() instanceof ItemSword))
-                                {
+                        if (var7 != null) {
+                            if (var5 == 0) {
+                                if (var4.getItem() instanceof ItemSword && !(var7.getItem() instanceof ItemSword)) {
                                     var6 = true;
-                                }
-                                else if (var4.getItem() instanceof ItemSword && var7.getItem() instanceof ItemSword)
-                                {
-                                    ItemSword var8 = (ItemSword)var4.getItem();
-                                    ItemSword var9 = (ItemSword)var7.getItem();
+                                } else if (var4.getItem() instanceof ItemSword && var7.getItem() instanceof ItemSword) {
+                                    ItemSword var8 = (ItemSword) var4.getItem();
+                                    ItemSword var9 = (ItemSword) var7.getItem();
 
-                                    if (var8.func_82803_g() == var9.func_82803_g())
-                                    {
+                                    if (var8.func_82803_g() == var9.func_82803_g()) {
                                         var6 = var4.getItemDamage() > var7.getItemDamage() || var4.hasTagCompound() && !var7.hasTagCompound();
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         var6 = var8.func_82803_g() > var9.func_82803_g();
                                     }
-                                }
-                                else
-                                {
+                                } else {
                                     var6 = false;
                                 }
-                            }
-                            else if (var4.getItem() instanceof ItemArmor && !(var7.getItem() instanceof ItemArmor))
-                            {
+                            } else if (var4.getItem() instanceof ItemArmor && !(var7.getItem() instanceof ItemArmor)) {
                                 var6 = true;
-                            }
-                            else if (var4.getItem() instanceof ItemArmor && var7.getItem() instanceof ItemArmor)
-                            {
-                                ItemArmor var10 = (ItemArmor)var4.getItem();
-                                ItemArmor var11 = (ItemArmor)var7.getItem();
+                            } else if (var4.getItem() instanceof ItemArmor && var7.getItem() instanceof ItemArmor) {
+                                ItemArmor var10 = (ItemArmor) var4.getItem();
+                                ItemArmor var11 = (ItemArmor) var7.getItem();
 
-                                if (var10.damageReduceAmount == var11.damageReduceAmount)
-                                {
+                                if (var10.damageReduceAmount == var11.damageReduceAmount) {
                                     var6 = var4.getItemDamage() > var7.getItemDamage() || var4.hasTagCompound() && !var7.hasTagCompound();
-                                }
-                                else
-                                {
+                                } else {
                                     var6 = var10.damageReduceAmount > var11.damageReduceAmount;
                                 }
-                            }
-                            else
-                            {
+                            } else {
                                 var6 = false;
                             }
                         }
 
-                        if (var6)
-                        {
-                            if (var7 != null && this.rand.nextFloat() - 0.1F < this.equipmentDropChances[var5])
-                            {
+                        if (var6) {
+                            if (var7 != null && this.rand.nextFloat() - 0.1F < this.equipmentDropChances[var5]) {
                                 this.entityDropItem(var7, 0.0F);
                             }
 
@@ -1039,7 +1011,7 @@ public abstract class EntityLiving extends EntityLivingBase
 
     public void func_94061_f(boolean par1)
     {
-        this.dataWatcher.updateObject(11, Byte.valueOf((byte)(par1 ? 1 : 0)));
+        this.dataWatcher.updateObject(11, (byte) (par1 ? 1 : 0));
     }
 
     public boolean func_94062_bN()
@@ -1095,7 +1067,7 @@ public abstract class EntityLiving extends EntityLivingBase
                 }
             }
 
-            return this.interact(par1EntityPlayer) ? true : super.func_130002_c(par1EntityPlayer);
+            return this.interact(par1EntityPlayer) || super.func_130002_c(par1EntityPlayer);
         }
     }
 
@@ -1137,7 +1109,7 @@ public abstract class EntityLiving extends EntityLivingBase
 
             if (!this.worldObj.isRemote && par1 && this.worldObj instanceof WorldServer)
             {
-                ((WorldServer)this.worldObj).getEntityTracker().sendPacketToTrackedPlayers(this, new Packet39AttachEntity(1, this, (Entity)null));
+                ((WorldServer)this.worldObj).getEntityTracker().sendPacketToTrackedPlayers(this, new Packet39AttachEntity(1, this, null));
             }
         }
     }
@@ -1176,14 +1148,11 @@ public abstract class EntityLiving extends EntityLivingBase
             {
                 UUID var5 = new UUID(this.field_110170_bx.getLong("UUIDMost"), this.field_110170_bx.getLong("UUIDLeast"));
                 List var6 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, this.boundingBox.expand(10.0D, 10.0D, 10.0D));
-                Iterator var7 = var6.iterator();
 
-                while (var7.hasNext())
-                {
-                    EntityLivingBase var8 = (EntityLivingBase)var7.next();
+                for (Object aVar6 : var6) {
+                    EntityLivingBase var8 = (EntityLivingBase) aVar6;
 
-                    if (var8.func_110124_au().equals(var5))
-                    {
+                    if (var8.func_110124_au().equals(var5)) {
                         this.field_110168_bw = var8;
                         break;
                     }

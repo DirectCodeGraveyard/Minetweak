@@ -3,6 +3,7 @@ package net.minecraft.src;
 import java.util.*;
 import java.util.Map.Entry;
 
+@SuppressWarnings("unchecked")
 public class FlatGeneratorInfo
 {
     /** List of layers on this preset. */
@@ -70,7 +71,7 @@ public class FlatGeneratorInfo
                 var1.append(",");
             }
 
-            var1.append(((FlatLayerInfo)this.flatLayers.get(var2)).toString());
+            var1.append(this.flatLayers.get(var2).toString());
         }
 
         var1.append(";");
@@ -80,38 +81,31 @@ public class FlatGeneratorInfo
         {
             var1.append(";");
             var2 = 0;
-            Iterator var3 = this.worldFeatures.entrySet().iterator();
 
-            while (var3.hasNext())
-            {
-                Entry var4 = (Entry)var3.next();
+            for (Object o1 : this.worldFeatures.entrySet()) {
+                Entry var4 = (Entry) o1;
 
-                if (var2++ > 0)
-                {
+                if (var2++ > 0) {
                     var1.append(",");
                 }
 
-                var1.append(((String)var4.getKey()).toLowerCase());
-                Map var5 = (Map)var4.getValue();
+                var1.append(((String) var4.getKey()).toLowerCase());
+                Map var5 = (Map) var4.getValue();
 
-                if (!var5.isEmpty())
-                {
+                if (!var5.isEmpty()) {
                     var1.append("(");
                     int var6 = 0;
-                    Iterator var7 = var5.entrySet().iterator();
 
-                    while (var7.hasNext())
-                    {
-                        Entry var8 = (Entry)var7.next();
+                    for (Object o : var5.entrySet()) {
+                        Entry var8 = (Entry) o;
 
-                        if (var6++ > 0)
-                        {
+                        if (var6++ > 0) {
                             var1.append(" ");
                         }
 
-                        var1.append((String)var8.getKey());
+                        var1.append((String) var8.getKey());
                         var1.append("=");
-                        var1.append((String)var8.getValue());
+                        var1.append((String) var8.getValue());
                     }
 
                     var1.append(")");
@@ -195,16 +189,12 @@ public class FlatGeneratorInfo
             ArrayList var1 = new ArrayList();
             String[] var2 = par0Str.split(",");
             int var3 = 0;
-            String[] var4 = var2;
             int var5 = var2.length;
 
-            for (int var6 = 0; var6 < var5; ++var6)
-            {
-                String var7 = var4[var6];
+            for (String var7 : var2) {
                 FlatLayerInfo var8 = func_82646_a(var7, var3);
 
-                if (var8 == null)
-                {
+                if (var8 == null) {
                     return null;
                 }
 
@@ -253,29 +243,22 @@ public class FlatGeneratorInfo
                     if (var2 > 0 && var1.length > var4)
                     {
                         String[] var7 = var1[var4++].toLowerCase().split(",");
-                        String[] var8 = var7;
                         int var9 = var7.length;
 
-                        for (int var10 = 0; var10 < var9; ++var10)
-                        {
-                            String var11 = var8[var10];
+                        for (String var11 : var7) {
                             String[] var12 = var11.split("\\(", 2);
                             HashMap var13 = new HashMap();
 
-                            if (var12[0].length() > 0)
-                            {
+                            if (var12[0].length() > 0) {
                                 var3.getWorldFeatures().put(var12[0], var13);
 
-                                if (var12.length > 1 && var12[1].endsWith(")") && var12[1].length() > 1)
-                                {
+                                if (var12.length > 1 && var12[1].endsWith(")") && var12[1].length() > 1) {
                                     String[] var14 = var12[1].substring(0, var12[1].length() - 1).split(" ");
 
-                                    for (int var15 = 0; var15 < var14.length; ++var15)
-                                    {
-                                        String[] var16 = var14[var15].split("=", 2);
+                                    for (String aVar14 : var14) {
+                                        String[] var16 = aVar14.split("=", 2);
 
-                                        if (var16.length == 2)
-                                        {
+                                        if (var16.length == 2) {
                                             var13.put(var16[0], var16[1]);
                                         }
                                     }

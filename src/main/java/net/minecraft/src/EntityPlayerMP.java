@@ -7,6 +7,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.*;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class EntityPlayerMP extends EntityPlayer implements ICrafting
 {
     private String translator = "en_US";

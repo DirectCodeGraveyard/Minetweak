@@ -77,12 +77,8 @@ public enum EnumGameType
         EnumGameType[] var1 = values();
         int var2 = var1.length;
 
-        for (int var3 = 0; var3 < var2; ++var3)
-        {
-            EnumGameType var4 = var1[var3];
-
-            if (var4.id == par0)
-            {
+        for (EnumGameType var4 : var1) {
+            if (var4.id == par0) {
                 return var4;
             }
         }

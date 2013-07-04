@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+@SuppressWarnings("FieldCanBeLocal")
 public enum EnumFacing
 {
     DOWN(0, 1, 0, -1, 0),

@@ -118,9 +118,9 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
-        this.dataWatcher.addObject(17, Float.valueOf(0.0F));
-        this.dataWatcher.addObject(18, Integer.valueOf(0));
+        this.dataWatcher.addObject(16, (byte) 0);
+        this.dataWatcher.addObject(17, 0.0F);
+        this.dataWatcher.addObject(18, 0);
     }
 
     /**
@@ -409,7 +409,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     {
         if (!this.worldObj.isRemote && this.isSneaking())
         {
-            this.mountEntity((Entity)null);
+            this.mountEntity(null);
             this.setSneaking(false);
         }
         else
@@ -975,7 +975,6 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     {
         int var1 = 0;
         ItemStack[] var2 = this.inventory.armorInventory;
-        int var3 = var2.length;
 
         for (ItemStack var5 : var2) {
             if (var5 != null) {
