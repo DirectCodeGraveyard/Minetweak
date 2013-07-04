@@ -6,6 +6,8 @@ import org.minetweak.command.CommandSender;
 import org.minetweak.permissions.PermissionNode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * This class represents the player, and allows you to
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 public class Player implements CommandSender {
 
     private String playerDisplayName;
-    private ArrayList<PermissionNode> playerPermissions = new ArrayList<PermissionNode>();
+    private HashMap<String, PermissionNode> playerPermissions = new HashMap<String, PermissionNode>();
 
     private EntityPlayerMP entityPlayerMP;
 
@@ -79,8 +81,8 @@ public class Player implements CommandSender {
      * @return True if the permission was successfully added, and that the permission did not already exist
      */
     protected boolean givePermission(String permissionNode) {
-        if (!playerPermissions.contains(permissionNode)) {
-            playerPermissions.add(new PermissionNode(permissionNode));
+        if (!playerPermissions.containsKey(permissionNode)) {
+            playerPermissions.put(permissionNode, new PermissionNode(permissionNode));
             return true;
         }
         return false;
@@ -90,8 +92,8 @@ public class Player implements CommandSender {
      * Get the player permissions
      * @return Object array including the player's permissions
      */
-    public Object[] getPlayerPermissions() {
-        return playerPermissions.toArray();
+    public Set<String> getPlayerPermissions() {
+        return playerPermissions.keySet();
     }
 
     /**
@@ -100,8 +102,8 @@ public class Player implements CommandSender {
      * @return True if the player has the permission
      */
     public boolean hasPermission(String permissionNode) {
-        for (PermissionNode p : playerPermissions) {
-            if (p.getPermissionNode() == permissionNode) {
+        for (String name : playerPermissions.keySet()) {
+            if (name.equals(permissionNode)) {
                 return true;
             }
         }
@@ -196,5 +198,4 @@ public class Player implements CommandSender {
     public float getSpeedOnGround() {
         return getPlayerMP().getSpeedOnGround();
     }
-
 }
