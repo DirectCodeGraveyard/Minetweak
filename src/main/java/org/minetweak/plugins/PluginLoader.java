@@ -13,7 +13,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.jar.JarFile;
-import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 
 public class PluginLoader {
@@ -35,8 +34,7 @@ public class PluginLoader {
 
     public static void enable(String pluginName) {
         if (plugins.containsKey(pluginName)) {
-            plugins.get(pluginName).onEnable();
-            enabledPlugins.add(pluginName);
+            new PluginLoadingThread(plugins.get(pluginName)).start();
         }
     }
 
@@ -79,9 +77,8 @@ public class PluginLoader {
     }
 
     public static void enableAll() {
-        for (MinetweakPlugin plugin : plugins.values()) {
-            plugin.onEnable();
-            enabledPlugins.add(plugin.getName());
+        for (String plugin : plugins.keySet()) {
+            enable(plugin);
         }
     }
 
@@ -114,7 +111,7 @@ public class PluginLoader {
     }
 
     /**
-     * Disable then re-enable all plugins
+     * Disable plugins, then reload from plugins directory
      */
     public static void reloadPlugins() {
         disableAll();
@@ -131,8 +128,22 @@ public class PluginLoader {
         }
     }
 
+    /**
+     * Detect if a plugin is enabled
+     * @param pluginName name of plugin
+     * @return if the plugin is enabled
+     */
     public static boolean isPluginEnabled(String pluginName) {
         return enabledPlugins.contains(pluginName);
+    }
+
+    /**
+     * Detect if a plugin is registered. This does not mean they are enabled
+     * @param pluginName name of plugin
+     * @return if the plugin is registered
+     */
+    public static boolean doesPluginExist(String pluginName) {
+        return plugins.keySet().contains(pluginName);
     }
 
     private static final class FileProcessor extends SimpleFileVisitor<Path> {
