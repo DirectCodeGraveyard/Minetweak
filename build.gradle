@@ -3,6 +3,8 @@ apply plugin: 'project-report'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 
+def version = '0.5'
+def groupId = 'org.minetweak'
 repositories {
     mavenCentral()
 
@@ -44,4 +46,20 @@ task wrapper(type: Wrapper) {
 tasks.withType(Test) {
     scanForTestClasses = false
     include '**/*Test*.class'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+    archives jar
 }
