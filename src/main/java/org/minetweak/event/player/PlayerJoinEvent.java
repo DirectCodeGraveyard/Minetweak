@@ -10,6 +10,10 @@ public class PlayerJoinEvent {
         this.playerJoined = playerJoined;
     }
 
+    /**
+     * Get player that joined
+     * @return player that joined
+     */
     public Player getPlayer() {
         return playerJoined;
     }

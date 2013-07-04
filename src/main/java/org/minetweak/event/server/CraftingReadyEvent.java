@@ -8,6 +8,10 @@ public class CraftingReadyEvent {
         this.craftingManager = craftingManager;
     }
 
+    /**
+     * Get CraftingManager
+     * @return the crafting manager instance for the server
+     */
     public CraftingManager getCraftingManager() {
         return craftingManager;
     }

@@ -13,20 +13,27 @@ public class PlayerChatEvent {
         this.message = message;
     }
 
+    /**
+     * Gets the username of the player
+     * @return username of player
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Returns Player instance
+     * @return player instance
+     */
     public Player getPlayer() {
         return Minetweak.getPlayerByName(username);
     }
 
+    /**
+     * Gets the message
+     * @return message
+     */
     public String getMessage() {
         return message;
     }
-
-    public void setMessage(String newMessage) {
-        message = newMessage;
-    }
-
 }
