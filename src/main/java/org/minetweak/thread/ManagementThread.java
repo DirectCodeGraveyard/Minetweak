@@ -2,6 +2,7 @@ package org.minetweak.thread;
 
 import com.google.common.eventbus.Subscribe;
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
 import org.minetweak.event.server.ServerFinishedStartupEvent;
 
 public class ManagementThread extends Thread {
@@ -10,7 +11,7 @@ public class ManagementThread extends Thread {
         while (true) {
             loadBans();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 break;
             }
@@ -24,6 +25,7 @@ public class ManagementThread extends Thread {
 
     @Subscribe
     public void serverReadyCallback(ServerFinishedStartupEvent event) {
+        Minetweak.info("Starting Management Thread");
         this.start();
     }
 }

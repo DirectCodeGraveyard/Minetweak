@@ -1215,4 +1215,15 @@ public class Block
         canBlockGrass[0] = true;
         StatList.initBreakableStats();
     }
+
+    public int getExpDrop(World world, int data, int enchantmentLevel)
+    {
+        return 0;
+    }
+    public boolean func_71906_q_CodeFix_Public(){
+        return canSilkHarvest();
+    }
+    public void func_71923_g_CodeFix_Public(net.minecraft.src.World a, int b, int c, int d, int e){
+        dropXpOnBlockBreak(a, b, c, d, e);
+    }
 }

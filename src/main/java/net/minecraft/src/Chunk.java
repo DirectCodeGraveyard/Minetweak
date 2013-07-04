@@ -81,6 +81,8 @@ public class Chunk
      */
     private int queuedLightChecks;
 
+    public org.minetweak.world.Chunk MineTweakChunk;
+
     public Chunk(World par1World, int par2, int par3)
     {
         this.storageArrays = new ExtendedBlockStorage[16];
@@ -102,6 +104,11 @@ public class Chunk
 
         Arrays.fill(this.precipitationHeightMap, -999);
         Arrays.fill(this.blockBiomeArray, (byte) - 1);
+
+        if (!(this instanceof EmptyChunk))
+        {
+            this.MineTweakChunk = new org.minetweak.world.MindTweakChunk(this);
+        }
     }
 
     public Chunk(World par1World, byte[] par2ArrayOfByte, int par3, int par4)

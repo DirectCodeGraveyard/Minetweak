@@ -11,6 +11,9 @@ public class CommandBan extends CommandExecutor {
         if (args.length == 0) {
             sender.sendMessage("Usage: /ban <player> [reason]");
             return;
+        } else if (!sender.hasPermission("minetweak.command.ban")) {
+            sender.sendMessage("You don't have the permissions to do that.");
+            return;
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);
         if (args.length == 1) {

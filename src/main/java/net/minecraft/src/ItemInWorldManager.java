@@ -1,5 +1,8 @@
 package net.minecraft.src;
 
+import org.minetweak.Minetweak;
+import org.minetweak.event.block.BlockBreakEvent;
+
 public class ItemInWorldManager
 {
     /** The world object that this object is connected to. */
@@ -240,50 +243,115 @@ public class ItemInWorldManager
 
     /**
      * Attempts to harvest a block at the given coordinate
-     */
+     *
+    */
     public boolean tryHarvestBlock(int par1, int par2, int par3)
     {
-        if (this.gameType.isAdventure() && !this.thisPlayerMP.canCurrentToolHarvestBlock(par1, par2, par3))
+        BlockBreakEvent event = null;
+
+        if (this.thisPlayerMP instanceof EntityPlayerMP)
         {
-            return false;
+            org.minetweak.event.block.Block block = this.theWorld.getWorld().getBlockAt(par1, par2, par3);
+
+            if (theWorld.getBlockTileEntity(par1, par2, par3) == null)
+            {
+                Packet53BlockChange packet = new Packet53BlockChange(par1, par2, par3, this.theWorld);
+                packet.type = 0;
+                packet.metadata = 0;
+                ((EntityPlayerMP) this.thisPlayerMP).playerNetServerHandler.sendPacket(packet);
+            }
+
+            event = new BlockBreakEvent(block, Minetweak.getPlayerByName(((EntityPlayerMP) this.thisPlayerMP).username));
+            event.setCancelled(this.gameType.isAdventure() && !this.thisPlayerMP.canCurrentToolHarvestBlock(par1, par2, par3));
+            Block nmsBlock = Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
+
+            if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && this.thisPlayerMP.canHarvestBlock(nmsBlock))
+            {
+                if (!(nmsBlock.func_71906_q_CodeFix_Public() && EnchantmentHelper.getSilkTouchModifier(this.thisPlayerMP)))
+                {
+                    int data = block.getData();
+                    int bonusLevel = EnchantmentHelper.getFortuneModifier(this.thisPlayerMP);
+                    event.setExpToDrop(nmsBlock.getExpDrop(this.theWorld, data, bonusLevel));
+                }
+            }
+
+            Minetweak.getEventBus().post(event);
+
+            if (event.isCancelled())
+            {
+                // Let the client know the block still exists
+                ((EntityPlayerMP) this.thisPlayerMP).playerNetServerHandler.sendPacket(new Packet53BlockChange(par1, par2, par3, this.theWorld));
+                // Update any tile entity data for this block
+                TileEntity tileentity = this.theWorld.getBlockTileEntity(par1, par2, par3);
+
+                if (tileentity != null)
+                {
+                    this.thisPlayerMP.playerNetServerHandler.sendPacket(tileentity.getDescriptionPacket());
+                }
+
+                return false;
+            }
         }
-        else if (this.gameType.isCreative() && this.thisPlayerMP.getHeldItem() != null && this.thisPlayerMP.getHeldItem().getItem() instanceof ItemSword)
+
+        if (false)
         {
             return false;
         }
         else
         {
-            int var4 = this.theWorld.getBlockId(par1, par2, par3);
-            int var5 = this.theWorld.getBlockMetadata(par1, par2, par3);
-            this.theWorld.playAuxSFXAtEntity(this.thisPlayerMP, 2001, par1, par2, par3, var4 + (this.theWorld.getBlockMetadata(par1, par2, par3) << 12));
-            boolean var6 = this.removeBlock(par1, par2, par3);
+            int l = this.theWorld.getBlockId(par1, par2, par3);
+
+            if (Block.blocksList[l] == null)
+            {
+                return false;
+            }
+
+            int i1 = this.theWorld.getBlockMetadata(par1, par2, par3);
+
+            if (l == Block.skull.blockID && !this.isCreative())
+            {
+                Block.skull.dropBlockAsItemWithChance(theWorld, par1, par2, par3, i1, 1.0F, 0);
+                return this.removeBlock(par1, par2, par3);
+            }
+
+            this.theWorld.playAuxSFXAtEntity(this.thisPlayerMP, 2001, par1, par2, par3, l + (this.theWorld.getBlockMetadata(par1, par2, par3) << 12));
+            boolean flag = false;
 
             if (this.isCreative())
             {
+                flag = this.removeBlock(par1, par2, par3);
                 this.thisPlayerMP.playerNetServerHandler.sendPacket(new Packet53BlockChange(par1, par2, par3, this.theWorld));
             }
             else
             {
-                ItemStack var7 = this.thisPlayerMP.getCurrentEquippedItem();
-                boolean var8 = this.thisPlayerMP.canHarvestBlock(Block.blocksList[var4]);
+                ItemStack itemstack = this.thisPlayerMP.getCurrentEquippedItem();
+                boolean flag1 = false;
+                Block block = Block.blocksList[l];
+                int var4 = this.theWorld.getBlockId(par1, par2, par3);
 
-                if (var7 != null)
+                if (itemstack != null)
                 {
-                    var7.onBlockDestroyed(this.theWorld, var4, par1, par2, par3, this.thisPlayerMP);
+                    itemstack.onBlockDestroyed(this.theWorld, l, par1, par2, par3, this.thisPlayerMP);
 
-                    if (var7.stackSize == 0)
+                    if (itemstack.stackSize == 0)
                     {
                         this.thisPlayerMP.destroyCurrentEquippedItem();
                     }
                 }
 
-                if (var6 && var8)
+                flag = this.removeBlock(par1, par2, par3);
+                if (flag && flag1)
                 {
-                    Block.blocksList[var4].harvestBlock(this.theWorld, this.thisPlayerMP, par1, par2, par3, var5);
+                    Block.blocksList[l].harvestBlock(this.theWorld, this.thisPlayerMP, par1, par2, par3, i1);
                 }
             }
 
-            return var6;
+            if (flag && event != null)
+            {
+                Block.blocksList[l].func_71923_g_CodeFix_Public(this.theWorld, par1, par2, par3, event.getExpToDrop());
+            }
+
+            return flag;
         }
     }
 

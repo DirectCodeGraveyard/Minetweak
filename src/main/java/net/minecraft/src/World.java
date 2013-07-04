@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.world.MindTweakWorld;
 
 import java.util.*;
 
@@ -139,11 +140,19 @@ public abstract class World implements IBlockAccess
         return this.provider.worldChunkMgr;
     }
 
+    private final MindTweakWorld world;
+
+    public MindTweakWorld getWorld()
+    {
+        return this.world;
+    }
+
     public World(ISaveHandler par1ISaveHandler, String par2Str, WorldSettings par3WorldSettings, WorldProvider par4WorldProvider, Profiler par5Profiler, ILogAgent par6ILogAgent)
     {
         this.ambientTickCountdown = this.rand.nextInt(12000);
         this.lightUpdateBlockList = new int[32768];
         this.saveHandler = par1ISaveHandler;
+        this.world = new MindTweakWorld((WorldServer) this);
         this.theProfiler = par5Profiler;
         this.mapStorage = new MapStorage(par1ISaveHandler);
         this.worldLogAgent = par6ILogAgent;
