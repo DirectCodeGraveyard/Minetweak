@@ -19,7 +19,7 @@ public class EntityItemFrame extends EntityHanging
     protected void entityInit()
     {
         this.getDataWatcher().addObjectByDataType(2, 5);
-        this.getDataWatcher().addObject(3, Byte.valueOf((byte)0));
+        this.getDataWatcher().addObject(3, (byte) 0);
     }
 
     public int func_82329_d()
@@ -67,7 +67,7 @@ public class EntityItemFrame extends EntityHanging
                 var2.playersVisibleOnMap.remove("frame-" + this.entityId);
             }
 
-            par1ItemStack.setItemFrame((EntityItemFrame)null);
+            par1ItemStack.setItemFrame(null);
         }
     }
 
@@ -95,7 +95,7 @@ public class EntityItemFrame extends EntityHanging
 
     public void setItemRotation(int par1)
     {
-        this.getDataWatcher().updateObject(3, Byte.valueOf((byte)(par1 % 4)));
+        this.getDataWatcher().updateObject(3, (byte) (par1 % 4));
     }
 
     /**
@@ -146,7 +146,7 @@ public class EntityItemFrame extends EntityHanging
 
                 if (!par1EntityPlayer.capabilities.isCreativeMode && --var2.stackSize <= 0)
                 {
-                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
+                    par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, null);
                 }
             }
         }

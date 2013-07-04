@@ -7,6 +7,10 @@ public class PluginInfo {
         MainClass = mainClass;
     }
 
+    /**
+     * Get the name of the main class
+     * @return name of main class
+     */
     public String getMainClass() {
         return MainClass;
     }

@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
+@SuppressWarnings("UnusedDeclaration")
 public class EntityFishHook extends Entity
 {
     /** The tile this entity is on, X position */
@@ -176,22 +177,18 @@ public class EntityFishHook extends Entity
             double var6 = 0.0D;
             double var13;
 
-            for (int var8 = 0; var8 < var5.size(); ++var8)
-            {
-                Entity var9 = (Entity)var5.get(var8);
+            for (Object aVar5 : var5) {
+                Entity var9 = (Entity) aVar5;
 
-                if (var9.canBeCollidedWith() && (var9 != this.angler || this.ticksInAir >= 5))
-                {
+                if (var9.canBeCollidedWith() && (var9 != this.angler || this.ticksInAir >= 5)) {
                     float var10 = 0.3F;
-                    AxisAlignedBB var11 = var9.boundingBox.expand((double)var10, (double)var10, (double)var10);
+                    AxisAlignedBB var11 = var9.boundingBox.expand((double) var10, (double) var10, (double) var10);
                     MovingObjectPosition var12 = var11.calculateIntercept(var20, var2);
 
-                    if (var12 != null)
-                    {
+                    if (var12 != null) {
                         var13 = var20.distanceTo(var12.hitVec);
 
-                        if (var13 < var6 || var6 == 0.0D)
-                        {
+                        if (var13 < var6 || var6 == 0.0D) {
                             var4 = var9;
                             var6 = var13;
                         }
@@ -225,10 +222,7 @@ public class EntityFishHook extends Entity
                 float var24 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
                 this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-                for (this.rotationPitch = (float)(Math.atan2(this.motionY, (double)var24) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
-                {
-                    ;
-                }
+                for (this.rotationPitch = (float)(Math.atan2(this.motionY, (double)var24) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F);
 
                 while (this.rotationPitch - this.prevRotationPitch >= 180.0F)
                 {
@@ -259,7 +253,7 @@ public class EntityFishHook extends Entity
 
                 for (int var29 = 0; var29 < var27; ++var29)
                 {
-                    double var14 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var29 + 0) / (double)var27 - 0.125D + 0.125D;
+                    double var14 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var29) / (double)var27 - 0.125D + 0.125D;
                     double var16 = this.boundingBox.minY + (this.boundingBox.maxY - this.boundingBox.minY) * (double)(var29 + 1) / (double)var27 - 0.125D + 0.125D;
                     AxisAlignedBB var18 = AxisAlignedBB.getAABBPool().getAABB(this.boundingBox.minX, var14, this.boundingBox.minZ, this.boundingBox.maxX, var16, this.boundingBox.maxZ);
 

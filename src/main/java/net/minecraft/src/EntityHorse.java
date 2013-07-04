@@ -1,8 +1,8 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import java.util.List;
 
+@SuppressWarnings({"MismatchedReadAndWriteOfArray", "UnusedDeclaration", "FieldCanBeLocal"})
 public class EntityHorse extends EntityAnimal implements IInvBasic
 {
     private static final IEntitySelector field_110276_bu = new EntityHorseBredSelector();
@@ -56,16 +56,16 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
     protected void entityInit()
     {
         super.entityInit();
-        this.dataWatcher.addObject(16, Integer.valueOf(0));
-        this.dataWatcher.addObject(19, Byte.valueOf((byte)0));
-        this.dataWatcher.addObject(20, Integer.valueOf(0));
+        this.dataWatcher.addObject(16, 0);
+        this.dataWatcher.addObject(19, (byte) 0);
+        this.dataWatcher.addObject(20, 0);
         this.dataWatcher.addObject(21, String.valueOf(""));
-        this.dataWatcher.addObject(22, Integer.valueOf(0));
+        this.dataWatcher.addObject(22, 0);
     }
 
     public void func_110214_p(int par1)
     {
-        this.dataWatcher.updateObject(19, Byte.valueOf((byte)par1));
+        this.dataWatcher.updateObject(19, (byte) par1);
         this.func_110230_cF();
     }
 
@@ -76,7 +76,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
 
     public void func_110235_q(int par1)
     {
-        this.dataWatcher.updateObject(20, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(20, par1);
         this.func_110230_cF();
     }
 
@@ -130,11 +130,11 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
 
         if (par2)
         {
-            this.dataWatcher.updateObject(16, Integer.valueOf(var3 | par1));
+            this.dataWatcher.updateObject(16, var3 | par1);
         }
         else
         {
-            this.dataWatcher.updateObject(16, Integer.valueOf(var3 & ~par1));
+            this.dataWatcher.updateObject(16, var3 & ~par1);
         }
     }
 
@@ -233,7 +233,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
 
     public void func_110236_r(int par1)
     {
-        this.dataWatcher.updateObject(22, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(22, par1);
         this.func_110230_cF();
     }
 
@@ -287,7 +287,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
         }
         else if (var3 instanceof EntityWolf)
         {
-            ((EntityWolf)var3).setTarget((Entity)null);
+            ((EntityWolf)var3).setTarget(null);
             return false;
         }
         else
@@ -450,15 +450,12 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
         double var4 = Double.MAX_VALUE;
         Entity var6 = null;
         List var7 = this.worldObj.getEntitiesWithinAABBExcludingEntity(par1Entity, par1Entity.boundingBox.addCoord(par2, par2, par2), field_110276_bu);
-        Iterator var8 = var7.iterator();
 
-        while (var8.hasNext())
-        {
-            Entity var9 = (Entity)var8.next();
+        for (Object aVar7 : var7) {
+            Entity var9 = (Entity) aVar7;
             double var10 = var9.getDistanceSq(par1Entity.posX, par1Entity.posY, par1Entity.posZ);
 
-            if (var10 < var4)
-            {
+            if (var10 < var4) {
                 var6 = var9;
                 var4 = var10;
             }
@@ -806,7 +803,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
                 {
                     if (!par1EntityPlayer.capabilities.isCreativeMode && --var2.stackSize == 0)
                     {
-                        par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
+                        par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, null);
                     }
 
                     return true;
@@ -861,7 +858,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
      */
     protected boolean isMovementBlocked()
     {
-        return this.riddenByEntity != null && this.func_110257_ck() ? true : this.func_110204_cc() || this.func_110209_cd();
+        return this.riddenByEntity != null && this.func_110257_ck() || this.func_110204_cc() || this.func_110209_cd();
     }
 
     public boolean func_110256_cu()

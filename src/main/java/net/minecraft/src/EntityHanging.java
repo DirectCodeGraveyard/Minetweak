@@ -121,7 +121,7 @@ public abstract class EntityHanging extends Entity
             if (!this.isDead && !this.onValidSurface())
             {
                 this.setDead();
-                this.func_110128_b((Entity)null);
+                this.func_110128_b(null);
             }
         }
     }
@@ -216,7 +216,7 @@ public abstract class EntityHanging extends Entity
 
     public boolean func_85031_j(Entity par1Entity)
     {
-        return par1Entity instanceof EntityPlayer ? this.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)par1Entity), 0.0F) : false;
+        return par1Entity instanceof EntityPlayer && this.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par1Entity), 0.0F);
     }
 
     /**
@@ -249,7 +249,7 @@ public abstract class EntityHanging extends Entity
         if (!this.worldObj.isRemote && !this.isDead && par1 * par1 + par3 * par3 + par5 * par5 > 0.0D)
         {
             this.setDead();
-            this.func_110128_b((Entity)null);
+            this.func_110128_b(null);
         }
     }
 
@@ -261,7 +261,7 @@ public abstract class EntityHanging extends Entity
         if (!this.worldObj.isRemote && !this.isDead && par1 * par1 + par3 * par3 + par5 * par5 > 0.0D)
         {
             this.setDead();
-            this.func_110128_b((Entity)null);
+            this.func_110128_b(null);
         }
     }
 
