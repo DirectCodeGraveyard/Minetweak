@@ -11,6 +11,9 @@ public class CommandKick extends CommandExecutor {
         if (args.length == 0) {
             sender.sendMessage("Usage: /kick <player> [reason]");
             return;
+        } else if (!sender.hasPermission("minetweak.command.kick")) {
+            sender.sendMessage("You don't have the permissions to do that.");
+            return;
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);
 

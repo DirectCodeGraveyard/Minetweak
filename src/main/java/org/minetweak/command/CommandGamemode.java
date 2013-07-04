@@ -12,6 +12,9 @@ public class CommandGamemode extends CommandExecutor {
         if (args.length != 1 && args.length != 2) {
             sender.sendMessage("Usage: /gamemode <gamemode> [player]");
             return;
+        } else if (!sender.hasPermission("minetweak.command.gamemode")) {
+            sender.sendMessage("You don't have the permissions to do that.");
+            return;
         }
 
         int gamemode = -1;
