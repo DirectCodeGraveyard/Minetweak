@@ -190,4 +190,14 @@ public class Player implements CommandSender {
     public float getSpeedOnGround() {
         return getPlayerMP().getSpeedOnGround();
     }
+
+    public float getPlayerHealth() {
+        return getPlayerMP().prevHealth;
+    }
+
+    public void setPlayerHealth(float health) {
+        getPlayerMP().setEntityHealth(health);
+        getPlayerMP().setPlayerHealthUpdated();
+    }
+
 }
