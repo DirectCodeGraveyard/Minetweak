@@ -2,10 +2,8 @@ package org.minetweak.permissions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.minetweak.Minetweak;
 
 import java.io.*;
-import java.util.HashMap;
 
 public class PermissionsLoader {
     private static File file = new File("./permissions.json");

@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
 import net.minecraft.src.*;
+import org.minetweak.Minetweak;
+import org.minetweak.event.server.WorldsLoadingEvent;
 
 import java.awt.*;
 import java.io.File;
@@ -191,11 +193,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     protected void loadAllWorlds(String par1Str, String par2Str, long par3, WorldType par5WorldType, String par6Str) {
         this.convertMapIfNeeded(par1Str);
         this.setUserMessage("menu.loadingLevel");
-        this.worldServers = new WorldServer[3];
+        this.worldServers = new WorldServer[10];
         this.timeOfLastDimensionTick = new long[this.worldServers.length][100];
         ISaveHandler var7 = this.anvilConverterForAnvilFile.getSaveLoader(par1Str, true);
         WorldInfo var9 = var7.loadWorldInfo();
         WorldSettings var8;
+        Minetweak.getEventBus().post(new WorldsLoadingEvent());
 
         if (var9 == null) {
             var8 = new WorldSettings(par3, this.getGameType(), this.canStructuresSpawn(), this.isHardcore(), par5WorldType);

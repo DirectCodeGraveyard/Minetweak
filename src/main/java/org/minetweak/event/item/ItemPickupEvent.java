@@ -8,7 +8,7 @@ public class ItemPickupEvent extends ItemEvent {
     private Item item;
     private Player player;
 
-    public ItemPickupEvent(ItemStack stack) {
+    public ItemPickupEvent(Player player, ItemStack stack) {
         super(null);
     }
 }
