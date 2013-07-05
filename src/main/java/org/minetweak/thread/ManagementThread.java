@@ -6,7 +6,11 @@ import org.minetweak.Minetweak;
 import org.minetweak.event.server.ServerFinishedStartupEvent;
 import org.minetweak.permissions.PermissionsLoader;
 
+import java.util.ArrayList;
+
 public class ManagementThread extends Thread {
+    private ArrayList<Runnable> runnables = new ArrayList<Runnable>();
+    private static ManagementThread instance;
     @Override
     public void run() {
         while (true) {
@@ -16,6 +20,10 @@ public class ManagementThread extends Thread {
             } catch (InterruptedException e) {
                 Minetweak.info("Stopping Management Thread");
                 break;
+            }
+            for (Runnable runnable : runnables) {
+                runnable.run();
+                runnables.remove(runnable);
             }
         }
     }
@@ -39,5 +47,13 @@ public class ManagementThread extends Thread {
     public void serverReadyCallback(ServerFinishedStartupEvent event) {
         Minetweak.info("Starting Management Thread");
         this.start();
+    }
+
+    public void runInThread(Runnable runnable) {
+        runnables.add(runnable);
+    }
+
+    public static ManagementThread getInstance() {
+        return instance;
     }
 }
