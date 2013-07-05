@@ -37,13 +37,13 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         DedicatedServerCommandThread var1 = new DedicatedServerCommandThread(this);
         var1.setDaemon(true);
         var1.start();
-        this.getLogAgent().func_98233_a("Starting minecraft server version 1.6.1");
+        this.logInfo("Starting minecraft server version 1.6.1");
 
         if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
             this.getLogAgent().func_98236_b("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
         }
 
-        this.getLogAgent().func_98233_a("Loading properties");
+        this.logInfo("Loading properties");
         this.settings = new PropertyManager(new File("server.properties"), this.getLogAgent());
         this.setOnlineMode(this.settings.getBooleanProperty("online-mode", true));
         this.setHostname(this.settings.getStringProperty("server-ip", ""));
@@ -64,7 +64,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.canSpawnStructures = this.settings.getBooleanProperty("generate-structures", true);
         int var2 = this.settings.getIntProperty("gamemode", EnumGameType.SURVIVAL.getID());
         this.gameType = WorldSettings.getGameTypeById(var2);
-        this.getLogAgent().func_98233_a("Default game type: " + this.gameType);
+        this.logInfo("Default game type: " + this.gameType);
         InetAddress var3 = null;
 
         if (this.getServerHostname().length() > 0) {
@@ -75,9 +75,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             this.setServerPort(this.settings.getIntProperty("server-port", 25565));
         }
 
-        this.getLogAgent().func_98233_a("Generating keypair");
+        this.logInfo("Generating keypair");
         this.setKeyPair(CryptManager.generateKeyPair());
-        this.getLogAgent().func_98233_a("Starting Minecraft server on " + (this.getServerHostname().length() == 0 ? "*" : this.getServerHostname()) + ":" + this.getServerPort());
+        this.logInfo("Starting Minecraft server on " + (this.getServerHostname().length() == 0 ? "*" : this.getServerHostname()) + ":" + this.getServerPort());
 
         try {
             this.networkThread = new DedicatedServerListenThread(this, var3, this.getServerPort());
@@ -129,23 +129,23 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.setBuildLimit((this.getBuildLimit() + 8) / 16 * 16);
         this.setBuildLimit(MathHelper.clamp_int(this.getBuildLimit(), 64, 256));
         this.settings.setProperty("max-build-height", Integer.valueOf(this.getBuildLimit()));
-        this.getLogAgent().func_98233_a("Preparing level \"" + this.getFolderName() + "\"");
+        this.logInfo("Preparing level \"" + this.getFolderName() + "\"");
         this.loadAllWorlds(this.getFolderName(), this.getFolderName(), var9, var17, var8);
         long var12 = System.nanoTime() - var4;
         String var14 = String.format("%.3fs", new Object[]{Double.valueOf((double) var12 / 1.0E9D)});
-        this.getLogAgent().func_98233_a("Done (" + var14 + ")! For help, type help");
+        this.logInfo("Done (" + var14 + ")! For help, type help");
 
         Minetweak.setServerDoneLoading();
         Minetweak.getEventBus().post(new ServerFinishedStartupEvent());
 
         if (this.settings.getBooleanProperty("enable-query", false)) {
-            this.getLogAgent().func_98233_a("Starting GS4 status listener");
+            this.logInfo("Starting GS4 status listener");
             this.theRConThreadQuery = new RConThreadQuery(this);
             this.theRConThreadQuery.startThread();
         }
 
         if (this.settings.getBooleanProperty("enable-rcon", false)) {
-            this.getLogAgent().func_98233_a("Starting remote control listener");
+            this.logInfo("Starting remote control listener");
             this.theRConThreadMain = new RConThreadMain(this);
             this.theRConThreadMain.startThread();
         }

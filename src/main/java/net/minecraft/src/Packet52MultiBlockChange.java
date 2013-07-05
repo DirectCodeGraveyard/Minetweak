@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.io.*;
 
 public class Packet52MultiBlockChange extends Packet {
@@ -38,7 +40,7 @@ public class Packet52MultiBlockChange extends Packet {
 
         try {
             if (par4 >= 64) {
-                this.field_98193_m.func_98233_a("ChunkTilesUpdatePacket compress " + par4);
+                MinecraftServer.getServer().logInfo("ChunkTilesUpdatePacket compress " + par4);
 
                 if (field_73449_e.length < var6) {
                     field_73449_e = new byte[var6];

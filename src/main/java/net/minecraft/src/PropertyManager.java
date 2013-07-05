@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -54,7 +56,7 @@ public class PropertyManager {
      * Generates a new properties file.
      */
     public void generateNewProperties() {
-        this.logger.func_98233_a("Generating new properties file");
+        MinecraftServer.getServer().logInfo("Generating new properties file");
         this.saveProperties();
     }
 

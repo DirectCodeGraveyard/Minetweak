@@ -82,7 +82,7 @@ public abstract class ServerConfigurationManager {
             var4 = par1INetworkManager.getRemoteAddress().toString();
         }
 
-        this.mcServer.getLogAgent().func_98233_a(par2EntityPlayerMP.getCommandSenderName() + "[" + var4 + "] logged in with entity id " + par2EntityPlayerMP.entityId + " at (" + par2EntityPlayerMP.posX + ", " + par2EntityPlayerMP.posY + ", " + par2EntityPlayerMP.posZ + ")");
+        this.mcServer.logInfo(par2EntityPlayerMP.getCommandSenderName() + "[" + var4 + "] logged in with entity id " + par2EntityPlayerMP.entityId + " at (" + par2EntityPlayerMP.posX + ", " + par2EntityPlayerMP.posY + ", " + par2EntityPlayerMP.posZ + ")");
         WorldServer var5 = this.mcServer.worldServerForDimension(par2EntityPlayerMP.dimension);
         ChunkCoordinates var6 = var5.getSpawnPoint();
         this.func_72381_a(par2EntityPlayerMP, (EntityPlayerMP) null, var5);

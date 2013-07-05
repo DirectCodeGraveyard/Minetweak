@@ -484,7 +484,7 @@ public class NetServerHandler extends NetHandler {
     }
 
     public void handleErrorMessage(String par1Str, Object[] par2ArrayOfObj) {
-        this.mcServer.getLogAgent().func_98233_a(this.playerEntity.getCommandSenderName() + " lost connection: " + par1Str);
+        this.mcServer.logInfo(this.playerEntity.getCommandSenderName() + " lost connection: " + par1Str);
         this.mcServer.getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("multiplayer.player.left", new Object[]{this.playerEntity.getTranslatedEntityName()}).func_111059_a(EnumChatFormatting.YELLOW));
         this.mcServer.getConfigurationManager().playerLoggedOut(this.playerEntity);
         this.connectionClosed = true;
