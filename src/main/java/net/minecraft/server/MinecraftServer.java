@@ -175,7 +175,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     protected void convertMapIfNeeded(String par1Str) {
         if (this.getActiveAnvilConverter().isOldMapFormat(par1Str)) {
-            this.logInfo("Converting map!");
+            this.getLogAgent().func_98233_a("Converting map!");
             this.setUserMessage("menu.convertingLevel");
             this.getActiveAnvilConverter().convertMapFormat(par1Str, new ConvertingProgressUpdate(this));
         }
@@ -244,7 +244,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         int var5 = 0;
         this.setUserMessage("menu.generatingTerrain");
         byte var6 = 0;
-        this.logInfo("Preparing start region for level " + var6);
+        this.getLogAgent().func_98233_a("Preparing start region for level " + var6);
         WorldServer var7 = this.worldServers[var6];
         ChunkCoordinates var8 = var7.getSpawnPoint();
         long var9 = func_130071_aq();
@@ -288,7 +288,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     protected void outputPercentRemaining(String par1Str, int par2) {
         this.currentTask = par1Str;
         this.percentDone = par2;
-        this.logInfo(par1Str + ": " + par2 + "%");
+        this.getLogAgent().func_98233_a(par1Str + ": " + par2 + "%");
     }
 
     /**
@@ -310,7 +310,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             for (WorldServer var5 : var2) {
                 if (var5 != null) {
                     if (!par1) {
-                        this.logInfo("Saving chunks for level \'" + var5.getWorldInfo().getWorldName() + "\'/" + var5.provider.getDimensionName());
+                        this.getLogAgent().func_98233_a("Saving chunks for level \'" + var5.getWorldInfo().getWorldName() + "\'/" + var5.provider.getDimensionName());
                     }
 
                     try {
@@ -328,19 +328,19 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      */
     public void stopServer() {
         if (!this.worldIsBeingDeleted) {
-            this.logInfo("Stopping server");
+            this.getLogAgent().func_98233_a("Stopping server");
 
             if (this.getNetworkThread() != null) {
                 this.getNetworkThread().stopListening();
             }
 
             if (this.serverConfigManager != null) {
-                this.logInfo("Saving players");
+                this.getLogAgent().func_98233_a("Saving players");
                 this.serverConfigManager.saveAllPlayerData();
                 this.serverConfigManager.removeAllPlayers();
             }
 
-            this.logInfo("Saving worlds");
+            this.getLogAgent().func_98233_a("Saving worlds");
             this.saveAllWorlds(false);
 
             for (WorldServer var2 : this.worldServers) {
@@ -662,11 +662,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      * Logs the message with a level of INFO.
      */
     public void logInfo(String par1Str) {
-        this.getLogAgent().func_98233_a("[Minecraft]" + par1Str);
-    }
-
-    public void minetweakInfo(String par1Str) {
-        this.getLogAgent().func_98233_a("[Minetweak] " + par1Str);
+        this.getLogAgent().func_98233_a(par1Str);
     }
 
     /**
@@ -767,7 +763,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      */
     public void logDebug(String par1Str) {
         if (this.isDebuggingEnabled()) {
-            this.logInfo(par1Str);
+            this.getLogAgent().func_98233_a(par1Str);
         }
     }
 
@@ -847,7 +843,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public void func_110122_a(ChatMessageComponent par1ChatMessageComponent) {
-        this.logInfo(par1ChatMessageComponent.toString());
+        this.getLogAgent().func_98233_a(par1ChatMessageComponent.toString());
     }
 
     /**

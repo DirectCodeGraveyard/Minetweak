@@ -57,7 +57,7 @@ public class MinecraftServerGui extends JComponent {
     private JComponent func_120018_d() {
         JPanel var1 = new JPanel(new BorderLayout());
         JTextArea var2 = new JTextArea();
-        this.field_120021_b.getLogAgent().func_120013_a().addHandler(new TextAreaLogHandler(var2));
+        this.field_120021_b.getLogAgent().getLogger().addHandler(new TextAreaLogHandler(var2));
         JScrollPane var3 = new JScrollPane(var2, 22, 30);
         var2.setEditable(false);
         JTextField var4 = new JTextField();

@@ -3,11 +3,11 @@ package net.minecraft.src;
 import java.util.logging.Logger;
 
 public interface ILogAgent {
-    Logger func_120013_a();
+    Logger getLogger();
 
-    void func_98233_a(String var1);
+    void logInfo(String var1);
 
-    void func_98236_b(String var1);
+    void logWarning(String var1);
 
     void logWarningFormatted(String var1, Object... var2);
 
