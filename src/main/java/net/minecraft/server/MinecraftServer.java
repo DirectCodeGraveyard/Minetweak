@@ -244,7 +244,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         int var5 = 0;
         this.setUserMessage("menu.generatingTerrain");
         byte var6 = 0;
-        this.getLogAgent().logInfo("Preparing start region for level " + var6);
+        this.logInfo("Preparing start region for level " + var6);
         WorldServer var7 = this.worldServers[var6];
         ChunkCoordinates var8 = var7.getSpawnPoint();
         long var9 = func_130071_aq();
