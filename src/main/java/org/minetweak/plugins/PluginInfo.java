@@ -1,12 +1,14 @@
 package org.minetweak.plugins;
 
 public class PluginInfo {
-    private String MainClass;
-    private String Name;
+    private String main;
+    private String name;
+    private String description;
 
-    public PluginInfo(String mainClass, String pluginName) {
-        this.MainClass = mainClass;
-        this.Name = pluginName;
+    public PluginInfo(String mainClass, String pluginName, String description) {
+        this.main = mainClass;
+        this.name = pluginName;
+        this.description = description;
     }
 
     /**
@@ -14,7 +16,7 @@ public class PluginInfo {
      * @return name of main class
      */
     public String getMainClass() {
-        return MainClass;
+        return main;
     }
 
     /**
@@ -22,6 +24,14 @@ public class PluginInfo {
      * @return name of plugin
      */
     public String getName() {
-        return Name;
+        return name;
+    }
+
+    /**
+     * Gets the description of the plugin
+     * @return description
+     */
+    public String getDescription() {
+        return description;
     }
 }
