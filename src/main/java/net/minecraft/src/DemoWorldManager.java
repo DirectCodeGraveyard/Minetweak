@@ -76,7 +76,7 @@ public class DemoWorldManager extends ItemInWorldManager {
      * Attempts to harvest a block at the given coordinate
      */
     public boolean tryHarvestBlock(int par1, int par2, int par3) {
-        return this.demoTimeExpired ? false : super.tryHarvestBlock(par1, par2, par3);
+        return !this.demoTimeExpired && super.tryHarvestBlock(par1, par2, par3);
     }
 
     /**

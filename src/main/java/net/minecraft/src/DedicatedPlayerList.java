@@ -80,7 +80,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
         try {
             this.getOps().clear();
             BufferedReader var1 = new BufferedReader(new FileReader(this.opsList));
-            String var2 = "";
+            String var2;
 
             while ((var2 = var1.readLine()) != null) {
                 this.getOps().add(var2.trim().toLowerCase());
@@ -95,10 +95,9 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     private void saveOpsList() {
         try {
             PrintWriter var1 = new PrintWriter(new FileWriter(this.opsList, false));
-            Iterator var2 = this.getOps().iterator();
 
-            while (var2.hasNext()) {
-                String var3 = (String) var2.next();
+            for (Object o : this.getOps()) {
+                String var3 = (String) o;
                 var1.println(var3);
             }
 
@@ -112,7 +111,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
         try {
             this.getWhiteListedPlayers().clear();
             BufferedReader var1 = new BufferedReader(new FileReader(this.whiteList));
-            String var2 = "";
+            String var2;
 
             while ((var2 = var1.readLine()) != null) {
                 this.getWhiteListedPlayers().add(var2.trim().toLowerCase());
@@ -127,10 +126,9 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     private void saveWhiteList() {
         try {
             PrintWriter var1 = new PrintWriter(new FileWriter(this.whiteList, false));
-            Iterator var2 = this.getWhiteListedPlayers().iterator();
 
-            while (var2.hasNext()) {
-                String var3 = (String) var2.next();
+            for (Object o : this.getWhiteListedPlayers()) {
+                String var3 = (String) o;
                 var1.println(var3);
             }
 

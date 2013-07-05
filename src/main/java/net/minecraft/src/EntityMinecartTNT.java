@@ -115,7 +115,7 @@ public class EntityMinecartTNT extends EntityMinecart {
     }
 
     public boolean func_96091_a(Explosion par1Explosion, World par2World, int par3, int par4, int par5, int par6, float par7) {
-        return this.isIgnited() && (BlockRailBase.isRailBlock(par6) || BlockRailBase.isRailBlockAt(par2World, par3, par4 + 1, par5)) ? false : super.func_96091_a(par1Explosion, par2World, par3, par4, par5, par6, par7);
+        return !(this.isIgnited() && (BlockRailBase.isRailBlock(par6) || BlockRailBase.isRailBlockAt(par2World, par3, par4 + 1, par5))) && super.func_96091_a(par1Explosion, par2World, par3, par4, par5, par6, par7);
     }
 
     /**

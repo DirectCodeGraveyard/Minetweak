@@ -19,7 +19,7 @@ public class EntityMinecartFurnace extends EntityMinecart {
 
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(16, new Byte((byte) 0));
+        this.dataWatcher.addObject(16, (byte) 0);
     }
 
     /**
@@ -97,7 +97,7 @@ public class EntityMinecartFurnace extends EntityMinecart {
 
         if (var2 != null && var2.itemID == Item.coal.itemID) {
             if (!par1EntityPlayer.capabilities.isCreativeMode && --var2.stackSize == 0) {
-                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
+                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, null);
             }
 
             this.fuel += 3600;
@@ -134,9 +134,9 @@ public class EntityMinecartFurnace extends EntityMinecart {
 
     protected void setMinecartPowered(boolean par1) {
         if (par1) {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) (this.dataWatcher.getWatchableObjectByte(16) | 1)));
+            this.dataWatcher.updateObject(16, (byte) (this.dataWatcher.getWatchableObjectByte(16) | 1));
         } else {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) (this.dataWatcher.getWatchableObjectByte(16) & -2)));
+            this.dataWatcher.updateObject(16, (byte) (this.dataWatcher.getWatchableObjectByte(16) & -2));
         }
     }
 

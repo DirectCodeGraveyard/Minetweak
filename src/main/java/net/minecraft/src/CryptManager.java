@@ -52,11 +52,8 @@ public class CryptManager {
     private static byte[] digestOperation(String par0Str, byte[]... par1ArrayOfByte) {
         try {
             MessageDigest var2 = MessageDigest.getInstance(par0Str);
-            byte[][] var3 = par1ArrayOfByte;
-            int var4 = par1ArrayOfByte.length;
 
-            for (int var5 = 0; var5 < var4; ++var5) {
-                byte[] var6 = var3[var5];
+            for (byte[] var6 : par1ArrayOfByte) {
                 var2.update(var6);
             }
 

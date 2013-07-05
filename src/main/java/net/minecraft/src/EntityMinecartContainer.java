@@ -114,7 +114,7 @@ public abstract class EntityMinecartContainer extends EntityMinecart implements 
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-        return this.isDead ? false : par1EntityPlayer.getDistanceSqToEntity(this) <= 64.0D;
+        return !this.isDead && par1EntityPlayer.getDistanceSqToEntity(this) <= 64.0D;
     }
 
     public void openChest() {
