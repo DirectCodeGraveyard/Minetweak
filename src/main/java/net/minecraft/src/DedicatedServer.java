@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class DedicatedServer extends MinecraftServer implements IServer {
     private final List pendingCommandList = Collections.synchronizedList(new ArrayList());
     private final ILogAgent field_98131_l;
@@ -56,9 +57,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.func_104055_i(this.settings.getBooleanProperty("force-gamemode", false));
 
         if (this.settings.getIntProperty("difficulty", 1) < 0) {
-            this.settings.setProperty("difficulty", Integer.valueOf(0));
+            this.settings.setProperty("difficulty", 0);
         } else if (this.settings.getIntProperty("difficulty", 1) > 3) {
-            this.settings.setProperty("difficulty", Integer.valueOf(3));
+            this.settings.setProperty("difficulty", 3);
         }
 
         this.canSpawnStructures = this.settings.getBooleanProperty("generate-structures", true);
@@ -128,15 +129,17 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.setBuildLimit(this.settings.getIntProperty("max-build-height", 256));
         this.setBuildLimit((this.getBuildLimit() + 8) / 16 * 16);
         this.setBuildLimit(MathHelper.clamp_int(this.getBuildLimit(), 64, 256));
-        this.settings.setProperty("max-build-height", Integer.valueOf(this.getBuildLimit()));
+        this.settings.setProperty("max-build-height", this.getBuildLimit());
         this.logInfo("Preparing level \"" + this.getFolderName() + "\"");
         this.loadAllWorlds(this.getFolderName(), this.getFolderName(), var9, var17, var8);
         long var12 = System.nanoTime() - var4;
-        String var14 = String.format("%.3fs", new Object[]{Double.valueOf((double) var12 / 1.0E9D)});
+        String var14 = String.format("%.3fs", (double) var12 / 1.0E9D);
+
+        Minetweak.getEventBus().post(new ServerFinishedStartupEvent());
+
         this.logInfo("Done (" + var14 + ")! For help, type help");
 
         Minetweak.setServerDoneLoading();
-        Minetweak.getEventBus().post(new ServerFinishedStartupEvent());
 
         if (this.settings.getBooleanProperty("enable-query", false)) {
             this.logInfo("Starting GS4 status listener");
@@ -221,8 +224,8 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     }
 
     public void addServerStatsToSnooper(PlayerUsageSnooper par1PlayerUsageSnooper) {
-        par1PlayerUsageSnooper.addData("whitelist_enabled", Boolean.valueOf(this.getDedicatedPlayerList().isWhiteListEnabled()));
-        par1PlayerUsageSnooper.addData("whitelist_count", Integer.valueOf(this.getDedicatedPlayerList().getWhiteListedPlayers().size()));
+        par1PlayerUsageSnooper.addData("whitelist_enabled", this.getDedicatedPlayerList().isWhiteListEnabled());
+        par1PlayerUsageSnooper.addData("whitelist_count", this.getDedicatedPlayerList().getWhiteListedPlayers().size());
         super.addServerStatsToSnooper(par1PlayerUsageSnooper);
     }
 
