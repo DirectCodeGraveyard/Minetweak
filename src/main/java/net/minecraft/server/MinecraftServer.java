@@ -665,10 +665,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.getLogAgent().logInfo("[Minecraft] " + par1Str);
     }
 
-    public void minetweakInfo(String par1Str) {
-        this.getLogAgent().logInfo("[Minetweak] " + par1Str);
-    }
-
     /**
      * Logs the message with a level of WARN.
      */
@@ -1157,5 +1153,9 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     public void minetweakInfo(String line) {
         this.getLogAgent().logInfo("[Minetweak] " + line);
+    }
+
+    public int getOpPermissionLevel() {
+        return 4;
     }
 }
