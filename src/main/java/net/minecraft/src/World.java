@@ -4,6 +4,7 @@ import net.minecraft.server.MinecraftServer;
 
 import java.util.*;
 
+@SuppressWarnings("UnusedDeclaration")
 public abstract class World implements IBlockAccess {
     /**
      * boolean; if true updates scheduled by scheduleBlockUpdate happen immediately
@@ -512,8 +513,8 @@ public abstract class World implements IBlockAccess {
      * including the tile entity description packet if applicable. Args: x, y, z
      */
     public void markBlockForUpdate(int par1, int par2, int par3) {
-        for (Object worldAccess : this.worldAccesses) {
-            ((IWorldAccess) worldAccess).markBlockForUpdate(par1, par2, par3);
+        for (IWorldAccess worldAccess : this.worldAccesses) {
+            (worldAccess).markBlockForUpdate(par1, par2, par3);
         }
     }
 
@@ -550,8 +551,8 @@ public abstract class World implements IBlockAccess {
      * min z, max x, max y, max z
      */
     public void markBlockRangeForRenderUpdate(int par1, int par2, int par3, int par4, int par5, int par6) {
-        for (Object worldAccess : this.worldAccesses) {
-            ((IWorldAccess) worldAccess).markBlockRangeForRenderUpdate(par1, par2, par3, par4, par5, par6);
+        for (IWorldAccess worldAccess : this.worldAccesses) {
+            (worldAccess).markBlockRangeForRenderUpdate(par1, par2, par3, par4, par5, par6);
         }
     }
 
@@ -790,8 +791,8 @@ public abstract class World implements IBlockAccess {
                         Chunk var6 = this.getChunkFromChunkCoords(par2 >> 4, par4 >> 4);
                         var6.setLightValue(par1EnumSkyBlock, par2 & 15, par3, par4 & 15, par5);
 
-                        for (Object worldAccess : this.worldAccesses) {
-                            ((IWorldAccess) worldAccess).markBlockForRenderUpdate(par2, par3, par4);
+                        for (IWorldAccess worldAccess : this.worldAccesses) {
+                            (worldAccess).markBlockForRenderUpdate(par2, par3, par4);
                         }
                     }
                 }
@@ -803,8 +804,8 @@ public abstract class World implements IBlockAccess {
      * On the client, re-renders this block. On the server, does nothing. Used for lighting updates.
      */
     public void markBlockForRenderUpdate(int par1, int par2, int par3) {
-        for (Object worldAccess : this.worldAccesses) {
-            ((IWorldAccess) worldAccess).markBlockForRenderUpdate(par1, par2, par3);
+        for (IWorldAccess worldAccess : this.worldAccesses) {
+            (worldAccess).markBlockForRenderUpdate(par1, par2, par3);
         }
     }
 
@@ -1000,8 +1001,8 @@ public abstract class World implements IBlockAccess {
      */
     public void playSoundAtEntity(Entity par1Entity, String par2Str, float par3, float par4) {
         if (par1Entity != null && par2Str != null) {
-            for (Object worldAccess : this.worldAccesses) {
-                ((IWorldAccess) worldAccess).playSound(par2Str, par1Entity.posX, par1Entity.posY - (double) par1Entity.yOffset, par1Entity.posZ, par3, par4);
+            for (IWorldAccess worldAccess : this.worldAccesses) {
+                (worldAccess).playSound(par2Str, par1Entity.posX, par1Entity.posY - (double) par1Entity.yOffset, par1Entity.posZ, par3, par4);
             }
         }
     }
@@ -1011,8 +1012,8 @@ public abstract class World implements IBlockAccess {
      */
     public void playSoundToNearExcept(EntityPlayer par1EntityPlayer, String par2Str, float par3, float par4) {
         if (par1EntityPlayer != null && par2Str != null) {
-            for (Object worldAccess : this.worldAccesses) {
-                ((IWorldAccess) worldAccess).playSoundToNearExcept(par1EntityPlayer, par2Str, par1EntityPlayer.posX, par1EntityPlayer.posY - (double) par1EntityPlayer.yOffset, par1EntityPlayer.posZ, par3, par4);
+            for (IWorldAccess worldAccess : this.worldAccesses) {
+                (worldAccess).playSoundToNearExcept(par1EntityPlayer, par2Str, par1EntityPlayer.posX, par1EntityPlayer.posY - (double) par1EntityPlayer.yOffset, par1EntityPlayer.posZ, par3, par4);
             }
         }
     }
@@ -1024,8 +1025,8 @@ public abstract class World implements IBlockAccess {
      */
     public void playSoundEffect(double par1, double par3, double par5, String par7Str, float par8, float par9) {
         if (par7Str != null)
-            for (Object worldAccess : this.worldAccesses) {
-                ((IWorldAccess) worldAccess).playSound(par7Str, par1, par3, par5, par8, par9);
+            for (IWorldAccess worldAccess : this.worldAccesses) {
+                (worldAccess).playSound(par7Str, par1, par3, par5, par8, par9);
             }
     }
 
@@ -1040,8 +1041,8 @@ public abstract class World implements IBlockAccess {
      * Plays a record at the specified coordinates of the specified name. Args: recordName, x, y, z
      */
     public void playRecord(String par1Str, int par2, int par3, int par4) {
-        for (Object worldAccess : this.worldAccesses) {
-            ((IWorldAccess) worldAccess).playRecord(par1Str, par2, par3, par4);
+        for (IWorldAccess worldAccess : this.worldAccesses) {
+            (worldAccess).playRecord(par1Str, par2, par3, par4);
         }
     }
 
@@ -1049,8 +1050,8 @@ public abstract class World implements IBlockAccess {
      * Spawns a particle.  Args particleName, x, y, z, velX, velY, velZ
      */
     public void spawnParticle(String par1Str, double par2, double par4, double par6, double par8, double par10, double par12) {
-        for (Object worldAccess : this.worldAccesses) {
-            ((IWorldAccess) worldAccess).spawnParticle(par1Str, par2, par4, par6, par8, par10, par12);
+        for (IWorldAccess worldAccess : this.worldAccesses) {
+            (worldAccess).spawnParticle(par1Str, par2, par4, par6, par8, par10, par12);
         }
     }
 
@@ -1094,8 +1095,8 @@ public abstract class World implements IBlockAccess {
      * Start the skin for this entity downloading, if necessary, and increment its reference counter
      */
     protected void obtainEntitySkin(Entity par1Entity) {
-        for (Object worldAccess : this.worldAccesses) {
-            ((IWorldAccess) worldAccess).onEntityCreate(par1Entity);
+        for (IWorldAccess worldAccess : this.worldAccesses) {
+            (worldAccess).onEntityCreate(par1Entity);
         }
     }
 
@@ -1103,8 +1104,8 @@ public abstract class World implements IBlockAccess {
      * Decrement the reference counter for this entity's skin image data
      */
     protected void releaseEntitySkin(Entity par1Entity) {
-        for (Object worldAccess : this.worldAccesses) {
-            ((IWorldAccess) worldAccess).onEntityDestroy(par1Entity);
+        for (IWorldAccess worldAccess : this.worldAccesses) {
+            (worldAccess).onEntityDestroy(par1Entity);
         }
     }
 
@@ -1203,7 +1204,7 @@ public abstract class World implements IBlockAccess {
     /**
      * calculates and returns a list of colliding bounding boxes within a given AABB
      */
-    public List getCollidingBlockBounds(AxisAlignedBB par1AxisAlignedBB) {
+    public List<AxisAlignedBB> getCollidingBlockBounds(AxisAlignedBB par1AxisAlignedBB) {
         this.collidingBoundingBoxes.clear();
         int var2 = MathHelper.floor_double(par1AxisAlignedBB.minX);
         int var3 = MathHelper.floor_double(par1AxisAlignedBB.maxX + 1.0D);
@@ -1413,10 +1414,10 @@ public abstract class World implements IBlockAccess {
 
         this.theProfiler.endStartSection("tileEntities");
         this.scanningTileEntities = true;
-        Iterator var14 = this.loadedTileEntityList.iterator();
+        Iterator<TileEntity> var14 = this.loadedTileEntityList.iterator();
 
         while (var14.hasNext()) {
-            TileEntity var9 = (TileEntity) var14.next();
+            TileEntity var9 = var14.next();
 
             if (!var9.isInvalid() && var9.func_70309_m() && this.blockExists(var9.xCoord, var9.yCoord, var9.zCoord)) {
                 try {
@@ -1452,8 +1453,8 @@ public abstract class World implements IBlockAccess {
         this.theProfiler.endStartSection("pendingTileEntities");
 
         if (!this.addedTileEntityList.isEmpty()) {
-            for (Object anAddedTileEntityList : this.addedTileEntityList) {
-                TileEntity var12 = (TileEntity) anAddedTileEntityList;
+            for (TileEntity anAddedTileEntityList : this.addedTileEntityList) {
+                TileEntity var12 = anAddedTileEntityList;
 
                 if (!var12.isInvalid()) {
                     if (!this.loadedTileEntityList.contains(var12)) {
@@ -1582,10 +1583,10 @@ public abstract class World implements IBlockAccess {
      * Returns true if there are no solid, live entities in the specified AxisAlignedBB, excluding the given entity
      */
     public boolean checkNoEntityCollision(AxisAlignedBB par1AxisAlignedBB, Entity par2Entity) {
-        List var3 = this.getEntitiesWithinAABBExcludingEntity(null, par1AxisAlignedBB);
+        List<Entity> var3 = this.getEntitiesWithinAABBExcludingEntity(null, par1AxisAlignedBB);
 
-        for (Object aVar3 : var3) {
-            Entity var5 = (Entity) aVar3;
+        for (Entity aVar3 : var3) {
+            Entity var5 = aVar3;
 
             if (!var5.isDead && var5.preventEntitySpawning && var5 != par2Entity) {
                 return false;
@@ -1946,10 +1947,10 @@ public abstract class World implements IBlockAccess {
                 par4TileEntity.xCoord = par1;
                 par4TileEntity.yCoord = par2;
                 par4TileEntity.zCoord = par3;
-                Iterator var5 = this.addedTileEntityList.iterator();
+                Iterator<TileEntity> var5 = this.addedTileEntityList.iterator();
 
                 while (var5.hasNext()) {
-                    TileEntity var6 = (TileEntity) var5.next();
+                    TileEntity var6 = var5.next();
 
                     if (var6.xCoord == par1 && var6.yCoord == par2 && var6.zCoord == par3) {
                         var6.invalidate();
@@ -2561,12 +2562,12 @@ public abstract class World implements IBlockAccess {
     }
 
     public Entity findNearestEntityWithinAABB(Class par1Class, AxisAlignedBB par2AxisAlignedBB, Entity par3Entity) {
-        List var4 = this.getEntitiesWithinAABB(par1Class, par2AxisAlignedBB);
+        List<Entity> var4 = this.getEntitiesWithinAABB(par1Class, par2AxisAlignedBB);
         Entity var5 = null;
         double var6 = Double.MAX_VALUE;
 
-        for (Object aVar4 : var4) {
-            Entity var9 = (Entity) aVar4;
+        for (Entity aVar4 : var4) {
+            Entity var9 = aVar4;
 
             if (var9 != par3Entity) {
                 double var10 = par3Entity.getDistanceSqToEntity(var9);
@@ -2824,8 +2825,8 @@ public abstract class World implements IBlockAccess {
         double var9 = -1.0D;
         EntityPlayer var11 = null;
 
-        for (Object playerEntity : this.playerEntities) {
-            EntityPlayer var13 = (EntityPlayer) playerEntity;
+        for (EntityPlayer playerEntity : this.playerEntities) {
+            EntityPlayer var13 = playerEntity;
 
             if (!var13.capabilities.disableDamage && var13.isEntityAlive()) {
                 double var14 = var13.getDistanceSq(par1, par3, par5);
@@ -3019,7 +3020,7 @@ public abstract class World implements IBlockAccess {
      * Loads an existing MapDataBase corresponding to the given String id from disk using the MapStorage, instantiating
      * the given Class, or returns null if none such file exists. args: Class to instantiate, String dataid
      */
-    public WorldSavedData loadItemData(Class par1Class, String par2Str) {
+    public WorldSavedData loadItemData(Class<MapData> par1Class, String par2Str) {
         return this.mapStorage.loadData(par1Class, par2Str);
     }
 
@@ -3121,8 +3122,8 @@ public abstract class World implements IBlockAccess {
      * value
      */
     public void destroyBlockInWorldPartially(int par1, int par2, int par3, int par4, int par5) {
-        for (Object worldAccess : this.worldAccesses) {
-            IWorldAccess var7 = (IWorldAccess) worldAccess;
+        for (IWorldAccess worldAccess : this.worldAccesses) {
+            IWorldAccess var7 = worldAccess;
             var7.destroyBlockPartially(par1, par2, par3, par4, par5);
         }
     }

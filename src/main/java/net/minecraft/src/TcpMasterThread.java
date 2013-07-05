@@ -15,16 +15,16 @@ class TcpMasterThread extends Thread {
             if (TcpConnection.getReadThread(this.theTcpConnection).isAlive()) {
                 try {
                     TcpConnection.getReadThread(this.theTcpConnection).stop();
-                } catch (Throwable var3) {
-                    ;
+                } catch (Throwable ignored) {
+
                 }
             }
 
             if (TcpConnection.getWriteThread(this.theTcpConnection).isAlive()) {
                 try {
                     TcpConnection.getWriteThread(this.theTcpConnection).stop();
-                } catch (Throwable var2) {
-                    ;
+                } catch (Throwable ignored) {
+
                 }
             }
         } catch (InterruptedException var4) {

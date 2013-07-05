@@ -80,15 +80,14 @@ public class WeightedRandomChestContent extends WeightedRandomItem {
         WeightedRandomChestContent[] var2 = new WeightedRandomChestContent[par0ArrayOfWeightedRandomChestContent.length + par1ArrayOfWeightedRandomChestContent.length];
         int var3 = 0;
 
-        for (int var4 = 0; var4 < par0ArrayOfWeightedRandomChestContent.length; ++var4) {
-            var2[var3++] = par0ArrayOfWeightedRandomChestContent[var4];
+        for (WeightedRandomChestContent aPar0ArrayOfWeightedRandomChestContent : par0ArrayOfWeightedRandomChestContent) {
+            var2[var3++] = aPar0ArrayOfWeightedRandomChestContent;
         }
 
-        WeightedRandomChestContent[] var8 = par1ArrayOfWeightedRandomChestContent;
         int var5 = par1ArrayOfWeightedRandomChestContent.length;
 
         for (int var6 = 0; var6 < var5; ++var6) {
-            WeightedRandomChestContent var7 = var8[var6];
+            WeightedRandomChestContent var7 = par1ArrayOfWeightedRandomChestContent[var6];
             var2[var3++] = var7;
         }
 

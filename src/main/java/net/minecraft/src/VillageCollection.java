@@ -11,7 +11,7 @@ public class VillageCollection extends WorldSavedData {
      * This is a black hole. You can add data to this list through a public interface, but you can't query that
      * information in any way and it's not used internally either.
      */
-    private final List villagerPositionsList = new ArrayList();
+    private final List<ChunkCoordinates> villagerPositionsList = new ArrayList<ChunkCoordinates>();
     private final List newDoors = new ArrayList();
     private final List villageList = new ArrayList();
     private int tickCounter;
@@ -28,10 +28,9 @@ public class VillageCollection extends WorldSavedData {
 
     public void func_82566_a(World par1World) {
         this.worldObj = par1World;
-        Iterator var2 = this.villageList.iterator();
 
-        while (var2.hasNext()) {
-            Village var3 = (Village) var2.next();
+        for (Object aVillageList : this.villageList) {
+            Village var3 = (Village) aVillageList;
             var3.func_82691_a(par1World);
         }
     }
@@ -53,10 +52,9 @@ public class VillageCollection extends WorldSavedData {
      */
     public void tick() {
         ++this.tickCounter;
-        Iterator var1 = this.villageList.iterator();
 
-        while (var1.hasNext()) {
-            Village var2 = (Village) var1.next();
+        for (Object aVillageList : this.villageList) {
+            Village var2 = (Village) aVillageList;
             var2.tick(this.tickCounter);
         }
 
@@ -96,10 +94,9 @@ public class VillageCollection extends WorldSavedData {
     public Village findNearestVillage(int par1, int par2, int par3, int par4) {
         Village var5 = null;
         float var6 = Float.MAX_VALUE;
-        Iterator var7 = this.villageList.iterator();
 
-        while (var7.hasNext()) {
-            Village var8 = (Village) var7.next();
+        for (Object aVillageList : this.villageList) {
+            Village var8 = (Village) aVillageList;
             float var9 = var8.getCenter().getDistanceSquared(par1, par2, par3);
 
             if (var9 < var6) {
@@ -117,7 +114,7 @@ public class VillageCollection extends WorldSavedData {
 
     private void dropOldestVillagerPosition() {
         if (!this.villagerPositionsList.isEmpty()) {
-            this.addUnassignedWoodenDoorsAroundToNewDoorsList((ChunkCoordinates) this.villagerPositionsList.remove(0));
+            this.addUnassignedWoodenDoorsAroundToNewDoorsList(this.villagerPositionsList.remove(0));
         }
     }
 
@@ -254,7 +251,7 @@ public class VillageCollection extends WorldSavedData {
     }
 
     private boolean isVillagerPositionPresent(int par1, int par2, int par3) {
-        Iterator var4 = this.villagerPositionsList.iterator();
+        Iterator<ChunkCoordinates> var4 = this.villagerPositionsList.iterator();
         ChunkCoordinates var5;
 
         do {
@@ -262,7 +259,7 @@ public class VillageCollection extends WorldSavedData {
                 return false;
             }
 
-            var5 = (ChunkCoordinates) var4.next();
+            var5 = var4.next();
         }
         while (var5.posX != par1 || var5.posY != par2 || var5.posZ != par3);
 
@@ -295,10 +292,9 @@ public class VillageCollection extends WorldSavedData {
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         par1NBTTagCompound.setInteger("Tick", this.tickCounter);
         NBTTagList var2 = new NBTTagList("Villages");
-        Iterator var3 = this.villageList.iterator();
 
-        while (var3.hasNext()) {
-            Village var4 = (Village) var3.next();
+        for (Object aVillageList : this.villageList) {
+            Village var4 = (Village) aVillageList;
             NBTTagCompound var5 = new NBTTagCompound("Village");
             var4.writeVillageDataToNBT(var5);
             var2.appendTag(var5);
