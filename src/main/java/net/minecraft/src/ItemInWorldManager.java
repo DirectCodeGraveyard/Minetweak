@@ -214,7 +214,7 @@ public class ItemInWorldManager {
     {
         BlockBreakEvent event = null;
 
-        if (this.thisPlayerMP instanceof EntityPlayerMP)
+        if (this.thisPlayerMP != null)
         {
             org.minetweak.event.block.Block block = this.theWorld.getWorld().getBlockAt(par1, par2, par3);
 
@@ -258,66 +258,55 @@ public class ItemInWorldManager {
             }
         }
 
-        if (false)
+        int l = this.theWorld.getBlockId(par1, par2, par3);
+
+        if (Block.blocksList[l] == null)
         {
             return false;
         }
+
+        int i1 = this.theWorld.getBlockMetadata(par1, par2, par3);
+
+        if (l == Block.skull.blockID && !this.isCreative())
+        {
+            Block.skull.dropBlockAsItemWithChance(theWorld, par1, par2, par3, i1, 1.0F, 0);
+            return this.removeBlock(par1, par2, par3);
+        }
+
+        this.theWorld.playAuxSFXAtEntity(this.thisPlayerMP, 2001, par1, par2, par3, l + (this.theWorld.getBlockMetadata(par1, par2, par3) << 12));
+        boolean flag = false;
+
+        if (this.isCreative())
+        {
+            flag = this.removeBlock(par1, par2, par3);
+            this.thisPlayerMP.playerNetServerHandler.sendPacket(new Packet53BlockChange(par1, par2, par3, this.theWorld));
+        }
         else
         {
-            int l = this.theWorld.getBlockId(par1, par2, par3);
+            ItemStack itemstack = this.thisPlayerMP.getCurrentEquippedItem();
+            boolean flag1 = false;
+            Block block = Block.blocksList[l];
+            int var4 = this.theWorld.getBlockId(par1, par2, par3);
 
-            if (Block.blocksList[l] == null)
+            if (itemstack != null)
             {
-                return false;
-            }
+                itemstack.onBlockDestroyed(this.theWorld, l, par1, par2, par3, this.thisPlayerMP);
 
-            int i1 = this.theWorld.getBlockMetadata(par1, par2, par3);
-
-            if (l == Block.skull.blockID && !this.isCreative())
-            {
-                Block.skull.dropBlockAsItemWithChance(theWorld, par1, par2, par3, i1, 1.0F, 0);
-                return this.removeBlock(par1, par2, par3);
-            }
-
-            this.theWorld.playAuxSFXAtEntity(this.thisPlayerMP, 2001, par1, par2, par3, l + (this.theWorld.getBlockMetadata(par1, par2, par3) << 12));
-            boolean flag = false;
-
-            if (this.isCreative())
-            {
-                flag = this.removeBlock(par1, par2, par3);
-                this.thisPlayerMP.playerNetServerHandler.sendPacket(new Packet53BlockChange(par1, par2, par3, this.theWorld));
-            }
-            else
-            {
-                ItemStack itemstack = this.thisPlayerMP.getCurrentEquippedItem();
-                boolean flag1 = false;
-                Block block = Block.blocksList[l];
-                int var4 = this.theWorld.getBlockId(par1, par2, par3);
-
-                if (itemstack != null)
+                if (itemstack.stackSize == 0)
                 {
-                    itemstack.onBlockDestroyed(this.theWorld, l, par1, par2, par3, this.thisPlayerMP);
-
-                    if (itemstack.stackSize == 0)
-                    {
-                        this.thisPlayerMP.destroyCurrentEquippedItem();
-                    }
-                }
-
-                flag = this.removeBlock(par1, par2, par3);
-                if (flag && flag1)
-                {
-                    Block.blocksList[l].harvestBlock(this.theWorld, this.thisPlayerMP, par1, par2, par3, i1);
+                    this.thisPlayerMP.destroyCurrentEquippedItem();
                 }
             }
 
-            if (flag && event != null)
-            {
-                Block.blocksList[l].func_71923_g_CodeFix_Public(this.theWorld, par1, par2, par3, event.getExpToDrop());
-            }
-
-            return flag;
+            flag = this.removeBlock(par1, par2, par3);
         }
+
+        if (flag && event != null)
+        {
+            Block.blocksList[l].func_71923_g_CodeFix_Public(this.theWorld, par1, par2, par3, event.getExpToDrop());
+        }
+
+        return flag;
     }
 
     /**
@@ -328,7 +317,7 @@ public class ItemInWorldManager {
         int var5 = par3ItemStack.getItemDamage();
         ItemStack var6 = par3ItemStack.useItemRightClick(par2World, par1EntityPlayer);
 
-        if (var6 == par3ItemStack && (var6 == null || var6.stackSize == var4 && var6.getMaxItemUseDuration() <= 0 && var6.getItemDamage() == var5)) {
+        if (var6 == par3ItemStack && (var6.stackSize == var4 && var6.getMaxItemUseDuration() <= 0 && var6.getItemDamage() == var5)) {
             return false;
         } else {
             par1EntityPlayer.inventory.mainInventory[par1EntityPlayer.inventory.currentItem] = var6;
