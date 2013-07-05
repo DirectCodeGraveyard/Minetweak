@@ -27,7 +27,7 @@ public class ConvertingProgressUpdate implements IProgressUpdate {
     public void setLoadingProgress(int par1) {
         if (MinecraftServer.func_130071_aq() - this.field_96245_b >= 1000L) {
             this.field_96245_b = MinecraftServer.func_130071_aq();
-            this.mcServer.getLogAgent().logInfo("Converting... " + par1 + "%");
+            this.mcServer.logInfo("Converting... " + par1 + "%");
         }
     }
 
