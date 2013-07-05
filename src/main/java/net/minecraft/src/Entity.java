@@ -645,7 +645,7 @@ public abstract class Entity {
                 }
 
                 for (var30 = 0; var30 < var36.size(); ++var30) {
-                    par5 = ((AxisAlignedBB) var36.get(var30)).calculateZOffset(this.boundingBox, par5);
+                    par5 = (var36.get(var30)).calculateZOffset(this.boundingBox, par5);
                 }
 
                 this.boundingBox.offset(0.0D, 0.0D, par5);
@@ -1315,7 +1315,6 @@ public abstract class Entity {
      */
     protected NBTTagList newDoubleNBTList(double... par1ArrayOfDouble) {
         NBTTagList var2 = new NBTTagList();
-        int var4 = par1ArrayOfDouble.length;
 
         for (double var6 : par1ArrayOfDouble) {
             var2.appendTag(new NBTTagDouble(null, var6));
@@ -1329,7 +1328,6 @@ public abstract class Entity {
      */
     protected NBTTagList newFloatNBTList(float... par1ArrayOfFloat) {
         NBTTagList var2 = new NBTTagList();
-        int var4 = par1ArrayOfFloat.length;
 
         for (float var6 : par1ArrayOfFloat) {
             var2.appendTag(new NBTTagFloat(null, var6));
@@ -1675,7 +1673,6 @@ public abstract class Entity {
         } else {
             boolean var17 = !this.worldObj.func_85174_u(var7 - 1, var8, var9);
             boolean var18 = !this.worldObj.func_85174_u(var7 + 1, var8, var9);
-            boolean var19 = !this.worldObj.func_85174_u(var7, var8 - 1, var9);
             boolean var20 = !this.worldObj.func_85174_u(var7, var8 + 1, var9);
             boolean var21 = !this.worldObj.func_85174_u(var7, var8, var9 - 1);
             boolean var22 = !this.worldObj.func_85174_u(var7, var8, var9 + 1);
@@ -1787,7 +1784,7 @@ public abstract class Entity {
     }
 
     public String toString() {
-        return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", this.getClass().getSimpleName(), this.getEntityName(), Integer.valueOf(this.entityId), this.worldObj == null ? "~NULL~" : this.worldObj.getWorldInfo().getWorldName(), Double.valueOf(this.posX), Double.valueOf(this.posY), Double.valueOf(this.posZ));
+        return String.format("%s[\'%s\'/%d, l=\'%s\', x=%.2f, y=%.2f, z=%.2f]", this.getClass().getSimpleName(), this.getEntityName(), this.entityId, this.worldObj == null ? "~NULL~" : this.worldObj.getWorldInfo().getWorldName(), this.posX, this.posY, this.posZ);
     }
 
     /**

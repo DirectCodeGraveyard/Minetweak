@@ -13,29 +13,29 @@ public abstract class World implements IBlockAccess {
     /**
      * A list of all Entities in all currently-loaded chunks
      */
-    public List loadedEntityList = new ArrayList();
-    protected List unloadedEntityList = new ArrayList();
+    public List<Entity> loadedEntityList = new ArrayList<Entity>();
+    protected List<Entity> unloadedEntityList = new ArrayList<Entity>();
 
     /**
      * A list of all TileEntities in all currently-loaded chunks
      */
-    public List loadedTileEntityList = new ArrayList();
-    private List addedTileEntityList = new ArrayList();
+    public List<TileEntity> loadedTileEntityList = new ArrayList<TileEntity>();
+    private List<TileEntity> addedTileEntityList = new ArrayList<TileEntity>();
 
     /**
      * Entities marked for removal.
      */
-    private List entityRemoval = new ArrayList();
+    private List<TileEntity> entityRemoval = new ArrayList<TileEntity>();
 
     /**
      * Array list of players in the world.
      */
-    public List playerEntities = new ArrayList();
+    public List<EntityPlayer> playerEntities = new ArrayList<EntityPlayer>();
 
     /**
      * a list of all the lightning entities
      */
-    public List weatherEffects = new ArrayList();
+    public List<Entity> weatherEffects = new ArrayList<Entity>();
     private long cloudColour = 16777215L;
 
     /**
@@ -79,7 +79,7 @@ public abstract class World implements IBlockAccess {
      * The WorldProvider instance that World uses.
      */
     public final WorldProvider provider;
-    protected List worldAccesses = new ArrayList();
+    protected List<IWorldAccess> worldAccesses = new ArrayList<IWorldAccess>();
 
     /**
      * Handles chunk operations and caching
@@ -129,7 +129,7 @@ public abstract class World implements IBlockAccess {
     /**
      * populated by chunks that are within 9 chunks of any player
      */
-    protected Set activeChunkSet = new HashSet();
+    protected Set<ChunkCoordIntPair> activeChunkSet = new HashSet<ChunkCoordIntPair>();
 
     /**
      * number of ticks until the next random ambients play
@@ -1032,6 +1032,7 @@ public abstract class World implements IBlockAccess {
     /**
      * par8 is loudness, all pars passed to minecraftInstance.sndManager.playSound
      */
+    @SuppressWarnings("unused") // method is used, parameters are not
     public void playSound(double par1, double par3, double par5, String par7Str, float par8, float par9, boolean par10) {
     }
 
@@ -1218,7 +1219,7 @@ public abstract class World implements IBlockAccess {
                         Block var11 = Block.blocksList[this.getBlockId(var8, var10, var9)];
 
                         if (var11 != null) {
-                            var11.addCollisionBoxesToList(this, var8, var10, var9, par1AxisAlignedBB, this.collidingBoundingBoxes, (Entity) null);
+                            var11.addCollisionBoxesToList(this, var8, var10, var9, par1AxisAlignedBB, this.collidingBoundingBoxes, null);
                         }
                     }
                 }
@@ -1322,7 +1323,7 @@ public abstract class World implements IBlockAccess {
         CrashReportCategory var5;
 
         for (var1 = 0; var1 < this.weatherEffects.size(); ++var1) {
-            var2 = (Entity) this.weatherEffects.get(var1);
+            var2 = this.weatherEffects.get(var1);
 
             try {
                 ++var2.ticksExisted;
@@ -1351,7 +1352,7 @@ public abstract class World implements IBlockAccess {
         int var13;
 
         for (var1 = 0; var1 < this.unloadedEntityList.size(); ++var1) {
-            var2 = (Entity) this.unloadedEntityList.get(var1);
+            var2 = this.unloadedEntityList.get(var1);
             var3 = var2.chunkCoordX;
             var13 = var2.chunkCoordZ;
 
@@ -1361,14 +1362,14 @@ public abstract class World implements IBlockAccess {
         }
 
         for (var1 = 0; var1 < this.unloadedEntityList.size(); ++var1) {
-            this.releaseEntitySkin((Entity) this.unloadedEntityList.get(var1));
+            this.releaseEntitySkin(this.unloadedEntityList.get(var1));
         }
 
         this.unloadedEntityList.clear();
         this.theProfiler.endStartSection("regular");
 
         for (var1 = 0; var1 < this.loadedEntityList.size(); ++var1) {
-            var2 = (Entity) this.loadedEntityList.get(var1);
+            var2 = this.loadedEntityList.get(var1);
 
             if (var2.ridingEntity != null) {
                 if (!var2.ridingEntity.isDead && var2.ridingEntity.riddenByEntity == var2) {
@@ -1478,7 +1479,7 @@ public abstract class World implements IBlockAccess {
         this.theProfiler.endSection();
     }
 
-    public void addTileEntity(Collection par1Collection) {
+    public void addTileEntity(Collection<? extends TileEntity> par1Collection) {
         if (this.scanningTileEntities) {
             this.addedTileEntityList.addAll(par1Collection);
         } else {
@@ -1902,7 +1903,7 @@ public abstract class World implements IBlockAccess {
 
             if (this.scanningTileEntities) {
                 for (var5 = 0; var5 < this.addedTileEntityList.size(); ++var5) {
-                    var6 = (TileEntity) this.addedTileEntityList.get(var5);
+                    var6 = this.addedTileEntityList.get(var5);
 
                     if (!var6.isInvalid() && var6.xCoord == par1 && var6.yCoord == par2 && var6.zCoord == par3) {
                         var4 = var6;
@@ -1921,7 +1922,7 @@ public abstract class World implements IBlockAccess {
 
             if (var4 == null) {
                 for (var5 = 0; var5 < this.addedTileEntityList.size(); ++var5) {
-                    var6 = (TileEntity) this.addedTileEntityList.get(var5);
+                    var6 = this.addedTileEntityList.get(var5);
 
                     if (!var6.isInvalid() && var6.xCoord == par1 && var6.yCoord == par2 && var6.zCoord == par3) {
                         var4 = var6;
@@ -2187,7 +2188,7 @@ public abstract class World implements IBlockAccess {
         int var4;
 
         for (var1 = 0; var1 < this.playerEntities.size(); ++var1) {
-            var2 = (EntityPlayer) this.playerEntities.get(var1);
+            var2 = this.playerEntities.get(var1);
             var3 = MathHelper.floor_double(var2.posX / 16.0D);
             var4 = MathHelper.floor_double(var2.posZ / 16.0D);
             byte var5 = 7;
@@ -2209,7 +2210,7 @@ public abstract class World implements IBlockAccess {
 
         if (!this.playerEntities.isEmpty()) {
             var1 = this.rand.nextInt(this.playerEntities.size());
-            var2 = (EntityPlayer) this.playerEntities.get(var1);
+            var2 = this.playerEntities.get(var1);
             var3 = MathHelper.floor_double(var2.posX) + this.rand.nextInt(11) - 5;
             var4 = MathHelper.floor_double(var2.posY) + this.rand.nextInt(11) - 5;
             int var8 = MathHelper.floor_double(var2.posZ) + this.rand.nextInt(11) - 5;
@@ -2600,10 +2601,9 @@ public abstract class World implements IBlockAccess {
     public int countEntities(Class par1Class) {
         int var2 = 0;
 
-        for (Object aLoadedEntityList : this.loadedEntityList) {
-            Entity var4 = (Entity) aLoadedEntityList;
+        for (Entity entity : this.loadedEntityList) {
 
-            if ((!(var4 instanceof EntityLiving) || !((EntityLiving) var4).func_104002_bU()) && par1Class.isAssignableFrom(var4.getClass())) {
+            if ((!(entity instanceof EntityLiving) || !((EntityLiving) entity).func_104002_bU()) && par1Class.isAssignableFrom(entity.getClass())) {
                 ++var2;
             }
         }
@@ -2614,18 +2614,18 @@ public abstract class World implements IBlockAccess {
     /**
      * adds entities to the loaded entities list, and loads thier skins.
      */
-    public void addLoadedEntities(List par1List) {
+    public void addLoadedEntities(List<? extends Entity> par1List) {
         this.loadedEntityList.addAll(par1List);
 
-        for (Object aPar1List : par1List) {
-            this.obtainEntitySkin((Entity) aPar1List);
+        for (Entity e : par1List) {
+            this.obtainEntitySkin(e);
         }
     }
 
     /**
      * adds entities to the list of unloaded entities
      */
-    public void unloadEntities(List par1List) {
+    public void unloadEntities(List<? extends Entity> par1List) {
         this.unloadedEntityList.addAll(par1List);
     }
 
@@ -2761,7 +2761,7 @@ public abstract class World implements IBlockAccess {
      * items like TNT or Doors so they don't have redstone going straight into them.  Args: x, y, z
      */
     public boolean isBlockIndirectlyGettingPowered(int par1, int par2, int par3) {
-        return this.getIndirectPowerLevelTo(par1, par2 - 1, par3, 0) > 0 || (this.getIndirectPowerLevelTo(par1, par2 + 1, par3, 1) > 0 || (this.getIndirectPowerLevelTo(par1, par2, par3 - 1, 2) > 0 || (this.getIndirectPowerLevelTo(par1, par2, par3 + 1, 3) > 0 || (this.getIndirectPowerLevelTo(par1 - 1, par2, par3, 4) > 0 ? true : this.getIndirectPowerLevelTo(par1 + 1, par2, par3, 5) > 0))));
+        return this.getIndirectPowerLevelTo(par1, par2 - 1, par3, 0) > 0 || (this.getIndirectPowerLevelTo(par1, par2 + 1, par3, 1) > 0 || (this.getIndirectPowerLevelTo(par1, par2, par3 - 1, 2) > 0 || (this.getIndirectPowerLevelTo(par1, par2, par3 + 1, 3) > 0 || (this.getIndirectPowerLevelTo(par1 - 1, par2, par3, 4) > 0 || this.getIndirectPowerLevelTo(par1 + 1, par2, par3, 5) > 0))));
     }
 
     public int getStrongestIndirectPower(int par1, int par2, int par3) {
@@ -2798,8 +2798,7 @@ public abstract class World implements IBlockAccess {
         double var9 = -1.0D;
         EntityPlayer var11 = null;
 
-        for (int var12 = 0; var12 < this.playerEntities.size(); ++var12) {
-            EntityPlayer var13 = (EntityPlayer) this.playerEntities.get(var12);
+        for (EntityPlayer var13 : this.playerEntities) {
             double var14 = var13.getDistanceSq(par1, par3, par5);
 
             if ((par7 < 0.0D || var14 < par7 * par7) && (var9 == -1.0D || var14 < var9)) {
@@ -2860,9 +2859,9 @@ public abstract class World implements IBlockAccess {
      * Find a player by name in this world.
      */
     public EntityPlayer getPlayerEntityByName(String par1Str) {
-        for (Object playerEntity : this.playerEntities) {
-            if (par1Str.equals(((EntityPlayer) playerEntity).getCommandSenderName())) {
-                return (EntityPlayer) playerEntity;
+        for (EntityPlayer playerEntity : this.playerEntities) {
+            if (par1Str.equals(playerEntity.getCommandSenderName())) {
+                return playerEntity;
             }
         }
 
@@ -3033,8 +3032,8 @@ public abstract class World implements IBlockAccess {
     }
 
     public void func_82739_e(int par1, int par2, int par3, int par4, int par5) {
-        for (int var6 = 0; var6 < this.worldAccesses.size(); ++var6) {
-            ((IWorldAccess) this.worldAccesses.get(var6)).broadcastSound(par1, par2, par3, par4, par5);
+        for (IWorldAccess worldAccess : this.worldAccesses) {
+            worldAccess.broadcastSound(par1, par2, par3, par4, par5);
         }
     }
 
@@ -3051,8 +3050,8 @@ public abstract class World implements IBlockAccess {
      */
     public void playAuxSFXAtEntity(EntityPlayer par1EntityPlayer, int par2, int par3, int par4, int par5, int par6) {
         try {
-            for (int var7 = 0; var7 < this.worldAccesses.size(); ++var7) {
-                ((IWorldAccess) this.worldAccesses.get(var7)).playAuxSFX(par1EntityPlayer, par2, par3, par4, par5, par6);
+            for (IWorldAccess worldAccess : this.worldAccesses) {
+                worldAccess.playAuxSFX(par1EntityPlayer, par2, par3, par4, par5, par6);
             }
         } catch (Throwable var10) {
             CrashReport var8 = CrashReport.makeCrashReport(var10, "Playing level event");
