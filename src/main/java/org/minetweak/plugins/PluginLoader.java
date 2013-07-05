@@ -110,11 +110,7 @@ public class PluginLoader {
     public static void disableAll() {
         for (MinetweakPlugin plugin : plugins.values()) {
             plugin.onDisable();
-<<<<<<< HEAD
-            enabledPlugins.remove(plugin.getName());
-=======
             enabledPlugins.remove(plugin.getPluginInfo().getName());
->>>>>>> 1.6.1
         }
     }
 

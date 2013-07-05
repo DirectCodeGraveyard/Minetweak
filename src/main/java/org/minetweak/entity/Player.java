@@ -138,6 +138,10 @@ public class Player implements CommandSender {
         return true;
     }
 
+    public ItemStack getItemInHand() {
+        return entityPlayerMP.inventory.getCurrentItem();
+    }
+
     /**
      * Get the instance of EntityPlayerMP for this player
      * @return EntityPlayerMP corresponding class

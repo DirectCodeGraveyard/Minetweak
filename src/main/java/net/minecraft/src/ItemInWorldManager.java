@@ -1,18 +1,12 @@
 package net.minecraft.src;
 
-<<<<<<< HEAD
 import org.minetweak.Minetweak;
 import org.minetweak.event.block.BlockBreakEvent;
 
-public class ItemInWorldManager
-{
-    /** The world object that this object is connected to. */
-=======
 public class ItemInWorldManager {
     /**
      * The world object that this object is connected to.
      */
->>>>>>> 1.6.1
     public World theWorld;
 
     /**
@@ -215,9 +209,7 @@ public class ItemInWorldManager {
 
     /**
      * Attempts to harvest a block at the given coordinate
-<<<<<<< HEAD
-     *
-    */
+     */
     public boolean tryHarvestBlock(int par1, int par2, int par3)
     {
         BlockBreakEvent event = null;
@@ -308,43 +300,14 @@ public class ItemInWorldManager {
 
                     if (itemstack.stackSize == 0)
                     {
-=======
-     */
-    public boolean tryHarvestBlock(int par1, int par2, int par3) {
-        if (this.gameType.isAdventure() && !this.thisPlayerMP.canCurrentToolHarvestBlock(par1, par2, par3)) {
-            return false;
-        } else if (this.gameType.isCreative() && this.thisPlayerMP.getHeldItem() != null && this.thisPlayerMP.getHeldItem().getItem() instanceof ItemSword) {
-            return false;
-        } else {
-            int var4 = this.theWorld.getBlockId(par1, par2, par3);
-            int var5 = this.theWorld.getBlockMetadata(par1, par2, par3);
-            this.theWorld.playAuxSFXAtEntity(this.thisPlayerMP, 2001, par1, par2, par3, var4 + (this.theWorld.getBlockMetadata(par1, par2, par3) << 12));
-            boolean var6 = this.removeBlock(par1, par2, par3);
-
-            if (this.isCreative()) {
-                this.thisPlayerMP.playerNetServerHandler.sendPacket(new Packet53BlockChange(par1, par2, par3, this.theWorld));
-            } else {
-                ItemStack var7 = this.thisPlayerMP.getCurrentEquippedItem();
-                boolean var8 = this.thisPlayerMP.canHarvestBlock(Block.blocksList[var4]);
-
-                if (var7 != null) {
-                    var7.onBlockDestroyed(this.theWorld, var4, par1, par2, par3, this.thisPlayerMP);
-
-                    if (var7.stackSize == 0) {
->>>>>>> 1.6.1
                         this.thisPlayerMP.destroyCurrentEquippedItem();
                     }
                 }
 
-<<<<<<< HEAD
                 flag = this.removeBlock(par1, par2, par3);
                 if (flag && flag1)
                 {
                     Block.blocksList[l].harvestBlock(this.theWorld, this.thisPlayerMP, par1, par2, par3, i1);
-=======
-                if (var6 && var8) {
-                    Block.blocksList[var4].harvestBlock(this.theWorld, this.thisPlayerMP, par1, par2, par3, var5);
->>>>>>> 1.6.1
                 }
             }
 

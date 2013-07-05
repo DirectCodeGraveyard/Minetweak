@@ -234,9 +234,13 @@ public class Minetweak {
      */
     public static void info(String line) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         MinecraftServer.getServer().logInfo("[Minetweak] " + line);
 =======
         MinecraftServer.getServer().minetweakInfo(line);
 >>>>>>> 1.6.1
+=======
+        MinecraftServer.getServer().minetweakInfo(line);
+>>>>>>> 1d673b3fd0896baa81a590dc93554e19915831a3
     }
 }

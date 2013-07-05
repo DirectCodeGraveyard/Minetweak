@@ -61,10 +61,7 @@ public class SaveFormatOld implements ISaveFormat {
 
     /**
      * Deletes World Directory
-<<<<<<< HEAD
-=======
      *
->>>>>>> 1.6.1
      * @param par1Str the name of the directory of the world to delete.
      */
     public boolean deleteWorldDirectory(String par1Str) {
@@ -87,13 +84,7 @@ public class SaveFormatOld implements ISaveFormat {
                 if (var3 < 5) {
                     try {
                         Thread.sleep(500L);
-<<<<<<< HEAD
-                    }
-                    catch (InterruptedException ignored)
-                    {
-=======
                     } catch (InterruptedException ignored) {
->>>>>>> 1.6.1
 
                     }
                 }
@@ -105,17 +96,10 @@ public class SaveFormatOld implements ISaveFormat {
 
     /**
      * Deletes the files
-<<<<<<< HEAD
-     * @param par0ArrayOfFile the list of files and directories to delete.
-     */
-    protected static boolean deleteFiles(File[] par0ArrayOfFile)
-    {
-=======
      *
      * @param par0ArrayOfFile the list of files and directories to delete.
      */
     protected static boolean deleteFiles(File[] par0ArrayOfFile) {
->>>>>>> 1.6.1
         for (File var2 : par0ArrayOfFile) {
             System.out.println("Deleting " + var2);
 

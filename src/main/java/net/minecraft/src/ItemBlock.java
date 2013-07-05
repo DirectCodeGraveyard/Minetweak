@@ -1,7 +1,11 @@
 package net.minecraft.src;
 
+<<<<<<< HEAD
 import org.minetweak.Minetweak;
 import org.minetweak.event.block.BlockPlacedEvent;
+=======
+import org.minetweak.event.block.MineTweakBlockState;
+>>>>>>> 1d673b3fd0896baa81a590dc93554e19915831a3
 
 public class ItemBlock extends Item {
     /**
@@ -27,6 +31,7 @@ public class ItemBlock extends Item {
      */
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
         int var11 = par3World.getBlockId(par4, par5, par6);
+        final int clickedX = par4, clickedY = par5, clickedZ = par6;
 
         if (var11 == Block.snow.blockID && (par3World.getBlockMetadata(par4, par5, par6) & 7) < 1) {
             par7 = 1;
@@ -67,6 +72,7 @@ public class ItemBlock extends Item {
             int var13 = this.getMetadata(par1ItemStack.getItemDamage());
             int var14 = Block.blocksList[this.blockID].onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10, var13);
 
+<<<<<<< HEAD
             if (par3World.setBlock(par4, par5, par6, this.blockID, var14, 3)) {
                 if (par3World.getBlockId(par4, par5, par6) == this.blockID) {
                     Minetweak.getEventBus().post(new BlockPlacedEvent(Block.blocksList[this.blockID], par2EntityPlayer, par4, par5, par6));
@@ -79,9 +85,53 @@ public class ItemBlock extends Item {
             }
 
             return true;
+=======
+>>>>>>> 1d673b3fd0896baa81a590dc93554e19915831a3
         } else {
             return false;
         }
+    }
+
+    public static boolean processBlockPlace(final World world, final EntityPlayer entityplayer, final ItemStack itemstack, final int x, final int y, final int z, final int id, final int data, final int clickedX, final int clickedY, final int clickedZ)
+    {
+        org.minetweak.event.block.BlockState blockstate = MineTweakBlockState.getBlockState(world, x, y, z);
+        world.callingPlaceEvent = true;
+        world.setBlock(x, y, z, id, data, 2);
+        org.minetweak.event.block.BlockPlaceEvent event = org.minetweak.event.helper.MineTweakEventFactory.callBlockPlaceEvent(world, entityplayer, blockstate, clickedX, clickedY, clickedZ);
+
+        if (event.isCancelled() || !event.canBuild())
+        {
+            blockstate.update(true, false);
+            world.callingPlaceEvent = false;
+            return false;
+        }
+
+        world.callingPlaceEvent = false;
+        int newId = world.getBlockId(x, y, z);
+        int newData = world.getBlockMetadata(x, y, z);
+        Block block = Block.blocksList[newId];
+
+        if (block != null && !(block instanceof BlockContainer))   // Containers get placed automatically
+        {
+            block.onBlockAdded(world, x, y, z);
+        }
+
+        world.notifyBlockChange(x, y, z, newId);
+
+        // Skulls don't get block data applied to them
+        if (block != null && block != Block.skull)
+        {
+            block.onBlockPlacedBy(world, x, y, z, entityplayer, itemstack);
+            block.onPostBlockPlaced(world, x, y, z, newData);
+            world.playSoundEffect((double)((float) x + 0.5F), (double)((float) y + 0.5F), (double)((float) z + 0.5F), block.stepSound.getPlaceSound(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
+        }
+
+        if (itemstack != null)
+        {
+            --itemstack.stackSize;
+        }
+
+        return true;
     }
 
     /**

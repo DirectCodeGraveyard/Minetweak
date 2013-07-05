@@ -2,11 +2,15 @@ package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import org.minetweak.world.MindTweakWorld;
 =======
 import org.minetweak.Minetweak;
 import org.minetweak.event.block.BlockPlacedEvent;
 >>>>>>> 1.6.1
+=======
+import org.minetweak.world.MineTweakWorld;
+>>>>>>> 1d673b3fd0896baa81a590dc93554e19915831a3
 
 import java.util.*;
 
@@ -71,6 +75,8 @@ public abstract class World implements IBlockAccess {
      * unused.
      */
     public int lastLightningBolt;
+
+    public boolean callingPlaceEvent = false;
 
     /**
      * Whether monsters are enabled or not. (1 = on, 0 = off)
@@ -175,24 +181,19 @@ public abstract class World implements IBlockAccess {
         return this.provider.worldChunkMgr;
     }
 
-<<<<<<< HEAD
-    private final MindTweakWorld world;
+    private final MineTweakWorld world;
 
-    public MindTweakWorld getWorld()
+    public MineTweakWorld getWorld()
     {
         return this.world;
     }
 
-    public World(ISaveHandler par1ISaveHandler, String par2Str, WorldSettings par3WorldSettings, WorldProvider par4WorldProvider, Profiler par5Profiler, ILogAgent par6ILogAgent)
-    {
-=======
     public World(ISaveHandler par1ISaveHandler, String par2Str, WorldSettings par3WorldSettings, WorldProvider par4WorldProvider, Profiler par5Profiler, ILogAgent par6ILogAgent) {
->>>>>>> 1.6.1
         this.ambientTickCountdown = this.rand.nextInt(12000);
         this.lightUpdateBlockList = new int[32768];
         this.saveHandler = par1ISaveHandler;
-        this.world = new MindTweakWorld((WorldServer) this);
         this.theProfiler = par5Profiler;
+        this.world = new MineTweakWorld((WorldServer) this);
         this.mapStorage = new MapStorage(par1ISaveHandler);
         this.worldLogAgent = par6ILogAgent;
         this.worldInfo = par1ISaveHandler.loadWorldInfo();

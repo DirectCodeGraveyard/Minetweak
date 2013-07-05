@@ -1,6 +1,6 @@
 package org.minetweak.event.block;
 
-import net.minecraft.src.Material;
+import org.minetweak.material.Material;
 import org.minetweak.world.Chunk;
 import org.minetweak.world.World;
 
@@ -34,13 +34,6 @@ public interface BlockState {
      * @return block type-id
      */
     int getTypeId();
-
-    /**
-     * Gets the light level between 0-15
-     *
-     * @return light level
-     */
-    byte getLightLevel();
 
     /**
      * Gets the world which contains this Block

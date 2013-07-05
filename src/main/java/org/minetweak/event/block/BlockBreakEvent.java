@@ -1,8 +1,7 @@
 package org.minetweak.event.block;
 
-import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
-import org.minetweak.event.cancellable.Cancellable;
+import org.minetweak.event.helper.Cancellable;
 
 /**
  * Called when a block is broken by a player.

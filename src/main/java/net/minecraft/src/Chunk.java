@@ -98,14 +98,9 @@ public class Chunk {
      */
     private int queuedLightChecks;
 
-<<<<<<< HEAD
     public org.minetweak.world.Chunk MineTweakChunk;
 
-    public Chunk(World par1World, int par2, int par3)
-    {
-=======
     public Chunk(World par1World, int par2, int par3) {
->>>>>>> 1.6.1
         this.storageArrays = new ExtendedBlockStorage[16];
         this.blockBiomeArray = new byte[256];
         this.precipitationHeightMap = new int[256];
@@ -123,16 +118,13 @@ public class Chunk {
         }
 
         Arrays.fill(this.precipitationHeightMap, -999);
-<<<<<<< HEAD
         Arrays.fill(this.blockBiomeArray, (byte) - 1);
 
         if (!(this instanceof EmptyChunk))
         {
-            this.MineTweakChunk = new org.minetweak.world.MindTweakChunk(this);
+            this.MineTweakChunk = new org.minetweak.world.MineTweakChunk(this);
         }
-=======
         Arrays.fill(this.blockBiomeArray, (byte) -1);
->>>>>>> 1.6.1
     }
 
     public Chunk(World par1World, byte[] par2ArrayOfByte, int par3, int par4) {
@@ -533,7 +525,7 @@ public class Chunk {
                     if (Block.blocksList[par4] instanceof ITileEntityProvider) {
                         var14 = this.getChunkBlockTileEntity(par1, par2, par3);
 
-                        if (var14 == null) {
+                        if (var14 == null && !this.worldObj.callingPlaceEvent) {
                             var14 = ((ITileEntityProvider) Block.blocksList[par4]).createNewTileEntity(this.worldObj);
                             this.worldObj.setBlockTileEntity(var12, par2, var13, var14);
                         }
