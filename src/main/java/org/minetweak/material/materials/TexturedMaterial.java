@@ -2,7 +2,7 @@ package org.minetweak.material.materials;
 
 import java.util.List;
 
-import org.bukkit.Material;
+import org.minetweak.material.Material;
 
 /**
  * Represents textured materials like steps and smooth bricks

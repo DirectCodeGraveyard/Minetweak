@@ -7,8 +7,6 @@ import org.minetweak.world.MineTweakChunk;
 import org.minetweak.world.MineTweakWorld;
 import org.minetweak.world.World;
 
-import java.util.List;
-
 public class MineTweakBlockState implements BlockState {
     private final MineTweakWorld world;
     private final MineTweakChunk chunk;

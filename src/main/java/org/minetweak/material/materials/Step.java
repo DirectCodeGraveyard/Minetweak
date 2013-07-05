@@ -3,7 +3,7 @@ package org.minetweak.material.materials;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Material;
+import org.minetweak.material.Material;
 
 /**
  * Represents the different types of steps.

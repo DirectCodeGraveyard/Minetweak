@@ -1,6 +1,6 @@
 package org.minetweak.material.materials;
 
-import org.bukkit.Material;
+import org.minetweak.material.Material;
 
 /**
  * Represents redstone wire

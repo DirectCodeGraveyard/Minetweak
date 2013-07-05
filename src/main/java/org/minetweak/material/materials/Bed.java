@@ -1,7 +1,7 @@
 package org.minetweak.material.materials;
 
-import org.bukkit.Material;
-import org.bukkit.block.BlockFace;
+import org.minetweak.event.block.BlockFace;
+import org.minetweak.material.Material;
 
 /**
  * Represents a bed.

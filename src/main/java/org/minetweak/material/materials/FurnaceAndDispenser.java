@@ -1,6 +1,6 @@
 package org.minetweak.material.materials;
 
-import org.bukkit.Material;
+import org.minetweak.material.Material;
 
 /**
  * Represents a furnace or dispenser, two types of directional containers

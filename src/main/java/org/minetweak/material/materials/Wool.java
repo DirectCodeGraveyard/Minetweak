@@ -1,7 +1,7 @@
 package org.minetweak.material.materials;
 
 import org.bukkit.DyeColor;
-import org.bukkit.Material;
+import org.minetweak.material.Material;
 
 /**
  * Represents a Wool/Cloth block

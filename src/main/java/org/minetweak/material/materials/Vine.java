@@ -3,8 +3,8 @@ package org.minetweak.material.materials;
 import java.util.Arrays;
 import java.util.EnumSet;
 
-import org.bukkit.Material;
-import org.bukkit.block.BlockFace;
+import org.minetweak.material.Material;
+import org.minetweak.event.block.BlockFace;
 
 /**
  * Represents a vine

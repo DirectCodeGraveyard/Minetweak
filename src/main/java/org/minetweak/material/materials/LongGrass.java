@@ -1,7 +1,7 @@
 package org.minetweak.material.materials;
 
 import org.bukkit.GrassSpecies;
-import org.bukkit.Material;
+import org.minetweak.material.Material;
 
 /**
  * Represents the different types of long grasses.

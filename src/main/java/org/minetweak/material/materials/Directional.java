@@ -1,6 +1,6 @@
 package org.minetweak.material.materials;
 
-import org.bukkit.block.BlockFace;
+import org.minetweak.event.block.BlockFace;
 
 public interface Directional {
 

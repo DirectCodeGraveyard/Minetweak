@@ -1,6 +1,6 @@
 package org.minetweak.material.materials;
 
-import org.bukkit.block.BlockFace;
+import org.minetweak.event.block.BlockFace;
 
 /**
  * Indicates that a block can be attached to another block
