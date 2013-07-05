@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+@SuppressWarnings("UnusedDeclaration")
 public class NetServerHandler extends NetHandler {
     /**
      * The underlying network manager for this server handler.

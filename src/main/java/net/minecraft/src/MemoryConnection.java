@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MemoryConnection implements INetworkManager {
     private static final SocketAddress mySocketAddress = new InetSocketAddress("127.0.0.1", 0);
-    private final List readPacketCache = java.util.Collections.synchronizedList(new java.util.ArrayList());
+    private final List<Packet> readPacketCache = java.util.Collections.synchronizedList(new java.util.ArrayList<Packet>());
     private final ILogAgent field_98214_c;
     private MemoryConnection pairedConnection;
     private NetHandler myNetHandler;
@@ -52,7 +52,7 @@ public class MemoryConnection implements INetworkManager {
         int var1 = 2500;
 
         while (var1-- >= 0 && !this.readPacketCache.isEmpty()) {
-            Packet var2 = (Packet) this.readPacketCache.remove(0);
+            Packet var2 = this.readPacketCache.remove(0);
             var2.processPacket(this.myNetHandler);
         }
 

@@ -63,14 +63,14 @@ public abstract class Packet {
             throw new IllegalArgumentException("Duplicate packet class:" + par3Class);
         } else {
             packetIdToClassMap.addKey(par0, par3Class);
-            packetClassToIdMap.put(par3Class, Integer.valueOf(par0));
+            packetClassToIdMap.put(par3Class, par0);
 
             if (par1) {
-                clientPacketIdList.add(Integer.valueOf(par0));
+                clientPacketIdList.add(par0);
             }
 
             if (par2) {
-                serverPacketIdList.add(Integer.valueOf(par0));
+                serverPacketIdList.add(par0);
             }
         }
     }
@@ -116,7 +116,7 @@ public abstract class Packet {
      * Returns the ID of this packet.
      */
     public final int getPacketId() {
-        return ((Integer) packetClassToIdMap.get(this.getClass())).intValue();
+        return (Integer) packetClassToIdMap.get(this.getClass());
     }
 
     /**
@@ -124,7 +124,7 @@ public abstract class Packet {
      */
     public static Packet readPacket(ILogAgent par0ILogAgent, DataInput par1DataInput, boolean par2, Socket par3Socket) throws IOException {
         boolean var4 = false;
-        Packet var5 = null;
+        Packet var5;
         int var6 = par3Socket.getSoTimeout();
         int var9;
 
@@ -249,8 +249,7 @@ public abstract class Packet {
     }
 
     public String toString() {
-        String var1 = this.getClass().getSimpleName();
-        return var1;
+        return this.getClass().getSimpleName();
     }
 
     /**

@@ -20,11 +20,11 @@ public class WorldChunkManager {
     /**
      * A list of biomes that the player can spawn in.
      */
-    private List biomesToSpawnIn;
+    private List<BiomeGenBase> biomesToSpawnIn;
 
     protected WorldChunkManager() {
         this.biomeCache = new BiomeCache(this);
-        this.biomesToSpawnIn = new ArrayList();
+        this.biomesToSpawnIn = new ArrayList<BiomeGenBase>();
         this.biomesToSpawnIn.add(BiomeGenBase.forest);
         this.biomesToSpawnIn.add(BiomeGenBase.plains);
         this.biomesToSpawnIn.add(BiomeGenBase.taiga);
@@ -48,7 +48,7 @@ public class WorldChunkManager {
     /**
      * Gets the list of valid biomes for the player to spawn in.
      */
-    public List getBiomesToSpawnIn() {
+    public List<BiomeGenBase> getBiomesToSpawnIn() {
         return this.biomesToSpawnIn;
     }
 

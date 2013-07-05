@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class VillageSiege {
@@ -26,36 +25,28 @@ public class VillageSiege {
      * Runs a single tick for the village siege
      */
     public void tick() {
-        boolean var1 = false;
 
-        if (var1) {
+        if (this.worldObj.isDaytime()) {
+            this.field_75536_c = 0;
+            return;
+        }
+
+        if (this.field_75536_c == 2) {
+            return;
+        }
+
+        if (this.field_75536_c == 0) {
+            float var2 = this.worldObj.getCelestialAngle(0.0F);
+
+            if ((double) var2 < 0.5D || (double) var2 > 0.501D) {
+                return;
+            }
+
+            this.field_75536_c = this.worldObj.rand.nextInt(10) == 0 ? 1 : 2;
+            this.field_75535_b = false;
+
             if (this.field_75536_c == 2) {
-                this.field_75533_d = 100;
                 return;
-            }
-        } else {
-            if (this.worldObj.isDaytime()) {
-                this.field_75536_c = 0;
-                return;
-            }
-
-            if (this.field_75536_c == 2) {
-                return;
-            }
-
-            if (this.field_75536_c == 0) {
-                float var2 = this.worldObj.getCelestialAngle(0.0F);
-
-                if ((double) var2 < 0.5D || (double) var2 > 0.501D) {
-                    return;
-                }
-
-                this.field_75536_c = this.worldObj.rand.nextInt(10) == 0 ? 1 : 2;
-                this.field_75535_b = false;
-
-                if (this.field_75536_c == 2) {
-                    return;
-                }
             }
         }
 
@@ -83,10 +74,9 @@ public class VillageSiege {
 
     private boolean func_75529_b() {
         List var1 = this.worldObj.playerEntities;
-        Iterator var2 = var1.iterator();
 
-        while (var2.hasNext()) {
-            EntityPlayer var3 = (EntityPlayer) var2.next();
+        for (Object aVar1 : var1) {
+            EntityPlayer var3 = (EntityPlayer) aVar1;
             this.theVillage = this.worldObj.villageCollectionObj.findNearestVillage((int) var3.posX, (int) var3.posY, (int) var3.posZ, 1);
 
             if (this.theVillage != null && this.theVillage.getNumVillageDoors() >= 10 && this.theVillage.getTicksSinceLastDoorAdding() >= 20 && this.theVillage.getNumVillagers() >= 20) {
@@ -101,10 +91,9 @@ public class VillageSiege {
                         this.field_75538_h = var4.posY;
                         this.field_75539_i = var4.posZ + (int) ((double) (MathHelper.sin(this.worldObj.rand.nextFloat() * (float) Math.PI * 2.0F) * var5) * 0.9D);
                         var6 = false;
-                        Iterator var8 = this.worldObj.villageCollectionObj.getVillageList().iterator();
 
-                        while (var8.hasNext()) {
-                            Village var9 = (Village) var8.next();
+                        for (Object o : this.worldObj.villageCollectionObj.getVillageList()) {
+                            Village var9 = (Village) o;
 
                             if (var9 != this.theVillage && var9.isInRange(this.field_75532_g, this.field_75538_h, this.field_75539_i)) {
                                 var6 = true;
@@ -148,7 +137,7 @@ public class VillageSiege {
 
             try {
                 var2 = new EntityZombie(this.worldObj);
-                var2.func_110161_a((EntityLivingData) null);
+                var2.func_110161_a(null);
                 var2.setVillager(false);
             } catch (Exception var4) {
                 var4.printStackTrace();

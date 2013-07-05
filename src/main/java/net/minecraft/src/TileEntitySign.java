@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+@SuppressWarnings("UnusedDeclaration")
 public class TileEntitySign extends TileEntity {
     /**
      * An array of four strings storing the lines of text on the sign.

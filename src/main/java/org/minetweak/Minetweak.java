@@ -75,6 +75,7 @@ public class Minetweak {
         registerCommand("op", new CommandOp());
         registerCommand("say", new CommandSay());
         registerCommand("stop", new CommandStop());
+        registerCommand("motd", new CommandMotd());
 
         registerListener(RecipeManager.getInstance());
         registerListener(new ManagementThread());
@@ -232,6 +233,10 @@ public class Minetweak {
      * @param line line to log
      */
     public static void info(String line) {
+<<<<<<< HEAD
         MinecraftServer.getServer().logInfo("[Minetweak] " + line);
+=======
+        MinecraftServer.getServer().minetweakInfo(line);
+>>>>>>> 1.6.1
     }
 }

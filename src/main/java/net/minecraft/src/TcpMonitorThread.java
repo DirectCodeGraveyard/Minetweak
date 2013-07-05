@@ -13,7 +13,7 @@ class TcpMonitorThread extends Thread {
 
             if (TcpConnection.isRunning(this.theTcpConnection)) {
                 TcpConnection.getWriteThread(this.theTcpConnection).interrupt();
-                this.theTcpConnection.networkShutdown("disconnect.closed", new Object[0]);
+                this.theTcpConnection.networkShutdown("disconnect.closed");
             }
         } catch (Exception var2) {
             var2.printStackTrace();
