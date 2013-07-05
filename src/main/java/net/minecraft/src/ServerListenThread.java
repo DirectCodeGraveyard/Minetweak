@@ -67,7 +67,7 @@ public class ServerListenThread extends Thread {
             }
         }
 
-        this.myNetworkListenThread.getServer().getLogAgent().logInfo("Closing listening thread");
+        this.myNetworkListenThread.getServer().getLogAgent().func_98233_a("Closing listening thread");
     }
 
     private void addPendingConnection(NetLoginHandler par1NetLoginHandler) {

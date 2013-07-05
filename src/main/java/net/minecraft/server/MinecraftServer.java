@@ -175,7 +175,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     protected void convertMapIfNeeded(String par1Str) {
         if (this.getActiveAnvilConverter().isOldMapFormat(par1Str)) {
-            this.getLogAgent().logInfo("Converting map!");
+            this.getLogAgent().func_98233_a("Converting map!");
             this.setUserMessage("menu.convertingLevel");
             this.getActiveAnvilConverter().convertMapFormat(par1Str, new ConvertingProgressUpdate(this));
         }
@@ -244,7 +244,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         int var5 = 0;
         this.setUserMessage("menu.generatingTerrain");
         byte var6 = 0;
-        this.getLogAgent().logInfo("Preparing start region for level " + var6);
+        this.getLogAgent().func_98233_a("Preparing start region for level " + var6);
         WorldServer var7 = this.worldServers[var6];
         ChunkCoordinates var8 = var7.getSpawnPoint();
         long var9 = func_130071_aq();
@@ -280,7 +280,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      */
     public abstract boolean isHardcore();
 
-    public abstract int getOpPermissionLevel();
+    public abstract int func_110455_j();
 
     /**
      * Used to display a percent remaining given text and the percentage.
@@ -288,7 +288,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     protected void outputPercentRemaining(String par1Str, int par2) {
         this.currentTask = par1Str;
         this.percentDone = par2;
-        this.getLogAgent().logInfo(par1Str + ": " + par2 + "%");
+        this.getLogAgent().func_98233_a(par1Str + ": " + par2 + "%");
     }
 
     /**
@@ -310,13 +310,13 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             for (WorldServer var5 : var2) {
                 if (var5 != null) {
                     if (!par1) {
-                        this.getLogAgent().logInfo("Saving chunks for level \'" + var5.getWorldInfo().getWorldName() + "\'/" + var5.provider.getDimensionName());
+                        this.getLogAgent().func_98233_a("Saving chunks for level \'" + var5.getWorldInfo().getWorldName() + "\'/" + var5.provider.getDimensionName());
                     }
 
                     try {
                         var5.saveAllChunks(true, null);
                     } catch (MinecraftException var7) {
-                        this.getLogAgent().logWarning(var7.getMessage());
+                        this.getLogAgent().func_98236_b(var7.getMessage());
                     }
                 }
             }
@@ -328,19 +328,19 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      */
     public void stopServer() {
         if (!this.worldIsBeingDeleted) {
-            this.getLogAgent().logInfo("Stopping server");
+            this.getLogAgent().func_98233_a("Stopping server");
 
             if (this.getNetworkThread() != null) {
                 this.getNetworkThread().stopListening();
             }
 
             if (this.serverConfigManager != null) {
-                this.getLogAgent().logInfo("Saving players");
+                this.getLogAgent().func_98233_a("Saving players");
                 this.serverConfigManager.saveAllPlayerData();
                 this.serverConfigManager.removeAllPlayers();
             }
 
-            this.getLogAgent().logInfo("Saving worlds");
+            this.getLogAgent().func_98233_a("Saving worlds");
             this.saveAllWorlds(false);
 
             for (WorldServer var2 : this.worldServers) {
@@ -385,13 +385,13 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     long var7 = var5 - var1;
 
                     if (var7 > 2000L && var1 - this.timeOfLastWarning >= 15000L) {
-                        this.getLogAgent().logWarning("Can\'t keep up! Did the system time change, or is the server overloaded?");
+                        this.getLogAgent().func_98236_b("Can\'t keep up! Did the system time change, or is the server overloaded?");
                         var7 = 2000L;
                         this.timeOfLastWarning = var1;
                     }
 
                     if (var7 < 0L) {
-                        this.getLogAgent().logWarning("Time ran backwards! Did the system time change?");
+                        this.getLogAgent().func_98236_b("Time ran backwards! Did the system time change?");
                         var7 = 0L;
                     }
 
@@ -662,14 +662,14 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      * Logs the message with a level of INFO.
      */
     public void logInfo(String par1Str) {
-        this.getLogAgent().logInfo(par1Str);
+        this.getLogAgent().func_98233_a(par1Str);
     }
 
     /**
      * Logs the message with a level of WARN.
      */
     public void logWarning(String par1Str) {
-        this.getLogAgent().logWarning(par1Str);
+        this.getLogAgent().func_98236_b(par1Str);
     }
 
     /**
@@ -763,7 +763,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      */
     public void logDebug(String par1Str) {
         if (this.isDebuggingEnabled()) {
-            this.getLogAgent().logInfo(par1Str);
+            this.getLogAgent().func_98233_a(par1Str);
         }
     }
 
@@ -843,7 +843,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public void func_110122_a(ChatMessageComponent par1ChatMessageComponent) {
-        this.getLogAgent().logInfo(par1ChatMessageComponent.toString());
+        this.getLogAgent().func_98233_a(par1ChatMessageComponent.toString());
     }
 
     /**

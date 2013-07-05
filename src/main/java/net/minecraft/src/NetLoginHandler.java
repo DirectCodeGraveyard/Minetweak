@@ -82,7 +82,7 @@ public class NetLoginHandler extends NetHandler {
      */
     public void kickUser(String par1Str) {
         try {
-            this.mcServer.getLogAgent().logInfo("Disconnecting " + this.getUsernameAndAddress() + ": " + par1Str);
+            this.mcServer.logInfo("Disconnecting " + this.getUsernameAndAddress() + ": " + par1Str);
             this.myTCPConnection.addToSendQueue(new Packet255KickDisconnect(par1Str));
             this.myTCPConnection.serverShutdown();
             this.finishedProcessing = true;
@@ -165,7 +165,7 @@ public class NetLoginHandler extends NetHandler {
     }
 
     public void handleErrorMessage(String par1Str, Object[] par2ArrayOfObj) {
-        this.mcServer.getLogAgent().logInfo(this.getUsernameAndAddress() + " lost connection");
+        this.mcServer.logInfo(this.getUsernameAndAddress() + " lost connection");
         this.finishedProcessing = true;
     }
 

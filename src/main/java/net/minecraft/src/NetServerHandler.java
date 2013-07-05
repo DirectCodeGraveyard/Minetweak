@@ -233,7 +233,7 @@ public class NetServerHandler extends NetHandler {
 
                     if (!this.playerEntity.isPlayerSleeping() && (var13 > 1.65D || var13 < 0.1D)) {
                         this.kickPlayer("Illegal stance");
-                        this.mcServer.getLogAgent().logWarning(this.playerEntity.getCommandSenderName() + " had an illegal stance: " + var13);
+                        this.mcServer.getLogAgent().func_98236_b(this.playerEntity.getCommandSenderName() + " had an illegal stance: " + var13);
                         return;
                     }
 
@@ -265,7 +265,7 @@ public class NetServerHandler extends NetHandler {
                 double var25 = var19 * var19 + var21 * var21 + var23 * var23;
 
                 if (var25 > 100.0D) {
-                    this.mcServer.getLogAgent().logWarning(this.playerEntity.getCommandSenderName() + " moved too quickly! " + var13 + "," + var15 + "," + var17 + " (" + var19 + ", " + var21 + ", " + var23 + ")");
+                    this.mcServer.getLogAgent().func_98236_b(this.playerEntity.getCommandSenderName() + " moved too quickly! " + var13 + "," + var15 + "," + var17 + " (" + var19 + ", " + var21 + ", " + var23 + ")");
                     this.setPlayerLocation(this.lastPosX, this.lastPosY, this.lastPosZ, this.playerEntity.rotationYaw, this.playerEntity.rotationPitch);
                     return;
                 }
@@ -294,7 +294,7 @@ public class NetServerHandler extends NetHandler {
 
                 if (var25 > 0.0625D && !this.playerEntity.isPlayerSleeping() && !this.playerEntity.theItemInWorldManager.isCreative()) {
                     var31 = true;
-                    this.mcServer.getLogAgent().logWarning(this.playerEntity.getCommandSenderName() + " moved wrongly!");
+                    this.mcServer.getLogAgent().func_98236_b(this.playerEntity.getCommandSenderName() + " moved wrongly!");
                 }
 
                 this.playerEntity.setPositionAndRotation(var5, var7, var9, var11, var12);
@@ -312,7 +312,7 @@ public class NetServerHandler extends NetHandler {
                         ++this.playerInAirTime;
 
                         if (this.playerInAirTime > 80) {
-                            this.mcServer.getLogAgent().logWarning(this.playerEntity.getCommandSenderName() + " was kicked for floating too long!");
+                            this.mcServer.getLogAgent().func_98236_b(this.playerEntity.getCommandSenderName() + " was kicked for floating too long!");
                             this.kickPlayer("Flying is not enabled on this server");
                             return;
                         }
@@ -484,7 +484,7 @@ public class NetServerHandler extends NetHandler {
     }
 
     public void handleErrorMessage(String par1Str, Object[] par2ArrayOfObj) {
-        this.mcServer.getLogAgent().logInfo(this.playerEntity.getCommandSenderName() + " lost connection: " + par1Str);
+        this.mcServer.logInfo(this.playerEntity.getCommandSenderName() + " lost connection: " + par1Str);
         this.mcServer.getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("multiplayer.player.left", new Object[]{this.playerEntity.getTranslatedEntityName()}).func_111059_a(EnumChatFormatting.YELLOW));
         this.mcServer.getConfigurationManager().playerLoggedOut(this.playerEntity);
         this.connectionClosed = true;
@@ -495,7 +495,7 @@ public class NetServerHandler extends NetHandler {
      * server.
      */
     public void unexpectedPacket(Packet par1Packet) {
-        this.mcServer.getLogAgent().logWarning(this.getClass() + " wasn\'t prepared to deal with a " + par1Packet.getClass());
+        this.mcServer.getLogAgent().func_98236_b(this.getClass() + " wasn\'t prepared to deal with a " + par1Packet.getClass());
         this.kickPlayer("Protocol error, unexpected packet");
     }
 
@@ -531,7 +531,7 @@ public class NetServerHandler extends NetHandler {
         if (par1Packet16BlockItemSwitch.id >= 0 && par1Packet16BlockItemSwitch.id < InventoryPlayer.getHotbarSize()) {
             this.playerEntity.inventory.currentItem = par1Packet16BlockItemSwitch.id;
         } else {
-            this.mcServer.getLogAgent().logWarning(this.playerEntity.getCommandSenderName() + " tried to set an invalid carried item");
+            this.mcServer.getLogAgent().func_98236_b(this.playerEntity.getCommandSenderName() + " tried to set an invalid carried item");
         }
     }
 

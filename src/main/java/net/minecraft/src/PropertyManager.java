@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -45,7 +47,7 @@ public class PropertyManager {
                 }
             }
         } else {
-            par2ILogAgent.logWarning(par1File + " does not exist");
+            par2ILogAgent.func_98236_b(par1File + " does not exist");
             this.generateNewProperties();
         }
     }
@@ -54,7 +56,7 @@ public class PropertyManager {
      * Generates a new properties file.
      */
     public void generateNewProperties() {
-        this.logger.logInfo("Generating new properties file");
+        MinecraftServer.getServer().logInfo("Generating new properties file");
         this.saveProperties();
     }
 
