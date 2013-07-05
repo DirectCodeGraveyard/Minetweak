@@ -8,73 +8,61 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
-public class BanList
-{
+public class BanList {
     private final LowerStringMap theBanList = new LowerStringMap();
     private final File fileName;
 
-    /** set to true if not singlePlayer */
+    /**
+     * set to true if not singlePlayer
+     */
     private boolean listActive = true;
 
-    public BanList(File par1File)
-    {
+    public BanList(File par1File) {
         this.fileName = par1File;
     }
 
-    public boolean isListActive()
-    {
+    public boolean isListActive() {
         return this.listActive;
     }
 
-    public void setListActive(boolean par1)
-    {
+    public void setListActive(boolean par1) {
         this.listActive = par1;
     }
 
     /**
      * removes expired Bans before returning
      */
-    public Map getBannedList()
-    {
+    public Map getBannedList() {
         this.removeExpiredBans();
         return this.theBanList;
     }
 
-    public boolean isBanned(String par1Str)
-    {
-        if (!this.isListActive())
-        {
+    public boolean isBanned(String par1Str) {
+        if (!this.isListActive()) {
             return false;
-        }
-        else
-        {
+        } else {
             this.removeExpiredBans();
             return this.theBanList.containsKey(par1Str);
         }
     }
 
-    public void put(BanEntry par1BanEntry)
-    {
+    public void put(BanEntry par1BanEntry) {
         this.theBanList.putLower(par1BanEntry.getBannedUsername(), par1BanEntry);
         this.saveToFileWithHeader();
     }
 
-    public void remove(String par1Str)
-    {
+    public void remove(String par1Str) {
         this.theBanList.remove(par1Str);
         this.saveToFileWithHeader();
     }
 
-    public void removeExpiredBans()
-    {
+    public void removeExpiredBans() {
         Iterator var1 = this.theBanList.values().iterator();
 
-        while (var1.hasNext())
-        {
-            BanEntry var2 = (BanEntry)var1.next();
+        while (var1.hasNext()) {
+            BanEntry var2 = (BanEntry) var1.next();
 
-            if (var2.hasBanExpired())
-            {
+            if (var2.hasBanExpired()) {
                 var1.remove();
             }
         }
@@ -83,63 +71,48 @@ public class BanList
     /**
      * Loads the ban list from the file (adds every entry, does not clear the current list).
      */
-    public void loadBanList()
-    {
-        if (this.fileName.isFile())
-        {
+    public void loadBanList() {
+        if (this.fileName.isFile()) {
             BufferedReader var1;
 
-            try
-            {
+            try {
                 var1 = new BufferedReader(new FileReader(this.fileName));
-            }
-            catch (FileNotFoundException var4)
-            {
+            } catch (FileNotFoundException var4) {
                 throw new Error();
             }
 
             String var2;
 
-            try
-            {
-                while ((var2 = var1.readLine()) != null)
-                {
-                    if (!var2.startsWith("#"))
-                    {
+            try {
+                while ((var2 = var1.readLine()) != null) {
+                    if (!var2.startsWith("#")) {
                         BanEntry var3 = BanEntry.parse(var2);
 
-                        if (var3 != null)
-                        {
+                        if (var3 != null) {
                             this.theBanList.putLower(var3.getBannedUsername(), var3);
                         }
                     }
                 }
-            }
-            catch (IOException var5)
-            {
+            } catch (IOException var5) {
                 MinecraftServer.getServer().getLogAgent().logSevereException("Could not load ban list", var5);
             }
         }
     }
 
-    public void saveToFileWithHeader()
-    {
+    public void saveToFileWithHeader() {
         this.saveToFile(true);
     }
 
     /**
      * par1: include header
      */
-    public void saveToFile(boolean par1)
-    {
+    public void saveToFile(boolean par1) {
         this.removeExpiredBans();
 
-        try
-        {
+        try {
             PrintWriter var2 = new PrintWriter(new FileWriter(this.fileName, false));
 
-            if (par1)
-            {
+            if (par1) {
                 var2.println("# Updated " + (new SimpleDateFormat()).format(new Date()) + " by Minecraft " + "1.6.1");
                 var2.println("# victim name | ban date | banned by | banned until | reason");
                 var2.println();
@@ -151,9 +124,7 @@ public class BanList
             }
 
             var2.close();
-        }
-        catch (IOException var5)
-        {
+        } catch (IOException var5) {
             MinecraftServer.getServer().getLogAgent().logSevereException("Could not save ban list", var5);
         }
     }

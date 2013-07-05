@@ -12,27 +12,38 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class Packet
-{
-    /** Maps packet id to packet class */
+public abstract class Packet {
+    /**
+     * Maps packet id to packet class
+     */
     public static IntHashMap packetIdToClassMap = new IntHashMap();
 
-    /** Maps packet class to packet id */
+    /**
+     * Maps packet class to packet id
+     */
     private static Map packetClassToIdMap = new HashMap();
 
-    /** List of the client's packet IDs. */
+    /**
+     * List of the client's packet IDs.
+     */
     private static Set clientPacketIdList = new HashSet();
 
-    /** List of the server's packet IDs. */
+    /**
+     * List of the server's packet IDs.
+     */
     private static Set serverPacketIdList = new HashSet();
     protected ILogAgent field_98193_m;
 
-    /** the system time in milliseconds when this packet was created. */
+    /**
+     * the system time in milliseconds when this packet was created.
+     */
     public final long creationTimeMillis = MinecraftServer.func_130071_aq();
     public static long receivedID;
     public static long receivedSize;
 
-    /** Assumed to be sequential by the profiler. */
+    /**
+     * Assumed to be sequential by the profiler.
+     */
     public static long sentID;
     public static long sentSize;
 
@@ -45,28 +56,20 @@ public abstract class Packet
     /**
      * Adds a two way mapping between the packet ID and packet class.
      */
-    static void addIdClassMapping(int par0, boolean par1, boolean par2, Class par3Class)
-    {
-        if (packetIdToClassMap.containsItem(par0))
-        {
+    static void addIdClassMapping(int par0, boolean par1, boolean par2, Class par3Class) {
+        if (packetIdToClassMap.containsItem(par0)) {
             throw new IllegalArgumentException("Duplicate packet id:" + par0);
-        }
-        else if (packetClassToIdMap.containsKey(par3Class))
-        {
+        } else if (packetClassToIdMap.containsKey(par3Class)) {
             throw new IllegalArgumentException("Duplicate packet class:" + par3Class);
-        }
-        else
-        {
+        } else {
             packetIdToClassMap.addKey(par0, par3Class);
             packetClassToIdMap.put(par3Class, Integer.valueOf(par0));
 
-            if (par1)
-            {
+            if (par1) {
                 clientPacketIdList.add(Integer.valueOf(par0));
             }
 
-            if (par2)
-            {
+            if (par2) {
                 serverPacketIdList.add(Integer.valueOf(par0));
             }
         }
@@ -75,15 +78,11 @@ public abstract class Packet
     /**
      * Returns a new instance of the specified Packet class.
      */
-    public static Packet getNewPacket(ILogAgent par0ILogAgent, int par1)
-    {
-        try
-        {
-            Class var2 = (Class)packetIdToClassMap.lookup(par1);
-            return var2 == null ? null : (Packet)var2.newInstance();
-        }
-        catch (Exception var3)
-        {
+    public static Packet getNewPacket(ILogAgent par0ILogAgent, int par1) {
+        try {
+            Class var2 = (Class) packetIdToClassMap.lookup(par1);
+            return var2 == null ? null : (Packet) var2.newInstance();
+        } catch (Exception var3) {
             var3.printStackTrace();
             par0ILogAgent.logSevere("Skipping packet with id " + par1);
             return null;
@@ -93,8 +92,7 @@ public abstract class Packet
     /**
      * Writes a byte array to the DataOutputStream
      */
-    public static void writeByteArray(DataOutput par0DataOutput, byte[] par1ArrayOfByte) throws IOException
-    {
+    public static void writeByteArray(DataOutput par0DataOutput, byte[] par1ArrayOfByte) throws IOException {
         par0DataOutput.writeShort(par1ArrayOfByte.length);
         par0DataOutput.write(par1ArrayOfByte);
     }
@@ -102,16 +100,12 @@ public abstract class Packet
     /**
      * the first short in the stream indicates the number of bytes to read
      */
-    public static byte[] readBytesFromStream(DataInput par0DataInput) throws IOException
-    {
+    public static byte[] readBytesFromStream(DataInput par0DataInput) throws IOException {
         short var1 = par0DataInput.readShort();
 
-        if (var1 < 0)
-        {
+        if (var1 < 0) {
             throw new IOException("Key was smaller than nothing!  Weird key!");
-        }
-        else
-        {
+        } else {
             byte[] var2 = new byte[var1];
             par0DataInput.readFully(var2);
             return var2;
@@ -121,57 +115,49 @@ public abstract class Packet
     /**
      * Returns the ID of this packet.
      */
-    public final int getPacketId()
-    {
-        return ((Integer)packetClassToIdMap.get(this.getClass())).intValue();
+    public final int getPacketId() {
+        return ((Integer) packetClassToIdMap.get(this.getClass())).intValue();
     }
 
     /**
      * Read a packet, prefixed by its ID, from the data stream.
      */
-    public static Packet readPacket(ILogAgent par0ILogAgent, DataInput par1DataInput, boolean par2, Socket par3Socket) throws IOException
-    {
+    public static Packet readPacket(ILogAgent par0ILogAgent, DataInput par1DataInput, boolean par2, Socket par3Socket) throws IOException {
         boolean var4 = false;
         Packet var5 = null;
         int var6 = par3Socket.getSoTimeout();
         int var9;
 
-        try
-        {
+        try {
             var9 = par1DataInput.readUnsignedByte();
 
-            if (par2 && !serverPacketIdList.contains(Integer.valueOf(var9)) || !par2 && !clientPacketIdList.contains(Integer.valueOf(var9)))
-            {
+            if (par2 && !serverPacketIdList.contains(Integer.valueOf(var9)) || !par2 && !clientPacketIdList.contains(Integer.valueOf(var9))) {
                 throw new IOException("Bad packet id " + var9);
             }
 
             var5 = getNewPacket(par0ILogAgent, var9);
 
-            if (var5 == null)
-            {
+            if (var5 == null) {
                 throw new IOException("Bad packet id " + var9);
             }
 
             var5.field_98193_m = par0ILogAgent;
 
-            if (var5 instanceof Packet254ServerPing)
-            {
+            if (var5 instanceof Packet254ServerPing) {
                 par3Socket.setSoTimeout(1500);
             }
 
             var5.readPacketData(par1DataInput);
             ++receivedID;
-            receivedSize += (long)var5.getPacketSize();
-        }
-        catch (EOFException var8)
-        {
+            receivedSize += (long) var5.getPacketSize();
+        } catch (EOFException var8) {
             par0ILogAgent.logSevere("Reached end of stream for " + par3Socket.getInetAddress());
             return null;
         }
 
-        PacketCount.countPacket(var9, (long)var5.getPacketSize());
+        PacketCount.countPacket(var9, (long) var5.getPacketSize());
         ++receivedID;
-        receivedSize += (long)var5.getPacketSize();
+        receivedSize += (long) var5.getPacketSize();
         par3Socket.setSoTimeout(var6);
         return var5;
     }
@@ -179,25 +165,20 @@ public abstract class Packet
     /**
      * Writes a packet, prefixed by its ID, to the data stream.
      */
-    public static void writePacket(Packet par0Packet, DataOutput par1DataOutput) throws IOException
-    {
+    public static void writePacket(Packet par0Packet, DataOutput par1DataOutput) throws IOException {
         par1DataOutput.write(par0Packet.getPacketId());
         par0Packet.writePacketData(par1DataOutput);
         ++sentID;
-        sentSize += (long)par0Packet.getPacketSize();
+        sentSize += (long) par0Packet.getPacketSize();
     }
 
     /**
      * Writes a String to the DataOutputStream
      */
-    public static void writeString(String par0Str, DataOutput par1DataOutput) throws IOException
-    {
-        if (par0Str.length() > 32767)
-        {
+    public static void writeString(String par0Str, DataOutput par1DataOutput) throws IOException {
+        if (par0Str.length() > 32767) {
             throw new IOException("String too big");
-        }
-        else
-        {
+        } else {
             par1DataOutput.writeShort(par0Str.length());
             par1DataOutput.writeChars(par0Str);
         }
@@ -206,24 +187,17 @@ public abstract class Packet
     /**
      * Reads a string from a packet
      */
-    public static String readString(DataInput par0DataInput, int par1) throws IOException
-    {
+    public static String readString(DataInput par0DataInput, int par1) throws IOException {
         short var2 = par0DataInput.readShort();
 
-        if (var2 > par1)
-        {
+        if (var2 > par1) {
             throw new IOException("Received string length longer than maximum allowed (" + var2 + " > " + par1 + ")");
-        }
-        else if (var2 < 0)
-        {
+        } else if (var2 < 0) {
             throw new IOException("Received string length is less than zero! Weird string!");
-        }
-        else
-        {
+        } else {
             StringBuilder var3 = new StringBuilder();
 
-            for (int var4 = 0; var4 < var2; ++var4)
-            {
+            for (int var4 = 0; var4 < var2; ++var4) {
                 var3.append(par0DataInput.readChar());
             }
 
@@ -254,8 +228,7 @@ public abstract class Packet
     /**
      * only false for the abstract Packet class, all real packets return true
      */
-    public boolean isRealPacket()
-    {
+    public boolean isRealPacket() {
         return false;
     }
 
@@ -263,8 +236,7 @@ public abstract class Packet
      * eg return packet30entity.entityId == entityId; WARNING : will throw if you compare a packet to a different packet
      * class
      */
-    public boolean containsSameEntityIDAs(Packet par1Packet)
-    {
+    public boolean containsSameEntityIDAs(Packet par1Packet) {
         return false;
     }
 
@@ -272,13 +244,11 @@ public abstract class Packet
      * If this returns true, the packet may be processed on any thread; otherwise it is queued for the main thread to
      * handle.
      */
-    public boolean canProcessAsync()
-    {
+    public boolean canProcessAsync() {
         return false;
     }
 
-    public String toString()
-    {
+    public String toString() {
         String var1 = this.getClass().getSimpleName();
         return var1;
     }
@@ -286,13 +256,11 @@ public abstract class Packet
     /**
      * Reads a ItemStack from the InputStream
      */
-    public static ItemStack readItemStack(DataInput par0DataInput) throws IOException
-    {
+    public static ItemStack readItemStack(DataInput par0DataInput) throws IOException {
         ItemStack var1 = null;
         short var2 = par0DataInput.readShort();
 
-        if (var2 >= 0)
-        {
+        if (var2 >= 0) {
             byte var3 = par0DataInput.readByte();
             short var4 = par0DataInput.readShort();
             var1 = new ItemStack(var2, var3, var4);
@@ -305,21 +273,16 @@ public abstract class Packet
     /**
      * Writes the ItemStack's ID (short), then size (byte), then damage. (short)
      */
-    public static void writeItemStack(ItemStack par0ItemStack, DataOutput par1DataOutput) throws IOException
-    {
-        if (par0ItemStack == null)
-        {
+    public static void writeItemStack(ItemStack par0ItemStack, DataOutput par1DataOutput) throws IOException {
+        if (par0ItemStack == null) {
             par1DataOutput.writeShort(-1);
-        }
-        else
-        {
+        } else {
             par1DataOutput.writeShort(par0ItemStack.itemID);
             par1DataOutput.writeByte(par0ItemStack.stackSize);
             par1DataOutput.writeShort(par0ItemStack.getItemDamage());
             NBTTagCompound var2 = null;
 
-            if (par0ItemStack.getItem().isDamageable() || par0ItemStack.getItem().getShareTag())
-            {
+            if (par0ItemStack.getItem().isDamageable() || par0ItemStack.getItem().getShareTag()) {
                 var2 = par0ItemStack.stackTagCompound;
             }
 
@@ -330,16 +293,12 @@ public abstract class Packet
     /**
      * Reads a compressed NBTTagCompound from the InputStream
      */
-    public static NBTTagCompound readNBTTagCompound(DataInput par0DataInput) throws IOException
-    {
+    public static NBTTagCompound readNBTTagCompound(DataInput par0DataInput) throws IOException {
         short var1 = par0DataInput.readShort();
 
-        if (var1 < 0)
-        {
+        if (var1 < 0) {
             return null;
-        }
-        else
-        {
+        } else {
             byte[] var2 = new byte[var1];
             par0DataInput.readFully(var2);
             return CompressedStreamTools.decompress(var2);
@@ -349,22 +308,17 @@ public abstract class Packet
     /**
      * Writes a compressed NBTTagCompound to the OutputStream
      */
-    protected static void writeNBTTagCompound(NBTTagCompound par0NBTTagCompound, DataOutput par1DataOutput) throws IOException
-    {
-        if (par0NBTTagCompound == null)
-        {
+    protected static void writeNBTTagCompound(NBTTagCompound par0NBTTagCompound, DataOutput par1DataOutput) throws IOException {
+        if (par0NBTTagCompound == null) {
             par1DataOutput.writeShort(-1);
-        }
-        else
-        {
+        } else {
             byte[] var2 = CompressedStreamTools.compress(par0NBTTagCompound);
-            par1DataOutput.writeShort((short)var2.length);
+            par1DataOutput.writeShort((short) var2.length);
             par1DataOutput.write(var2);
         }
     }
 
-    static
-    {
+    static {
         addIdClassMapping(0, true, true, Packet0KeepAlive.class);
         addIdClassMapping(1, true, true, Packet1Login.class);
         addIdClassMapping(2, false, true, Packet2ClientProtocol.class);

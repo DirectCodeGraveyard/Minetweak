@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IBlockSource extends ILocatableSource
-{
+public interface IBlockSource extends ILocatableSource {
     double getX();
 
     double getY();

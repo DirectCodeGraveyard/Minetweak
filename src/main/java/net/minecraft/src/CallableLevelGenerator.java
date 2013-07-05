@@ -2,22 +2,18 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableLevelGenerator implements Callable
-{
+class CallableLevelGenerator implements Callable {
     final WorldInfo worldInfoInstance;
 
-    CallableLevelGenerator(WorldInfo par1WorldInfo)
-    {
+    CallableLevelGenerator(WorldInfo par1WorldInfo) {
         this.worldInfoInstance = par1WorldInfo;
     }
 
-    public String callLevelGeneratorInfo()
-    {
+    public String callLevelGeneratorInfo() {
         return String.format("ID %02d - %s, ver %d. Features enabled: %b", WorldInfo.getTerrainTypeOfWorld(this.worldInfoInstance).getWorldTypeID(), WorldInfo.getTerrainTypeOfWorld(this.worldInfoInstance).getWorldTypeName(), WorldInfo.getTerrainTypeOfWorld(this.worldInfoInstance).getGeneratorVersion(), WorldInfo.getMapFeaturesEnabled(this.worldInfoInstance));
     }
 
-    public Object call()
-    {
+    public Object call() {
         return this.callLevelGeneratorInfo();
     }
 }

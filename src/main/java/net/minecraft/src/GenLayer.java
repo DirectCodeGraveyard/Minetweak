@@ -1,11 +1,14 @@
 package net.minecraft.src;
 
-public abstract class GenLayer
-{
-    /** seed from World#getWorldSeed that is used in the LCG prng */
+public abstract class GenLayer {
+    /**
+     * seed from World#getWorldSeed that is used in the LCG prng
+     */
     private long worldGenSeed;
 
-    /** parent GenLayer that was provided via the constructor */
+    /**
+     * parent GenLayer that was provided via the constructor
+     */
     protected GenLayer parent;
 
     /**
@@ -14,15 +17,16 @@ public abstract class GenLayer
      */
     private long chunkSeed;
 
-    /** base seed to the LCG prng provided via the constructor */
+    /**
+     * base seed to the LCG prng provided via the constructor
+     */
     private long baseSeed;
 
     /**
      * the first array item is a linked list of the biomes, the second is the zoom function, the third is the same as the
      * first.
      */
-    public static GenLayer[] initializeAllBiomeGenerators(long par0, WorldType par2WorldType)
-    {
+    public static GenLayer[] initializeAllBiomeGenerators(long par0, WorldType par2WorldType) {
         GenLayerIsland var3 = new GenLayerIsland(1L);
         GenLayerFuzzyZoom var9 = new GenLayerFuzzyZoom(2000L, var3);
         GenLayerAddIsland var10 = new GenLayerAddIsland(1L, var9);
@@ -36,8 +40,7 @@ public abstract class GenLayer
         GenLayerAddMushroomIsland var16 = new GenLayerAddMushroomIsland(5L, var10);
         byte var4 = 4;
 
-        if (par2WorldType == WorldType.LARGE_BIOMES)
-        {
+        if (par2WorldType == WorldType.LARGE_BIOMES) {
             var4 = 6;
         }
 
@@ -51,36 +54,31 @@ public abstract class GenLayer
         var6 = GenLayerZoom.magnify(1000L, var17, 2);
         Object var18 = new GenLayerHills(1000L, var6);
 
-        for (int var7 = 0; var7 < var4; ++var7)
-        {
-            var18 = new GenLayerZoom((long)(1000 + var7), (GenLayer)var18);
+        for (int var7 = 0; var7 < var4; ++var7) {
+            var18 = new GenLayerZoom((long) (1000 + var7), (GenLayer) var18);
 
-            if (var7 == 0)
-            {
-                var18 = new GenLayerAddIsland(3L, (GenLayer)var18);
+            if (var7 == 0) {
+                var18 = new GenLayerAddIsland(3L, (GenLayer) var18);
             }
 
-            if (var7 == 1)
-            {
-                var18 = new GenLayerShore(1000L, (GenLayer)var18);
+            if (var7 == 1) {
+                var18 = new GenLayerShore(1000L, (GenLayer) var18);
             }
 
-            if (var7 == 1)
-            {
-                var18 = new GenLayerSwampRivers(1000L, (GenLayer)var18);
+            if (var7 == 1) {
+                var18 = new GenLayerSwampRivers(1000L, (GenLayer) var18);
             }
         }
 
-        GenLayerSmooth var19 = new GenLayerSmooth(1000L, (GenLayer)var18);
+        GenLayerSmooth var19 = new GenLayerSmooth(1000L, (GenLayer) var18);
         GenLayerRiverMix var20 = new GenLayerRiverMix(100L, var19, var15);
         GenLayerVoronoiZoom var8 = new GenLayerVoronoiZoom(10L, var20);
         var20.initWorldGenSeed(par0);
         var8.initWorldGenSeed(par0);
-        return new GenLayer[] {var20, var8, var20};
+        return new GenLayer[]{var20, var8, var20};
     }
 
-    public GenLayer(long par1)
-    {
+    public GenLayer(long par1) {
         this.baseSeed = par1;
         this.baseSeed *= this.baseSeed * 6364136223846793005L + 1442695040888963407L;
         this.baseSeed += par1;
@@ -94,12 +92,10 @@ public abstract class GenLayer
      * Initialize layer's local worldGenSeed based on its own baseSeed and the world's global seed (passed in as an
      * argument).
      */
-    public void initWorldGenSeed(long par1)
-    {
+    public void initWorldGenSeed(long par1) {
         this.worldGenSeed = par1;
 
-        if (this.parent != null)
-        {
+        if (this.parent != null) {
             this.parent.initWorldGenSeed(par1);
         }
 
@@ -114,8 +110,7 @@ public abstract class GenLayer
     /**
      * Initialize layer's current chunkSeed based on the local worldGenSeed and the (x,z) chunk coordinates.
      */
-    public void initChunkSeed(long par1, long par3)
-    {
+    public void initChunkSeed(long par1, long par3) {
         this.chunkSeed = this.worldGenSeed;
         this.chunkSeed *= this.chunkSeed * 6364136223846793005L + 1442695040888963407L;
         this.chunkSeed += par1;
@@ -130,12 +125,10 @@ public abstract class GenLayer
     /**
      * returns a LCG pseudo random number from [0, x). Args: int x
      */
-    protected int nextInt(int par1)
-    {
-        int var2 = (int)((this.chunkSeed >> 24) % (long)par1);
+    protected int nextInt(int par1) {
+        int var2 = (int) ((this.chunkSeed >> 24) % (long) par1);
 
-        if (var2 < 0)
-        {
+        if (var2 < 0) {
             var2 += par1;
         }
 

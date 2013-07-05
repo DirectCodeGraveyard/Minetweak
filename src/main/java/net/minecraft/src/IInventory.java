@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IInventory
-{
+public interface IInventory {
     /**
      * Returns the number of slots in the inventory.
      */

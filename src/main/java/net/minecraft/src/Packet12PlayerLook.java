@@ -4,18 +4,15 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class Packet12PlayerLook extends Packet10Flying
-{
-    public Packet12PlayerLook()
-    {
+public class Packet12PlayerLook extends Packet10Flying {
+    public Packet12PlayerLook() {
         this.rotating = true;
     }
 
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInput par1DataInput) throws IOException
-    {
+    public void readPacketData(DataInput par1DataInput) throws IOException {
         this.yaw = par1DataInput.readFloat();
         this.pitch = par1DataInput.readFloat();
         super.readPacketData(par1DataInput);
@@ -24,8 +21,7 @@ public class Packet12PlayerLook extends Packet10Flying
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutput par1DataOutput) throws IOException
-    {
+    public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeFloat(this.yaw);
         par1DataOutput.writeFloat(this.pitch);
         super.writePacketData(par1DataOutput);
@@ -34,8 +30,7 @@ public class Packet12PlayerLook extends Packet10Flying
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 9;
     }
 }

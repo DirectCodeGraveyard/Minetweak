@@ -6,22 +6,25 @@ import com.google.common.collect.Multimap;
 import java.util.Random;
 import java.util.UUID;
 
-public class Item
-{
+public class Item {
     protected static final UUID field_111210_e = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
     private CreativeTabs tabToDisplayOn;
 
-    /** The RNG used by the Item subclasses. */
+    /**
+     * The RNG used by the Item subclasses.
+     */
     protected static Random itemRand = new Random();
 
-    /** A 32000 elements Item array. */
+    /**
+     * A 32000 elements Item array.
+     */
     public static Item[] itemsList = new Item[32000];
     public static Item shovelIron = (new ItemSpade(0, EnumToolMaterial.IRON)).setUnlocalizedName("shovelIron").func_111206_d("iron_shovel");
     public static Item pickaxeIron = (new ItemPickaxe(1, EnumToolMaterial.IRON)).setUnlocalizedName("pickaxeIron").func_111206_d("iron_pickaxe");
     public static Item axeIron = (new ItemAxe(2, EnumToolMaterial.IRON)).setUnlocalizedName("hatchetIron").func_111206_d("iron_axe");
     public static Item flintAndSteel = (new ItemFlintAndSteel(3)).setUnlocalizedName("flintAndSteel").func_111206_d("flint_and_steel");
     public static Item appleRed = (new ItemFood(4, 4, 0.3F, false)).setUnlocalizedName("apple").func_111206_d("apple");
-    public static ItemBow bow = (ItemBow)(new ItemBow(5)).setUnlocalizedName("bow").func_111206_d("bow");
+    public static ItemBow bow = (ItemBow) (new ItemBow(5)).setUnlocalizedName("bow").func_111206_d("bow");
     public static Item arrow = (new Item(6)).setUnlocalizedName("arrow").setCreativeTab(CreativeTabs.tabCombat).func_111206_d("arrow");
     public static Item coal = (new ItemCoal(7)).setUnlocalizedName("coal").func_111206_d("coal");
     public static Item diamond = (new Item(8)).setUnlocalizedName("diamond").setCreativeTab(CreativeTabs.tabMaterials).func_111206_d("diamond");
@@ -58,26 +61,26 @@ public class Item
     public static Item seeds = (new ItemSeeds(39, Block.crops.blockID, Block.tilledField.blockID)).setUnlocalizedName("seeds").func_111206_d("seeds_wheat");
     public static Item wheat = (new Item(40)).setUnlocalizedName("wheat").setCreativeTab(CreativeTabs.tabMaterials).func_111206_d("wheat");
     public static Item bread = (new ItemFood(41, 5, 0.6F, false)).setUnlocalizedName("bread").func_111206_d("bread");
-    public static ItemArmor helmetLeather = (ItemArmor)(new ItemArmor(42, EnumArmorMaterial.CLOTH, 0, 0)).setUnlocalizedName("helmetCloth").func_111206_d("leather_helmet");
-    public static ItemArmor plateLeather = (ItemArmor)(new ItemArmor(43, EnumArmorMaterial.CLOTH, 0, 1)).setUnlocalizedName("chestplateCloth").func_111206_d("leather_chestplate");
-    public static ItemArmor legsLeather = (ItemArmor)(new ItemArmor(44, EnumArmorMaterial.CLOTH, 0, 2)).setUnlocalizedName("leggingsCloth").func_111206_d("leather_leggings");
-    public static ItemArmor bootsLeather = (ItemArmor)(new ItemArmor(45, EnumArmorMaterial.CLOTH, 0, 3)).setUnlocalizedName("bootsCloth").func_111206_d("leather_boots");
-    public static ItemArmor helmetChain = (ItemArmor)(new ItemArmor(46, EnumArmorMaterial.CHAIN, 1, 0)).setUnlocalizedName("helmetChain").func_111206_d("chainmail_helmet");
-    public static ItemArmor plateChain = (ItemArmor)(new ItemArmor(47, EnumArmorMaterial.CHAIN, 1, 1)).setUnlocalizedName("chestplateChain").func_111206_d("chainmail_chestplate");
-    public static ItemArmor legsChain = (ItemArmor)(new ItemArmor(48, EnumArmorMaterial.CHAIN, 1, 2)).setUnlocalizedName("leggingsChain").func_111206_d("chainmail_leggings");
-    public static ItemArmor bootsChain = (ItemArmor)(new ItemArmor(49, EnumArmorMaterial.CHAIN, 1, 3)).setUnlocalizedName("bootsChain").func_111206_d("chainmail_boots");
-    public static ItemArmor helmetIron = (ItemArmor)(new ItemArmor(50, EnumArmorMaterial.IRON, 2, 0)).setUnlocalizedName("helmetIron").func_111206_d("iron_helmet");
-    public static ItemArmor plateIron = (ItemArmor)(new ItemArmor(51, EnumArmorMaterial.IRON, 2, 1)).setUnlocalizedName("chestplateIron").func_111206_d("iron_chestplate");
-    public static ItemArmor legsIron = (ItemArmor)(new ItemArmor(52, EnumArmorMaterial.IRON, 2, 2)).setUnlocalizedName("leggingsIron").func_111206_d("iron_leggings");
-    public static ItemArmor bootsIron = (ItemArmor)(new ItemArmor(53, EnumArmorMaterial.IRON, 2, 3)).setUnlocalizedName("bootsIron").func_111206_d("iron_boots");
-    public static ItemArmor helmetDiamond = (ItemArmor)(new ItemArmor(54, EnumArmorMaterial.DIAMOND, 3, 0)).setUnlocalizedName("helmetDiamond").func_111206_d("diamond_helmet");
-    public static ItemArmor plateDiamond = (ItemArmor)(new ItemArmor(55, EnumArmorMaterial.DIAMOND, 3, 1)).setUnlocalizedName("chestplateDiamond").func_111206_d("diamond_chestplate");
-    public static ItemArmor legsDiamond = (ItemArmor)(new ItemArmor(56, EnumArmorMaterial.DIAMOND, 3, 2)).setUnlocalizedName("leggingsDiamond").func_111206_d("diamond_leggings");
-    public static ItemArmor bootsDiamond = (ItemArmor)(new ItemArmor(57, EnumArmorMaterial.DIAMOND, 3, 3)).setUnlocalizedName("bootsDiamond").func_111206_d("diamond_boots");
-    public static ItemArmor helmetGold = (ItemArmor)(new ItemArmor(58, EnumArmorMaterial.GOLD, 4, 0)).setUnlocalizedName("helmetGold").func_111206_d("gold_helmet");
-    public static ItemArmor plateGold = (ItemArmor)(new ItemArmor(59, EnumArmorMaterial.GOLD, 4, 1)).setUnlocalizedName("chestplateGold").func_111206_d("gold_chestplate");
-    public static ItemArmor legsGold = (ItemArmor)(new ItemArmor(60, EnumArmorMaterial.GOLD, 4, 2)).setUnlocalizedName("leggingsGold").func_111206_d("gold_leggings");
-    public static ItemArmor bootsGold = (ItemArmor)(new ItemArmor(61, EnumArmorMaterial.GOLD, 4, 3)).setUnlocalizedName("bootsGold").func_111206_d("gold_boots");
+    public static ItemArmor helmetLeather = (ItemArmor) (new ItemArmor(42, EnumArmorMaterial.CLOTH, 0, 0)).setUnlocalizedName("helmetCloth").func_111206_d("leather_helmet");
+    public static ItemArmor plateLeather = (ItemArmor) (new ItemArmor(43, EnumArmorMaterial.CLOTH, 0, 1)).setUnlocalizedName("chestplateCloth").func_111206_d("leather_chestplate");
+    public static ItemArmor legsLeather = (ItemArmor) (new ItemArmor(44, EnumArmorMaterial.CLOTH, 0, 2)).setUnlocalizedName("leggingsCloth").func_111206_d("leather_leggings");
+    public static ItemArmor bootsLeather = (ItemArmor) (new ItemArmor(45, EnumArmorMaterial.CLOTH, 0, 3)).setUnlocalizedName("bootsCloth").func_111206_d("leather_boots");
+    public static ItemArmor helmetChain = (ItemArmor) (new ItemArmor(46, EnumArmorMaterial.CHAIN, 1, 0)).setUnlocalizedName("helmetChain").func_111206_d("chainmail_helmet");
+    public static ItemArmor plateChain = (ItemArmor) (new ItemArmor(47, EnumArmorMaterial.CHAIN, 1, 1)).setUnlocalizedName("chestplateChain").func_111206_d("chainmail_chestplate");
+    public static ItemArmor legsChain = (ItemArmor) (new ItemArmor(48, EnumArmorMaterial.CHAIN, 1, 2)).setUnlocalizedName("leggingsChain").func_111206_d("chainmail_leggings");
+    public static ItemArmor bootsChain = (ItemArmor) (new ItemArmor(49, EnumArmorMaterial.CHAIN, 1, 3)).setUnlocalizedName("bootsChain").func_111206_d("chainmail_boots");
+    public static ItemArmor helmetIron = (ItemArmor) (new ItemArmor(50, EnumArmorMaterial.IRON, 2, 0)).setUnlocalizedName("helmetIron").func_111206_d("iron_helmet");
+    public static ItemArmor plateIron = (ItemArmor) (new ItemArmor(51, EnumArmorMaterial.IRON, 2, 1)).setUnlocalizedName("chestplateIron").func_111206_d("iron_chestplate");
+    public static ItemArmor legsIron = (ItemArmor) (new ItemArmor(52, EnumArmorMaterial.IRON, 2, 2)).setUnlocalizedName("leggingsIron").func_111206_d("iron_leggings");
+    public static ItemArmor bootsIron = (ItemArmor) (new ItemArmor(53, EnumArmorMaterial.IRON, 2, 3)).setUnlocalizedName("bootsIron").func_111206_d("iron_boots");
+    public static ItemArmor helmetDiamond = (ItemArmor) (new ItemArmor(54, EnumArmorMaterial.DIAMOND, 3, 0)).setUnlocalizedName("helmetDiamond").func_111206_d("diamond_helmet");
+    public static ItemArmor plateDiamond = (ItemArmor) (new ItemArmor(55, EnumArmorMaterial.DIAMOND, 3, 1)).setUnlocalizedName("chestplateDiamond").func_111206_d("diamond_chestplate");
+    public static ItemArmor legsDiamond = (ItemArmor) (new ItemArmor(56, EnumArmorMaterial.DIAMOND, 3, 2)).setUnlocalizedName("leggingsDiamond").func_111206_d("diamond_leggings");
+    public static ItemArmor bootsDiamond = (ItemArmor) (new ItemArmor(57, EnumArmorMaterial.DIAMOND, 3, 3)).setUnlocalizedName("bootsDiamond").func_111206_d("diamond_boots");
+    public static ItemArmor helmetGold = (ItemArmor) (new ItemArmor(58, EnumArmorMaterial.GOLD, 4, 0)).setUnlocalizedName("helmetGold").func_111206_d("gold_helmet");
+    public static ItemArmor plateGold = (ItemArmor) (new ItemArmor(59, EnumArmorMaterial.GOLD, 4, 1)).setUnlocalizedName("chestplateGold").func_111206_d("gold_chestplate");
+    public static ItemArmor legsGold = (ItemArmor) (new ItemArmor(60, EnumArmorMaterial.GOLD, 4, 2)).setUnlocalizedName("leggingsGold").func_111206_d("gold_leggings");
+    public static ItemArmor bootsGold = (ItemArmor) (new ItemArmor(61, EnumArmorMaterial.GOLD, 4, 3)).setUnlocalizedName("bootsGold").func_111206_d("gold_boots");
     public static Item flint = (new Item(62)).setUnlocalizedName("flint").setCreativeTab(CreativeTabs.tabMaterials).func_111206_d("flint");
     public static Item porkRaw = (new ItemFood(63, 3, 0.3F, true)).setUnlocalizedName("porkchopRaw").func_111206_d("porkchop_raw");
     public static Item porkCooked = (new ItemFood(64, 8, 0.8F, true)).setUnlocalizedName("porkchopCooked").func_111206_d("porkchop_cooked");
@@ -106,7 +109,7 @@ public class Item
     public static Item minecartPowered = (new ItemMinecart(87, 2)).setUnlocalizedName("minecartFurnace").func_111206_d("minecart_furnace");
     public static Item egg = (new ItemEgg(88)).setUnlocalizedName("egg").func_111206_d("egg");
     public static Item compass = (new Item(89)).setUnlocalizedName("compass").setCreativeTab(CreativeTabs.tabTools).func_111206_d("compass");
-    public static ItemFishingRod fishingRod = (ItemFishingRod)(new ItemFishingRod(90)).setUnlocalizedName("fishingRod").func_111206_d("fishing_rod");
+    public static ItemFishingRod fishingRod = (ItemFishingRod) (new ItemFishingRod(90)).setUnlocalizedName("fishingRod").func_111206_d("fishing_rod");
     public static Item pocketSundial = (new Item(91)).setUnlocalizedName("clock").setCreativeTab(CreativeTabs.tabTools).func_111206_d("clock");
     public static Item lightStoneDust = (new Item(92)).setUnlocalizedName("yellowDust").setPotionEffect(PotionHelper.glowstoneEffect).setCreativeTab(CreativeTabs.tabMaterials).func_111206_d("glowstone_dust");
     public static Item fishRaw = (new ItemFood(93, 2, 0.3F, false)).setUnlocalizedName("fishRaw").func_111206_d("fish_raw");
@@ -118,12 +121,12 @@ public class Item
     public static Item bed = (new ItemBed(99)).setMaxStackSize(1).setUnlocalizedName("bed").func_111206_d("bed");
     public static Item redstoneRepeater = (new ItemReed(100, Block.redstoneRepeaterIdle)).setUnlocalizedName("diode").setCreativeTab(CreativeTabs.tabRedstone).func_111206_d("repeater");
     public static Item cookie = (new ItemFood(101, 2, 0.1F, false)).setUnlocalizedName("cookie").func_111206_d("cookie");
-    public static ItemMap map = (ItemMap)(new ItemMap(102)).setUnlocalizedName("map").func_111206_d("map_filled");
+    public static ItemMap map = (ItemMap) (new ItemMap(102)).setUnlocalizedName("map").func_111206_d("map_filled");
 
     /**
      * Item introduced on 1.7 version, is a shear to cut leaves (you can keep the block) or get wool from sheeps.
      */
-    public static ItemShears shears = (ItemShears)(new ItemShears(103)).setUnlocalizedName("shears").func_111206_d("shears");
+    public static ItemShears shears = (ItemShears) (new ItemShears(103)).setUnlocalizedName("shears").func_111206_d("shears");
     public static Item melon = (new ItemFood(104, 2, 0.3F, false)).setUnlocalizedName("melon").func_111206_d("melon");
     public static Item pumpkinSeeds = (new ItemSeeds(105, Block.pumpkinStem.blockID, Block.tilledField.blockID)).setUnlocalizedName("seeds_pumpkin").func_111206_d("seeds_pumpkin");
     public static Item melonSeeds = (new ItemSeeds(106, Block.melonStem.blockID, Block.tilledField.blockID)).setUnlocalizedName("seeds_melon").func_111206_d("seeds_melon");
@@ -137,7 +140,7 @@ public class Item
     public static Item ghastTear = (new Item(114)).setUnlocalizedName("ghastTear").setPotionEffect(PotionHelper.ghastTearEffect).setCreativeTab(CreativeTabs.tabBrewing).func_111206_d("ghast_tear");
     public static Item goldNugget = (new Item(115)).setUnlocalizedName("goldNugget").setCreativeTab(CreativeTabs.tabMaterials).func_111206_d("gold_nugget");
     public static Item netherStalkSeeds = (new ItemSeeds(116, Block.netherStalk.blockID, Block.slowSand.blockID)).setUnlocalizedName("netherStalkSeeds").setPotionEffect("+4").func_111206_d("nether_wart");
-    public static ItemPotion potion = (ItemPotion)(new ItemPotion(117)).setUnlocalizedName("potion").func_111206_d("potion");
+    public static ItemPotion potion = (ItemPotion) (new ItemPotion(117)).setUnlocalizedName("potion").func_111206_d("potion");
     public static Item glassBottle = (new ItemGlassBottle(118)).setUnlocalizedName("glassBottle").func_111206_d("potion_bottle_empty");
     public static Item spiderEye = (new ItemFood(119, 2, 0.8F, false)).setPotionEffect(Potion.poison.id, 5, 0, 1.0F).setUnlocalizedName("spiderEye").setPotionEffect(PotionHelper.spiderEyeEffect).func_111206_d("spider_eye");
     public static Item fermentedSpiderEye = (new Item(120)).setUnlocalizedName("fermentedSpiderEye").setPotionEffect(PotionHelper.fermentedSpiderEyeEffect).setCreativeTab(CreativeTabs.tabBrewing).func_111206_d("spider_eye_fermented");
@@ -167,7 +170,7 @@ public class Item
     public static Item potato = (new ItemSeedFood(136, 1, 0.3F, Block.potato.blockID, Block.tilledField.blockID)).setUnlocalizedName("potato").func_111206_d("potato");
     public static Item bakedPotato = (new ItemFood(137, 6, 0.6F, false)).setUnlocalizedName("potatoBaked").func_111206_d("potato_baked");
     public static Item poisonousPotato = (new ItemFood(138, 2, 0.3F, false)).setPotionEffect(Potion.poison.id, 5, 0, 0.6F).setUnlocalizedName("potatoPoisonous").func_111206_d("potato_poisonous");
-    public static ItemEmptyMap emptyMap = (ItemEmptyMap)(new ItemEmptyMap(139)).setUnlocalizedName("emptyMap").func_111206_d("map_empty");
+    public static ItemEmptyMap emptyMap = (ItemEmptyMap) (new ItemEmptyMap(139)).setUnlocalizedName("emptyMap").func_111206_d("map_empty");
     public static Item goldenCarrot = (new ItemFood(140, 6, 1.2F, false)).setUnlocalizedName("carrotGolden").setPotionEffect(PotionHelper.goldenCarrotEffect).func_111206_d("carrot_golden");
     public static Item skull = (new ItemSkull(141)).setUnlocalizedName("skull").func_111206_d("skull");
     public static Item carrotOnAStick = (new ItemCarrotOnAStick(142)).setUnlocalizedName("carrotOnAStick").func_111206_d("carrot_on_a_stick");
@@ -175,7 +178,7 @@ public class Item
     public static Item pumpkinPie = (new ItemFood(144, 8, 0.3F, false)).setUnlocalizedName("pumpkinPie").setCreativeTab(CreativeTabs.tabFood).func_111206_d("pumpkin_pie");
     public static Item firework = (new ItemFirework(145)).setUnlocalizedName("fireworks").func_111206_d("fireworks");
     public static Item fireworkCharge = (new ItemFireworkCharge(146)).setUnlocalizedName("fireworksCharge").setCreativeTab(CreativeTabs.tabMisc).func_111206_d("fireworks_charge");
-    public static ItemEnchantedBook enchantedBook = (ItemEnchantedBook)(new ItemEnchantedBook(147)).setMaxStackSize(1).setUnlocalizedName("enchantedBook").func_111206_d("book_enchanted");
+    public static ItemEnchantedBook enchantedBook = (ItemEnchantedBook) (new ItemEnchantedBook(147)).setMaxStackSize(1).setUnlocalizedName("enchantedBook").func_111206_d("book_enchanted");
     public static Item comparator = (new ItemReed(148, Block.redstoneComparatorIdle)).setUnlocalizedName("comparator").setCreativeTab(CreativeTabs.tabRedstone).func_111206_d("comparator");
     public static Item netherrackBrick = (new Item(149)).setUnlocalizedName("netherbrick").setCreativeTab(CreativeTabs.tabMaterials).func_111206_d("netherbrick");
     public static Item netherQuartz = (new Item(150)).setUnlocalizedName("netherquartz").setCreativeTab(CreativeTabs.tabMaterials).func_111206_d("quartz");
@@ -199,16 +202,24 @@ public class Item
     public static Item record11 = (new ItemRecord(2010, "11")).setUnlocalizedName("record").func_111206_d("record_11");
     public static Item recordWait = (new ItemRecord(2011, "wait")).setUnlocalizedName("record").func_111206_d("record_wait");
 
-    /** The ID of this item. */
+    /**
+     * The ID of this item.
+     */
     public final int itemID;
 
-    /** Maximum size of the stack. */
+    /**
+     * Maximum size of the stack.
+     */
     protected int maxStackSize = 64;
 
-    /** Maximum damage an item can handle. */
+    /**
+     * Maximum damage an item can handle.
+     */
     private int maxDamage;
 
-    /** If true, render the object in full 3D, like weapons and tools. */
+    /**
+     * If true, render the object in full 3D, like weapons and tools.
+     */
     protected boolean bFull3D;
 
     /**
@@ -222,24 +233,23 @@ public class Item
      */
     private String potionEffect;
 
-    /** The unlocalized name of this item. */
+    /**
+     * The unlocalized name of this item.
+     */
     private String unlocalizedName;
     protected String field_111218_cA;
 
-    protected Item(int par1)
-    {
+    protected Item(int par1) {
         this.itemID = 256 + par1;
 
-        if (itemsList[256 + par1] != null)
-        {
+        if (itemsList[256 + par1] != null) {
             System.out.println("CONFLICT @ " + par1);
         }
 
         itemsList[256 + par1] = this;
     }
 
-    public Item setMaxStackSize(int par1)
-    {
+    public Item setMaxStackSize(int par1) {
         this.maxStackSize = par1;
         return this;
     }
@@ -248,8 +258,7 @@ public class Item
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
-    {
+    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
         return false;
     }
 
@@ -257,47 +266,40 @@ public class Item
      * Returns the strength of the stack against a given block. 1.0F base, (Quality+1)*2 if correct blocktype, 1.5F if
      * sword
      */
-    public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
-    {
+    public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block) {
         return 1.0F;
     }
 
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         return par1ItemStack;
     }
 
-    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
+    public ItemStack onEaten(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         return par1ItemStack;
     }
 
     /**
      * Returns the maximum size of the stack for a specific item. *Isn't this more a Set than a Get?*
      */
-    public int getItemStackLimit()
-    {
+    public int getItemStackLimit() {
         return this.maxStackSize;
     }
 
     /**
      * Returns the metadata of the block which this Item (ItemBlock) can place
      */
-    public int getMetadata(int par1)
-    {
+    public int getMetadata(int par1) {
         return 0;
     }
 
-    public boolean getHasSubtypes()
-    {
+    public boolean getHasSubtypes() {
         return this.hasSubtypes;
     }
 
-    protected Item setHasSubtypes(boolean par1)
-    {
+    protected Item setHasSubtypes(boolean par1) {
         this.hasSubtypes = par1;
         return this;
     }
@@ -305,22 +307,19 @@ public class Item
     /**
      * Returns the maximum damage an item can take.
      */
-    public int getMaxDamage()
-    {
+    public int getMaxDamage() {
         return this.maxDamage;
     }
 
     /**
      * set max damage of an Item
      */
-    protected Item setMaxDamage(int par1)
-    {
+    protected Item setMaxDamage(int par1) {
         this.maxDamage = par1;
         return this;
     }
 
-    public boolean isDamageable()
-    {
+    public boolean isDamageable() {
         return this.maxDamage > 0 && !this.hasSubtypes;
     }
 
@@ -328,34 +327,29 @@ public class Item
      * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
      * the damage on the stack.
      */
-    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
-    {
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase) {
         return false;
     }
 
-    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLivingBase par7EntityLivingBase)
-    {
+    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLivingBase par7EntityLivingBase) {
         return false;
     }
 
     /**
      * Returns if the item (tool) can harvest results from the block type.
      */
-    public boolean canHarvestBlock(Block par1Block)
-    {
+    public boolean canHarvestBlock(Block par1Block) {
         return false;
     }
 
-    public boolean func_111207_a(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
-    {
+    public boolean func_111207_a(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase) {
         return false;
     }
 
     /**
      * Sets bFull3D to True and return the object.
      */
-    public Item setFull3D()
-    {
+    public Item setFull3D() {
         this.bFull3D = true;
         return this;
     }
@@ -363,8 +357,7 @@ public class Item
     /**
      * Sets the unlocalized name of this item to the string passed as the parameter, prefixed by "item."
      */
-    public Item setUnlocalizedName(String par1Str)
-    {
+    public Item setUnlocalizedName(String par1Str) {
         this.unlocalizedName = par1Str;
         return this;
     }
@@ -372,8 +365,7 @@ public class Item
     /**
      * Gets the localized name of the given item stack.
      */
-    public String getLocalizedName(ItemStack par1ItemStack)
-    {
+    public String getLocalizedName(ItemStack par1ItemStack) {
         String var2 = this.getUnlocalizedName(par1ItemStack);
         return var2 == null ? "" : StatCollector.translateToLocal(var2);
     }
@@ -381,8 +373,7 @@ public class Item
     /**
      * Returns the unlocalized name of this item.
      */
-    public String getUnlocalizedName()
-    {
+    public String getUnlocalizedName() {
         return "item." + this.unlocalizedName;
     }
 
@@ -390,13 +381,11 @@ public class Item
      * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
      * different names based on their damage or NBT.
      */
-    public String getUnlocalizedName(ItemStack par1ItemStack)
-    {
+    public String getUnlocalizedName(ItemStack par1ItemStack) {
         return "item." + this.unlocalizedName;
     }
 
-    public Item setContainerItem(Item par1Item)
-    {
+    public Item setContainerItem(Item par1Item) {
         this.containerItem = par1Item;
         return this;
     }
@@ -405,39 +394,33 @@ public class Item
      * If this returns true, after a recipe involving this item is crafted the container item will be added to the
      * player's inventory instead of remaining in the crafting grid.
      */
-    public boolean doesContainerItemLeaveCraftingGrid(ItemStack par1ItemStack)
-    {
+    public boolean doesContainerItemLeaveCraftingGrid(ItemStack par1ItemStack) {
         return true;
     }
 
     /**
      * If this function returns true (or the item is damageable), the ItemStack's NBT tag will be sent to the client.
      */
-    public boolean getShareTag()
-    {
+    public boolean getShareTag() {
         return true;
     }
 
-    public Item getContainerItem()
-    {
+    public Item getContainerItem() {
         return this.containerItem;
     }
 
     /**
      * True if this Item has a container item (a.k.a. crafting result)
      */
-    public boolean hasContainerItem()
-    {
+    public boolean hasContainerItem() {
         return this.containerItem != null;
     }
 
-    public String getStatName()
-    {
+    public String getStatName() {
         return StatCollector.translateToLocal(this.getUnlocalizedName() + ".name");
     }
 
-    public String func_77653_i(ItemStack par1ItemStack)
-    {
+    public String func_77653_i(ItemStack par1ItemStack) {
         return StatCollector.translateToLocal(this.getUnlocalizedName(par1ItemStack) + ".name");
     }
 
@@ -445,47 +428,46 @@ public class Item
      * Called each tick as long the item is on a player inventory. Uses by maps to check if is on a player hand and
      * update it's contents.
      */
-    public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {}
+    public void onUpdate(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
+    }
 
     /**
      * Called when item is crafted/smelted. Used only by maps so far.
      */
-    public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {}
+    public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+    }
 
     /**
      * false for all Items except sub-classes of ItemMapBase
      */
-    public boolean isMap()
-    {
+    public boolean isMap() {
         return false;
     }
 
     /**
      * returns the action that specifies what animation to play when the items is being used
      */
-    public EnumAction getItemUseAction(ItemStack par1ItemStack)
-    {
+    public EnumAction getItemUseAction(ItemStack par1ItemStack) {
         return EnumAction.none;
     }
 
     /**
      * How long it takes to use or consume an item
      */
-    public int getMaxItemUseDuration(ItemStack par1ItemStack)
-    {
+    public int getMaxItemUseDuration(ItemStack par1ItemStack) {
         return 0;
     }
 
     /**
      * called when the player releases the use item button. Args: itemstack, world, entityplayer, itemInUseCount
      */
-    public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4) {}
+    public void onPlayerStoppedUsing(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer, int par4) {
+    }
 
     /**
      * Sets the string representing this item's effect on a potion when used as an ingredient.
      */
-    protected Item setPotionEffect(String par1Str)
-    {
+    protected Item setPotionEffect(String par1Str) {
         this.potionEffect = par1Str;
         return this;
     }
@@ -493,95 +475,83 @@ public class Item
     /**
      * Returns a string representing what this item does to a potion.
      */
-    public String getPotionEffect()
-    {
+    public String getPotionEffect() {
         return this.potionEffect;
     }
 
     /**
      * Returns true if this item serves as a potion ingredient (its ingredient information is not null).
      */
-    public boolean isPotionIngredient()
-    {
+    public boolean isPotionIngredient() {
         return this.potionEffect != null;
     }
 
-    public String getItemDisplayName(ItemStack par1ItemStack)
-    {
+    public String getItemDisplayName(ItemStack par1ItemStack) {
         return ("" + StatCollector.translateToLocal(this.getLocalizedName(par1ItemStack) + ".name")).trim();
     }
 
     /**
      * Checks isDamagable and if it cannot be stacked
      */
-    public boolean isItemTool(ItemStack par1ItemStack)
-    {
+    public boolean isItemTool(ItemStack par1ItemStack) {
         return this.getItemStackLimit() == 1 && this.isDamageable();
     }
 
-    protected MovingObjectPosition getMovingObjectPositionFromPlayer(World par1World, EntityPlayer par2EntityPlayer, boolean par3)
-    {
+    protected MovingObjectPosition getMovingObjectPositionFromPlayer(World par1World, EntityPlayer par2EntityPlayer, boolean par3) {
         float var4 = 1.0F;
         float var5 = par2EntityPlayer.prevRotationPitch + (par2EntityPlayer.rotationPitch - par2EntityPlayer.prevRotationPitch) * var4;
         float var6 = par2EntityPlayer.prevRotationYaw + (par2EntityPlayer.rotationYaw - par2EntityPlayer.prevRotationYaw) * var4;
-        double var7 = par2EntityPlayer.prevPosX + (par2EntityPlayer.posX - par2EntityPlayer.prevPosX) * (double)var4;
-        double var9 = par2EntityPlayer.prevPosY + (par2EntityPlayer.posY - par2EntityPlayer.prevPosY) * (double)var4 + 1.62D - (double)par2EntityPlayer.yOffset;
-        double var11 = par2EntityPlayer.prevPosZ + (par2EntityPlayer.posZ - par2EntityPlayer.prevPosZ) * (double)var4;
+        double var7 = par2EntityPlayer.prevPosX + (par2EntityPlayer.posX - par2EntityPlayer.prevPosX) * (double) var4;
+        double var9 = par2EntityPlayer.prevPosY + (par2EntityPlayer.posY - par2EntityPlayer.prevPosY) * (double) var4 + 1.62D - (double) par2EntityPlayer.yOffset;
+        double var11 = par2EntityPlayer.prevPosZ + (par2EntityPlayer.posZ - par2EntityPlayer.prevPosZ) * (double) var4;
         Vec3 var13 = par1World.getWorldVec3Pool().getVecFromPool(var7, var9, var11);
-        float var14 = MathHelper.cos(-var6 * 0.017453292F - (float)Math.PI);
-        float var15 = MathHelper.sin(-var6 * 0.017453292F - (float)Math.PI);
+        float var14 = MathHelper.cos(-var6 * 0.017453292F - (float) Math.PI);
+        float var15 = MathHelper.sin(-var6 * 0.017453292F - (float) Math.PI);
         float var16 = -MathHelper.cos(-var5 * 0.017453292F);
         float var17 = MathHelper.sin(-var5 * 0.017453292F);
         float var18 = var15 * var16;
         float var20 = var14 * var16;
         double var21 = 5.0D;
-        Vec3 var23 = var13.addVector((double)var18 * var21, (double)var17 * var21, (double)var20 * var21);
+        Vec3 var23 = var13.addVector((double) var18 * var21, (double) var17 * var21, (double) var20 * var21);
         return par1World.rayTraceBlocks_do_do(var13, var23, par3, !par3);
     }
 
     /**
      * Return the enchantability factor of the item, most of the time is based on material.
      */
-    public int getItemEnchantability()
-    {
+    public int getItemEnchantability() {
         return 0;
     }
 
     /**
      * returns this;
      */
-    public Item setCreativeTab(CreativeTabs par1CreativeTabs)
-    {
+    public Item setCreativeTab(CreativeTabs par1CreativeTabs) {
         this.tabToDisplayOn = par1CreativeTabs;
         return this;
     }
 
-    public boolean func_82788_x()
-    {
+    public boolean func_82788_x() {
         return true;
     }
 
     /**
      * Return whether this item is repairable in an anvil.
      */
-    public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
-    {
+    public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack) {
         return false;
     }
 
-    public Multimap func_111205_h()
-    {
+    public Multimap func_111205_h() {
         return HashMultimap.create();
     }
 
-    protected Item func_111206_d(String par1Str)
-    {
+    protected Item func_111206_d(String par1Str) {
         this.field_111218_cA = par1Str;
         return this;
     }
 
-    static
-    {
+    static {
         StatList.initStats();
     }
 }

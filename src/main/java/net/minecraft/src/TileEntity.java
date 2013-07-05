@@ -1,11 +1,11 @@
 package net.minecraft.src;
 
-import java.util.HashMap;
-import java.util.Map;
 import net.minecraft.server.MinecraftServer;
 
-public class TileEntity
-{
+import java.util.HashMap;
+import java.util.Map;
+
+public class TileEntity {
     /**
      * A HashMap storing string names of classes mapping to the actual java.lang.Class type.
      */
@@ -16,34 +16,40 @@ public class TileEntity
      */
     private static Map classToNameMap = new HashMap();
 
-    /** The reference to the world. */
+    /**
+     * The reference to the world.
+     */
     protected World worldObj;
 
-    /** The x coordinate of the tile entity. */
+    /**
+     * The x coordinate of the tile entity.
+     */
     public int xCoord;
 
-    /** The y coordinate of the tile entity. */
+    /**
+     * The y coordinate of the tile entity.
+     */
     public int yCoord;
 
-    /** The z coordinate of the tile entity. */
+    /**
+     * The z coordinate of the tile entity.
+     */
     public int zCoord;
     protected boolean tileEntityInvalid;
     public int blockMetadata = -1;
 
-    /** the Block type that this TileEntity is contained within */
+    /**
+     * the Block type that this TileEntity is contained within
+     */
     public Block blockType;
 
     /**
      * Adds a new two-way mapping between the class and its string name in both hashmaps.
      */
-    private static void addMapping(Class par0Class, String par1Str)
-    {
-        if (nameToClassMap.containsKey(par1Str))
-        {
+    private static void addMapping(Class par0Class, String par1Str) {
+        if (nameToClassMap.containsKey(par1Str)) {
             throw new IllegalArgumentException("Duplicate id: " + par1Str);
-        }
-        else
-        {
+        } else {
             nameToClassMap.put(par1Str, par0Class);
             classToNameMap.put(par0Class, par1Str);
         }
@@ -52,29 +58,25 @@ public class TileEntity
     /**
      * Returns the worldObj for this tileEntity.
      */
-    public World getWorldObj()
-    {
+    public World getWorldObj() {
         return this.worldObj;
     }
 
     /**
      * Sets the worldObj for this tileEntity.
      */
-    public void setWorldObj(World par1World)
-    {
+    public void setWorldObj(World par1World) {
         this.worldObj = par1World;
     }
 
-    public boolean func_70309_m()
-    {
+    public boolean func_70309_m() {
         return this.worldObj != null;
     }
 
     /**
      * Reads a tile entity from NBT.
      */
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         this.xCoord = par1NBTTagCompound.getInteger("x");
         this.yCoord = par1NBTTagCompound.getInteger("y");
         this.zCoord = par1NBTTagCompound.getInteger("z");
@@ -83,16 +85,12 @@ public class TileEntity
     /**
      * Writes a tile entity to NBT.
      */
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        String var2 = (String)classToNameMap.get(this.getClass());
+    public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
+        String var2 = (String) classToNameMap.get(this.getClass());
 
-        if (var2 == null)
-        {
+        if (var2 == null) {
             throw new RuntimeException(this.getClass() + " is missing a mapping! This is a bug!");
-        }
-        else
-        {
+        } else {
             par1NBTTagCompound.setString("id", var2);
             par1NBTTagCompound.setInteger("x", this.xCoord);
             par1NBTTagCompound.setInteger("y", this.yCoord);
@@ -104,35 +102,28 @@ public class TileEntity
      * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
      * ticks and creates a new spawn inside its implementation.
      */
-    public void updateEntity() {}
+    public void updateEntity() {
+    }
 
     /**
      * Creates a new entity and loads its data from the specified NBT.
      */
-    public static TileEntity createAndLoadEntity(NBTTagCompound par0NBTTagCompound)
-    {
+    public static TileEntity createAndLoadEntity(NBTTagCompound par0NBTTagCompound) {
         TileEntity var1 = null;
 
-        try
-        {
-            Class var2 = (Class)nameToClassMap.get(par0NBTTagCompound.getString("id"));
+        try {
+            Class var2 = (Class) nameToClassMap.get(par0NBTTagCompound.getString("id"));
 
-            if (var2 != null)
-            {
-                var1 = (TileEntity)var2.newInstance();
+            if (var2 != null) {
+                var1 = (TileEntity) var2.newInstance();
             }
-        }
-        catch (Exception var3)
-        {
+        } catch (Exception var3) {
             var3.printStackTrace();
         }
 
-        if (var1 != null)
-        {
+        if (var1 != null) {
             var1.readFromNBT(par0NBTTagCompound);
-        }
-        else
-        {
+        } else {
             MinecraftServer.getServer().getLogAgent().func_98236_b("Skipping TileEntity with id " + par0NBTTagCompound.getString("id"));
         }
 
@@ -142,10 +133,8 @@ public class TileEntity
     /**
      * Returns block data at the location of this entity (client-only).
      */
-    public int getBlockMetadata()
-    {
-        if (this.blockMetadata == -1)
-        {
+    public int getBlockMetadata() {
+        if (this.blockMetadata == -1) {
             this.blockMetadata = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
         }
 
@@ -155,15 +144,12 @@ public class TileEntity
     /**
      * Called when an the contents of an Inventory change, usually
      */
-    public void onInventoryChanged()
-    {
-        if (this.worldObj != null)
-        {
+    public void onInventoryChanged() {
+        if (this.worldObj != null) {
             this.blockMetadata = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
             this.worldObj.updateTileEntityChunkAndDoNothing(this.xCoord, this.yCoord, this.zCoord, this);
 
-            if (this.getBlockType() != null)
-            {
+            if (this.getBlockType() != null) {
                 this.worldObj.func_96440_m(this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID);
             }
         }
@@ -172,10 +158,8 @@ public class TileEntity
     /**
      * Gets the block type at the location of this entity (client-only).
      */
-    public Block getBlockType()
-    {
-        if (this.blockType == null)
-        {
+    public Block getBlockType() {
+        if (this.blockType == null) {
             this.blockType = Block.blocksList[this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord)];
         }
 
@@ -185,40 +169,35 @@ public class TileEntity
     /**
      * Overriden in a sign to provide the text.
      */
-    public Packet getDescriptionPacket()
-    {
+    public Packet getDescriptionPacket() {
         return null;
     }
 
     /**
      * returns true if tile entity is invalid, false otherwise
      */
-    public boolean isInvalid()
-    {
+    public boolean isInvalid() {
         return this.tileEntityInvalid;
     }
 
     /**
      * invalidates a tile entity
      */
-    public void invalidate()
-    {
+    public void invalidate() {
         this.tileEntityInvalid = true;
     }
 
     /**
      * validates a tile entity
      */
-    public void validate()
-    {
+    public void validate() {
         this.tileEntityInvalid = false;
     }
 
     /**
      * Called when a client event is received with the event number and argument, see World.sendClientEvent
      */
-    public boolean receiveClientEvent(int par1, int par2)
-    {
+    public boolean receiveClientEvent(int par1, int par2) {
         return false;
     }
 
@@ -226,27 +205,23 @@ public class TileEntity
      * Causes the TileEntity to reset all it's cached values for it's container block, blockID, metaData and in the case
      * of chests, the adjcacent chest check
      */
-    public void updateContainingBlockInfo()
-    {
+    public void updateContainingBlockInfo() {
         this.blockType = null;
         this.blockMetadata = -1;
     }
 
-    public void func_85027_a(CrashReportCategory par1CrashReportCategory)
-    {
+    public void func_85027_a(CrashReportCategory par1CrashReportCategory) {
         par1CrashReportCategory.addCrashSectionCallable("Name", new CallableTileEntityName(this));
         CrashReportCategory.func_85068_a(par1CrashReportCategory, this.xCoord, this.yCoord, this.zCoord, this.getBlockType().blockID, this.getBlockMetadata());
         par1CrashReportCategory.addCrashSectionCallable("Actual block type", new CallableTileEntityID(this));
         par1CrashReportCategory.addCrashSectionCallable("Actual block data value", new CallableTileEntityData(this));
     }
 
-    static Map getClassToNameMap()
-    {
+    static Map getClassToNameMap() {
         return classToNameMap;
     }
 
-    static
-    {
+    static {
         addMapping(TileEntityFurnace.class, "Furnace");
         addMapping(TileEntityChest.class, "Chest");
         addMapping(TileEntityEnderChest.class, "EnderChest");

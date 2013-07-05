@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IRecipe
-{
+public interface IRecipe {
     /**
      * Used to check if a recipe matches current crafting inventory
      */

@@ -2,29 +2,22 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-final class CallableBlockType implements Callable
-{
+final class CallableBlockType implements Callable {
     final int blockID;
 
-    CallableBlockType(int par1)
-    {
+    CallableBlockType(int par1) {
         this.blockID = par1;
     }
 
-    public String callBlockType()
-    {
-        try
-        {
+    public String callBlockType() {
+        try {
             return String.format("ID #%d (%s // %s)", this.blockID, Block.blocksList[this.blockID].getUnlocalizedName(), Block.blocksList[this.blockID].getClass().getCanonicalName());
-        }
-        catch (Throwable var2)
-        {
+        } catch (Throwable var2) {
             return "ID #" + this.blockID;
         }
     }
 
-    public Object call()
-    {
+    public Object call() {
         return this.callBlockType();
     }
 }

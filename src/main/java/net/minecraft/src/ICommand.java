@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public interface ICommand extends Comparable
-{
+public interface ICommand extends Comparable {
     String getCommandName();
 
     String getCommandUsage(ICommandSender var1);

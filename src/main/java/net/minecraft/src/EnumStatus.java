@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public enum EnumStatus
-{
+public enum EnumStatus {
     OK,
     NOT_POSSIBLE_HERE,
     NOT_POSSIBLE_NOW,

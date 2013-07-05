@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public enum EnumArt
-{
+public enum EnumArt {
     Kebab("Kebab", 16, 16, 0, 0),
     Aztec("Aztec", 16, 16, 16, 0),
     Alban("Alban", 16, 16, 32, 0),
@@ -29,18 +28,21 @@ public enum EnumArt
     Skeleton("Skeleton", 64, 48, 192, 64),
     DonkeyKong("DonkeyKong", 64, 48, 192, 112);
 
-    /** Holds the maximum length of paintings art title. */
+    /**
+     * Holds the maximum length of paintings art title.
+     */
     public static final int maxArtTitleLength = "SkullAndRoses".length();
 
-    /** Painting Title. */
+    /**
+     * Painting Title.
+     */
     public final String title;
     public final int sizeX;
     public final int sizeY;
     public final int offsetX;
     public final int offsetY;
 
-    private EnumArt(String par3Str, int par4, int par5, int par6, int par7)
-    {
+    private EnumArt(String par3Str, int par4, int par5, int par6, int par7) {
         this.title = par3Str;
         this.sizeX = par4;
         this.sizeY = par5;

@@ -7,33 +7,27 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class CommandHelp extends CommandBase
-{
-    public String getCommandName()
-    {
+public class CommandHelp extends CommandBase {
+    public String getCommandName() {
         return "help";
     }
 
     /**
      * Return the required permission level for this command.
      */
-    public int getRequiredPermissionLevel()
-    {
+    public int getRequiredPermissionLevel() {
         return 0;
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
-    {
+    public String getCommandUsage(ICommandSender par1ICommandSender) {
         return "commands.help.usage";
     }
 
-    public List getCommandAliases()
-    {
-        return Arrays.asList(new String[] {"?"});
+    public List getCommandAliases() {
+        return Arrays.asList(new String[]{"?"});
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
-    {
+    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         List var3 = this.getSortedPossibleCommands(par1ICommandSender);
         byte var4 = 7;
         int var5 = (var3.size() - 1) / var4;
@@ -41,17 +35,13 @@ public class CommandHelp extends CommandBase
         ICommand var9;
         int var11;
 
-        try
-        {
+        try {
             var11 = par2ArrayOfStr.length == 0 ? 0 : parseIntBounded(par1ICommandSender, par2ArrayOfStr[0], 1, var5 + 1) - 1;
-        }
-        catch (NumberInvalidException var10)
-        {
+        } catch (NumberInvalidException var10) {
             Map var8 = this.getCommands();
-            var9 = (ICommand)var8.get(par2ArrayOfStr[0]);
+            var9 = (ICommand) var8.get(par2ArrayOfStr[0]);
 
-            if (var9 != null)
-            {
+            if (var9 != null) {
                 throw new WrongUsageException(var9.getCommandUsage(par1ICommandSender), new Object[0]);
             }
 
@@ -59,16 +49,14 @@ public class CommandHelp extends CommandBase
         }
 
         int var7 = Math.min((var11 + 1) * var4, var3.size());
-        par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.help.header", new Object[] {Integer.valueOf(var11 + 1), Integer.valueOf(var5 + 1)}).func_111059_a(EnumChatFormatting.DARK_GREEN));
+        par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.help.header", new Object[]{Integer.valueOf(var11 + 1), Integer.valueOf(var5 + 1)}).func_111059_a(EnumChatFormatting.DARK_GREEN));
 
-        for (int var12 = var11 * var4; var12 < var7; ++var12)
-        {
-            var9 = (ICommand)var3.get(var12);
+        for (int var12 = var11 * var4; var12 < var7; ++var12) {
+            var9 = (ICommand) var3.get(var12);
             par1ICommandSender.func_110122_a(ChatMessageComponent.func_111077_e(var9.getCommandUsage(par1ICommandSender)));
         }
 
-        if (var11 == 0 && par1ICommandSender instanceof EntityPlayer)
-        {
+        if (var11 == 0 && par1ICommandSender instanceof EntityPlayer) {
             par1ICommandSender.func_110122_a(ChatMessageComponent.func_111077_e("commands.help.footer").func_111059_a(EnumChatFormatting.GREEN));
         }
     }
@@ -76,15 +64,13 @@ public class CommandHelp extends CommandBase
     /**
      * Returns a sorted list of all possible commands for the given ICommandSender.
      */
-    protected List getSortedPossibleCommands(ICommandSender par1ICommandSender)
-    {
+    protected List getSortedPossibleCommands(ICommandSender par1ICommandSender) {
         List var2 = MinecraftServer.getServer().getCommandManager().getPossibleCommands(par1ICommandSender);
         Collections.sort(var2);
         return var2;
     }
 
-    protected Map getCommands()
-    {
+    protected Map getCommands() {
         return MinecraftServer.getServer().getCommandManager().getCommands();
     }
 }

@@ -2,75 +2,118 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class BiomeDecorator
-{
-    /** The world the BiomeDecorator is currently decorating */
+public class BiomeDecorator {
+    /**
+     * The world the BiomeDecorator is currently decorating
+     */
     protected World currentWorld;
 
-    /** The Biome Decorator's random number generator. */
+    /**
+     * The Biome Decorator's random number generator.
+     */
     protected Random randomGenerator;
 
-    /** The X-coordinate of the chunk currently being decorated */
+    /**
+     * The X-coordinate of the chunk currently being decorated
+     */
     protected int chunk_X;
 
-    /** The Z-coordinate of the chunk currently being decorated */
+    /**
+     * The Z-coordinate of the chunk currently being decorated
+     */
     protected int chunk_Z;
 
-    /** The biome generator object. */
+    /**
+     * The biome generator object.
+     */
     protected BiomeGenBase biome;
 
-    /** The clay generator. */
+    /**
+     * The clay generator.
+     */
     protected WorldGenerator clayGen = new WorldGenClay(4);
 
-    /** The sand generator. */
+    /**
+     * The sand generator.
+     */
     protected WorldGenerator sandGen;
 
-    /** The gravel generator. */
+    /**
+     * The gravel generator.
+     */
     protected WorldGenerator gravelAsSandGen;
 
-    /** The dirt generator. */
+    /**
+     * The dirt generator.
+     */
     protected WorldGenerator dirtGen;
     protected WorldGenerator gravelGen;
     protected WorldGenerator coalGen;
     protected WorldGenerator ironGen;
 
-    /** Field that holds gold WorldGenMinable */
+    /**
+     * Field that holds gold WorldGenMinable
+     */
     protected WorldGenerator goldGen;
 
-    /** Field that holds redstone WorldGenMinable */
+    /**
+     * Field that holds redstone WorldGenMinable
+     */
     protected WorldGenerator redstoneGen;
 
-    /** Field that holds diamond WorldGenMinable */
+    /**
+     * Field that holds diamond WorldGenMinable
+     */
     protected WorldGenerator diamondGen;
 
-    /** Field that holds Lapis WorldGenMinable */
+    /**
+     * Field that holds Lapis WorldGenMinable
+     */
     protected WorldGenerator lapisGen;
 
-    /** Field that holds one of the plantYellow WorldGenFlowers */
+    /**
+     * Field that holds one of the plantYellow WorldGenFlowers
+     */
     protected WorldGenerator plantYellowGen;
 
-    /** Field that holds one of the plantRed WorldGenFlowers */
+    /**
+     * Field that holds one of the plantRed WorldGenFlowers
+     */
     protected WorldGenerator plantRedGen;
 
-    /** Field that holds mushroomBrown WorldGenFlowers */
+    /**
+     * Field that holds mushroomBrown WorldGenFlowers
+     */
     protected WorldGenerator mushroomBrownGen;
 
-    /** Field that holds mushroomRed WorldGenFlowers */
+    /**
+     * Field that holds mushroomRed WorldGenFlowers
+     */
     protected WorldGenerator mushroomRedGen;
 
-    /** Field that holds big mushroom generator */
+    /**
+     * Field that holds big mushroom generator
+     */
     protected WorldGenerator bigMushroomGen;
 
-    /** Field that holds WorldGenReed */
+    /**
+     * Field that holds WorldGenReed
+     */
     protected WorldGenerator reedGen;
 
-    /** Field that holds WorldGenCactus */
+    /**
+     * Field that holds WorldGenCactus
+     */
     protected WorldGenerator cactusGen;
 
-    /** The water lily generation! */
+    /**
+     * The water lily generation!
+     */
     protected WorldGenerator waterlilyGen;
 
-    /** Amount of waterlilys per chunk. */
+    /**
+     * Amount of waterlilys per chunk.
+     */
     protected int waterlilyPerChunk;
 
     /**
@@ -84,7 +127,9 @@ public class BiomeDecorator
      */
     protected int flowersPerChunk;
 
-    /** The amount of tall grass to generate per chunk. */
+    /**
+     * The amount of tall grass to generate per chunk.
+     */
     protected int grassPerChunk;
 
     /**
@@ -124,14 +169,17 @@ public class BiomeDecorator
      */
     protected int clayPerChunk;
 
-    /** Amount of big mushrooms per chunk */
+    /**
+     * Amount of big mushrooms per chunk
+     */
     protected int bigMushroomsPerChunk;
 
-    /** True if decorator should generate surface lava & water */
+    /**
+     * True if decorator should generate surface lava & water
+     */
     public boolean generateLakes;
 
-    public BiomeDecorator(BiomeGenBase par1BiomeGenBase)
-    {
+    public BiomeDecorator(BiomeGenBase par1BiomeGenBase) {
         this.sandGen = new WorldGenSand(7, Block.sand.blockID);
         this.gravelAsSandGen = new WorldGenSand(6, Block.gravel.blockID);
         this.dirtGen = new WorldGenMinable(Block.dirt.blockID, 32);
@@ -162,14 +210,10 @@ public class BiomeDecorator
     /**
      * Decorates the world. Calls code that was formerly (pre-1.8) in ChunkProviderGenerate.populate
      */
-    public void decorate(World par1World, Random par2Random, int par3, int par4)
-    {
-        if (this.currentWorld != null)
-        {
+    public void decorate(World par1World, Random par2Random, int par3, int par4) {
+        if (this.currentWorld != null) {
             throw new RuntimeException("Already decorating!!");
-        }
-        else
-        {
+        } else {
             this.currentWorld = par1World;
             this.randomGenerator = par2Random;
             this.chunk_X = par3;
@@ -183,29 +227,25 @@ public class BiomeDecorator
     /**
      * The method that does the work of actually decorating chunks
      */
-    protected void decorate()
-    {
+    protected void decorate() {
         this.generateOres();
         int var1;
         int var2;
         int var3;
 
-        for (var1 = 0; var1 < this.sandPerChunk2; ++var1)
-        {
+        for (var1 = 0; var1 < this.sandPerChunk2; ++var1) {
             var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var3 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             this.sandGen.generate(this.currentWorld, this.randomGenerator, var2, this.currentWorld.getTopSolidOrLiquidBlock(var2, var3), var3);
         }
 
-        for (var1 = 0; var1 < this.clayPerChunk; ++var1)
-        {
+        for (var1 = 0; var1 < this.clayPerChunk; ++var1) {
             var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var3 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             this.clayGen.generate(this.currentWorld, this.randomGenerator, var2, this.currentWorld.getTopSolidOrLiquidBlock(var2, var3), var3);
         }
 
-        for (var1 = 0; var1 < this.sandPerChunk; ++var1)
-        {
+        for (var1 = 0; var1 < this.sandPerChunk; ++var1) {
             var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var3 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             this.sandGen.generate(this.currentWorld, this.randomGenerator, var2, this.currentWorld.getTopSolidOrLiquidBlock(var2, var3), var3);
@@ -213,15 +253,13 @@ public class BiomeDecorator
 
         var1 = this.treesPerChunk;
 
-        if (this.randomGenerator.nextInt(10) == 0)
-        {
+        if (this.randomGenerator.nextInt(10) == 0) {
             ++var1;
         }
 
         int var4;
 
-        for (var2 = 0; var2 < var1; ++var2)
-        {
+        for (var2 = 0; var2 < var1; ++var2) {
             var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             WorldGenerator var5 = this.biome.getRandomWorldGenForTrees(this.randomGenerator);
@@ -229,8 +267,7 @@ public class BiomeDecorator
             var5.generate(this.currentWorld, this.randomGenerator, var3, this.currentWorld.getHeightValue(var3, var4), var4);
         }
 
-        for (var2 = 0; var2 < this.bigMushroomsPerChunk; ++var2)
-        {
+        for (var2 = 0; var2 < this.bigMushroomsPerChunk; ++var2) {
             var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             this.bigMushroomGen.generate(this.currentWorld, this.randomGenerator, var3, this.currentWorld.getHeightValue(var3, var4), var4);
@@ -238,15 +275,13 @@ public class BiomeDecorator
 
         int var7;
 
-        for (var2 = 0; var2 < this.flowersPerChunk; ++var2)
-        {
+        for (var2 = 0; var2 < this.flowersPerChunk; ++var2) {
             var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var4 = this.randomGenerator.nextInt(128);
             var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             this.plantYellowGen.generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
 
-            if (this.randomGenerator.nextInt(4) == 0)
-            {
+            if (this.randomGenerator.nextInt(4) == 0) {
                 var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
                 var4 = this.randomGenerator.nextInt(128);
                 var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
@@ -254,8 +289,7 @@ public class BiomeDecorator
             }
         }
 
-        for (var2 = 0; var2 < this.grassPerChunk; ++var2)
-        {
+        for (var2 = 0; var2 < this.grassPerChunk; ++var2) {
             var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var4 = this.randomGenerator.nextInt(128);
             var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
@@ -263,16 +297,14 @@ public class BiomeDecorator
             var6.generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
         }
 
-        for (var2 = 0; var2 < this.deadBushPerChunk; ++var2)
-        {
+        for (var2 = 0; var2 < this.deadBushPerChunk; ++var2) {
             var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var4 = this.randomGenerator.nextInt(128);
             var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             (new WorldGenDeadBush(Block.deadBush.blockID)).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
         }
 
-        for (var2 = 0; var2 < this.waterlilyPerChunk; ++var2)
-        {
+        for (var2 = 0; var2 < this.waterlilyPerChunk; ++var2) {
             var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
 
@@ -285,18 +317,15 @@ public class BiomeDecorator
             this.waterlilyGen.generate(this.currentWorld, this.randomGenerator, var3, var7, var4);
         }
 
-        for (var2 = 0; var2 < this.mushroomsPerChunk; ++var2)
-        {
-            if (this.randomGenerator.nextInt(4) == 0)
-            {
+        for (var2 = 0; var2 < this.mushroomsPerChunk; ++var2) {
+            if (this.randomGenerator.nextInt(4) == 0) {
                 var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
                 var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
                 var7 = this.currentWorld.getHeightValue(var3, var4);
                 this.mushroomBrownGen.generate(this.currentWorld, this.randomGenerator, var3, var7, var4);
             }
 
-            if (this.randomGenerator.nextInt(8) == 0)
-            {
+            if (this.randomGenerator.nextInt(8) == 0) {
                 var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
                 var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
                 var7 = this.randomGenerator.nextInt(128);
@@ -304,66 +333,57 @@ public class BiomeDecorator
             }
         }
 
-        if (this.randomGenerator.nextInt(4) == 0)
-        {
+        if (this.randomGenerator.nextInt(4) == 0) {
             var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var3 = this.randomGenerator.nextInt(128);
             var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             this.mushroomBrownGen.generate(this.currentWorld, this.randomGenerator, var2, var3, var4);
         }
 
-        if (this.randomGenerator.nextInt(8) == 0)
-        {
+        if (this.randomGenerator.nextInt(8) == 0) {
             var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var3 = this.randomGenerator.nextInt(128);
             var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             this.mushroomRedGen.generate(this.currentWorld, this.randomGenerator, var2, var3, var4);
         }
 
-        for (var2 = 0; var2 < this.reedsPerChunk; ++var2)
-        {
+        for (var2 = 0; var2 < this.reedsPerChunk; ++var2) {
             var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             var7 = this.randomGenerator.nextInt(128);
             this.reedGen.generate(this.currentWorld, this.randomGenerator, var3, var7, var4);
         }
 
-        for (var2 = 0; var2 < 10; ++var2)
-        {
+        for (var2 = 0; var2 < 10; ++var2) {
             var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var4 = this.randomGenerator.nextInt(128);
             var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             this.reedGen.generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
         }
 
-        if (this.randomGenerator.nextInt(32) == 0)
-        {
+        if (this.randomGenerator.nextInt(32) == 0) {
             var2 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var3 = this.randomGenerator.nextInt(128);
             var4 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             (new WorldGenPumpkin()).generate(this.currentWorld, this.randomGenerator, var2, var3, var4);
         }
 
-        for (var2 = 0; var2 < this.cactiPerChunk; ++var2)
-        {
+        for (var2 = 0; var2 < this.cactiPerChunk; ++var2) {
             var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
             var4 = this.randomGenerator.nextInt(128);
             var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
             this.cactusGen.generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
         }
 
-        if (this.generateLakes)
-        {
-            for (var2 = 0; var2 < 50; ++var2)
-            {
+        if (this.generateLakes) {
+            for (var2 = 0; var2 < 50; ++var2) {
                 var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
                 var4 = this.randomGenerator.nextInt(this.randomGenerator.nextInt(120) + 8);
                 var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
                 (new WorldGenLiquids(Block.waterMoving.blockID)).generate(this.currentWorld, this.randomGenerator, var3, var4, var7);
             }
 
-            for (var2 = 0; var2 < 20; ++var2)
-            {
+            for (var2 = 0; var2 < 20; ++var2) {
                 var3 = this.chunk_X + this.randomGenerator.nextInt(16) + 8;
                 var4 = this.randomGenerator.nextInt(this.randomGenerator.nextInt(this.randomGenerator.nextInt(112) + 8) + 8);
                 var7 = this.chunk_Z + this.randomGenerator.nextInt(16) + 8;
@@ -375,10 +395,8 @@ public class BiomeDecorator
     /**
      * Standard ore generation helper. Generates most ores.
      */
-    protected void genStandardOre1(int par1, WorldGenerator par2WorldGenerator, int par3, int par4)
-    {
-        for (int var5 = 0; var5 < par1; ++var5)
-        {
+    protected void genStandardOre1(int par1, WorldGenerator par2WorldGenerator, int par3, int par4) {
+        for (int var5 = 0; var5 < par1; ++var5) {
             int var6 = this.chunk_X + this.randomGenerator.nextInt(16);
             int var7 = this.randomGenerator.nextInt(par4 - par3) + par3;
             int var8 = this.chunk_Z + this.randomGenerator.nextInt(16);
@@ -389,10 +407,8 @@ public class BiomeDecorator
     /**
      * Standard ore generation helper. Generates Lapis Lazuli.
      */
-    protected void genStandardOre2(int par1, WorldGenerator par2WorldGenerator, int par3, int par4)
-    {
-        for (int var5 = 0; var5 < par1; ++var5)
-        {
+    protected void genStandardOre2(int par1, WorldGenerator par2WorldGenerator, int par3, int par4) {
+        for (int var5 = 0; var5 < par1; ++var5) {
             int var6 = this.chunk_X + this.randomGenerator.nextInt(16);
             int var7 = this.randomGenerator.nextInt(par4) + this.randomGenerator.nextInt(par4) + (par3 - par4);
             int var8 = this.chunk_Z + this.randomGenerator.nextInt(16);
@@ -403,8 +419,7 @@ public class BiomeDecorator
     /**
      * Generates ores in the current chunk
      */
-    protected void generateOres()
-    {
+    protected void generateOres() {
         this.genStandardOre1(20, this.dirtGen, 0, 128);
         this.genStandardOre1(10, this.gravelGen, 0, 128);
         this.genStandardOre1(20, this.coalGen, 0, 128);

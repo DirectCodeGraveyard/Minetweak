@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class EntityAIDefendVillage extends EntityAITarget
-{
+public class EntityAIDefendVillage extends EntityAITarget {
     EntityIronGolem irongolem;
 
     /**
@@ -9,8 +8,7 @@ public class EntityAIDefendVillage extends EntityAITarget
      */
     EntityLivingBase villageAgressorTarget;
 
-    public EntityAIDefendVillage(EntityIronGolem par1EntityIronGolem)
-    {
+    public EntityAIDefendVillage(EntityIronGolem par1EntityIronGolem) {
         super(par1EntityIronGolem, false, true);
         this.irongolem = par1EntityIronGolem;
         this.setMutexBits(1);
@@ -19,32 +17,22 @@ public class EntityAIDefendVillage extends EntityAITarget
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
         Village var1 = this.irongolem.getVillage();
 
-        if (var1 == null)
-        {
+        if (var1 == null) {
             return false;
-        }
-        else
-        {
+        } else {
             this.villageAgressorTarget = var1.findNearestVillageAggressor(this.irongolem);
 
-            if (!this.isSuitableTarget(this.villageAgressorTarget, false))
-            {
-                if (this.taskOwner.getRNG().nextInt(20) == 0)
-                {
+            if (!this.isSuitableTarget(this.villageAgressorTarget, false)) {
+                if (this.taskOwner.getRNG().nextInt(20) == 0) {
                     this.villageAgressorTarget = var1.func_82685_c(this.irongolem);
                     return this.isSuitableTarget(this.villageAgressorTarget, false);
-                }
-                else
-                {
+                } else {
                     return false;
                 }
-            }
-            else
-            {
+            } else {
                 return true;
             }
         }
@@ -53,8 +41,7 @@ public class EntityAIDefendVillage extends EntityAITarget
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
-    {
+    public void startExecuting() {
         this.irongolem.setAttackTarget(this.villageAgressorTarget);
         super.startExecuting();
     }

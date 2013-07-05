@@ -4,18 +4,17 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class Packet17Sleep extends Packet
-{
+public class Packet17Sleep extends Packet {
     public int entityID;
     public int bedX;
     public int bedY;
     public int bedZ;
     public int field_73622_e;
 
-    public Packet17Sleep() {}
+    public Packet17Sleep() {
+    }
 
-    public Packet17Sleep(Entity par1Entity, int par2, int par3, int par4, int par5)
-    {
+    public Packet17Sleep(Entity par1Entity, int par2, int par3, int par4, int par5) {
         this.field_73622_e = par2;
         this.bedX = par3;
         this.bedY = par4;
@@ -26,8 +25,7 @@ public class Packet17Sleep extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInput par1DataInput) throws IOException
-    {
+    public void readPacketData(DataInput par1DataInput) throws IOException {
         this.entityID = par1DataInput.readInt();
         this.field_73622_e = par1DataInput.readByte();
         this.bedX = par1DataInput.readInt();
@@ -38,8 +36,7 @@ public class Packet17Sleep extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutput par1DataOutput) throws IOException
-    {
+    public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeInt(this.entityID);
         par1DataOutput.writeByte(this.field_73622_e);
         par1DataOutput.writeInt(this.bedX);
@@ -50,16 +47,14 @@ public class Packet17Sleep extends Packet
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler)
-    {
+    public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleSleep(this);
     }
 
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 14;
     }
 }

@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-class StructureStrongholdPieceWeight
-{
+class StructureStrongholdPieceWeight {
     public Class pieceClass;
 
     /**
@@ -11,23 +10,22 @@ class StructureStrongholdPieceWeight
     public final int pieceWeight;
     public int instancesSpawned;
 
-    /** How many Structure Pieces of this type may spawn in a structure */
+    /**
+     * How many Structure Pieces of this type may spawn in a structure
+     */
     public int instancesLimit;
 
-    public StructureStrongholdPieceWeight(Class par1Class, int par2, int par3)
-    {
+    public StructureStrongholdPieceWeight(Class par1Class, int par2, int par3) {
         this.pieceClass = par1Class;
         this.pieceWeight = par2;
         this.instancesLimit = par3;
     }
 
-    public boolean canSpawnMoreStructuresOfType(int par1)
-    {
+    public boolean canSpawnMoreStructuresOfType(int par1) {
         return this.instancesLimit == 0 || this.instancesSpawned < this.instancesLimit;
     }
 
-    public boolean canSpawnMoreStructures()
-    {
+    public boolean canSpawnMoreStructures() {
         return this.instancesLimit == 0 || this.instancesSpawned < this.instancesLimit;
     }
 }

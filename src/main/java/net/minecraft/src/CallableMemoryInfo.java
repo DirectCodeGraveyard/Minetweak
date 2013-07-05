@@ -2,13 +2,13 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableMemoryInfo implements Callable
-{
-    /** Reference to the CrashReport object. */
+class CallableMemoryInfo implements Callable {
+    /**
+     * Reference to the CrashReport object.
+     */
     final CrashReport theCrashReport;
 
-    CallableMemoryInfo(CrashReport par1CrashReport)
-    {
+    CallableMemoryInfo(CrashReport par1CrashReport) {
         this.theCrashReport = par1CrashReport;
     }
 
@@ -16,8 +16,7 @@ class CallableMemoryInfo implements Callable
      * Returns the memory information as a String.  Includes the Free Memory in bytes and MB, Total Memory in bytes and
      * MB, and Max Memory in Bytes and MB.
      */
-    public String getMemoryInfoAsString()
-    {
+    public String getMemoryInfoAsString() {
         Runtime var1 = Runtime.getRuntime();
         long var2 = var1.maxMemory();
         long var4 = var1.totalMemory();
@@ -28,8 +27,7 @@ class CallableMemoryInfo implements Callable
         return var6 + " bytes (" + var12 + " MB) / " + var4 + " bytes (" + var10 + " MB) up to " + var2 + " bytes (" + var8 + " MB)";
     }
 
-    public Object call()
-    {
+    public Object call() {
         return this.getMemoryInfoAsString();
     }
 }

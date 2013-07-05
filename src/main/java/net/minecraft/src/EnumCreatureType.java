@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public enum EnumCreatureType
-{
+public enum EnumCreatureType {
     monster(IMob.class, 70, Material.air, false, false),
     creature(EntityAnimal.class, 10, Material.air, true, true),
     ambient(EntityAmbientCreature.class, 15, Material.air, true, false),
@@ -15,14 +14,17 @@ public enum EnumCreatureType
     private final int maxNumberOfCreature;
     private final Material creatureMaterial;
 
-    /** A flag indicating whether this creature type is peaceful. */
+    /**
+     * A flag indicating whether this creature type is peaceful.
+     */
     private final boolean isPeacefulCreature;
 
-    /** Whether this creature type is an animal. */
+    /**
+     * Whether this creature type is an animal.
+     */
     private final boolean isAnimal;
 
-    private EnumCreatureType(Class par3Class, int par4, Material par5Material, boolean par6, boolean par7)
-    {
+    private EnumCreatureType(Class par3Class, int par4, Material par5Material, boolean par6, boolean par7) {
         this.creatureClass = par3Class;
         this.maxNumberOfCreature = par4;
         this.creatureMaterial = par5Material;
@@ -30,34 +32,29 @@ public enum EnumCreatureType
         this.isAnimal = par7;
     }
 
-    public Class getCreatureClass()
-    {
+    public Class getCreatureClass() {
         return this.creatureClass;
     }
 
-    public int getMaxNumberOfCreature()
-    {
+    public int getMaxNumberOfCreature() {
         return this.maxNumberOfCreature;
     }
 
-    public Material getCreatureMaterial()
-    {
+    public Material getCreatureMaterial() {
         return this.creatureMaterial;
     }
 
     /**
      * Gets whether or not this creature type is peaceful.
      */
-    public boolean getPeacefulCreature()
-    {
+    public boolean getPeacefulCreature() {
         return this.isPeacefulCreature;
     }
 
     /**
      * Return whether this creature type is an animal.
      */
-    public boolean getAnimal()
-    {
+    public boolean getAnimal() {
         return this.isAnimal;
     }
 }

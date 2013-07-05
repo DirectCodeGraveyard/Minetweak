@@ -3,20 +3,16 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-abstract class ComponentStronghold extends StructureComponent
-{
-    protected ComponentStronghold(int par1)
-    {
+abstract class ComponentStronghold extends StructureComponent {
+    protected ComponentStronghold(int par1) {
         super(par1);
     }
 
     /**
      * builds a door of the enumerated types (empty opening is a door)
      */
-    protected void placeDoor(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumDoor par4EnumDoor, int par5, int par6, int par7)
-    {
-        switch (EnumDoorHelper.doorEnum[par4EnumDoor.ordinal()])
-        {
+    protected void placeDoor(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox, EnumDoor par4EnumDoor, int par5, int par6, int par7) {
+        switch (EnumDoorHelper.doorEnum[par4EnumDoor.ordinal()]) {
             case 1:
             default:
                 this.fillWithBlocks(par1World, par3StructureBoundingBox, par5, par6, par7, par5 + 3 - 1, par6 + 3 - 1, par7, 0, 0, false);
@@ -61,12 +57,10 @@ abstract class ComponentStronghold extends StructureComponent
         }
     }
 
-    protected EnumDoor getRandomDoor(Random par1Random)
-    {
+    protected EnumDoor getRandomDoor(Random par1Random) {
         int var2 = par1Random.nextInt(5);
 
-        switch (var2)
-        {
+        switch (var2) {
             case 0:
             case 1:
             default:
@@ -86,10 +80,8 @@ abstract class ComponentStronghold extends StructureComponent
     /**
      * Gets the next component in any cardinal direction
      */
-    protected StructureComponent getNextComponentNormal(ComponentStrongholdStairs2 par1ComponentStrongholdStairs2, List par2List, Random par3Random, int par4, int par5)
-    {
-        switch (this.coordBaseMode)
-        {
+    protected StructureComponent getNextComponentNormal(ComponentStrongholdStairs2 par1ComponentStrongholdStairs2, List par2List, Random par3Random, int par4, int par5) {
+        switch (this.coordBaseMode) {
             case 0:
                 return StructureStrongholdPieces.getNextValidComponentAccess(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.minX + par4, this.boundingBox.minY + par5, this.boundingBox.maxZ + 1, this.coordBaseMode, this.getComponentType());
 
@@ -110,10 +102,8 @@ abstract class ComponentStronghold extends StructureComponent
     /**
      * Gets the next component in the +/- X direction
      */
-    protected StructureComponent getNextComponentX(ComponentStrongholdStairs2 par1ComponentStrongholdStairs2, List par2List, Random par3Random, int par4, int par5)
-    {
-        switch (this.coordBaseMode)
-        {
+    protected StructureComponent getNextComponentX(ComponentStrongholdStairs2 par1ComponentStrongholdStairs2, List par2List, Random par3Random, int par4, int par5) {
+        switch (this.coordBaseMode) {
             case 0:
                 return StructureStrongholdPieces.getNextValidComponentAccess(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.minX - 1, this.boundingBox.minY + par4, this.boundingBox.minZ + par5, 1, this.getComponentType());
 
@@ -134,10 +124,8 @@ abstract class ComponentStronghold extends StructureComponent
     /**
      * Gets the next component in the +/- Z direction
      */
-    protected StructureComponent getNextComponentZ(ComponentStrongholdStairs2 par1ComponentStrongholdStairs2, List par2List, Random par3Random, int par4, int par5)
-    {
-        switch (this.coordBaseMode)
-        {
+    protected StructureComponent getNextComponentZ(ComponentStrongholdStairs2 par1ComponentStrongholdStairs2, List par2List, Random par3Random, int par4, int par5) {
+        switch (this.coordBaseMode) {
             case 0:
                 return StructureStrongholdPieces.getNextValidComponentAccess(par1ComponentStrongholdStairs2, par2List, par3Random, this.boundingBox.maxX + 1, this.boundingBox.minY + par4, this.boundingBox.minZ + par5, 3, this.getComponentType());
 
@@ -158,8 +146,7 @@ abstract class ComponentStronghold extends StructureComponent
     /**
      * returns false if the Structure Bounding Box goes below 10
      */
-    protected static boolean canStrongholdGoDeeper(StructureBoundingBox par0StructureBoundingBox)
-    {
+    protected static boolean canStrongholdGoDeeper(StructureBoundingBox par0StructureBoundingBox) {
         return par0StructureBoundingBox != null && par0StructureBoundingBox.minY > 10;
     }
 }

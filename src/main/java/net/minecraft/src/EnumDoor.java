@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public enum EnumDoor
-{
+public enum EnumDoor {
     OPENING,
     WOOD_DOOR,
     GRATES,

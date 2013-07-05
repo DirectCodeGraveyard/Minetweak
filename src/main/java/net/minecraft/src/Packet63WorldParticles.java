@@ -4,20 +4,25 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class Packet63WorldParticles extends Packet
-{
+public class Packet63WorldParticles extends Packet {
     /**
      * The name of the particle to create. A list can be found at https://gist.github.com/thinkofdeath/5110835
      */
     private String particleName;
 
-    /** X position of the particle. */
+    /**
+     * X position of the particle.
+     */
     private float posX;
 
-    /** Y position of the particle. */
+    /**
+     * Y position of the particle.
+     */
     private float posY;
 
-    /** Z position of the particle. */
+    /**
+     * Z position of the particle.
+     */
     private float posZ;
 
     /**
@@ -35,17 +40,20 @@ public class Packet63WorldParticles extends Packet
      */
     private float offsetZ;
 
-    /** The speed of each particle. */
+    /**
+     * The speed of each particle.
+     */
     private float speed;
 
-    /** The number of particles to create. */
+    /**
+     * The number of particles to create.
+     */
     private int quantity;
 
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInput par1DataInput) throws IOException
-    {
+    public void readPacketData(DataInput par1DataInput) throws IOException {
         this.particleName = readString(par1DataInput, 64);
         this.posX = par1DataInput.readFloat();
         this.posY = par1DataInput.readFloat();
@@ -60,8 +68,7 @@ public class Packet63WorldParticles extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutput par1DataOutput) throws IOException
-    {
+    public void writePacketData(DataOutput par1DataOutput) throws IOException {
         writeString(this.particleName, par1DataOutput);
         par1DataOutput.writeFloat(this.posX);
         par1DataOutput.writeFloat(this.posY);
@@ -76,16 +83,14 @@ public class Packet63WorldParticles extends Packet
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler)
-    {
+    public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleWorldParticles(this);
     }
 
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 64;
     }
 }

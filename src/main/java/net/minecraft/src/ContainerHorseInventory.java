@@ -1,12 +1,10 @@
 package net.minecraft.src;
 
-public class ContainerHorseInventory extends Container
-{
+public class ContainerHorseInventory extends Container {
     private IInventory field_111243_a;
     private EntityHorse field_111242_f;
 
-    public ContainerHorseInventory(IInventory par1IInventory, IInventory par2IInventory, EntityHorse par3EntityHorse)
-    {
+    public ContainerHorseInventory(IInventory par1IInventory, IInventory par2IInventory, EntityHorse par3EntityHorse) {
         this.field_111243_a = par2IInventory;
         this.field_111242_f = par3EntityHorse;
         byte var4 = 3;
@@ -17,81 +15,59 @@ public class ContainerHorseInventory extends Container
         int var6;
         int var7;
 
-        if (par3EntityHorse.func_110261_ca())
-        {
-            for (var6 = 0; var6 < var4; ++var6)
-            {
-                for (var7 = 0; var7 < 5; ++var7)
-                {
+        if (par3EntityHorse.func_110261_ca()) {
+            for (var6 = 0; var6 < var4; ++var6) {
+                for (var7 = 0; var7 < 5; ++var7) {
                     this.addSlotToContainer(new Slot(par2IInventory, 2 + var7 + var6 * 5, 80 + var7 * 18, 18 + var6 * 18));
                 }
             }
         }
 
-        for (var6 = 0; var6 < 3; ++var6)
-        {
-            for (var7 = 0; var7 < 9; ++var7)
-            {
+        for (var6 = 0; var6 < 3; ++var6) {
+            for (var7 = 0; var7 < 9; ++var7) {
                 this.addSlotToContainer(new Slot(par1IInventory, var7 + var6 * 9 + 9, 8 + var7 * 18, 102 + var6 * 18 + var5));
             }
         }
 
-        for (var6 = 0; var6 < 9; ++var6)
-        {
+        for (var6 = 0; var6 < 9; ++var6) {
             this.addSlotToContainer(new Slot(par1IInventory, var6, 8 + var6 * 18, 160 + var5));
         }
     }
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
-    {
+    public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
         return this.field_111243_a.isUseableByPlayer(par1EntityPlayer) && this.field_111242_f.getDistanceToEntity(par1EntityPlayer) < 8.0F;
     }
 
     /**
      * Take a stack from the specified inventory slot.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
-    {
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack var3 = null;
-        Slot var4 = (Slot)this.inventorySlots.get(par2);
+        Slot var4 = (Slot) this.inventorySlots.get(par2);
 
-        if (var4 != null && var4.getHasStack())
-        {
+        if (var4 != null && var4.getHasStack()) {
             ItemStack var5 = var4.getStack();
             var3 = var5.copy();
 
-            if (par2 < this.field_111243_a.getSizeInventory())
-            {
-                if (!this.mergeItemStack(var5, this.field_111243_a.getSizeInventory(), this.inventorySlots.size(), true))
-                {
+            if (par2 < this.field_111243_a.getSizeInventory()) {
+                if (!this.mergeItemStack(var5, this.field_111243_a.getSizeInventory(), this.inventorySlots.size(), true)) {
                     return null;
                 }
-            }
-            else if (this.getSlot(1).isItemValid(var5))
-            {
-                if (!this.mergeItemStack(var5, 1, 2, false))
-                {
+            } else if (this.getSlot(1).isItemValid(var5)) {
+                if (!this.mergeItemStack(var5, 1, 2, false)) {
                     return null;
                 }
-            }
-            else if (this.getSlot(0).isItemValid(var5))
-            {
-                if (!this.mergeItemStack(var5, 0, 1, false))
-                {
+            } else if (this.getSlot(0).isItemValid(var5)) {
+                if (!this.mergeItemStack(var5, 0, 1, false)) {
                     return null;
                 }
-            }
-            else if (this.field_111243_a.getSizeInventory() <= 2 || !this.mergeItemStack(var5, 2, this.field_111243_a.getSizeInventory(), false))
-            {
+            } else if (this.field_111243_a.getSizeInventory() <= 2 || !this.mergeItemStack(var5, 2, this.field_111243_a.getSizeInventory(), false)) {
                 return null;
             }
 
-            if (var5.stackSize == 0)
-            {
-                var4.putStack((ItemStack)null);
-            }
-            else
-            {
+            if (var5.stackSize == 0) {
+                var4.putStack((ItemStack) null);
+            } else {
                 var4.onSlotChanged();
             }
         }
@@ -102,8 +78,7 @@ public class ContainerHorseInventory extends Container
     /**
      * Callback for when the crafting gui is closed.
      */
-    public void onCraftGuiClosed(EntityPlayer par1EntityPlayer)
-    {
+    public void onCraftGuiClosed(EntityPlayer par1EntityPlayer) {
         super.onCraftGuiClosed(par1EntityPlayer);
         this.field_111243_a.closeChest();
     }

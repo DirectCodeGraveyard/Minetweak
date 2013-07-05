@@ -2,10 +2,8 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class BiomeGenSwamp extends BiomeGenBase
-{
-    protected BiomeGenSwamp(int par1)
-    {
+public class BiomeGenSwamp extends BiomeGenBase {
+    protected BiomeGenSwamp(int par1) {
         super(par1);
         this.theBiomeDecorator.treesPerChunk = 2;
         this.theBiomeDecorator.flowersPerChunk = -999;
@@ -21,8 +19,7 @@ public class BiomeGenSwamp extends BiomeGenBase
     /**
      * Gets a WorldGen appropriate for this biome.
      */
-    public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
-    {
+    public WorldGenerator getRandomWorldGenForTrees(Random par1Random) {
         return this.worldGeneratorSwamp;
     }
 }

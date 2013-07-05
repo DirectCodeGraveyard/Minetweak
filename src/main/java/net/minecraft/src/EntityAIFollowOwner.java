@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class EntityAIFollowOwner extends EntityAIBase
-{
+public class EntityAIFollowOwner extends EntityAIBase {
     private EntityTameable thePet;
     private EntityLivingBase theOwner;
     World theWorld;
@@ -12,8 +11,7 @@ public class EntityAIFollowOwner extends EntityAIBase
     float minDist;
     private boolean field_75344_i;
 
-    public EntityAIFollowOwner(EntityTameable par1EntityTameable, double par2, float par4, float par5)
-    {
+    public EntityAIFollowOwner(EntityTameable par1EntityTameable, double par2, float par4, float par5) {
         this.thePet = par1EntityTameable;
         this.theWorld = par1EntityTameable.worldObj;
         this.field_75336_f = par2;
@@ -26,24 +24,16 @@ public class EntityAIFollowOwner extends EntityAIBase
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
+    public boolean shouldExecute() {
         EntityLivingBase var1 = this.thePet.func_130012_q();
 
-        if (var1 == null)
-        {
+        if (var1 == null) {
             return false;
-        }
-        else if (this.thePet.isSitting())
-        {
+        } else if (this.thePet.isSitting()) {
             return false;
-        }
-        else if (this.thePet.getDistanceSqToEntity(var1) < (double)(this.minDist * this.minDist))
-        {
+        } else if (this.thePet.getDistanceSqToEntity(var1) < (double) (this.minDist * this.minDist)) {
             return false;
-        }
-        else
-        {
+        } else {
             this.theOwner = var1;
             return true;
         }
@@ -52,16 +42,14 @@ public class EntityAIFollowOwner extends EntityAIBase
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
-    public boolean continueExecuting()
-    {
-        return !this.petPathfinder.noPath() && this.thePet.getDistanceSqToEntity(this.theOwner) > (double)(this.maxDist * this.maxDist) && !this.thePet.isSitting();
+    public boolean continueExecuting() {
+        return !this.petPathfinder.noPath() && this.thePet.getDistanceSqToEntity(this.theOwner) > (double) (this.maxDist * this.maxDist) && !this.thePet.isSitting();
     }
 
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
-    {
+    public void startExecuting() {
         this.field_75343_h = 0;
         this.field_75344_i = this.thePet.getNavigator().getAvoidsWater();
         this.thePet.getNavigator().setAvoidsWater(false);
@@ -70,8 +58,7 @@ public class EntityAIFollowOwner extends EntityAIBase
     /**
      * Resets the task
      */
-    public void resetTask()
-    {
+    public void resetTask() {
         this.theOwner = null;
         this.petPathfinder.clearPathEntity();
         this.thePet.getNavigator().setAvoidsWater(this.field_75344_i);
@@ -80,33 +67,24 @@ public class EntityAIFollowOwner extends EntityAIBase
     /**
      * Updates the task
      */
-    public void updateTask()
-    {
-        this.thePet.getLookHelper().setLookPositionWithEntity(this.theOwner, 10.0F, (float)this.thePet.getVerticalFaceSpeed());
+    public void updateTask() {
+        this.thePet.getLookHelper().setLookPositionWithEntity(this.theOwner, 10.0F, (float) this.thePet.getVerticalFaceSpeed());
 
-        if (!this.thePet.isSitting())
-        {
-            if (--this.field_75343_h <= 0)
-            {
+        if (!this.thePet.isSitting()) {
+            if (--this.field_75343_h <= 0) {
                 this.field_75343_h = 10;
 
-                if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.field_75336_f))
-                {
-                    if (!this.thePet.func_110167_bD())
-                    {
-                        if (this.thePet.getDistanceSqToEntity(this.theOwner) >= 144.0D)
-                        {
+                if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.field_75336_f)) {
+                    if (!this.thePet.func_110167_bD()) {
+                        if (this.thePet.getDistanceSqToEntity(this.theOwner) >= 144.0D) {
                             int var1 = MathHelper.floor_double(this.theOwner.posX) - 2;
                             int var2 = MathHelper.floor_double(this.theOwner.posZ) - 2;
                             int var3 = MathHelper.floor_double(this.theOwner.boundingBox.minY);
 
-                            for (int var4 = 0; var4 <= 4; ++var4)
-                            {
-                                for (int var5 = 0; var5 <= 4; ++var5)
-                                {
-                                    if ((var4 < 1 || var5 < 1 || var4 > 3 || var5 > 3) && this.theWorld.doesBlockHaveSolidTopSurface(var1 + var4, var3 - 1, var2 + var5) && !this.theWorld.isBlockNormalCube(var1 + var4, var3, var2 + var5) && !this.theWorld.isBlockNormalCube(var1 + var4, var3 + 1, var2 + var5))
-                                    {
-                                        this.thePet.setLocationAndAngles((double)((float)(var1 + var4) + 0.5F), (double)var3, (double)((float)(var2 + var5) + 0.5F), this.thePet.rotationYaw, this.thePet.rotationPitch);
+                            for (int var4 = 0; var4 <= 4; ++var4) {
+                                for (int var5 = 0; var5 <= 4; ++var5) {
+                                    if ((var4 < 1 || var5 < 1 || var4 > 3 || var5 > 3) && this.theWorld.doesBlockHaveSolidTopSurface(var1 + var4, var3 - 1, var2 + var5) && !this.theWorld.isBlockNormalCube(var1 + var4, var3, var2 + var5) && !this.theWorld.isBlockNormalCube(var1 + var4, var3 + 1, var2 + var5)) {
+                                        this.thePet.setLocationAndAngles((double) ((float) (var1 + var4) + 0.5F), (double) var3, (double) ((float) (var2 + var5) + 0.5F), this.thePet.rotationYaw, this.thePet.rotationPitch);
                                         this.petPathfinder.clearPathEntity();
                                         return;
                                     }

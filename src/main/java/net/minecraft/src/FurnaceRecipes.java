@@ -3,24 +3,23 @@ package net.minecraft.src;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FurnaceRecipes
-{
+public class FurnaceRecipes {
     private static final FurnaceRecipes smeltingBase = new FurnaceRecipes();
 
-    /** The list of smelting results. */
+    /**
+     * The list of smelting results.
+     */
     private Map<Number, ItemStack> smeltingList = new HashMap<Number, ItemStack>();
     private Map<Number, Float> experienceList = new HashMap<Number, Float>();
 
     /**
      * Used to call methods addSmelting and getSmeltingResult.
      */
-    public static FurnaceRecipes smelting()
-    {
+    public static FurnaceRecipes smelting() {
         return smeltingBase;
     }
 
-    private FurnaceRecipes()
-    {
+    private FurnaceRecipes() {
         this.addSmelting(Block.oreIron.blockID, new ItemStack(Item.ingotIron), 0.7F);
         this.addSmelting(Block.oreGold.blockID, new ItemStack(Item.ingotGold), 1.0F);
         this.addSmelting(Block.oreDiamond.blockID, new ItemStack(Item.diamond), 1.0F);
@@ -46,8 +45,7 @@ public class FurnaceRecipes
     /**
      * Adds a smelting recipe.
      */
-    public void addSmelting(int par1, ItemStack par2ItemStack, float par3)
-    {
+    public void addSmelting(int par1, ItemStack par2ItemStack, float par3) {
         this.smeltingList.put(par1, par2ItemStack);
         this.experienceList.put(par2ItemStack.itemID, par3);
     }
@@ -55,18 +53,15 @@ public class FurnaceRecipes
     /**
      * Returns the smelting result of an item.
      */
-    public ItemStack getSmeltingResult(int par1)
-    {
+    public ItemStack getSmeltingResult(int par1) {
         return this.smeltingList.get(par1);
     }
 
-    public Map<Number, ItemStack> getSmeltingList()
-    {
+    public Map<Number, ItemStack> getSmeltingList() {
         return this.smeltingList;
     }
 
-    public float getExperience(int par1)
-    {
+    public float getExperience(int par1) {
         return this.experienceList.containsKey(par1) ? this.experienceList.get(par1) : 0.0F;
     }
 }

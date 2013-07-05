@@ -1,41 +1,32 @@
 package net.minecraft.src;
 
 @SuppressWarnings("FieldCanBeLocal")
-class GameRuleValue
-{
+class GameRuleValue {
     private String valueString;
     private boolean valueBoolean;
     private int valueInteger;
     private double valueDouble;
 
-    public GameRuleValue(String par1Str)
-    {
+    public GameRuleValue(String par1Str) {
         this.setValue(par1Str);
     }
 
     /**
      * Set this game rule value.
      */
-    public void setValue(String par1Str)
-    {
+    public void setValue(String par1Str) {
         this.valueString = par1Str;
         this.valueBoolean = Boolean.parseBoolean(par1Str);
 
-        try
-        {
+        try {
             this.valueInteger = Integer.parseInt(par1Str);
-        }
-        catch (NumberFormatException ignored)
-        {
+        } catch (NumberFormatException ignored) {
 
         }
 
-        try
-        {
+        try {
             this.valueDouble = Double.parseDouble(par1Str);
-        }
-        catch (NumberFormatException ignored)
-        {
+        } catch (NumberFormatException ignored) {
 
         }
     }
@@ -43,16 +34,14 @@ class GameRuleValue
     /**
      * Gets the GameRule's value as String.
      */
-    public String getGameRuleStringValue()
-    {
+    public String getGameRuleStringValue() {
         return this.valueString;
     }
 
     /**
      * Gets the GameRule's value as boolean.
      */
-    public boolean getGameRuleBooleanValue()
-    {
+    public boolean getGameRuleBooleanValue() {
         return this.valueBoolean;
     }
 }

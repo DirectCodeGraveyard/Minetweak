@@ -10,36 +10,30 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class AnvilSaveConverter extends SaveFormatOld
-{
-    public AnvilSaveConverter(File par1File)
-    {
+public class AnvilSaveConverter extends SaveFormatOld {
+    public AnvilSaveConverter(File par1File) {
         super(par1File);
     }
 
-    protected int getSaveVersion()
-    {
+    protected int getSaveVersion() {
         return 19133;
     }
 
-    public void flushCache()
-    {
+    public void flushCache() {
         RegionFileCache.clearRegionFileReferences();
     }
 
     /**
      * Returns back a loader for the specified save directory
      */
-    public ISaveHandler getSaveLoader(String par1Str, boolean par2)
-    {
+    public ISaveHandler getSaveLoader(String par1Str, boolean par2) {
         return new AnvilSaveHandler(this.savesDirectory, par1Str, par2);
     }
 
     /**
      * gets if the map is old chunk saving (true) or McRegion (false)
      */
-    public boolean isOldMapFormat(String par1Str)
-    {
+    public boolean isOldMapFormat(String par1Str) {
         WorldInfo var2 = this.getWorldInfo(par1Str);
         return var2 != null && var2.getSaveVersion() != this.getSaveVersion();
     }
@@ -47,8 +41,7 @@ public class AnvilSaveConverter extends SaveFormatOld
     /**
      * converts the map to mcRegion
      */
-    public boolean convertMapFormat(String par1Str, IProgressUpdate par2IProgressUpdate)
-    {
+    public boolean convertMapFormat(String par1Str, IProgressUpdate par2IProgressUpdate) {
         par2IProgressUpdate.setLoadingProgress(0);
         ArrayList var3 = new ArrayList();
         ArrayList var4 = new ArrayList();
@@ -59,13 +52,11 @@ public class AnvilSaveConverter extends SaveFormatOld
         MinecraftServer.getServer().getLogAgent().func_98233_a("Scanning folders...");
         this.addRegionFilesToCollection(var6, var3);
 
-        if (var7.exists())
-        {
+        if (var7.exists()) {
             this.addRegionFilesToCollection(var7, var4);
         }
 
-        if (var8.exists())
-        {
+        if (var8.exists()) {
             this.addRegionFilesToCollection(var8, var5);
         }
 
@@ -74,22 +65,18 @@ public class AnvilSaveConverter extends SaveFormatOld
         WorldInfo var10 = this.getWorldInfo(par1Str);
         Object var11;
 
-        if (var10.getTerrainType() == WorldType.FLAT)
-        {
+        if (var10.getTerrainType() == WorldType.FLAT) {
             var11 = new WorldChunkManagerHell(BiomeGenBase.plains, 0.5F, 0.5F);
-        }
-        else
-        {
+        } else {
             var11 = new WorldChunkManager(var10.getSeed(), var10.getTerrainType());
         }
 
-        this.convertFile(new File(var6, "region"), var3, (WorldChunkManager)var11, 0, var9, par2IProgressUpdate);
+        this.convertFile(new File(var6, "region"), var3, (WorldChunkManager) var11, 0, var9, par2IProgressUpdate);
         this.convertFile(new File(var7, "region"), var4, new WorldChunkManagerHell(BiomeGenBase.hell, 1.0F, 0.0F), var3.size(), var9, par2IProgressUpdate);
         this.convertFile(new File(var8, "region"), var5, new WorldChunkManagerHell(BiomeGenBase.sky, 0.5F, 0.0F), var3.size() + var4.size(), var9, par2IProgressUpdate);
         var10.setSaveVersion(19133);
 
-        if (var10.getTerrainType() == WorldType.DEFAULT_1_1)
-        {
+        if (var10.getTerrainType() == WorldType.DEFAULT_1_1) {
             var10.setTerrainType(WorldType.DEFAULT);
         }
 
@@ -102,36 +89,27 @@ public class AnvilSaveConverter extends SaveFormatOld
     /**
      * par: filename for the level.dat_mcr backup
      */
-    private void createFile(String par1Str)
-    {
+    private void createFile(String par1Str) {
         File var2 = new File(this.savesDirectory, par1Str);
 
-        if (!var2.exists())
-        {
+        if (!var2.exists()) {
             System.out.println("Warning: Unable to create level.dat_mcr backup");
-        }
-        else
-        {
+        } else {
             File var3 = new File(var2, "level.dat");
 
-            if (!var3.exists())
-            {
+            if (!var3.exists()) {
                 System.out.println("Warning: Unable to create level.dat_mcr backup");
-            }
-            else
-            {
+            } else {
                 File var4 = new File(var2, "level.dat_mcr");
 
-                if (!var3.renameTo(var4))
-                {
+                if (!var3.renameTo(var4)) {
                     System.out.println("Warning: Unable to create level.dat_mcr backup");
                 }
             }
         }
     }
 
-    private void convertFile(File par1File, Iterable par2Iterable, WorldChunkManager par3WorldChunkManager, int par4, int par5, IProgressUpdate par6IProgressUpdate)
-    {
+    private void convertFile(File par1File, Iterable par2Iterable, WorldChunkManager par3WorldChunkManager, int par4, int par5, IProgressUpdate par6IProgressUpdate) {
         for (Object aPar2Iterable : par2Iterable) {
             File var8 = (File) aPar2Iterable;
             this.convertChunks(par1File, var8, par3WorldChunkManager, par4, par5, par6IProgressUpdate);
@@ -144,30 +122,22 @@ public class AnvilSaveConverter extends SaveFormatOld
     /**
      * copies a 32x32 chunk set from par2File to par1File, via AnvilConverterData
      */
-    private void convertChunks(File par1File, File par2File, WorldChunkManager par3WorldChunkManager, int par4, int par5, IProgressUpdate par6IProgressUpdate)
-    {
-        try
-        {
+    private void convertChunks(File par1File, File par2File, WorldChunkManager par3WorldChunkManager, int par4, int par5, IProgressUpdate par6IProgressUpdate) {
+        try {
             String var7 = par2File.getName();
             RegionFile var8 = new RegionFile(par2File);
             RegionFile var9 = new RegionFile(new File(par1File, var7.substring(0, var7.length() - ".mcr".length()) + ".mca"));
 
-            for (int var10 = 0; var10 < 32; ++var10)
-            {
+            for (int var10 = 0; var10 < 32; ++var10) {
                 int var11;
 
-                for (var11 = 0; var11 < 32; ++var11)
-                {
-                    if (var8.isChunkSaved(var10, var11) && !var9.isChunkSaved(var10, var11))
-                    {
+                for (var11 = 0; var11 < 32; ++var11) {
+                    if (var8.isChunkSaved(var10, var11) && !var9.isChunkSaved(var10, var11)) {
                         DataInputStream var12 = var8.getChunkDataInputStream(var10, var11);
 
-                        if (var12 == null)
-                        {
+                        if (var12 == null) {
                             MinecraftServer.getServer().getLogAgent().func_98236_b("Failed to fetch input stream");
-                        }
-                        else
-                        {
+                        } else {
                             NBTTagCompound var13 = CompressedStreamTools.read(var12);
                             var12.close();
                             NBTTagCompound var14 = var13.getCompoundTag("Level");
@@ -183,20 +153,17 @@ public class AnvilSaveConverter extends SaveFormatOld
                     }
                 }
 
-                var11 = (int)Math.round(100.0D * (double)(par4 * 1024) / (double)(par5 * 1024));
-                int var20 = (int)Math.round(100.0D * (double)((var10 + 1) * 32 + par4 * 1024) / (double)(par5 * 1024));
+                var11 = (int) Math.round(100.0D * (double) (par4 * 1024) / (double) (par5 * 1024));
+                int var20 = (int) Math.round(100.0D * (double) ((var10 + 1) * 32 + par4 * 1024) / (double) (par5 * 1024));
 
-                if (var20 > var11)
-                {
+                if (var20 > var11) {
                     par6IProgressUpdate.setLoadingProgress(var20);
                 }
             }
 
             var8.close();
             var9.close();
-        }
-        catch (IOException var19)
-        {
+        } catch (IOException var19) {
             var19.printStackTrace();
         }
     }
@@ -204,13 +171,11 @@ public class AnvilSaveConverter extends SaveFormatOld
     /**
      * filters the files in the par1 directory, and adds them to the par2 collections
      */
-    private void addRegionFilesToCollection(File par1File, Collection par2Collection)
-    {
+    private void addRegionFilesToCollection(File par1File, Collection par2Collection) {
         File var3 = new File(par1File, "region");
         File[] var4 = var3.listFiles(new AnvilSaveConverterFileFilter(this));
 
-        if (var4 != null)
-        {
+        if (var4 != null) {
             Collections.addAll(par2Collection, var4);
         }
     }

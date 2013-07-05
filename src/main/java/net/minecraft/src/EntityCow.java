@@ -1,9 +1,7 @@
 package net.minecraft.src;
 
-public class EntityCow extends EntityAnimal
-{
-    public EntityCow(World par1World)
-    {
+public class EntityCow extends EntityAnimal {
+    public EntityCow(World par1World) {
         super(par1World);
         this.setSize(0.9F, 1.3F);
         this.getNavigator().setAvoidsWater(true);
@@ -20,13 +18,11 @@ public class EntityCow extends EntityAnimal
     /**
      * Returns true if the newer Entity AI code should be run
      */
-    public boolean isAIEnabled()
-    {
+    public boolean isAIEnabled() {
         return true;
     }
 
-    protected void func_110147_ax()
-    {
+    protected void func_110147_ax() {
         super.func_110147_ax();
         this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(10.0D);
         this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.20000000298023224D);
@@ -35,74 +31,62 @@ public class EntityCow extends EntityAnimal
     /**
      * Returns the sound this mob makes while it's alive.
      */
-    protected String getLivingSound()
-    {
+    protected String getLivingSound() {
         return "mob.cow.say";
     }
 
     /**
      * Returns the sound this mob makes when it is hurt.
      */
-    protected String getHurtSound()
-    {
+    protected String getHurtSound() {
         return "mob.cow.hurt";
     }
 
     /**
      * Returns the sound this mob makes on death.
      */
-    protected String getDeathSound()
-    {
+    protected String getDeathSound() {
         return "mob.cow.hurt";
     }
 
     /**
      * Plays step sound at given x, y, z for the entity
      */
-    protected void playStepSound(int par1, int par2, int par3, int par4)
-    {
+    protected void playStepSound(int par1, int par2, int par3, int par4) {
         this.playSound("mob.cow.step", 0.15F, 1.0F);
     }
 
     /**
      * Returns the volume for the sounds this mob makes.
      */
-    protected float getSoundVolume()
-    {
+    protected float getSoundVolume() {
         return 0.4F;
     }
 
     /**
      * Returns the item ID for the item the mob drops on death.
      */
-    protected int getDropItemId()
-    {
+    protected int getDropItemId() {
         return Item.leather.itemID;
     }
 
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
-    {
+    protected void dropFewItems(boolean par1, int par2) {
         int var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
         int var4;
 
-        for (var4 = 0; var4 < var3; ++var4)
-        {
+        for (var4 = 0; var4 < var3; ++var4) {
             this.dropItem(Item.leather.itemID, 1);
         }
 
         var3 = this.rand.nextInt(3) + 1 + this.rand.nextInt(1 + par2);
 
-        for (var4 = 0; var4 < var3; ++var4)
-        {
-            if (this.isBurning())
-            {
+        for (var4 = 0; var4 < var3; ++var4) {
+            if (this.isBurning()) {
                 this.dropItem(Item.beefCooked.itemID, 1);
-            }
-            else
-            {
+            } else {
                 this.dropItem(Item.beefRaw.itemID, 1);
             }
         }
@@ -111,25 +95,18 @@ public class EntityCow extends EntityAnimal
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
-    public boolean interact(EntityPlayer par1EntityPlayer)
-    {
+    public boolean interact(EntityPlayer par1EntityPlayer) {
         ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 
-        if (var2 != null && var2.itemID == Item.bucketEmpty.itemID && !par1EntityPlayer.capabilities.isCreativeMode)
-        {
-            if (var2.stackSize-- == 1)
-            {
+        if (var2 != null && var2.itemID == Item.bucketEmpty.itemID && !par1EntityPlayer.capabilities.isCreativeMode) {
+            if (var2.stackSize-- == 1) {
                 par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, new ItemStack(Item.bucketMilk));
-            }
-            else if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Item.bucketMilk)))
-            {
+            } else if (!par1EntityPlayer.inventory.addItemStackToInventory(new ItemStack(Item.bucketMilk))) {
                 par1EntityPlayer.dropPlayerItem(new ItemStack(Item.bucketMilk.itemID, 1, 0));
             }
 
             return true;
-        }
-        else
-        {
+        } else {
             return super.interact(par1EntityPlayer);
         }
     }
@@ -137,13 +114,11 @@ public class EntityCow extends EntityAnimal
     /**
      * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
      */
-    public EntityCow spawnBabyAnimal(EntityAgeable par1EntityAgeable)
-    {
+    public EntityCow spawnBabyAnimal(EntityAgeable par1EntityAgeable) {
         return new EntityCow(this.worldObj);
     }
 
-    public EntityAgeable createChild(EntityAgeable par1EntityAgeable)
-    {
+    public EntityAgeable createChild(EntityAgeable par1EntityAgeable) {
         return this.spawnBabyAnimal(par1EntityAgeable);
     }
 }

@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class MapCoord
-{
+public class MapCoord {
     public byte iconSize;
     public byte centerX;
     public byte centerZ;
@@ -9,8 +8,7 @@ public class MapCoord
 
     final MapData data;
 
-    public MapCoord(MapData par1MapData, byte par2, byte par3, byte par4, byte par5)
-    {
+    public MapCoord(MapData par1MapData, byte par2, byte par3, byte par4, byte par5) {
         this.data = par1MapData;
         this.iconSize = par2;
         this.centerX = par3;

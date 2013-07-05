@@ -3,8 +3,7 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-public class ChunkProviderEnd implements IChunkProvider
-{
+public class ChunkProviderEnd implements IChunkProvider {
     private Random endRNG;
     private NoiseGeneratorOctaves noiseGen1;
     private NoiseGeneratorOctaves noiseGen2;
@@ -14,7 +13,9 @@ public class ChunkProviderEnd implements IChunkProvider
     private World endWorld;
     private double[] densities;
 
-    /** The biomes that are used to generate the chunk */
+    /**
+     * The biomes that are used to generate the chunk
+     */
     private BiomeGenBase[] biomesForGeneration;
     double[] noiseData1;
     double[] noiseData2;
@@ -23,8 +24,7 @@ public class ChunkProviderEnd implements IChunkProvider
     double[] noiseData5;
     int[][] field_73203_h = new int[32][32];
 
-    public ChunkProviderEnd(World par1World, long par2)
-    {
+    public ChunkProviderEnd(World par1World, long par2) {
         this.endWorld = par1World;
         this.endRNG = new Random(par2);
         this.noiseGen1 = new NoiseGeneratorOctaves(this.endRNG, 16);
@@ -34,16 +34,14 @@ public class ChunkProviderEnd implements IChunkProvider
         this.noiseGen5 = new NoiseGeneratorOctaves(this.endRNG, 16);
     }
 
-    public void generateTerrain(int par1, int par2, byte[] par3ArrayOfByte, BiomeGenBase[] par4ArrayOfBiomeGenBase)
-    {
+    public void generateTerrain(int par1, int par2, byte[] par3ArrayOfByte, BiomeGenBase[] par4ArrayOfBiomeGenBase) {
         byte var5 = 2;
         int var6 = var5 + 1;
         byte var7 = 33;
         int var8 = var5 + 1;
         this.densities = this.initializeNoiseField(this.densities, par1 * var5, 0, par2 * var5, var6, var7, var8);
 
-        for (int var9 = 0; var9 < var5; ++var9)
-        {
+        for (int var9 = 0; var9 < var5; ++var9) {
             for (int var10 = 0; var10 < var5; ++var10)
                 for (int var11 = 0; var11 < 32; ++var11) {
                     double var12 = 0.25D;
@@ -95,49 +93,35 @@ public class ChunkProviderEnd implements IChunkProvider
         }
     }
 
-    public void replaceBlocksForBiome(int par1, int par2, byte[] par3ArrayOfByte, BiomeGenBase[] par4ArrayOfBiomeGenBase)
-    {
-        for (int var5 = 0; var5 < 16; ++var5)
-        {
-            for (int var6 = 0; var6 < 16; ++var6)
-            {
+    public void replaceBlocksForBiome(int par1, int par2, byte[] par3ArrayOfByte, BiomeGenBase[] par4ArrayOfBiomeGenBase) {
+        for (int var5 = 0; var5 < 16; ++var5) {
+            for (int var6 = 0; var6 < 16; ++var6) {
                 byte var7 = 1;
                 int var8 = -1;
-                byte var9 = (byte)Block.whiteStone.blockID;
-                byte var10 = (byte)Block.whiteStone.blockID;
+                byte var9 = (byte) Block.whiteStone.blockID;
+                byte var10 = (byte) Block.whiteStone.blockID;
 
-                for (int var11 = 127; var11 >= 0; --var11)
-                {
+                for (int var11 = 127; var11 >= 0; --var11) {
                     int var12 = (var6 * 16 + var5) * 128 + var11;
                     byte var13 = par3ArrayOfByte[var12];
 
-                    if (var13 == 0)
-                    {
+                    if (var13 == 0) {
                         var8 = -1;
-                    }
-                    else if (var13 == Block.stone.blockID)
-                    {
-                        if (var8 == -1)
-                        {
-                            if (var7 <= 0)
-                            {
+                    } else if (var13 == Block.stone.blockID) {
+                        if (var8 == -1) {
+                            if (var7 <= 0) {
                                 var9 = 0;
-                                var10 = (byte)Block.whiteStone.blockID;
+                                var10 = (byte) Block.whiteStone.blockID;
                             }
 
                             var8 = var7;
 
-                            if (var11 >= 0)
-                            {
+                            if (var11 >= 0) {
                                 par3ArrayOfByte[var12] = var9;
-                            }
-                            else
-                            {
+                            } else {
                                 par3ArrayOfByte[var12] = var10;
                             }
-                        }
-                        else if (var8 > 0)
-                        {
+                        } else if (var8 > 0) {
                             --var8;
                             par3ArrayOfByte[var12] = var10;
                         }
@@ -150,8 +134,7 @@ public class ChunkProviderEnd implements IChunkProvider
     /**
      * loads or generates the chunk at the chunk location specified
      */
-    public Chunk loadChunk(int par1, int par2)
-    {
+    public Chunk loadChunk(int par1, int par2) {
         return this.provideChunk(par1, par2);
     }
 
@@ -159,9 +142,8 @@ public class ChunkProviderEnd implements IChunkProvider
      * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
      * specified chunk from the map seed and chunk seed
      */
-    public Chunk provideChunk(int par1, int par2)
-    {
-        this.endRNG.setSeed((long)par1 * 341873128712L + (long)par2 * 132897987541L);
+    public Chunk provideChunk(int par1, int par2) {
+        this.endRNG.setSeed((long) par1 * 341873128712L + (long) par2 * 132897987541L);
         byte[] var3 = new byte[32768];
         this.biomesForGeneration = this.endWorld.getWorldChunkManager().loadBlockGeneratorData(this.biomesForGeneration, par1 * 16, par2 * 16, 16, 16);
         this.generateTerrain(par1, par2, var3, this.biomesForGeneration);
@@ -169,9 +151,8 @@ public class ChunkProviderEnd implements IChunkProvider
         Chunk var4 = new Chunk(this.endWorld, var3, par1, par2);
         byte[] var5 = var4.getBiomeArray();
 
-        for (int var6 = 0; var6 < var5.length; ++var6)
-        {
-            var5[var6] = (byte)this.biomesForGeneration[var6].biomeID;
+        for (int var6 = 0; var6 < var5.length; ++var6) {
+            var5[var6] = (byte) this.biomesForGeneration[var6].biomeID;
         }
 
         var4.generateSkylightMap();
@@ -182,10 +163,8 @@ public class ChunkProviderEnd implements IChunkProvider
      * generates a subset of the level's terrain data. Takes 7 arguments: the [empty] noise array, the position, and the
      * size.
      */
-    private double[] initializeNoiseField(double[] par1ArrayOfDouble, int par2, int par3, int par4, int par5, int par6, int par7)
-    {
-        if (par1ArrayOfDouble == null)
-        {
+    private double[] initializeNoiseField(double[] par1ArrayOfDouble, int par2, int par3, int par4, int par5, int par6, int par7) {
+        if (par1ArrayOfDouble == null) {
             par1ArrayOfDouble = new double[par5 * par6 * par7];
         }
 
@@ -200,64 +179,54 @@ public class ChunkProviderEnd implements IChunkProvider
         int var12 = 0;
         int var13 = 0;
 
-        for (int var14 = 0; var14 < par5; ++var14)
-        {
-            for (int var15 = 0; var15 < par7; ++var15)
-            {
+        for (int var14 = 0; var14 < par5; ++var14) {
+            for (int var15 = 0; var15 < par7; ++var15) {
                 double var16 = (this.noiseData4[var13] + 256.0D) / 512.0D;
 
-                if (var16 > 1.0D)
-                {
+                if (var16 > 1.0D) {
                     var16 = 1.0D;
                 }
 
                 double var18 = this.noiseData5[var13] / 8000.0D;
 
-                if (var18 < 0.0D)
-                {
+                if (var18 < 0.0D) {
                     var18 = -var18 * 0.3D;
                 }
 
                 var18 = var18 * 3.0D - 2.0D;
-                float var20 = (float)(var14 + par2) / 1.0F;
-                float var21 = (float)(var15 + par4) / 1.0F;
+                float var20 = (float) (var14 + par2) / 1.0F;
+                float var21 = (float) (var15 + par4) / 1.0F;
                 float var22 = 100.0F - MathHelper.sqrt_float(var20 * var20 + var21 * var21) * 8.0F;
 
-                if (var22 > 80.0F)
-                {
+                if (var22 > 80.0F) {
                     var22 = 80.0F;
                 }
 
-                if (var22 < -100.0F)
-                {
+                if (var22 < -100.0F) {
                     var22 = -100.0F;
                 }
 
-                if (var18 > 1.0D)
-                {
+                if (var18 > 1.0D) {
                     var18 = 1.0D;
                 }
 
                 var18 /= 8.0D;
                 var18 = 0.0D;
 
-                if (var16 < 0.0D)
-                {
+                if (var16 < 0.0D) {
                     var16 = 0.0D;
                 }
 
                 var16 += 0.5D;
-                var18 = var18 * (double)par6 / 16.0D;
+                var18 = var18 * (double) par6 / 16.0D;
                 ++var13;
-                double var23 = (double)par6 / 2.0D;
+                double var23 = (double) par6 / 2.0D;
 
-                for (int var25 = 0; var25 < par6; ++var25)
-                {
+                for (int var25 = 0; var25 < par6; ++var25) {
                     double var26;
-                    double var28 = ((double)var25 - var23) * 8.0D / var16;
+                    double var28 = ((double) var25 - var23) * 8.0D / var16;
 
-                    if (var28 < 0.0D)
-                    {
+                    if (var28 < 0.0D) {
                         var28 *= -1.0D;
                     }
 
@@ -265,35 +234,27 @@ public class ChunkProviderEnd implements IChunkProvider
                     double var32 = this.noiseData3[var12] / 512.0D;
                     double var34 = (this.noiseData1[var12] / 10.0D + 1.0D) / 2.0D;
 
-                    if (var34 < 0.0D)
-                    {
+                    if (var34 < 0.0D) {
                         var26 = var30;
-                    }
-                    else if (var34 > 1.0D)
-                    {
+                    } else if (var34 > 1.0D) {
                         var26 = var32;
-                    }
-                    else
-                    {
+                    } else {
                         var26 = var30 + (var32 - var30) * var34;
                     }
 
                     var26 -= 8.0D;
-                    var26 += (double)var22;
+                    var26 += (double) var22;
                     byte var36 = 2;
                     double var37;
 
-                    if (var25 > par6 / 2 - var36)
-                    {
-                        var37 = (double)((float)(var25 - (par6 / 2 - var36)) / 64.0F);
+                    if (var25 > par6 / 2 - var36) {
+                        var37 = (double) ((float) (var25 - (par6 / 2 - var36)) / 64.0F);
 
-                        if (var37 < 0.0D)
-                        {
+                        if (var37 < 0.0D) {
                             var37 = 0.0D;
                         }
 
-                        if (var37 > 1.0D)
-                        {
+                        if (var37 > 1.0D) {
                             var37 = 1.0D;
                         }
 
@@ -302,9 +263,8 @@ public class ChunkProviderEnd implements IChunkProvider
 
                     var36 = 8;
 
-                    if (var25 < var36)
-                    {
-                        var37 = (double)((float)(var36 - var25) / ((float)var36 - 1.0F));
+                    if (var25 < var36) {
+                        var37 = (double) ((float) (var36 - var25) / ((float) var36 - 1.0F));
                         var26 = var26 * (1.0D - var37) + -30.0D * var37;
                     }
 
@@ -320,16 +280,14 @@ public class ChunkProviderEnd implements IChunkProvider
     /**
      * Checks to see if a chunk exists at x, y
      */
-    public boolean chunkExists(int par1, int par2)
-    {
+    public boolean chunkExists(int par1, int par2) {
         return true;
     }
 
     /**
      * Populates chunk with ores etc etc
      */
-    public void populate(IChunkProvider par1IChunkProvider, int par2, int par3)
-    {
+    public void populate(IChunkProvider par1IChunkProvider, int par2, int par3) {
         BlockSand.fallInstantly = true;
         int var4 = par2 * 16;
         int var5 = par3 * 16;
@@ -342,42 +300,38 @@ public class ChunkProviderEnd implements IChunkProvider
      * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
      * Return true if all chunks have been saved.
      */
-    public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate)
-    {
+    public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate) {
         return true;
     }
 
-    public void func_104112_b() {}
+    public void func_104112_b() {
+    }
 
     /**
      * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
      */
-    public boolean unloadQueuedChunks()
-    {
+    public boolean unloadQueuedChunks() {
         return false;
     }
 
     /**
      * Returns if the IChunkProvider supports saving.
      */
-    public boolean canSave()
-    {
+    public boolean canSave() {
         return true;
     }
 
     /**
      * Converts the instance data to a readable string.
      */
-    public String makeString()
-    {
+    public String makeString() {
         return "RandomLevelSource";
     }
 
     /**
      * Returns a list of creatures of the specified type that can spawn at the given location.
      */
-    public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4)
-    {
+    public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4) {
         BiomeGenBase var5 = this.endWorld.getBiomeGenForCoords(par2, par4);
         return var5 == null ? null : var5.getSpawnableList(par1EnumCreatureType);
     }
@@ -385,15 +339,14 @@ public class ChunkProviderEnd implements IChunkProvider
     /**
      * Returns the location of the closest structure of the specified type. If not found returns null.
      */
-    public ChunkPosition findClosestStructure(World par1World, String par2Str, int par3, int par4, int par5)
-    {
+    public ChunkPosition findClosestStructure(World par1World, String par2Str, int par3, int par4, int par5) {
         return null;
     }
 
-    public int getLoadedChunkCount()
-    {
+    public int getLoadedChunkCount() {
         return 0;
     }
 
-    public void recreateStructures(int par1, int par2) {}
+    public void recreateStructures(int par1, int par2) {
+    }
 }

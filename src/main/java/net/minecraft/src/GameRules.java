@@ -1,16 +1,13 @@
 package net.minecraft.src;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class GameRules
-{
+public class GameRules {
     private TreeMap<String, GameRuleValue> theGameRules = new TreeMap<String, GameRuleValue>();
 
-    public GameRules()
-    {
+    public GameRules() {
         this.addGameRule("doFireTick", "true");
         this.addGameRule("mobGriefing", "true");
         this.addGameRule("keepInventory", "false");
@@ -25,21 +22,16 @@ public class GameRules
     /**
      * Define a game rule and its default value.
      */
-    public void addGameRule(String par1Str, String par2Str)
-    {
+    public void addGameRule(String par1Str, String par2Str) {
         this.theGameRules.put(par1Str, new GameRuleValue(par2Str));
     }
 
-    public void setOrCreateGameRule(String par1Str, String par2Str)
-    {
+    public void setOrCreateGameRule(String par1Str, String par2Str) {
         GameRuleValue var3 = this.theGameRules.get(par1Str);
 
-        if (var3 != null)
-        {
+        if (var3 != null) {
             var3.setValue(par2Str);
-        }
-        else
-        {
+        } else {
             this.addGameRule(par1Str, par2Str);
         }
     }
@@ -47,8 +39,7 @@ public class GameRules
     /**
      * Gets the string Game Rule value.
      */
-    public String getGameRuleStringValue(String par1Str)
-    {
+    public String getGameRuleStringValue(String par1Str) {
         GameRuleValue var2 = this.theGameRules.get(par1Str);
         return var2 != null ? var2.getGameRuleStringValue() : "";
     }
@@ -56,8 +47,7 @@ public class GameRules
     /**
      * Gets the boolean Game Rule value.
      */
-    public boolean getGameRuleBooleanValue(String par1Str)
-    {
+    public boolean getGameRuleBooleanValue(String par1Str) {
         GameRuleValue var2 = this.theGameRules.get(par1Str);
         return var2 != null && var2.getGameRuleBooleanValue();
     }
@@ -65,8 +55,7 @@ public class GameRules
     /**
      * Return the defined game rules as NBT.
      */
-    public NBTTagCompound writeGameRulesToNBT()
-    {
+    public NBTTagCompound writeGameRulesToNBT() {
         NBTTagCompound var1 = new NBTTagCompound("GameRules");
 
         for (String var3 : this.theGameRules.keySet()) {
@@ -80,8 +69,7 @@ public class GameRules
     /**
      * Set defined game rules from NBT.
      */
-    public void readGameRulesFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void readGameRulesFromNBT(NBTTagCompound par1NBTTagCompound) {
         Collection var2 = par1NBTTagCompound.getTags();
 
         for (Object aVar2 : var2) {
@@ -95,8 +83,7 @@ public class GameRules
     /**
      * Return the defined game rules.
      */
-    public String[] getRules()
-    {
+    public String[] getRules() {
         Set<String> rules = this.theGameRules.keySet();
         return rules.toArray(new String[rules.size()]);
     }
@@ -104,8 +91,7 @@ public class GameRules
     /**
      * Return whether the specified game rule is defined.
      */
-    public boolean hasRule(String par1Str)
-    {
+    public boolean hasRule(String par1Str) {
         return this.theGameRules.containsKey(par1Str);
     }
 }

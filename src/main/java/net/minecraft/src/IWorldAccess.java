@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IWorldAccess
-{
+public interface IWorldAccess {
     /**
      * On the client, re-renders the block. On the server, sends the block to the client (which will re-render it),
      * including the tile entity description packet if applicable. Args: x, y, z

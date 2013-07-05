@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ComponentNetherBridgeStartPiece extends ComponentNetherBridgeCrossing3
-{
-    /** Instance of StructureNetherBridgePieceWeight. */
+public class ComponentNetherBridgeStartPiece extends ComponentNetherBridgeCrossing3 {
+    /**
+     * Instance of StructureNetherBridgePieceWeight.
+     */
     public StructureNetherBridgePieceWeight theNetherBridgePieceWeight;
 
     /**
@@ -20,16 +21,14 @@ public class ComponentNetherBridgeStartPiece extends ComponentNetherBridgeCrossi
     public List secondaryWeights;
     public ArrayList field_74967_d = new ArrayList();
 
-    public ComponentNetherBridgeStartPiece(Random par1Random, int par2, int par3)
-    {
+    public ComponentNetherBridgeStartPiece(Random par1Random, int par2, int par3) {
         super(par1Random, par2, par3);
         StructureNetherBridgePieceWeight[] var4 = StructureNetherBridgePieces.getPrimaryComponents();
         int var5 = var4.length;
         int var6;
         StructureNetherBridgePieceWeight var7;
 
-        for (var6 = 0; var6 < var5; ++var6)
-        {
+        for (var6 = 0; var6 < var5; ++var6) {
             var7 = var4[var6];
             var7.field_78827_c = 0;
             this.primaryWeights.add(var7);
@@ -39,8 +38,7 @@ public class ComponentNetherBridgeStartPiece extends ComponentNetherBridgeCrossi
         var4 = StructureNetherBridgePieces.getSecondaryComponents();
         var5 = var4.length;
 
-        for (var6 = 0; var6 < var5; ++var6)
-        {
+        for (var6 = 0; var6 < var5; ++var6) {
             var7 = var4[var6];
             var7.field_78827_c = 0;
             this.secondaryWeights.add(var7);

@@ -1,15 +1,17 @@
 package net.minecraft.src;
 
-public abstract class WorldSavedData
-{
-    /** The name of the map data nbt */
+public abstract class WorldSavedData {
+    /**
+     * The name of the map data nbt
+     */
     public final String mapName;
 
-    /** Whether this MapDataBase needs saving to disk. */
+    /**
+     * Whether this MapDataBase needs saving to disk.
+     */
     private boolean dirty;
 
-    public WorldSavedData(String par1Str)
-    {
+    public WorldSavedData(String par1Str) {
         this.mapName = par1Str;
     }
 
@@ -26,24 +28,21 @@ public abstract class WorldSavedData
     /**
      * Marks this MapDataBase dirty, to be saved to disk when the level next saves.
      */
-    public void markDirty()
-    {
+    public void markDirty() {
         this.setDirty(true);
     }
 
     /**
      * Sets the dirty state of this MapDataBase, whether it needs saving to disk.
      */
-    public void setDirty(boolean par1)
-    {
+    public void setDirty(boolean par1) {
         this.dirty = par1;
     }
 
     /**
      * Whether this MapDataBase needs saving to disk.
      */
-    public boolean isDirty()
-    {
+    public boolean isDirty() {
         return this.dirty;
     }
 }

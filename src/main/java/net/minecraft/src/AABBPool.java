@@ -3,8 +3,7 @@ package net.minecraft.src;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AABBPool
-{
+public class AABBPool {
     /**
      * Maximum number of times the pool can be "cleaned" before the list is shrunk
      */
@@ -15,10 +14,14 @@ public class AABBPool
      */
     private final int numEntriesToRemove;
 
-    /** List of AABB stored in this Pool */
+    /**
+     * List of AABB stored in this Pool
+     */
     private final List<AxisAlignedBB> listAABB = new ArrayList<AxisAlignedBB>();
 
-    /** Next index to use when adding a Pool Entry. */
+    /**
+     * Next index to use when adding a Pool Entry.
+     */
     private int nextPoolIndex;
 
     /**
@@ -26,11 +29,12 @@ public class AABBPool
      */
     private int maxPoolIndex;
 
-    /** Number of times this Pool has been cleaned */
+    /**
+     * Number of times this Pool has been cleaned
+     */
     private int numCleans;
 
-    public AABBPool(int par1, int par2)
-    {
+    public AABBPool(int par1, int par2) {
         this.maxNumCleans = par1;
         this.numEntriesToRemove = par2;
     }
@@ -39,17 +43,13 @@ public class AABBPool
      * Creates a new AABB, or reuses one that's no longer in use. Parameters: minX, minY, minZ, maxX, maxY, maxZ. AABBs
      * returned from this function should only be used for one frame or tick, as after that they will be reused.
      */
-    public AxisAlignedBB getAABB(double par1, double par3, double par5, double par7, double par9, double par11)
-    {
+    public AxisAlignedBB getAABB(double par1, double par3, double par5, double par7, double par9, double par11) {
         AxisAlignedBB var13;
 
-        if (this.nextPoolIndex >= this.listAABB.size())
-        {
+        if (this.nextPoolIndex >= this.listAABB.size()) {
             var13 = new AxisAlignedBB(par1, par3, par5, par7, par9, par11);
             this.listAABB.add(var13);
-        }
-        else
-        {
+        } else {
             var13 = this.listAABB.get(this.nextPoolIndex);
             var13.setBounds(par1, par3, par5, par7, par9, par11);
         }
@@ -62,19 +62,15 @@ public class AABBPool
      * Marks the pool as "empty", starting over when adding new entries. If this is called maxNumCleans times, the list
      * size is reduced
      */
-    public void cleanPool()
-    {
-        if (this.nextPoolIndex > this.maxPoolIndex)
-        {
+    public void cleanPool() {
+        if (this.nextPoolIndex > this.maxPoolIndex) {
             this.maxPoolIndex = this.nextPoolIndex;
         }
 
-        if (this.numCleans++ == this.maxNumCleans)
-        {
+        if (this.numCleans++ == this.maxNumCleans) {
             int var1 = Math.max(this.maxPoolIndex, this.listAABB.size() - this.numEntriesToRemove);
 
-            while (this.listAABB.size() > var1)
-            {
+            while (this.listAABB.size() > var1) {
                 this.listAABB.remove(var1);
             }
 
@@ -85,13 +81,11 @@ public class AABBPool
         this.nextPoolIndex = 0;
     }
 
-    public int getlistAABBsize()
-    {
+    public int getlistAABBsize() {
         return this.listAABB.size();
     }
 
-    public int getnextPoolIndex()
-    {
+    public int getnextPoolIndex() {
         return this.nextPoolIndex;
     }
 }

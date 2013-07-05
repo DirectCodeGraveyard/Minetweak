@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class NBTTagList extends NBTBase
-{
-    /** The array list containing the tags encapsulated in this list. */
+public class NBTTagList extends NBTBase {
+    /**
+     * The array list containing the tags encapsulated in this list.
+     */
     private List tagList = new ArrayList();
 
     /**
@@ -17,57 +18,45 @@ public class NBTTagList extends NBTBase
      */
     private byte tagType;
 
-    public NBTTagList()
-    {
+    public NBTTagList() {
         super("");
     }
 
-    public NBTTagList(String par1Str)
-    {
+    public NBTTagList(String par1Str) {
         super(par1Str);
     }
 
     /**
      * Write the actual data contents of the tag, implemented in NBT extension classes
      */
-    void write(DataOutput par1DataOutput) throws IOException
-    {
-        if (!this.tagList.isEmpty())
-        {
-            this.tagType = ((NBTBase)this.tagList.get(0)).getId();
-        }
-        else
-        {
+    void write(DataOutput par1DataOutput) throws IOException {
+        if (!this.tagList.isEmpty()) {
+            this.tagType = ((NBTBase) this.tagList.get(0)).getId();
+        } else {
             this.tagType = 1;
         }
 
         par1DataOutput.writeByte(this.tagType);
         par1DataOutput.writeInt(this.tagList.size());
 
-        for (int var2 = 0; var2 < this.tagList.size(); ++var2)
-        {
-            ((NBTBase)this.tagList.get(var2)).write(par1DataOutput);
+        for (int var2 = 0; var2 < this.tagList.size(); ++var2) {
+            ((NBTBase) this.tagList.get(var2)).write(par1DataOutput);
         }
     }
 
     /**
      * Read the actual data contents of the tag, implemented in NBT extension classes
      */
-    void load(DataInput par1DataInput, int par2) throws IOException
-    {
-        if (par2 > 512)
-        {
+    void load(DataInput par1DataInput, int par2) throws IOException {
+        if (par2 > 512) {
             throw new RuntimeException("Tried to read NBT tag with too high complexity, depth > 512");
-        }
-        else
-        {
+        } else {
             this.tagType = par1DataInput.readByte();
             int var3 = par1DataInput.readInt();
             this.tagList = new ArrayList();
 
-            for (int var4 = 0; var4 < var3; ++var4)
-            {
-                NBTBase var5 = NBTBase.newTag(this.tagType, (String)null);
+            for (int var4 = 0; var4 < var3; ++var4) {
+                NBTBase var5 = NBTBase.newTag(this.tagType, (String) null);
                 var5.load(par1DataInput, par2 + 1);
                 this.tagList.add(var5);
             }
@@ -77,13 +66,11 @@ public class NBTTagList extends NBTBase
     /**
      * Gets the type byte for the tag.
      */
-    public byte getId()
-    {
-        return (byte)9;
+    public byte getId() {
+        return (byte) 9;
     }
 
-    public String toString()
-    {
+    public String toString() {
         return "" + this.tagList.size() + " entries of type " + NBTBase.getTagName(this.tagType);
     }
 
@@ -91,8 +78,7 @@ public class NBTTagList extends NBTBase
      * Adds the provided tag to the end of the list. There is no check to verify this tag is of the same type as any
      * previous tag.
      */
-    public void appendTag(NBTBase par1NBTBase)
-    {
+    public void appendTag(NBTBase par1NBTBase) {
         this.tagType = par1NBTBase.getId();
         this.tagList.add(par1NBTBase);
     }
@@ -100,31 +86,27 @@ public class NBTTagList extends NBTBase
     /**
      * Retrieves the tag at the specified index from the list.
      */
-    public NBTBase tagAt(int par1)
-    {
-        return (NBTBase)this.tagList.get(par1);
+    public NBTBase tagAt(int par1) {
+        return (NBTBase) this.tagList.get(par1);
     }
 
     /**
      * Returns the number of tags in the list.
      */
-    public int tagCount()
-    {
+    public int tagCount() {
         return this.tagList.size();
     }
 
     /**
      * Creates a clone of the tag.
      */
-    public NBTBase copy()
-    {
+    public NBTBase copy() {
         NBTTagList var1 = new NBTTagList(this.getName());
         var1.tagType = this.tagType;
         Iterator var2 = this.tagList.iterator();
 
-        while (var2.hasNext())
-        {
-            NBTBase var3 = (NBTBase)var2.next();
+        while (var2.hasNext()) {
+            NBTBase var3 = (NBTBase) var2.next();
             NBTBase var4 = var3.copy();
             var1.tagList.add(var4);
         }
@@ -132,14 +114,11 @@ public class NBTTagList extends NBTBase
         return var1;
     }
 
-    public boolean equals(Object par1Obj)
-    {
-        if (super.equals(par1Obj))
-        {
-            NBTTagList var2 = (NBTTagList)par1Obj;
+    public boolean equals(Object par1Obj) {
+        if (super.equals(par1Obj)) {
+            NBTTagList var2 = (NBTTagList) par1Obj;
 
-            if (this.tagType == var2.tagType)
-            {
+            if (this.tagType == var2.tagType) {
                 return this.tagList.equals(var2.tagList);
             }
         }
@@ -147,8 +126,7 @@ public class NBTTagList extends NBTBase
         return false;
     }
 
-    public int hashCode()
-    {
+    public int hashCode() {
         return super.hashCode() ^ this.tagList.hashCode();
     }
 }

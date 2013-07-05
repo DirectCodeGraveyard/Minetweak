@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IRegistry
-{
+public interface IRegistry {
     Object func_82594_a(Object var1);
 
     /**

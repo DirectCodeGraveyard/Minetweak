@@ -3,19 +3,16 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-public class ComponentVillageHouse3 extends ComponentVillage
-{
+public class ComponentVillageHouse3 extends ComponentVillage {
     private int averageGroundLevel = -1;
 
-    public ComponentVillageHouse3(ComponentVillageStartPiece par1ComponentVillageStartPiece, int par2, Random par3Random, StructureBoundingBox par4StructureBoundingBox, int par5)
-    {
+    public ComponentVillageHouse3(ComponentVillageStartPiece par1ComponentVillageStartPiece, int par2, Random par3Random, StructureBoundingBox par4StructureBoundingBox, int par5) {
         super(par1ComponentVillageStartPiece, par2);
         this.coordBaseMode = par5;
         this.boundingBox = par4StructureBoundingBox;
     }
 
-    public static ComponentVillageHouse3 func_74921_a(ComponentVillageStartPiece par0ComponentVillageStartPiece, List par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7)
-    {
+    public static ComponentVillageHouse3 func_74921_a(ComponentVillageStartPiece par0ComponentVillageStartPiece, List par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7) {
         StructureBoundingBox var8 = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 9, 7, 12, par6);
         return canVillageGoDeeper(var8) && StructureComponent.findIntersecting(par1List, var8) == null ? new ComponentVillageHouse3(par0ComponentVillageStartPiece, par7, par2Random, var8, par6) : null;
     }
@@ -24,14 +21,11 @@ public class ComponentVillageHouse3 extends ComponentVillage
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
-    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
-    {
-        if (this.averageGroundLevel < 0)
-        {
+    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox) {
+        if (this.averageGroundLevel < 0) {
             this.averageGroundLevel = this.getAverageGroundLevel(par1World, par3StructureBoundingBox);
 
-            if (this.averageGroundLevel < 0)
-            {
+            if (this.averageGroundLevel < 0) {
                 return true;
             }
 
@@ -63,14 +57,11 @@ public class ComponentVillageHouse3 extends ComponentVillage
         int var6;
         int var7;
 
-        for (var6 = -1; var6 <= 2; ++var6)
-        {
-            for (var7 = 0; var7 <= 8; ++var7)
-            {
+        for (var6 = -1; var6 <= 2; ++var6) {
+            for (var7 = 0; var7 <= 8; ++var7) {
                 this.placeBlockAtCurrentPosition(par1World, Block.stairsWoodOak.blockID, var4, var7, 4 + var6, var6, par3StructureBoundingBox);
 
-                if ((var6 > -1 || var7 <= 1) && (var6 > 0 || var7 <= 3) && (var6 > 1 || var7 <= 4 || var7 >= 6))
-                {
+                if ((var6 > -1 || var7 <= 1) && (var6 > 0 || var7 <= 3) && (var6 > 1 || var7 <= 4 || var7 >= 6)) {
                     this.placeBlockAtCurrentPosition(par1World, Block.stairsWoodOak.blockID, var5, var7, 4 + var6, 5 - var6, par3StructureBoundingBox);
                 }
             }
@@ -84,12 +75,10 @@ public class ComponentVillageHouse3 extends ComponentVillage
         var6 = this.getMetadataWithOffset(Block.stairsWoodOak.blockID, 0);
         int var8;
 
-        for (var7 = 4; var7 >= 1; --var7)
-        {
+        for (var7 = 4; var7 >= 1; --var7) {
             this.placeBlockAtCurrentPosition(par1World, Block.planks.blockID, 0, var7, 2 + var7, 7 - var7, par3StructureBoundingBox);
 
-            for (var8 = 8 - var7; var8 <= 10; ++var8)
-            {
+            for (var8 = 8 - var7; var8 <= 10; ++var8) {
                 this.placeBlockAtCurrentPosition(par1World, Block.stairsWoodOak.blockID, var6, var7, 2 + var7, var8, par3StructureBoundingBox);
             }
         }
@@ -100,10 +89,8 @@ public class ComponentVillageHouse3 extends ComponentVillage
         this.placeBlockAtCurrentPosition(par1World, Block.stairsWoodOak.blockID, var7, 6, 6, 4, par3StructureBoundingBox);
         int var9;
 
-        for (var8 = 6; var8 <= 8; ++var8)
-        {
-            for (var9 = 5; var9 <= 10; ++var9)
-            {
+        for (var8 = 6; var8 <= 8; ++var8) {
+            for (var9 = 5; var9 <= 10; ++var9) {
                 this.placeBlockAtCurrentPosition(par1World, Block.stairsWoodOak.blockID, var7, var8, 12 - var8, var9, par3StructureBoundingBox);
             }
         }
@@ -138,24 +125,19 @@ public class ComponentVillageHouse3 extends ComponentVillage
         this.placeDoorAtCurrentPosition(par1World, par3StructureBoundingBox, par2Random, 2, 1, 0, this.getMetadataWithOffset(Block.doorWood.blockID, 1));
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 1, 0, -1, 3, 2, -1, 0, 0, false);
 
-        if (this.getBlockIdAtCurrentPosition(par1World, 2, 0, -1, par3StructureBoundingBox) == 0 && this.getBlockIdAtCurrentPosition(par1World, 2, -1, -1, par3StructureBoundingBox) != 0)
-        {
+        if (this.getBlockIdAtCurrentPosition(par1World, 2, 0, -1, par3StructureBoundingBox) == 0 && this.getBlockIdAtCurrentPosition(par1World, 2, -1, -1, par3StructureBoundingBox) != 0) {
             this.placeBlockAtCurrentPosition(par1World, Block.stairsCobblestone.blockID, this.getMetadataWithOffset(Block.stairsCobblestone.blockID, 3), 2, 0, -1, par3StructureBoundingBox);
         }
 
-        for (var8 = 0; var8 < 5; ++var8)
-        {
-            for (var9 = 0; var9 < 9; ++var9)
-            {
+        for (var8 = 0; var8 < 5; ++var8) {
+            for (var9 = 0; var9 < 9; ++var9) {
                 this.clearCurrentPositionBlocksUpwards(par1World, var9, 7, var8, par3StructureBoundingBox);
                 this.fillCurrentPositionBlocksDownwards(par1World, Block.cobblestone.blockID, 0, var9, -1, var8, par3StructureBoundingBox);
             }
         }
 
-        for (var8 = 5; var8 < 11; ++var8)
-        {
-            for (var9 = 2; var9 < 9; ++var9)
-            {
+        for (var8 = 5; var8 < 11; ++var8) {
+            for (var9 = 2; var9 < 9; ++var9) {
                 this.clearCurrentPositionBlocksUpwards(par1World, var9, 7, var8, par3StructureBoundingBox);
                 this.fillCurrentPositionBlocksDownwards(par1World, Block.cobblestone.blockID, 0, var9, -1, var8, par3StructureBoundingBox);
             }

@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class AnvilConverterData
-{
+public class AnvilConverterData {
     public long lastUpdated;
     public boolean terrainPopulated;
     public byte[] heightmap;
@@ -15,8 +14,7 @@ public class AnvilConverterData
     public final int x;
     public final int z;
 
-    public AnvilConverterData(int par1, int par2)
-    {
+    public AnvilConverterData(int par1, int par2) {
         this.x = par1;
         this.z = par2;
     }

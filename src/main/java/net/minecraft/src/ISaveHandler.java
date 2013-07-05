@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import java.io.File;
 
-public interface ISaveHandler
-{
+public interface ISaveHandler {
     /**
      * Loads and returns the world info
      */

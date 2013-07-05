@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface Attribute
-{
+public interface Attribute {
     String func_111108_a();
 
     double func_111109_a(double var1);

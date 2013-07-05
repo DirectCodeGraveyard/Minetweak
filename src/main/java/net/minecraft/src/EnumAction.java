@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public enum EnumAction
-{
+public enum EnumAction {
     none,
     eat,
     drink,
