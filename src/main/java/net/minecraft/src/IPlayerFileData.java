@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IPlayerFileData
-{
+public interface IPlayerFileData {
     /**
      * Writes the player data to disk from the specified PlayerEntityMP.
      */

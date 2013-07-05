@@ -1,9 +1,7 @@
 package net.minecraft.src;
 
-public class DispenserBehaviors
-{
-    public static void func_96467_a()
-    {
+public class DispenserBehaviors {
+    public static void func_96467_a() {
         BlockDispenser.dispenseBehaviorRegistry.putObject(Item.arrow, new DispenserBehaviorArrow());
         BlockDispenser.dispenseBehaviorRegistry.putObject(Item.egg, new DispenserBehaviorEgg());
         BlockDispenser.dispenseBehaviorRegistry.putObject(Item.snowball, new DispenserBehaviorSnowball());

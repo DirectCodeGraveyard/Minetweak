@@ -1,11 +1,9 @@
 package net.minecraft.src;
 
-class ContainerRepairINNER1 extends InventoryBasic
-{
+class ContainerRepairINNER1 extends InventoryBasic {
     final ContainerRepair field_135010_a;
 
-    ContainerRepairINNER1(ContainerRepair par1ContainerRepair, String par2Str, boolean par3, int par4)
-    {
+    ContainerRepairINNER1(ContainerRepair par1ContainerRepair, String par2Str, boolean par3, int par4) {
         super(par2Str, par3, par4);
         this.field_135010_a = par1ContainerRepair;
     }
@@ -13,8 +11,7 @@ class ContainerRepairINNER1 extends InventoryBasic
     /**
      * Called when an the contents of an Inventory change, usually
      */
-    public void onInventoryChanged()
-    {
+    public void onInventoryChanged() {
         super.onInventoryChanged();
         this.field_135010_a.onCraftMatrixChanged(this);
     }
@@ -22,8 +19,7 @@ class ContainerRepairINNER1 extends InventoryBasic
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot.
      */
-    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack)
-    {
+    public boolean isStackValidForSlot(int par1, ItemStack par2ItemStack) {
         return true;
     }
 }

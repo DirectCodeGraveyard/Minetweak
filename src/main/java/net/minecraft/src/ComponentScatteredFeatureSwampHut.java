@@ -2,13 +2,13 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class ComponentScatteredFeatureSwampHut extends ComponentScatteredFeature
-{
-    /** Whether this swamp hut has a witch. */
+public class ComponentScatteredFeatureSwampHut extends ComponentScatteredFeature {
+    /**
+     * Whether this swamp hut has a witch.
+     */
     private boolean hasWitch;
 
-    public ComponentScatteredFeatureSwampHut(Random par1Random, int par2, int par3)
-    {
+    public ComponentScatteredFeatureSwampHut(Random par1Random, int par2, int par3) {
         super(par1Random, par2, 64, par3, 7, 5, 9);
     }
 
@@ -16,14 +16,10 @@ public class ComponentScatteredFeatureSwampHut extends ComponentScatteredFeature
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
-    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
-    {
-        if (!this.func_74935_a(par1World, par3StructureBoundingBox, 0))
-        {
+    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox) {
+        if (!this.func_74935_a(par1World, par3StructureBoundingBox, 0)) {
             return false;
-        }
-        else
-        {
+        } else {
             this.fillWithMetadataBlocks(par1World, par3StructureBoundingBox, 1, 1, 1, 5, 1, 7, Block.planks.blockID, 1, Block.planks.blockID, 1, false);
             this.fillWithMetadataBlocks(par1World, par3StructureBoundingBox, 1, 4, 2, 5, 4, 7, Block.planks.blockID, 1, Block.planks.blockID, 1, false);
             this.fillWithMetadataBlocks(par1World, par3StructureBoundingBox, 2, 1, 0, 4, 1, 0, Block.planks.blockID, 1, Block.planks.blockID, 1, false);
@@ -56,26 +52,22 @@ public class ComponentScatteredFeatureSwampHut extends ComponentScatteredFeature
             int var8;
             int var9;
 
-            for (var8 = 2; var8 <= 7; var8 += 5)
-            {
-                for (var9 = 1; var9 <= 5; var9 += 4)
-                {
+            for (var8 = 2; var8 <= 7; var8 += 5) {
+                for (var9 = 1; var9 <= 5; var9 += 4) {
                     this.fillCurrentPositionBlocksDownwards(par1World, Block.wood.blockID, 0, var9, -1, var8, par3StructureBoundingBox);
                 }
             }
 
-            if (!this.hasWitch)
-            {
+            if (!this.hasWitch) {
                 var8 = this.getXWithOffset(2, 5);
                 var9 = this.getYWithOffset(2);
                 int var10 = this.getZWithOffset(2, 5);
 
-                if (par3StructureBoundingBox.isVecInside(var8, var9, var10))
-                {
+                if (par3StructureBoundingBox.isVecInside(var8, var9, var10)) {
                     this.hasWitch = true;
                     EntityWitch var11 = new EntityWitch(par1World);
-                    var11.setLocationAndAngles((double)var8 + 0.5D, (double)var9, (double)var10 + 0.5D, 0.0F, 0.0F);
-                    var11.func_110161_a((EntityLivingData)null);
+                    var11.setLocationAndAngles((double) var8 + 0.5D, (double) var9, (double) var10 + 0.5D, 0.0F, 0.0F);
+                    var11.func_110161_a((EntityLivingData) null);
                     par1World.spawnEntityInWorld(var11);
                 }
             }

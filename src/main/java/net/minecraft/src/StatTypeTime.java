@@ -1,5 +1,4 @@
 package net.minecraft.src;
 
-final class StatTypeTime implements IStatType
-{
+final class StatTypeTime implements IStatType {
 }

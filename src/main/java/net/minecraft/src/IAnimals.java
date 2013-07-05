@@ -1,5 +1,4 @@
 package net.minecraft.src;
 
-public interface IAnimals
-{
+public interface IAnimals {
 }

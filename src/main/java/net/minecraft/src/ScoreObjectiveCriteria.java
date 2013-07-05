@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public interface ScoreObjectiveCriteria
-{
+public interface ScoreObjectiveCriteria {
     Map field_96643_a = new HashMap();
     ScoreObjectiveCriteria field_96641_b = new ScoreDummyCriteria("dummy");
     ScoreObjectiveCriteria field_96642_c = new ScoreDummyCriteria("deathCount");

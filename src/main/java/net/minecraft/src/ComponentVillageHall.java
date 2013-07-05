@@ -3,19 +3,16 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-public class ComponentVillageHall extends ComponentVillage
-{
+public class ComponentVillageHall extends ComponentVillage {
     private int averageGroundLevel = -1;
 
-    public ComponentVillageHall(ComponentVillageStartPiece par1ComponentVillageStartPiece, int par2, Random par3Random, StructureBoundingBox par4StructureBoundingBox, int par5)
-    {
+    public ComponentVillageHall(ComponentVillageStartPiece par1ComponentVillageStartPiece, int par2, Random par3Random, StructureBoundingBox par4StructureBoundingBox, int par5) {
         super(par1ComponentVillageStartPiece, par2);
         this.coordBaseMode = par5;
         this.boundingBox = par4StructureBoundingBox;
     }
 
-    public static ComponentVillageHall func_74906_a(ComponentVillageStartPiece par0ComponentVillageStartPiece, List par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7)
-    {
+    public static ComponentVillageHall func_74906_a(ComponentVillageStartPiece par0ComponentVillageStartPiece, List par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7) {
         StructureBoundingBox var8 = StructureBoundingBox.getComponentToAddBoundingBox(par3, par4, par5, 0, 0, 0, 9, 7, 11, par6);
         return canVillageGoDeeper(var8) && StructureComponent.findIntersecting(par1List, var8) == null ? new ComponentVillageHall(par0ComponentVillageStartPiece, par7, par2Random, var8, par6) : null;
     }
@@ -24,14 +21,11 @@ public class ComponentVillageHall extends ComponentVillage
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
-    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
-    {
-        if (this.averageGroundLevel < 0)
-        {
+    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox) {
+        if (this.averageGroundLevel < 0) {
             this.averageGroundLevel = this.getAverageGroundLevel(par1World, par3StructureBoundingBox);
 
-            if (this.averageGroundLevel < 0)
-            {
+            if (this.averageGroundLevel < 0) {
                 return true;
             }
 
@@ -64,10 +58,8 @@ public class ComponentVillageHall extends ComponentVillage
         int var6;
         int var7;
 
-        for (var6 = -1; var6 <= 2; ++var6)
-        {
-            for (var7 = 0; var7 <= 8; ++var7)
-            {
+        for (var6 = -1; var6 <= 2; ++var6) {
+            for (var7 = 0; var7 <= 8; ++var7) {
                 this.placeBlockAtCurrentPosition(par1World, Block.stairsWoodOak.blockID, var4, var7, 4 + var6, var6, par3StructureBoundingBox);
                 this.placeBlockAtCurrentPosition(par1World, Block.stairsWoodOak.blockID, var5, var7, 4 + var6, 5 - var6, par3StructureBoundingBox);
             }
@@ -98,8 +90,7 @@ public class ComponentVillageHall extends ComponentVillage
         this.placeBlockAtCurrentPosition(par1World, Block.torchWood.blockID, 0, 2, 3, 1, par3StructureBoundingBox);
         this.placeDoorAtCurrentPosition(par1World, par3StructureBoundingBox, par2Random, 2, 1, 0, this.getMetadataWithOffset(Block.doorWood.blockID, 1));
 
-        if (this.getBlockIdAtCurrentPosition(par1World, 2, 0, -1, par3StructureBoundingBox) == 0 && this.getBlockIdAtCurrentPosition(par1World, 2, -1, -1, par3StructureBoundingBox) != 0)
-        {
+        if (this.getBlockIdAtCurrentPosition(par1World, 2, 0, -1, par3StructureBoundingBox) == 0 && this.getBlockIdAtCurrentPosition(par1World, 2, -1, -1, par3StructureBoundingBox) != 0) {
             this.placeBlockAtCurrentPosition(par1World, Block.stairsCobblestone.blockID, this.getMetadataWithOffset(Block.stairsCobblestone.blockID, 3), 2, 0, -1, par3StructureBoundingBox);
         }
 
@@ -108,10 +99,8 @@ public class ComponentVillageHall extends ComponentVillage
         this.placeBlockAtCurrentPosition(par1World, Block.torchWood.blockID, 0, 6, 3, 4, par3StructureBoundingBox);
         this.placeDoorAtCurrentPosition(par1World, par3StructureBoundingBox, par2Random, 6, 1, 5, this.getMetadataWithOffset(Block.doorWood.blockID, 1));
 
-        for (var6 = 0; var6 < 5; ++var6)
-        {
-            for (var7 = 0; var7 < 9; ++var7)
-            {
+        for (var6 = 0; var6 < 5; ++var6) {
+            for (var7 = 0; var7 < 9; ++var7) {
                 this.clearCurrentPositionBlocksUpwards(par1World, var7, 7, var6, par3StructureBoundingBox);
                 this.fillCurrentPositionBlocksDownwards(par1World, Block.cobblestone.blockID, 0, var7, -1, var6, par3StructureBoundingBox);
             }
@@ -124,8 +113,7 @@ public class ComponentVillageHall extends ComponentVillage
     /**
      * Returns the villager type to spawn in this component, based on the number of villagers already spawned.
      */
-    protected int getVillagerType(int par1)
-    {
+    protected int getVillagerType(int par1) {
         return par1 == 0 ? 4 : 0;
     }
 }

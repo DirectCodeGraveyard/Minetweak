@@ -4,12 +4,15 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class Packet7UseEntity extends Packet
-{
-    /** The entity of the player (ignored by the server) */
+public class Packet7UseEntity extends Packet {
+    /**
+     * The entity of the player (ignored by the server)
+     */
     public int playerEntityId;
 
-    /** The entity the player is interacting with */
+    /**
+     * The entity the player is interacting with
+     */
     public int targetEntity;
 
     /**
@@ -20,8 +23,7 @@ public class Packet7UseEntity extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInput par1DataInput) throws IOException
-    {
+    public void readPacketData(DataInput par1DataInput) throws IOException {
         this.playerEntityId = par1DataInput.readInt();
         this.targetEntity = par1DataInput.readInt();
         this.isLeftClick = par1DataInput.readByte();
@@ -30,8 +32,7 @@ public class Packet7UseEntity extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutput par1DataOutput) throws IOException
-    {
+    public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeInt(this.playerEntityId);
         par1DataOutput.writeInt(this.targetEntity);
         par1DataOutput.writeByte(this.isLeftClick);
@@ -40,16 +41,14 @@ public class Packet7UseEntity extends Packet
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler)
-    {
+    public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleUseEntity(this);
     }
 
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 9;
     }
 }

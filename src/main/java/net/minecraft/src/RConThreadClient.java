@@ -7,33 +7,34 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-public class RConThreadClient extends RConThreadBase
-{
+public class RConThreadClient extends RConThreadBase {
     /**
      * True if the client has succefssfully logged into the RCon, otherwise false
      */
     private boolean loggedIn;
 
-    /** The client's Socket connection */
+    /**
+     * The client's Socket connection
+     */
     private Socket clientSocket;
 
-    /** A buffer for incoming Socket data */
+    /**
+     * A buffer for incoming Socket data
+     */
     private byte[] buffer = new byte[1460];
 
-    /** The RCon password */
+    /**
+     * The RCon password
+     */
     private String rconPassword;
 
-    RConThreadClient(IServer par1IServer, Socket par2Socket)
-    {
+    RConThreadClient(IServer par1IServer, Socket par2Socket) {
         super(par1IServer);
         this.clientSocket = par2Socket;
 
-        try
-        {
+        try {
             this.clientSocket.setSoTimeout(0);
-        }
-        catch (Exception var4)
-        {
+        } catch (Exception var4) {
             this.running = false;
         }
 
@@ -41,49 +42,38 @@ public class RConThreadClient extends RConThreadBase
         this.logInfo("Rcon connection from: " + par2Socket.getInetAddress());
     }
 
-    public void run()
-    {
-        try
-        {
-            while (true)
-            {
-                if (!this.running)
-                {
+    public void run() {
+        try {
+            while (true) {
+                if (!this.running) {
                     break;
                 }
 
                 BufferedInputStream var1 = new BufferedInputStream(this.clientSocket.getInputStream());
                 int var2 = var1.read(this.buffer, 0, 1460);
 
-                if (10 > var2)
-                {
+                if (10 > var2) {
                     return;
                 }
 
                 byte var3 = 0;
                 int var4 = RConUtils.getBytesAsLEInt(this.buffer, 0, var2);
 
-                if (var4 == var2 - 4)
-                {
+                if (var4 == var2 - 4) {
                     int var21 = var3 + 4;
                     int var5 = RConUtils.getBytesAsLEInt(this.buffer, var21, var2);
                     var21 += 4;
                     int var6 = RConUtils.getRemainingBytesAsLEInt(this.buffer, var21);
                     var21 += 4;
 
-                    switch (var6)
-                    {
+                    switch (var6) {
                         case 2:
-                            if (this.loggedIn)
-                            {
+                            if (this.loggedIn) {
                                 String var8 = RConUtils.getBytesAsString(this.buffer, var21, var2);
 
-                                try
-                                {
+                                try {
                                     this.sendMultipacketResponse(var5, this.server.handleRConCommand(var8));
-                                }
-                                catch (Exception var16)
-                                {
+                                } catch (Exception var16) {
                                     this.sendMultipacketResponse(var5, "Error executing: " + var8 + " (" + var16.getMessage() + ")");
                                 }
 
@@ -97,8 +87,7 @@ public class RConThreadClient extends RConThreadBase
                             String var7 = RConUtils.getBytesAsString(this.buffer, var21, var2);
                             int var10000 = var21 + var7.length();
 
-                            if (0 != var7.length() && var7.equals(this.rconPassword))
-                            {
+                            if (0 != var7.length() && var7.equals(this.rconPassword)) {
                                 this.loggedIn = true;
                                 this.sendResponse(var5, 2, "");
                                 continue;
@@ -109,24 +98,16 @@ public class RConThreadClient extends RConThreadBase
                             continue;
 
                         default:
-                            this.sendMultipacketResponse(var5, String.format("Unknown request %s", new Object[] {Integer.toHexString(var6)}));
+                            this.sendMultipacketResponse(var5, String.format("Unknown request %s", new Object[]{Integer.toHexString(var6)}));
                             continue;
                     }
                 }
             }
-        }
-        catch (SocketTimeoutException var17)
-        {
-        }
-        catch (IOException var18)
-        {
-        }
-        catch (Exception var19)
-        {
+        } catch (SocketTimeoutException var17) {
+        } catch (IOException var18) {
+        } catch (Exception var19) {
             System.out.println(var19);
-        }
-        finally
-        {
+        } finally {
             this.closeSocket();
         }
     }
@@ -134,8 +115,7 @@ public class RConThreadClient extends RConThreadBase
     /**
      * Sends the given response message to the client
      */
-    private void sendResponse(int par1, int par2, String par3Str) throws IOException
-    {
+    private void sendResponse(int par1, int par2, String par3Str) throws IOException {
         ByteArrayOutputStream var4 = new ByteArrayOutputStream(1248);
         DataOutputStream var5 = new DataOutputStream(var4);
         byte[] var6 = par3Str.getBytes("UTF-8");
@@ -151,20 +131,17 @@ public class RConThreadClient extends RConThreadBase
     /**
      * Sends the standard RCon 'authorization failed' response packet
      */
-    private void sendLoginFailedResponse() throws IOException
-    {
+    private void sendLoginFailedResponse() throws IOException {
         this.sendResponse(-1, 2, "");
     }
 
     /**
      * Splits the response message into individual packets and sends each one
      */
-    private void sendMultipacketResponse(int par1, String par2Str) throws IOException
-    {
+    private void sendMultipacketResponse(int par1, String par2Str) throws IOException {
         int var3 = par2Str.length();
 
-        do
-        {
+        do {
             int var4 = 4096 <= var3 ? 4096 : var3;
             this.sendResponse(par1, 0, par2Str.substring(0, var4));
             par2Str = par2Str.substring(var4);
@@ -176,16 +153,11 @@ public class RConThreadClient extends RConThreadBase
     /**
      * Closes the client socket
      */
-    private void closeSocket()
-    {
-        if (null != this.clientSocket)
-        {
-            try
-            {
+    private void closeSocket() {
+        if (null != this.clientSocket) {
+            try {
                 this.clientSocket.close();
-            }
-            catch (IOException var2)
-            {
+            } catch (IOException var2) {
                 this.logWarning("IO: " + var2.getMessage());
             }
 

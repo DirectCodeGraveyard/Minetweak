@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public interface IChunkProvider
-{
+public interface IChunkProvider {
     /**
      * Checks to see if a chunk exists at x, y
      */

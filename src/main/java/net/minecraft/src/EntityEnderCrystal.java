@@ -1,13 +1,13 @@
 package net.minecraft.src;
 
-public class EntityEnderCrystal extends Entity
-{
-    /** Used to create the rotation animation when rendering the crystal. */
+public class EntityEnderCrystal extends Entity {
+    /**
+     * Used to create the rotation animation when rendering the crystal.
+     */
     public int innerRotation;
     public int health;
 
-    public EntityEnderCrystal(World par1World)
-    {
+    public EntityEnderCrystal(World par1World) {
         super(par1World);
         this.preventEntitySpawning = true;
         this.setSize(2.0F, 2.0F);
@@ -20,21 +20,18 @@ public class EntityEnderCrystal extends Entity
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
-    protected boolean canTriggerWalking()
-    {
+    protected boolean canTriggerWalking() {
         return false;
     }
 
-    protected void entityInit()
-    {
+    protected void entityInit() {
         this.dataWatcher.addObject(8, Integer.valueOf(this.health));
     }
 
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
-    {
+    public void onUpdate() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
@@ -44,8 +41,7 @@ public class EntityEnderCrystal extends Entity
         int var2 = MathHelper.floor_double(this.posY);
         int var3 = MathHelper.floor_double(this.posZ);
 
-        if (this.worldObj.getBlockId(var1, var2, var3) != Block.fire.blockID)
-        {
+        if (this.worldObj.getBlockId(var1, var2, var3) != Block.fire.blockID) {
             this.worldObj.setBlock(var1, var2, var3, Block.fire.blockID);
         }
     }
@@ -53,43 +49,37 @@ public class EntityEnderCrystal extends Entity
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {}
+    protected void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+    }
 
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {}
+    protected void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+    }
 
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
-    public boolean canBeCollidedWith()
-    {
+    public boolean canBeCollidedWith() {
         return true;
     }
 
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
-    {
-        if (this.isEntityInvulnerable())
-        {
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
+        if (this.isEntityInvulnerable()) {
             return false;
-        }
-        else
-        {
-            if (!this.isDead && !this.worldObj.isRemote)
-            {
+        } else {
+            if (!this.isDead && !this.worldObj.isRemote) {
                 this.health = 0;
 
-                if (this.health <= 0)
-                {
+                if (this.health <= 0) {
                     this.setDead();
 
-                    if (!this.worldObj.isRemote)
-                    {
-                        this.worldObj.createExplosion((Entity)null, this.posX, this.posY, this.posZ, 6.0F, true);
+                    if (!this.worldObj.isRemote) {
+                        this.worldObj.createExplosion((Entity) null, this.posX, this.posY, this.posZ, 6.0F, true);
                     }
                 }
             }

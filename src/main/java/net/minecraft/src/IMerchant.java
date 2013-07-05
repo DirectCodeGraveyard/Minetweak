@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IMerchant
-{
+public interface IMerchant {
     void setCustomer(EntityPlayer var1);
 
     EntityPlayer getCustomer();

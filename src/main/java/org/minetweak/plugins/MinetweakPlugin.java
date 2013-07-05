@@ -4,13 +4,7 @@ package org.minetweak.plugins;
  * Base Class for Plugins
  */
 public abstract class MinetweakPlugin {
-
-    /**
-     * Returns the name of this plugin
-     * @return name of plugin
-     */
-    public abstract String getName();
-
+    private PluginInfo pluginInfo;
     /**
      * Called when plugins are loaded before server is started.
      */
@@ -20,4 +14,15 @@ public abstract class MinetweakPlugin {
      * Called when plugins are unloaded before server is stopped.
      */
     public void onDisable() {}
+
+    /**
+     * Gets Plugin Info
+     */
+    public PluginInfo getPluginInfo() {
+        return pluginInfo;
+    }
+
+    protected void setPluginInfo(PluginInfo pluginInfo) {
+        this.pluginInfo = pluginInfo;
+    }
 }

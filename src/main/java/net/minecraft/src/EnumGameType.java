@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public enum EnumGameType
-{
+public enum EnumGameType {
     NOT_SET(-1, ""),
     SURVIVAL(0, "survival"),
     CREATIVE(1, "creative"),
@@ -9,8 +8,7 @@ public enum EnumGameType
     int id;
     String name;
 
-    private EnumGameType(int par3, String par4Str)
-    {
+    private EnumGameType(int par3, String par4Str) {
         this.id = par3;
         this.name = par4Str;
     }
@@ -18,32 +16,26 @@ public enum EnumGameType
     /**
      * Returns the ID of this game type
      */
-    public int getID()
-    {
+    public int getID() {
         return this.id;
     }
 
     /**
      * Returns the name of this game type
      */
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
     /**
      * Configures the player capabilities based on the game type
      */
-    public void configurePlayerCapabilities(PlayerCapabilities par1PlayerCapabilities)
-    {
-        if (this == CREATIVE)
-        {
+    public void configurePlayerCapabilities(PlayerCapabilities par1PlayerCapabilities) {
+        if (this == CREATIVE) {
             par1PlayerCapabilities.allowFlying = true;
             par1PlayerCapabilities.isCreativeMode = true;
             par1PlayerCapabilities.disableDamage = true;
-        }
-        else
-        {
+        } else {
             par1PlayerCapabilities.allowFlying = false;
             par1PlayerCapabilities.isCreativeMode = false;
             par1PlayerCapabilities.disableDamage = false;
@@ -56,24 +48,21 @@ public enum EnumGameType
     /**
      * Returns true if this is the ADVENTURE game type
      */
-    public boolean isAdventure()
-    {
+    public boolean isAdventure() {
         return this == ADVENTURE;
     }
 
     /**
      * Returns true if this is the CREATIVE game type
      */
-    public boolean isCreative()
-    {
+    public boolean isCreative() {
         return this == CREATIVE;
     }
 
     /**
      * Returns the game type with the specified ID, or SURVIVAL if none found. Args: id
      */
-    public static EnumGameType getByID(int par0)
-    {
+    public static EnumGameType getByID(int par0) {
         EnumGameType[] var1 = values();
         int var2 = var1.length;
 

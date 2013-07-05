@@ -1,44 +1,30 @@
 package net.minecraft.src;
 
-class EnumDoorHelper
-{
+class EnumDoorHelper {
     static final int[] doorEnum = new int[EnumDoor.values().length];
 
-    static
-    {
-        try
-        {
+    static {
+        try {
             doorEnum[EnumDoor.OPENING.ordinal()] = 1;
-        }
-        catch (NoSuchFieldError ignored)
-        {
+        } catch (NoSuchFieldError ignored) {
 
         }
 
-        try
-        {
+        try {
             doorEnum[EnumDoor.WOOD_DOOR.ordinal()] = 2;
-        }
-        catch (NoSuchFieldError ignored)
-        {
+        } catch (NoSuchFieldError ignored) {
 
         }
 
-        try
-        {
+        try {
             doorEnum[EnumDoor.GRATES.ordinal()] = 3;
-        }
-        catch (NoSuchFieldError ignored)
-        {
+        } catch (NoSuchFieldError ignored) {
 
         }
 
-        try
-        {
+        try {
             doorEnum[EnumDoor.IRON_DOOR.ordinal()] = 4;
-        }
-        catch (NoSuchFieldError ignored)
-        {
+        } catch (NoSuchFieldError ignored) {
 
         }
     }

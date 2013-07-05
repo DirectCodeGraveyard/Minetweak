@@ -1,9 +1,7 @@
 package net.minecraft.src;
 
-public class EntitySnowman extends EntityGolem implements IRangedAttackMob
-{
-    public EntitySnowman(World par1World)
-    {
+public class EntitySnowman extends EntityGolem implements IRangedAttackMob {
+    public EntitySnowman(World par1World) {
         super(par1World);
         this.setSize(0.4F, 1.8F);
         this.getNavigator().setAvoidsWater(true);
@@ -17,13 +15,11 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob
     /**
      * Returns true if the newer Entity AI code should be run
      */
-    public boolean isAIEnabled()
-    {
+    public boolean isAIEnabled() {
         return true;
     }
 
-    protected void func_110147_ax()
-    {
+    protected void func_110147_ax() {
         super.func_110147_ax();
         this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(4.0D);
         this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.20000000298023224D);
@@ -33,31 +29,26 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
-    public void onLivingUpdate()
-    {
+    public void onLivingUpdate() {
         super.onLivingUpdate();
 
-        if (this.isWet())
-        {
+        if (this.isWet()) {
             this.attackEntityFrom(DamageSource.drown, 1.0F);
         }
 
         int var1 = MathHelper.floor_double(this.posX);
         int var2 = MathHelper.floor_double(this.posZ);
 
-        if (this.worldObj.getBiomeGenForCoords(var1, var2).getFloatTemperature() > 1.0F)
-        {
+        if (this.worldObj.getBiomeGenForCoords(var1, var2).getFloatTemperature() > 1.0F) {
             this.attackEntityFrom(DamageSource.onFire, 1.0F);
         }
 
-        for (var1 = 0; var1 < 4; ++var1)
-        {
-            var2 = MathHelper.floor_double(this.posX + (double)((float)(var1 % 2 * 2 - 1) * 0.25F));
+        for (var1 = 0; var1 < 4; ++var1) {
+            var2 = MathHelper.floor_double(this.posX + (double) ((float) (var1 % 2 * 2 - 1) * 0.25F));
             int var3 = MathHelper.floor_double(this.posY);
-            int var4 = MathHelper.floor_double(this.posZ + (double)((float)(var1 / 2 % 2 * 2 - 1) * 0.25F));
+            int var4 = MathHelper.floor_double(this.posZ + (double) ((float) (var1 / 2 % 2 * 2 - 1) * 0.25F));
 
-            if (this.worldObj.getBlockId(var2, var3, var4) == 0 && this.worldObj.getBiomeGenForCoords(var2, var4).getFloatTemperature() < 0.8F && Block.snow.canPlaceBlockAt(this.worldObj, var2, var3, var4))
-            {
+            if (this.worldObj.getBlockId(var2, var3, var4) == 0 && this.worldObj.getBiomeGenForCoords(var2, var4).getFloatTemperature() < 0.8F && Block.snow.canPlaceBlockAt(this.worldObj, var2, var3, var4)) {
                 this.worldObj.setBlock(var2, var3, var4, Block.snow.blockID);
             }
         }
@@ -66,20 +57,17 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob
     /**
      * Returns the item ID for the item the mob drops on death.
      */
-    protected int getDropItemId()
-    {
+    protected int getDropItemId() {
         return Item.snowball.itemID;
     }
 
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
-    {
+    protected void dropFewItems(boolean par1, int par2) {
         int var3 = this.rand.nextInt(16);
 
-        for (int var4 = 0; var4 < var3; ++var4)
-        {
+        for (int var4 = 0; var4 < var3; ++var4) {
             this.dropItem(Item.snowball.itemID, 1);
         }
     }
@@ -87,14 +75,13 @@ public class EntitySnowman extends EntityGolem implements IRangedAttackMob
     /**
      * Attack the specified entity using a ranged attack.
      */
-    public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2)
-    {
+    public void attackEntityWithRangedAttack(EntityLivingBase par1EntityLivingBase, float par2) {
         EntitySnowball var3 = new EntitySnowball(this.worldObj, this);
         double var4 = par1EntityLivingBase.posX - this.posX;
-        double var6 = par1EntityLivingBase.posY + (double)par1EntityLivingBase.getEyeHeight() - 1.100000023841858D - var3.posY;
+        double var6 = par1EntityLivingBase.posY + (double) par1EntityLivingBase.getEyeHeight() - 1.100000023841858D - var3.posY;
         double var8 = par1EntityLivingBase.posZ - this.posZ;
         float var10 = MathHelper.sqrt_double(var4 * var4 + var8 * var8) * 0.2F;
-        var3.setThrowableHeading(var4, var6 + (double)var10, var8, 1.6F, 12.0F);
+        var3.setThrowableHeading(var4, var6 + (double) var10, var8, 1.6F, 12.0F);
         this.playSound("random.bow", 1.0F, 1.0F / (this.getRNG().nextFloat() * 0.4F + 0.8F));
         this.worldObj.spawnEntityInWorld(var3);
     }

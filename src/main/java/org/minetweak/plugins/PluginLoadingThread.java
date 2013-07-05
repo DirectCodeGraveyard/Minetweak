@@ -17,6 +17,6 @@ public class PluginLoadingThread extends Thread {
     @Override
     public void run() {
         plugin.onEnable();
-        PluginLoader.enabledPlugins.add(plugin.getName());
+        PluginLoader.enabledPlugins.add(plugin.getPluginInfo().getName());
     }
 }

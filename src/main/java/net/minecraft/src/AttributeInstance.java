@@ -3,8 +3,7 @@ package net.minecraft.src;
 import java.util.Collection;
 import java.util.UUID;
 
-public interface AttributeInstance
-{
+public interface AttributeInstance {
     Attribute func_111123_a();
 
     double func_111125_b();

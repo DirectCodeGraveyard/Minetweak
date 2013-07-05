@@ -4,11 +4,12 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class Packet254ServerPing extends Packet
-{
+public class Packet254ServerPing extends Packet {
     private static final int field_140051_d = (new Packet250CustomPayload()).getPacketId();
 
-    /** Always 1, unless readByte threw an exception. */
+    /**
+     * Always 1, unless readByte threw an exception.
+     */
     public int readSuccessfully;
     public String field_140052_b;
     public int field_140053_c;
@@ -16,24 +17,19 @@ public class Packet254ServerPing extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInput par1DataInput) throws IOException
-    {
-        try
-        {
+    public void readPacketData(DataInput par1DataInput) throws IOException {
+        try {
             par1DataInput.readByte();
             par1DataInput.readByte();
             readString(par1DataInput, 255);
             par1DataInput.readShort();
             this.readSuccessfully = par1DataInput.readByte();
 
-            if (this.readSuccessfully >= 73)
-            {
+            if (this.readSuccessfully >= 73) {
                 this.field_140052_b = readString(par1DataInput, 255);
                 this.field_140053_c = par1DataInput.readInt();
             }
-        }
-        catch (Throwable var3)
-        {
+        } catch (Throwable var3) {
             this.readSuccessfully = 0;
             this.field_140052_b = "";
         }
@@ -42,8 +38,7 @@ public class Packet254ServerPing extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutput par1DataOutput) throws IOException
-    {
+    public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeByte(1);
         par1DataOutput.writeByte(field_140051_d);
         Packet.writeString("MC|PingHost", par1DataOutput);
@@ -56,21 +51,18 @@ public class Packet254ServerPing extends Packet
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler)
-    {
+    public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleServerPing(this);
     }
 
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 3 + this.field_140052_b.length() * 2 + 4;
     }
 
-    public boolean func_140050_d()
-    {
+    public boolean func_140050_d() {
         return this.readSuccessfully == 0;
     }
 }

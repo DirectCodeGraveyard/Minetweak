@@ -1,12 +1,10 @@
 package net.minecraft.src;
 
-public class EntityAIOwnerHurtTarget extends EntityAITarget
-{
+public class EntityAIOwnerHurtTarget extends EntityAITarget {
     EntityTameable theEntityTameable;
     EntityLivingBase theTarget;
 
-    public EntityAIOwnerHurtTarget(EntityTameable par1EntityTameable)
-    {
+    public EntityAIOwnerHurtTarget(EntityTameable par1EntityTameable) {
         super(par1EntityTameable, false);
         this.theEntityTameable = par1EntityTameable;
         this.setMutexBits(1);
@@ -15,22 +13,15 @@ public class EntityAIOwnerHurtTarget extends EntityAITarget
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
-        if (!this.theEntityTameable.isTamed())
-        {
+    public boolean shouldExecute() {
+        if (!this.theEntityTameable.isTamed()) {
             return false;
-        }
-        else
-        {
+        } else {
             EntityLivingBase var1 = this.theEntityTameable.func_130012_q();
 
-            if (var1 == null)
-            {
+            if (var1 == null) {
                 return false;
-            }
-            else
-            {
+            } else {
                 this.theTarget = var1.func_110144_aD();
                 return this.isSuitableTarget(this.theTarget, false);
             }
@@ -40,8 +31,7 @@ public class EntityAIOwnerHurtTarget extends EntityAITarget
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
-    {
+    public void startExecuting() {
         this.taskOwner.setAttackTarget(this.theTarget);
         super.startExecuting();
     }

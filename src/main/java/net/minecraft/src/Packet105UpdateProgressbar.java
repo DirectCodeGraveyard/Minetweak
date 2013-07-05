@@ -4,9 +4,10 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class Packet105UpdateProgressbar extends Packet
-{
-    /** The id of the window that the progress bar is in. */
+public class Packet105UpdateProgressbar extends Packet {
+    /**
+     * The id of the window that the progress bar is in.
+     */
     public int windowId;
 
     /**
@@ -21,10 +22,10 @@ public class Packet105UpdateProgressbar extends Packet
      */
     public int progressBarValue;
 
-    public Packet105UpdateProgressbar() {}
+    public Packet105UpdateProgressbar() {
+    }
 
-    public Packet105UpdateProgressbar(int par1, int par2, int par3)
-    {
+    public Packet105UpdateProgressbar(int par1, int par2, int par3) {
         this.windowId = par1;
         this.progressBar = par2;
         this.progressBarValue = par3;
@@ -33,16 +34,14 @@ public class Packet105UpdateProgressbar extends Packet
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler)
-    {
+    public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleUpdateProgressbar(this);
     }
 
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInput par1DataInput) throws IOException
-    {
+    public void readPacketData(DataInput par1DataInput) throws IOException {
         this.windowId = par1DataInput.readByte();
         this.progressBar = par1DataInput.readShort();
         this.progressBarValue = par1DataInput.readShort();
@@ -51,8 +50,7 @@ public class Packet105UpdateProgressbar extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutput par1DataOutput) throws IOException
-    {
+    public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeByte(this.windowId);
         par1DataOutput.writeShort(this.progressBar);
         par1DataOutput.writeShort(this.progressBarValue);
@@ -61,8 +59,7 @@ public class Packet105UpdateProgressbar extends Packet
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 5;
     }
 }

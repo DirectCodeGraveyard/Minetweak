@@ -2,15 +2,15 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class ComponentScatteredFeatureDesertPyramid extends ComponentScatteredFeature
-{
+public class ComponentScatteredFeatureDesertPyramid extends ComponentScatteredFeature {
     private boolean[] field_74940_h = new boolean[4];
 
-    /** List of items to generate in chests of Temples. */
-    private static final WeightedRandomChestContent[] itemsToGenerateInTemple = new WeightedRandomChestContent[] {new WeightedRandomChestContent(Item.diamond.itemID, 0, 1, 3, 3), new WeightedRandomChestContent(Item.ingotIron.itemID, 0, 1, 5, 10), new WeightedRandomChestContent(Item.ingotGold.itemID, 0, 2, 7, 15), new WeightedRandomChestContent(Item.emerald.itemID, 0, 1, 3, 2), new WeightedRandomChestContent(Item.bone.itemID, 0, 4, 6, 20), new WeightedRandomChestContent(Item.rottenFlesh.itemID, 0, 3, 7, 16), new WeightedRandomChestContent(Item.saddle.itemID, 0, 1, 1, 3), new WeightedRandomChestContent(Item.field_111215_ce.itemID, 0, 1, 1, 1), new WeightedRandomChestContent(Item.field_111216_cf.itemID, 0, 1, 1, 1), new WeightedRandomChestContent(Item.field_111213_cg.itemID, 0, 1, 1, 1)};
+    /**
+     * List of items to generate in chests of Temples.
+     */
+    private static final WeightedRandomChestContent[] itemsToGenerateInTemple = new WeightedRandomChestContent[]{new WeightedRandomChestContent(Item.diamond.itemID, 0, 1, 3, 3), new WeightedRandomChestContent(Item.ingotIron.itemID, 0, 1, 5, 10), new WeightedRandomChestContent(Item.ingotGold.itemID, 0, 2, 7, 15), new WeightedRandomChestContent(Item.emerald.itemID, 0, 1, 3, 2), new WeightedRandomChestContent(Item.bone.itemID, 0, 4, 6, 20), new WeightedRandomChestContent(Item.rottenFlesh.itemID, 0, 3, 7, 16), new WeightedRandomChestContent(Item.saddle.itemID, 0, 1, 1, 3), new WeightedRandomChestContent(Item.field_111215_ce.itemID, 0, 1, 1, 1), new WeightedRandomChestContent(Item.field_111216_cf.itemID, 0, 1, 1, 1), new WeightedRandomChestContent(Item.field_111213_cg.itemID, 0, 1, 1, 1)};
 
-    public ComponentScatteredFeatureDesertPyramid(Random par1Random, int par2, int par3)
-    {
+    public ComponentScatteredFeatureDesertPyramid(Random par1Random, int par2, int par3) {
         super(par1Random, par2, 64, par3, 21, 15, 21);
     }
 
@@ -18,23 +18,19 @@ public class ComponentScatteredFeatureDesertPyramid extends ComponentScatteredFe
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
-    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
-    {
+    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox) {
         this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, -4, 0, this.scatteredFeatureSizeX - 1, 0, this.scatteredFeatureSizeZ - 1, Block.sandStone.blockID, Block.sandStone.blockID, false);
         int var4;
 
-        for (var4 = 1; var4 <= 9; ++var4)
-        {
+        for (var4 = 1; var4 <= 9; ++var4) {
             this.fillWithBlocks(par1World, par3StructureBoundingBox, var4, var4, var4, this.scatteredFeatureSizeX - 1 - var4, var4, this.scatteredFeatureSizeZ - 1 - var4, Block.sandStone.blockID, Block.sandStone.blockID, false);
             this.fillWithBlocks(par1World, par3StructureBoundingBox, var4 + 1, var4, var4 + 1, this.scatteredFeatureSizeX - 2 - var4, var4, this.scatteredFeatureSizeZ - 2 - var4, 0, 0, false);
         }
 
         int var5;
 
-        for (var4 = 0; var4 < this.scatteredFeatureSizeX; ++var4)
-        {
-            for (var5 = 0; var5 < this.scatteredFeatureSizeZ; ++var5)
-            {
+        for (var4 = 0; var4 < this.scatteredFeatureSizeX; ++var4) {
+            for (var5 = 0; var5 < this.scatteredFeatureSizeZ; ++var5) {
                 this.fillCurrentPositionBlocksDownwards(par1World, Block.sandStone.blockID, 0, var4, -5, var5, par3StructureBoundingBox);
             }
         }
@@ -108,8 +104,7 @@ public class ComponentScatteredFeatureDesertPyramid extends ComponentScatteredFe
         this.fillWithBlocks(par1World, par3StructureBoundingBox, this.scatteredFeatureSizeX - 6, 1, 5, this.scatteredFeatureSizeX - 5, 2, 16, 0, 0, false);
         int var10;
 
-        for (var10 = 5; var10 <= 17; var10 += 2)
-        {
+        for (var10 = 5; var10 <= 17; var10 += 2) {
             this.placeBlockAtCurrentPosition(par1World, Block.sandStone.blockID, 2, 4, 1, var10, par3StructureBoundingBox);
             this.placeBlockAtCurrentPosition(par1World, Block.sandStone.blockID, 1, 4, 2, var10, par3StructureBoundingBox);
             this.placeBlockAtCurrentPosition(par1World, Block.sandStone.blockID, 2, this.scatteredFeatureSizeX - 5, 1, var10, par3StructureBoundingBox);
@@ -130,8 +125,7 @@ public class ComponentScatteredFeatureDesertPyramid extends ComponentScatteredFe
         this.placeBlockAtCurrentPosition(par1World, Block.cloth.blockID, var8, 10, 0, 13, par3StructureBoundingBox);
         this.placeBlockAtCurrentPosition(par1World, Block.cloth.blockID, var9, 10, 0, 10, par3StructureBoundingBox);
 
-        for (var10 = 0; var10 <= this.scatteredFeatureSizeX - 1; var10 += this.scatteredFeatureSizeX - 1)
-        {
+        for (var10 = 0; var10 <= this.scatteredFeatureSizeX - 1; var10 += this.scatteredFeatureSizeX - 1) {
             this.placeBlockAtCurrentPosition(par1World, Block.sandStone.blockID, 2, var10, 2, 1, par3StructureBoundingBox);
             this.placeBlockAtCurrentPosition(par1World, Block.cloth.blockID, var8, var10, 2, 2, par3StructureBoundingBox);
             this.placeBlockAtCurrentPosition(par1World, Block.sandStone.blockID, 2, var10, 2, 3, par3StructureBoundingBox);
@@ -155,8 +149,7 @@ public class ComponentScatteredFeatureDesertPyramid extends ComponentScatteredFe
             this.placeBlockAtCurrentPosition(par1World, Block.sandStone.blockID, 2, var10, 8, 3, par3StructureBoundingBox);
         }
 
-        for (var10 = 2; var10 <= this.scatteredFeatureSizeX - 3; var10 += this.scatteredFeatureSizeX - 3 - 2)
-        {
+        for (var10 = 2; var10 <= this.scatteredFeatureSizeX - 3; var10 += this.scatteredFeatureSizeX - 3 - 2) {
             this.placeBlockAtCurrentPosition(par1World, Block.sandStone.blockID, 2, var10 - 1, 2, 0, par3StructureBoundingBox);
             this.placeBlockAtCurrentPosition(par1World, Block.cloth.blockID, var8, var10, 2, 0, par3StructureBoundingBox);
             this.placeBlockAtCurrentPosition(par1World, Block.sandStone.blockID, 2, var10 + 1, 2, 0, par3StructureBoundingBox);
@@ -210,13 +203,11 @@ public class ComponentScatteredFeatureDesertPyramid extends ComponentScatteredFe
         this.placeBlockAtCurrentPosition(par1World, Block.sandStone.blockID, 1, 10, -10, 13, par3StructureBoundingBox);
         this.placeBlockAtCurrentPosition(par1World, Block.sandStone.blockID, 2, 10, -11, 13, par3StructureBoundingBox);
 
-        for (var10 = 0; var10 < 4; ++var10)
-        {
-            if (!this.field_74940_h[var10])
-            {
+        for (var10 = 0; var10 < 4; ++var10) {
+            if (!this.field_74940_h[var10]) {
                 int var11 = Direction.offsetX[var10] * 2;
                 int var12 = Direction.offsetZ[var10] * 2;
-                this.field_74940_h[var10] = this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 10 + var11, -11, 10 + var12, WeightedRandomChestContent.func_92080_a(itemsToGenerateInTemple, new WeightedRandomChestContent[] {Item.enchantedBook.func_92114_b(par2Random)}), 2 + par2Random.nextInt(5));
+                this.field_74940_h[var10] = this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 10 + var11, -11, 10 + var12, WeightedRandomChestContent.func_92080_a(itemsToGenerateInTemple, new WeightedRandomChestContent[]{Item.enchantedBook.func_92114_b(par2Random)}), 2 + par2Random.nextInt(5));
             }
         }
 

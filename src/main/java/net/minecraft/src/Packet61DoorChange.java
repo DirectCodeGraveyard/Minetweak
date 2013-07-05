@@ -4,8 +4,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class Packet61DoorChange extends Packet
-{
+public class Packet61DoorChange extends Packet {
     public int sfxID;
     public int auxData;
     public int posX;
@@ -13,10 +12,10 @@ public class Packet61DoorChange extends Packet
     public int posZ;
     private boolean disableRelativeVolume;
 
-    public Packet61DoorChange() {}
+    public Packet61DoorChange() {
+    }
 
-    public Packet61DoorChange(int par1, int par2, int par3, int par4, int par5, boolean par6)
-    {
+    public Packet61DoorChange(int par1, int par2, int par3, int par4, int par5, boolean par6) {
         this.sfxID = par1;
         this.posX = par2;
         this.posY = par3;
@@ -28,8 +27,7 @@ public class Packet61DoorChange extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInput par1DataInput) throws IOException
-    {
+    public void readPacketData(DataInput par1DataInput) throws IOException {
         this.sfxID = par1DataInput.readInt();
         this.posX = par1DataInput.readInt();
         this.posY = par1DataInput.readByte() & 255;
@@ -41,8 +39,7 @@ public class Packet61DoorChange extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutput par1DataOutput) throws IOException
-    {
+    public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeInt(this.sfxID);
         par1DataOutput.writeInt(this.posX);
         par1DataOutput.writeByte(this.posY & 255);
@@ -54,16 +51,14 @@ public class Packet61DoorChange extends Packet
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler)
-    {
+    public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleDoorChange(this);
     }
 
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 21;
     }
 }

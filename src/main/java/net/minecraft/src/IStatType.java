@@ -1,5 +1,4 @@
 package net.minecraft.src;
 
-public interface IStatType
-{
+public interface IStatType {
 }

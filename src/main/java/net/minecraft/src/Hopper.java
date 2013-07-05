@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface Hopper extends IInventory
-{
+public interface Hopper extends IInventory {
     /**
      * Returns the worldObj for this tileEntity.
      */

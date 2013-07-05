@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IEntitySelector
-{
+public interface IEntitySelector {
     IEntitySelector selectAnything = new EntitySelectorAlive();
     IEntitySelector selectInventories = new EntitySelectorInventory();
 

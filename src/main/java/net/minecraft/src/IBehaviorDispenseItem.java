@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IBehaviorDispenseItem
-{
+public interface IBehaviorDispenseItem {
     IBehaviorDispenseItem itemDispenseBehaviorProvider = new BehaviorDispenseItemProvider();
 
     /**

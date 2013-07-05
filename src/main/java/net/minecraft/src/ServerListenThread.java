@@ -10,8 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @SuppressWarnings({"FieldCanBeLocal", "UnusedDeclaration"})
-public class ServerListenThread extends Thread
-{
+public class ServerListenThread extends Thread {
     private final List<NetLoginHandler> pendingConnections = Collections.synchronizedList(new ArrayList<NetLoginHandler>());
 
     /**
@@ -24,8 +23,7 @@ public class ServerListenThread extends Thread
     private final InetAddress myServerAddress;
     private final int myPort;
 
-    public ServerListenThread(NetworkListenThread par1NetworkListenThread, InetAddress par2InetAddress, int par3) throws IOException
-    {
+    public ServerListenThread(NetworkListenThread par1NetworkListenThread, InetAddress par2InetAddress, int par3) throws IOException {
         super("Listen thread");
         this.myNetworkListenThread = par1NetworkListenThread;
         this.myPort = par3;
@@ -34,27 +32,20 @@ public class ServerListenThread extends Thread
         this.myServerSocket.setPerformancePreferences(0, 2, 1);
     }
 
-    public void processPendingConnections()
-    {
+    public void processPendingConnections() {
 
-        synchronized (this.pendingConnections)
-        {
-            for (int var2 = 0; var2 < this.pendingConnections.size(); ++var2)
-            {
+        synchronized (this.pendingConnections) {
+            for (int var2 = 0; var2 < this.pendingConnections.size(); ++var2) {
                 NetLoginHandler var3 = this.pendingConnections.get(var2);
 
-                try
-                {
+                try {
                     var3.tryLogin();
-                }
-                catch (Exception var6)
-                {
+                } catch (Exception var6) {
                     var3.kickUser("Internal server error");
                     this.myNetworkListenThread.getServer().getLogAgent().logWarningException("Failed to handle packet for " + var3.getUsernameAndAddress() + ": " + var6, var6);
                 }
 
-                if (var3.finishedProcessing)
-                {
+                if (var3.finishedProcessing) {
                     this.pendingConnections.remove(var2--);
                 }
 
@@ -63,64 +54,47 @@ public class ServerListenThread extends Thread
         }
     }
 
-    public void run()
-    {
-        while (this.myNetworkListenThread.isListening)
-        {
-            try
-            {
+    public void run() {
+        while (this.myNetworkListenThread.isListening) {
+            try {
                 Socket var1 = this.myServerSocket.accept();
                 NetLoginHandler var2 = new NetLoginHandler(this.myNetworkListenThread.getServer(), var1, "Connection #" + this.connectionCounter++);
                 this.addPendingConnection(var2);
-            }
-            catch (IOException var3)
-            {
+            } catch (IOException var3) {
                 if (!var3.getMessage().equals("Socket closed")) {
                     var3.printStackTrace();
                 }
             }
         }
 
-        this.myNetworkListenThread.getServer().getLogAgent().func_98233_a("Closing listening thread");
+        this.myNetworkListenThread.getServer().getLogAgent().logInfo("Closing listening thread");
     }
 
-    private void addPendingConnection(NetLoginHandler par1NetLoginHandler)
-    {
-        if (par1NetLoginHandler == null)
-        {
+    private void addPendingConnection(NetLoginHandler par1NetLoginHandler) {
+        if (par1NetLoginHandler == null) {
             throw new IllegalArgumentException("Got null pending connection!");
-        }
-        else
-        {
+        } else {
 
-            synchronized (this.pendingConnections)
-            {
+            synchronized (this.pendingConnections) {
                 this.pendingConnections.add(par1NetLoginHandler);
             }
         }
     }
 
-    public void func_71769_a(InetAddress par1InetAddress)
-    {
-        if (par1InetAddress != null)
-        {
+    public void func_71769_a(InetAddress par1InetAddress) {
+        if (par1InetAddress != null) {
             HashMap var2 = this.recentConnections;
 
-            synchronized (this.recentConnections)
-            {
+            synchronized (this.recentConnections) {
                 this.recentConnections.remove(par1InetAddress);
             }
         }
     }
 
-    public void func_71768_b()
-    {
-        try
-        {
+    public void func_71768_b() {
+        try {
             this.myServerSocket.close();
-        }
-        catch (Throwable ignored)
-        {
+        } catch (Throwable ignored) {
 
         }
     }

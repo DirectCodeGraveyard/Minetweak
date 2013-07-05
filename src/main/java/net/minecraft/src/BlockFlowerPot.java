@@ -2,10 +2,8 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class BlockFlowerPot extends Block
-{
-    public BlockFlowerPot(int par1)
-    {
+public class BlockFlowerPot extends Block {
+    public BlockFlowerPot(int par1) {
         super(par1, Material.circuits);
         this.setBlockBoundsForItemRender();
     }
@@ -13,8 +11,8 @@ public class BlockFlowerPot extends Block
     /**
      * Sets the block's bounds for rendering it as an item
      */
-    public void setBlockBoundsForItemRender()
-    {
+    @Override
+    public void setBlockBoundsForItemRender() {
         float var1 = 0.375F;
         float var2 = var1 / 2.0F;
         this.setBlockBounds(0.5F - var2, 0.0F, 0.5F - var2, 0.5F + var2, var1, 0.5F + var2);
@@ -24,59 +22,50 @@ public class BlockFlowerPot extends Block
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
-    public boolean isOpaqueCube()
-    {
+    @Override
+    public boolean isOpaqueCube() {
         return false;
     }
 
     /**
      * The type of render function that is called for this block
      */
-    public int getRenderType()
-    {
+    @Override
+    public int getRenderType() {
         return 33;
     }
 
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
-    public boolean renderAsNormalBlock()
-    {
+    @Override
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
     /**
      * Called upon block activation (right click on the block.)
      */
-    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-    {
+    @Override
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         ItemStack var10 = par5EntityPlayer.inventory.getCurrentItem();
 
-        if (var10 == null)
-        {
+        if (var10 == null) {
             return false;
-        }
-        else if (par1World.getBlockMetadata(par2, par3, par4) != 0)
-        {
+        } else if (par1World.getBlockMetadata(par2, par3, par4) != 0) {
             return false;
-        }
-        else
-        {
+        } else {
             int var11 = getMetaForPlant(var10);
 
-            if (var11 > 0)
-            {
+            if (var11 > 0) {
                 par1World.setBlockMetadata(par2, par3, par4, var11, 2);
 
-                if (!par5EntityPlayer.capabilities.isCreativeMode && --var10.stackSize <= 0)
-                {
+                if (!par5EntityPlayer.capabilities.isCreativeMode && --var10.stackSize <= 0) {
                     par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, null);
                 }
 
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
             }
         }
@@ -85,8 +74,8 @@ public class BlockFlowerPot extends Block
     /**
      * Get the block's damage value (for use with pick block).
      */
-    public int getDamageValue(World par1World, int par2, int par3, int par4)
-    {
+    @Override
+    public int getDamageValue(World par1World, int par2, int par3, int par4) {
         ItemStack var5 = getPlantForMeta(par1World.getBlockMetadata(par2, par3, par4));
         return var5 == null ? Item.flowerPot.itemID : var5.getItemDamage();
     }
@@ -94,8 +83,8 @@ public class BlockFlowerPot extends Block
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
-    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
-    {
+    @Override
+    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return super.canPlaceBlockAt(par1World, par2, par3, par4) && par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4);
     }
 
@@ -103,10 +92,9 @@ public class BlockFlowerPot extends Block
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
-    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
-    {
-        if (!par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4))
-        {
+    @Override
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
+        if (!par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4)) {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
             par1World.setBlockToAir(par2, par3, par4);
         }
@@ -115,16 +103,14 @@ public class BlockFlowerPot extends Block
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
-    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7)
-    {
+    @Override
+    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, par7);
 
-        if (par5 > 0)
-        {
+        if (par5 > 0) {
             ItemStack var8 = getPlantForMeta(par5);
 
-            if (var8 != null)
-            {
+            if (var8 != null) {
                 this.dropBlockAsItem_do(par1World, par2, par3, par4, var8);
             }
         }
@@ -133,18 +119,16 @@ public class BlockFlowerPot extends Block
     /**
      * Returns the ID of the items to drop on destruction.
      */
-    public int idDropped(int par1, Random par2Random, int par3)
-    {
+    @Override
+    public int idDropped(int par1, Random par2Random, int par3) {
         return Item.flowerPot.itemID;
     }
 
     /**
      * Return the item associated with the specified flower pot metadata value.
      */
-    public static ItemStack getPlantForMeta(int par0)
-    {
-        switch (par0)
-        {
+    public static ItemStack getPlantForMeta(int par0) {
+        switch (par0) {
             case 1:
                 return new ItemStack(Block.plantRed);
 
@@ -186,40 +170,24 @@ public class BlockFlowerPot extends Block
     /**
      * Return the flower pot metadata value associated with the specified item.
      */
-    public static int getMetaForPlant(ItemStack par0ItemStack)
-    {
+    public static int getMetaForPlant(ItemStack par0ItemStack) {
         int var1 = par0ItemStack.getItem().itemID;
 
-        if (var1 == Block.plantRed.blockID)
-        {
+        if (var1 == Block.plantRed.blockID) {
             return 1;
-        }
-        else if (var1 == Block.plantYellow.blockID)
-        {
+        } else if (var1 == Block.plantYellow.blockID) {
             return 2;
-        }
-        else if (var1 == Block.cactus.blockID)
-        {
+        } else if (var1 == Block.cactus.blockID) {
             return 9;
-        }
-        else if (var1 == Block.mushroomBrown.blockID)
-        {
+        } else if (var1 == Block.mushroomBrown.blockID) {
             return 8;
-        }
-        else if (var1 == Block.mushroomRed.blockID)
-        {
+        } else if (var1 == Block.mushroomRed.blockID) {
             return 7;
-        }
-        else if (var1 == Block.deadBush.blockID)
-        {
+        } else if (var1 == Block.deadBush.blockID) {
             return 10;
-        }
-        else
-        {
-            if (var1 == Block.sapling.blockID)
-            {
-                switch (par0ItemStack.getItemDamage())
-                {
+        } else {
+            if (var1 == Block.sapling.blockID) {
+                switch (par0ItemStack.getItemDamage()) {
                     case 0:
                         return 3;
 
@@ -234,10 +202,8 @@ public class BlockFlowerPot extends Block
                 }
             }
 
-            if (var1 == Block.tallGrass.blockID)
-            {
-                switch (par0ItemStack.getItemDamage())
-                {
+            if (var1 == Block.tallGrass.blockID) {
+                switch (par0ItemStack.getItemDamage()) {
                     case 2:
                         return 11;
                 }

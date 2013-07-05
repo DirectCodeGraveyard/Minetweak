@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-final class EnchantmentModifierDamage implements IEnchantmentModifier
-{
+final class EnchantmentModifierDamage implements IEnchantmentModifier {
     /**
      * Used to calculate the damage modifier (extra armor) on enchantments that the player have on equipped armors.
      */
@@ -13,18 +12,17 @@ final class EnchantmentModifierDamage implements IEnchantmentModifier
      */
     public DamageSource source;
 
-    private EnchantmentModifierDamage() {}
+    private EnchantmentModifierDamage() {
+    }
 
     /**
      * Generic method use to calculate modifiers of offensive or defensive enchantment values.
      */
-    public void calculateModifier(Enchantment par1Enchantment, int par2)
-    {
+    public void calculateModifier(Enchantment par1Enchantment, int par2) {
         this.damageModifier += par1Enchantment.calcModifierDamage(par2, this.source);
     }
 
-    EnchantmentModifierDamage(Empty3 par1Empty3)
-    {
+    EnchantmentModifierDamage(Empty3 par1Empty3) {
         this();
     }
 }

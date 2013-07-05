@@ -4,8 +4,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class Packet25EntityPainting extends Packet
-{
+public class Packet25EntityPainting extends Packet {
     public int entityId;
     public int xPosition;
     public int yPosition;
@@ -13,10 +12,10 @@ public class Packet25EntityPainting extends Packet
     public int direction;
     public String title;
 
-    public Packet25EntityPainting() {}
+    public Packet25EntityPainting() {
+    }
 
-    public Packet25EntityPainting(EntityPainting par1EntityPainting)
-    {
+    public Packet25EntityPainting(EntityPainting par1EntityPainting) {
         this.entityId = par1EntityPainting.entityId;
         this.xPosition = par1EntityPainting.xPosition;
         this.yPosition = par1EntityPainting.yPosition;
@@ -28,8 +27,7 @@ public class Packet25EntityPainting extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInput par1DataInput) throws IOException
-    {
+    public void readPacketData(DataInput par1DataInput) throws IOException {
         this.entityId = par1DataInput.readInt();
         this.title = readString(par1DataInput, EnumArt.maxArtTitleLength);
         this.xPosition = par1DataInput.readInt();
@@ -41,8 +39,7 @@ public class Packet25EntityPainting extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutput par1DataOutput) throws IOException
-    {
+    public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeInt(this.entityId);
         writeString(this.title, par1DataOutput);
         par1DataOutput.writeInt(this.xPosition);
@@ -54,16 +51,14 @@ public class Packet25EntityPainting extends Packet
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler)
-    {
+    public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleEntityPainting(this);
     }
 
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 24;
     }
 }

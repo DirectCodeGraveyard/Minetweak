@@ -1,5 +1,4 @@
 package net.minecraft.src;
 
-public interface Icon
-{
+public interface Icon {
 }

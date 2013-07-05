@@ -2,26 +2,28 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class ComponentScatteredFeatureJunglePyramid extends ComponentScatteredFeature
-{
+public class ComponentScatteredFeatureJunglePyramid extends ComponentScatteredFeature {
     private boolean field_74947_h;
     private boolean field_74948_i;
     private boolean field_74945_j;
     private boolean field_74946_k;
 
-    /** List of Chest contents to be generated in the Jungle Pyramid chests. */
-    private static final WeightedRandomChestContent[] junglePyramidsChestContents = new WeightedRandomChestContent[] {new WeightedRandomChestContent(Item.diamond.itemID, 0, 1, 3, 3), new WeightedRandomChestContent(Item.ingotIron.itemID, 0, 1, 5, 10), new WeightedRandomChestContent(Item.ingotGold.itemID, 0, 2, 7, 15), new WeightedRandomChestContent(Item.emerald.itemID, 0, 1, 3, 2), new WeightedRandomChestContent(Item.bone.itemID, 0, 4, 6, 20), new WeightedRandomChestContent(Item.rottenFlesh.itemID, 0, 3, 7, 16), new WeightedRandomChestContent(Item.saddle.itemID, 0, 1, 1, 3), new WeightedRandomChestContent(Item.field_111215_ce.itemID, 0, 1, 1, 1), new WeightedRandomChestContent(Item.field_111216_cf.itemID, 0, 1, 1, 1), new WeightedRandomChestContent(Item.field_111213_cg.itemID, 0, 1, 1, 1)};
+    /**
+     * List of Chest contents to be generated in the Jungle Pyramid chests.
+     */
+    private static final WeightedRandomChestContent[] junglePyramidsChestContents = new WeightedRandomChestContent[]{new WeightedRandomChestContent(Item.diamond.itemID, 0, 1, 3, 3), new WeightedRandomChestContent(Item.ingotIron.itemID, 0, 1, 5, 10), new WeightedRandomChestContent(Item.ingotGold.itemID, 0, 2, 7, 15), new WeightedRandomChestContent(Item.emerald.itemID, 0, 1, 3, 2), new WeightedRandomChestContent(Item.bone.itemID, 0, 4, 6, 20), new WeightedRandomChestContent(Item.rottenFlesh.itemID, 0, 3, 7, 16), new WeightedRandomChestContent(Item.saddle.itemID, 0, 1, 1, 3), new WeightedRandomChestContent(Item.field_111215_ce.itemID, 0, 1, 1, 1), new WeightedRandomChestContent(Item.field_111216_cf.itemID, 0, 1, 1, 1), new WeightedRandomChestContent(Item.field_111213_cg.itemID, 0, 1, 1, 1)};
 
     /**
      * List of Dispenser contents to be generated in the Jungle Pyramid dispensers.
      */
-    private static final WeightedRandomChestContent[] junglePyramidsDispenserContents = new WeightedRandomChestContent[] {new WeightedRandomChestContent(Item.arrow.itemID, 0, 2, 7, 30)};
+    private static final WeightedRandomChestContent[] junglePyramidsDispenserContents = new WeightedRandomChestContent[]{new WeightedRandomChestContent(Item.arrow.itemID, 0, 2, 7, 30)};
 
-    /** List of random stones to be generated in the Jungle Pyramid. */
-    private static StructureScatteredFeatureStones junglePyramidsRandomScatteredStones = new StructureScatteredFeatureStones((ComponentScatteredFeaturePieces2)null);
+    /**
+     * List of random stones to be generated in the Jungle Pyramid.
+     */
+    private static StructureScatteredFeatureStones junglePyramidsRandomScatteredStones = new StructureScatteredFeatureStones((ComponentScatteredFeaturePieces2) null);
 
-    public ComponentScatteredFeatureJunglePyramid(Random par1Random, int par2, int par3)
-    {
+    public ComponentScatteredFeatureJunglePyramid(Random par1Random, int par2, int par3) {
         super(par1Random, par2, 64, par3, 12, 10, 15);
     }
 
@@ -29,14 +31,10 @@ public class ComponentScatteredFeatureJunglePyramid extends ComponentScatteredFe
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
-    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
-    {
-        if (!this.func_74935_a(par1World, par3StructureBoundingBox, 0))
-        {
+    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox) {
+        if (!this.func_74935_a(par1World, par3StructureBoundingBox, 0)) {
             return false;
-        }
-        else
-        {
+        } else {
             int var4 = this.getMetadataWithOffset(Block.stairsCobblestone.blockID, 3);
             int var5 = this.getMetadataWithOffset(Block.stairsCobblestone.blockID, 2);
             int var6 = this.getMetadataWithOffset(Block.stairsCobblestone.blockID, 0);
@@ -69,8 +67,7 @@ public class ComponentScatteredFeatureJunglePyramid extends ComponentScatteredFe
             this.placeBlockAtCurrentPosition(par1World, 0, 0, 10, 5, 9, par3StructureBoundingBox);
             int var8;
 
-            for (var8 = 0; var8 <= 14; var8 += 14)
-            {
+            for (var8 = 0; var8 <= 14; var8 += 14) {
                 this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 2, 4, var8, 2, 5, var8, false, par2Random, junglePyramidsRandomScatteredStones);
                 this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 4, 4, var8, 4, 5, var8, false, par2Random, junglePyramidsRandomScatteredStones);
                 this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 7, 4, var8, 7, 5, var8, false, par2Random, junglePyramidsRandomScatteredStones);
@@ -79,10 +76,8 @@ public class ComponentScatteredFeatureJunglePyramid extends ComponentScatteredFe
 
             this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 5, 6, 0, 6, 6, 0, false, par2Random, junglePyramidsRandomScatteredStones);
 
-            for (var8 = 0; var8 <= 11; var8 += 11)
-            {
-                for (int var9 = 2; var9 <= 12; var9 += 2)
-                {
+            for (var8 = 0; var8 <= 11; var8 += 11) {
+                for (int var9 = 2; var9 <= 12; var9 += 2) {
                     this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, var8, 4, var9, var8, 5, var9, false, par2Random, junglePyramidsRandomScatteredStones);
                 }
 
@@ -120,8 +115,7 @@ public class ComponentScatteredFeatureJunglePyramid extends ComponentScatteredFe
             this.placeBlockAtCurrentPosition(par1World, Block.stairsCobblestone.blockID, var6, 4, 4, 5, par3StructureBoundingBox);
             this.placeBlockAtCurrentPosition(par1World, Block.stairsCobblestone.blockID, var7, 7, 4, 5, par3StructureBoundingBox);
 
-            for (var8 = 0; var8 < 4; ++var8)
-            {
+            for (var8 = 0; var8 < 4; ++var8) {
                 this.placeBlockAtCurrentPosition(par1World, Block.stairsCobblestone.blockID, var5, 5, 0 - var8, 6 + var8, par3StructureBoundingBox);
                 this.placeBlockAtCurrentPosition(par1World, Block.stairsCobblestone.blockID, var5, 6, 0 - var8, 6 + var8, par3StructureBoundingBox);
                 this.fillWithAir(par1World, par3StructureBoundingBox, 5, 0 - var8, 7 + var8, 6, 0 - var8, 9 + var8);
@@ -131,13 +125,11 @@ public class ComponentScatteredFeatureJunglePyramid extends ComponentScatteredFe
             this.fillWithAir(par1World, par3StructureBoundingBox, 1, -3, 1, 3, -1, 13);
             this.fillWithAir(par1World, par3StructureBoundingBox, 1, -3, 1, 9, -1, 5);
 
-            for (var8 = 1; var8 <= 13; var8 += 2)
-            {
+            for (var8 = 1; var8 <= 13; var8 += 2) {
                 this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, -3, var8, 1, -2, var8, false, par2Random, junglePyramidsRandomScatteredStones);
             }
 
-            for (var8 = 2; var8 <= 12; var8 += 2)
-            {
+            for (var8 = 2; var8 <= 12; var8 += 2) {
                 this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 1, -1, var8, 3, -1, var8, false, par2Random, junglePyramidsRandomScatteredStones);
             }
 
@@ -159,8 +151,7 @@ public class ComponentScatteredFeatureJunglePyramid extends ComponentScatteredFe
             this.placeBlockAtCurrentPosition(par1World, Block.redstoneWire.blockID, 0, 4, -3, 1, par3StructureBoundingBox);
             this.placeBlockAtCurrentPosition(par1World, Block.cobblestoneMossy.blockID, 0, 3, -3, 1, par3StructureBoundingBox);
 
-            if (!this.field_74945_j)
-            {
+            if (!this.field_74945_j) {
                 this.field_74945_j = this.generateStructureDispenserContents(par1World, par3StructureBoundingBox, par2Random, 3, -2, 1, 2, junglePyramidsDispenserContents, 2);
             }
 
@@ -176,17 +167,15 @@ public class ComponentScatteredFeatureJunglePyramid extends ComponentScatteredFe
             this.placeBlockAtCurrentPosition(par1World, Block.cobblestoneMossy.blockID, 0, 9, -3, 4, par3StructureBoundingBox);
             this.placeBlockAtCurrentPosition(par1World, Block.redstoneWire.blockID, 0, 9, -2, 4, par3StructureBoundingBox);
 
-            if (!this.field_74946_k)
-            {
+            if (!this.field_74946_k) {
                 this.field_74946_k = this.generateStructureDispenserContents(par1World, par3StructureBoundingBox, par2Random, 9, -2, 3, 4, junglePyramidsDispenserContents, 2);
             }
 
             this.placeBlockAtCurrentPosition(par1World, Block.vine.blockID, 15, 8, -1, 3, par3StructureBoundingBox);
             this.placeBlockAtCurrentPosition(par1World, Block.vine.blockID, 15, 8, -2, 3, par3StructureBoundingBox);
 
-            if (!this.field_74947_h)
-            {
-                this.field_74947_h = this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 8, -3, 3, WeightedRandomChestContent.func_92080_a(junglePyramidsChestContents, new WeightedRandomChestContent[] {Item.enchantedBook.func_92114_b(par2Random)}), 2 + par2Random.nextInt(5));
+            if (!this.field_74947_h) {
+                this.field_74947_h = this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 8, -3, 3, WeightedRandomChestContent.func_92080_a(junglePyramidsChestContents, new WeightedRandomChestContent[]{Item.enchantedBook.func_92114_b(par2Random)}), 2 + par2Random.nextInt(5));
             }
 
             this.placeBlockAtCurrentPosition(par1World, Block.cobblestoneMossy.blockID, 0, 9, -3, 2, par3StructureBoundingBox);
@@ -217,9 +206,8 @@ public class ComponentScatteredFeatureJunglePyramid extends ComponentScatteredFe
             this.placeBlockAtCurrentPosition(par1World, Block.pistonStickyBase.blockID, this.getMetadataWithOffset(Block.pistonStickyBase.blockID, 4), 10, -1, 8, par3StructureBoundingBox);
             this.placeBlockAtCurrentPosition(par1World, Block.redstoneRepeaterIdle.blockID, this.getMetadataWithOffset(Block.redstoneRepeaterIdle.blockID, 2), 10, -2, 10, par3StructureBoundingBox);
 
-            if (!this.field_74948_i)
-            {
-                this.field_74948_i = this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 9, -3, 10, WeightedRandomChestContent.func_92080_a(junglePyramidsChestContents, new WeightedRandomChestContent[] {Item.enchantedBook.func_92114_b(par2Random)}), 2 + par2Random.nextInt(5));
+            if (!this.field_74948_i) {
+                this.field_74948_i = this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 9, -3, 10, WeightedRandomChestContent.func_92080_a(junglePyramidsChestContents, new WeightedRandomChestContent[]{Item.enchantedBook.func_92114_b(par2Random)}), 2 + par2Random.nextInt(5));
             }
 
             return true;

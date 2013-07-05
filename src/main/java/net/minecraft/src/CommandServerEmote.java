@@ -4,35 +4,27 @@ import net.minecraft.server.MinecraftServer;
 
 import java.util.List;
 
-public class CommandServerEmote extends CommandBase
-{
-    public String getCommandName()
-    {
+public class CommandServerEmote extends CommandBase {
+    public String getCommandName() {
         return "me";
     }
 
     /**
      * Return the required permission level for this command.
      */
-    public int getRequiredPermissionLevel()
-    {
+    public int getRequiredPermissionLevel() {
         return 0;
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
-    {
+    public String getCommandUsage(ICommandSender par1ICommandSender) {
         return "commands.me.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
-    {
-        if (par2ArrayOfStr.length > 0)
-        {
+    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
+        if (par2ArrayOfStr.length > 0) {
             String var3 = func_82361_a(par1ICommandSender, par2ArrayOfStr, 0, par1ICommandSender.canCommandSenderUseCommand(1, "me"));
-            MinecraftServer.getServer().getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("chat.type.emote", new Object[] {par1ICommandSender.getCommandSenderName(), var3}));
-        }
-        else
-        {
+            MinecraftServer.getServer().getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("chat.type.emote", new Object[]{par1ICommandSender.getCommandSenderName(), var3}));
+        } else {
             throw new WrongUsageException("commands.me.usage", new Object[0]);
         }
     }
@@ -40,8 +32,7 @@ public class CommandServerEmote extends CommandBase
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
-    public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
-    {
+    public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         return getListOfStringsMatchingLastWord(par2ArrayOfStr, MinecraftServer.getServer().getAllUsernames());
     }
 }

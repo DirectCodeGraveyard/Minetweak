@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IServer
-{
+public interface IServer {
     /**
      * Gets an integer property. If it does not exist, set it to the specified value.
      */

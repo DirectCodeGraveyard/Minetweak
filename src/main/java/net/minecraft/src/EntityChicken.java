@@ -1,18 +1,18 @@
 package net.minecraft.src;
 
-public class EntityChicken extends EntityAnimal
-{
+public class EntityChicken extends EntityAnimal {
     public float field_70886_e;
     public float destPos;
     public float field_70884_g;
     public float field_70888_h;
     public float field_70889_i = 1.0F;
 
-    /** The time until the next egg is spawned. */
+    /**
+     * The time until the next egg is spawned.
+     */
     public int timeUntilNextEgg;
 
-    public EntityChicken(World par1World)
-    {
+    public EntityChicken(World par1World) {
         super(par1World);
         this.setSize(0.3F, 0.7F);
         this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
@@ -29,13 +29,11 @@ public class EntityChicken extends EntityAnimal
     /**
      * Returns true if the newer Entity AI code should be run
      */
-    public boolean isAIEnabled()
-    {
+    public boolean isAIEnabled() {
         return true;
     }
 
-    protected void func_110147_ax()
-    {
+    protected void func_110147_ax() {
         super.func_110147_ax();
         this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(4.0D);
         this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.25D);
@@ -45,39 +43,33 @@ public class EntityChicken extends EntityAnimal
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
-    public void onLivingUpdate()
-    {
+    public void onLivingUpdate() {
         super.onLivingUpdate();
         this.field_70888_h = this.field_70886_e;
         this.field_70884_g = this.destPos;
-        this.destPos = (float)((double)this.destPos + (double)(this.onGround ? -1 : 4) * 0.3D);
+        this.destPos = (float) ((double) this.destPos + (double) (this.onGround ? -1 : 4) * 0.3D);
 
-        if (this.destPos < 0.0F)
-        {
+        if (this.destPos < 0.0F) {
             this.destPos = 0.0F;
         }
 
-        if (this.destPos > 1.0F)
-        {
+        if (this.destPos > 1.0F) {
             this.destPos = 1.0F;
         }
 
-        if (!this.onGround && this.field_70889_i < 1.0F)
-        {
+        if (!this.onGround && this.field_70889_i < 1.0F) {
             this.field_70889_i = 1.0F;
         }
 
-        this.field_70889_i = (float)((double)this.field_70889_i * 0.9D);
+        this.field_70889_i = (float) ((double) this.field_70889_i * 0.9D);
 
-        if (!this.onGround && this.motionY < 0.0D)
-        {
+        if (!this.onGround && this.motionY < 0.0D) {
             this.motionY *= 0.6D;
         }
 
         this.field_70886_e += this.field_70889_i * 2.0F;
 
-        if (!this.isChild() && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0)
-        {
+        if (!this.isChild() && !this.worldObj.isRemote && --this.timeUntilNextEgg <= 0) {
             this.playSound("mob.chicken.plop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
             this.dropItem(Item.egg.itemID, 1);
             this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
@@ -87,66 +79,57 @@ public class EntityChicken extends EntityAnimal
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
-    protected void fall(float par1) {}
+    protected void fall(float par1) {
+    }
 
     /**
      * Returns the sound this mob makes while it's alive.
      */
-    protected String getLivingSound()
-    {
+    protected String getLivingSound() {
         return "mob.chicken.say";
     }
 
     /**
      * Returns the sound this mob makes when it is hurt.
      */
-    protected String getHurtSound()
-    {
+    protected String getHurtSound() {
         return "mob.chicken.hurt";
     }
 
     /**
      * Returns the sound this mob makes on death.
      */
-    protected String getDeathSound()
-    {
+    protected String getDeathSound() {
         return "mob.chicken.hurt";
     }
 
     /**
      * Plays step sound at given x, y, z for the entity
      */
-    protected void playStepSound(int par1, int par2, int par3, int par4)
-    {
+    protected void playStepSound(int par1, int par2, int par3, int par4) {
         this.playSound("mob.chicken.step", 0.15F, 1.0F);
     }
 
     /**
      * Returns the item ID for the item the mob drops on death.
      */
-    protected int getDropItemId()
-    {
+    protected int getDropItemId() {
         return Item.feather.itemID;
     }
 
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
-    {
+    protected void dropFewItems(boolean par1, int par2) {
         int var3 = this.rand.nextInt(3) + this.rand.nextInt(1 + par2);
 
-        for (int var4 = 0; var4 < var3; ++var4)
-        {
+        for (int var4 = 0; var4 < var3; ++var4) {
             this.dropItem(Item.feather.itemID, 1);
         }
 
-        if (this.isBurning())
-        {
+        if (this.isBurning()) {
             this.dropItem(Item.chickenCooked.itemID, 1);
-        }
-        else
-        {
+        } else {
             this.dropItem(Item.chickenRaw.itemID, 1);
         }
     }
@@ -154,8 +137,7 @@ public class EntityChicken extends EntityAnimal
     /**
      * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
      */
-    public EntityChicken spawnBabyAnimal(EntityAgeable par1EntityAgeable)
-    {
+    public EntityChicken spawnBabyAnimal(EntityAgeable par1EntityAgeable) {
         return new EntityChicken(this.worldObj);
     }
 
@@ -163,13 +145,11 @@ public class EntityChicken extends EntityAnimal
      * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
      * the animal type)
      */
-    public boolean isBreedingItem(ItemStack par1ItemStack)
-    {
+    public boolean isBreedingItem(ItemStack par1ItemStack) {
         return par1ItemStack != null && par1ItemStack.getItem() instanceof ItemSeeds;
     }
 
-    public EntityAgeable createChild(EntityAgeable par1EntityAgeable)
-    {
+    public EntityAgeable createChild(EntityAgeable par1EntityAgeable) {
         return this.spawnBabyAnimal(par1EntityAgeable);
     }
 }

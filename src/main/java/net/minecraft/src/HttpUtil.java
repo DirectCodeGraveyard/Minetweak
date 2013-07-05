@@ -10,19 +10,16 @@ import java.net.HttpURLConnection;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class HttpUtil
-{
+public class HttpUtil {
     /**
      * Builds an encoded HTTP POST content string from a string map
      */
-    public static String buildPostString(Map par0Map)
-    {
+    public static String buildPostString(Map par0Map) {
         StringBuilder var1 = new StringBuilder();
 
         for (Object o : par0Map.entrySet()) {
@@ -55,26 +52,22 @@ public class HttpUtil
     /**
      * Sends a HTTP POST request to the given URL with data from a map
      */
-    public static String sendPost(ILogAgent par0ILogAgent, URL par1URL, Map par2Map, boolean par3)
-    {
+    public static String sendPost(ILogAgent par0ILogAgent, URL par1URL, Map par2Map, boolean par3) {
         return sendPost(par0ILogAgent, par1URL, buildPostString(par2Map), par3);
     }
 
     /**
      * Sends a HTTP POST request to the given URL with data from a string
      */
-    private static String sendPost(ILogAgent par0ILogAgent, URL par1URL, String par2Str, boolean par3)
-    {
-        try
-        {
+    private static String sendPost(ILogAgent par0ILogAgent, URL par1URL, String par2Str, boolean par3) {
+        try {
             Proxy var4 = MinecraftServer.getServer() == null ? null : MinecraftServer.getServer().func_110454_ao();
 
-            if (var4 == null)
-            {
+            if (var4 == null) {
                 var4 = Proxy.NO_PROXY;
             }
 
-            HttpURLConnection var5 = (HttpURLConnection)par1URL.openConnection(var4);
+            HttpURLConnection var5 = (HttpURLConnection) par1URL.openConnection(var4);
             var5.setRequestMethod("POST");
             var5.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             var5.setRequestProperty("Content-Length", "" + par2Str.getBytes().length);
@@ -90,25 +83,18 @@ public class HttpUtil
             StringBuilder var9 = new StringBuilder();
             String var8;
 
-            while ((var8 = var7.readLine()) != null)
-            {
+            while ((var8 = var7.readLine()) != null) {
                 var9.append(var8);
                 var9.append('\r');
             }
 
             var7.close();
             return var9.toString();
-        }
-        catch (Exception var10)
-        {
-            if (!par3)
-            {
-                if (par0ILogAgent != null)
-                {
+        } catch (Exception var10) {
+            if (!par3) {
+                if (par0ILogAgent != null) {
                     par0ILogAgent.logSevereException("Could not post to " + par1URL, var10);
-                }
-                else
-                {
+                } else {
                     Logger.getAnonymousLogger().log(Level.SEVERE, "Could not post to " + par1URL, var10);
                 }
             }

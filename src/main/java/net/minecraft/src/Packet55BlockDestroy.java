@@ -4,27 +4,36 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class Packet55BlockDestroy extends Packet
-{
-    /** Entity breaking the block */
+public class Packet55BlockDestroy extends Packet {
+    /**
+     * Entity breaking the block
+     */
     private int entityId;
 
-    /** X posiiton of the block */
+    /**
+     * X posiiton of the block
+     */
     private int posX;
 
-    /** Y position of the block */
+    /**
+     * Y position of the block
+     */
     private int posY;
 
-    /** Z position of the block */
+    /**
+     * Z position of the block
+     */
     private int posZ;
 
-    /** How far destroyed this block is */
+    /**
+     * How far destroyed this block is
+     */
     private int destroyedStage;
 
-    public Packet55BlockDestroy() {}
+    public Packet55BlockDestroy() {
+    }
 
-    public Packet55BlockDestroy(int par1, int par2, int par3, int par4, int par5)
-    {
+    public Packet55BlockDestroy(int par1, int par2, int par3, int par4, int par5) {
         this.entityId = par1;
         this.posX = par2;
         this.posY = par3;
@@ -35,8 +44,7 @@ public class Packet55BlockDestroy extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInput par1DataInput) throws IOException
-    {
+    public void readPacketData(DataInput par1DataInput) throws IOException {
         this.entityId = par1DataInput.readInt();
         this.posX = par1DataInput.readInt();
         this.posY = par1DataInput.readInt();
@@ -47,8 +55,7 @@ public class Packet55BlockDestroy extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutput par1DataOutput) throws IOException
-    {
+    public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeInt(this.entityId);
         par1DataOutput.writeInt(this.posX);
         par1DataOutput.writeInt(this.posY);
@@ -59,24 +66,21 @@ public class Packet55BlockDestroy extends Packet
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler)
-    {
+    public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleBlockDestroy(this);
     }
 
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 13;
     }
 
     /**
      * only false for the abstract Packet class, all real packets return true
      */
-    public boolean isRealPacket()
-    {
+    public boolean isRealPacket() {
         return true;
     }
 
@@ -84,9 +88,8 @@ public class Packet55BlockDestroy extends Packet
      * eg return packet30entity.entityId == entityId; WARNING : will throw if you compare a packet to a different packet
      * class
      */
-    public boolean containsSameEntityIDAs(Packet par1Packet)
-    {
-        Packet55BlockDestroy var2 = (Packet55BlockDestroy)par1Packet;
+    public boolean containsSameEntityIDAs(Packet par1Packet) {
+        Packet55BlockDestroy var2 = (Packet55BlockDestroy) par1Packet;
         return var2.entityId == this.entityId;
     }
 }

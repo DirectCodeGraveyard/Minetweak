@@ -5,23 +5,23 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AchievementMap
-{
-    /** Holds the singleton instance of AchievementMap. */
+public class AchievementMap {
+    /**
+     * Holds the singleton instance of AchievementMap.
+     */
     public static AchievementMap instance = new AchievementMap();
 
-    /** Maps a achievement id with it's unique GUID. */
+    /**
+     * Maps a achievement id with it's unique GUID.
+     */
     private Map<Integer, String> guidMap = new HashMap<Integer, String>();
 
-    private AchievementMap()
-    {
-        try
-        {
+    private AchievementMap() {
+        try {
             BufferedReader var1 = new BufferedReader(new InputStreamReader(AchievementMap.class.getResourceAsStream("/achievement/map.txt")));
             String var2;
 
-            while ((var2 = var1.readLine()) != null)
-            {
+            while ((var2 = var1.readLine()) != null) {
                 String[] var3 = var2.split(",");
                 int var4;
                 var4 = Integer.parseInt(var3[0]);
@@ -29,9 +29,7 @@ public class AchievementMap
             }
 
             var1.close();
-        }
-        catch (Exception var5)
-        {
+        } catch (Exception var5) {
             var5.printStackTrace();
         }
     }
@@ -39,8 +37,7 @@ public class AchievementMap
     /**
      * Returns the unique GUID of a achievement id.
      */
-    public static String getGuid(int par0)
-    {
+    public static String getGuid(int par0) {
         return instance.guidMap.get(par0);
     }
 }

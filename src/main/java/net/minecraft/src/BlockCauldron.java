@@ -3,10 +3,8 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-public class BlockCauldron extends Block
-{
-    public BlockCauldron(int par1)
-    {
+public class BlockCauldron extends Block {
+    public BlockCauldron(int par1) {
         super(par1, Material.iron);
     }
 
@@ -14,8 +12,8 @@ public class BlockCauldron extends Block
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
      * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
      */
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
-    {
+    @Override
+    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List<AxisAlignedBB> par6List, Entity par7Entity) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.3125F, 1.0F);
         super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
         float var8 = 0.125F;
@@ -33,8 +31,8 @@ public class BlockCauldron extends Block
     /**
      * Sets the block's bounds for rendering it as an item
      */
-    public void setBlockBoundsForItemRender()
-    {
+    @Override
+    public void setBlockBoundsForItemRender() {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
@@ -42,55 +40,46 @@ public class BlockCauldron extends Block
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
-    public boolean isOpaqueCube()
-    {
+    @Override
+    public boolean isOpaqueCube() {
         return false;
     }
 
     /**
      * The type of render function that is called for this block
      */
-    public int getRenderType()
-    {
+    @Override
+    public int getRenderType() {
         return 24;
     }
 
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
-    public boolean renderAsNormalBlock()
-    {
+    @Override
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
     /**
      * Called upon block activation (right click on the block.)
      */
-    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-    {
-        if (par1World.isRemote)
-        {
+    @Override
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
+        if (par1World.isRemote) {
             return true;
-        }
-        else
-        {
+        } else {
             ItemStack var10 = par5EntityPlayer.inventory.getCurrentItem();
 
-            if (var10 == null)
-            {
+            if (var10 == null) {
                 return true;
-            }
-            else
-            {
+            } else {
                 int var11 = par1World.getBlockMetadata(par2, par3, par4);
                 int var12 = func_111045_h_(var11);
 
-                if (var10.itemID == Item.bucketWater.itemID)
-                {
-                    if (var12 < 3)
-                    {
-                        if (!par5EntityPlayer.capabilities.isCreativeMode)
-                        {
+                if (var10.itemID == Item.bucketWater.itemID) {
+                    if (var12 < 3) {
+                        if (!par5EntityPlayer.capabilities.isCreativeMode) {
                             par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, new ItemStack(Item.bucketEmpty));
                         }
 
@@ -99,38 +88,28 @@ public class BlockCauldron extends Block
                     }
 
                     return true;
-                }
-                else
-                {
-                    if (var10.itemID == Item.glassBottle.itemID)
-                    {
-                        if (var12 > 0)
-                        {
+                } else {
+                    if (var10.itemID == Item.glassBottle.itemID) {
+                        if (var12 > 0) {
                             ItemStack var13 = new ItemStack(Item.potion, 1, 0);
 
-                            if (!par5EntityPlayer.inventory.addItemStackToInventory(var13))
-                            {
-                                par1World.spawnEntityInWorld(new EntityItem(par1World, (double)par2 + 0.5D, (double)par3 + 1.5D, (double)par4 + 0.5D, var13));
-                            }
-                            else if (par5EntityPlayer instanceof EntityPlayerMP)
-                            {
-                                ((EntityPlayerMP)par5EntityPlayer).sendContainerToPlayer(par5EntityPlayer.inventoryContainer);
+                            if (!par5EntityPlayer.inventory.addItemStackToInventory(var13)) {
+                                par1World.spawnEntityInWorld(new EntityItem(par1World, (double) par2 + 0.5D, (double) par3 + 1.5D, (double) par4 + 0.5D, var13));
+                            } else if (par5EntityPlayer instanceof EntityPlayerMP) {
+                                ((EntityPlayerMP) par5EntityPlayer).sendContainerToPlayer(par5EntityPlayer.inventoryContainer);
                             }
 
                             --var10.stackSize;
 
-                            if (var10.stackSize <= 0)
-                            {
+                            if (var10.stackSize <= 0) {
                                 par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, null);
                             }
 
                             par1World.setBlockMetadata(par2, par3, par4, var12 - 1, 2);
                             par1World.func_96440_m(par2, par3, par4, this.blockID);
                         }
-                    }
-                    else if (var12 > 0 && var10.getItem() instanceof ItemArmor && ((ItemArmor)var10.getItem()).getArmorMaterial() == EnumArmorMaterial.CLOTH)
-                    {
-                        ItemArmor var14 = (ItemArmor)var10.getItem();
+                    } else if (var12 > 0 && var10.getItem() instanceof ItemArmor && ((ItemArmor) var10.getItem()).getArmorMaterial() == EnumArmorMaterial.CLOTH) {
+                        ItemArmor var14 = (ItemArmor) var10.getItem();
                         var14.removeColor(var10);
                         par1World.setBlockMetadata(par2, par3, par4, var12 - 1, 2);
                         par1World.func_96440_m(par2, par3, par4, this.blockID);
@@ -146,14 +125,12 @@ public class BlockCauldron extends Block
     /**
      * currently only used by BlockCauldron to incrament meta-data during rain
      */
-    public void fillWithRain(World par1World, int par2, int par3, int par4)
-    {
-        if (par1World.rand.nextInt(20) == 1)
-        {
+    @Override
+    public void fillWithRain(World par1World, int par2, int par3, int par4) {
+        if (par1World.rand.nextInt(20) == 1) {
             int var5 = par1World.getBlockMetadata(par2, par3, par4);
 
-            if (var5 < 3)
-            {
+            if (var5 < 3) {
                 par1World.setBlockMetadata(par2, par3, par4, var5 + 1, 2);
             }
         }
@@ -162,8 +139,8 @@ public class BlockCauldron extends Block
     /**
      * Returns the ID of the items to drop on destruction.
      */
-    public int idDropped(int par1, Random par2Random, int par3)
-    {
+    @Override
+    public int idDropped(int par1, Random par2Random, int par3) {
         return Item.cauldron.itemID;
     }
 
@@ -171,8 +148,8 @@ public class BlockCauldron extends Block
      * If this returns true, then comparators facing away from this block will use the value from
      * getComparatorInputOverride instead of the actual redstone signal strength.
      */
-    public boolean hasComparatorInputOverride()
-    {
+    @Override
+    public boolean hasComparatorInputOverride() {
         return true;
     }
 
@@ -180,14 +157,13 @@ public class BlockCauldron extends Block
      * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
      * strength when this block inputs to a comparator.
      */
-    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
-    {
+    @Override
+    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5) {
         int var6 = par1World.getBlockMetadata(par2, par3, par4);
         return func_111045_h_(var6);
     }
 
-    public static int func_111045_h_(int par0)
-    {
+    public static int func_111045_h_(int par0) {
         return par0;
     }
 }

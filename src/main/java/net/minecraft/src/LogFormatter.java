@@ -6,26 +6,22 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
-class LogFormatter extends Formatter
-{
+class LogFormatter extends Formatter {
     private SimpleDateFormat field_98228_b;
 
     final LogAgent field_98229_a;
 
-    private LogFormatter(LogAgent par1LogAgent)
-    {
+    private LogFormatter(LogAgent par1LogAgent) {
         this.field_98229_a = par1LogAgent;
         this.field_98228_b = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
 
-    public String format(LogRecord par1LogRecord)
-    {
+    public String format(LogRecord par1LogRecord) {
         StringBuilder var2 = new StringBuilder();
         var2.append(this.field_98228_b.format(Long.valueOf(par1LogRecord.getMillis())));
 
-        if (LogAgent.func_98237_a(this.field_98229_a) != null)
-        {
-            var2.append(LogAgent.func_98237_a(this.field_98229_a));
+        if (LogAgent.getLogPrefix(this.field_98229_a) != null) {
+            var2.append(LogAgent.getLogPrefix(this.field_98229_a));
         }
 
         var2.append(" [").append(par1LogRecord.getLevel().getName()).append("] ");
@@ -33,8 +29,7 @@ class LogFormatter extends Formatter
         var2.append('\n');
         Throwable var3 = par1LogRecord.getThrown();
 
-        if (var3 != null)
-        {
+        if (var3 != null) {
             StringWriter var4 = new StringWriter();
             var3.printStackTrace(new PrintWriter(var4));
             var2.append(var4.toString());
@@ -43,8 +38,7 @@ class LogFormatter extends Formatter
         return var2.toString();
     }
 
-    LogFormatter(LogAgent par1LogAgent, LogAgentEmptyAnon par2LogAgentEmptyAnon)
-    {
+    LogFormatter(LogAgent par1LogAgent, LogAgentEmptyAnon par2LogAgentEmptyAnon) {
         this(par1LogAgent);
     }
 }

@@ -3,10 +3,8 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-public class BlockDetectorRail extends BlockRailBase
-{
-    public BlockDetectorRail(int par1)
-    {
+public class BlockDetectorRail extends BlockRailBase {
+    public BlockDetectorRail(int par1) {
         super(par1, true);
         this.setTickRandomly(true);
     }
@@ -14,30 +12,28 @@ public class BlockDetectorRail extends BlockRailBase
     /**
      * How many world ticks before ticking
      */
-    public int tickRate(World par1World)
-    {
+    @Override
+    public int tickRate(World par1World) {
         return 20;
     }
 
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
-    public boolean canProvidePower()
-    {
+    @Override
+    public boolean canProvidePower() {
         return true;
     }
 
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
      */
-    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
-    {
-        if (!par1World.isRemote)
-        {
+    @Override
+    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
+        if (!par1World.isRemote) {
             int var6 = par1World.getBlockMetadata(par2, par3, par4);
 
-            if ((var6 & 8) == 0)
-            {
+            if ((var6 & 8) == 0) {
                 this.setStateIfMinecartInteractsWithRail(par1World, par2, par3, par4, var6);
             }
         }
@@ -46,14 +42,12 @@ public class BlockDetectorRail extends BlockRailBase
     /**
      * Ticks the block if it's been scheduled
      */
-    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random)
-    {
-        if (!par1World.isRemote)
-        {
+    @Override
+    public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
+        if (!par1World.isRemote) {
             int var6 = par1World.getBlockMetadata(par2, par3, par4);
 
-            if ((var6 & 8) != 0)
-            {
+            if ((var6 & 8) != 0) {
                 this.setStateIfMinecartInteractsWithRail(par1World, par2, par3, par4, var6);
             }
         }
@@ -64,8 +58,8 @@ public class BlockDetectorRail extends BlockRailBase
      * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
      * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
+    @Override
+    public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return (par1IBlockAccess.getBlockMetadata(par2, par3, par4) & 8) != 0 ? 15 : 0;
     }
 
@@ -73,44 +67,39 @@ public class BlockDetectorRail extends BlockRailBase
      * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
      * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
+    @Override
+    public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return (par1IBlockAccess.getBlockMetadata(par2, par3, par4) & 8) == 0 ? 0 : (par5 == 1 ? 15 : 0);
     }
 
     /**
      * Update the detector rail power state if a minecart enter, stays or leave the block.
      */
-    private void setStateIfMinecartInteractsWithRail(World par1World, int par2, int par3, int par4, int par5)
-    {
+    private void setStateIfMinecartInteractsWithRail(World par1World, int par2, int par3, int par4, int par5) {
         boolean var6 = (par5 & 8) != 0;
         boolean var7 = false;
         float var8 = 0.125F;
-        List var9 = par1World.getEntitiesWithinAABB(EntityMinecart.class, AxisAlignedBB.getAABBPool().getAABB((double)((float)par2 + var8), (double)par3, (double)((float)par4 + var8), (double)((float)(par2 + 1) - var8), (double)((float)(par3 + 1) - var8), (double)((float)(par4 + 1) - var8)));
+        List var9 = par1World.getEntitiesWithinAABB(EntityMinecart.class, AxisAlignedBB.getAABBPool().getAABB((double) ((float) par2 + var8), (double) par3, (double) ((float) par4 + var8), (double) ((float) (par2 + 1) - var8), (double) ((float) (par3 + 1) - var8), (double) ((float) (par4 + 1) - var8)));
 
-        if (!var9.isEmpty())
-        {
+        if (!var9.isEmpty()) {
             var7 = true;
         }
 
-        if (var7 && !var6)
-        {
+        if (var7 && !var6) {
             par1World.setBlockMetadata(par2, par3, par4, par5 | 8, 3);
             par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
             par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
             par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
         }
 
-        if (!var7 && var6)
-        {
+        if (!var7 && var6) {
             par1World.setBlockMetadata(par2, par3, par4, par5 & 7, 3);
             par1World.notifyBlocksOfNeighborChange(par2, par3, par4, this.blockID);
             par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
             par1World.markBlockRangeForRenderUpdate(par2, par3, par4, par2, par3, par4);
         }
 
-        if (var7)
-        {
+        if (var7) {
             par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
         }
 
@@ -120,8 +109,8 @@ public class BlockDetectorRail extends BlockRailBase
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World par1World, int par2, int par3, int par4)
-    {
+    @Override
+    public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
         this.setStateIfMinecartInteractsWithRail(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4));
     }
@@ -130,8 +119,8 @@ public class BlockDetectorRail extends BlockRailBase
      * If this returns true, then comparators facing away from this block will use the value from
      * getComparatorInputOverride instead of the actual redstone signal strength.
      */
-    public boolean hasComparatorInputOverride()
-    {
+    @Override
+    public boolean hasComparatorInputOverride() {
         return true;
     }
 
@@ -139,16 +128,14 @@ public class BlockDetectorRail extends BlockRailBase
      * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
      * strength when this block inputs to a comparator.
      */
-    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
-    {
-        if ((par1World.getBlockMetadata(par2, par3, par4) & 8) > 0)
-        {
+    @Override
+    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5) {
+        if ((par1World.getBlockMetadata(par2, par3, par4) & 8) > 0) {
             float var6 = 0.125F;
-            List var7 = par1World.selectEntitiesWithinAABB(EntityMinecart.class, AxisAlignedBB.getAABBPool().getAABB((double)((float)par2 + var6), (double)par3, (double)((float)par4 + var6), (double)((float)(par2 + 1) - var6), (double)((float)(par3 + 1) - var6), (double)((float)(par4 + 1) - var6)), IEntitySelector.selectInventories);
+            List var7 = par1World.selectEntitiesWithinAABB(EntityMinecart.class, AxisAlignedBB.getAABBPool().getAABB((double) ((float) par2 + var6), (double) par3, (double) ((float) par4 + var6), (double) ((float) (par2 + 1) - var6), (double) ((float) (par3 + 1) - var6), (double) ((float) (par4 + 1) - var6)), IEntitySelector.selectInventories);
 
-            if (var7.size() > 0)
-            {
-                return Container.calcRedstoneFromInventory((IInventory)var7.get(0));
+            if (var7.size() > 0) {
+                return Container.calcRedstoneFromInventory((IInventory) var7.get(0));
             }
         }
 

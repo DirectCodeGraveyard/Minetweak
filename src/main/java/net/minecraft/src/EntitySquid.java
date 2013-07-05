@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class EntitySquid extends EntityWaterMob
-{
+public class EntitySquid extends EntityWaterMob {
     public float field_70861_d;
     public float field_70862_e;
     public float field_70859_f;
@@ -9,10 +8,14 @@ public class EntitySquid extends EntityWaterMob
     public float field_70867_h;
     public float field_70868_i;
 
-    /** angle of the tentacles in radians */
+    /**
+     * angle of the tentacles in radians
+     */
     public float tentacleAngle;
 
-    /** the last calculated angle of the tentacles in radians */
+    /**
+     * the last calculated angle of the tentacles in radians
+     */
     public float lastTentacleAngle;
     private float randomMotionSpeed;
     private float field_70864_bA;
@@ -21,15 +24,13 @@ public class EntitySquid extends EntityWaterMob
     private float randomMotionVecY;
     private float randomMotionVecZ;
 
-    public EntitySquid(World par1World)
-    {
+    public EntitySquid(World par1World) {
         super(par1World);
         this.setSize(0.95F, 0.95F);
         this.field_70864_bA = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
     }
 
-    protected void func_110147_ax()
-    {
+    protected void func_110147_ax() {
         super.func_110147_ax();
         this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(10.0D);
     }
@@ -37,40 +38,35 @@ public class EntitySquid extends EntityWaterMob
     /**
      * Returns the sound this mob makes while it's alive.
      */
-    protected String getLivingSound()
-    {
+    protected String getLivingSound() {
         return null;
     }
 
     /**
      * Returns the sound this mob makes when it is hurt.
      */
-    protected String getHurtSound()
-    {
+    protected String getHurtSound() {
         return null;
     }
 
     /**
      * Returns the sound this mob makes on death.
      */
-    protected String getDeathSound()
-    {
+    protected String getDeathSound() {
         return null;
     }
 
     /**
      * Returns the volume for the sounds this mob makes.
      */
-    protected float getSoundVolume()
-    {
+    protected float getSoundVolume() {
         return 0.4F;
     }
 
     /**
      * Returns the item ID for the item the mob drops on death.
      */
-    protected int getDropItemId()
-    {
+    protected int getDropItemId() {
         return 0;
     }
 
@@ -78,20 +74,17 @@ public class EntitySquid extends EntityWaterMob
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
-    protected boolean canTriggerWalking()
-    {
+    protected boolean canTriggerWalking() {
         return false;
     }
 
     /**
      * Drop 0-2 items of this living's type
      */
-    protected void dropFewItems(boolean par1, int par2)
-    {
+    protected void dropFewItems(boolean par1, int par2) {
         int var3 = this.rand.nextInt(3 + par2) + 1;
 
-        for (int var4 = 0; var4 < var3; ++var4)
-        {
+        for (int var4 = 0; var4 < var3; ++var4) {
             this.entityDropItem(new ItemStack(Item.dyePowder, 1, 0), 0.0F);
         }
     }
@@ -100,8 +93,7 @@ public class EntitySquid extends EntityWaterMob
      * Checks if this entity is inside water (if inWater field is true as a result of handleWaterMovement() returning
      * true)
      */
-    public boolean isInWater()
-    {
+    public boolean isInWater() {
         return this.worldObj.handleMaterialAcceleration(this.boundingBox.expand(0.0D, -0.6000000238418579D, 0.0D), Material.water, this);
     }
 
@@ -109,8 +101,7 @@ public class EntitySquid extends EntityWaterMob
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
-    public void onLivingUpdate()
-    {
+    public void onLivingUpdate() {
         super.onLivingUpdate();
         this.field_70862_e = this.field_70861_d;
         this.field_70860_g = this.field_70859_f;
@@ -118,90 +109,72 @@ public class EntitySquid extends EntityWaterMob
         this.lastTentacleAngle = this.tentacleAngle;
         this.field_70867_h += this.field_70864_bA;
 
-        if (this.field_70867_h > ((float)Math.PI * 2F))
-        {
-            this.field_70867_h -= ((float)Math.PI * 2F);
+        if (this.field_70867_h > ((float) Math.PI * 2F)) {
+            this.field_70867_h -= ((float) Math.PI * 2F);
 
-            if (this.rand.nextInt(10) == 0)
-            {
+            if (this.rand.nextInt(10) == 0) {
                 this.field_70864_bA = 1.0F / (this.rand.nextFloat() + 1.0F) * 0.2F;
             }
         }
 
-        if (this.isInWater())
-        {
+        if (this.isInWater()) {
             float var1;
 
-            if (this.field_70867_h < (float)Math.PI)
-            {
-                var1 = this.field_70867_h / (float)Math.PI;
-                this.tentacleAngle = MathHelper.sin(var1 * var1 * (float)Math.PI) * (float)Math.PI * 0.25F;
+            if (this.field_70867_h < (float) Math.PI) {
+                var1 = this.field_70867_h / (float) Math.PI;
+                this.tentacleAngle = MathHelper.sin(var1 * var1 * (float) Math.PI) * (float) Math.PI * 0.25F;
 
-                if ((double)var1 > 0.75D)
-                {
+                if ((double) var1 > 0.75D) {
                     this.randomMotionSpeed = 1.0F;
                     this.field_70871_bB = 1.0F;
-                }
-                else
-                {
+                } else {
                     this.field_70871_bB *= 0.8F;
                 }
-            }
-            else
-            {
+            } else {
                 this.tentacleAngle = 0.0F;
                 this.randomMotionSpeed *= 0.9F;
                 this.field_70871_bB *= 0.99F;
             }
 
-            if (!this.worldObj.isRemote)
-            {
-                this.motionX = (double)(this.randomMotionVecX * this.randomMotionSpeed);
-                this.motionY = (double)(this.randomMotionVecY * this.randomMotionSpeed);
-                this.motionZ = (double)(this.randomMotionVecZ * this.randomMotionSpeed);
+            if (!this.worldObj.isRemote) {
+                this.motionX = (double) (this.randomMotionVecX * this.randomMotionSpeed);
+                this.motionY = (double) (this.randomMotionVecY * this.randomMotionSpeed);
+                this.motionZ = (double) (this.randomMotionVecZ * this.randomMotionSpeed);
             }
 
             var1 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
-            this.renderYawOffset += (-((float)Math.atan2(this.motionX, this.motionZ)) * 180.0F / (float)Math.PI - this.renderYawOffset) * 0.1F;
+            this.renderYawOffset += (-((float) Math.atan2(this.motionX, this.motionZ)) * 180.0F / (float) Math.PI - this.renderYawOffset) * 0.1F;
             this.rotationYaw = this.renderYawOffset;
-            this.field_70859_f += (float)Math.PI * this.field_70871_bB * 1.5F;
-            this.field_70861_d += (-((float)Math.atan2((double)var1, this.motionY)) * 180.0F / (float)Math.PI - this.field_70861_d) * 0.1F;
-        }
-        else
-        {
-            this.tentacleAngle = MathHelper.abs(MathHelper.sin(this.field_70867_h)) * (float)Math.PI * 0.25F;
+            this.field_70859_f += (float) Math.PI * this.field_70871_bB * 1.5F;
+            this.field_70861_d += (-((float) Math.atan2((double) var1, this.motionY)) * 180.0F / (float) Math.PI - this.field_70861_d) * 0.1F;
+        } else {
+            this.tentacleAngle = MathHelper.abs(MathHelper.sin(this.field_70867_h)) * (float) Math.PI * 0.25F;
 
-            if (!this.worldObj.isRemote)
-            {
+            if (!this.worldObj.isRemote) {
                 this.motionX = 0.0D;
                 this.motionY -= 0.08D;
                 this.motionY *= 0.9800000190734863D;
                 this.motionZ = 0.0D;
             }
 
-            this.field_70861_d = (float)((double)this.field_70861_d + (double)(-90.0F - this.field_70861_d) * 0.02D);
+            this.field_70861_d = (float) ((double) this.field_70861_d + (double) (-90.0F - this.field_70861_d) * 0.02D);
         }
     }
 
     /**
      * Moves the entity based on the specified heading.  Args: strafe, forward
      */
-    public void moveEntityWithHeading(float par1, float par2)
-    {
+    public void moveEntityWithHeading(float par1, float par2) {
         this.moveEntity(this.motionX, this.motionY, this.motionZ);
     }
 
-    protected void updateEntityActionState()
-    {
+    protected void updateEntityActionState() {
         ++this.entityAge;
 
-        if (this.entityAge > 100)
-        {
+        if (this.entityAge > 100) {
             this.randomMotionVecX = this.randomMotionVecY = this.randomMotionVecZ = 0.0F;
-        }
-        else if (this.rand.nextInt(50) == 0 || !this.inWater || this.randomMotionVecX == 0.0F && this.randomMotionVecY == 0.0F && this.randomMotionVecZ == 0.0F)
-        {
-            float var1 = this.rand.nextFloat() * (float)Math.PI * 2.0F;
+        } else if (this.rand.nextInt(50) == 0 || !this.inWater || this.randomMotionVecX == 0.0F && this.randomMotionVecY == 0.0F && this.randomMotionVecZ == 0.0F) {
+            float var1 = this.rand.nextFloat() * (float) Math.PI * 2.0F;
             this.randomMotionVecX = MathHelper.cos(var1) * 0.2F;
             this.randomMotionVecY = -0.1F + this.rand.nextFloat() * 0.2F;
             this.randomMotionVecZ = MathHelper.sin(var1) * 0.2F;
@@ -213,8 +186,7 @@ public class EntitySquid extends EntityWaterMob
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
-    public boolean getCanSpawnHere()
-    {
+    public boolean getCanSpawnHere() {
         return this.posY > 45.0D && this.posY < 63.0D && super.getCanSpawnHere();
     }
 }

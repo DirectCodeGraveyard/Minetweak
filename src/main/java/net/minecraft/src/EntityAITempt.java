@@ -1,8 +1,9 @@
 package net.minecraft.src;
 
-public class EntityAITempt extends EntityAIBase
-{
-    /** The entity using this AI that is tempted by the player. */
+public class EntityAITempt extends EntityAIBase {
+    /**
+     * The entity using this AI that is tempted by the player.
+     */
     private EntityCreature temptedEntity;
     private double field_75282_b;
     private double field_75283_c;
@@ -11,7 +12,9 @@ public class EntityAITempt extends EntityAIBase
     private double field_75278_f;
     private double field_75279_g;
 
-    /** The player that is tempting the entity that is using this AI. */
+    /**
+     * The player that is tempting the entity that is using this AI.
+     */
     private EntityPlayer temptingPlayer;
 
     /**
@@ -32,8 +35,7 @@ public class EntityAITempt extends EntityAIBase
     private boolean scaredByPlayerMovement;
     private boolean field_75286_m;
 
-    public EntityAITempt(EntityCreature par1EntityCreature, double par2, int par4, boolean par5)
-    {
+    public EntityAITempt(EntityCreature par1EntityCreature, double par2, int par4, boolean par5) {
         this.temptedEntity = par1EntityCreature;
         this.field_75282_b = par2;
         this.breedingFood = par4;
@@ -44,23 +46,16 @@ public class EntityAITempt extends EntityAIBase
     /**
      * Returns whether the EntityAIBase should begin execution.
      */
-    public boolean shouldExecute()
-    {
-        if (this.delayTemptCounter > 0)
-        {
+    public boolean shouldExecute() {
+        if (this.delayTemptCounter > 0) {
             --this.delayTemptCounter;
             return false;
-        }
-        else
-        {
+        } else {
             this.temptingPlayer = this.temptedEntity.worldObj.getClosestPlayerToEntity(this.temptedEntity, 10.0D);
 
-            if (this.temptingPlayer == null)
-            {
+            if (this.temptingPlayer == null) {
                 return false;
-            }
-            else
-            {
+            } else {
                 ItemStack var1 = this.temptingPlayer.getCurrentEquippedItem();
                 return var1 == null ? false : var1.itemID == this.breedingFood;
             }
@@ -70,31 +65,24 @@ public class EntityAITempt extends EntityAIBase
     /**
      * Returns whether an in-progress EntityAIBase should continue executing
      */
-    public boolean continueExecuting()
-    {
-        if (this.scaredByPlayerMovement)
-        {
-            if (this.temptedEntity.getDistanceSqToEntity(this.temptingPlayer) < 36.0D)
-            {
-                if (this.temptingPlayer.getDistanceSq(this.field_75283_c, this.field_75280_d, this.field_75281_e) > 0.010000000000000002D)
-                {
+    public boolean continueExecuting() {
+        if (this.scaredByPlayerMovement) {
+            if (this.temptedEntity.getDistanceSqToEntity(this.temptingPlayer) < 36.0D) {
+                if (this.temptingPlayer.getDistanceSq(this.field_75283_c, this.field_75280_d, this.field_75281_e) > 0.010000000000000002D) {
                     return false;
                 }
 
-                if (Math.abs((double)this.temptingPlayer.rotationPitch - this.field_75278_f) > 5.0D || Math.abs((double)this.temptingPlayer.rotationYaw - this.field_75279_g) > 5.0D)
-                {
+                if (Math.abs((double) this.temptingPlayer.rotationPitch - this.field_75278_f) > 5.0D || Math.abs((double) this.temptingPlayer.rotationYaw - this.field_75279_g) > 5.0D) {
                     return false;
                 }
-            }
-            else
-            {
+            } else {
                 this.field_75283_c = this.temptingPlayer.posX;
                 this.field_75280_d = this.temptingPlayer.posY;
                 this.field_75281_e = this.temptingPlayer.posZ;
             }
 
-            this.field_75278_f = (double)this.temptingPlayer.rotationPitch;
-            this.field_75279_g = (double)this.temptingPlayer.rotationYaw;
+            this.field_75278_f = (double) this.temptingPlayer.rotationPitch;
+            this.field_75279_g = (double) this.temptingPlayer.rotationYaw;
         }
 
         return this.shouldExecute();
@@ -103,8 +91,7 @@ public class EntityAITempt extends EntityAIBase
     /**
      * Execute a one shot task or start executing a continuous task
      */
-    public void startExecuting()
-    {
+    public void startExecuting() {
         this.field_75283_c = this.temptingPlayer.posX;
         this.field_75280_d = this.temptingPlayer.posY;
         this.field_75281_e = this.temptingPlayer.posZ;
@@ -116,8 +103,7 @@ public class EntityAITempt extends EntityAIBase
     /**
      * Resets the task
      */
-    public void resetTask()
-    {
+    public void resetTask() {
         this.temptingPlayer = null;
         this.temptedEntity.getNavigator().clearPathEntity();
         this.delayTemptCounter = 100;
@@ -128,22 +114,17 @@ public class EntityAITempt extends EntityAIBase
     /**
      * Updates the task
      */
-    public void updateTask()
-    {
-        this.temptedEntity.getLookHelper().setLookPositionWithEntity(this.temptingPlayer, 30.0F, (float)this.temptedEntity.getVerticalFaceSpeed());
+    public void updateTask() {
+        this.temptedEntity.getLookHelper().setLookPositionWithEntity(this.temptingPlayer, 30.0F, (float) this.temptedEntity.getVerticalFaceSpeed());
 
-        if (this.temptedEntity.getDistanceSqToEntity(this.temptingPlayer) < 6.25D)
-        {
+        if (this.temptedEntity.getDistanceSqToEntity(this.temptingPlayer) < 6.25D) {
             this.temptedEntity.getNavigator().clearPathEntity();
-        }
-        else
-        {
+        } else {
             this.temptedEntity.getNavigator().tryMoveToEntityLiving(this.temptingPlayer, this.field_75282_b);
         }
     }
 
-    public boolean func_75277_f()
-    {
+    public boolean func_75277_f() {
         return this.field_75287_j;
     }
 }

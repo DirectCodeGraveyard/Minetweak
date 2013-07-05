@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface ISidedInventory extends IInventory
-{
+public interface ISidedInventory extends IInventory {
     /**
      * param side
      */

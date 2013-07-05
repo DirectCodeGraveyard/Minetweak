@@ -3,12 +3,10 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-public class BlockHopper extends BlockContainer
-{
+public class BlockHopper extends BlockContainer {
     private final Random field_94457_a = new Random();
 
-    public BlockHopper(int par1)
-    {
+    public BlockHopper(int par1) {
         super(par1, Material.iron);
         this.setCreativeTab(CreativeTabs.tabRedstone);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
@@ -17,8 +15,8 @@ public class BlockHopper extends BlockContainer
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
+    @Override
+    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
 
@@ -26,8 +24,8 @@ public class BlockHopper extends BlockContainer
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
      * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
      */
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
-    {
+    @Override
+    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.625F, 1.0F);
         super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
         float var8 = 0.125F;
@@ -45,12 +43,11 @@ public class BlockHopper extends BlockContainer
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
-    public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9)
-    {
+    @Override
+    public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
         int var10 = Facing.oppositeSide[par5];
 
-        if (var10 == 1)
-        {
+        if (var10 == 1) {
             var10 = 0;
         }
 
@@ -60,20 +57,19 @@ public class BlockHopper extends BlockContainer
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
-    public TileEntity createNewTileEntity(World par1World)
-    {
+    @Override
+    public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityHopper();
     }
 
     /**
      * Called when the block is placed in the world.
      */
-    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack)
-    {
+    @Override
+    public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
 
-        if (par6ItemStack.hasDisplayName())
-        {
+        if (par6ItemStack.hasDisplayName()) {
             TileEntityHopper var7 = getHopperTile(par1World, par2, par3, par4);
             var7.setInventoryName(par6ItemStack.getDisplayName());
         }
@@ -82,8 +78,8 @@ public class BlockHopper extends BlockContainer
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    public void onBlockAdded(World par1World, int par2, int par3, int par4)
-    {
+    @Override
+    public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
         this.updateMetadata(par1World, par2, par3, par4);
     }
@@ -91,18 +87,14 @@ public class BlockHopper extends BlockContainer
     /**
      * Called upon block activation (right click on the block.)
      */
-    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9)
-    {
-        if (par1World.isRemote)
-        {
+    @Override
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
+        if (par1World.isRemote) {
             return true;
-        }
-        else
-        {
+        } else {
             TileEntityHopper var10 = getHopperTile(par1World, par2, par3, par4);
 
-            if (var10 != null)
-            {
+            if (var10 != null) {
                 par5EntityPlayer.displayGUIHopper(var10);
             }
 
@@ -114,23 +106,21 @@ public class BlockHopper extends BlockContainer
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
-    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5)
-    {
+    @Override
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         this.updateMetadata(par1World, par2, par3, par4);
     }
 
     /**
      * Updates the Metadata to include if the Hopper gets powered by Redstone or not
      */
-    private void updateMetadata(World par1World, int par2, int par3, int par4)
-    {
+    private void updateMetadata(World par1World, int par2, int par3, int par4) {
         int var5 = par1World.getBlockMetadata(par2, par3, par4);
         int var6 = getDirectionFromMetadata(var5);
         boolean var7 = !par1World.isBlockIndirectlyGettingPowered(par2, par3, par4);
         boolean var8 = getIsBlockNotPoweredFromMetadata(var5);
 
-        if (var7 != var8)
-        {
+        if (var7 != var8) {
             par1World.setBlockMetadata(par2, par3, par4, var6 | (var7 ? 0 : 8), 4);
         }
     }
@@ -138,43 +128,37 @@ public class BlockHopper extends BlockContainer
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
-    {
-        TileEntityHopper var7 = (TileEntityHopper)par1World.getBlockTileEntity(par2, par3, par4);
+    @Override
+    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
+        TileEntityHopper var7 = (TileEntityHopper) par1World.getBlockTileEntity(par2, par3, par4);
 
-        if (var7 != null)
-        {
-            for (int var8 = 0; var8 < var7.getSizeInventory(); ++var8)
-            {
+        if (var7 != null) {
+            for (int var8 = 0; var8 < var7.getSizeInventory(); ++var8) {
                 ItemStack var9 = var7.getStackInSlot(var8);
 
-                if (var9 != null)
-                {
+                if (var9 != null) {
                     float var10 = this.field_94457_a.nextFloat() * 0.8F + 0.1F;
                     float var11 = this.field_94457_a.nextFloat() * 0.8F + 0.1F;
                     float var12 = this.field_94457_a.nextFloat() * 0.8F + 0.1F;
 
-                    while (var9.stackSize > 0)
-                    {
+                    while (var9.stackSize > 0) {
                         int var13 = this.field_94457_a.nextInt(21) + 10;
 
-                        if (var13 > var9.stackSize)
-                        {
+                        if (var13 > var9.stackSize) {
                             var13 = var9.stackSize;
                         }
 
                         var9.stackSize -= var13;
-                        EntityItem var14 = new EntityItem(par1World, (double)((float)par2 + var10), (double)((float)par3 + var11), (double)((float)par4 + var12), new ItemStack(var9.itemID, var13, var9.getItemDamage()));
+                        EntityItem var14 = new EntityItem(par1World, (double) ((float) par2 + var10), (double) ((float) par3 + var11), (double) ((float) par4 + var12), new ItemStack(var9.itemID, var13, var9.getItemDamage()));
 
-                        if (var9.hasTagCompound())
-                        {
-                            var14.getEntityItem().setTagCompound((NBTTagCompound)var9.getTagCompound().copy());
+                        if (var9.hasTagCompound()) {
+                            var14.getEntityItem().setTagCompound((NBTTagCompound) var9.getTagCompound().copy());
                         }
 
                         float var15 = 0.05F;
-                        var14.motionX = (double)((float)this.field_94457_a.nextGaussian() * var15);
-                        var14.motionY = (double)((float)this.field_94457_a.nextGaussian() * var15 + 0.2F);
-                        var14.motionZ = (double)((float)this.field_94457_a.nextGaussian() * var15);
+                        var14.motionX = (double) ((float) this.field_94457_a.nextGaussian() * var15);
+                        var14.motionY = (double) ((float) this.field_94457_a.nextGaussian() * var15 + 0.2F);
+                        var14.motionZ = (double) ((float) this.field_94457_a.nextGaussian() * var15);
                         par1World.spawnEntityInWorld(var14);
                     }
                 }
@@ -189,16 +173,16 @@ public class BlockHopper extends BlockContainer
     /**
      * The type of render function that is called for this block
      */
-    public int getRenderType()
-    {
+    @Override
+    public int getRenderType() {
         return 38;
     }
 
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
-    public boolean renderAsNormalBlock()
-    {
+    @Override
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
@@ -206,18 +190,16 @@ public class BlockHopper extends BlockContainer
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
-    public boolean isOpaqueCube()
-    {
+    @Override
+    public boolean isOpaqueCube() {
         return false;
     }
 
-    public static int getDirectionFromMetadata(int par0)
-    {
+    public static int getDirectionFromMetadata(int par0) {
         return par0 & 7;
     }
 
-    public static boolean getIsBlockNotPoweredFromMetadata(int par0)
-    {
+    public static boolean getIsBlockNotPoweredFromMetadata(int par0) {
         return (par0 & 8) != 8;
     }
 
@@ -225,8 +207,8 @@ public class BlockHopper extends BlockContainer
      * If this returns true, then comparators facing away from this block will use the value from
      * getComparatorInputOverride instead of the actual redstone signal strength.
      */
-    public boolean hasComparatorInputOverride()
-    {
+    @Override
+    public boolean hasComparatorInputOverride() {
         return true;
     }
 
@@ -234,13 +216,12 @@ public class BlockHopper extends BlockContainer
      * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
      * strength when this block inputs to a comparator.
      */
-    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5)
-    {
+    @Override
+    public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5) {
         return Container.calcRedstoneFromInventory(getHopperTile(par1World, par2, par3, par4));
     }
 
-    public static TileEntityHopper getHopperTile(IBlockAccess par0IBlockAccess, int par1, int par2, int par3)
-    {
-        return (TileEntityHopper)par0IBlockAccess.getBlockTileEntity(par1, par2, par3);
+    public static TileEntityHopper getHopperTile(IBlockAccess par0IBlockAccess, int par1, int par2, int par3) {
+        return (TileEntityHopper) par0IBlockAccess.getBlockTileEntity(par1, par2, par3);
     }
 }

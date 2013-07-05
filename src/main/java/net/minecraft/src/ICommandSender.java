@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface ICommandSender
-{
+public interface ICommandSender {
     /**
      * Gets the name of this command sender (usually username, but possibly "Rcon")
      */

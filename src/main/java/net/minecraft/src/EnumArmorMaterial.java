@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public enum EnumArmorMaterial
-{
+public enum EnumArmorMaterial {
     CLOTH(5, new int[]{1, 3, 2, 1}, 15),
     CHAIN(15, new int[]{2, 5, 4, 1}, 12),
     IRON(15, new int[]{2, 6, 5, 2}, 9),
@@ -20,11 +19,12 @@ public enum EnumArmorMaterial
      */
     private int[] damageReductionAmountArray;
 
-    /** Return the enchantability factor of the material */
+    /**
+     * Return the enchantability factor of the material
+     */
     private int enchantability;
 
-    private EnumArmorMaterial(int par3, int[] par4ArrayOfInteger, int par5)
-    {
+    private EnumArmorMaterial(int par3, int[] par4ArrayOfInteger, int par5) {
         this.maxDamageFactor = par3;
         this.damageReductionAmountArray = par4ArrayOfInteger;
         this.enchantability = par5;
@@ -33,8 +33,7 @@ public enum EnumArmorMaterial
     /**
      * Returns the durability for a armor slot of for this type.
      */
-    public int getDurability(int par1)
-    {
+    public int getDurability(int par1) {
         return ItemArmor.getMaxDamageArray()[par1] * this.maxDamageFactor;
     }
 
@@ -42,16 +41,14 @@ public enum EnumArmorMaterial
      * Return the damage reduction (each 1 point is a half a shield on gui) of the piece index passed (0 = helmet, 1 =
      * plate, 2 = legs and 3 = boots)
      */
-    public int getDamageReductionAmount(int par1)
-    {
+    public int getDamageReductionAmount(int par1) {
         return this.damageReductionAmountArray[par1];
     }
 
     /**
      * Return the enchantability factor of the material.
      */
-    public int getEnchantability()
-    {
+    public int getEnchantability() {
         return this.enchantability;
     }
 
@@ -59,8 +56,7 @@ public enum EnumArmorMaterial
      * Return the crafting material for this armor material, used to determine the item that can be used to repair an
      * armor piece with an anvil
      */
-    public int getArmorCraftingMaterial()
-    {
+    public int getArmorCraftingMaterial() {
         return this == CLOTH ? Item.leather.itemID : (this == CHAIN ? Item.ingotIron.itemID : (this == GOLD ? Item.ingotGold.itemID : (this == IRON ? Item.ingotIron.itemID : (this == DIAMOND ? Item.diamond.itemID : 0))));
     }
 }

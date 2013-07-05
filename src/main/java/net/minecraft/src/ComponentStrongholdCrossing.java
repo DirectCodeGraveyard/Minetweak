@@ -3,16 +3,14 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
-public class ComponentStrongholdCrossing extends ComponentStronghold
-{
+public class ComponentStrongholdCrossing extends ComponentStronghold {
     protected final EnumDoor doorType;
     private boolean field_74996_b;
     private boolean field_74997_c;
     private boolean field_74995_d;
     private boolean field_74999_h;
 
-    public ComponentStrongholdCrossing(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4)
-    {
+    public ComponentStrongholdCrossing(int par1, Random par2Random, StructureBoundingBox par3StructureBoundingBox, int par4) {
         super(par1);
         this.coordBaseMode = par4;
         this.doorType = this.getRandomDoor(par2Random);
@@ -26,42 +24,35 @@ public class ComponentStrongholdCrossing extends ComponentStronghold
     /**
      * Initiates construction of the Structure Component picked, at the current Location of StructGen
      */
-    public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random)
-    {
+    public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random) {
         int var4 = 3;
         int var5 = 5;
 
-        if (this.coordBaseMode == 1 || this.coordBaseMode == 2)
-        {
+        if (this.coordBaseMode == 1 || this.coordBaseMode == 2) {
             var4 = 8 - var4;
             var5 = 8 - var5;
         }
 
-        this.getNextComponentNormal((ComponentStrongholdStairs2)par1StructureComponent, par2List, par3Random, 5, 1);
+        this.getNextComponentNormal((ComponentStrongholdStairs2) par1StructureComponent, par2List, par3Random, 5, 1);
 
-        if (this.field_74996_b)
-        {
-            this.getNextComponentX((ComponentStrongholdStairs2)par1StructureComponent, par2List, par3Random, var4, 1);
+        if (this.field_74996_b) {
+            this.getNextComponentX((ComponentStrongholdStairs2) par1StructureComponent, par2List, par3Random, var4, 1);
         }
 
-        if (this.field_74997_c)
-        {
-            this.getNextComponentX((ComponentStrongholdStairs2)par1StructureComponent, par2List, par3Random, var5, 7);
+        if (this.field_74997_c) {
+            this.getNextComponentX((ComponentStrongholdStairs2) par1StructureComponent, par2List, par3Random, var5, 7);
         }
 
-        if (this.field_74995_d)
-        {
-            this.getNextComponentZ((ComponentStrongholdStairs2)par1StructureComponent, par2List, par3Random, var4, 1);
+        if (this.field_74995_d) {
+            this.getNextComponentZ((ComponentStrongholdStairs2) par1StructureComponent, par2List, par3Random, var4, 1);
         }
 
-        if (this.field_74999_h)
-        {
-            this.getNextComponentZ((ComponentStrongholdStairs2)par1StructureComponent, par2List, par3Random, var5, 7);
+        if (this.field_74999_h) {
+            this.getNextComponentZ((ComponentStrongholdStairs2) par1StructureComponent, par2List, par3Random, var5, 7);
         }
     }
 
-    public static ComponentStrongholdCrossing findValidPlacement(List par0List, Random par1Random, int par2, int par3, int par4, int par5, int par6)
-    {
+    public static ComponentStrongholdCrossing findValidPlacement(List par0List, Random par1Random, int par2, int par3, int par4, int par5, int par6) {
         StructureBoundingBox var7 = StructureBoundingBox.getComponentToAddBoundingBox(par2, par3, par4, -4, -3, 0, 10, 9, 11, par5);
         return canStrongholdGoDeeper(var7) && StructureComponent.findIntersecting(par0List, var7) == null ? new ComponentStrongholdCrossing(par6, par1Random, var7, par5) : null;
     }
@@ -70,34 +61,26 @@ public class ComponentStrongholdCrossing extends ComponentStronghold
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
-    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox)
-    {
-        if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox))
-        {
+    public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox) {
+        if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox)) {
             return false;
-        }
-        else
-        {
+        } else {
             this.fillWithRandomizedBlocks(par1World, par3StructureBoundingBox, 0, 0, 0, 9, 8, 10, true, par2Random, StructureStrongholdPieces.getStrongholdStones());
             this.placeDoor(par1World, par2Random, par3StructureBoundingBox, this.doorType, 4, 3, 0);
 
-            if (this.field_74996_b)
-            {
+            if (this.field_74996_b) {
                 this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 3, 1, 0, 5, 3, 0, 0, false);
             }
 
-            if (this.field_74995_d)
-            {
+            if (this.field_74995_d) {
                 this.fillWithBlocks(par1World, par3StructureBoundingBox, 9, 3, 1, 9, 5, 3, 0, 0, false);
             }
 
-            if (this.field_74997_c)
-            {
+            if (this.field_74997_c) {
                 this.fillWithBlocks(par1World, par3StructureBoundingBox, 0, 5, 7, 0, 7, 9, 0, 0, false);
             }
 
-            if (this.field_74999_h)
-            {
+            if (this.field_74999_h) {
                 this.fillWithBlocks(par1World, par3StructureBoundingBox, 9, 5, 7, 9, 7, 9, 0, 0, false);
             }
 

@@ -6,32 +6,30 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
-{
+public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
     private List<AnvilChunkLoaderPending> chunksToRemove = new ArrayList<AnvilChunkLoaderPending>();
     private Set<ChunkCoordIntPair> pendingAnvilChunksCoordinates = new HashSet<ChunkCoordIntPair>();
     private final Object syncLockObject = new Object();
 
-    /** Save directory for chunks using the Anvil format */
+    /**
+     * Save directory for chunks using the Anvil format
+     */
     private final File chunkSaveLocation;
 
-    public AnvilChunkLoader(File par1File)
-    {
+    public AnvilChunkLoader(File par1File) {
         this.chunkSaveLocation = par1File;
     }
 
     /**
      * Loads the specified(XZ) chunk into the specified world.
      */
-    public Chunk loadChunk(World par1World, int par2, int par3) throws IOException
-    {
+    @Override
+    public Chunk loadChunk(World par1World, int par2, int par3) throws IOException {
         NBTTagCompound var4 = null;
         ChunkCoordIntPair var5 = new ChunkCoordIntPair(par2, par3);
 
-        synchronized (this.syncLockObject)
-        {
-            if (this.pendingAnvilChunksCoordinates.contains(var5))
-            {
+        synchronized (this.syncLockObject) {
+            if (this.pendingAnvilChunksCoordinates.contains(var5)) {
                 for (AnvilChunkLoaderPending aChunksToRemove : this.chunksToRemove) {
                     if ((aChunksToRemove).chunkCoordinate.equals(var5)) {
                         var4 = (aChunksToRemove).nbtTags;
@@ -41,12 +39,10 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
             }
         }
 
-        if (var4 == null)
-        {
+        if (var4 == null) {
             DataInputStream var10 = RegionFileCache.getChunkInputStream(this.chunkSaveLocation, par2, par3);
 
-            if (var10 == null)
-            {
+            if (var10 == null) {
                 return null;
             }
 
@@ -59,24 +55,17 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
     /**
      * Wraps readChunkFromNBT. Checks the coordinates and several NBT tags.
      */
-    protected Chunk checkedReadChunkFromNBT(World par1World, int par2, int par3, NBTTagCompound par4NBTTagCompound)
-    {
-        if (!par4NBTTagCompound.hasKey("Level"))
-        {
+    protected Chunk checkedReadChunkFromNBT(World par1World, int par2, int par3, NBTTagCompound par4NBTTagCompound) {
+        if (!par4NBTTagCompound.hasKey("Level")) {
             par1World.getWorldLogAgent().logSevere("Chunk file at " + par2 + "," + par3 + " is missing level data, skipping");
             return null;
-        }
-        else if (!par4NBTTagCompound.getCompoundTag("Level").hasKey("Sections"))
-        {
+        } else if (!par4NBTTagCompound.getCompoundTag("Level").hasKey("Sections")) {
             par1World.getWorldLogAgent().logSevere("Chunk file at " + par2 + "," + par3 + " is missing block data, skipping");
             return null;
-        }
-        else
-        {
+        } else {
             Chunk var5 = this.readChunkFromNBT(par1World, par4NBTTagCompound.getCompoundTag("Level"));
 
-            if (!var5.isAtLocation(par2, par3))
-            {
+            if (!var5.isAtLocation(par2, par3)) {
                 par1World.getWorldLogAgent().logSevere("Chunk file at " + par2 + "," + par3 + " is in the wrong location; relocating. (Expected " + par2 + ", " + par3 + ", got " + var5.xPosition + ", " + var5.zPosition + ")");
                 par4NBTTagCompound.setInteger("xPos", par2);
                 par4NBTTagCompound.setInteger("zPos", par3);
@@ -87,35 +76,27 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         }
     }
 
-    public void saveChunk(World par1World, Chunk par2Chunk) throws MinecraftException, IOException
-    {
+    @Override
+    public void saveChunk(World par1World, Chunk par2Chunk) throws MinecraftException, IOException {
         par1World.checkSessionLock();
 
-        try
-        {
+        try {
             NBTTagCompound var3 = new NBTTagCompound();
             NBTTagCompound var4 = new NBTTagCompound();
             var3.setTag("Level", var4);
             this.writeChunkToNBT(par2Chunk, par1World, var4);
             this.addChunkToPending(par2Chunk.getChunkCoordIntPair(), var3);
-        }
-        catch (Exception var5)
-        {
+        } catch (Exception var5) {
             var5.printStackTrace();
         }
     }
 
-    protected void addChunkToPending(ChunkCoordIntPair par1ChunkCoordIntPair, NBTTagCompound par2NBTTagCompound)
-    {
+    protected void addChunkToPending(ChunkCoordIntPair par1ChunkCoordIntPair, NBTTagCompound par2NBTTagCompound) {
 
-        synchronized (this.syncLockObject)
-        {
-            if (this.pendingAnvilChunksCoordinates.contains(par1ChunkCoordIntPair))
-            {
-                for (int var4 = 0; var4 < this.chunksToRemove.size(); ++var4)
-                {
-                    if ((this.chunksToRemove.get(var4)).chunkCoordinate.equals(par1ChunkCoordIntPair))
-                    {
+        synchronized (this.syncLockObject) {
+            if (this.pendingAnvilChunksCoordinates.contains(par1ChunkCoordIntPair)) {
+                for (int var4 = 0; var4 < this.chunksToRemove.size(); ++var4) {
+                    if ((this.chunksToRemove.get(var4)).chunkCoordinate.equals(par1ChunkCoordIntPair)) {
                         this.chunksToRemove.set(var4, new AnvilChunkLoaderPending(par1ChunkCoordIntPair, par2NBTTagCompound));
                         return;
                     }
@@ -131,14 +112,12 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
     /**
      * Returns a boolean stating if the write was unsuccessful.
      */
-    public boolean writeNextIO()
-    {
+    @Override
+    public boolean writeNextIO() {
         AnvilChunkLoaderPending var1;
 
-        synchronized (this.syncLockObject)
-        {
-            if (this.chunksToRemove.isEmpty())
-            {
+        synchronized (this.syncLockObject) {
+            if (this.chunksToRemove.isEmpty()) {
                 return false;
             }
 
@@ -146,20 +125,16 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
             this.pendingAnvilChunksCoordinates.remove(var1.chunkCoordinate);
         }
 
-        try
-        {
+        try {
             this.writeChunkNBTTags(var1);
-        }
-        catch (Exception var4)
-        {
+        } catch (Exception var4) {
             var4.printStackTrace();
         }
 
         return true;
     }
 
-    private void writeChunkNBTTags(AnvilChunkLoaderPending par1AnvilChunkLoaderPending) throws IOException
-    {
+    private void writeChunkNBTTags(AnvilChunkLoaderPending par1AnvilChunkLoaderPending) throws IOException {
         DataOutputStream var2 = RegionFileCache.getChunkOutputStream(this.chunkSaveLocation, par1AnvilChunkLoaderPending.chunkCoordinate.chunkXPos, par1AnvilChunkLoaderPending.chunkCoordinate.chunkZPos);
         CompressedStreamTools.write(par1AnvilChunkLoaderPending.nbtTags, var2);
         var2.close();
@@ -169,19 +144,23 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
      * Save extra data associated with this Chunk not normally saved during autosave, only during chunk unload.
      * Currently unused.
      */
-    public void saveExtraChunkData(World par1World, Chunk par2Chunk) {}
+    @Override
+    public void saveExtraChunkData(World par1World, Chunk par2Chunk) {
+    }
 
     /**
      * Called every World.tick()
      */
-    public void chunkTick() {}
+    @Override
+    public void chunkTick() {
+    }
 
     /**
      * Save extra data not associated with any Chunk.  Not saved during autosave, only during world unload.  Currently
      * unused.
      */
-    public void saveExtraData()
-    {
+    @Override
+    public void saveExtraData() {
 
     }
 
@@ -189,8 +168,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
      * Writes the Chunk passed as an argument to the NBTTagCompound also passed, using the World argument to retrieve
      * the Chunk's last update time.
      */
-    private void writeChunkToNBT(Chunk par1Chunk, World par2World, NBTTagCompound par3NBTTagCompound)
-    {
+    private void writeChunkToNBT(Chunk par1Chunk, World par2World, NBTTagCompound par3NBTTagCompound) {
         par3NBTTagCompound.setInteger("xPos", par1Chunk.xPosition);
         par3NBTTagCompound.setInteger("zPos", par1Chunk.zPosition);
         par3NBTTagCompound.setLong("LastUpdate", par2World.getTotalWorldTime());
@@ -203,30 +181,24 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         int var8 = var4.length;
         NBTTagCompound var11;
 
-        for (int var9 = 0; var9 < var8; ++var9)
-        {
+        for (int var9 = 0; var9 < var8; ++var9) {
             ExtendedBlockStorage var10 = var4[var9];
 
-            if (var10 != null)
-            {
+            if (var10 != null) {
                 var11 = new NBTTagCompound();
-                var11.setByte("Y", (byte)(var10.getYLocation() >> 4 & 255));
+                var11.setByte("Y", (byte) (var10.getYLocation() >> 4 & 255));
                 var11.setByteArray("Blocks", var10.getBlockLSBArray());
 
-                if (var10.getBlockMSBArray() != null)
-                {
+                if (var10.getBlockMSBArray() != null) {
                     var11.setByteArray("Add", var10.getBlockMSBArray().data);
                 }
 
                 var11.setByteArray("Data", var10.getMetadataArray().data);
                 var11.setByteArray("BlockLight", var10.getBlocklightArray().data);
 
-                if (var6)
-                {
+                if (var6) {
                     var11.setByteArray("SkyLight", var10.getSkylightArray().data);
-                }
-                else
-                {
+                } else {
                     var11.setByteArray("SkyLight", new byte[var10.getBlocklightArray().data.length]);
                 }
 
@@ -240,17 +212,14 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         NBTTagList var16 = new NBTTagList();
         Iterator var18;
 
-        for (var8 = 0; var8 < par1Chunk.entityLists.length; ++var8)
-        {
+        for (var8 = 0; var8 < par1Chunk.entityLists.length; ++var8) {
             var18 = par1Chunk.entityLists[var8].iterator();
 
-            while (var18.hasNext())
-            {
-                Entity var21 = (Entity)var18.next();
+            while (var18.hasNext()) {
+                Entity var21 = (Entity) var18.next();
                 var11 = new NBTTagCompound();
 
-                if (var21.addEntityID(var11))
-                {
+                if (var21.addEntityID(var11)) {
                     par1Chunk.hasEntities = true;
                     var16.appendTag(var11);
                 }
@@ -261,9 +230,8 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         NBTTagList var17 = new NBTTagList();
         var18 = par1Chunk.chunkTileEntityMap.values().iterator();
 
-        while (var18.hasNext())
-        {
-            TileEntity var22 = (TileEntity)var18.next();
+        while (var18.hasNext()) {
+            TileEntity var22 = (TileEntity) var18.next();
             var11 = new NBTTagCompound();
             var22.writeToNBT(var11);
             var17.appendTag(var11);
@@ -272,8 +240,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         par3NBTTagCompound.setTag("TileEntities", var17);
         List var20 = par2World.getPendingBlockUpdates(par1Chunk, false);
 
-        if (var20 != null)
-        {
+        if (var20 != null) {
             long var19 = par2World.getTotalWorldTime();
             NBTTagList var12 = new NBTTagList();
 
@@ -297,8 +264,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
      * Reads the data stored in the passed NBTTagCompound and creates a Chunk with that data in the passed World.
      * Returns the created Chunk.
      */
-    private Chunk readChunkFromNBT(World par1World, NBTTagCompound par2NBTTagCompound)
-    {
+    private Chunk readChunkFromNBT(World par1World, NBTTagCompound par2NBTTagCompound) {
         int var3 = par2NBTTagCompound.getInteger("xPos");
         int var4 = par2NBTTagCompound.getInteger("zPos");
         Chunk var5 = new Chunk(par1World, var3, var4);
@@ -310,23 +276,20 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
         ExtendedBlockStorage[] var8 = new ExtendedBlockStorage[var7];
         boolean var9 = !par1World.provider.hasNoSky;
 
-        for (int var10 = 0; var10 < var6.tagCount(); ++var10)
-        {
-            NBTTagCompound var11 = (NBTTagCompound)var6.tagAt(var10);
+        for (int var10 = 0; var10 < var6.tagCount(); ++var10) {
+            NBTTagCompound var11 = (NBTTagCompound) var6.tagAt(var10);
             byte var12 = var11.getByte("Y");
             ExtendedBlockStorage var13 = new ExtendedBlockStorage(var12 << 4, var9);
             var13.setBlockLSBArray(var11.getByteArray("Blocks"));
 
-            if (var11.hasKey("Add"))
-            {
+            if (var11.hasKey("Add")) {
                 var13.setBlockMSBArray(new NibbleArray(var11.getByteArray("Add"), 4));
             }
 
             var13.setBlockMetadataArray(new NibbleArray(var11.getByteArray("Data"), 4));
             var13.setBlocklightArray(new NibbleArray(var11.getByteArray("BlockLight"), 4));
 
-            if (var9)
-            {
+            if (var9) {
                 var13.setSkylightArray(new NibbleArray(var11.getByteArray("SkyLight"), 4));
             }
 
@@ -336,32 +299,26 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
 
         var5.setStorageArrays(var8);
 
-        if (par2NBTTagCompound.hasKey("Biomes"))
-        {
+        if (par2NBTTagCompound.hasKey("Biomes")) {
             var5.setBiomeArray(par2NBTTagCompound.getByteArray("Biomes"));
         }
 
         NBTTagList var18 = par2NBTTagCompound.getTagList("Entities");
 
-        if (var18 != null)
-        {
-            for (int var17 = 0; var17 < var18.tagCount(); ++var17)
-            {
-                NBTTagCompound var19 = (NBTTagCompound)var18.tagAt(var17);
+        if (var18 != null) {
+            for (int var17 = 0; var17 < var18.tagCount(); ++var17) {
+                NBTTagCompound var19 = (NBTTagCompound) var18.tagAt(var17);
                 Entity var25 = EntityList.createEntityFromNBT(var19, par1World);
                 var5.hasEntities = true;
 
-                if (var25 != null)
-                {
+                if (var25 != null) {
                     var5.addEntity(var25);
                     Entity var14 = var25;
 
-                    for (NBTTagCompound var15 = var19; var15.hasKey("Riding"); var15 = var15.getCompoundTag("Riding"))
-                    {
+                    for (NBTTagCompound var15 = var19; var15.hasKey("Riding"); var15 = var15.getCompoundTag("Riding")) {
                         Entity var16 = EntityList.createEntityFromNBT(var15.getCompoundTag("Riding"), par1World);
 
-                        if (var16 != null)
-                        {
+                        if (var16 != null) {
                             var5.addEntity(var16);
                             var14.mountEntity(var16);
                         }
@@ -374,29 +331,23 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO
 
         NBTTagList var21 = par2NBTTagCompound.getTagList("TileEntities");
 
-        if (var21 != null)
-        {
-            for (int var20 = 0; var20 < var21.tagCount(); ++var20)
-            {
-                NBTTagCompound var22 = (NBTTagCompound)var21.tagAt(var20);
+        if (var21 != null) {
+            for (int var20 = 0; var20 < var21.tagCount(); ++var20) {
+                NBTTagCompound var22 = (NBTTagCompound) var21.tagAt(var20);
                 TileEntity var27 = TileEntity.createAndLoadEntity(var22);
 
-                if (var27 != null)
-                {
+                if (var27 != null) {
                     var5.addTileEntity(var27);
                 }
             }
         }
 
-        if (par2NBTTagCompound.hasKey("TileTicks"))
-        {
+        if (par2NBTTagCompound.hasKey("TileTicks")) {
             NBTTagList var24 = par2NBTTagCompound.getTagList("TileTicks");
 
-            if (var24 != null)
-            {
-                for (int var23 = 0; var23 < var24.tagCount(); ++var23)
-                {
-                    NBTTagCompound var26 = (NBTTagCompound)var24.tagAt(var23);
+            if (var24 != null) {
+                for (int var23 = 0; var23 < var24.tagCount(); ++var23) {
+                    NBTTagCompound var26 = (NBTTagCompound) var24.tagAt(var23);
                     par1World.scheduleBlockUpdateFromLoad(var26.getInteger("x"), var26.getInteger("y"), var26.getInteger("z"), var26.getInteger("i"), var26.getInteger("t"), var26.getInteger("p"));
                 }
             }

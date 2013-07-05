@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public enum EnumMobType
-{
+public enum EnumMobType {
     everything,
     mobs,
     players
