@@ -134,10 +134,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.loadAllWorlds(this.getFolderName(), this.getFolderName(), var9, var17, var8);
         long var12 = System.nanoTime() - var4;
         String var14 = String.format("%.3fs", (double) var12 / 1.0E9D);
-        this.getLogAgent().logInfo("Done (" + var14 + ")! For help, type help");
-
-        Minetweak.setServerDoneLoading();
         Minetweak.getEventBus().post(new ServerFinishedStartupEvent());
+        this.getLogAgent().logInfo("Done (" + var14 + ")! For help, type help");
+        Minetweak.setServerDoneLoading();
 
         if (this.settings.getBooleanProperty("enable-query", false)) {
             this.getLogAgent().logInfo("Starting GS4 status listener");
