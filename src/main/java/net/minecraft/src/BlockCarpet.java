@@ -13,6 +13,7 @@ public class BlockCarpet extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         byte var5 = 0;
         float var6 = 0.0625F;
@@ -23,6 +24,7 @@ public class BlockCarpet extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -30,6 +32,7 @@ public class BlockCarpet extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -37,6 +40,7 @@ public class BlockCarpet extends Block {
     /**
      * Sets the block's bounds for rendering it as an item
      */
+    @Override
     public void setBlockBoundsForItemRender() {
         this.func_111047_d(0);
     }
@@ -44,6 +48,7 @@ public class BlockCarpet extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         this.func_111047_d(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
     }
@@ -57,6 +62,7 @@ public class BlockCarpet extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return super.canPlaceBlockAt(par1World, par2, par3, par4) && this.canBlockStay(par1World, par2, par3, par4);
     }
@@ -65,6 +71,7 @@ public class BlockCarpet extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         this.func_111046_k(par1World, par2, par3, par4);
     }
@@ -82,6 +89,7 @@ public class BlockCarpet extends Block {
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
      */
+    @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
         return !par1World.isAirBlock(par2, par3 - 1, par4);
     }
@@ -89,6 +97,7 @@ public class BlockCarpet extends Block {
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
+    @Override
     public int damageDropped(int par1) {
         return par1;
     }

@@ -11,6 +11,7 @@ public class BlockClay extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Item.clay.itemID;
     }
@@ -18,6 +19,7 @@ public class BlockClay extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 4;
     }

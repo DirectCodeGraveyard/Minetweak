@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableCrashMemoryReport implements Callable {
+class CallableCrashMemoryReport implements Callable<String> {
     final CrashReport theCrashReport;
 
     CallableCrashMemoryReport(CrashReport par1CrashReport) {
@@ -22,7 +22,8 @@ class CallableCrashMemoryReport implements Callable {
         return var1 + " (" + var2 + " bytes; " + var3 + " MB) allocated, " + var4 + " (" + var5 + " bytes; " + var6 + " MB) used";
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.getMemoryReport();
     }
 }

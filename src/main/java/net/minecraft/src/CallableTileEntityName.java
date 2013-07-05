@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableTileEntityName implements Callable {
+class CallableTileEntityName implements Callable<String> {
     final TileEntity theTileEntity;
 
     CallableTileEntityName(TileEntity par1TileEntity) {
@@ -13,7 +13,8 @@ class CallableTileEntityName implements Callable {
         return TileEntity.getClassToNameMap().get(this.theTileEntity.getClass()) + " // " + this.theTileEntity.getClass().getCanonicalName();
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callTileEntityName();
     }
 }

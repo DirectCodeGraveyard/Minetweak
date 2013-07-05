@@ -15,6 +15,7 @@ public class BlockSapling extends BlockFlower {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (!par1World.isRemote) {
             super.updateTick(par1World, par2, par3, par4, par5Random);
@@ -108,6 +109,7 @@ public class BlockSapling extends BlockFlower {
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
+    @Override
     public int damageDropped(int par1) {
         return par1 & 3;
     }

@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableMinecraftVersion implements Callable {
+class CallableMinecraftVersion implements Callable<String> {
     /**
      * Reference to the CrashReport object.
      */
@@ -19,7 +19,8 @@ class CallableMinecraftVersion implements Callable {
         return "1.6.1";
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.minecraftVersion();
     }
 }

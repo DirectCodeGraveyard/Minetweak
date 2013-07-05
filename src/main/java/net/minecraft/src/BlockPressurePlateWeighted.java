@@ -15,6 +15,7 @@ public class BlockPressurePlateWeighted extends BlockBasePressurePlate {
      * Returns the current state of the pressure plate. Returns a value between 0 and 15 based on the number of items on
      * it.
      */
+    @Override
     protected int getPlateState(World par1World, int par2, int par3, int par4) {
         int var5 = 0;
 
@@ -38,6 +39,7 @@ public class BlockPressurePlateWeighted extends BlockBasePressurePlate {
     /**
      * Argument is metadata. Returns power level (0-15)
      */
+    @Override
     protected int getPowerSupply(int par1) {
         return par1;
     }
@@ -45,6 +47,7 @@ public class BlockPressurePlateWeighted extends BlockBasePressurePlate {
     /**
      * Argument is weight (0-15). Return the metadata to be set because of it.
      */
+    @Override
     protected int getMetaFromWeight(int par1) {
         return par1;
     }
@@ -52,6 +55,7 @@ public class BlockPressurePlateWeighted extends BlockBasePressurePlate {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return 10;
     }

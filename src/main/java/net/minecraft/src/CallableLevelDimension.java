@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableLevelDimension implements Callable {
+class CallableLevelDimension implements Callable<String> {
     final WorldInfo worldInfoInstance;
 
     CallableLevelDimension(WorldInfo par1WorldInfo) {
@@ -13,7 +13,8 @@ class CallableLevelDimension implements Callable {
         return String.valueOf(WorldInfo.func_85122_i(this.worldInfoInstance));
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callLevelDimension();
     }
 }

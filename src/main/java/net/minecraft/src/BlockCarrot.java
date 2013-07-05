@@ -8,6 +8,7 @@ public class BlockCarrot extends BlockCrops {
     /**
      * Generate a seed ItemStack for this crop.
      */
+    @Override
     protected int getSeedItem() {
         return Item.carrot.itemID;
     }
@@ -15,6 +16,7 @@ public class BlockCarrot extends BlockCrops {
     /**
      * Generate a crop produce ItemStack for this crop.
      */
+    @Override
     protected int getCropItem() {
         return Item.carrot.itemID;
     }

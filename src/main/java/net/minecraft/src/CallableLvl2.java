@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableLvl2 implements Callable {
+class CallableLvl2 implements Callable<String> {
     /**
      * Reference to the World object.
      */
@@ -19,7 +19,8 @@ class CallableLvl2 implements Callable {
         return this.theWorld.playerEntities.size() + " total; " + this.theWorld.playerEntities.toString();
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.getPlayerEntities();
     }
 }

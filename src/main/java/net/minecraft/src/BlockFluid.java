@@ -11,6 +11,7 @@ public abstract class BlockFluid extends Block {
         this.setTickRandomly(true);
     }
 
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         return this.blockMaterial != Material.lava;
     }
@@ -55,6 +56,7 @@ public abstract class BlockFluid extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -63,6 +65,7 @@ public abstract class BlockFluid extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -70,6 +73,7 @@ public abstract class BlockFluid extends Block {
     /**
      * Returns whether this block is collideable based on the arguments passed in Args: blockMetaData, unknownFlag
      */
+    @Override
     public boolean canCollideCheck(int par1, boolean par2) {
         return par2 && par1 == 0;
     }
@@ -78,6 +82,7 @@ public abstract class BlockFluid extends Block {
      * Returns Returns true if the given side of this block type should be rendered (if it's solid or not), if the
      * adjacent block is at the given coordinates. Args: blockAccess, x, y, z, side
      */
+    @Override
     public boolean isBlockSolid(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         Material var6 = par1IBlockAccess.getBlockMaterial(par2, par3, par4);
         return var6 != this.blockMaterial && (par5 == 1 || (var6 != Material.ice && super.isBlockSolid(par1IBlockAccess, par2, par3, par4, par5)));
@@ -87,6 +92,7 @@ public abstract class BlockFluid extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
     }
@@ -94,6 +100,7 @@ public abstract class BlockFluid extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 4;
     }
@@ -101,6 +108,7 @@ public abstract class BlockFluid extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return 0;
     }
@@ -108,6 +116,7 @@ public abstract class BlockFluid extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 0;
     }
@@ -204,6 +213,7 @@ public abstract class BlockFluid extends Block {
     /**
      * Can add to the passed in vector for a movement vector to be applied to the entity. Args: x, y, z, entity, vec3d
      */
+    @Override
     public void velocityToAddToEntity(World par1World, int par2, int par3, int par4, Entity par5Entity, Vec3 par6Vec3) {
         Vec3 var7 = this.getFlowVector(par1World, par2, par3, par4);
         par6Vec3.xCoord += var7.xCoord;
@@ -214,6 +224,7 @@ public abstract class BlockFluid extends Block {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return this.blockMaterial == Material.water ? 5 : (this.blockMaterial == Material.lava ? (par1World.provider.hasNoSky ? 10 : 30) : 0);
     }
@@ -221,6 +232,7 @@ public abstract class BlockFluid extends Block {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         this.checkForHarden(par1World, par2, par3, par4);
     }
@@ -229,6 +241,7 @@ public abstract class BlockFluid extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         this.checkForHarden(par1World, par2, par3, par4);
     }

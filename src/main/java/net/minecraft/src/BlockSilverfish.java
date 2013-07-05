@@ -17,6 +17,7 @@ public class BlockSilverfish extends Block {
     /**
      * Called right before the block is destroyed by a player.  Args: world, x, y, z, metaData
      */
+    @Override
     public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
         if (!par1World.isRemote) {
             EntitySilverfish var6 = new EntitySilverfish(par1World);
@@ -31,6 +32,7 @@ public class BlockSilverfish extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 0;
     }
@@ -54,6 +56,7 @@ public class BlockSilverfish extends Block {
      * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
      * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
      */
+    @Override
     protected ItemStack createStackedBlock(int par1) {
         Block var2 = Block.stone;
 
@@ -71,6 +74,7 @@ public class BlockSilverfish extends Block {
     /**
      * Get the block's damage value (for use with pick block).
      */
+    @Override
     public int getDamageValue(World par1World, int par2, int par3, int par4) {
         return par1World.getBlockMetadata(par2, par3, par4);
     }

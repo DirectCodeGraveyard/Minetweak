@@ -106,6 +106,7 @@ public class BlockRailPowered extends BlockRailBase {
         return false;
     }
 
+    @Override
     protected void func_94358_a(World par1World, int par2, int par3, int par4, int par5, int par6, int par7) {
         boolean var8 = par1World.isBlockIndirectlyGettingPowered(par2, par3, par4);
         var8 = var8 || this.func_94360_a(par1World, par2, par3, par4, par5, true, 0) || this.func_94360_a(par1World, par2, par3, par4, par5, false, 0);

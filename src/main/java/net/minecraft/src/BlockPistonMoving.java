@@ -11,6 +11,7 @@ public class BlockPistonMoving extends BlockContainer {
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return null;
     }
@@ -18,12 +19,14 @@ public class BlockPistonMoving extends BlockContainer {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
     }
 
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         TileEntity var7 = par1World.getBlockTileEntity(par2, par3, par4);
 
@@ -37,6 +40,7 @@ public class BlockPistonMoving extends BlockContainer {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return false;
     }
@@ -44,6 +48,7 @@ public class BlockPistonMoving extends BlockContainer {
     /**
      * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
      */
+    @Override
     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5) {
         return false;
     }
@@ -51,6 +56,7 @@ public class BlockPistonMoving extends BlockContainer {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return -1;
     }
@@ -59,6 +65,7 @@ public class BlockPistonMoving extends BlockContainer {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -66,6 +73,7 @@ public class BlockPistonMoving extends BlockContainer {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -73,6 +81,7 @@ public class BlockPistonMoving extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         if (!par1World.isRemote && par1World.getBlockTileEntity(par2, par3, par4) == null) {
             par1World.setBlockToAir(par2, par3, par4);
@@ -85,6 +94,7 @@ public class BlockPistonMoving extends BlockContainer {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return 0;
     }
@@ -92,6 +102,7 @@ public class BlockPistonMoving extends BlockContainer {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         if (!par1World.isRemote) {
             TileEntityPiston var8 = this.getTileEntityAtLocation(par1World, par2, par3, par4);
@@ -106,6 +117,7 @@ public class BlockPistonMoving extends BlockContainer {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (!par1World.isRemote) {
             par1World.getBlockTileEntity(par2, par3, par4);
@@ -123,6 +135,7 @@ public class BlockPistonMoving extends BlockContainer {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         TileEntityPiston var5 = this.getTileEntityAtLocation(par1World, par2, par3, par4);
 
@@ -142,6 +155,7 @@ public class BlockPistonMoving extends BlockContainer {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         TileEntityPiston var5 = this.getTileEntityAtLocation(par1IBlockAccess, par2, par3, par4);
 

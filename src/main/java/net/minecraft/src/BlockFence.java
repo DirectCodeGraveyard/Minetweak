@@ -15,6 +15,7 @@ public class BlockFence extends Block {
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
      * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
      */
+    @Override
     public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
         boolean var8 = this.canConnectFenceTo(par1World, par2, par3, par4 - 1);
         boolean var9 = this.canConnectFenceTo(par1World, par2, par3, par4 + 1);
@@ -68,6 +69,7 @@ public class BlockFence extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         boolean var5 = this.canConnectFenceTo(par1IBlockAccess, par2, par3, par4 - 1);
         boolean var6 = this.canConnectFenceTo(par1IBlockAccess, par2, par3, par4 + 1);
@@ -101,6 +103,7 @@ public class BlockFence extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -108,10 +111,12 @@ public class BlockFence extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         return false;
     }
@@ -119,6 +124,7 @@ public class BlockFence extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 11;
     }
@@ -144,6 +150,7 @@ public class BlockFence extends Block {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         return par1World.isRemote || ItemLeash.func_135066_a(par5EntityPlayer, par1World, par2, par3, par4);
     }

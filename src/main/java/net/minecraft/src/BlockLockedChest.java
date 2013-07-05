@@ -10,6 +10,7 @@ public class BlockLockedChest extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return true;
     }
@@ -17,6 +18,7 @@ public class BlockLockedChest extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         par1World.setBlockToAir(par2, par3, par4);
     }

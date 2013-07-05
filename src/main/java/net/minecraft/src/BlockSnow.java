@@ -15,6 +15,7 @@ public class BlockSnow extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         int var5 = par1World.getBlockMetadata(par2, par3, par4) & 7;
         float var6 = 0.125F;
@@ -25,6 +26,7 @@ public class BlockSnow extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -32,6 +34,7 @@ public class BlockSnow extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -39,6 +42,7 @@ public class BlockSnow extends Block {
     /**
      * Sets the block's bounds for rendering it as an item
      */
+    @Override
     public void setBlockBoundsForItemRender() {
         this.setBlockBoundsForSnowDepth(0);
     }
@@ -46,6 +50,7 @@ public class BlockSnow extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         this.setBlockBoundsForSnowDepth(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
     }
@@ -62,6 +67,7 @@ public class BlockSnow extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         int var5 = par1World.getBlockId(par2, par3 - 1, par4);
         return var5 != 0 && (var5 == this.blockID && (par1World.getBlockMetadata(par2, par3 - 1, par4) & 7) == 7 || (!(var5 != Block.leaves.blockID && !Block.blocksList[var5].isOpaqueCube()) && par1World.getBlockMaterial(par2, par3 - 1, par4).blocksMovement()));
@@ -71,6 +77,7 @@ public class BlockSnow extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         this.canSnowStay(par1World, par2, par3, par4);
     }
@@ -92,6 +99,7 @@ public class BlockSnow extends Block {
      * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
      * block and l is the block's subtype/damage.
      */
+    @Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6) {
         int var7 = Item.snowball.itemID;
         int var8 = par6 & 7;
@@ -103,6 +111,7 @@ public class BlockSnow extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Item.snowball.itemID;
     }
@@ -110,6 +119,7 @@ public class BlockSnow extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 0;
     }
@@ -117,6 +127,7 @@ public class BlockSnow extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11) {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);

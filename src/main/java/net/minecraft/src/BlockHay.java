@@ -9,6 +9,7 @@ public class BlockHay extends BlockRotatedPillar {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 31;
     }

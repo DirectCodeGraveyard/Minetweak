@@ -14,6 +14,7 @@ public class BlockTallGrass extends BlockFlower {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return par2Random.nextInt(8) == 0 ? Item.seeds.itemID : -1;
     }
@@ -21,6 +22,7 @@ public class BlockTallGrass extends BlockFlower {
     /**
      * Returns the usual quantity dropped by the block plus a bonus of 1 to 'i' (inclusive).
      */
+    @Override
     public int quantityDroppedWithBonus(int par1, Random par2Random) {
         return 1 + par2Random.nextInt(par1 * 2 + 1);
     }
@@ -29,6 +31,7 @@ public class BlockTallGrass extends BlockFlower {
      * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
      * block and l is the block's subtype/damage.
      */
+    @Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6) {
         if (!par1World.isRemote && par2EntityPlayer.getCurrentEquippedItem() != null && par2EntityPlayer.getCurrentEquippedItem().itemID == Item.shears.itemID) {
             par2EntityPlayer.addStat(StatList.mineBlockStatArray[this.blockID], 1);
@@ -41,6 +44,7 @@ public class BlockTallGrass extends BlockFlower {
     /**
      * Get the block's damage value (for use with pick block).
      */
+    @Override
     public int getDamageValue(World par1World, int par2, int par3, int par4) {
         return par1World.getBlockMetadata(par2, par3, par4);
     }

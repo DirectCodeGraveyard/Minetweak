@@ -20,6 +20,7 @@ public abstract class BlockButton extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
     }
@@ -27,6 +28,7 @@ public abstract class BlockButton extends Block {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return this.sensible ? 30 : 20;
     }
@@ -35,6 +37,7 @@ public abstract class BlockButton extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -42,6 +45,7 @@ public abstract class BlockButton extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -49,6 +53,7 @@ public abstract class BlockButton extends Block {
     /**
      * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
      */
+    @Override
     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5) {
         return par5 == 2 && par1World.isBlockNormalCube(par2, par3, par4 + 1) || (par5 == 3 && par1World.isBlockNormalCube(par2, par3, par4 - 1) || (par5 == 4 && par1World.isBlockNormalCube(par2 + 1, par3, par4) || par5 == 5 && par1World.isBlockNormalCube(par2 - 1, par3, par4)));
     }
@@ -56,6 +61,7 @@ public abstract class BlockButton extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return par1World.isBlockNormalCube(par2 - 1, par3, par4) || (par1World.isBlockNormalCube(par2 + 1, par3, par4) || (par1World.isBlockNormalCube(par2, par3, par4 - 1) || par1World.isBlockNormalCube(par2, par3, par4 + 1)));
     }
@@ -63,6 +69,7 @@ public abstract class BlockButton extends Block {
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
+    @Override
     public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
         int var10 = par1World.getBlockMetadata(par2, par3, par4);
         int var11 = var10 & 8;
@@ -94,6 +101,7 @@ public abstract class BlockButton extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (this.redundantCanPlaceBlockAt(par1World, par2, par3, par4)) {
             int var6 = par1World.getBlockMetadata(par2, par3, par4) & 7;
@@ -138,6 +146,7 @@ public abstract class BlockButton extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         this.func_82534_e(var5);
@@ -169,12 +178,14 @@ public abstract class BlockButton extends Block {
     /**
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */
+    @Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
     }
 
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         int var10 = par1World.getBlockMetadata(par2, par3, par4);
         int var11 = var10 & 7;
@@ -195,6 +206,7 @@ public abstract class BlockButton extends Block {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         if ((par6 & 8) > 0) {
             int var7 = par6 & 7;
@@ -209,6 +221,7 @@ public abstract class BlockButton extends Block {
      * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
      * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
+    @Override
     public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return (par1IBlockAccess.getBlockMetadata(par2, par3, par4) & 8) > 0 ? 15 : 0;
     }
@@ -217,6 +230,7 @@ public abstract class BlockButton extends Block {
      * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
      * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
+    @Override
     public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         int var6 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 
@@ -231,6 +245,7 @@ public abstract class BlockButton extends Block {
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
+    @Override
     public boolean canProvidePower() {
         return true;
     }
@@ -238,6 +253,7 @@ public abstract class BlockButton extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (!par1World.isRemote) {
             int var6 = par1World.getBlockMetadata(par2, par3, par4);
@@ -259,6 +275,7 @@ public abstract class BlockButton extends Block {
     /**
      * Sets the block's bounds for rendering it as an item
      */
+    @Override
     public void setBlockBoundsForItemRender() {
         float var1 = 0.1875F;
         float var2 = 0.125F;
@@ -269,6 +286,7 @@ public abstract class BlockButton extends Block {
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         if (!par1World.isRemote) {
             if (this.sensible) {

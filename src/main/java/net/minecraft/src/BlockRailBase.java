@@ -41,6 +41,7 @@ public abstract class BlockRailBase extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
     }
@@ -49,6 +50,7 @@ public abstract class BlockRailBase extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -57,6 +59,7 @@ public abstract class BlockRailBase extends Block {
      * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit. Args: world,
      * x, y, z, startVec, endVec
      */
+    @Override
     public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3) {
         this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
         return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
@@ -65,6 +68,7 @@ public abstract class BlockRailBase extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 
@@ -78,6 +82,7 @@ public abstract class BlockRailBase extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -85,6 +90,7 @@ public abstract class BlockRailBase extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 9;
     }
@@ -92,6 +98,7 @@ public abstract class BlockRailBase extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 1;
     }
@@ -99,6 +106,7 @@ public abstract class BlockRailBase extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4);
     }
@@ -106,6 +114,7 @@ public abstract class BlockRailBase extends Block {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         if (!par1World.isRemote) {
             this.refreshTrackShape(par1World, par2, par3, par4, true);
@@ -120,6 +129,7 @@ public abstract class BlockRailBase extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (!par1World.isRemote) {
             int var6 = par1World.getBlockMetadata(par2, par3, par4);
@@ -176,6 +186,7 @@ public abstract class BlockRailBase extends Block {
      * Returns the mobility information of the block, 0 = free, 1 = can't push but can move over, 2 = total immobility
      * and stop pistons
      */
+    @Override
     public int getMobilityFlag() {
         return 0;
     }
@@ -183,6 +194,7 @@ public abstract class BlockRailBase extends Block {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         int var7 = par6;
 

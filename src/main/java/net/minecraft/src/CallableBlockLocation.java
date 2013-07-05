@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-final class CallableBlockLocation implements Callable {
+final class CallableBlockLocation implements Callable<String> {
     final int blockXCoord;
 
     final int blockYCoord;
@@ -19,7 +19,8 @@ final class CallableBlockLocation implements Callable {
         return CrashReportCategory.getLocationInfo(this.blockXCoord, this.blockYCoord, this.blockZCoord);
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callBlockLocationInfo();
     }
 }

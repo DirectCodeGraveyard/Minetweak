@@ -17,6 +17,7 @@ public class BlockDispenser extends BlockContainer {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return 4;
     }
@@ -24,6 +25,7 @@ public class BlockDispenser extends BlockContainer {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
         this.setDispenserDefaultDirection(par1World, par2, par3, par4);
@@ -64,6 +66,7 @@ public class BlockDispenser extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         if (par1World.isRemote) {
             return true;
@@ -110,6 +113,7 @@ public class BlockDispenser extends BlockContainer {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         boolean var6 = par1World.isBlockIndirectlyGettingPowered(par2, par3, par4) || par1World.isBlockIndirectlyGettingPowered(par2, par3 + 1, par4);
         int var7 = par1World.getBlockMetadata(par2, par3, par4);
@@ -126,6 +130,7 @@ public class BlockDispenser extends BlockContainer {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (!par1World.isRemote) {
             this.dispense(par1World, par2, par3, par4);
@@ -135,6 +140,7 @@ public class BlockDispenser extends BlockContainer {
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityDispenser();
     }
@@ -142,6 +148,7 @@ public class BlockDispenser extends BlockContainer {
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int var7 = BlockPistonBase.determineOrientation(par1World, par2, par3, par4, par5EntityLivingBase);
         par1World.setBlockMetadata(par2, par3, par4, var7, 2);
@@ -154,6 +161,7 @@ public class BlockDispenser extends BlockContainer {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         TileEntityDispenser var7 = (TileEntityDispenser) par1World.getBlockTileEntity(par2, par3, par4);
 
@@ -211,6 +219,7 @@ public class BlockDispenser extends BlockContainer {
      * If this returns true, then comparators facing away from this block will use the value from
      * getComparatorInputOverride instead of the actual redstone signal strength.
      */
+    @Override
     public boolean hasComparatorInputOverride() {
         return true;
     }
@@ -219,6 +228,7 @@ public class BlockDispenser extends BlockContainer {
      * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
      * strength when this block inputs to a comparator.
      */
+    @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5) {
         return Container.calcRedstoneFromInventory((IInventory) par1World.getBlockTileEntity(par2, par3, par4));
     }

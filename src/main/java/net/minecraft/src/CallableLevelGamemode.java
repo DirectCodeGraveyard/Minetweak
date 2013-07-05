@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableLevelGamemode implements Callable {
+class CallableLevelGamemode implements Callable<String> {
     final WorldInfo worldInfoInstance;
 
     CallableLevelGamemode(WorldInfo par1WorldInfo) {
@@ -13,7 +13,8 @@ class CallableLevelGamemode implements Callable {
         return String.format("Game mode: %s (ID %d). Hardcore: %b. Cheats: %b", WorldInfo.getGameType(this.worldInfoInstance).getName(), WorldInfo.getGameType(this.worldInfoInstance).getID(), WorldInfo.func_85117_p(this.worldInfoInstance), WorldInfo.func_85131_q(this.worldInfoInstance));
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callLevelGameModeInfo();
     }
 }

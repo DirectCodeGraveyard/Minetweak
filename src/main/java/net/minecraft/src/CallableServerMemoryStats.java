@@ -4,7 +4,7 @@ import net.minecraft.server.MinecraftServer;
 
 import java.util.concurrent.Callable;
 
-public class CallableServerMemoryStats implements Callable {
+public class CallableServerMemoryStats implements Callable<String> {
     /**
      * Reference to the MinecraftServer object.
      */
@@ -18,7 +18,8 @@ public class CallableServerMemoryStats implements Callable {
         return MinecraftServer.getServerConfigurationManager(this.mcServer).getCurrentPlayerCount() + " / " + MinecraftServer.getServerConfigurationManager(this.mcServer).getMaxPlayers() + "; " + MinecraftServer.getServerConfigurationManager(this.mcServer).playerEntityList;
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callServerMemoryStats();
     }
 }

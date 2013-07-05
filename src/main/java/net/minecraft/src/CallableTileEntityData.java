@@ -5,7 +5,7 @@ import java.util.concurrent.Callable;
 import static java.lang.Integer.toBinaryString;
 import static java.lang.Integer.valueOf;
 
-class CallableTileEntityData implements Callable {
+class CallableTileEntityData implements Callable<String> {
     final TileEntity theTileEntity;
 
     CallableTileEntityData(TileEntity par1TileEntity) {
@@ -23,7 +23,8 @@ class CallableTileEntityData implements Callable {
         }
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callTileEntityDataInfo();
     }
 }

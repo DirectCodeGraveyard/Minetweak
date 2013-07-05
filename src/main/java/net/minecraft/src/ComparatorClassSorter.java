@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.Comparator;
 
-class ComparatorClassSorter implements Comparator {
+class ComparatorClassSorter implements Comparator<Class> {
     final CallableSuspiciousClasses theSuspiciousClasses;
 
     ComparatorClassSorter(CallableSuspiciousClasses par1CallableSuspiciousClasses) {
@@ -15,7 +15,8 @@ class ComparatorClassSorter implements Comparator {
         return var3.compareTo(var4);
     }
 
-    public int compare(Object par1Obj, Object par2Obj) {
-        return this.func_85081_a((Class) par1Obj, (Class) par2Obj);
+    @Override
+    public int compare(Class par1Obj, Class par2Obj) {
+        return this.func_85081_a(par1Obj, par2Obj);
     }
 }

@@ -16,6 +16,7 @@ public class BlockStep extends BlockHalfSlab {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Block.stoneSingleSlab.blockID;
     }
@@ -24,6 +25,7 @@ public class BlockStep extends BlockHalfSlab {
      * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
      * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
      */
+    @Override
     protected ItemStack createStackedBlock(int par1) {
         return new ItemStack(Block.stoneSingleSlab.blockID, 2, par1 & 7);
     }
@@ -31,6 +33,7 @@ public class BlockStep extends BlockHalfSlab {
     /**
      * Returns the slab block name with step type.
      */
+    @Override
     public String getFullSlabName(int par1) {
         if (par1 < 0 || par1 >= blockStepTypes.length) {
             par1 = 0;

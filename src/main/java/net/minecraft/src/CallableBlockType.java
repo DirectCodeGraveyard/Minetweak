@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-final class CallableBlockType implements Callable {
+final class CallableBlockType implements Callable<String> {
     final int blockID;
 
     CallableBlockType(int par1) {
@@ -17,7 +17,8 @@ final class CallableBlockType implements Callable {
         }
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callBlockType();
     }
 }

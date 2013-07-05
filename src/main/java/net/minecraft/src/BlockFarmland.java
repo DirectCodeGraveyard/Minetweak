@@ -14,6 +14,7 @@ public class BlockFarmland extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return AxisAlignedBB.getAABBPool().getAABB((double) (par2), (double) (par3), (double) (par4), (double) (par2 + 1), (double) (par3 + 1), (double) (par4 + 1));
     }
@@ -22,6 +23,7 @@ public class BlockFarmland extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -29,6 +31,7 @@ public class BlockFarmland extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -36,6 +39,7 @@ public class BlockFarmland extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (!this.isWaterNearby(par1World, par2, par3, par4) && !par1World.canLightningStrikeAt(par2, par3 + 1, par4)) {
             int var6 = par1World.getBlockMetadata(par2, par3, par4);
@@ -53,6 +57,7 @@ public class BlockFarmland extends Block {
     /**
      * Block's chance to react to an entity falling on it.
      */
+    @Override
     public void onFallenUpon(World par1World, int par2, int par3, int par4, Entity par5Entity, float par6) {
         if (!par1World.isRemote && par1World.rand.nextFloat() < par6 - 0.5F) {
             if (!(par5Entity instanceof EntityPlayer) && !par1World.getGameRules().getGameRuleBooleanValue("mobGriefing")) {
@@ -103,6 +108,7 @@ public class BlockFarmland extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
         Material var6 = par1World.getBlockMaterial(par2, par3 + 1, par4);
@@ -115,6 +121,7 @@ public class BlockFarmland extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Block.dirt.idDropped(0, par2Random, par3);
     }

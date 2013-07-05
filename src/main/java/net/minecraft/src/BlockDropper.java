@@ -10,6 +10,7 @@ public class BlockDropper extends BlockDispenser {
     /**
      * Returns the behavior for the given ItemStack.
      */
+    @Override
     protected IBehaviorDispenseItem getBehaviorForItemStack(ItemStack par1ItemStack) {
         return this.dropperDefaultBehaviour;
     }
@@ -17,10 +18,12 @@ public class BlockDropper extends BlockDispenser {
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityDropper();
     }
 
+    @Override
     protected void dispense(World par1World, int par2, int par3, int par4) {
         BlockSourceImpl var5 = new BlockSourceImpl(par1World, par2, par3, par4);
         TileEntityDispenser var6 = (TileEntityDispenser) var5.getBlockTileEntity();

@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableLvl1 implements Callable {
+class CallableLvl1 implements Callable<String> {
     final int field_85179_a;
 
     /**
@@ -23,7 +23,8 @@ class CallableLvl1 implements Callable {
         }
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.getWorldEntitiesAsString();
     }
 }

@@ -15,6 +15,7 @@ public class BlockNetherStalk extends BlockFlower {
      * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
      * blockID passed in. Args: blockID
      */
+    @Override
     protected boolean canThisPlantGrowOnThisBlockID(int par1) {
         return par1 == Block.slowSand.blockID;
     }
@@ -22,6 +23,7 @@ public class BlockNetherStalk extends BlockFlower {
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
      */
+    @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
         return this.canThisPlantGrowOnThisBlockID(par1World.getBlockId(par2, par3 - 1, par4));
     }
@@ -29,6 +31,7 @@ public class BlockNetherStalk extends BlockFlower {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         int var6 = par1World.getBlockMetadata(par2, par3, par4);
 
@@ -43,6 +46,7 @@ public class BlockNetherStalk extends BlockFlower {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 6;
     }
@@ -50,6 +54,7 @@ public class BlockNetherStalk extends BlockFlower {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         if (!par1World.isRemote) {
             int var8 = 1;
@@ -71,6 +76,7 @@ public class BlockNetherStalk extends BlockFlower {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return 0;
     }
@@ -78,6 +84,7 @@ public class BlockNetherStalk extends BlockFlower {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 0;
     }

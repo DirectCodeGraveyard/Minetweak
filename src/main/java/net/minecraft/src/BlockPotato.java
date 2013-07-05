@@ -8,6 +8,7 @@ public class BlockPotato extends BlockCrops {
     /**
      * Generate a seed ItemStack for this crop.
      */
+    @Override
     protected int getSeedItem() {
         return Item.potato.itemID;
     }
@@ -15,6 +16,7 @@ public class BlockPotato extends BlockCrops {
     /**
      * Generate a crop produce ItemStack for this crop.
      */
+    @Override
     protected int getCropItem() {
         return Item.potato.itemID;
     }
@@ -22,6 +24,7 @@ public class BlockPotato extends BlockCrops {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, par7);
 

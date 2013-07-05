@@ -14,6 +14,7 @@ public class BlockIce extends BlockBreakable {
      * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
      * block and l is the block's subtype/damage.
      */
+    @Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6) {
         par2EntityPlayer.addStat(StatList.mineBlockStatArray[this.blockID], 1);
         par2EntityPlayer.addExhaustion(0.025F);
@@ -43,6 +44,7 @@ public class BlockIce extends BlockBreakable {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 0;
     }
@@ -50,6 +52,7 @@ public class BlockIce extends BlockBreakable {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (par1World.getSavedLightValue(EnumSkyBlock.Block, par2, par3, par4) > 11 - Block.lightOpacity[this.blockID]) {
             if (par1World.provider.isHellWorld) {
@@ -66,6 +69,7 @@ public class BlockIce extends BlockBreakable {
      * Returns the mobility information of the block, 0 = free, 1 = can't push but can move over, 2 = total immobility
      * and stop pistons
      */
+    @Override
     public int getMobilityFlag() {
         return 0;
     }

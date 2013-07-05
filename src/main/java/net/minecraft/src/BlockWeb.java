@@ -11,6 +11,7 @@ public class BlockWeb extends Block {
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         par5Entity.setInWeb();
     }
@@ -19,6 +20,7 @@ public class BlockWeb extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -27,6 +29,7 @@ public class BlockWeb extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
     }
@@ -34,6 +37,7 @@ public class BlockWeb extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 1;
     }
@@ -41,6 +45,7 @@ public class BlockWeb extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -48,6 +53,7 @@ public class BlockWeb extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Item.silk.itemID;
     }
@@ -55,6 +61,7 @@ public class BlockWeb extends Block {
     /**
      * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
      */
+    @Override
     protected boolean canSilkHarvest() {
         return true;
     }

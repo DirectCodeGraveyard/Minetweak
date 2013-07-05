@@ -13,6 +13,7 @@ public class BlockMushroom extends BlockFlower {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (par5Random.nextInt(25) == 0) {
             byte var6 = 4;
@@ -60,6 +61,7 @@ public class BlockMushroom extends BlockFlower {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return super.canPlaceBlockAt(par1World, par2, par3, par4) && this.canBlockStay(par1World, par2, par3, par4);
     }
@@ -68,6 +70,7 @@ public class BlockMushroom extends BlockFlower {
      * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
      * blockID passed in. Args: blockID
      */
+    @Override
     protected boolean canThisPlantGrowOnThisBlockID(int par1) {
         return Block.opaqueCubeLookup[par1];
     }
@@ -75,6 +78,7 @@ public class BlockMushroom extends BlockFlower {
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
      */
+    @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
         if (par3 >= 0 && par3 < 256) {
             int var5 = par1World.getBlockId(par2, par3 - 1, par4);

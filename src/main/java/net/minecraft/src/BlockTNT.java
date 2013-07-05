@@ -11,6 +11,7 @@ public class BlockTNT extends Block {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
 
@@ -24,6 +25,7 @@ public class BlockTNT extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (par1World.isBlockIndirectlyGettingPowered(par2, par3, par4)) {
             this.onBlockDestroyedByPlayer(par1World, par2, par3, par4, 1);
@@ -34,6 +36,7 @@ public class BlockTNT extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 1;
     }
@@ -41,6 +44,7 @@ public class BlockTNT extends Block {
     /**
      * Called upon the block being destroyed by an explosion
      */
+    @Override
     public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
         if (!par1World.isRemote) {
             EntityTNTPrimed var6 = new EntityTNTPrimed(par1World, (double) ((float) par2 + 0.5F), (double) ((float) par3 + 0.5F), (double) ((float) par4 + 0.5F), par5Explosion.func_94613_c());
@@ -52,6 +56,7 @@ public class BlockTNT extends Block {
     /**
      * Called right before the block is destroyed by a player.  Args: world, x, y, z, metaData
      */
+    @Override
     public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
         this.func_94391_a(par1World, par2, par3, par4, par5, null);
     }
@@ -69,6 +74,7 @@ public class BlockTNT extends Block {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         if (par5EntityPlayer.getCurrentEquippedItem() != null && par5EntityPlayer.getCurrentEquippedItem().itemID == Item.flintAndSteel.itemID) {
             this.func_94391_a(par1World, par2, par3, par4, 1, par5EntityPlayer);
@@ -83,6 +89,7 @@ public class BlockTNT extends Block {
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         if (par5Entity instanceof EntityArrow && !par1World.isRemote) {
             EntityArrow var6 = (EntityArrow) par5Entity;
@@ -97,6 +104,7 @@ public class BlockTNT extends Block {
     /**
      * Return whether this block can drop from an explosion.
      */
+    @Override
     public boolean canDropFromExplosion(Explosion par1Explosion) {
         return false;
     }
