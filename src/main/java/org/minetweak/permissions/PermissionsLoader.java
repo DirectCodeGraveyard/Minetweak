@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class PermissionsLoader {
     private static File file = new File("./permissions.json");
-    private static Gson gson = new GsonBuilder().create();
+    private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     public static void load() {
         if (!file.exists()) {
             try {
@@ -23,10 +23,25 @@ public class PermissionsLoader {
         try {
             FileReader reader = new FileReader(file);
             PermissionsFile permissionsFile = gson.fromJson(reader, PermissionsFile.class);
+            if (permissionsFile==null || permissionsFile.entries==null) {
+                return;
+            }
             for (PermissionsFile.entry entry : permissionsFile.entries) {
-
+                Permissions.addPermission(entry.player, entry.permission);
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void save() {
+        try {
+            file.delete();
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            writer.write(gson.toJson(Permissions.permissions));
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

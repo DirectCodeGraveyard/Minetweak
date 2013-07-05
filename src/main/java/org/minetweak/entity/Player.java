@@ -2,8 +2,10 @@ package org.minetweak.entity;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.*;
+import org.minetweak.Minetweak;
 import org.minetweak.command.CommandSender;
 import org.minetweak.permissions.PermissionNode;
+import org.minetweak.permissions.Permissions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +24,6 @@ import java.util.Set;
 public class Player implements CommandSender {
 
     private String playerDisplayName;
-    private HashMap<String, PermissionNode> playerPermissions = new HashMap<String, PermissionNode>();
 
     private EntityPlayerMP entityPlayerMP;
 
@@ -81,19 +82,15 @@ public class Player implements CommandSender {
      * @return True if the permission was successfully added, and that the permission did not already exist
      */
     protected boolean givePermission(String permissionNode) {
-        if (!playerPermissions.containsKey(permissionNode)) {
-            playerPermissions.put(permissionNode, new PermissionNode(permissionNode));
-            return true;
-        }
-        return false;
+        return Permissions.addPermission(playerDisplayName, permissionNode);
     }
 
     /**
      * Get the player permissions
-     * @return Object array including the player's permissions
+     * @return String list of permissions
      */
-    public Set<String> getPlayerPermissions() {
-        return playerPermissions.keySet();
+    public ArrayList<String> getPlayerPermissions() {
+        return Permissions.getPlayerPermissions(playerDisplayName);
     }
 
     /**
@@ -102,12 +99,7 @@ public class Player implements CommandSender {
      * @return True if the player has the permission
      */
     public boolean hasPermission(String permissionNode) {
-        for (String name : playerPermissions.keySet()) {
-            if (name.equals(permissionNode)) {
-                return true;
-            }
-        }
-        return false;
+        return Permissions.hasPermission(playerDisplayName, permissionNode);
     }
 
     /**

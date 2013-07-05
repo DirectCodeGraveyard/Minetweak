@@ -4,6 +4,7 @@ import com.google.common.eventbus.EventBus;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.command.*;
 import org.minetweak.entity.Player;
+import org.minetweak.permissions.PermissionsLoader;
 import org.minetweak.plugins.PluginLoader;
 import org.minetweak.plugins.PluginLoaderHook;
 import org.minetweak.recipe.RecipeManager;
@@ -65,6 +66,9 @@ public class Minetweak {
     public static void main(String[] args) {
         System.out.println("Success is very tasty.");
         System.out.println("Minetweak v" + getServerVersion() + " using Minecraft v" + getMinecraftVersion());
+
+        PermissionsLoader.load();
+        PermissionsLoader.save();
 
         registerServerCommands();
 

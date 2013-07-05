@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
 import org.minetweak.event.server.ServerFinishedStartupEvent;
+import org.minetweak.permissions.PermissionsLoader;
 
 public class ManagementThread extends Thread {
     @Override
@@ -11,7 +12,7 @@ public class ManagementThread extends Thread {
         while (true) {
             loadBans();
             try {
-                Thread.sleep(5000);
+                Thread.sleep(10000);
             } catch (InterruptedException e) {
                 Minetweak.info("Stopping Management Thread");
                 break;
@@ -25,6 +26,13 @@ public class ManagementThread extends Thread {
     public void loadBans() {
         MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().loadBanList();
         MinecraftServer.getServer().getConfigurationManager().getBannedIPs().loadBanList();
+    }
+
+    /**
+     * This loads permissions for the server
+     */
+    public void loadPerms() {
+        PermissionsLoader.load();
     }
 
     @Subscribe
