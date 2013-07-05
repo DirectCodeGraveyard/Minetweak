@@ -1,5 +1,8 @@
 package net.minecraft.src;
 
+import org.minetweak.Minetweak;
+import org.minetweak.event.block.BlockPlacedEvent;
+
 public class ItemBlock extends Item {
     /**
      * The block ID of the Block associated with this ItemBlock
@@ -66,6 +69,7 @@ public class ItemBlock extends Item {
 
             if (par3World.setBlock(par4, par5, par6, this.blockID, var14, 3)) {
                 if (par3World.getBlockId(par4, par5, par6) == this.blockID) {
+                    Minetweak.getEventBus().post(new BlockPlacedEvent(Block.blocksList[this.blockID], par2EntityPlayer, par4, par5, par6));
                     Block.blocksList[this.blockID].onBlockPlacedBy(par3World, par4, par5, par6, par2EntityPlayer, par1ItemStack);
                     Block.blocksList[this.blockID].onPostBlockPlaced(par3World, par4, par5, par6, var14);
                 }

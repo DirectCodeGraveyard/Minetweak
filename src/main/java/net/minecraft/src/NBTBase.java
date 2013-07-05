@@ -78,7 +78,7 @@ public abstract class NBTBase {
                 CrashReport var6 = CrashReport.makeCrashReport(var8, "Loading NBT data");
                 CrashReportCategory var7 = var6.makeCategory("NBT Tag");
                 var7.addCrashSection("Tag name", var3);
-                var7.addCrashSection("Tag type", Byte.valueOf(var2));
+                var7.addCrashSection("Tag type", var2);
                 throw new ReportedException(var6);
             }
         }

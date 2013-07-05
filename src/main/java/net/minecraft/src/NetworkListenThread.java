@@ -12,7 +12,7 @@ public abstract class NetworkListenThread {
      * Reference to the MinecraftServer object.
      */
     private final MinecraftServer mcServer;
-    private final List connections = Collections.synchronizedList(new ArrayList());
+    private final List<NetServerHandler> connections = Collections.synchronizedList(new ArrayList<NetServerHandler>());
 
     /**
      * Whether the network listener object is listening.
@@ -40,7 +40,7 @@ public abstract class NetworkListenThread {
      */
     public void handleNetworkListenThread() {
         for (int var1 = 0; var1 < this.connections.size(); ++var1) {
-            NetServerHandler var2 = (NetServerHandler) this.connections.get(var1);
+            NetServerHandler var2 = this.connections.get(var1);
 
             try {
                 var2.handlePackets();

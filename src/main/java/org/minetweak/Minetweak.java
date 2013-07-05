@@ -75,6 +75,7 @@ public class Minetweak {
         registerCommand("op", new CommandOp());
         registerCommand("say", new CommandSay());
         registerCommand("stop", new CommandStop());
+        registerCommand("motd", new CommandMotd());
 
         registerListener(RecipeManager.getInstance());
         registerListener(new ManagementThread());

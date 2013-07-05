@@ -6,6 +6,7 @@ import com.google.common.collect.Multimap;
 import java.text.DecimalFormat;
 import java.util.Random;
 
+@SuppressWarnings("UnusedDeclaration")
 public final class ItemStack {
     public static final DecimalFormat field_111284_a = new DecimalFormat("#.###");
 
@@ -327,21 +328,21 @@ public final class ItemStack {
     }
 
     public static boolean areItemStackTagsEqual(ItemStack par0ItemStack, ItemStack par1ItemStack) {
-        return par0ItemStack == null && par1ItemStack == null ? true : (par0ItemStack != null && par1ItemStack != null ? (par0ItemStack.stackTagCompound == null && par1ItemStack.stackTagCompound != null ? false : par0ItemStack.stackTagCompound == null || par0ItemStack.stackTagCompound.equals(par1ItemStack.stackTagCompound)) : false);
+        return par0ItemStack == null && par1ItemStack == null || (par0ItemStack != null && par1ItemStack != null && (!(par0ItemStack.stackTagCompound == null && par1ItemStack.stackTagCompound != null) && (par0ItemStack.stackTagCompound == null || par0ItemStack.stackTagCompound.equals(par1ItemStack.stackTagCompound))));
     }
 
     /**
      * compares ItemStack argument1 with ItemStack argument2; returns true if both ItemStacks are equal
      */
     public static boolean areItemStacksEqual(ItemStack par0ItemStack, ItemStack par1ItemStack) {
-        return par0ItemStack == null && par1ItemStack == null ? true : (par0ItemStack != null && par1ItemStack != null ? par0ItemStack.isItemStackEqual(par1ItemStack) : false);
+        return par0ItemStack == null && par1ItemStack == null || (par0ItemStack != null && par1ItemStack != null && par0ItemStack.isItemStackEqual(par1ItemStack));
     }
 
     /**
      * compares ItemStack argument to the instance ItemStack; returns true if both ItemStacks are equal
      */
     private boolean isItemStackEqual(ItemStack par1ItemStack) {
-        return this.stackSize != par1ItemStack.stackSize ? false : (this.itemID != par1ItemStack.itemID ? false : (this.itemDamage != par1ItemStack.itemDamage ? false : (this.stackTagCompound == null && par1ItemStack.stackTagCompound != null ? false : this.stackTagCompound == null || this.stackTagCompound.equals(par1ItemStack.stackTagCompound))));
+        return this.stackSize == par1ItemStack.stackSize && (this.itemID == par1ItemStack.itemID && (this.itemDamage == par1ItemStack.itemDamage && (!(this.stackTagCompound == null && par1ItemStack.stackTagCompound != null) && (this.stackTagCompound == null || this.stackTagCompound.equals(par1ItemStack.stackTagCompound)))));
     }
 
     /**
@@ -466,7 +467,7 @@ public final class ItemStack {
                     this.stackTagCompound.removeTag("display");
 
                     if (this.stackTagCompound.hasNoTags()) {
-                        this.setTagCompound((NBTTagCompound) null);
+                        this.setTagCompound(null);
                     }
                 }
             }
@@ -477,14 +478,14 @@ public final class ItemStack {
      * Returns true if the itemstack has a display name
      */
     public boolean hasDisplayName() {
-        return this.stackTagCompound == null ? false : (!this.stackTagCompound.hasKey("display") ? false : this.stackTagCompound.getCompoundTag("display").hasKey("Name"));
+        return this.stackTagCompound != null && (this.stackTagCompound.hasKey("display") && this.stackTagCompound.getCompoundTag("display").hasKey("Name"));
     }
 
     /**
      * True if it is a tool and has no enchantments to begin with
      */
     public boolean isItemEnchantable() {
-        return !this.getItem().isItemTool(this) ? false : !this.isItemEnchanted();
+        return this.getItem().isItemTool(this) && !this.isItemEnchanted();
     }
 
     /**
@@ -565,7 +566,7 @@ public final class ItemStack {
     }
 
     public Multimap func_111283_C() {
-        Object var1;
+        Multimap var1;
 
         if (this.hasTagCompound() && this.stackTagCompound.hasKey("AttributeModifiers")) {
             var1 = HashMultimap.create();
@@ -576,13 +577,13 @@ public final class ItemStack {
                 AttributeModifier var5 = SharedMonsterAttributes.func_111259_a(var4);
 
                 if (var5.func_111167_a().getLeastSignificantBits() != 0L && var5.func_111167_a().getMostSignificantBits() != 0L) {
-                    ((Multimap) var1).put(var4.getString("AttributeName"), var5);
+                    var1.put(var4.getString("AttributeName"), var5);
                 }
             }
         } else {
             var1 = this.getItem().func_111205_h();
         }
 
-        return (Multimap) var1;
+        return var1;
     }
 }
