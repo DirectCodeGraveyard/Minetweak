@@ -234,7 +234,7 @@ public class Minetweak {
     protected static void registerServerCommands() {
         registerCommand("ban", new CommandBan());
         registerCommand("deop", new CommandDeop());
-        registerCommand("gamemode", new CommandDeop());
+        registerCommand("gamemode", new CommandGamemode());
         registerCommand("help", new CommandHelp());
         registerCommand("kick", new CommandKick());
         registerCommand("kill", new CommandKill());

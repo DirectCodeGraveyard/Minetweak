@@ -50,10 +50,12 @@ public class Permissions {
         if (perms==null) {
             return false;
         }
-        if (perms.contains("*")) {
-            return true;
-        } else if (perms.contains(permission)) {
-            return true;
+        for (String perm : perms) {
+            if (permission.equals(perm)) {
+                return true;
+            } else if (perm.equals("*")) {
+                return true;
+            }
         }
         return false;
     }
