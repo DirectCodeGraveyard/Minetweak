@@ -60,7 +60,11 @@ public class Permissions {
         return false;
     }
 
-    public static ArrayList<String> getPlayerPermissions(String user) {
+    public static ArrayList<String> getPermissions(String user) {
         return permissions.get(user);
+    }
+
+    public static HashMap<String, ArrayList<String>> getPermissions() {
+        return permissions;
     }
 }

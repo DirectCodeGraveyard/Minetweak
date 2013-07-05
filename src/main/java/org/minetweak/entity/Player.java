@@ -2,14 +2,10 @@ package org.minetweak.entity;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.*;
-import org.minetweak.Minetweak;
 import org.minetweak.command.CommandSender;
-import org.minetweak.permissions.PermissionNode;
 import org.minetweak.permissions.Permissions;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 
 /**
  * This class represents the player, and allows you to
@@ -90,7 +86,7 @@ public class Player implements CommandSender {
      * @return String list of permissions
      */
     public ArrayList<String> getPlayerPermissions() {
-        return Permissions.getPlayerPermissions(playerDisplayName);
+        return Permissions.getPermissions(playerDisplayName);
     }
 
     /**
