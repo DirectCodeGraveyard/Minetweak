@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'project-report'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
+apply plugin: 'maven'
 
 def version = '0.5'
 def groupId = 'org.minetweak'
@@ -13,12 +14,17 @@ repositories {
     }
 }
 
+configurations {
+    deployerJars
+}
+
 dependencies {
     compile 'com.google.guava:guava:14.0.1'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'commons-io:commons-io:2.4'
     compile 'org.apache.commons:commons-lang3:3.1'
     testCompile 'junit:junit:4.10'
+    deployerJars "org.apache.maven.wagon:wagon-ftp:2.2"
     compile files('libs/bcprov-jdk15on-1.47.jar')
 }
 
@@ -62,4 +68,22 @@ artifacts {
     archives sourcesJar
     archives javadocJar
     archives jar
+}
+
+if (!hasProperty('ciUsername')) {
+    ext.ciUsername = ''
+}
+if (!hasProperty('ciPassword')) {
+    ext.ciPassword = ''
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        configuration = configurations.deployerJars
+        repository(url: 'ftp://ci.directmyfile.com/var/www/snapshots/') {
+            authentication(userName: ciUsername, password: ciPassword)
+        }
+        pom.groupId = groupId
+        pom.version = version
+    }
 }
