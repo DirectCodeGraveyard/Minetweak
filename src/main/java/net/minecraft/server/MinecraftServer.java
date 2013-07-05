@@ -1150,4 +1150,8 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     public static ServerConfigurationManager getServerConfigurationManager(MinecraftServer par0MinecraftServer) {
         return par0MinecraftServer.serverConfigManager;
     }
+
+    public void minetweakInfo(String line) {
+        this.getLogAgent().logInfo("[Minetweak] " + line);
+    }
 }

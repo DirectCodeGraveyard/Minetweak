@@ -136,7 +136,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
                         DataInputStream var12 = var8.getChunkDataInputStream(var10, var11);
 
                         if (var12 == null) {
-                            MinecraftServer.getServer().getLogAgent().func_98236_b("Failed to fetch input stream");
+                            MinecraftServer.getServer().getLogAgent().logWarning("Failed to fetch input stream");
                         } else {
                             NBTTagCompound var13 = CompressedStreamTools.read(var12);
                             var12.close();

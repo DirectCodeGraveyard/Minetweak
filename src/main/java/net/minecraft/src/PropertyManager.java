@@ -47,7 +47,7 @@ public class PropertyManager {
                 }
             }
         } else {
-            par2ILogAgent.func_98236_b(par1File + " does not exist");
+            par2ILogAgent.logWarning(par1File + " does not exist");
             this.generateNewProperties();
         }
     }

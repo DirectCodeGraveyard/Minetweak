@@ -40,7 +40,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.logInfo("Starting minecraft server version 1.6.1");
 
         if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
-            this.getLogAgent().func_98236_b("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
+            this.getLogAgent().logWarning("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
         }
 
         this.logInfo("Loading properties");
@@ -82,17 +82,17 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         try {
             this.networkThread = new DedicatedServerListenThread(this, var3, this.getServerPort());
         } catch (IOException var16) {
-            this.getLogAgent().func_98236_b("**** FAILED TO BIND TO PORT!");
+            this.getLogAgent().logWarning("**** FAILED TO BIND TO PORT!");
             this.getLogAgent().logWarningFormatted("The exception was: {0}", new Object[]{var16.toString()});
-            this.getLogAgent().func_98236_b("Perhaps a server is already running on that port?");
+            this.getLogAgent().logWarning("Perhaps a server is already running on that port?");
             return false;
         }
 
         if (!this.isServerInOnlineMode()) {
-            this.getLogAgent().func_98236_b("**** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!");
-            this.getLogAgent().func_98236_b("The server will make no attempt to authenticate usernames. Beware.");
-            this.getLogAgent().func_98236_b("While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.");
-            this.getLogAgent().func_98236_b("To change this, set \"online-mode\" to \"true\" in the server.properties file.");
+            this.getLogAgent().logWarning("**** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!");
+            this.getLogAgent().logWarning("The server will make no attempt to authenticate usernames. Beware.");
+            this.getLogAgent().logWarning("While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.");
+            this.getLogAgent().logWarning("To change this, set \"online-mode\" to \"true\" in the server.properties file.");
         }
 
         this.setConfigurationManager(new DedicatedPlayerList(this));
