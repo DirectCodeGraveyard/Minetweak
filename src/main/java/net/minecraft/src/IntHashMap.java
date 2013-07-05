@@ -3,6 +3,7 @@ package net.minecraft.src;
 import java.util.HashSet;
 import java.util.Set;
 
+@SuppressWarnings({"FieldCanBeLocal", "MismatchedQueryAndUpdateOfCollection"})
 public class IntHashMap {
     /**
      * An array of HashEntries representing the heads of hash slot lists

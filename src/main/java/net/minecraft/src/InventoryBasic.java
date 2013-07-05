@@ -7,7 +7,7 @@ public class InventoryBasic implements IInventory {
     private String inventoryTitle;
     private int slotsCount;
     private ItemStack[] inventoryContents;
-    private List field_70480_d;
+    private List<IInvBasic> field_70480_d;
     private boolean field_94051_e;
 
     public InventoryBasic(String par1Str, boolean par2, int par3) {
@@ -19,7 +19,7 @@ public class InventoryBasic implements IInventory {
 
     public void func_110134_a(IInvBasic par1IInvBasic) {
         if (this.field_70480_d == null) {
-            this.field_70480_d = new ArrayList();
+            this.field_70480_d = new ArrayList<IInvBasic>();
         }
 
         this.field_70480_d.add(par1IInvBasic);
@@ -131,8 +131,8 @@ public class InventoryBasic implements IInventory {
      */
     public void onInventoryChanged() {
         if (this.field_70480_d != null) {
-            for (int var1 = 0; var1 < this.field_70480_d.size(); ++var1) {
-                ((IInvBasic) this.field_70480_d.get(var1)).onInventoryChanged(this);
+            for (IInvBasic aField_70480_d : this.field_70480_d) {
+                aField_70480_d.onInventoryChanged(this);
             }
         }
     }
