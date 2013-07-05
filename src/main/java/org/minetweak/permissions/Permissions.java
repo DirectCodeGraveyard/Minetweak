@@ -1,10 +1,7 @@
 package org.minetweak.permissions;
 
-import org.minetweak.plugins.PluginLoader;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 public class Permissions {
     protected static HashMap<String, ArrayList<String>> permissions = new HashMap<String, ArrayList<String>>();
