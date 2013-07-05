@@ -1,5 +1,7 @@
 package org.minetweak.permissions;
 
+import org.minetweak.plugins.PluginLoader;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -20,10 +22,12 @@ public class Permissions {
             }
             perms.add(permission);
             permissions.put(user, perms);
+            PermissionsLoader.save();
             return true;
         } else {
             perms.add(permission);
             permissions.put(user, perms);
+            PermissionsLoader.save();
             return true;
         }
     }
@@ -37,6 +41,7 @@ public class Permissions {
         }
         userPerms.remove(permission);
         permissions.put(user, userPerms);
+        PermissionsLoader.save();
         return true;
     }
 
