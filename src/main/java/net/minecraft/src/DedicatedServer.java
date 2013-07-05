@@ -40,7 +40,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.logInfo("Starting minecraft server version 1.6.1");
 
         if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
-            this.getLogAgent().logWarning("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
+            this.getLogAgent().logInfo("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
         }
 
         this.logInfo("Loading properties");
@@ -82,9 +82,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         try {
             this.networkThread = new DedicatedServerListenThread(this, var3, this.getServerPort());
         } catch (IOException var16) {
-            this.getLogAgent().logWarning("**** FAILED TO BIND TO PORT!");
-            this.getLogAgent().logWarningFormatted("The exception was: {0}", new Object[]{var16.toString()});
-            this.getLogAgent().logWarning("Perhaps a server is already running on that port?");
+            this.getLogAgent().logSevere("**** FAILED TO BIND TO PORT!");
+            this.getLogAgent().logWarningFormatted("The exception was: {0}", var16.toString());
+            this.getLogAgent().logSevere("Perhaps a server is already running on that port?");
             return false;
         }
 

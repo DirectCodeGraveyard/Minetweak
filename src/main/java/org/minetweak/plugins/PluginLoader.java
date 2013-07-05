@@ -50,11 +50,13 @@ public class PluginLoader {
         getPluginFiles();
         ArrayList<String> classes = new ArrayList<String>();
         ArrayList<URL> urls = new ArrayList<URL>();
+        HashMap<String, PluginInfo> pluginInformation = new HashMap<String, PluginInfo>();
         for (File f : files) {
             PluginInfo pluginInfo = getPluginInfo(f);
             if (pluginInfo == null || pluginInfo.getMainClass()==null) {
                 continue;
             }
+            pluginInformation.put(pluginInfo.getMainClass(), pluginInfo);
             try {
                 urls.add(f.toURI().toURL());
                 classes.add(pluginInfo.getMainClass());
@@ -68,8 +70,9 @@ public class PluginLoader {
             try {
                 Class mc = Class.forName(c, true, loader);
                 MinetweakPlugin plugin = (MinetweakPlugin) mc.newInstance();
+                plugin.setPluginInfo(pluginInformation.get(c));
                 // Note that we override plugins even if they exist. This allows for alphabetical file-name plugin overriding
-                plugins.put(plugin.getName(), plugin);
+                plugins.put(plugin.getPluginInfo().getName(), plugin);
             } catch (Exception e) {
                 throw new RuntimeException("Error loading plugin", e);
             }
@@ -107,7 +110,7 @@ public class PluginLoader {
     public static void disableAll() {
         for (MinetweakPlugin plugin : plugins.values()) {
             plugin.onDisable();
-            enabledPlugins.remove(plugin.getName());
+            enabledPlugins.remove(plugin.getPluginInfo().getName());
         }
     }
 

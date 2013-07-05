@@ -27,7 +27,7 @@ public class AchievementList {
     /**
      * The list holding all achievements
      */
-    public static List achievementList = new ArrayList();
+    public static List<Achievement> achievementList = new ArrayList<Achievement>();
 
     /**
      * Is the 'open inventory' achievement.

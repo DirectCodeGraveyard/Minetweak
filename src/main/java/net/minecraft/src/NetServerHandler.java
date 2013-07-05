@@ -120,16 +120,18 @@ public class NetServerHandler extends NetHandler {
             this.playerEntity.mountEntityAndWakeUp();
             this.sendPacket(new Packet255KickDisconnect(par1Str));
             this.netManager.serverShutdown();
-            this.mcServer.getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("multiplayer.player.left", new Object[]{this.playerEntity.getTranslatedEntityName()}).func_111059_a(EnumChatFormatting.YELLOW));
+            this.mcServer.getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("multiplayer.player.left", this.playerEntity.getTranslatedEntityName()).func_111059_a(EnumChatFormatting.YELLOW));
             this.mcServer.getConfigurationManager().playerLoggedOut(this.playerEntity);
             this.connectionClosed = true;
         }
     }
 
+    @Override
     public void func_110774_a(Packet27PlayerInput par1Packet27PlayerInput) {
         this.playerEntity.func_110430_a(par1Packet27PlayerInput.func_111010_d(), par1Packet27PlayerInput.func_111012_f(), par1Packet27PlayerInput.func_111013_g(), par1Packet27PlayerInput.func_111011_h());
     }
 
+    @Override
     public void handleFlying(Packet10Flying par1Packet10Flying) {
         WorldServer var2 = this.mcServer.worldServerForDimension(this.playerEntity.dimension);
         this.field_72584_h = true;
@@ -342,6 +344,7 @@ public class NetServerHandler extends NetHandler {
         this.playerEntity.playerNetServerHandler.sendPacket(new Packet13PlayerLookMove(par1, par3 + 1.6200000047683716D, par3, par5, par7, par8, false));
     }
 
+    @Override
     public void handleBlockDig(Packet14BlockDig par1Packet14BlockDig) {
         WorldServer var2 = this.mcServer.worldServerForDimension(this.playerEntity.dimension);
 
@@ -407,6 +410,7 @@ public class NetServerHandler extends NetHandler {
         }
     }
 
+    @Override
     public void handlePlace(Packet15Place par1Packet15Place) {
         WorldServer var2 = this.mcServer.worldServerForDimension(this.playerEntity.dimension);
         ItemStack var3 = this.playerEntity.inventory.getCurrentItem();
@@ -423,7 +427,7 @@ public class NetServerHandler extends NetHandler {
 
             this.playerEntity.theItemInWorldManager.tryUseItem(this.playerEntity, var2, var3);
         } else if (par1Packet15Place.getYPosition() >= this.mcServer.getBuildLimit() - 1 && (par1Packet15Place.getDirection() == 1 || par1Packet15Place.getYPosition() >= this.mcServer.getBuildLimit())) {
-            this.playerEntity.playerNetServerHandler.sendPacket(new Packet3Chat(ChatMessageComponent.func_111082_b("build.tooHigh", new Object[]{Integer.valueOf(this.mcServer.getBuildLimit())}).func_111059_a(EnumChatFormatting.RED)));
+            this.playerEntity.playerNetServerHandler.sendPacket(new Packet3Chat(ChatMessageComponent.func_111082_b("build.tooHigh", this.mcServer.getBuildLimit()).func_111059_a(EnumChatFormatting.RED)));
             var4 = true;
         } else {
             if (this.hasMoved && this.playerEntity.getDistanceSq((double) var5 + 0.5D, (double) var6 + 0.5D, (double) var7 + 0.5D) < 64.0D && !this.mcServer.func_96290_a(var2, var5, var6, var7, this.playerEntity)) {
@@ -483,9 +487,10 @@ public class NetServerHandler extends NetHandler {
         }
     }
 
+    @Override
     public void handleErrorMessage(String par1Str, Object[] par2ArrayOfObj) {
         this.mcServer.logInfo(this.playerEntity.getCommandSenderName() + " lost connection: " + par1Str);
-        this.mcServer.getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("multiplayer.player.left", new Object[]{this.playerEntity.getTranslatedEntityName()}).func_111059_a(EnumChatFormatting.YELLOW));
+        this.mcServer.getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("multiplayer.player.left", this.playerEntity.getTranslatedEntityName()).func_111059_a(EnumChatFormatting.YELLOW));
         this.mcServer.getConfigurationManager().playerLoggedOut(this.playerEntity);
         this.connectionClosed = true;
     }
@@ -494,6 +499,7 @@ public class NetServerHandler extends NetHandler {
      * Default handler called for packets that don't have their own handlers in NetServerHandler; kicks player from the
      * server.
      */
+    @Override
     public void unexpectedPacket(Packet par1Packet) {
         this.mcServer.getLogAgent().logWarning(this.getClass() + " wasn\'t prepared to deal with a " + par1Packet.getClass());
         this.kickPlayer("Protocol error, unexpected packet");
@@ -527,14 +533,16 @@ public class NetServerHandler extends NetHandler {
         }
     }
 
+    @Override
     public void handleBlockItemSwitch(Packet16BlockItemSwitch par1Packet16BlockItemSwitch) {
         if (par1Packet16BlockItemSwitch.id >= 0 && par1Packet16BlockItemSwitch.id < InventoryPlayer.getHotbarSize()) {
             this.playerEntity.inventory.currentItem = par1Packet16BlockItemSwitch.id;
         } else {
-            this.mcServer.getLogAgent().logWarning(this.playerEntity.getCommandSenderName() + " tried to set an invalid carried item");
+            this.mcServer.getLogAgent().logInfo(this.playerEntity.getCommandSenderName() + " tried to set an invalid carried item");
         }
     }
 
+    @Override
     public void handleChat(Packet3Chat par1Packet3Chat) {
         if (this.playerEntity.getChatVisibility() == 2) {
             this.sendPacket(new Packet3Chat(ChatMessageComponent.func_111077_e("chat.cannotSend").func_111059_a(EnumChatFormatting.RED)));
@@ -582,6 +590,7 @@ public class NetServerHandler extends NetHandler {
         Server.handleCommand(this.playerEntity, targetCommand);
     }
 
+    @Override
     public void handleAnimation(Packet18Animation par1Packet18Animation) {
         if (par1Packet18Animation.animate == 1) {
             this.playerEntity.swingItem();
@@ -591,6 +600,7 @@ public class NetServerHandler extends NetHandler {
     /**
      * runs registerPacket on the given Packet19EntityAction
      */
+    @Override
     public void handleEntityAction(Packet19EntityAction par1Packet19EntityAction) {
         if (par1Packet19EntityAction.state == 1) {
             this.playerEntity.setSneaking(true);
@@ -612,8 +622,9 @@ public class NetServerHandler extends NetHandler {
         }
     }
 
+    @Override
     public void handleKickDisconnect(Packet255KickDisconnect par1Packet255KickDisconnect) {
-        this.netManager.networkShutdown("disconnect.quitting", new Object[0]);
+        this.netManager.networkShutdown("disconnect.quitting");
     }
 
     /**
@@ -623,6 +634,7 @@ public class NetServerHandler extends NetHandler {
         return this.netManager.getNumChunkDataPackets();
     }
 
+    @Override
     public void handleUseEntity(Packet7UseEntity par1Packet7UseEntity) {
         WorldServer var2 = this.mcServer.worldServerForDimension(this.playerEntity.dimension);
         Entity var3 = var2.getEntityByID(par1Packet7UseEntity.targetEntity);
@@ -645,6 +657,7 @@ public class NetServerHandler extends NetHandler {
         }
     }
 
+    @Override
     public void handleClientCommand(Packet205ClientCommand par1Packet205ClientCommand) {
         if (par1Packet205ClientCommand.forceRespawn == 1) {
             if (this.playerEntity.playerConqueredTheEnd) {
@@ -669,6 +682,7 @@ public class NetServerHandler extends NetHandler {
      * processed asynchronously. Used to avoid processing packets on the client before the world has been downloaded
      * (which happens on the main thread)
      */
+    @Override
     public boolean canProcessPacketsAsync() {
         return true;
     }
@@ -676,13 +690,16 @@ public class NetServerHandler extends NetHandler {
     /**
      * respawns the player
      */
+    @Override
     public void handleRespawn(Packet9Respawn par1Packet9Respawn) {
     }
 
+    @Override
     public void handleCloseWindow(Packet101CloseWindow par1Packet101CloseWindow) {
         this.playerEntity.closeCraftingGui();
     }
 
+    @Override
     public void handleWindowClick(Packet102WindowClick par1Packet102WindowClick) {
         if (this.playerEntity.openContainer.windowId == par1Packet102WindowClick.window_Id && this.playerEntity.openContainer.getCanCraft(this.playerEntity)) {
             ItemStack var2 = this.playerEntity.openContainer.slotClick(par1Packet102WindowClick.inventorySlot, par1Packet102WindowClick.mouseClick, par1Packet102WindowClick.holdingShift, this.playerEntity);
@@ -694,10 +711,10 @@ public class NetServerHandler extends NetHandler {
                 this.playerEntity.updateHeldItem();
                 this.playerEntity.isChangingQuantityOnly = false;
             } else {
-                this.field_72586_s.addKey(this.playerEntity.openContainer.windowId, Short.valueOf(par1Packet102WindowClick.action));
+                this.field_72586_s.addKey(this.playerEntity.openContainer.windowId, par1Packet102WindowClick.action);
                 this.playerEntity.playerNetServerHandler.sendPacket(new Packet106Transaction(par1Packet102WindowClick.window_Id, par1Packet102WindowClick.action, false));
                 this.playerEntity.openContainer.setCanCraft(this.playerEntity, false);
-                ArrayList var3 = new ArrayList();
+                ArrayList<ItemStack> var3 = new ArrayList<ItemStack>();
 
                 for (int var4 = 0; var4 < this.playerEntity.openContainer.inventorySlots.size(); ++var4) {
                     var3.add(((Slot) this.playerEntity.openContainer.inventorySlots.get(var4)).getStack());
@@ -708,6 +725,7 @@ public class NetServerHandler extends NetHandler {
         }
     }
 
+    @Override
     public void handleEnchantItem(Packet108EnchantItem par1Packet108EnchantItem) {
         if (this.playerEntity.openContainer.windowId == par1Packet108EnchantItem.windowId && this.playerEntity.openContainer.getCanCraft(this.playerEntity)) {
             this.playerEntity.openContainer.enchantItem(this.playerEntity, par1Packet108EnchantItem.enchantment);
@@ -718,6 +736,7 @@ public class NetServerHandler extends NetHandler {
     /**
      * Handle a creative slot packet.
      */
+    @Override
     public void handleCreativeSetSlot(Packet107CreativeSetSlot par1Packet107CreativeSetSlot) {
         if (this.playerEntity.theItemInWorldManager.isCreative()) {
             boolean var2 = par1Packet107CreativeSetSlot.slot < 0;
@@ -728,7 +747,7 @@ public class NetServerHandler extends NetHandler {
 
             if (var4 && var5 && var6) {
                 if (var3 == null) {
-                    this.playerEntity.inventoryContainer.putStackInSlot(par1Packet107CreativeSetSlot.slot, (ItemStack) null);
+                    this.playerEntity.inventoryContainer.putStackInSlot(par1Packet107CreativeSetSlot.slot, null);
                 } else {
                     this.playerEntity.inventoryContainer.putStackInSlot(par1Packet107CreativeSetSlot.slot, var3);
                 }
@@ -745,10 +764,11 @@ public class NetServerHandler extends NetHandler {
         }
     }
 
+    @Override
     public void handleTransaction(Packet106Transaction par1Packet106Transaction) {
         Short var2 = (Short) this.field_72586_s.lookup(this.playerEntity.openContainer.windowId);
 
-        if (var2 != null && par1Packet106Transaction.shortWindowId == var2.shortValue() && this.playerEntity.openContainer.windowId == par1Packet106Transaction.windowId && !this.playerEntity.openContainer.getCanCraft(this.playerEntity)) {
+        if (var2 != null && par1Packet106Transaction.shortWindowId == var2 && this.playerEntity.openContainer.windowId == par1Packet106Transaction.windowId && !this.playerEntity.openContainer.getCanCraft(this.playerEntity)) {
             this.playerEntity.openContainer.setCanCraft(this.playerEntity, true);
         }
     }
@@ -756,6 +776,7 @@ public class NetServerHandler extends NetHandler {
     /**
      * Updates Client side signs
      */
+    @Override
     public void handleUpdateSign(Packet130UpdateSign par1Packet130UpdateSign) {
         WorldServer var2 = this.mcServer.worldServerForDimension(this.playerEntity.dimension);
 
@@ -807,6 +828,7 @@ public class NetServerHandler extends NetHandler {
     /**
      * Handle a keep alive packet.
      */
+    @Override
     public void handleKeepAlive(Packet0KeepAlive par1Packet0KeepAlive) {
         if (par1Packet0KeepAlive.randomId == this.keepAliveRandomID) {
             int var2 = (int) (System.nanoTime() / 1000000L - this.keepAliveTimeSent);
@@ -817,6 +839,7 @@ public class NetServerHandler extends NetHandler {
     /**
      * determine if it is a server handler
      */
+    @Override
     public boolean isServerHandler() {
         return true;
     }
@@ -824,10 +847,12 @@ public class NetServerHandler extends NetHandler {
     /**
      * Handle a player abilities packet.
      */
+    @Override
     public void handlePlayerAbilities(Packet202PlayerAbilities par1Packet202PlayerAbilities) {
         this.playerEntity.capabilities.isFlying = par1Packet202PlayerAbilities.getFlying() && this.playerEntity.capabilities.allowFlying;
     }
 
+    @Override
     public void handleAutoComplete(Packet203AutoComplete par1Packet203AutoComplete) {
         StringBuilder var2 = new StringBuilder();
         String var4;
@@ -843,10 +868,12 @@ public class NetServerHandler extends NetHandler {
         this.playerEntity.playerNetServerHandler.sendPacket(new Packet203AutoComplete(var2.toString()));
     }
 
+    @Override
     public void handleClientInfo(Packet204ClientInfo par1Packet204ClientInfo) {
         this.playerEntity.updateClientInfo(par1Packet204ClientInfo);
     }
 
+    @Override
     public void handleCustomPayload(Packet250CustomPayload par1Packet250CustomPayload) {
         DataInputStream var2;
         ItemStack var3;
@@ -863,7 +890,7 @@ public class NetServerHandler extends NetHandler {
 
                 var4 = this.playerEntity.inventory.getCurrentItem();
 
-                if (var3 != null && var3.itemID == Item.writableBook.itemID && var3.itemID == var4.itemID) {
+                if (var3.itemID == Item.writableBook.itemID && var3.itemID == var4.itemID) {
                     var4.setTagInfo("pages", var3.getTagCompound().getTagList("pages"));
                 }
             } catch (Exception var12) {
@@ -880,7 +907,7 @@ public class NetServerHandler extends NetHandler {
 
                 var4 = this.playerEntity.inventory.getCurrentItem();
 
-                if (var3 != null && var3.itemID == Item.writtenBook.itemID && var4.itemID == Item.writableBook.itemID) {
+                if (var3.itemID == Item.writtenBook.itemID && var4.itemID == Item.writableBook.itemID) {
                     var4.setTagInfo("author", new NBTTagString("author", this.playerEntity.getCommandSenderName()));
                     var4.setTagInfo("title", new NBTTagString("title", var3.getTagCompound().getString("title")));
                     var4.setTagInfo("pages", var3.getTagCompound().getTagList("pages"));
@@ -922,7 +949,7 @@ public class NetServerHandler extends NetHandler {
                             if (var7 != null && var7 instanceof TileEntityCommandBlock) {
                                 ((TileEntityCommandBlock) var7).setCommand(var6);
                                 this.playerEntity.worldObj.markBlockForUpdate(var14, var18, var5);
-                                this.playerEntity.func_110122_a(ChatMessageComponent.func_111082_b("advMode.setCommand.success", new Object[]{var6}));
+                                this.playerEntity.func_110122_a(ChatMessageComponent.func_111082_b("advMode.setCommand.success", var6));
                             }
                         } catch (Exception var9) {
                             var9.printStackTrace();

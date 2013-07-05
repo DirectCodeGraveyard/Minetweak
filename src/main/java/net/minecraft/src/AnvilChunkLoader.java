@@ -23,6 +23,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
     /**
      * Loads the specified(XZ) chunk into the specified world.
      */
+    @Override
     public Chunk loadChunk(World par1World, int par2, int par3) throws IOException {
         NBTTagCompound var4 = null;
         ChunkCoordIntPair var5 = new ChunkCoordIntPair(par2, par3);
@@ -75,6 +76,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
         }
     }
 
+    @Override
     public void saveChunk(World par1World, Chunk par2Chunk) throws MinecraftException, IOException {
         par1World.checkSessionLock();
 
@@ -110,6 +112,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
     /**
      * Returns a boolean stating if the write was unsuccessful.
      */
+    @Override
     public boolean writeNextIO() {
         AnvilChunkLoaderPending var1;
 
@@ -141,12 +144,14 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
      * Save extra data associated with this Chunk not normally saved during autosave, only during chunk unload.
      * Currently unused.
      */
+    @Override
     public void saveExtraChunkData(World par1World, Chunk par2Chunk) {
     }
 
     /**
      * Called every World.tick()
      */
+    @Override
     public void chunkTick() {
     }
 
@@ -154,6 +159,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
      * Save extra data not associated with any Chunk.  Not saved during autosave, only during world unload.  Currently
      * unused.
      */
+    @Override
     public void saveExtraData() {
 
     }
