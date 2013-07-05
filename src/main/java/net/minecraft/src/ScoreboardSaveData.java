@@ -104,7 +104,7 @@ public class ScoreboardSaveData extends WorldSavedData {
      */
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         if (this.field_96507_a == null) {
-            MinecraftServer.getServer().getLogAgent().func_98236_b("Tried to save scoreboard without having a scoreboard...");
+            MinecraftServer.getServer().getLogAgent().logWarning("Tried to save scoreboard without having a scoreboard...");
         } else {
             par1NBTTagCompound.setTag("Objectives", this.func_96505_b());
             par1NBTTagCompound.setTag("PlayerScores", this.func_96503_e());

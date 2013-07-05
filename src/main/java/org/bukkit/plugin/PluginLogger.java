@@ -14,7 +14,7 @@ public class PluginLogger extends Logger {
         super(context.getClass().getCanonicalName(), null);
         String prefix = context.getDescription().getPrefix();
         pluginName = prefix != null ? "[" + prefix + "] " : "[" + context.getDescription().getName() + "] ";
-        setParent(MinecraftServer.getServer().getLogAgent().func_120013_a());
+        setParent(MinecraftServer.getServer().getLogAgent().getLogger());
         setLevel(Level.ALL);
     }
 }

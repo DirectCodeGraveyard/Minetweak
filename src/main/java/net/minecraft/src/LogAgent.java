@@ -22,14 +22,12 @@ public class LogAgent implements ILogAgent {
     private void setupLogger() {
         this.serverLogger.setUseParentHandlers(false);
         Handler[] var1 = this.serverLogger.getHandlers();
-        int var2 = var1.length;
 
-        for (int var3 = 0; var3 < var2; ++var3) {
-            Handler var4 = var1[var3];
+        for (Handler var4 : var1) {
             this.serverLogger.removeHandler(var4);
         }
 
-        LogFormatter var6 = new LogFormatter(this, (LogAgentEmptyAnon) null);
+        LogFormatter var6 = new LogFormatter(this, null);
         ConsoleHandler var7 = new ConsoleHandler();
         var7.setFormatter(var6);
         this.serverLogger.addHandler(var7);
@@ -43,15 +41,15 @@ public class LogAgent implements ILogAgent {
         }
     }
 
-    public Logger func_120013_a() {
+    public Logger getLogger() {
         return this.serverLogger;
     }
 
-    public void func_98233_a(String par1Str) {
+    public void logInfo(String par1Str) {
         this.serverLogger.log(Level.INFO, par1Str);
     }
 
-    public void func_98236_b(String par1Str) {
+    public void logWarning(String par1Str) {
         this.serverLogger.log(Level.WARNING, par1Str);
     }
 
@@ -71,7 +69,7 @@ public class LogAgent implements ILogAgent {
         this.serverLogger.log(Level.SEVERE, par1Str, par2Throwable);
     }
 
-    static String func_98237_a(LogAgent par0LogAgent) {
+    static String getLogPrefix(LogAgent par0LogAgent) {
         return par0LogAgent.loggerPrefix;
     }
 }

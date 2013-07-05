@@ -88,7 +88,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
 
             var1.close();
         } catch (Exception var3) {
-            this.getDedicatedServerInstance().getLogAgent().func_98236_b("Failed to load operators list: " + var3);
+            this.getDedicatedServerInstance().getLogAgent().logWarning("Failed to load operators list: " + var3);
         }
     }
 
@@ -104,7 +104,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
 
             var1.close();
         } catch (Exception var4) {
-            this.getDedicatedServerInstance().getLogAgent().func_98236_b("Failed to save operators list: " + var4);
+            this.getDedicatedServerInstance().getLogAgent().logWarning("Failed to save operators list: " + var4);
         }
     }
 
@@ -120,7 +120,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
 
             var1.close();
         } catch (Exception var3) {
-            this.getDedicatedServerInstance().getLogAgent().func_98236_b("Failed to load white-list: " + var3);
+            this.getDedicatedServerInstance().getLogAgent().logWarning("Failed to load white-list: " + var3);
         }
     }
 
@@ -136,7 +136,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
 
             var1.close();
         } catch (Exception var4) {
-            this.getDedicatedServerInstance().getLogAgent().func_98236_b("Failed to save white-list: " + var4);
+            this.getDedicatedServerInstance().getLogAgent().logWarning("Failed to save white-list: " + var4);
         }
     }
 
