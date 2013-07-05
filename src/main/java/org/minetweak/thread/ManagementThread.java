@@ -13,6 +13,7 @@ public class ManagementThread extends Thread {
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
+                Minetweak.info("Stopping Management Thread");
                 break;
             }
         }
