@@ -26,7 +26,7 @@ public class GenLayerVoronoiZoom extends GenLayer {
         int var16;
 
         for (int var15 = 0; var15 < var10 - 1; ++var15) {
-            var16 = var11[((var15 + 0) * var9)];
+            var16 = var11[((var15) * var9)];
             int var17 = var11[((var15 + 1) * var9)];
 
             for (int var18 = 0; var18 < var9 - 1; ++var18) {
