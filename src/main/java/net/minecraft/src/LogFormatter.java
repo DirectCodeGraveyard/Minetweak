@@ -20,8 +20,8 @@ class LogFormatter extends Formatter {
         StringBuilder var2 = new StringBuilder();
         var2.append(this.field_98228_b.format(Long.valueOf(par1LogRecord.getMillis())));
 
-        if (LogAgent.func_98237_a(this.field_98229_a) != null) {
-            var2.append(LogAgent.func_98237_a(this.field_98229_a));
+        if (LogAgent.getLogPrefix(this.field_98229_a) != null) {
+            var2.append(LogAgent.getLogPrefix(this.field_98229_a));
         }
 
         var2.append(" [").append(par1LogRecord.getLevel().getName()).append("] ");

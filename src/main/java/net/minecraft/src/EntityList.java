@@ -109,7 +109,7 @@ public class EntityList {
         if (var2 != null) {
             var2.readFromNBT(par0NBTTagCompound);
         } else {
-            par1World.getWorldLogAgent().func_98236_b("Skipping Entity with id " + par0NBTTagCompound.getString("id"));
+            par1World.getWorldLogAgent().logWarning("Skipping Entity with id " + par0NBTTagCompound.getString("id"));
         }
 
         return var2;
@@ -132,7 +132,7 @@ public class EntityList {
         }
 
         if (var2 == null) {
-            par1World.getWorldLogAgent().func_98236_b("Skipping Entity with id " + par0);
+            par1World.getWorldLogAgent().logWarning("Skipping Entity with id " + par0);
         }
 
         return var2;

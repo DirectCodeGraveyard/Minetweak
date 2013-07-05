@@ -366,7 +366,7 @@ public class EntityTrackerEntry {
 
     private Packet getSpawnPacket() {
         if (this.trackedEntity.isDead) {
-            this.trackedEntity.worldObj.getWorldLogAgent().func_98236_b("Fetching addPacket for removed entity");
+            this.trackedEntity.worldObj.getWorldLogAgent().logWarning("Fetching addPacket for removed entity");
         }
 
         if (this.trackedEntity instanceof EntityItem) {

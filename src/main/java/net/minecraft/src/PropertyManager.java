@@ -45,7 +45,7 @@ public class PropertyManager {
                 }
             }
         } else {
-            par2ILogAgent.func_98236_b(par1File + " does not exist");
+            par2ILogAgent.logWarning(par1File + " does not exist");
             this.generateNewProperties();
         }
     }
@@ -54,7 +54,7 @@ public class PropertyManager {
      * Generates a new properties file.
      */
     public void generateNewProperties() {
-        this.logger.func_98233_a("Generating new properties file");
+        this.logger.logInfo("Generating new properties file");
         this.saveProperties();
     }
 

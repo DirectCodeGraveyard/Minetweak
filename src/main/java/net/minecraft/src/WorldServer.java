@@ -601,7 +601,7 @@ public class WorldServer extends World {
                 var6 = var5.x;
                 var8 = var5.z;
             } else {
-                this.getWorldLogAgent().func_98236_b("Unable to find spawn biome");
+                this.getWorldLogAgent().logWarning("Unable to find spawn biome");
             }
 
             int var9 = 0;

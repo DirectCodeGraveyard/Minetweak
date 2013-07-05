@@ -790,7 +790,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
      * Returns true if the command sender is allowed to use the given command.
      */
     public boolean canCommandSenderUseCommand(int par1, String par2Str) {
-        return "seed".equals(par2Str) && !this.mcServer.isDedicatedServer() || (!(!"tell".equals(par2Str) && !"help".equals(par2Str) && !"me".equals(par2Str)) || (this.mcServer.getConfigurationManager().areCommandsAllowed(this.username) && this.mcServer.func_110455_j() >= par1));
+        return "seed".equals(par2Str) && !this.mcServer.isDedicatedServer() || (!(!"tell".equals(par2Str) && !"help".equals(par2Str) && !"me".equals(par2Str)) || (this.mcServer.getConfigurationManager().areCommandsAllowed(this.username) && this.mcServer.getOpPermissionLevel() >= par1));
     }
 
     /**

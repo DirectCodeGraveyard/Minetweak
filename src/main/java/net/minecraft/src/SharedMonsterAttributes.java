@@ -66,7 +66,7 @@ public class SharedMonsterAttributes {
             if (var5 != null) {
                 func_111258_a(var5, var4);
             } else if (par2ILogAgent != null) {
-                par2ILogAgent.func_98236_b("Ignoring unknown attribute \'" + var4.getString("Name") + "\'");
+                par2ILogAgent.logWarning("Ignoring unknown attribute \'" + var4.getString("Name") + "\'");
             }
         }
     }

@@ -124,7 +124,7 @@ public class TileEntity {
         if (var1 != null) {
             var1.readFromNBT(par0NBTTagCompound);
         } else {
-            MinecraftServer.getServer().getLogAgent().func_98236_b("Skipping TileEntity with id " + par0NBTTagCompound.getString("id"));
+            MinecraftServer.getServer().getLogAgent().logWarning("Skipping TileEntity with id " + par0NBTTagCompound.getString("id"));
         }
 
         return var1;
