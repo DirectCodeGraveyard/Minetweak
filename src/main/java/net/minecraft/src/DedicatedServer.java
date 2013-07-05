@@ -5,6 +5,7 @@ import org.minetweak.Minetweak;
 import org.minetweak.Server;
 import org.minetweak.command.Console;
 import org.minetweak.event.server.ServerFinishedStartupEvent;
+import org.minetweak.event.server.ServerInitializedEvent;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     public DedicatedServer(File par1File) {
         super(par1File);
-        this.field_98131_l = new LogAgent("Minecraft-Server", (String) null, (new File(par1File, "server.log")).getAbsolutePath());
+        this.field_98131_l = new LogAgent("Minecraft-Server", null, (new File(par1File, "server.log")).getAbsolutePath());
         new DedicatedServerSleepThread(this);
     }
 
@@ -79,6 +80,8 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.logInfo("Generating keypair");
         this.setKeyPair(CryptManager.generateKeyPair());
         this.logInfo("Starting Minecraft server on " + (this.getServerHostname().length() == 0 ? "*" : this.getServerHostname()) + ":" + this.getServerPort());
+
+        Minetweak.getEventBus().post(new ServerInitializedEvent());
 
         try {
             this.networkThread = new DedicatedServerListenThread(this, var3, this.getServerPort());

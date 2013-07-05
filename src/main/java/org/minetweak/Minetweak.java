@@ -5,6 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import org.minetweak.command.*;
 import org.minetweak.entity.Player;
 import org.minetweak.plugins.PluginLoader;
+import org.minetweak.plugins.PluginLoaderHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
 
@@ -65,22 +66,12 @@ public class Minetweak {
         System.out.println("Success is very tasty.");
         System.out.println("Minetweak v" + getServerVersion() + " using Minecraft v" + getMinecraftVersion());
 
-        registerCommand("ban", new CommandBan());
-        registerCommand("deop", new CommandDeop());
-        registerCommand("gamemode", new CommandDeop());
-        registerCommand("help", new CommandHelp());
-        registerCommand("kick", new CommandKick());
-        registerCommand("kill", new CommandKill());
-        registerCommand("players", new CommandListPlayers());
-        registerCommand("op", new CommandOp());
-        registerCommand("say", new CommandSay());
-        registerCommand("stop", new CommandStop());
-        registerCommand("motd", new CommandMotd());
+        registerServerCommands();
 
         registerListener(RecipeManager.getInstance());
         registerListener(new ManagementThread());
-
-        PluginLoader.initialize();
+        // Used to run plugin startup inside the Server
+        registerListener(new PluginLoaderHook());
 
         ramCheck();
 
@@ -234,5 +225,21 @@ public class Minetweak {
      */
     public static void info(String line) {
         MinecraftServer.getServer().minetweakInfo(line);
+    }
+
+    protected static void registerServerCommands() {
+        registerCommand("ban", new CommandBan());
+        registerCommand("deop", new CommandDeop());
+        registerCommand("gamemode", new CommandDeop());
+        registerCommand("help", new CommandHelp());
+        registerCommand("kick", new CommandKick());
+        registerCommand("kill", new CommandKill());
+        registerCommand("players", new CommandListPlayers());
+        registerCommand("op", new CommandOp());
+        registerCommand("say", new CommandSay());
+        registerCommand("stop", new CommandStop());
+        registerCommand("motd", new CommandMotd());
+        registerCommand("pardon", new CommandPardon());
+        registerCommand("reload", new CommandReload());
     }
 }

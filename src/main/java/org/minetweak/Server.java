@@ -3,6 +3,7 @@ package org.minetweak;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.CommandBase;
 import net.minecraft.src.EntityPlayerMP;
+import net.minecraft.src.EnumChatFormatting;
 import org.minetweak.command.Console;
 import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;
@@ -66,6 +67,8 @@ public class Server {
 
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
+        } else {
+            player.addChatMessage(EnumChatFormatting.RED + "No Such Command: " + commandOnly);
         }
     }
 
@@ -91,4 +94,8 @@ public class Server {
         MinecraftServer.getServer().getConfigurationManager().removeOp(playerUsername);
     }
 
+
+    public static void pardonPlayer(String playerUsername) {
+        MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().remove(playerUsername);
+    }
 }
