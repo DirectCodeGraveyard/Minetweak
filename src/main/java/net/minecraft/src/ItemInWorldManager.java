@@ -125,11 +125,11 @@ public class ItemInWorldManager {
     public void onBlockClicked(int par1, int par2, int par3, int par4) {
         if (!this.gameType.isAdventure() || this.thisPlayerMP.canCurrentToolHarvestBlock(par1, par2, par3)) {
             if (this.isCreative()) {
-                if (!this.theWorld.extinguishFire((EntityPlayer) null, par1, par2, par3, par4)) {
+                if (!this.theWorld.extinguishFire(null, par1, par2, par3, par4)) {
                     this.tryHarvestBlock(par1, par2, par3);
                 }
             } else {
-                this.theWorld.extinguishFire((EntityPlayer) null, par1, par2, par3, par4);
+                this.theWorld.extinguishFire(null, par1, par2, par3, par4);
                 this.initialDamage = this.curblockDamage;
                 float var5 = 1.0F;
                 int var6 = this.theWorld.getBlockId(par1, par2, par3);
@@ -223,10 +223,10 @@ public class ItemInWorldManager {
                 Packet53BlockChange packet = new Packet53BlockChange(par1, par2, par3, this.theWorld);
                 packet.type = 0;
                 packet.metadata = 0;
-                ((EntityPlayerMP) this.thisPlayerMP).playerNetServerHandler.sendPacket(packet);
+                this.thisPlayerMP.playerNetServerHandler.sendPacket(packet);
             }
 
-            event = new BlockBreakEvent(block, Minetweak.getPlayerByName(((EntityPlayerMP) this.thisPlayerMP).username));
+            event = new BlockBreakEvent(block, Minetweak.getPlayerByName(this.thisPlayerMP.username));
             event.setCancelled(this.gameType.isAdventure() && !this.thisPlayerMP.canCurrentToolHarvestBlock(par1, par2, par3));
             Block nmsBlock = Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
 
@@ -245,7 +245,7 @@ public class ItemInWorldManager {
             if (event.isCancelled())
             {
                 // Let the client know the block still exists
-                ((EntityPlayerMP) this.thisPlayerMP).playerNetServerHandler.sendPacket(new Packet53BlockChange(par1, par2, par3, this.theWorld));
+                this.thisPlayerMP.playerNetServerHandler.sendPacket(new Packet53BlockChange(par1, par2, par3, this.theWorld));
                 // Update any tile entity data for this block
                 TileEntity tileentity = this.theWorld.getBlockTileEntity(par1, par2, par3);
 
