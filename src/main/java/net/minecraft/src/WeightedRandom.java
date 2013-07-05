@@ -56,11 +56,8 @@ public class WeightedRandom {
      */
     public static int getTotalWeight(WeightedRandomItem[] par0ArrayOfWeightedRandomItem) {
         int var1 = 0;
-        WeightedRandomItem[] var2 = par0ArrayOfWeightedRandomItem;
-        int var3 = par0ArrayOfWeightedRandomItem.length;
 
-        for (int var4 = 0; var4 < var3; ++var4) {
-            WeightedRandomItem var5 = var2[var4];
+        for (WeightedRandomItem var5 : par0ArrayOfWeightedRandomItem) {
             var1 += var5.itemWeight;
         }
 
@@ -75,11 +72,8 @@ public class WeightedRandom {
             throw new IllegalArgumentException();
         } else {
             int var3 = par0Random.nextInt(par2);
-            WeightedRandomItem[] var4 = par1ArrayOfWeightedRandomItem;
-            int var5 = par1ArrayOfWeightedRandomItem.length;
 
-            for (int var6 = 0; var6 < var5; ++var6) {
-                WeightedRandomItem var7 = var4[var6];
+            for (WeightedRandomItem var7 : par1ArrayOfWeightedRandomItem) {
                 var3 -= var7.itemWeight;
 
                 if (var3 < 0) {

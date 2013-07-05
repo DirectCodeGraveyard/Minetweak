@@ -22,7 +22,7 @@ public class Teleporter {
      * A list of valid keys for the destinationCoordainteCache. These are based on the X & Z of the players initial
      * location.
      */
-    private final List destinationCoordinateKeys = new ArrayList();
+    private final List<Long> destinationCoordinateKeys = new ArrayList<Long>();
 
     public Teleporter(WorldServer par1WorldServer) {
         this.worldServerInstance = par1WorldServer;
@@ -117,7 +117,7 @@ public class Teleporter {
         if (var10 >= 0.0D) {
             if (var19) {
                 this.destinationCoordinateCache.add(var17, new PortalPosition(this, var12, var13, var14, this.worldServerInstance.getTotalWorldTime()));
-                this.destinationCoordinateKeys.add(Long.valueOf(var17));
+                this.destinationCoordinateKeys.add(var17);
             }
 
             double var49 = (double) var12 + 0.5D;
@@ -408,16 +408,16 @@ public class Teleporter {
      */
     public void removeStalePortalLocations(long par1) {
         if (par1 % 100L == 0L) {
-            Iterator var3 = this.destinationCoordinateKeys.iterator();
+            Iterator<Long> var3 = this.destinationCoordinateKeys.iterator();
             long var4 = par1 - 600L;
 
             while (var3.hasNext()) {
-                Long var6 = (Long) var3.next();
-                PortalPosition var7 = (PortalPosition) this.destinationCoordinateCache.getValueByKey(var6.longValue());
+                Long var6 = var3.next();
+                PortalPosition var7 = (PortalPosition) this.destinationCoordinateCache.getValueByKey(var6);
 
                 if (var7 == null || var7.lastUpdateTime < var4) {
                     var3.remove();
-                    this.destinationCoordinateCache.remove(var6.longValue());
+                    this.destinationCoordinateCache.remove(var6);
                 }
             }
         }

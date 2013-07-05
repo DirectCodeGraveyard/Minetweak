@@ -17,8 +17,8 @@ class TcpReaderThread extends Thread {
                     if (!TcpConnection.readNetworkPacket(this.theTcpConnection)) {
                         try {
                             sleep(2L);
-                        } catch (InterruptedException var5) {
-                            ;
+                        } catch (InterruptedException ignored) {
+
                         }
                     }
                 }

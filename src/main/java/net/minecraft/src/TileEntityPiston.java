@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class TileEntityPiston extends TileEntity {
@@ -24,7 +23,7 @@ public class TileEntityPiston extends TileEntity {
      * the progress in (de)extending
      */
     private float lastProgress;
-    private List pushedObjects = new ArrayList();
+    private List<Entity> pushedObjects = new ArrayList<Entity>();
 
     public TileEntityPiston() {
     }
@@ -84,14 +83,12 @@ public class TileEntityPiston extends TileEntity {
         AxisAlignedBB var3 = Block.pistonMoving.getAxisAlignedBB(this.worldObj, this.xCoord, this.yCoord, this.zCoord, this.storedBlockID, par1, this.storedOrientation);
 
         if (var3 != null) {
-            List var4 = this.worldObj.getEntitiesWithinAABBExcludingEntity((Entity) null, var3);
+            List<? extends Entity> var4 = this.worldObj.getEntitiesWithinAABBExcludingEntity(null, var3);
 
             if (!var4.isEmpty()) {
                 this.pushedObjects.addAll(var4);
-                Iterator var5 = this.pushedObjects.iterator();
 
-                while (var5.hasNext()) {
-                    Entity var6 = (Entity) var5.next();
+                for (Entity var6 : this.pushedObjects) {
                     var6.moveEntity((double) (par2 * (float) Facing.offsetsXForSide[this.storedOrientation]), (double) (par2 * (float) Facing.offsetsYForSide[this.storedOrientation]), (double) (par2 * (float) Facing.offsetsZForSide[this.storedOrientation]));
                 }
 

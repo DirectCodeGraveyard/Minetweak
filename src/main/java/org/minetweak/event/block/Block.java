@@ -1,7 +1,8 @@
 package org.minetweak.event.block;
 
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
+import org.minetweak.material.Material;
+import org.minetweak.world.Chunk;
 import org.minetweak.world.World;
 
 import java.util.Collection;
@@ -68,6 +69,20 @@ public interface Block {
      * @param applyPhysics False to cancel physics from the changed block.
      */
     void setData(byte data, boolean applyPhysics);
+
+    /**
+     * Gets the chunk which contains this block
+     *
+     * @return Containing Chunk
+     */
+    Chunk getChunk();
+
+    /**
+     * Gets the type of this block
+     *
+     * @return block type
+     */
+    Material getType();
 
     /**
      * Sets the type-id of this block

@@ -3,25 +3,29 @@ package org.minetweak.event.block;
 import net.minecraft.src.ItemStack;
 import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
+import org.minetweak.event.helper.Cancellable;
 
 /**
  * Called when a block is placed by a player.
  * <p>
  * If a Block Place event is cancelled, the block will not be placed.
  */
-public class BlockPlaceEvent extends BlockEvent {
+public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     protected boolean cancel;
     protected boolean canBuild;
     protected Block placedAgainst;
+    protected BlockState replacedBlockState;
     protected ItemStack itemInHand;
-    protected String player;
+    protected Player player;
 
-    public BlockPlaceEvent(final Block placedBlock, final Block placedAgainst, final ItemStack itemInHand, final String thePlayer, final boolean canBuild) {
+    public BlockPlaceEvent(final Block placedBlock, final BlockState replacedBlockState, final Block placedAgainst, final ItemStack itemInHand, final Player thePlayer, final boolean canBuild) {
         super(placedBlock);
         this.placedAgainst = placedAgainst;
         this.itemInHand = itemInHand;
         this.player = thePlayer;
+        this.replacedBlockState = replacedBlockState;
         this.canBuild = canBuild;
+        cancel = false;
     }
 
     public boolean isCancelled() {
@@ -38,7 +42,7 @@ public class BlockPlaceEvent extends BlockEvent {
      * @return The Player who placed the block involved in this event
      */
     public Player getPlayer() {
-        return Minetweak.getPlayerByName(player);
+        return player;
     }
 
     /**
@@ -49,6 +53,15 @@ public class BlockPlaceEvent extends BlockEvent {
      */
     public Block getBlockPlaced() {
         return getBlock();
+    }
+
+    /**
+     * Gets the BlockState for the block which was replaced. Material type air mostly.
+     *
+     * @return The BlockState for the block which was replaced.
+     */
+    public BlockState getBlockReplacedState() {
+        return this.replacedBlockState;
     }
 
     /**

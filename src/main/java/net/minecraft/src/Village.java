@@ -11,7 +11,7 @@ public class Village {
     /**
      * list of VillageDoorInfo objects
      */
-    private final List villageDoorInfoList = new ArrayList();
+    private final List<VillageDoorInfo> villageDoorInfoList = new ArrayList<VillageDoorInfo>();
 
     /**
      * This is the sum of all door coordinates and used to calculate the actual village center by dividing by the number
@@ -36,8 +36,8 @@ public class Village {
     /**
      * List of player reputations with this village
      */
-    private TreeMap playerReputation = new TreeMap();
-    private List villageAgressors = new ArrayList();
+    private TreeMap<String, Integer> playerReputation = new TreeMap<String, Integer>();
+    private List<VillageAgressor> villageAgressors = new ArrayList<VillageAgressor>();
     private int numIronGolems;
 
     public Village() {
@@ -120,12 +120,12 @@ public class Village {
     }
 
     private void updateNumIronGolems() {
-        List var1 = this.worldObj.getEntitiesWithinAABB(EntityIronGolem.class, AxisAlignedBB.getAABBPool().getAABB((double) (this.center.posX - this.villageRadius), (double) (this.center.posY - 4), (double) (this.center.posZ - this.villageRadius), (double) (this.center.posX + this.villageRadius), (double) (this.center.posY + 4), (double) (this.center.posZ + this.villageRadius)));
+        List<Entity> var1 = this.worldObj.getEntitiesWithinAABB(EntityIronGolem.class, AxisAlignedBB.getAABBPool().getAABB((double) (this.center.posX - this.villageRadius), (double) (this.center.posY - 4), (double) (this.center.posZ - this.villageRadius), (double) (this.center.posX + this.villageRadius), (double) (this.center.posY + 4), (double) (this.center.posZ + this.villageRadius)));
         this.numIronGolems = var1.size();
     }
 
     private void updateNumVillagers() {
-        List var1 = this.worldObj.getEntitiesWithinAABB(EntityVillager.class, AxisAlignedBB.getAABBPool().getAABB((double) (this.center.posX - this.villageRadius), (double) (this.center.posY - 4), (double) (this.center.posZ - this.villageRadius), (double) (this.center.posX + this.villageRadius), (double) (this.center.posY + 4), (double) (this.center.posZ + this.villageRadius)));
+        List<Entity> var1 = this.worldObj.getEntitiesWithinAABB(EntityVillager.class, AxisAlignedBB.getAABBPool().getAABB((double) (this.center.posX - this.villageRadius), (double) (this.center.posY - 4), (double) (this.center.posZ - this.villageRadius), (double) (this.center.posX + this.villageRadius), (double) (this.center.posY + 4), (double) (this.center.posZ + this.villageRadius)));
         this.numVillagers = var1.size();
 
         if (this.numVillagers == 0) {
@@ -167,21 +167,19 @@ public class Village {
     /**
      * called only by class EntityAIMoveThroughVillage
      */
-    public List getVillageDoorInfoList() {
+    public List<VillageDoorInfo> getVillageDoorInfoList() {
         return this.villageDoorInfoList;
     }
 
     public VillageDoorInfo findNearestDoor(int par1, int par2, int par3) {
         VillageDoorInfo var4 = null;
         int var5 = Integer.MAX_VALUE;
-        Iterator var6 = this.villageDoorInfoList.iterator();
 
-        while (var6.hasNext()) {
-            VillageDoorInfo var7 = (VillageDoorInfo) var6.next();
-            int var8 = var7.getDistanceSquared(par1, par2, par3);
+        for (VillageDoorInfo aVillageDoorInfoList : this.villageDoorInfoList) {
+            int var8 = aVillageDoorInfoList.getDistanceSquared(par1, par2, par3);
 
             if (var8 < var5) {
-                var4 = var7;
+                var4 = aVillageDoorInfoList;
                 var5 = var8;
             }
         }
@@ -197,20 +195,18 @@ public class Village {
     public VillageDoorInfo findNearestDoorUnrestricted(int par1, int par2, int par3) {
         VillageDoorInfo var4 = null;
         int var5 = Integer.MAX_VALUE;
-        Iterator var6 = this.villageDoorInfoList.iterator();
 
-        while (var6.hasNext()) {
-            VillageDoorInfo var7 = (VillageDoorInfo) var6.next();
-            int var8 = var7.getDistanceSquared(par1, par2, par3);
+        for (VillageDoorInfo aVillageDoorInfoList : this.villageDoorInfoList) {
+            int var8 = aVillageDoorInfoList.getDistanceSquared(par1, par2, par3);
 
             if (var8 > 256) {
                 var8 *= 1000;
             } else {
-                var8 = var7.getDoorOpeningRestrictionCounter();
+                var8 = aVillageDoorInfoList.getDoorOpeningRestrictionCounter();
             }
 
             if (var8 < var5) {
-                var4 = var7;
+                var4 = aVillageDoorInfoList;
                 var5 = var8;
             }
         }
@@ -222,7 +218,7 @@ public class Village {
         if (this.center.getDistanceSquared(par1, par2, par3) > (float) (this.villageRadius * this.villageRadius)) {
             return null;
         } else {
-            Iterator var4 = this.villageDoorInfoList.iterator();
+            Iterator<VillageDoorInfo> var4 = this.villageDoorInfoList.iterator();
             VillageDoorInfo var5;
 
             do {
@@ -230,7 +226,7 @@ public class Village {
                     return null;
                 }
 
-                var5 = (VillageDoorInfo) var4.next();
+                var5 = var4.next();
             }
             while (var5.posX != par1 || var5.posZ != par3 || Math.abs(var5.posY - par2) > 1);
 
@@ -255,7 +251,7 @@ public class Village {
     }
 
     public void addOrRenewAgressor(EntityLivingBase par1EntityLivingBase) {
-        Iterator var2 = this.villageAgressors.iterator();
+        Iterator<VillageAgressor> var2 = this.villageAgressors.iterator();
         VillageAgressor var3;
 
         do {
@@ -264,7 +260,7 @@ public class Village {
                 return;
             }
 
-            var3 = (VillageAgressor) var2.next();
+            var3 = var2.next();
         }
         while (var3.agressor != par1EntityLivingBase);
 
@@ -275,8 +271,7 @@ public class Village {
         double var2 = Double.MAX_VALUE;
         VillageAgressor var4 = null;
 
-        for (int var5 = 0; var5 < this.villageAgressors.size(); ++var5) {
-            VillageAgressor var6 = (VillageAgressor) this.villageAgressors.get(var5);
+        for (VillageAgressor var6 : this.villageAgressors) {
             double var7 = var6.agressor.getDistanceSqToEntity(par1EntityLivingBase);
 
             if (var7 <= var2) {
@@ -291,11 +286,8 @@ public class Village {
     public EntityPlayer func_82685_c(EntityLivingBase par1EntityLivingBase) {
         double var2 = Double.MAX_VALUE;
         EntityPlayer var4 = null;
-        Iterator var5 = this.playerReputation.keySet().iterator();
 
-        while (var5.hasNext()) {
-            String var6 = (String) var5.next();
-
+        for (String var6 : this.playerReputation.keySet()) {
             if (this.isPlayerReputationTooLow(var6)) {
                 EntityPlayer var7 = this.worldObj.getPlayerEntityByName(var6);
 
@@ -314,10 +306,10 @@ public class Village {
     }
 
     private void removeDeadAndOldAgressors() {
-        Iterator var1 = this.villageAgressors.iterator();
+        Iterator<VillageAgressor> var1 = this.villageAgressors.iterator();
 
         while (var1.hasNext()) {
-            VillageAgressor var2 = (VillageAgressor) var1.next();
+            VillageAgressor var2 = var1.next();
 
             if (!var2.agressor.isEntityAlive() || Math.abs(this.tickCounter - var2.agressionTime) > 300) {
                 var1.remove();
@@ -328,10 +320,10 @@ public class Village {
     private void removeDeadAndOutOfRangeDoors() {
         boolean var1 = false;
         boolean var2 = this.worldObj.rand.nextInt(50) == 0;
-        Iterator var3 = this.villageDoorInfoList.iterator();
+        Iterator<VillageDoorInfo> var3 = this.villageDoorInfoList.iterator();
 
         while (var3.hasNext()) {
-            VillageDoorInfo var4 = (VillageDoorInfo) var3.next();
+            VillageDoorInfo var4 = var3.next();
 
             if (var2) {
                 var4.resetDoorOpeningRestrictionCounter();
@@ -354,7 +346,7 @@ public class Village {
 
     private boolean isBlockDoor(int par1, int par2, int par3) {
         int var4 = this.worldObj.getBlockId(par1, par2, par3);
-        return var4 <= 0 ? false : var4 == Block.doorWood.blockID;
+        return var4 > 0 && var4 == Block.doorWood.blockID;
     }
 
     private void updateVillageRadiusAndCenter() {
@@ -368,8 +360,8 @@ public class Village {
             int var2 = 0;
             VillageDoorInfo var4;
 
-            for (Iterator var3 = this.villageDoorInfoList.iterator(); var3.hasNext(); var2 = Math.max(var4.getDistanceSquared(this.center.posX, this.center.posY, this.center.posZ), var2)) {
-                var4 = (VillageDoorInfo) var3.next();
+            for (Iterator<VillageDoorInfo> var3 = this.villageDoorInfoList.iterator(); var3.hasNext(); var2 = Math.max(var4.getDistanceSquared(this.center.posX, this.center.posY, this.center.posZ), var2)) {
+                var4 = var3.next();
             }
 
             this.villageRadius = Math.max(32, (int) Math.sqrt((double) var2) + 1);
@@ -380,8 +372,8 @@ public class Village {
      * Return the village reputation for a player
      */
     public int getReputationForPlayer(String par1Str) {
-        Integer var2 = (Integer) this.playerReputation.get(par1Str);
-        return var2 != null ? var2.intValue() : 0;
+        Integer var2 = this.playerReputation.get(par1Str);
+        return var2 != null ? var2 : 0;
     }
 
     /**
@@ -390,7 +382,7 @@ public class Village {
     public int setReputationForPlayer(String par1Str, int par2) {
         int var3 = this.getReputationForPlayer(par1Str);
         int var4 = MathHelper.clamp_int(var3 + par2, -30, 10);
-        this.playerReputation.put(par1Str, Integer.valueOf(var4));
+        this.playerReputation.put(par1Str, var4);
         return var4;
     }
 
@@ -429,7 +421,7 @@ public class Village {
 
         for (int var7 = 0; var7 < var6.tagCount(); ++var7) {
             NBTTagCompound var8 = (NBTTagCompound) var6.tagAt(var7);
-            this.playerReputation.put(var8.getString("Name"), Integer.valueOf(var8.getInteger("S")));
+            this.playerReputation.put(var8.getString("Name"), var8.getInteger("S"));
         }
     }
 
@@ -450,10 +442,8 @@ public class Village {
         par1NBTTagCompound.setInteger("ACY", this.centerHelper.posY);
         par1NBTTagCompound.setInteger("ACZ", this.centerHelper.posZ);
         NBTTagList var2 = new NBTTagList("Doors");
-        Iterator var3 = this.villageDoorInfoList.iterator();
 
-        while (var3.hasNext()) {
-            VillageDoorInfo var4 = (VillageDoorInfo) var3.next();
+        for (VillageDoorInfo var4 : this.villageDoorInfoList) {
             NBTTagCompound var5 = new NBTTagCompound("Door");
             var5.setInteger("X", var4.posX);
             var5.setInteger("Y", var4.posY);
@@ -466,13 +456,11 @@ public class Village {
 
         par1NBTTagCompound.setTag("Doors", var2);
         NBTTagList var7 = new NBTTagList("Players");
-        Iterator var8 = this.playerReputation.keySet().iterator();
 
-        while (var8.hasNext()) {
-            String var9 = (String) var8.next();
+        for (String var9 : this.playerReputation.keySet()) {
             NBTTagCompound var6 = new NBTTagCompound(var9);
             var6.setString("Name", var9);
-            var6.setInteger("S", ((Integer) this.playerReputation.get(var9)).intValue());
+            var6.setInteger("S", this.playerReputation.get(var9));
             var7.appendTag(var6);
         }
 
@@ -494,10 +482,8 @@ public class Village {
     }
 
     public void func_82683_b(int par1) {
-        Iterator var2 = this.playerReputation.keySet().iterator();
 
-        while (var2.hasNext()) {
-            String var3 = (String) var2.next();
+        for (String var3 : this.playerReputation.keySet()) {
             this.setReputationForPlayer(var3, par1);
         }
     }

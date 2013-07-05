@@ -9,7 +9,7 @@ public class ThreadedFileIOBase implements Runnable {
      * Instance of ThreadedFileIOBase
      */
     public static final ThreadedFileIOBase threadedIOInstance = new ThreadedFileIOBase();
-    private List threadedIOQueue = Collections.synchronizedList(new ArrayList());
+    private List<IThreadedFileIO> threadedIOQueue = Collections.synchronizedList(new ArrayList<IThreadedFileIO>());
     private volatile long writeQueuedCounter;
     private volatile long savedIOCounter;
     private volatile boolean isThreadWaiting;
@@ -31,7 +31,7 @@ public class ThreadedFileIOBase implements Runnable {
      */
     private void processQueue() {
         for (int var1 = 0; var1 < this.threadedIOQueue.size(); ++var1) {
-            IThreadedFileIO var2 = (IThreadedFileIO) this.threadedIOQueue.get(var1);
+            IThreadedFileIO var2 = this.threadedIOQueue.get(var1);
             boolean var3 = var2.writeNextIO();
 
             if (!var3) {

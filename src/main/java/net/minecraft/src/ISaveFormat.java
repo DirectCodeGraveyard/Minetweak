@@ -10,10 +10,7 @@ public interface ISaveFormat {
 
     /**
      * Deletes World Directory
-<<<<<<< HEAD
-=======
      *
->>>>>>> 1.6.1
      * @param var1 the name of the directory of the world to delete.
      */
     boolean deleteWorldDirectory(String var1);

@@ -57,17 +57,17 @@ public class TcpConnection implements INetworkManager {
     /**
      * Linked list of packets that have been read and are awaiting processing.
      */
-    private List readPackets = Collections.synchronizedList(new ArrayList());
+    private List<Packet> readPackets = Collections.synchronizedList(new ArrayList<Packet>());
 
     /**
      * Linked list of packets awaiting sending.
      */
-    private List dataPackets = Collections.synchronizedList(new ArrayList());
+    private List<Packet> dataPackets = Collections.synchronizedList(new ArrayList<Packet>());
 
     /**
      * Linked list of packets with chunk data that are awaiting sending.
      */
-    private List chunkDataPackets = Collections.synchronizedList(new ArrayList());
+    private List<Packet> chunkDataPackets = Collections.synchronizedList(new ArrayList<Packet>());
 
     /**
      * A reference to the NetHandler object.
@@ -147,7 +147,6 @@ public class TcpConnection implements INetworkManager {
      */
     public void addToSendQueue(Packet par1Packet) {
         if (!this.isServerTerminating) {
-            Object var2 = this.sendQueueLock;
 
             synchronized (this.sendQueueLock) {
                 this.sendQueueByteLength += par1Packet.getPacketSize() + 1;
@@ -168,7 +167,7 @@ public class TcpConnection implements INetworkManager {
             int var10001;
             int[] var10000;
 
-            if (this.field_74468_e == 0 || !this.dataPackets.isEmpty() && MinecraftServer.func_130071_aq() - ((Packet) this.dataPackets.get(0)).creationTimeMillis >= (long) this.field_74468_e) {
+            if (this.field_74468_e == 0 || !this.dataPackets.isEmpty() && MinecraftServer.func_130071_aq() - (this.dataPackets.get(0)).creationTimeMillis >= (long) this.field_74468_e) {
                 var2 = this.func_74460_a(false);
 
                 if (var2 != null) {
@@ -189,7 +188,7 @@ public class TcpConnection implements INetworkManager {
                 }
             }
 
-            if (this.chunkDataPacketsDelay-- <= 0 && (this.field_74468_e == 0 || !this.chunkDataPackets.isEmpty() && MinecraftServer.func_130071_aq() - ((Packet) this.chunkDataPackets.get(0)).creationTimeMillis >= (long) this.field_74468_e)) {
+            if (this.chunkDataPacketsDelay-- <= 0 && (this.field_74468_e == 0 || !this.chunkDataPackets.isEmpty() && MinecraftServer.func_130071_aq() - (this.chunkDataPackets.get(0)).creationTimeMillis >= (long) this.field_74468_e)) {
                 var2 = this.func_74460_a(true);
 
                 if (var2 != null) {
@@ -214,12 +213,11 @@ public class TcpConnection implements INetworkManager {
 
     private Packet func_74460_a(boolean par1) {
         Packet var2 = null;
-        List var3 = par1 ? this.chunkDataPackets : this.dataPackets;
-        Object var4 = this.sendQueueLock;
+        List<Packet> var3 = par1 ? this.chunkDataPackets : this.dataPackets;
 
         synchronized (this.sendQueueLock) {
             while (!var3.isEmpty() && var2 == null) {
-                var2 = (Packet) var3.remove(0);
+                var2 = var3.remove(0);
                 this.sendQueueByteLength -= var2.getPacketSize() + 1;
 
                 if (this.func_74454_a(var2, par1)) {
@@ -235,8 +233,8 @@ public class TcpConnection implements INetworkManager {
         if (!par1Packet.isRealPacket()) {
             return false;
         } else {
-            List var3 = par2 ? this.chunkDataPackets : this.dataPackets;
-            Iterator var4 = var3.iterator();
+            List<Packet> var3 = par2 ? this.chunkDataPackets : this.dataPackets;
+            Iterator<Packet> var4 = var3.iterator();
             Packet var5;
 
             do {
@@ -244,7 +242,7 @@ public class TcpConnection implements INetworkManager {
                     return false;
                 }
 
-                var5 = (Packet) var4.next();
+                var5 = var4.next();
             }
             while (var5.getPacketId() != par1Packet.getPacketId());
 
@@ -299,7 +297,7 @@ public class TcpConnection implements INetworkManager {
 
                 var1 = true;
             } else {
-                this.networkShutdown("disconnect.endOfStream", new Object[0]);
+                this.networkShutdown("disconnect.endOfStream");
             }
 
             return var1;
@@ -317,7 +315,7 @@ public class TcpConnection implements INetworkManager {
      */
     private void onNetworkError(Exception par1Exception) {
         par1Exception.printStackTrace();
-        this.networkShutdown("disconnect.genericReason", new Object[]{"Internal exception: " + par1Exception.toString()});
+        this.networkShutdown("disconnect.genericReason", "Internal exception: " + par1Exception.toString());
     }
 
     /**
@@ -334,20 +332,20 @@ public class TcpConnection implements INetworkManager {
 
             try {
                 this.socketInputStream.close();
-            } catch (Throwable var6) {
-                ;
+            } catch (Throwable ignored) {
+
             }
 
             try {
                 this.socketOutputStream.close();
-            } catch (Throwable var5) {
-                ;
+            } catch (Throwable ignored) {
+
             }
 
             try {
                 this.networkSocket.close();
-            } catch (Throwable var4) {
-                ;
+            } catch (Throwable ignored) {
+
             }
 
             this.socketInputStream = null;
@@ -361,12 +359,12 @@ public class TcpConnection implements INetworkManager {
      */
     public void processReadPackets() {
         if (this.sendQueueByteLength > 2097152) {
-            this.networkShutdown("disconnect.overflow", new Object[0]);
+            this.networkShutdown("disconnect.overflow");
         }
 
         if (this.readPackets.isEmpty()) {
             if (this.field_74490_x++ == 1200) {
-                this.networkShutdown("disconnect.timeout", new Object[0]);
+                this.networkShutdown("disconnect.timeout");
             }
         } else {
             this.field_74490_x = 0;
@@ -375,7 +373,7 @@ public class TcpConnection implements INetworkManager {
         int var1 = 1000;
 
         while (!this.readPackets.isEmpty() && var1-- >= 0) {
-            Packet var2 = (Packet) this.readPackets.remove(0);
+            Packet var2 = this.readPackets.remove(0);
             var2.processPacket(this.theNetHandler);
         }
 

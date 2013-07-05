@@ -9,12 +9,12 @@ public class TileEntity {
     /**
      * A HashMap storing string names of classes mapping to the actual java.lang.Class type.
      */
-    private static Map nameToClassMap = new HashMap();
+    private static Map<String, Class<? extends TileEntity>> nameToClassMap = new HashMap<String, Class<? extends TileEntity>>();
 
     /**
      * A HashMap storing the classes and mapping to the string names (reverse of nameToClassMap).
      */
-    private static Map classToNameMap = new HashMap();
+    private static Map<Class<? extends TileEntity>, String> classToNameMap = new HashMap<Class<? extends TileEntity>, String>();
 
     /**
      * The reference to the world.
@@ -46,7 +46,7 @@ public class TileEntity {
     /**
      * Adds a new two-way mapping between the class and its string name in both hashmaps.
      */
-    private static void addMapping(Class par0Class, String par1Str) {
+    private static void addMapping(Class<? extends TileEntity> par0Class, String par1Str) {
         if (nameToClassMap.containsKey(par1Str)) {
             throw new IllegalArgumentException("Duplicate id: " + par1Str);
         } else {
@@ -86,7 +86,7 @@ public class TileEntity {
      * Writes a tile entity to NBT.
      */
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
-        String var2 = (String) classToNameMap.get(this.getClass());
+        String var2 = classToNameMap.get(this.getClass());
 
         if (var2 == null) {
             throw new RuntimeException(this.getClass() + " is missing a mapping! This is a bug!");
@@ -112,10 +112,10 @@ public class TileEntity {
         TileEntity var1 = null;
 
         try {
-            Class var2 = (Class) nameToClassMap.get(par0NBTTagCompound.getString("id"));
+            Class<? extends TileEntity> var2 = nameToClassMap.get(par0NBTTagCompound.getString("id"));
 
             if (var2 != null) {
-                var1 = (TileEntity) var2.newInstance();
+                var1 = var2.newInstance();
             }
         } catch (Exception var3) {
             var3.printStackTrace();
@@ -217,7 +217,7 @@ public class TileEntity {
         par1CrashReportCategory.addCrashSectionCallable("Actual block data value", new CallableTileEntityData(this));
     }
 
-    static Map getClassToNameMap() {
+    static Map<Class<? extends TileEntity>, String> getClassToNameMap() {
         return classToNameMap;
     }
 
