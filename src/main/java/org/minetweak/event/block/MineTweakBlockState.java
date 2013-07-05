@@ -1,7 +1,7 @@
 package org.minetweak.event.block;
 
 import org.minetweak.material.Material;
-import org.minetweak.material.materials.MaterialData;
+import org.minetweak.material.MaterialData;
 import org.minetweak.world.Chunk;
 import org.minetweak.world.MineTweakChunk;
 import org.minetweak.world.MineTweakWorld;

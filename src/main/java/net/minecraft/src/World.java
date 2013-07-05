@@ -1,16 +1,7 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import org.minetweak.world.MindTweakWorld;
-=======
-import org.minetweak.Minetweak;
-import org.minetweak.event.block.BlockPlacedEvent;
->>>>>>> 1.6.1
-=======
 import org.minetweak.world.MineTweakWorld;
->>>>>>> 1d673b3fd0896baa81a590dc93554e19915831a3
 
 import java.util.*;
 

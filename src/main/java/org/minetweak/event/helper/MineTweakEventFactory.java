@@ -57,9 +57,6 @@ public class MineTweakEventFactory {
             case STATIONARY_LAVA:
                 cause = BlockIgniteEvent.IgniteCause.LAVA;
                 break;
-            case DISPENSER:
-                cause = BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL;
-                break;
             case FIRE: // Fire or any other unknown block counts as SPREAD.
             default:
                 cause = BlockIgniteEvent.IgniteCause.SPREAD;

@@ -16,7 +16,11 @@ public enum Material {
     STONE(1),
     GRASS(2),
     DIRT(3),
-    COBBLESTONE(4);
+    COBBLESTONE(4),
+    LAVA(10, MaterialData.class),
+    STATIONARY_LAVA(11, MaterialData.class),
+    FIRE(51),
+    ;
 
     private final int id;
     private final Constructor<? extends MaterialData> ctor;
@@ -135,7 +139,6 @@ public enum Material {
      */
     public boolean isEdible() {
         switch (this) {
-                return true;
             default:
                 return false;
         }

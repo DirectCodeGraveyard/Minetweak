@@ -1,11 +1,6 @@
 package net.minecraft.src;
 
-<<<<<<< HEAD
-import org.minetweak.Minetweak;
-import org.minetweak.event.block.BlockPlacedEvent;
-=======
 import org.minetweak.event.block.MineTweakBlockState;
->>>>>>> 1d673b3fd0896baa81a590dc93554e19915831a3
 
 public class ItemBlock extends Item {
     /**
@@ -72,21 +67,7 @@ public class ItemBlock extends Item {
             int var13 = this.getMetadata(par1ItemStack.getItemDamage());
             int var14 = Block.blocksList[this.blockID].onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10, var13);
 
-<<<<<<< HEAD
-            if (par3World.setBlock(par4, par5, par6, this.blockID, var14, 3)) {
-                if (par3World.getBlockId(par4, par5, par6) == this.blockID) {
-                    Minetweak.getEventBus().post(new BlockPlacedEvent(Block.blocksList[this.blockID], par2EntityPlayer, par4, par5, par6));
-                    Block.blocksList[this.blockID].onBlockPlacedBy(par3World, par4, par5, par6, par2EntityPlayer, par1ItemStack);
-                    Block.blocksList[this.blockID].onPostBlockPlaced(par3World, par4, par5, par6, var14);
-                }
-
-                par3World.playSoundEffect((double) ((float) par4 + 0.5F), (double) ((float) par5 + 0.5F), (double) ((float) par6 + 0.5F), var12.stepSound.getPlaceSound(), (var12.stepSound.getVolume() + 1.0F) / 2.0F, var12.stepSound.getPitch() * 0.8F);
-                --par1ItemStack.stackSize;
-            }
-
-            return true;
-=======
->>>>>>> 1d673b3fd0896baa81a590dc93554e19915831a3
+            return processBlockPlace(par3World, par2EntityPlayer, par1ItemStack, par4, par5, par6, this.blockID, var14, clickedX, clickedY, clickedZ);
         } else {
             return false;
         }
