@@ -99,10 +99,9 @@ public class WorldManager implements IWorldAccess {
      * value
      */
     public void destroyBlockPartially(int par1, int par2, int par3, int par4, int par5) {
-        Iterator var6 = this.mcServer.getConfigurationManager().playerEntityList.iterator();
 
-        while (var6.hasNext()) {
-            EntityPlayerMP var7 = (EntityPlayerMP) var6.next();
+        for (Object aPlayerEntityList : this.mcServer.getConfigurationManager().playerEntityList) {
+            EntityPlayerMP var7 = (EntityPlayerMP) aPlayerEntityList;
 
             if (var7 != null && var7.worldObj == this.theWorldServer && var7.entityId != par1) {
                 double var8 = (double) par2 - var7.posX;
