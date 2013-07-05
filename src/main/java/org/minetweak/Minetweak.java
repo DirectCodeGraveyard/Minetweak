@@ -232,6 +232,6 @@ public class Minetweak {
      * @param line line to log
      */
     public static void info(String line) {
-        MinecraftServer.getServer().minetweakInfo(line);
+        MinecraftServer.getServer().logInfo(line);
     }
 }

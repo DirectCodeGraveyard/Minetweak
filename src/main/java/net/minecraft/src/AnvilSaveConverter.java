@@ -19,6 +19,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
         return 19133;
     }
 
+    @Override
     public void flushCache() {
         RegionFileCache.clearRegionFileReferences();
     }
@@ -26,6 +27,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
     /**
      * Returns back a loader for the specified save directory
      */
+    @Override
     public ISaveHandler getSaveLoader(String par1Str, boolean par2) {
         return new AnvilSaveHandler(this.savesDirectory, par1Str, par2);
     }
@@ -33,6 +35,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
     /**
      * gets if the map is old chunk saving (true) or McRegion (false)
      */
+    @Override
     public boolean isOldMapFormat(String par1Str) {
         WorldInfo var2 = this.getWorldInfo(par1Str);
         return var2 != null && var2.getSaveVersion() != this.getSaveVersion();
@@ -41,6 +44,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
     /**
      * converts the map to mcRegion
      */
+    @Override
     public boolean convertMapFormat(String par1Str, IProgressUpdate par2IProgressUpdate) {
         par2IProgressUpdate.setLoadingProgress(0);
         ArrayList var3 = new ArrayList();
@@ -136,7 +140,7 @@ public class AnvilSaveConverter extends SaveFormatOld {
                         DataInputStream var12 = var8.getChunkDataInputStream(var10, var11);
 
                         if (var12 == null) {
-                            MinecraftServer.getServer().getLogAgent().func_98236_b("Failed to fetch input stream");
+                            MinecraftServer.getServer().getLogAgent().logInfo("Failed to fetch input stream");
                         } else {
                             NBTTagCompound var13 = CompressedStreamTools.read(var12);
                             var12.close();

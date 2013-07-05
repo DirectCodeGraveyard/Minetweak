@@ -42,12 +42,11 @@ public class PropertyManager {
                     try {
                         var3.close();
                     } catch (IOException var12) {
-                        ;
                     }
                 }
             }
         } else {
-            par2ILogAgent.func_98236_b(par1File + " does not exist");
+            par2ILogAgent.logInfo(par1File + " does not exist");
             this.generateNewProperties();
         }
     }
@@ -77,7 +76,6 @@ public class PropertyManager {
                 try {
                     var1.close();
                 } catch (IOException var10) {
-                    ;
                 }
             }
         }

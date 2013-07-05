@@ -96,6 +96,7 @@ public class Achievement extends StatBase {
     /**
      * Register the stat into StatList.
      */
+    @Override
     public StatBase registerStat() {
         return this.registerAchievement();
     }
@@ -104,6 +105,7 @@ public class Achievement extends StatBase {
      * Initializes the current stat as independent (i.e., lacking prerequisites for being updated) and returns the
      * current instance.
      */
+    @Override
     public StatBase initIndependentStat() {
         return this.setIndependent();
     }
