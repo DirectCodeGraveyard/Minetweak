@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableType implements Callable {
+class CallableType implements Callable<String> {
     /**
      * Reference to the DecitatedServer object.
      */
@@ -17,7 +17,8 @@ class CallableType implements Callable {
         return !var1.equals("vanilla") ? "Definitely; Server brand changed to \'" + var1 + "\'" : "Unknown (can\'t tell)";
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.getType();
     }
 }

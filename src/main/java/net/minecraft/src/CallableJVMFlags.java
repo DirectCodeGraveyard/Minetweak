@@ -5,7 +5,7 @@ import java.lang.management.RuntimeMXBean;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-class CallableJVMFlags implements Callable {
+class CallableJVMFlags implements Callable<String> {
     /**
      * Reference to the CrashReport object.
      */
@@ -39,7 +39,8 @@ class CallableJVMFlags implements Callable {
         return String.format("%d total; %s", var3, var4.toString());
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.getJVMFlagsAsString();
     }
 }

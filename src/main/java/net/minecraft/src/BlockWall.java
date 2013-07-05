@@ -17,6 +17,7 @@ public class BlockWall extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 32;
     }
@@ -24,10 +25,12 @@ public class BlockWall extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         return false;
     }
@@ -36,6 +39,7 @@ public class BlockWall extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -43,6 +47,7 @@ public class BlockWall extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         boolean var5 = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 - 1);
         boolean var6 = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 + 1);
@@ -87,6 +92,7 @@ public class BlockWall extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
         this.maxY = 1.5D;
@@ -110,6 +116,7 @@ public class BlockWall extends Block {
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
+    @Override
     public int damageDropped(int par1) {
         return par1;
     }

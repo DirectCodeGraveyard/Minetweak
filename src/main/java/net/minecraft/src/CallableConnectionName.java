@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableConnectionName implements Callable {
+class CallableConnectionName implements Callable<String> {
     final NetServerHandler field_111201_a;
 
     final NetworkListenThread field_111200_b;
@@ -16,7 +16,8 @@ class CallableConnectionName implements Callable {
         return this.field_111201_a.toString();
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.func_111199_a();
     }
 }

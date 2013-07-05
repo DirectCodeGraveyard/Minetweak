@@ -13,6 +13,7 @@ public class BlockTripWireSource extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
     }
@@ -21,6 +22,7 @@ public class BlockTripWireSource extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -28,6 +30,7 @@ public class BlockTripWireSource extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -35,6 +38,7 @@ public class BlockTripWireSource extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 29;
     }
@@ -42,6 +46,7 @@ public class BlockTripWireSource extends Block {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return 10;
     }
@@ -49,6 +54,7 @@ public class BlockTripWireSource extends Block {
     /**
      * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
      */
+    @Override
     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5) {
         return ((par5 == 2) && par1World.isBlockNormalCube(par2, par3, par4 + 1)) || (((par5 == 3) && par1World.isBlockNormalCube(par2, par3, par4 - 1)) || (((par5 == 4) && par1World.isBlockNormalCube(par2 + 1, par3, par4)) || ((par5 == 5) && par1World.isBlockNormalCube(par2 - 1, par3, par4))));
     }
@@ -56,6 +62,7 @@ public class BlockTripWireSource extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return par1World.isBlockNormalCube(par2 - 1, par3, par4) || (par1World.isBlockNormalCube(par2 + 1, par3, par4) || (par1World.isBlockNormalCube(par2, par3, par4 - 1) || par1World.isBlockNormalCube(par2, par3, par4 + 1)));
     }
@@ -63,6 +70,7 @@ public class BlockTripWireSource extends Block {
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
+    @Override
     public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
         byte var10 = 0;
 
@@ -88,6 +96,7 @@ public class BlockTripWireSource extends Block {
     /**
      * Called after a block is placed
      */
+    @Override
     public void onPostBlockPlaced(World par1World, int par2, int par3, int par4, int par5) {
         this.func_72143_a(par1World, par2, par3, par4, this.blockID, par5, false, -1, 0);
     }
@@ -96,6 +105,7 @@ public class BlockTripWireSource extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (par5 != this.blockID) {
             if (this.func_72144_l(par1World, par2, par3, par4)) {
@@ -224,6 +234,7 @@ public class BlockTripWireSource extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         this.func_72143_a(par1World, par2, par3, par4, this.blockID, par1World.getBlockMetadata(par2, par3, par4), true, -1, 0);
     }
@@ -270,6 +281,7 @@ public class BlockTripWireSource extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4) & 3;
         float var6 = 0.1875F;
@@ -288,6 +300,7 @@ public class BlockTripWireSource extends Block {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         boolean var7 = (par6 & 4) == 4;
         boolean var8 = (par6 & 8) == 8;
@@ -319,6 +332,7 @@ public class BlockTripWireSource extends Block {
      * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
      * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
+    @Override
     public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return (par1IBlockAccess.getBlockMetadata(par2, par3, par4) & 8) == 8 ? 15 : 0;
     }
@@ -327,6 +341,7 @@ public class BlockTripWireSource extends Block {
      * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
      * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
+    @Override
     public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         int var6 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 
@@ -341,6 +356,7 @@ public class BlockTripWireSource extends Block {
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
+    @Override
     public boolean canProvidePower() {
         return true;
     }

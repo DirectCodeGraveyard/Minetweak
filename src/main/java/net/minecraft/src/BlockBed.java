@@ -16,6 +16,7 @@ public class BlockBed extends BlockDirectional {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         if (par1World.isRemote) {
             return true;
@@ -73,9 +74,6 @@ public class BlockBed extends BlockDirectional {
                     return true;
                 }
             } else {
-                double var18 = (double) par2 + 0.5D;
-                double var13 = (double) par3 + 0.5D;
-                double var15 = (double) par4 + 0.5D;
                 par1World.setBlockToAir(par2, par3, par4);
                 int var17 = getDirection(var10);
                 par2 += footBlockToHeadBlockMap[var17][0];
@@ -83,9 +81,6 @@ public class BlockBed extends BlockDirectional {
 
                 if (par1World.getBlockId(par2, par3, par4) == this.blockID) {
                     par1World.setBlockToAir(par2, par3, par4);
-                    var18 = (var18 + (double) par2 + 0.5D) / 2.0D;
-                    var13 = (var13 + (double) par3 + 0.5D) / 2.0D;
-                    var15 = (var15 + (double) par4 + 0.5D) / 2.0D;
                 }
 
                 par1World.newExplosion(null, (double) ((float) par2 + 0.5F), (double) ((float) par3 + 0.5F), (double) ((float) par4 + 0.5F), 5.0F, true, true);
@@ -97,6 +92,7 @@ public class BlockBed extends BlockDirectional {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 14;
     }
@@ -104,6 +100,7 @@ public class BlockBed extends BlockDirectional {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -112,6 +109,7 @@ public class BlockBed extends BlockDirectional {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -119,6 +117,7 @@ public class BlockBed extends BlockDirectional {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         this.setBounds();
     }
@@ -127,6 +126,7 @@ public class BlockBed extends BlockDirectional {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         int var6 = par1World.getBlockMetadata(par2, par3, par4);
         int var7 = getDirection(var6);
@@ -147,6 +147,7 @@ public class BlockBed extends BlockDirectional {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return isBlockHeadOfBed(par1) ? 0 : Item.bed.itemID;
     }
@@ -219,6 +220,7 @@ public class BlockBed extends BlockDirectional {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         if (!isBlockHeadOfBed(par5)) {
             super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, 0);
@@ -229,6 +231,7 @@ public class BlockBed extends BlockDirectional {
      * Returns the mobility information of the block, 0 = free, 1 = can't push but can move over, 2 = total immobility
      * and stop pistons
      */
+    @Override
     public int getMobilityFlag() {
         return 1;
     }
@@ -236,6 +239,7 @@ public class BlockBed extends BlockDirectional {
     /**
      * Called when the block is attempted to be harvested
      */
+    @Override
     public void onBlockHarvested(World par1World, int par2, int par3, int par4, int par5, EntityPlayer par6EntityPlayer) {
         if (par6EntityPlayer.capabilities.isCreativeMode && isBlockHeadOfBed(par5)) {
             int var7 = getDirection(par5);

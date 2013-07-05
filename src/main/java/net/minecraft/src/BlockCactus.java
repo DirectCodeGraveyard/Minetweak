@@ -12,6 +12,7 @@ public class BlockCactus extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (par1World.isAirBlock(par2, par3 + 1, par4)) {
             int var6;
@@ -39,6 +40,7 @@ public class BlockCactus extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         float var5 = 0.0625F;
         return AxisAlignedBB.getAABBPool().getAABB((double) ((float) par2 + var5), (double) par3, (double) ((float) par4 + var5), (double) ((float) (par2 + 1) - var5), (double) ((float) (par3 + 1) - var5), (double) ((float) (par4 + 1) - var5));
@@ -47,6 +49,7 @@ public class BlockCactus extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -55,6 +58,7 @@ public class BlockCactus extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -62,6 +66,7 @@ public class BlockCactus extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 13;
     }
@@ -69,6 +74,7 @@ public class BlockCactus extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return super.canPlaceBlockAt(par1World, par2, par3, par4) && this.canBlockStay(par1World, par2, par3, par4);
     }
@@ -77,6 +83,7 @@ public class BlockCactus extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (!this.canBlockStay(par1World, par2, par3, par4)) {
             par1World.destroyBlock(par2, par3, par4, true);
@@ -86,6 +93,7 @@ public class BlockCactus extends Block {
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
      */
+    @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
         if (par1World.getBlockMaterial(par2 - 1, par3, par4).isSolid()) {
             return false;
@@ -104,6 +112,7 @@ public class BlockCactus extends Block {
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         par5Entity.attackEntityFrom(DamageSource.cactus, 1.0F);
     }

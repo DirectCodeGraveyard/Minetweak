@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.Callable;
 
-class CallableSuspiciousClasses implements Callable {
+class CallableSuspiciousClasses implements Callable<String> {
     final CrashReport theCrashReport;
 
     CallableSuspiciousClasses(CrashReport par1CrashReport) {
@@ -13,28 +13,26 @@ class CallableSuspiciousClasses implements Callable {
 
     public String callSuspiciousClasses() throws SecurityException, NoSuchFieldException, IllegalAccessException, IllegalArgumentException {
         StringBuilder var1 = new StringBuilder();
-        ArrayList var3;
+        ArrayList<Class> var3;
 
         try {
             Field var2 = ClassLoader.class.getDeclaredField("classes");
             var2.setAccessible(true);
-            var3 = new ArrayList((Vector) var2.get(CrashReport.class.getClassLoader()));
+            var3 = new ArrayList<Class>((Vector) var2.get(CrashReport.class.getClassLoader()));
         } catch (Exception ex) {
             return "";
         }
 
         boolean var4 = true;
         boolean var5 = !CrashReport.class.getCanonicalName().equals("net.minecraft.CrashReport");
-        HashMap var6 = new HashMap();
+        HashMap<String, Integer> var6 = new HashMap<String, Integer>();
         String var7 = "";
         Collections.sort(var3, new ComparatorClassSorter(this));
-        Iterator var8 = var3.iterator();
 
-        while (var8.hasNext()) {
-            Class var9 = (Class) var8.next();
+        for (Class c : var3) {
 
-            if (var9 != null) {
-                String var10 = var9.getCanonicalName();
+            if (c != null) {
+                String var10 = c.getCanonicalName();
 
                 if (var10 != null && !var10.startsWith("org.lwjgl.") && !var10.startsWith("paulscode.") && !var10.startsWith("org.bouncycastle.") && !var10.startsWith("argo.") && !var10.startsWith("com.jcraft.") && !var10.startsWith("com.fasterxml.") && !var10.startsWith("com.google.") && !var10.startsWith("joptsimple.") && !var10.startsWith("org.apache.") && !var10.equals("util.GLX")) {
                     if (var5) {
@@ -45,11 +43,11 @@ class CallableSuspiciousClasses implements Callable {
                         continue;
                     }
 
-                    Package var11 = var9.getPackage();
+                    Package var11 = c.getPackage();
                     String var12 = var11 == null ? "" : var11.getName();
 
                     if (var6.containsKey(var12)) {
-                        int var13 = (Integer) var6.get(var12);
+                        int var13 = var6.get(var12);
                         var6.put(var12, var13 + 1);
 
                         if (var13 == 3) {
@@ -83,7 +81,7 @@ class CallableSuspiciousClasses implements Callable {
                         var1.append(".");
                     }
 
-                    var1.append(var9.getSimpleName());
+                    var1.append(c.getSimpleName());
                     var7 = var12;
                     var4 = false;
                 }
@@ -99,7 +97,8 @@ class CallableSuspiciousClasses implements Callable {
         return var1.toString();
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         try {
             return this.callSuspiciousClasses();
         } catch (Exception ex) {

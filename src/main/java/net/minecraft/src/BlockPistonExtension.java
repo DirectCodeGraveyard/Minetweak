@@ -13,6 +13,7 @@ public class BlockPistonExtension extends Block {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
         int var7 = Facing.oppositeSide[getDirectionMeta(par6)];
@@ -34,6 +35,7 @@ public class BlockPistonExtension extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 17;
     }
@@ -42,6 +44,7 @@ public class BlockPistonExtension extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -49,6 +52,7 @@ public class BlockPistonExtension extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -56,6 +60,7 @@ public class BlockPistonExtension extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return false;
     }
@@ -63,6 +68,7 @@ public class BlockPistonExtension extends Block {
     /**
      * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
      */
+    @Override
     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5) {
         return false;
     }
@@ -70,6 +76,7 @@ public class BlockPistonExtension extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 0;
     }
@@ -78,6 +85,7 @@ public class BlockPistonExtension extends Block {
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
      * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
      */
+    @Override
     public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
         int var8 = par1World.getBlockMetadata(par2, par3, par4);
 
@@ -130,6 +138,7 @@ public class BlockPistonExtension extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 
@@ -163,6 +172,7 @@ public class BlockPistonExtension extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         int var6 = getDirectionMeta(par1World.getBlockMetadata(par2, par3, par4));
         int var7 = par1World.getBlockId(par2 - Facing.offsetsXForSide[var6], par3 - Facing.offsetsYForSide[var6], par4 - Facing.offsetsZForSide[var6]);

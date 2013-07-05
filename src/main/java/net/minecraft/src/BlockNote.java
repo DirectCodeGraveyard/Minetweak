@@ -10,6 +10,7 @@ public class BlockNote extends BlockContainer {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         boolean var6 = par1World.isBlockIndirectlyGettingPowered(par2, par3, par4);
         TileEntityNote var7 = (TileEntityNote) par1World.getBlockTileEntity(par2, par3, par4);
@@ -26,6 +27,7 @@ public class BlockNote extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         if (par1World.isRemote) {
             return true;
@@ -44,6 +46,7 @@ public class BlockNote extends BlockContainer {
     /**
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */
+    @Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
         if (!par1World.isRemote) {
             TileEntityNote var6 = (TileEntityNote) par1World.getBlockTileEntity(par2, par3, par4);
@@ -57,6 +60,7 @@ public class BlockNote extends BlockContainer {
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityNote();
     }
@@ -65,6 +69,7 @@ public class BlockNote extends BlockContainer {
      * Called when the block receives a BlockEvent - see World.addBlockEvent. By default, passes it on to the tile
      * entity at this location. Args: world, x, y, z, blockID, EventID, event parameter
      */
+    @Override
     public boolean onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6) {
         float var7 = (float) Math.pow(2.0D, (double) (par6 - 12) / 12.0D);
         String var8 = "harp";

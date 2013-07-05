@@ -16,6 +16,7 @@ public class BlockLog extends BlockRotatedPillar {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 1;
     }
@@ -23,6 +24,7 @@ public class BlockLog extends BlockRotatedPillar {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Block.wood.blockID;
     }
@@ -30,6 +32,7 @@ public class BlockLog extends BlockRotatedPillar {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         byte var7 = 4;
         int var8 = var7 + 1;

@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableTileEntityID implements Callable {
+class CallableTileEntityID implements Callable<String> {
     final TileEntity theTileEntity;
 
     CallableTileEntityID(TileEntity par1TileEntity) {
@@ -19,7 +19,8 @@ class CallableTileEntityID implements Callable {
         }
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callTileEntityID();
     }
 }

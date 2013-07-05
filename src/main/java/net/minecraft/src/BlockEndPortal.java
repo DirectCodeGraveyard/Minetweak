@@ -17,6 +17,7 @@ public class BlockEndPortal extends BlockContainer {
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityEndPortal();
     }
@@ -24,6 +25,7 @@ public class BlockEndPortal extends BlockContainer {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         float var5 = 0.0625F;
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, var5, 1.0F);
@@ -33,6 +35,7 @@ public class BlockEndPortal extends BlockContainer {
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
      * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
      */
+    @Override
     public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
     }
 
@@ -40,6 +43,7 @@ public class BlockEndPortal extends BlockContainer {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -47,6 +51,7 @@ public class BlockEndPortal extends BlockContainer {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -54,6 +59,7 @@ public class BlockEndPortal extends BlockContainer {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 0;
     }
@@ -61,6 +67,7 @@ public class BlockEndPortal extends BlockContainer {
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         if (par5Entity.ridingEntity == null && par5Entity.riddenByEntity == null && !par1World.isRemote) {
             par5Entity.travelToTheEnd(1);
@@ -70,6 +77,7 @@ public class BlockEndPortal extends BlockContainer {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return -1;
     }
@@ -77,6 +85,7 @@ public class BlockEndPortal extends BlockContainer {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         if (!bossDefeated) {
             if (par1World.provider.dimensionId != 0) {

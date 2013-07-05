@@ -11,6 +11,7 @@ public class BlockFlowerPot extends Block {
     /**
      * Sets the block's bounds for rendering it as an item
      */
+    @Override
     public void setBlockBoundsForItemRender() {
         float var1 = 0.375F;
         float var2 = var1 / 2.0F;
@@ -21,6 +22,7 @@ public class BlockFlowerPot extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -28,6 +30,7 @@ public class BlockFlowerPot extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 33;
     }
@@ -35,6 +38,7 @@ public class BlockFlowerPot extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -42,6 +46,7 @@ public class BlockFlowerPot extends Block {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         ItemStack var10 = par5EntityPlayer.inventory.getCurrentItem();
 
@@ -69,6 +74,7 @@ public class BlockFlowerPot extends Block {
     /**
      * Get the block's damage value (for use with pick block).
      */
+    @Override
     public int getDamageValue(World par1World, int par2, int par3, int par4) {
         ItemStack var5 = getPlantForMeta(par1World.getBlockMetadata(par2, par3, par4));
         return var5 == null ? Item.flowerPot.itemID : var5.getItemDamage();
@@ -77,6 +83,7 @@ public class BlockFlowerPot extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return super.canPlaceBlockAt(par1World, par2, par3, par4) && par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4);
     }
@@ -85,6 +92,7 @@ public class BlockFlowerPot extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (!par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4)) {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
@@ -95,6 +103,7 @@ public class BlockFlowerPot extends Block {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, par7);
 
@@ -110,6 +119,7 @@ public class BlockFlowerPot extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Item.flowerPot.itemID;
     }

@@ -23,6 +23,7 @@ public class BlockSign extends BlockContainer {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
     }
@@ -30,6 +31,7 @@ public class BlockSign extends BlockContainer {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         if (!this.isFreestanding) {
             int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
@@ -61,6 +63,7 @@ public class BlockSign extends BlockContainer {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return -1;
     }
@@ -68,10 +71,12 @@ public class BlockSign extends BlockContainer {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         return true;
     }
@@ -80,6 +85,7 @@ public class BlockSign extends BlockContainer {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -87,6 +93,7 @@ public class BlockSign extends BlockContainer {
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         try {
             return (TileEntity) this.signEntityClass.newInstance();
@@ -98,6 +105,7 @@ public class BlockSign extends BlockContainer {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Item.sign.itemID;
     }
@@ -106,6 +114,7 @@ public class BlockSign extends BlockContainer {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         boolean var6 = false;
 

@@ -14,6 +14,7 @@ public class BlockDaylightDetector extends BlockContainer {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.375F, 1.0F);
     }
@@ -23,6 +24,7 @@ public class BlockDaylightDetector extends BlockContainer {
      * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
      * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
+    @Override
     public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return par1IBlockAccess.getBlockMetadata(par2, par3, par4);
     }
@@ -30,6 +32,7 @@ public class BlockDaylightDetector extends BlockContainer {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
     }
 
@@ -37,12 +40,14 @@ public class BlockDaylightDetector extends BlockContainer {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
     }
 
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
     }
 
@@ -77,6 +82,7 @@ public class BlockDaylightDetector extends BlockContainer {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -85,6 +91,7 @@ public class BlockDaylightDetector extends BlockContainer {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -92,6 +99,7 @@ public class BlockDaylightDetector extends BlockContainer {
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
+    @Override
     public boolean canProvidePower() {
         return true;
     }
@@ -99,6 +107,7 @@ public class BlockDaylightDetector extends BlockContainer {
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityDaylightDetector();
     }

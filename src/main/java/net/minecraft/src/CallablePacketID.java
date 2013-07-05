@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallablePacketID implements Callable {
+class CallablePacketID implements Callable<String> {
     final Packet thePacket;
 
     final NetServerHandler theNetServerHandler;
@@ -16,7 +16,8 @@ class CallablePacketID implements Callable {
         return String.valueOf(this.thePacket.getPacketId());
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callPacketID();
     }
 }

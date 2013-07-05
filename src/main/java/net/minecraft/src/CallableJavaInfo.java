@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableJavaInfo implements Callable {
+class CallableJavaInfo implements Callable<String> {
     /**
      * Reference to the CrashReport object.
      */
@@ -19,7 +19,8 @@ class CallableJavaInfo implements Callable {
         return System.getProperty("java.version") + ", " + System.getProperty("java.vendor");
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.getJavaInfoAsString();
     }
 }

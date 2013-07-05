@@ -460,7 +460,7 @@ public class Block {
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
      * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
      */
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
+    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List<AxisAlignedBB> par6List, Entity par7Entity) {
         AxisAlignedBB var8 = this.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
 
         if (var8 != null && par5AxisAlignedBB.intersectsWith(var8)) {
@@ -729,21 +729,21 @@ public class Block {
      * Checks if a vector is within the Y and Z bounds of the block.
      */
     private boolean isVecInsideYZBounds(Vec3 par1Vec3) {
-        return par1Vec3 == null ? false : par1Vec3.yCoord >= this.minY && par1Vec3.yCoord <= this.maxY && par1Vec3.zCoord >= this.minZ && par1Vec3.zCoord <= this.maxZ;
+        return par1Vec3 != null && par1Vec3.yCoord >= this.minY && par1Vec3.yCoord <= this.maxY && par1Vec3.zCoord >= this.minZ && par1Vec3.zCoord <= this.maxZ;
     }
 
     /**
      * Checks if a vector is within the X and Z bounds of the block.
      */
     private boolean isVecInsideXZBounds(Vec3 par1Vec3) {
-        return par1Vec3 == null ? false : par1Vec3.xCoord >= this.minX && par1Vec3.xCoord <= this.maxX && par1Vec3.zCoord >= this.minZ && par1Vec3.zCoord <= this.maxZ;
+        return par1Vec3 != null && par1Vec3.xCoord >= this.minX && par1Vec3.xCoord <= this.maxX && par1Vec3.zCoord >= this.minZ && par1Vec3.zCoord <= this.maxZ;
     }
 
     /**
      * Checks if a vector is within the X and Y bounds of the block.
      */
     private boolean isVecInsideXYBounds(Vec3 par1Vec3) {
-        return par1Vec3 == null ? false : par1Vec3.xCoord >= this.minX && par1Vec3.xCoord <= this.maxX && par1Vec3.yCoord >= this.minY && par1Vec3.yCoord <= this.maxY;
+        return par1Vec3 != null && par1Vec3.xCoord >= this.minX && par1Vec3.xCoord <= this.maxX && par1Vec3.yCoord >= this.minY && par1Vec3.yCoord <= this.maxY;
     }
 
     /**

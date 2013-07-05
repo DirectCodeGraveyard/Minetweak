@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableLevelSpawnLocation implements Callable {
+class CallableLevelSpawnLocation implements Callable<String> {
     final WorldInfo worldInfoInstance;
 
     CallableLevelSpawnLocation(WorldInfo par1WorldInfo) {
@@ -13,7 +13,8 @@ class CallableLevelSpawnLocation implements Callable {
         return CrashReportCategory.getLocationInfo(WorldInfo.getSpawnXCoordinate(this.worldInfoInstance), WorldInfo.getSpawnYCoordinate(this.worldInfoInstance), WorldInfo.getSpawnZCoordinate(this.worldInfoInstance));
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callLevelSpawnLocation();
     }
 }

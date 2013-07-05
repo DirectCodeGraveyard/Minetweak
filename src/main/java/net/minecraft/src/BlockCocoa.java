@@ -11,6 +11,7 @@ public class BlockCocoa extends BlockDirectional {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (!this.canBlockStay(par1World, par2, par3, par4)) {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
@@ -29,6 +30,7 @@ public class BlockCocoa extends BlockDirectional {
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
      */
+    @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
         int var5 = getDirection(par1World.getBlockMetadata(par2, par3, par4));
         par2 += Direction.offsetX[var5];
@@ -40,6 +42,7 @@ public class BlockCocoa extends BlockDirectional {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 28;
     }
@@ -47,6 +50,7 @@ public class BlockCocoa extends BlockDirectional {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -55,6 +59,7 @@ public class BlockCocoa extends BlockDirectional {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -63,6 +68,7 @@ public class BlockCocoa extends BlockDirectional {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
         return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
@@ -71,6 +77,7 @@ public class BlockCocoa extends BlockDirectional {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         int var6 = getDirection(var5);
@@ -100,6 +107,7 @@ public class BlockCocoa extends BlockDirectional {
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int var7 = ((MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3)) % 4;
         par1World.setBlockMetadata(par2, par3, par4, var7, 2);
@@ -108,6 +116,7 @@ public class BlockCocoa extends BlockDirectional {
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
+    @Override
     public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
         if (par5 == 1 || par5 == 0) {
             par5 = 2;
@@ -120,6 +129,7 @@ public class BlockCocoa extends BlockDirectional {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (!this.canBlockStay(par1World, par2, par3, par4)) {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
@@ -134,6 +144,7 @@ public class BlockCocoa extends BlockDirectional {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         int var8 = func_72219_c(par5);
         byte var9 = 1;
@@ -150,6 +161,7 @@ public class BlockCocoa extends BlockDirectional {
     /**
      * Get the block's damage value (for use with pick block).
      */
+    @Override
     public int getDamageValue(World par1World, int par2, int par3, int par4) {
         return 3;
     }

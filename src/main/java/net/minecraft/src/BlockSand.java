@@ -20,6 +20,7 @@ public class BlockSand extends Block {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
     }
@@ -28,6 +29,7 @@ public class BlockSand extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
     }
@@ -35,6 +37,7 @@ public class BlockSand extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (!par1World.isRemote) {
             this.tryToFall(par1World, par2, par3, par4);
@@ -77,6 +80,7 @@ public class BlockSand extends Block {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return 2;
     }

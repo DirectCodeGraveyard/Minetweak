@@ -12,7 +12,8 @@ public class BlockCauldron extends Block {
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
      * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
      */
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
+    @Override
+    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List<AxisAlignedBB> par6List, Entity par7Entity) {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.3125F, 1.0F);
         super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
         float var8 = 0.125F;
@@ -30,6 +31,7 @@ public class BlockCauldron extends Block {
     /**
      * Sets the block's bounds for rendering it as an item
      */
+    @Override
     public void setBlockBoundsForItemRender() {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
@@ -38,6 +40,7 @@ public class BlockCauldron extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -45,6 +48,7 @@ public class BlockCauldron extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 24;
     }
@@ -52,6 +56,7 @@ public class BlockCauldron extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -59,6 +64,7 @@ public class BlockCauldron extends Block {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         if (par1World.isRemote) {
             return true;
@@ -119,6 +125,7 @@ public class BlockCauldron extends Block {
     /**
      * currently only used by BlockCauldron to incrament meta-data during rain
      */
+    @Override
     public void fillWithRain(World par1World, int par2, int par3, int par4) {
         if (par1World.rand.nextInt(20) == 1) {
             int var5 = par1World.getBlockMetadata(par2, par3, par4);
@@ -132,6 +139,7 @@ public class BlockCauldron extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Item.cauldron.itemID;
     }
@@ -140,6 +148,7 @@ public class BlockCauldron extends Block {
      * If this returns true, then comparators facing away from this block will use the value from
      * getComparatorInputOverride instead of the actual redstone signal strength.
      */
+    @Override
     public boolean hasComparatorInputOverride() {
         return true;
     }
@@ -148,6 +157,7 @@ public class BlockCauldron extends Block {
      * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
      * strength when this block inputs to a comparator.
      */
+    @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5) {
         int var6 = par1World.getBlockMetadata(par2, par3, par4);
         return func_111045_h_(var6);

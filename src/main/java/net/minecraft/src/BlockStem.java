@@ -21,6 +21,7 @@ public class BlockStem extends BlockFlower {
      * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
      * blockID passed in. Args: blockID
      */
+    @Override
     protected boolean canThisPlantGrowOnThisBlockID(int par1) {
         return par1 == Block.tilledField.blockID;
     }
@@ -28,6 +29,7 @@ public class BlockStem extends BlockFlower {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         super.updateTick(par1World, par2, par3, par4, par5Random);
 
@@ -142,6 +144,7 @@ public class BlockStem extends BlockFlower {
     /**
      * Sets the block's bounds for rendering it as an item
      */
+    @Override
     public void setBlockBoundsForItemRender() {
         float var1 = 0.125F;
         this.setBlockBounds(0.5F - var1, 0.0F, 0.5F - var1, 0.5F + var1, 0.25F, 0.5F + var1);
@@ -150,6 +153,7 @@ public class BlockStem extends BlockFlower {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         this.maxY = (double) ((float) (par1IBlockAccess.getBlockMetadata(par2, par3, par4) * 2 + 2) / 16.0F);
         float var5 = 0.125F;
@@ -159,6 +163,7 @@ public class BlockStem extends BlockFlower {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 19;
     }
@@ -166,6 +171,7 @@ public class BlockStem extends BlockFlower {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, par7);
 
@@ -191,6 +197,7 @@ public class BlockStem extends BlockFlower {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return -1;
     }
@@ -198,6 +205,7 @@ public class BlockStem extends BlockFlower {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 1;
     }

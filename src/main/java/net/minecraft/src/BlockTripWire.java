@@ -13,6 +13,7 @@ public class BlockTripWire extends Block {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return 10;
     }
@@ -21,6 +22,7 @@ public class BlockTripWire extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
     }
@@ -29,6 +31,7 @@ public class BlockTripWire extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -36,6 +39,7 @@ public class BlockTripWire extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -43,6 +47,7 @@ public class BlockTripWire extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 30;
     }
@@ -50,6 +55,7 @@ public class BlockTripWire extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Item.silk.itemID;
     }
@@ -58,6 +64,7 @@ public class BlockTripWire extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         int var6 = par1World.getBlockMetadata(par2, par3, par4);
         boolean var7 = (var6 & 2) == 2;
@@ -72,6 +79,7 @@ public class BlockTripWire extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         int var5 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         boolean var6 = (var5 & 4) == 4;
@@ -89,6 +97,7 @@ public class BlockTripWire extends Block {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         int var5 = par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) ? 0 : 2;
         par1World.setBlockMetadata(par2, par3, par4, var5, 3);
@@ -98,6 +107,7 @@ public class BlockTripWire extends Block {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         this.func_72149_e(par1World, par2, par3, par4, par6 | 1);
     }
@@ -105,6 +115,7 @@ public class BlockTripWire extends Block {
     /**
      * Called when the block is attempted to be harvested
      */
+    @Override
     public void onBlockHarvested(World par1World, int par2, int par3, int par4, int par5, EntityPlayer par6EntityPlayer) {
         if (!par1World.isRemote) {
             if (par6EntityPlayer.getCurrentEquippedItem() != null && par6EntityPlayer.getCurrentEquippedItem().itemID == Item.shears.itemID) {
@@ -146,6 +157,7 @@ public class BlockTripWire extends Block {
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         if (!par1World.isRemote) {
             if ((par1World.getBlockMetadata(par2, par3, par4) & 1) != 1) {
@@ -157,6 +169,7 @@ public class BlockTripWire extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (!par1World.isRemote) {
             if ((par1World.getBlockMetadata(par2, par3, par4) & 1) == 1) {

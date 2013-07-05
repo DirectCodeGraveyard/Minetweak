@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableLevelSeed implements Callable {
+class CallableLevelSeed implements Callable<String> {
     final WorldInfo worldInfoInstance;
 
     CallableLevelSeed(WorldInfo par1WorldInfo) {
@@ -13,7 +13,8 @@ class CallableLevelSeed implements Callable {
         return String.valueOf(this.worldInfoInstance.getSeed());
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callLevelSeed();
     }
 }

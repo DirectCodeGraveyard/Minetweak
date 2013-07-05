@@ -16,6 +16,7 @@ public class BlockPressurePlate extends BlockBasePressurePlate {
     /**
      * Argument is weight (0-15). Return the metadata to be set because of it.
      */
+    @Override
     protected int getMetaFromWeight(int par1) {
         return par1 > 0 ? 1 : 0;
     }
@@ -23,6 +24,7 @@ public class BlockPressurePlate extends BlockBasePressurePlate {
     /**
      * Argument is metadata. Returns power level (0-15)
      */
+    @Override
     protected int getPowerSupply(int par1) {
         return par1 == 1 ? 15 : 0;
     }
@@ -31,6 +33,7 @@ public class BlockPressurePlate extends BlockBasePressurePlate {
      * Returns the current state of the pressure plate. Returns a value between 0 and 15 based on the number of items on
      * it.
      */
+    @Override
     protected int getPlateState(World par1World, int par2, int par3, int par4) {
         List var5 = null;
 

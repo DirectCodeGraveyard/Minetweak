@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableIsFeatureChunk implements Callable {
+class CallableIsFeatureChunk implements Callable<String> {
     final int field_85169_a;
 
     final int field_85167_b;
@@ -19,7 +19,8 @@ class CallableIsFeatureChunk implements Callable {
         return this.theMapStructureGenerator.canSpawnStructureAtCoords(this.field_85169_a, this.field_85167_b) ? "True" : "False";
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.func_85166_a();
     }
 }

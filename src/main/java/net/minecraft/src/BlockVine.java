@@ -12,6 +12,7 @@ public class BlockVine extends Block {
     /**
      * Sets the block's bounds for rendering it as an item
      */
+    @Override
     public void setBlockBoundsForItemRender() {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
@@ -19,6 +20,7 @@ public class BlockVine extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 20;
     }
@@ -27,6 +29,7 @@ public class BlockVine extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -34,6 +37,7 @@ public class BlockVine extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -41,6 +45,7 @@ public class BlockVine extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         int var6 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         float var7 = 1.0F;
@@ -107,6 +112,7 @@ public class BlockVine extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
     }
@@ -114,6 +120,7 @@ public class BlockVine extends Block {
     /**
      * checks to see if you can place this block can be placed on that side of a block: BlockLever overrides
      */
+    @Override
     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5) {
         switch (par5) {
             case 1:
@@ -180,6 +187,7 @@ public class BlockVine extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (!par1World.isRemote && !this.canVineStay(par1World, par2, par3, par4)) {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
@@ -190,6 +198,7 @@ public class BlockVine extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (!par1World.isRemote && par1World.rand.nextInt(4) == 0) {
             byte var6 = 4;
@@ -294,6 +303,7 @@ public class BlockVine extends Block {
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
+    @Override
     public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
         byte var10 = 0;
 
@@ -320,6 +330,7 @@ public class BlockVine extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return 0;
     }
@@ -327,6 +338,7 @@ public class BlockVine extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 0;
     }
@@ -335,6 +347,7 @@ public class BlockVine extends Block {
      * Called when the player destroys a block with an item that can harvest it. (i, j, k) are the coordinates of the
      * block and l is the block's subtype/damage.
      */
+    @Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6) {
         if (!par1World.isRemote && par2EntityPlayer.getCurrentEquippedItem() != null && par2EntityPlayer.getCurrentEquippedItem().itemID == Item.shears.itemID) {
             par2EntityPlayer.addStat(StatList.mineBlockStatArray[this.blockID], 1);

@@ -28,6 +28,7 @@ public class BlockStairs extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         if (this.field_72156_cr) {
             this.setBlockBounds(0.5F * (float) (this.field_72160_cs % 2), 0.5F * (float) (this.field_72160_cs / 2 % 2), 0.5F * (float) (this.field_72160_cs / 4 % 2), 0.5F + 0.5F * (float) (this.field_72160_cs % 2), 0.5F + 0.5F * (float) (this.field_72160_cs / 2 % 2), 0.5F + 0.5F * (float) (this.field_72160_cs / 4 % 2));
@@ -40,6 +41,7 @@ public class BlockStairs extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -47,6 +49,7 @@ public class BlockStairs extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -54,6 +57,7 @@ public class BlockStairs extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 10;
     }
@@ -273,7 +277,8 @@ public class BlockStairs extends Block {
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
      * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
      */
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
+    @Override
+    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List<AxisAlignedBB> par6List, Entity par7Entity) {
         this.func_82541_d(par1World, par2, par3, par4);
         super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
         boolean var8 = this.func_82542_g(par1World, par2, par3, par4);
@@ -289,6 +294,7 @@ public class BlockStairs extends Block {
     /**
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */
+    @Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
         this.modelBlock.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
     }
@@ -296,6 +302,7 @@ public class BlockStairs extends Block {
     /**
      * Called right before the block is destroyed by a player.  Args: world, x, y, z, metaData
      */
+    @Override
     public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
         this.modelBlock.onBlockDestroyedByPlayer(par1World, par2, par3, par4, par5);
     }
@@ -303,6 +310,7 @@ public class BlockStairs extends Block {
     /**
      * Returns how much this block can resist explosions from the passed in entity.
      */
+    @Override
     public float getExplosionResistance(Entity par1Entity) {
         return this.modelBlock.getExplosionResistance(par1Entity);
     }
@@ -310,6 +318,7 @@ public class BlockStairs extends Block {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return this.modelBlock.tickRate(par1World);
     }
@@ -317,6 +326,7 @@ public class BlockStairs extends Block {
     /**
      * Can add to the passed in vector for a movement vector to be applied to the entity. Args: x, y, z, entity, vec3d
      */
+    @Override
     public void velocityToAddToEntity(World par1World, int par2, int par3, int par4, Entity par5Entity, Vec3 par6Vec3) {
         this.modelBlock.velocityToAddToEntity(par1World, par2, par3, par4, par5Entity, par6Vec3);
     }
@@ -324,6 +334,7 @@ public class BlockStairs extends Block {
     /**
      * Returns if this block is collidable (only used by Fire). Args: x, y, z
      */
+    @Override
     public boolean isCollidable() {
         return this.modelBlock.isCollidable();
     }
@@ -331,6 +342,7 @@ public class BlockStairs extends Block {
     /**
      * Returns whether this block is collideable based on the arguments passed in Args: blockMetaData, unknownFlag
      */
+    @Override
     public boolean canCollideCheck(int par1, boolean par2) {
         return this.modelBlock.canCollideCheck(par1, par2);
     }
@@ -338,6 +350,7 @@ public class BlockStairs extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return this.modelBlock.canPlaceBlockAt(par1World, par2, par3, par4);
     }
@@ -345,6 +358,7 @@ public class BlockStairs extends Block {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         this.onNeighborBlockChange(par1World, par2, par3, par4, 0);
         this.modelBlock.onBlockAdded(par1World, par2, par3, par4);
@@ -353,6 +367,7 @@ public class BlockStairs extends Block {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         this.modelBlock.breakBlock(par1World, par2, par3, par4, par5, par6);
     }
@@ -360,6 +375,7 @@ public class BlockStairs extends Block {
     /**
      * Called whenever an entity is walking on top of this block. Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityWalking(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         this.modelBlock.onEntityWalking(par1World, par2, par3, par4, par5Entity);
     }
@@ -367,6 +383,7 @@ public class BlockStairs extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         this.modelBlock.updateTick(par1World, par2, par3, par4, par5Random);
     }
@@ -374,6 +391,7 @@ public class BlockStairs extends Block {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         return this.modelBlock.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, 0, 0.0F, 0.0F, 0.0F);
     }
@@ -381,6 +399,7 @@ public class BlockStairs extends Block {
     /**
      * Called upon the block being destroyed by an explosion
      */
+    @Override
     public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
         this.modelBlock.onBlockDestroyedByExplosion(par1World, par2, par3, par4, par5Explosion);
     }
@@ -388,6 +407,7 @@ public class BlockStairs extends Block {
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int var7 = MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
         int var8 = par1World.getBlockMetadata(par2, par3, par4) & 4;
@@ -412,6 +432,7 @@ public class BlockStairs extends Block {
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
+    @Override
     public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
         return par5 != 0 && (par5 == 1 || (double) par7 <= 0.5D) ? par9 : par9 | 4;
     }
@@ -420,6 +441,7 @@ public class BlockStairs extends Block {
      * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit. Args: world,
      * x, y, z, startVec, endVec
      */
+    @Override
     public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3) {
         MovingObjectPosition[] var7 = new MovingObjectPosition[8];
         int var8 = par1World.getBlockMetadata(par2, par3, par4);
@@ -433,15 +455,6 @@ public class BlockStairs extends Block {
 
         for (int var12 = 0; var12 < 8; ++var12) {
             this.field_72160_cs = var12;
-            var14 = var11.length;
-
-            for (var15 = 0; var15 < var14; ++var15) {
-                var16 = var11[var15];
-
-                if (var16 == var12) {
-                    ;
-                }
-            }
 
             var7[var12] = super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
         }

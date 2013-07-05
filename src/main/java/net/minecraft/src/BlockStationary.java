@@ -12,6 +12,7 @@ public class BlockStationary extends BlockFluid {
         }
     }
 
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         return this.blockMaterial != Material.lava;
     }
@@ -20,6 +21,7 @@ public class BlockStationary extends BlockFluid {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 
@@ -40,6 +42,7 @@ public class BlockStationary extends BlockFluid {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (this.blockMaterial == Material.lava) {
             int var6 = par5Random.nextInt(3);

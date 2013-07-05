@@ -11,6 +11,7 @@ public class BlockGlass extends BlockBreakable {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 0;
     }
@@ -19,6 +20,7 @@ public class BlockGlass extends BlockBreakable {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -26,6 +28,7 @@ public class BlockGlass extends BlockBreakable {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -33,6 +36,7 @@ public class BlockGlass extends BlockBreakable {
     /**
      * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
      */
+    @Override
     protected boolean canSilkHarvest() {
         return true;
     }

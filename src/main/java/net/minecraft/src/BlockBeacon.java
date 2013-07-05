@@ -10,6 +10,7 @@ public class BlockBeacon extends BlockContainer {
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityBeacon();
     }
@@ -17,6 +18,7 @@ public class BlockBeacon extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         if (par1World.isRemote) {
             return true;
@@ -35,6 +37,7 @@ public class BlockBeacon extends BlockContainer {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -42,6 +45,7 @@ public class BlockBeacon extends BlockContainer {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -49,6 +53,7 @@ public class BlockBeacon extends BlockContainer {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 34;
     }
@@ -56,6 +61,7 @@ public class BlockBeacon extends BlockContainer {
     /**
      * Called when the block is placed in the world.
      */
+    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
 

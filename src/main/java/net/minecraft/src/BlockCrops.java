@@ -18,6 +18,7 @@ public class BlockCrops extends BlockFlower {
      * Gets passed in the blockID of the block below and supposed to return true if its allowed to grow on the type of
      * blockID passed in. Args: blockID
      */
+    @Override
     protected boolean canThisPlantGrowOnThisBlockID(int par1) {
         return par1 == Block.tilledField.blockID;
     }
@@ -25,6 +26,7 @@ public class BlockCrops extends BlockFlower {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         super.updateTick(par1World, par2, par3, par4, par5Random);
 
@@ -105,6 +107,7 @@ public class BlockCrops extends BlockFlower {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 6;
     }
@@ -126,6 +129,7 @@ public class BlockCrops extends BlockFlower {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, 0);
 
@@ -145,6 +149,7 @@ public class BlockCrops extends BlockFlower {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return par1 == 7 ? this.getCropItem() : this.getSeedItem();
     }
@@ -152,6 +157,7 @@ public class BlockCrops extends BlockFlower {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 1;
     }

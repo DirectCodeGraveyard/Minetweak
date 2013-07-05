@@ -33,6 +33,7 @@ public class BlockFlowing extends BlockFluid {
         par1World.setBlock(par2, par3, par4, this.blockID + 1, var5, 2);
     }
 
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         return this.blockMaterial != Material.lava;
     }
@@ -40,6 +41,7 @@ public class BlockFlowing extends BlockFluid {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         int var6 = this.getFlowDecay(par1World, par2, par3, par4);
         byte var7 = 1;
@@ -323,6 +325,7 @@ public class BlockFlowing extends BlockFluid {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
 
@@ -331,6 +334,7 @@ public class BlockFlowing extends BlockFluid {
         }
     }
 
+    @Override
     public boolean func_82506_l() {
         return true;
     }

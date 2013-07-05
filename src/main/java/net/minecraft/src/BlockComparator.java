@@ -11,18 +11,22 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Item.comparator.itemID;
     }
 
+    @Override
     protected int func_94481_j_(int par1) {
         return 2;
     }
 
+    @Override
     protected BlockRedstoneLogic func_94485_e() {
         return Block.redstoneComparatorActive;
     }
 
+    @Override
     protected BlockRedstoneLogic func_94484_i() {
         return Block.redstoneComparatorIdle;
     }
@@ -30,14 +34,17 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 37;
     }
 
+    @Override
     protected boolean func_96470_c(int par1) {
         return this.isRepeaterPowered || (par1 & 8) != 0;
     }
 
+    @Override
     protected int func_94480_d(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return this.getTileEntityComparator(par1IBlockAccess, par2, par3, par4).func_96100_a();
     }
@@ -50,6 +57,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         return (par1 & 4) == 4;
     }
 
+    @Override
     protected boolean func_94478_d(World par1World, int par2, int par3, int par4, int par5) {
         int var6 = this.getInputStrength(par1World, par2, par3, par4, par5);
 
@@ -66,6 +74,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     /**
      * Returns the signal strength at one input of the block. Args: world, X, Y, Z, side
      */
+    @Override
     protected int getInputStrength(World par1World, int par2, int par3, int par4, int par5) {
         int var6 = super.getInputStrength(par1World, par2, par3, par4, par5);
         int var7 = getDirection(par5);
@@ -100,6 +109,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         int var10 = par1World.getBlockMetadata(par2, par3, par4);
         boolean var11 = this.isRepeaterPowered | (var10 & 8) != 0;
@@ -112,6 +122,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
         return true;
     }
 
+    @Override
     protected void func_94479_f(World par1World, int par2, int par3, int par4, int par5) {
         if (!par1World.isBlockTickScheduled(par2, par3, par4, this.blockID)) {
             int var6 = par1World.getBlockMetadata(par2, par3, par4);
@@ -151,6 +162,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (this.isRepeaterPowered) {
             int var6 = par1World.getBlockMetadata(par2, par3, par4);
@@ -163,6 +175,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
         par1World.setBlockTileEntity(par2, par3, par4, this.createNewTileEntity(par1World));
@@ -171,6 +184,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
         par1World.removeBlockTileEntity(par2, par3, par4);
@@ -181,6 +195,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
      * Called when the block receives a BlockEvent - see World.addBlockEvent. By default, passes it on to the tile
      * entity at this location. Args: world, x, y, z, blockID, EventID, event parameter
      */
+    @Override
     public boolean onBlockEventReceived(World par1World, int par2, int par3, int par4, int par5, int par6) {
         super.onBlockEventReceived(par1World, par2, par3, par4, par5, par6);
         TileEntity var7 = par1World.getBlockTileEntity(par2, par3, par4);
@@ -190,6 +205,7 @@ public class BlockComparator extends BlockRedstoneLogic implements ITileEntityPr
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityComparator();
     }

@@ -11,6 +11,7 @@ public class BlockMelon extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Item.melon.itemID;
     }
@@ -18,6 +19,7 @@ public class BlockMelon extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 3 + par1Random.nextInt(5);
     }
@@ -25,6 +27,7 @@ public class BlockMelon extends Block {
     /**
      * Returns the usual quantity dropped by the block plus a bonus of 1 to 'i' (inclusive).
      */
+    @Override
     public int quantityDroppedWithBonus(int par1, Random par2Random) {
         int var3 = this.quantityDropped(par2Random) + par2Random.nextInt(1 + par1);
 

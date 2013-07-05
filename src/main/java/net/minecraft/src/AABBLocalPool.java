@@ -5,6 +5,7 @@ final class AABBLocalPool extends ThreadLocal {
         return new AABBPool(300, 2000);
     }
 
+    @Override
     protected Object initialValue() {
         return this.createNewDefaultPool();
     }

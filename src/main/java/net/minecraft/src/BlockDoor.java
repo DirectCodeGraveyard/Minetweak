@@ -14,10 +14,12 @@ public class BlockDoor extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         int var5 = this.getFullMetadata(par1IBlockAccess, par2, par3, par4);
         return (var5 & 4) != 0;
@@ -26,6 +28,7 @@ public class BlockDoor extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -33,6 +36,7 @@ public class BlockDoor extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 7;
     }
@@ -41,6 +45,7 @@ public class BlockDoor extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
         return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
@@ -49,6 +54,7 @@ public class BlockDoor extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         this.setDoorRotation(this.getFullMetadata(par1IBlockAccess, par2, par3, par4));
     }
@@ -117,12 +123,14 @@ public class BlockDoor extends Block {
     /**
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */
+    @Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
     }
 
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         if (this.blockMaterial == Material.iron) {
             return true;
@@ -171,6 +179,7 @@ public class BlockDoor extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         int var6 = par1World.getBlockMetadata(par2, par3, par4);
 
@@ -216,6 +225,7 @@ public class BlockDoor extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return (par1 & 8) != 0 ? 0 : (this.blockMaterial == Material.iron ? Item.doorIron.itemID : Item.doorWood.itemID);
     }
@@ -224,6 +234,7 @@ public class BlockDoor extends Block {
      * Ray traces through the blocks collision from start vector to end vector returning a ray trace hit. Args: world,
      * x, y, z, startVec, endVec
      */
+    @Override
     public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3) {
         this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
         return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
@@ -232,6 +243,7 @@ public class BlockDoor extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return par3 < 255 && par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && super.canPlaceBlockAt(par1World, par2, par3, par4) && super.canPlaceBlockAt(par1World, par2, par3 + 1, par4);
     }
@@ -240,6 +252,7 @@ public class BlockDoor extends Block {
      * Returns the mobility information of the block, 0 = free, 1 = can't push but can move over, 2 = total immobility
      * and stop pistons
      */
+    @Override
     public int getMobilityFlag() {
         return 1;
     }
@@ -268,6 +281,7 @@ public class BlockDoor extends Block {
     /**
      * Called when the block is attempted to be harvested
      */
+    @Override
     public void onBlockHarvested(World par1World, int par2, int par3, int par4, int par5, EntityPlayer par6EntityPlayer) {
         if (par6EntityPlayer.capabilities.isCreativeMode && (par5 & 8) != 0 && par1World.getBlockId(par2, par3 - 1, par4) == this.blockID) {
             par1World.setBlockToAir(par2, par3 - 1, par4);

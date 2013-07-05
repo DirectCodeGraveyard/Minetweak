@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableLevelGeneratorOptions implements Callable {
+class CallableLevelGeneratorOptions implements Callable<String> {
     final WorldInfo worldInfoInstance;
 
     CallableLevelGeneratorOptions(WorldInfo par1WorldInfo) {
@@ -13,7 +13,8 @@ class CallableLevelGeneratorOptions implements Callable {
         return WorldInfo.getWorldGeneratorOptions(this.worldInfoInstance);
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callLevelGeneratorOptions();
     }
 }

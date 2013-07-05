@@ -11,6 +11,7 @@ public class BlockDragonEgg extends Block {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
     }
@@ -19,6 +20,7 @@ public class BlockDragonEgg extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, this.tickRate(par1World));
     }
@@ -26,6 +28,7 @@ public class BlockDragonEgg extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         this.fallIfPossible(par1World, par2, par3, par4);
     }
@@ -57,6 +60,7 @@ public class BlockDragonEgg extends Block {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         this.teleportNearby(par1World, par2, par3, par4);
         return true;
@@ -65,6 +69,7 @@ public class BlockDragonEgg extends Block {
     /**
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */
+    @Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
         this.teleportNearby(par1World, par2, par3, par4);
     }
@@ -107,6 +112,7 @@ public class BlockDragonEgg extends Block {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return 5;
     }
@@ -115,6 +121,7 @@ public class BlockDragonEgg extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -122,6 +129,7 @@ public class BlockDragonEgg extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -129,6 +137,7 @@ public class BlockDragonEgg extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 27;
     }

@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableItemName implements Callable {
+class CallableItemName implements Callable<String> {
     final ItemStack theItemStack;
 
     final InventoryPlayer playerInventory;
@@ -16,7 +16,8 @@ class CallableItemName implements Callable {
         return this.theItemStack.getDisplayName();
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callItemDisplayName();
     }
 }

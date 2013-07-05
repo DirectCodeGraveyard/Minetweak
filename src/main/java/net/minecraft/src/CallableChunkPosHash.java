@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableChunkPosHash implements Callable {
+class CallableChunkPosHash implements Callable<String> {
     final int field_85165_a;
 
     final int field_85163_b;
@@ -19,7 +19,8 @@ class CallableChunkPosHash implements Callable {
         return String.valueOf(ChunkCoordIntPair.chunkXZ2Int(this.field_85165_a, this.field_85163_b));
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callChunkPositionHash();
     }
 }

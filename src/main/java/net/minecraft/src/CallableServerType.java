@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableServerType implements Callable {
+class CallableServerType implements Callable<String> {
     final DedicatedServer theDedicatedServer;
 
     CallableServerType(DedicatedServer par1DedicatedServer) {
@@ -13,7 +13,8 @@ class CallableServerType implements Callable {
         return "Dedicated Server (map_server.txt)";
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callServerType();
     }
 }

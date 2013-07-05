@@ -49,6 +49,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return 2;
     }
@@ -56,6 +57,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
+    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         if (par1World.getBlockMetadata(par2, par3, par4) == 0) {
             super.onBlockAdded(par1World, par2, par3, par4);
@@ -74,6 +76,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         if (this.torchActive) {
             par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
@@ -90,6 +93,7 @@ public class BlockRedstoneTorch extends BlockTorch {
      * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
      * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
+    @Override
     public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         if (!this.torchActive) {
             return 0;
@@ -110,6 +114,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         boolean var6 = this.isIndirectlyPowered(par1World, par2, par3, par4);
         List<RedstoneUpdateInfo> var7 = redstoneUpdateInfoCache.get(par1World);
@@ -142,6 +147,7 @@ public class BlockRedstoneTorch extends BlockTorch {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (!this.func_94397_d(par1World, par2, par3, par4, par5)) {
             boolean var6 = this.isIndirectlyPowered(par1World, par2, par3, par4);
@@ -156,6 +162,7 @@ public class BlockRedstoneTorch extends BlockTorch {
      * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
      * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
+    @Override
     public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return par5 == 0 ? this.isProvidingWeakPower(par1IBlockAccess, par2, par3, par4, par5) : 0;
     }
@@ -163,6 +170,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Block.torchRedstoneActive.blockID;
     }
@@ -170,6 +178,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
+    @Override
     public boolean canProvidePower() {
         return true;
     }
@@ -178,6 +187,7 @@ public class BlockRedstoneTorch extends BlockTorch {
      * Returns true if the given block ID is equivalent to this one. Example: redstoneTorchOn matches itself and
      * redstoneTorchOff, and vice versa. Most blocks only match themselves.
      */
+    @Override
     public boolean isAssociatedBlockID(int par1) {
         return par1 == Block.torchRedstoneIdle.blockID || par1 == Block.torchRedstoneActive.blockID;
     }

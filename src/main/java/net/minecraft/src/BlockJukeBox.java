@@ -9,6 +9,7 @@ public class BlockJukeBox extends BlockContainer {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         if (par1World.getBlockMetadata(par2, par3, par4) == 0) {
             return false;
@@ -63,6 +64,7 @@ public class BlockJukeBox extends BlockContainer {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         this.ejectRecord(par1World, par2, par3, par4);
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
@@ -71,6 +73,7 @@ public class BlockJukeBox extends BlockContainer {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         if (!par1World.isRemote) {
             super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, 0);
@@ -80,6 +83,7 @@ public class BlockJukeBox extends BlockContainer {
     /**
      * Returns a new instance of a block's tile entity class. Called on placing the block.
      */
+    @Override
     public TileEntity createNewTileEntity(World par1World) {
         return new TileEntityRecordPlayer();
     }
@@ -88,6 +92,7 @@ public class BlockJukeBox extends BlockContainer {
      * If this returns true, then comparators facing away from this block will use the value from
      * getComparatorInputOverride instead of the actual redstone signal strength.
      */
+    @Override
     public boolean hasComparatorInputOverride() {
         return true;
     }
@@ -96,6 +101,7 @@ public class BlockJukeBox extends BlockContainer {
      * If hasComparatorInputOverride returns true, the return value from this is used instead of the redstone signal
      * strength when this block inputs to a comparator.
      */
+    @Override
     public int getComparatorInputOverride(World par1World, int par2, int par3, int par4, int par5) {
         ItemStack var6 = ((TileEntityRecordPlayer) par1World.getBlockTileEntity(par2, par3, par4)).func_110136_a();
         return var6 == null ? 0 : var6.itemID + 1 - Item.record13.itemID;

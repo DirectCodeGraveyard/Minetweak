@@ -18,6 +18,7 @@ public class BlockRedstoneOre extends Block {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return 30;
     }
@@ -25,6 +26,7 @@ public class BlockRedstoneOre extends Block {
     /**
      * Called when the block is clicked by a player. Args: x, y, z, entityPlayer
      */
+    @Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
         this.glow(par1World, par2, par3, par4);
         super.onBlockClicked(par1World, par2, par3, par4, par5EntityPlayer);
@@ -33,6 +35,7 @@ public class BlockRedstoneOre extends Block {
     /**
      * Called whenever an entity is walking on top of this block. Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityWalking(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         this.glow(par1World, par2, par3, par4);
         super.onEntityWalking(par1World, par2, par3, par4, par5Entity);
@@ -41,6 +44,7 @@ public class BlockRedstoneOre extends Block {
     /**
      * Called upon block activation (right click on the block.)
      */
+    @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         this.glow(par1World, par2, par3, par4);
         return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
@@ -60,6 +64,7 @@ public class BlockRedstoneOre extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (this.blockID == Block.oreRedstoneGlowing.blockID) {
             par1World.setBlock(par2, par3, par4, Block.oreRedstone.blockID);
@@ -69,6 +74,7 @@ public class BlockRedstoneOre extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Item.redstone.itemID;
     }
@@ -76,6 +82,7 @@ public class BlockRedstoneOre extends Block {
     /**
      * Returns the usual quantity dropped by the block plus a bonus of 1 to 'i' (inclusive).
      */
+    @Override
     public int quantityDroppedWithBonus(int par1, Random par2Random) {
         return this.quantityDropped(par2Random) + par2Random.nextInt(par1 + 1);
     }
@@ -83,6 +90,7 @@ public class BlockRedstoneOre extends Block {
     /**
      * Returns the quantity of items to drop on block destruction.
      */
+    @Override
     public int quantityDropped(Random par1Random) {
         return 4 + par1Random.nextInt(2);
     }
@@ -90,6 +98,7 @@ public class BlockRedstoneOre extends Block {
     /**
      * Drops the block items with a specified chance of dropping the specified items
      */
+    @Override
     public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         super.dropBlockAsItemWithChance(par1World, par2, par3, par4, par5, par6, par7);
 
@@ -145,6 +154,7 @@ public class BlockRedstoneOre extends Block {
      * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
      * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
      */
+    @Override
     protected ItemStack createStackedBlock(int par1) {
         return new ItemStack(Block.oreRedstone);
     }

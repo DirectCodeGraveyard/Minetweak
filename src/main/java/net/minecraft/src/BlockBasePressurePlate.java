@@ -16,6 +16,7 @@ public abstract class BlockBasePressurePlate extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         this.func_94353_c_(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
     }
@@ -34,6 +35,7 @@ public abstract class BlockBasePressurePlate extends Block {
     /**
      * How many world ticks before ticking
      */
+    @Override
     public int tickRate(World par1World) {
         return 20;
     }
@@ -42,6 +44,7 @@ public abstract class BlockBasePressurePlate extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
+    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
     }
@@ -50,6 +53,7 @@ public abstract class BlockBasePressurePlate extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -57,10 +61,12 @@ public abstract class BlockBasePressurePlate extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
 
+    @Override
     public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         return true;
     }
@@ -68,6 +74,7 @@ public abstract class BlockBasePressurePlate extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
+    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) || BlockFence.isIdAFence(par1World.getBlockId(par2, par3 - 1, par4));
     }
@@ -76,6 +83,7 @@ public abstract class BlockBasePressurePlate extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
+    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         boolean var6 = false;
 
@@ -92,6 +100,7 @@ public abstract class BlockBasePressurePlate extends Block {
     /**
      * Ticks the block if it's been scheduled
      */
+    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         if (!par1World.isRemote) {
             int var6 = this.getPowerSupply(par1World.getBlockMetadata(par2, par3, par4));
@@ -105,6 +114,7 @@ public abstract class BlockBasePressurePlate extends Block {
     /**
      * Triggered whenever an entity collides with this block (enters into the block). Args: world, x, y, z, entity
      */
+    @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         if (!par1World.isRemote) {
             int var6 = this.getPowerSupply(par1World.getBlockMetadata(par2, par3, par4));
@@ -148,6 +158,7 @@ public abstract class BlockBasePressurePlate extends Block {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
+    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         if (this.getPowerSupply(par6) > 0) {
             this.func_94354_b_(par1World, par2, par3, par4);
@@ -166,6 +177,7 @@ public abstract class BlockBasePressurePlate extends Block {
      * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
      * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
+    @Override
     public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return this.getPowerSupply(par1IBlockAccess.getBlockMetadata(par2, par3, par4));
     }
@@ -174,6 +186,7 @@ public abstract class BlockBasePressurePlate extends Block {
      * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
      * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
+    @Override
     public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return par5 == 1 ? this.getPowerSupply(par1IBlockAccess.getBlockMetadata(par2, par3, par4)) : 0;
     }
@@ -181,6 +194,7 @@ public abstract class BlockBasePressurePlate extends Block {
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
+    @Override
     public boolean canProvidePower() {
         return true;
     }
@@ -188,6 +202,7 @@ public abstract class BlockBasePressurePlate extends Block {
     /**
      * Sets the block's bounds for rendering it as an item
      */
+    @Override
     public void setBlockBoundsForItemRender() {
         float var1 = 0.5F;
         float var2 = 0.125F;
@@ -199,6 +214,7 @@ public abstract class BlockBasePressurePlate extends Block {
      * Returns the mobility information of the block, 0 = free, 1 = can't push but can move over, 2 = total immobility
      * and stop pistons
      */
+    @Override
     public int getMobilityFlag() {
         return 1;
     }

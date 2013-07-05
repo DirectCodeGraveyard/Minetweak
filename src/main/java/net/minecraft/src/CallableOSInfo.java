@@ -2,7 +2,7 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableOSInfo implements Callable {
+class CallableOSInfo implements Callable<String> {
     /**
      * Reference to the CrashReport object.
      */
@@ -16,7 +16,8 @@ class CallableOSInfo implements Callable {
         return System.getProperty("os.name") + " (" + System.getProperty("os.arch") + ") version " + System.getProperty("os.version");
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.getOsAsString();
     }
 }

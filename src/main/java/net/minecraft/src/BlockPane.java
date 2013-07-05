@@ -27,6 +27,7 @@ public class BlockPane extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
+    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return !this.canDropItself ? 0 : super.idDropped(par1, par2Random, par3);
     }
@@ -35,6 +36,7 @@ public class BlockPane extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
+    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -42,6 +44,7 @@ public class BlockPane extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
+    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -49,6 +52,7 @@ public class BlockPane extends Block {
     /**
      * The type of render function that is called for this block
      */
+    @Override
     public int getRenderType() {
         return 18;
     }
@@ -57,6 +61,7 @@ public class BlockPane extends Block {
      * Adds all intersecting collision boxes to a list. (Be sure to only add boxes to the list if they intersect the
      * mask.) Parameters: World, X, Y, Z, mask, list, colliding entity
      */
+    @Override
     public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
         boolean var8 = this.canThisPaneConnectToThisBlockID(par1World.getBlockId(par2, par3, par4 - 1));
         boolean var9 = this.canThisPaneConnectToThisBlockID(par1World.getBlockId(par2, par3, par4 + 1));
@@ -93,6 +98,7 @@ public class BlockPane extends Block {
     /**
      * Sets the block's bounds for rendering it as an item
      */
+    @Override
     public void setBlockBoundsForItemRender() {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
     }
@@ -100,6 +106,7 @@ public class BlockPane extends Block {
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
+    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         float var5 = 0.4375F;
         float var6 = 0.5625F;
@@ -146,6 +153,7 @@ public class BlockPane extends Block {
     /**
      * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
      */
+    @Override
     protected boolean canSilkHarvest() {
         return true;
     }
@@ -154,6 +162,7 @@ public class BlockPane extends Block {
      * Returns an item stack containing a single instance of the current block type. 'i' is the block's subtype/damage
      * and is ignored for blocks which do not support subtypes. Blocks which cannot be harvested should return null.
      */
+    @Override
     protected ItemStack createStackedBlock(int par1) {
         return new ItemStack(this.blockID, 1, par1);
     }

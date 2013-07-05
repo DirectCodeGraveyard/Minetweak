@@ -4,7 +4,7 @@ import net.minecraft.server.MinecraftServer;
 
 import java.util.concurrent.Callable;
 
-public class CallableServerProfiler implements Callable {
+public class CallableServerProfiler implements Callable<String> {
     /**
      * Reference to the MinecraftServer object.
      */
@@ -24,7 +24,8 @@ public class CallableServerProfiler implements Callable {
         return var1 + " (" + var2 + " bytes; " + var3 + " MB) allocated, " + var4 + " (" + var5 + " bytes; " + var6 + " MB) used";
     }
 
-    public Object call() {
+    @Override
+    public String call() {
         return this.callServerProfiler();
     }
 }
