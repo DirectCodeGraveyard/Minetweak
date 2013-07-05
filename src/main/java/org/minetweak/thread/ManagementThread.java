@@ -19,6 +19,9 @@ public class ManagementThread extends Thread {
         }
     }
 
+    /**
+     * This loads the bans in the thread, allowing for not-in game changes
+     */
     public void loadBans() {
         MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().loadBanList();
         MinecraftServer.getServer().getConfigurationManager().getBannedIPs().loadBanList();
