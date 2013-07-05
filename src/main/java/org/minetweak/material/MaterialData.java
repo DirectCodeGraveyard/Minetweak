@@ -1,7 +1,7 @@
-package org.minetweak.material.materials;
+package org.minetweak.material;
 
-import org.bukkit.inventory.ItemStack;
-import org.minetweak.material.Material;
+
+import net.minecraft.src.ItemStack;
 
 /**
  * Handles specific metadata for certain items or blocks
