@@ -42,7 +42,6 @@ public class ManagementThread extends Thread {
      */
     public void loadPerms() {
         PermissionsLoader.load();
-        PermissionsLoader.save();
     }
 
     @Subscribe
