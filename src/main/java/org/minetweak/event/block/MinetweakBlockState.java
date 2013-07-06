@@ -3,32 +3,32 @@ package org.minetweak.event.block;
 import org.minetweak.material.Material;
 import org.minetweak.material.MaterialData;
 import org.minetweak.world.Chunk;
-import org.minetweak.world.MineTweakChunk;
-import org.minetweak.world.MineTweakWorld;
+import org.minetweak.world.MinetweakChunk;
+import org.minetweak.world.MinetweakWorld;
 import org.minetweak.world.World;
 
-public class MineTweakBlockState implements BlockState {
-    private final MineTweakWorld world;
-    private final MineTweakChunk chunk;
+public class MinetweakBlockState implements BlockState {
+    private final MinetweakWorld world;
+    private final MinetweakChunk chunk;
     private final int x;
     private final int y;
     private final int z;
     protected int type;
     protected MaterialData data;
 
-    public MineTweakBlockState(final Block block) {
-        this.world = (MineTweakWorld) block.getWorld();
+    public MinetweakBlockState(final Block block) {
+        this.world = (MinetweakWorld) block.getWorld();
         this.x = block.getX();
         this.y = block.getY();
         this.z = block.getZ();
         this.type = block.getTypeId();
-        this.chunk = (MineTweakChunk) block.getChunk();
+        this.chunk = (MinetweakChunk) block.getChunk();
 
         createData(block.getData());
     }
 
-    public static MineTweakBlockState getBlockState(net.minecraft.src.World world, int x, int y, int z) {
-        return new MineTweakBlockState(world.getWorld().getBlockAt(x, y, z));
+    public static MinetweakBlockState getBlockState(net.minecraft.src.World world, int x, int y, int z) {
+        return new MinetweakBlockState(world.getWorld().getBlockAt(x, y, z));
     }
 
     public World getWorld() {
@@ -145,7 +145,7 @@ public class MineTweakBlockState implements BlockState {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final MineTweakBlockState other = (MineTweakBlockState) obj;
+        final MinetweakBlockState other = (MinetweakBlockState) obj;
         if (this.world != other.world && (this.world == null || !this.world.equals(other.world))) {
             return false;
         }

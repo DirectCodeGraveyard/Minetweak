@@ -1,11 +1,11 @@
 package org.minetweak.world;
 
 import org.minetweak.event.block.Block;
-import org.minetweak.event.block.MineTweakBlock;
+import org.minetweak.event.block.MinetweakBlock;
 
 import java.lang.ref.WeakReference;
 
-public class MineTweakChunk implements Chunk {
+public class MinetweakChunk implements Chunk {
     private WeakReference<net.minecraft.src.Chunk> weakChunk;
     private final net.minecraft.src.WorldServer worldServer;
     private final int x;
@@ -14,7 +14,7 @@ public class MineTweakChunk implements Chunk {
     private static final short[] emptyBlockIDs = new short[4096];
     private static final byte[] emptySkyLight = new byte[2048];
 
-    public MineTweakChunk(net.minecraft.src.Chunk chunk) {
+    public MinetweakChunk(net.minecraft.src.Chunk chunk) {
         if (!(chunk instanceof net.minecraft.src.EmptyChunk)) {
             this.weakChunk = new WeakReference<net.minecraft.src.Chunk>(chunk);
         }
@@ -28,8 +28,8 @@ public class MineTweakChunk implements Chunk {
         return worldServer.getWorld();
     }
 
-    public MineTweakWorld getCraftWorld() {
-        return (MineTweakWorld) getWorld();
+    public MinetweakWorld getCraftWorld() {
+        return (MinetweakWorld) getWorld();
     }
 
     public net.minecraft.src.Chunk getHandle() {
@@ -60,6 +60,6 @@ public class MineTweakChunk implements Chunk {
     }
 
     public Block getBlock(int x, int y, int z) {
-        return new MineTweakBlock(this, (getX() << 4) | (x & 0xF), y & 0xFF, (getZ() << 4) | (z & 0xF));
+        return new MinetweakBlock(this, (getX() << 4) | (x & 0xF), y & 0xFF, (getZ() << 4) | (z & 0xF));
     }
 }

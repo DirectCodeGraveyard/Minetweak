@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import org.minetweak.world.MinetweakChunk;
+
 import java.util.*;
 
 public class Chunk {
@@ -122,7 +124,7 @@ public class Chunk {
 
         if (!(this instanceof EmptyChunk))
         {
-            this.MineTweakChunk = new org.minetweak.world.MineTweakChunk(this);
+            this.MineTweakChunk = new MinetweakChunk(this);
         }
         Arrays.fill(this.blockBiomeArray, (byte) -1);
     }

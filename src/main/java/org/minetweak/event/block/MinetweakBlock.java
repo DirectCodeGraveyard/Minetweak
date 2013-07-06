@@ -2,16 +2,16 @@ package org.minetweak.event.block;
 
 import org.minetweak.material.Material;
 import org.minetweak.world.Chunk;
-import org.minetweak.world.MineTweakChunk;
+import org.minetweak.world.MinetweakChunk;
 import org.minetweak.world.World;
 
-public class MineTweakBlock implements Block {
-    private final MineTweakChunk chunk;
+public class MinetweakBlock implements Block {
+    private final MinetweakChunk chunk;
     private final int x;
     private final int y;
     private final int z;
 
-    public MineTweakBlock(MineTweakChunk chunk, int x, int y, int z) {
+    public MinetweakBlock(MinetweakChunk chunk, int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -45,10 +45,10 @@ public class MineTweakBlock implements Block {
     public BlockState getState() {
         Material material = getType();
         if (material == null)
-            return new MineTweakBlockState(this);
+            return new MinetweakBlockState(this);
         switch (material) {
             default:
-                return new MineTweakBlockState(this);
+                return new MinetweakBlockState(this);
         }
     }
 

@@ -2,11 +2,11 @@ package org.minetweak.world;
 
 import org.minetweak.event.block.Block;
 
-public class MineTweakWorld implements World  {
+public class MinetweakWorld implements World  {
 
     private final net.minecraft.src.WorldServer world;
 
-    public MineTweakWorld(net.minecraft.src.WorldServer world) {
+    public MinetweakWorld(net.minecraft.src.WorldServer world) {
         this.world = world;
     }
 

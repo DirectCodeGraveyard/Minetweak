@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
-import org.minetweak.event.block.MineTweakBlockState;
+import org.minetweak.event.block.MinetweakBlockState;
+import org.minetweak.event.helper.MinetweakEventFactory;
 
 public class ItemBlock extends Item {
     /**
@@ -75,10 +76,10 @@ public class ItemBlock extends Item {
 
     public static boolean processBlockPlace(final World world, final EntityPlayer entityplayer, final ItemStack itemstack, final int x, final int y, final int z, final int id, final int data, final int clickedX, final int clickedY, final int clickedZ)
     {
-        org.minetweak.event.block.BlockState blockstate = MineTweakBlockState.getBlockState(world, x, y, z);
+        org.minetweak.event.block.BlockState blockstate = MinetweakBlockState.getBlockState(world, x, y, z);
         world.callingPlaceEvent = true;
         world.setBlock(x, y, z, id, data, 2);
-        org.minetweak.event.block.BlockPlaceEvent event = org.minetweak.event.helper.MineTweakEventFactory.callBlockPlaceEvent(world, entityplayer, blockstate, clickedX, clickedY, clickedZ);
+        org.minetweak.event.block.BlockPlaceEvent event = MinetweakEventFactory.callBlockPlaceEvent(world, entityplayer, blockstate, clickedX, clickedY, clickedZ);
 
         if (event.isCancelled() || !event.canBuild())
         {
