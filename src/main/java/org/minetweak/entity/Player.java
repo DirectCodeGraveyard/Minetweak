@@ -208,4 +208,8 @@ public class Player implements CommandSender {
         getPlayerMP().getFoodStats().setFoodLevel(level);
     }
 
+    public ItemStack getHeldItem() {
+        return getPlayerMP().getHeldItem();
+    }
+
 }
