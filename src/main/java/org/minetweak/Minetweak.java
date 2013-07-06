@@ -67,9 +67,6 @@ public class Minetweak {
         System.out.println("Success is very tasty.");
         System.out.println("Minetweak v" + getServerVersion() + " using Minecraft v" + getMinecraftVersion());
 
-        PermissionsLoader.load();
-        PermissionsLoader.save();
-
         registerServerCommands();
 
         registerListener(RecipeManager.getInstance());
@@ -245,6 +242,7 @@ public class Minetweak {
         registerCommand("motd", new CommandMotd());
         registerCommand("pardon", new CommandPardon());
         registerCommand("reload", new CommandReload());
+        registerCommand("loaddata", new CommandLoadData());
     }
 
     public static HashMap<String, Player> getPlayers() {

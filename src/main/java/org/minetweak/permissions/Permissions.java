@@ -1,14 +1,13 @@
 package org.minetweak.permissions;
 
+import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Permissions {
     protected static HashMap<String, ArrayList<String>> permissions = new HashMap<String, ArrayList<String>>();
-
-    public static boolean doesUserHavePermission(String user, String node) {
-        return permissions.containsKey(user) && permissions.get(user).contains(node);
-    }
 
     public static boolean addPermission(String user, String permission) {
         ArrayList<String> perms = new ArrayList<String>();
@@ -44,17 +43,7 @@ public class Permissions {
 
     public static boolean hasPermission(String user, String permission) {
         ArrayList<String> perms = permissions.get(user);
-        if (perms==null) {
-            return false;
-        }
-        for (String perm : perms) {
-            if (permission.equals(perm)) {
-                return true;
-            } else if (perm.equals("*")) {
-                return true;
-            }
-        }
-        return false;
+        return perms != null && (perms.contains("*") || perms.contains(permission)) || MinecraftServer.getServer().getConfigurationManager().getOps().contains(user);
     }
 
     public static ArrayList<String> getPermissions(String user) {
