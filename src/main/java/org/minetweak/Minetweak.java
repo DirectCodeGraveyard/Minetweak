@@ -9,6 +9,7 @@ import org.minetweak.plugins.PluginLoaderHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -244,5 +245,9 @@ public class Minetweak {
         registerCommand("motd", new CommandMotd());
         registerCommand("pardon", new CommandPardon());
         registerCommand("reload", new CommandReload());
+    }
+
+    public static HashMap<String, Player> getPlayers() {
+        return players;
     }
 }

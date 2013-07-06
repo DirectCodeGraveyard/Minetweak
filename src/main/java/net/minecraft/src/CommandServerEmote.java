@@ -23,9 +23,9 @@ public class CommandServerEmote extends CommandBase {
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         if (par2ArrayOfStr.length > 0) {
             String var3 = func_82361_a(par1ICommandSender, par2ArrayOfStr, 0, par1ICommandSender.canCommandSenderUseCommand(1, "me"));
-            MinecraftServer.getServer().getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("chat.type.emote", new Object[]{par1ICommandSender.getCommandSenderName(), var3}));
+            MinecraftServer.getServer().getConfigurationManager().func_110460_a(ChatMessageComponent.func_111082_b("chat.type.emote", par1ICommandSender.getCommandSenderName(), var3));
         } else {
-            throw new WrongUsageException("commands.me.usage", new Object[0]);
+            throw new WrongUsageException("commands.me.usage");
         }
     }
 

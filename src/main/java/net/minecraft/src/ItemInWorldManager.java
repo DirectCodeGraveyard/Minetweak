@@ -301,6 +301,7 @@ public class ItemInWorldManager {
                 }
             }
 
+            Block.blocksList[var4].harvestBlock(this.theWorld, this.thisPlayerMP, par1, par2, par3, i1);
             flag = this.removeBlock(par1, par2, par3);
         }
 
