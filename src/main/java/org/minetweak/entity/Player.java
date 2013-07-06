@@ -212,4 +212,8 @@ public class Player implements CommandSender {
         return getPlayerMP().getHeldItem();
     }
 
+    public void addPotionEffect(PotionEffect potionEffect) {
+        getPlayerMP().addPotionEffect(potionEffect);
+    }
+
 }
