@@ -200,4 +200,12 @@ public class Player implements CommandSender {
         getPlayerMP().setPlayerHealthUpdated();
     }
 
+    public int getPlayerHunger() {
+        return getPlayerMP().getFoodStats().getFoodLevel();
+    }
+
+    public void setPlayerHunger(int level) {
+        getPlayerMP().getFoodStats().setFoodLevel(level);
+    }
+
 }

@@ -127,4 +127,9 @@ public class FoodStats {
     public float getSaturationLevel() {
         return this.foodSaturationLevel;
     }
+
+    public void setFoodLevel(int level) {
+        foodLevel = level;
+    }
+
 }
