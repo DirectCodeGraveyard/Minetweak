@@ -220,4 +220,19 @@ public class Player implements CommandSender {
         getPlayerMP().triggerAchievement(awardedAchievement);
     }
 
+    /**
+     * Set the player on fire for an amount of time, in seconds.
+     * @param seconds
+     */
+    public void setFire(int seconds) {
+        getPlayerMP().setFire(seconds);
+    }
+
+    /**
+     * Extinguish the player from fire.
+     */
+    public void extinguishFire() {
+        getPlayerMP().extinguish();
+    }
+
 }
