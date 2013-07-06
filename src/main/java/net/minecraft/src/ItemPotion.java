@@ -1,5 +1,8 @@
 package net.minecraft.src;
 
+import org.minetweak.Minetweak;
+import org.minetweak.event.player.PlayerDrinkPotionEvent;
+
 import java.util.*;
 
 public class ItemPotion extends Item {
@@ -72,6 +75,7 @@ public class ItemPotion extends Item {
                 while (var5.hasNext()) {
                     PotionEffect var6 = (PotionEffect) var5.next();
                     par3EntityPlayer.addPotionEffect(new PotionEffect(var6));
+                    Minetweak.getEventBus().post(new PlayerDrinkPotionEvent(Minetweak.getPlayerByName(par3EntityPlayer.getEntityName()), new PotionEffect(var6)));
                 }
             }
         }
