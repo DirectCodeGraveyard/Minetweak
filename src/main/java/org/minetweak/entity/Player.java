@@ -216,4 +216,8 @@ public class Player implements CommandSender {
         getPlayerMP().addPotionEffect(potionEffect);
     }
 
+    public void awardAchievement(Achievement awardedAchievement) {
+        getPlayerMP().triggerAchievement(awardedAchievement);
+    }
+
 }
