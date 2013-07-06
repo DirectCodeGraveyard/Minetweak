@@ -85,7 +85,7 @@ public abstract class ServerConfigurationManager {
         this.mcServer.logInfo(par2EntityPlayerMP.getCommandSenderName() + "[" + var4 + "] logged in with entity id " + par2EntityPlayerMP.entityId + " at (" + par2EntityPlayerMP.posX + ", " + par2EntityPlayerMP.posY + ", " + par2EntityPlayerMP.posZ + ")");
         WorldServer var5 = this.mcServer.worldServerForDimension(par2EntityPlayerMP.dimension);
         ChunkCoordinates var6 = var5.getSpawnPoint();
-        this.func_72381_a(par2EntityPlayerMP, (EntityPlayerMP) null, var5);
+        this.func_72381_a(par2EntityPlayerMP, null, var5);
         NetServerHandler var7 = new NetServerHandler(this.mcServer, par1INetworkManager, par2EntityPlayerMP);
         var7.sendPacket(new Packet1Login(par2EntityPlayerMP.entityId, var5.getWorldInfo().getTerrainType(), par2EntityPlayerMP.theItemInWorldManager.getGameType(), var5.getWorldInfo().isHardcoreModeEnabled(), var5.provider.dimensionId, var5.difficultySetting, var5.getHeight(), this.getMaxPlayers()));
         var7.sendPacket(new Packet6SpawnPosition(var6.posX, var6.posY, var6.posZ));
@@ -103,10 +103,8 @@ public abstract class ServerConfigurationManager {
             par2EntityPlayerMP.requestTexturePackLoad(this.mcServer.getTexturePack(), this.mcServer.textureSize());
         }
 
-        Iterator var8 = par2EntityPlayerMP.getActivePotionEffects().iterator();
-
-        while (var8.hasNext()) {
-            PotionEffect var9 = (PotionEffect) var8.next();
+        for (Object o : par2EntityPlayerMP.getActivePotionEffects()) {
+            PotionEffect var9 = (PotionEffect) o;
             var7.sendPacket(new Packet41EntityEffect(par2EntityPlayerMP.entityId, var9));
         }
 
@@ -128,10 +126,9 @@ public abstract class ServerConfigurationManager {
 
     protected void func_96456_a(ServerScoreboard par1ServerScoreboard, EntityPlayerMP par2EntityPlayerMP) {
         HashSet var3 = new HashSet();
-        Iterator var4 = par1ServerScoreboard.func_96525_g().iterator();
 
-        while (var4.hasNext()) {
-            ScorePlayerTeam var5 = (ScorePlayerTeam) var4.next();
+        for (Object o : par1ServerScoreboard.func_96525_g()) {
+            ScorePlayerTeam var5 = (ScorePlayerTeam) o;
             par2EntityPlayerMP.playerNetServerHandler.sendPacket(new Packet209SetPlayerTeam(var5, 0));
         }
 
@@ -140,10 +137,9 @@ public abstract class ServerConfigurationManager {
 
             if (var10 != null && !var3.contains(var10)) {
                 List var6 = par1ServerScoreboard.func_96550_d(var10);
-                Iterator var7 = var6.iterator();
 
-                while (var7.hasNext()) {
-                    Packet var8 = (Packet) var7.next();
+                for (Object aVar6 : var6) {
+                    Packet var8 = (Packet) aVar6;
                     par2EntityPlayerMP.playerNetServerHandler.sendPacket(var8);
                 }
 
@@ -178,7 +174,6 @@ public abstract class ServerConfigurationManager {
      * called during player login. reads the player information from disk.
      */
     public NBTTagCompound readPlayerDataFromFile(EntityPlayerMP par1EntityPlayerMP) {
-        NBTTagCompound var2 = this.mcServer.worldServers[0].getWorldInfo().getPlayerNBTTagCompound();
         NBTTagCompound var3;
 
         var3 = this.playerNBTManagerObj.readPlayerData(par1EntityPlayerMP);
@@ -201,10 +196,10 @@ public abstract class ServerConfigurationManager {
         this.playerEntityList.add(par1EntityPlayerMP);
         WorldServer var2 = this.mcServer.worldServerForDimension(par1EntityPlayerMP.dimension);
         var2.spawnEntityInWorld(par1EntityPlayerMP);
-        this.func_72375_a(par1EntityPlayerMP, (WorldServer) null);
+        this.func_72375_a(par1EntityPlayerMP, null);
 
-        for (int var3 = 0; var3 < this.playerEntityList.size(); ++var3) {
-            EntityPlayerMP var4 = (EntityPlayerMP) this.playerEntityList.get(var3);
+        for (Object aPlayerEntityList : this.playerEntityList) {
+            EntityPlayerMP var4 = (EntityPlayerMP) aPlayerEntityList;
             par1EntityPlayerMP.playerNetServerHandler.sendPacket(new Packet201PlayerInfo(var4.getCommandSenderName(), true, var4.ping));
         }
     }
@@ -277,18 +272,16 @@ public abstract class ServerConfigurationManager {
         ArrayList var2 = new ArrayList();
         EntityPlayerMP var4;
 
-        for (int var3 = 0; var3 < this.playerEntityList.size(); ++var3) {
-            var4 = (EntityPlayerMP) this.playerEntityList.get(var3);
+        for (Object aPlayerEntityList : this.playerEntityList) {
+            var4 = (EntityPlayerMP) aPlayerEntityList;
 
             if (var4.getCommandSenderName().equalsIgnoreCase(par1Str)) {
                 var2.add(var4);
             }
         }
 
-        Iterator var5 = var2.iterator();
-
-        while (var5.hasNext()) {
-            var4 = (EntityPlayerMP) var5.next();
+        for (Object aVar2 : var2) {
+            var4 = (EntityPlayerMP) aVar2;
             var4.playerNetServerHandler.kickPlayer("You logged in from another location");
         }
 
@@ -379,10 +372,9 @@ public abstract class ServerConfigurationManager {
         par1EntityPlayerMP.theItemInWorldManager.setWorld(var5);
         this.updateTimeAndWeatherForPlayer(par1EntityPlayerMP, var5);
         this.syncPlayerInventory(par1EntityPlayerMP);
-        Iterator var6 = par1EntityPlayerMP.getActivePotionEffects().iterator();
 
-        while (var6.hasNext()) {
-            PotionEffect var7 = (PotionEffect) var6.next();
+        for (Object o : par1EntityPlayerMP.getActivePotionEffects()) {
+            PotionEffect var7 = (PotionEffect) o;
             par1EntityPlayerMP.playerNetServerHandler.sendPacket(new Packet41EntityEffect(par1EntityPlayerMP.entityId, var7));
         }
     }
@@ -473,8 +465,8 @@ public abstract class ServerConfigurationManager {
      * sends a packet to all players
      */
     public void sendPacketToAllPlayers(Packet par1Packet) {
-        for (int var2 = 0; var2 < this.playerEntityList.size(); ++var2) {
-            ((EntityPlayerMP) this.playerEntityList.get(var2)).playerNetServerHandler.sendPacket(par1Packet);
+        for (Object aPlayerEntityList : this.playerEntityList) {
+            ((EntityPlayerMP) aPlayerEntityList).playerNetServerHandler.sendPacket(par1Packet);
         }
     }
 
@@ -482,8 +474,8 @@ public abstract class ServerConfigurationManager {
      * Sends a packet to all players in the specified Dimension
      */
     public void sendPacketToAllPlayersInDimension(Packet par1Packet, int par2) {
-        for (int var3 = 0; var3 < this.playerEntityList.size(); ++var3) {
-            EntityPlayerMP var4 = (EntityPlayerMP) this.playerEntityList.get(var3);
+        for (Object aPlayerEntityList : this.playerEntityList) {
+            EntityPlayerMP var4 = (EntityPlayerMP) aPlayerEntityList;
 
             if (var4.dimension == par2) {
                 var4.playerNetServerHandler.sendPacket(par1Packet);
@@ -537,7 +529,6 @@ public abstract class ServerConfigurationManager {
         Player player = Minetweak.getPlayerByName(par1Str);
         if (player == null) {
             Minetweak.getEventBus().post(new PlayerOpEvent(par1Str));
-            return;
         } else Minetweak.getEventBus().post(new PlayerOpEvent(player));
     }
 
@@ -549,7 +540,6 @@ public abstract class ServerConfigurationManager {
         Player player = Minetweak.getPlayerByName(par1Str);
         if (player == null) {
             Minetweak.getEventBus().post(new PlayerDeopEvent(par1Str));
-            return;
         } else Minetweak.getEventBus().post(new PlayerDeopEvent(player));
     }
 
@@ -610,8 +600,8 @@ public abstract class ServerConfigurationManager {
                 par10Str = par10Str.substring(1);
             }
 
-            for (int var18 = 0; var18 < this.playerEntityList.size(); ++var18) {
-                EntityPlayerMP var19 = (EntityPlayerMP) this.playerEntityList.get(var18);
+            for (Object aPlayerEntityList : this.playerEntityList) {
+                EntityPlayerMP var19 = (EntityPlayerMP) aPlayerEntityList;
 
                 if ((par11World == null || var19.worldObj == par11World) && (par9Str == null || var14 != par9Str.equalsIgnoreCase(var19.getEntityName()))) {
                     if (par10Str != null) {
@@ -684,11 +674,11 @@ public abstract class ServerConfigurationManager {
                 Score var9 = par1EntityPlayer.getWorldScoreboard().func_96529_a(par1EntityPlayer.getEntityName(), var8);
                 var10 = var9.func_96652_c();
 
-                if (var10 < ((Integer) var4.getValue()).intValue() && var6) {
+                if (var10 < (Integer) var4.getValue() && var6) {
                     return false;
                 }
             }
-            while (var10 <= ((Integer) var4.getValue()).intValue() || var6);
+            while (var10 <= (Integer) var4.getValue() || var6);
 
             return false;
         } else {
@@ -708,8 +698,8 @@ public abstract class ServerConfigurationManager {
      * dx*dx+dy*dy+dz*dz<d*d
      */
     public void sendToAllNearExcept(EntityPlayer par1EntityPlayer, double par2, double par4, double par6, double par8, int par10, Packet par11Packet) {
-        for (int var12 = 0; var12 < this.playerEntityList.size(); ++var12) {
-            EntityPlayerMP var13 = (EntityPlayerMP) this.playerEntityList.get(var12);
+        for (Object aPlayerEntityList : this.playerEntityList) {
+            EntityPlayerMP var13 = (EntityPlayerMP) aPlayerEntityList;
 
             if (var13 != par1EntityPlayer && var13.dimension == par10) {
                 double var14 = par2 - var13.posX;
@@ -727,8 +717,8 @@ public abstract class ServerConfigurationManager {
      * Saves all of the players' current states.
      */
     public void saveAllPlayerData() {
-        for (int var1 = 0; var1 < this.playerEntityList.size(); ++var1) {
-            this.writePlayerData((EntityPlayerMP) this.playerEntityList.get(var1));
+        for (Object aPlayerEntityList : this.playerEntityList) {
+            this.writePlayerData((EntityPlayerMP) aPlayerEntityList);
         }
     }
 
@@ -814,10 +804,9 @@ public abstract class ServerConfigurationManager {
 
     public List getPlayerList(String par1Str) {
         ArrayList var2 = new ArrayList();
-        Iterator var3 = this.playerEntityList.iterator();
 
-        while (var3.hasNext()) {
-            EntityPlayerMP var4 = (EntityPlayerMP) var3.next();
+        for (Object aPlayerEntityList : this.playerEntityList) {
+            EntityPlayerMP var4 = (EntityPlayerMP) aPlayerEntityList;
 
             if (var4.getPlayerIP().equals(par1Str)) {
                 var2.add(var4);

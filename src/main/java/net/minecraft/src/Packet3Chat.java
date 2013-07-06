@@ -16,11 +16,11 @@ public class Packet3Chat extends Packet {
     }
 
     public Packet3Chat(ChatMessageComponent par1ChatMessageComponent) {
-        this(par1ChatMessageComponent.func_111062_i());
+        this(par1ChatMessageComponent.toJSON());
     }
 
     public Packet3Chat(ChatMessageComponent par1ChatMessageComponent, boolean par2) {
-        this(par1ChatMessageComponent.func_111062_i(), par2);
+        this(par1ChatMessageComponent.toJSON(), par2);
     }
 
     public Packet3Chat(String par1Str) {

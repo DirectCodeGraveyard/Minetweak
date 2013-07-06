@@ -1,6 +1,8 @@
 package org.minetweak.command;
 
+import org.minetweak.Minetweak;
 import org.minetweak.Server;
+import org.minetweak.entity.Player;
 
 public class CommandStop extends CommandExecutor {
 
@@ -14,6 +16,11 @@ public class CommandStop extends CommandExecutor {
         }
 
         Server.broadcastMessage("Stopping the server...");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Server.shutdownServer();
     }
 

@@ -1,7 +1,7 @@
 package org.minetweak;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.CommandBase;
+import net.minecraft.src.ChatMessageComponent;
 import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.EnumChatFormatting;
 import org.minetweak.command.Console;
@@ -13,8 +13,7 @@ public class Server {
 
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
-            String var3 = CommandBase.func_82361_a(null, new String[]{message}, 0, true);
-            MinecraftServer.getServer().getConfigurationManager().sendChatMsg(String.format("[%s] %s", "Server", var3));
+            MinecraftServer.getServer().getConfigurationManager().sendChatToAllPlayers(ChatMessageComponent.func_111077_e(String.format("[%s] %s", "Server", message)), true);
             return true;
         } else {
             return false;
@@ -51,6 +50,7 @@ public class Server {
 
     public static void shutdownServer() {
         MinecraftServer.getServer().initiateShutdown();
+        MinecraftServer.getServer().stopServer();
     }
 
     public static void handleCommand(EntityPlayerMP player, String command) {
