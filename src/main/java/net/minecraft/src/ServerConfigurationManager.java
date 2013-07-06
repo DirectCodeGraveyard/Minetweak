@@ -849,7 +849,7 @@ public abstract class ServerConfigurationManager {
      * Kicks everyone with "Server closed" as reason.
      */
     public void removeAllPlayers() {
-        String message = MinetweakConfig.get("server.stop.message");
+        String message = MinetweakConfig.get("server.stop.message", "Stopping Server");
         while (!this.playerEntityList.isEmpty()) {
             ((EntityPlayerMP) this.playerEntityList.get(0)).playerNetServerHandler.kickPlayer(message);
         }
