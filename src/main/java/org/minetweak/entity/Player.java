@@ -190,4 +190,30 @@ public class Player implements CommandSender {
     public float getSpeedOnGround() {
         return getPlayerMP().getSpeedOnGround();
     }
+
+    public float getPlayerHealth() {
+        return getPlayerMP().prevHealth;
+    }
+
+    public void setPlayerHealth(float health) {
+        getPlayerMP().setEntityHealth(health);
+        getPlayerMP().setPlayerHealthUpdated();
+    }
+
+    public int getPlayerHunger() {
+        return getPlayerMP().getFoodStats().getFoodLevel();
+    }
+
+    public void setPlayerHunger(int level) {
+        getPlayerMP().getFoodStats().setFoodLevel(level);
+    }
+
+    public ItemStack getHeldItem() {
+        return getPlayerMP().getHeldItem();
+    }
+
+    public void addPotionEffect(PotionEffect potionEffect) {
+        getPlayerMP().addPotionEffect(potionEffect);
+    }
+
 }
