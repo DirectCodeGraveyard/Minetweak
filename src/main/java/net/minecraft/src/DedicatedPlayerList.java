@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.config.MinetweakConfig;
 
 import java.io.*;
 import java.util.Iterator;
@@ -33,8 +34,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
 
     public void setWhiteListEnabled(boolean par1) {
         super.setWhiteListEnabled(par1);
-        this.getDedicatedServerInstance().setProperty("white-list", Boolean.valueOf(par1));
-        this.getDedicatedServerInstance().saveProperties();
+        MinetweakConfig.set("server.whitelist-enabled", "" + par1);
     }
 
     /**
