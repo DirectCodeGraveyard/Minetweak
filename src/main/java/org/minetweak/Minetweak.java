@@ -67,6 +67,8 @@ public class Minetweak {
         System.out.println("Success is very tasty.");
         System.out.println("Minetweak v" + getServerVersion() + " using Minecraft v" + getMinecraftVersion());
 
+        PermissionsLoader.load();
+
         registerServerCommands();
 
         registerListener(RecipeManager.getInstance());

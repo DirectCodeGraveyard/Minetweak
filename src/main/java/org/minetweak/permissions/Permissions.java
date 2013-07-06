@@ -1,7 +1,6 @@
 package org.minetweak.permissions;
 
 import net.minecraft.server.MinecraftServer;
-import org.minetweak.Minetweak;
 
 import java.util.ArrayList;
 import java.util.HashMap;

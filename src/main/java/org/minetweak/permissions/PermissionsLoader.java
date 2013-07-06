@@ -3,6 +3,7 @@ package org.minetweak.permissions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.io.IOUtils;
+import org.minetweak.Minetweak;
 
 import java.io.*;
 
@@ -27,7 +28,9 @@ public class PermissionsLoader {
                 reader.close();
                 return;
             } else {
-                System.out.println("Permissions Changed.");
+                if (Minetweak.isServerDoneLoading()) {
+                    Minetweak.info("Detected Permissions File Change. Loading....");
+                }
                 lastData = data;
             }
             PermissionsFile permissionsFile = gson.fromJson(data, PermissionsFile.class);
@@ -47,7 +50,6 @@ public class PermissionsLoader {
     }
 
     public static void save() {
-        System.out.println("Saving Permissions");
         try {
             file.delete();
             file.createNewFile();

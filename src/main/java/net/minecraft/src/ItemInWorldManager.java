@@ -219,21 +219,24 @@ public class ItemInWorldManager {
 
         if (this.thisPlayerMP != null)
         {
+            if (this.isCreative() && this.thisPlayerMP.getCurrentEquippedItem()!=null && this.thisPlayerMP.getCurrentEquippedItem().getItem().equals(Item.swordDiamond)) {
+                return false;
+            }
             org.minetweak.event.block.Block block = this.theWorld.getWorld().getBlockAt(par1, par2, par3);
 
-            if (theWorld.getBlockTileEntity(par1, par2, par3) == null)
-            {
+            if (theWorld.getBlockTileEntity(par1, par2, par3) == null) {
                 Packet53BlockChange packet = new Packet53BlockChange(par1, par2, par3, this.theWorld);
                 packet.type = 0;
                 packet.metadata = 0;
                 this.thisPlayerMP.playerNetServerHandler.sendPacket(packet);
             }
 
+
             event = new BlockBreakEvent(block, Minetweak.getPlayerByName(this.thisPlayerMP.username));
-            event.setCancelled(this.gameType.isAdventure() && !this.thisPlayerMP.canCurrentToolHarvestBlock(par1, par2, par3));
+            event.setCancelled(this.gameType.isAdventure() || !this.thisPlayerMP.canCurrentToolHarvestBlock(par1, par2, par3));
             Block nmsBlock = Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
 
-            if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && this.thisPlayerMP.canHarvestBlock(nmsBlock))
+            if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && !this.thisPlayerMP.canHarvestBlock(nmsBlock))
             {
                 if (!(nmsBlock.func_71906_q_CodeFix_Public() && EnchantmentHelper.getSilkTouchModifier(this.thisPlayerMP)))
                 {
@@ -287,8 +290,6 @@ public class ItemInWorldManager {
         else
         {
             ItemStack itemstack = this.thisPlayerMP.getCurrentEquippedItem();
-            boolean flag1 = false;
-            Block block = Block.blocksList[l];
             int var4 = this.theWorld.getBlockId(par1, par2, par3);
 
             if (itemstack != null)
@@ -300,8 +301,9 @@ public class ItemInWorldManager {
                     this.thisPlayerMP.destroyCurrentEquippedItem();
                 }
             }
-
-            Block.blocksList[var4].harvestBlock(this.theWorld, this.thisPlayerMP, par1, par2, par3, i1);
+            if (this.thisPlayerMP.canHarvestBlock(Block.blocksList[var4])) {
+                Block.blocksList[var4].harvestBlock(this.theWorld, this.thisPlayerMP, par1, par2, par3, i1);
+            }
             flag = this.removeBlock(par1, par2, par3);
         }
 
