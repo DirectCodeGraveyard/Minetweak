@@ -24,6 +24,7 @@ public class PermissionsLoader {
             if (permissionsFile==null || permissionsFile.entries==null) {
                 return;
             }
+            Permissions.permissions.clear();
             for (PermissionsFile.entry entry : permissionsFile.entries) {
                 Permissions.addPermission(entry.player, entry.permission);
             }

@@ -15,6 +15,7 @@ public class ManagementThread extends Thread {
     public void run() {
         while (true) {
             loadBans();
+            loadPerms();
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
@@ -41,6 +42,7 @@ public class ManagementThread extends Thread {
      */
     public void loadPerms() {
         PermissionsLoader.load();
+        PermissionsLoader.save();
     }
 
     @Subscribe
