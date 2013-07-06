@@ -1,8 +1,6 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
-import org.minetweak.Minetweak;
-import org.minetweak.event.item.ItemPickupEvent;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -835,5 +833,9 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
      */
     public ChunkCoordinates getCommandSenderPosition() {
         return new ChunkCoordinates(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY + 0.5D), MathHelper.floor_double(this.posZ));
+    }
+
+    public float getLastHealth() {
+        return lastHealth;
     }
 }

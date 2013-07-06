@@ -175,54 +175,100 @@ public class Player implements CommandSender {
         getPlayerMP().attackEntityFrom(DamageSource.outOfWorld, 5000);
     }
 
+    /**
+     * Check if the player is sleeping in a bed.
+     * @return True if the player is sleeping
+     */
     public boolean isPlayerSleeping() {
         return getNetServerHandler().playerEntity.isPlayerSleeping();
     }
 
+    /**
+     * Set the gamemode of the player.
+     * @param gameType Gametype from EnumGameType
+     */
     public void setGameMode(EnumGameType gameType) {
         getPlayerMP().setGameType(gameType);
     }
 
+    /**
+     * Set the speed on ground.
+     * @param speedFloat Speed parameter
+     */
     public void setSpeedOnGround(float speedFloat) {
         getPlayerMP().setSpeedOnGround(speedFloat);
     }
 
+    /**
+     * Retrieve the speed on ground.
+     * @return Speed on ground
+     */
     public float getSpeedOnGround() {
         return getPlayerMP().getSpeedOnGround();
     }
 
+    /**
+     * Retrieve the player's health.
+     * @return Player health
+     */
     public float getPlayerHealth() {
-        return getPlayerMP().prevHealth;
+        return getPlayerMP().getLastHealth();
     }
 
+    /**
+     * Set the player's health
+     * @param health Health level for set
+     */
     public void setPlayerHealth(float health) {
         getPlayerMP().setEntityHealth(health);
         getPlayerMP().setPlayerHealthUpdated();
     }
 
+    /**
+     * Retrieve the player's hunger level.
+     * @return Hunger bar level
+     */
     public int getPlayerHunger() {
         return getPlayerMP().getFoodStats().getFoodLevel();
     }
 
+    /**
+     * Set the player's hunger level.
+     * @param level Level to set hunger at
+     */
     public void setPlayerHunger(int level) {
         getPlayerMP().getFoodStats().setFoodLevel(level);
     }
 
+    /**
+     * Return the item held by the player as an ItemStack.
+     * @return ItemStack of the currently held item.
+     */
     public ItemStack getHeldItem() {
         return getPlayerMP().getHeldItem();
     }
 
+    /**
+     * Give the player a potion effect. Uses the vanilla class: PotionEffect to process effects.
+     * Might be moved to a separate class like PotionEffect, but with documentation, unlike Vanilla's.
+     * @param potionEffect
+     */
     public void addPotionEffect(PotionEffect potionEffect) {
         getPlayerMP().addPotionEffect(potionEffect);
     }
 
+    /**
+     * Award the player an achievement, they might deserve it.
+     * @param awardedAchievement Achievement awarded, retrieve one from AchievementList
+     */
     public void awardAchievement(Achievement awardedAchievement) {
         getPlayerMP().triggerAchievement(awardedAchievement);
     }
 
     /**
      * Set the player on fire for an amount of time, in seconds.
-     * @param seconds
+     * Cannot be used if the passed time was below the amount of fire seconds that already are in place.
+     * @param seconds Amount of time in seconds that you were to catch the player on fire for.
      */
     public void setFire(int seconds) {
         getPlayerMP().setFire(seconds);
