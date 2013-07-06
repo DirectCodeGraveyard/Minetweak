@@ -3,13 +3,13 @@ package org.minetweak;
 import com.google.common.eventbus.EventBus;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.command.*;
+import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.permissions.PermissionsLoader;
 import org.minetweak.plugins.PluginLoaderHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -68,6 +68,7 @@ public class Minetweak {
         System.out.println("Minetweak v" + getServerVersion() + " using Minecraft v" + getMinecraftVersion());
 
         PermissionsLoader.load();
+        MinetweakConfig.initialize();
 
         registerServerCommands();
 

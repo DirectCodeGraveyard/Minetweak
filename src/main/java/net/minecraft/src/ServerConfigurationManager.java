@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
+import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.event.player.PlayerDeopEvent;
 import org.minetweak.event.player.PlayerJoinEvent;
@@ -848,8 +849,9 @@ public abstract class ServerConfigurationManager {
      * Kicks everyone with "Server closed" as reason.
      */
     public void removeAllPlayers() {
+        String message = MinetweakConfig.get("server.stop.message");
         while (!this.playerEntityList.isEmpty()) {
-            ((EntityPlayerMP) this.playerEntityList.get(0)).playerNetServerHandler.kickPlayer("Server closed");
+            ((EntityPlayerMP) this.playerEntityList.get(0)).playerNetServerHandler.kickPlayer(message);
         }
     }
 
