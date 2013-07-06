@@ -1,21 +1,20 @@
 package org.minetweak.event.helper;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.EntityPlayerMP;
 import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
 import org.minetweak.event.block.Block;
 import org.minetweak.event.block.BlockIgniteEvent;
 import org.minetweak.event.block.BlockPlaceEvent;
 import org.minetweak.event.block.BlockState;
-import org.minetweak.world.MineTweakWorld;
+import org.minetweak.world.MinetweakWorld;
 
 /**
  * Is our call event helper
  */
-public class MineTweakEventFactory {
+public class MinetweakEventFactory {
 
-    private static boolean canBuild(MineTweakWorld world, Player player, int x, int z) {
+    private static boolean canBuild(MinetweakWorld world, Player player, int x, int z) {
         net.minecraft.src.WorldServer worldServer = world.getHandle();
         int spawnSize = MinecraftServer.getServer().getSpawnProtectionSize();
 
@@ -33,7 +32,7 @@ public class MineTweakEventFactory {
      * Block place methods
      */
     public static BlockPlaceEvent callBlockPlaceEvent(net.minecraft.src.World world, net.minecraft.src.EntityPlayer who, BlockState replacedBlockState, int clickedX, int clickedY, int clickedZ) {
-        MineTweakWorld craftWorld = world.getWorld();
+        MinetweakWorld craftWorld = world.getWorld();
 
         Player player = (who == null) ? null : (Player) Minetweak.getPlayerByName(who.getEntityName());
 

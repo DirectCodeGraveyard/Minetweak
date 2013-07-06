@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
-import org.minetweak.world.MineTweakWorld;
+import org.minetweak.world.MinetweakWorld;
 
 import java.util.*;
 
@@ -172,9 +172,9 @@ public abstract class World implements IBlockAccess {
         return this.provider.worldChunkMgr;
     }
 
-    private final MineTweakWorld world;
+    private final MinetweakWorld world;
 
-    public MineTweakWorld getWorld()
+    public MinetweakWorld getWorld()
     {
         return this.world;
     }
@@ -184,7 +184,7 @@ public abstract class World implements IBlockAccess {
         this.lightUpdateBlockList = new int[32768];
         this.saveHandler = par1ISaveHandler;
         this.theProfiler = par5Profiler;
-        this.world = new MineTweakWorld((WorldServer) this);
+        this.world = new MinetweakWorld((WorldServer) this);
         this.mapStorage = new MapStorage(par1ISaveHandler);
         this.worldLogAgent = par6ILogAgent;
         this.worldInfo = par1ISaveHandler.loadWorldInfo();

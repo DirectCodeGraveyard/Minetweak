@@ -1,7 +1,7 @@
 package net.minecraft.src;
 
-import org.minetweak.event.block.MineTweakBlockState;
-import org.minetweak.event.helper.MineTweakEventFactory;
+import org.minetweak.event.block.MinetweakBlockState;
+import org.minetweak.event.helper.MinetweakEventFactory;
 
 public class ItemFlintAndSteel extends Item {
     public ItemFlintAndSteel(int par1) {
@@ -58,18 +58,18 @@ public class ItemFlintAndSteel extends Item {
             if (par3World.isAirBlock(par4, par5, par6))
             {
                 // CraftBukkit start - Store the clicked block
-                if (MineTweakEventFactory.callBlockIgniteEvent(par3World, par4, par5, par6, org.minetweak.event.block.BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL, par2EntityPlayer).isCancelled())
+                if (MinetweakEventFactory.callBlockIgniteEvent(par3World, par4, par5, par6, org.minetweak.event.block.BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL, par2EntityPlayer).isCancelled())
                 {
                     par1ItemStack.damageItem(1, par2EntityPlayer);
                     return false;
                 }
 
-                MineTweakBlockState blockState = MineTweakBlockState.getBlockState(par3World, par4, par5, par6);
+                MinetweakBlockState blockState = MinetweakBlockState.getBlockState(par3World, par4, par5, par6);
                 // CraftBukkit end
                 par3World.playSoundEffect((double)par4 + 0.5D, (double)par5 + 0.5D, (double)par6 + 0.5D, "fire.ignite", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
                 par3World.setBlock(par4, par5, par6, Block.fire.blockID);
                 // CraftBukkit start
-                org.minetweak.event.block.BlockPlaceEvent placeEvent = MineTweakEventFactory.callBlockPlaceEvent(par3World, par2EntityPlayer, blockState, clickedX, clickedY, clickedZ);
+                org.minetweak.event.block.BlockPlaceEvent placeEvent = MinetweakEventFactory.callBlockPlaceEvent(par3World, par2EntityPlayer, blockState, clickedX, clickedY, clickedZ);
 
                 if (placeEvent.isCancelled() || !placeEvent.canBuild())
                 {

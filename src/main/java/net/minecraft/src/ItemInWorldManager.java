@@ -3,8 +3,8 @@ package net.minecraft.src;
 import org.minetweak.Minetweak;
 import org.minetweak.event.block.BlockBreakEvent;
 import org.minetweak.event.block.BlockUseEvent;
-import org.minetweak.event.block.MineTweakBlock;
-import org.minetweak.world.MineTweakChunk;
+import org.minetweak.event.block.MinetweakBlock;
+import org.minetweak.world.MinetweakChunk;
 
 public class ItemInWorldManager {
     /**
@@ -356,7 +356,7 @@ public class ItemInWorldManager {
         if (!par1EntityPlayer.isSneaking() || par1EntityPlayer.getHeldItem() == null) {
             var11 = par2World.getBlockId(par4, par5, par6);
 
-            BlockUseEvent event = new BlockUseEvent(Minetweak.getPlayerByName(par1EntityPlayer.getCommandSenderName()), new MineTweakBlock(new MineTweakChunk(par2World.getChunkFromBlockCoords(par4, par5)), par4, par5, par6));
+            BlockUseEvent event = new BlockUseEvent(Minetweak.getPlayerByName(par1EntityPlayer.getCommandSenderName()), new MinetweakBlock(new MinetweakChunk(par2World.getChunkFromBlockCoords(par4, par5)), par4, par5, par6));
             Minetweak.getEventBus().post(event);
             if (event.isCancelled()) {
                 return false;
