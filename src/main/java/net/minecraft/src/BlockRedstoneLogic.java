@@ -54,7 +54,7 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
                 par1World.setBlock(par2, par3, par4, this.func_94485_e().blockID, var6, 2);
 
                 if (!var7) {
-                    par1World.func_82740_a(par2, par3, par4, this.func_94485_e().blockID, this.func_94486_g(var6), -1);
+                    par1World.addBlockEvent(par2, par3, par4, this.func_94485_e().blockID, this.func_94486_g(var6), -1);
                 }
             }
         }
@@ -124,7 +124,7 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
         if (!this.func_94476_e(par1World, par2, par3, par4, var6)) {
             boolean var7 = this.func_94478_d(par1World, par2, par3, par4, var6);
 
-            if ((this.isRepeaterPowered && !var7 || !this.isRepeaterPowered && var7) && !par1World.isBlockTickScheduled(par2, par3, par4, this.blockID)) {
+            if ((this.isRepeaterPowered && !var7 || !this.isRepeaterPowered && var7) && !par1World.isBlockTickScheduledThisTick(par2, par3, par4, this.blockID)) {
                 byte var8 = -1;
 
                 if (this.func_83011_d(par1World, par2, par3, par4, var6)) {
@@ -133,7 +133,7 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
                     var8 = -2;
                 }
 
-                par1World.func_82740_a(par2, par3, par4, this.blockID, this.func_94481_j_(var6), var8);
+                par1World.addBlockEvent(par2, par3, par4, this.blockID, this.func_94481_j_(var6), var8);
             }
         }
     }

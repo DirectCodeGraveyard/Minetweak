@@ -23,7 +23,7 @@ public class CrashReportCategory {
         StringBuilder var3 = new StringBuilder();
 
         try {
-            var3.append(String.format("World: (%d,%d,%d)", new Object[]{Integer.valueOf(par0), Integer.valueOf(par1), Integer.valueOf(par2)}));
+            var3.append(String.format("World: (%d,%d,%d)", new Object[]{par0, par1, par2}));
         } catch (Throwable var16) {
             var3.append("(Error finding world loc)");
         }
@@ -49,7 +49,7 @@ public class CrashReportCategory {
             var10 = var5 << 4;
             var11 = (var4 + 1 << 4) - 1;
             var12 = (var5 + 1 << 4) - 1;
-            var3.append(String.format("Chunk: (at %d,%d,%d in %d,%d; contains blocks %d,0,%d to %d,255,%d)", new Object[]{Integer.valueOf(var6), Integer.valueOf(var7), Integer.valueOf(var8), Integer.valueOf(var4), Integer.valueOf(var5), Integer.valueOf(var9), Integer.valueOf(var10), Integer.valueOf(var11), Integer.valueOf(var12)}));
+            var3.append(String.format("Chunk: (at %d,%d,%d in %d,%d; contains blocks %d,0,%d to %d,255,%d)", new Object[]{var6, var7, var8, var4, var5, var9, var10, Integer.valueOf(var11), Integer.valueOf(var12)}));
         } catch (Throwable var15) {
             var3.append("(Error finding chunk loc)");
         }

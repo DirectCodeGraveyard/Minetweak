@@ -1,7 +1,9 @@
 package net.minecraft.src;
 
-public abstract class EntityMob extends EntityCreature implements IMob {
-    public EntityMob(World par1World) {
+public abstract class EntityMob extends EntityCreature implements IMob
+{
+    public EntityMob(World par1World)
+    {
         super(par1World);
         this.experienceValue = 5;
     }
@@ -10,11 +12,13 @@ public abstract class EntityMob extends EntityCreature implements IMob {
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
-    public void onLivingUpdate() {
+    public void onLivingUpdate()
+    {
         this.updateArmSwingProgress();
         float var1 = this.getBrightness(1.0F);
 
-        if (var1 > 0.5F) {
+        if (var1 > 0.5F)
+        {
             this.entityAge += 2;
         }
 
@@ -24,10 +28,12 @@ public abstract class EntityMob extends EntityCreature implements IMob {
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate() {
+    public void onUpdate()
+    {
         super.onUpdate();
 
-        if (!this.worldObj.isRemote && this.worldObj.difficultySetting == 0) {
+        if (!this.worldObj.isRemote && this.worldObj.difficultySetting == 0)
+        {
             this.setDead();
         }
     }
@@ -36,7 +42,8 @@ public abstract class EntityMob extends EntityCreature implements IMob {
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
      * (Animals, Spiders at day, peaceful PigZombies).
      */
-    protected Entity findPlayerToAttack() {
+    protected Entity findPlayerToAttack()
+    {
         EntityPlayer var1 = this.worldObj.getClosestVulnerablePlayerToEntity(this, 16.0D);
         return var1 != null && this.canEntityBeSeen(var1) ? var1 : null;
     }
@@ -44,52 +51,68 @@ public abstract class EntityMob extends EntityCreature implements IMob {
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
-        if (this.isEntityInvulnerable()) {
+    public boolean attackEntityFrom(DamageSource par1DamageSource, float par2)
+    {
+        if (this.isEntityInvulnerable())
+        {
             return false;
-        } else if (super.attackEntityFrom(par1DamageSource, par2)) {
+        }
+        else if (super.attackEntityFrom(par1DamageSource, par2))
+        {
             Entity var3 = par1DamageSource.getEntity();
 
-            if (this.riddenByEntity != var3 && this.ridingEntity != var3) {
-                if (var3 != this) {
+            if (this.riddenByEntity != var3 && this.ridingEntity != var3)
+            {
+                if (var3 != this)
+                {
                     this.entityToAttack = var3;
                 }
 
                 return true;
-            } else {
+            }
+            else
+            {
                 return true;
             }
-        } else {
+        }
+        else
+        {
             return false;
         }
     }
 
-    public boolean attackEntityAsMob(Entity par1Entity) {
-        float var2 = (float) this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111126_e();
+    public boolean attackEntityAsMob(Entity par1Entity)
+    {
+        float var2 = (float)this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111126_e();
         int var3 = 0;
 
-        if (par1Entity instanceof EntityLivingBase) {
-            var2 += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) par1Entity);
-            var3 += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) par1Entity);
+        if (par1Entity instanceof EntityLivingBase)
+        {
+            var2 += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase)par1Entity);
+            var3 += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase)par1Entity);
         }
 
         boolean var4 = par1Entity.attackEntityFrom(DamageSource.causeMobDamage(this), var2);
 
-        if (var4) {
-            if (var3 > 0) {
-                par1Entity.addVelocity((double) (-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * (float) var3 * 0.5F), 0.1D, (double) (MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * (float) var3 * 0.5F));
+        if (var4)
+        {
+            if (var3 > 0)
+            {
+                par1Entity.addVelocity((double)(-MathHelper.sin(this.rotationYaw * (float)Math.PI / 180.0F) * (float)var3 * 0.5F), 0.1D, (double)(MathHelper.cos(this.rotationYaw * (float)Math.PI / 180.0F) * (float)var3 * 0.5F));
                 this.motionX *= 0.6D;
                 this.motionZ *= 0.6D;
             }
 
             int var5 = EnchantmentHelper.getFireAspectModifier(this);
 
-            if (var5 > 0) {
+            if (var5 > 0)
+            {
                 par1Entity.setFire(var5 * 4);
             }
 
-            if (par1Entity instanceof EntityLivingBase) {
-                EnchantmentThorns.func_92096_a(this, (EntityLivingBase) par1Entity, this.rand);
+            if (par1Entity instanceof EntityLivingBase)
+            {
+                EnchantmentThorns.func_92096_a(this, (EntityLivingBase)par1Entity, this.rand);
             }
         }
 
@@ -99,8 +122,10 @@ public abstract class EntityMob extends EntityCreature implements IMob {
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
-    protected void attackEntity(Entity par1Entity, float par2) {
-        if (this.attackTime <= 0 && par2 < 2.0F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY) {
+    protected void attackEntity(Entity par1Entity, float par2)
+    {
+        if (this.attackTime <= 0 && par2 < 2.0F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY)
+        {
             this.attackTime = 20;
             this.attackEntityAsMob(par1Entity);
         }
@@ -110,24 +135,30 @@ public abstract class EntityMob extends EntityCreature implements IMob {
      * Takes a coordinate in and returns a weight to determine how likely this creature will try to path to the block.
      * Args: x, y, z
      */
-    public float getBlockPathWeight(int par1, int par2, int par3) {
+    public float getBlockPathWeight(int par1, int par2, int par3)
+    {
         return 0.5F - this.worldObj.getLightBrightness(par1, par2, par3);
     }
 
     /**
      * Checks to make sure the light is not too bright where the mob is spawning
      */
-    protected boolean isValidLightLevel() {
+    protected boolean isValidLightLevel()
+    {
         int var1 = MathHelper.floor_double(this.posX);
         int var2 = MathHelper.floor_double(this.boundingBox.minY);
         int var3 = MathHelper.floor_double(this.posZ);
 
-        if (this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, var1, var2, var3) > this.rand.nextInt(32)) {
+        if (this.worldObj.getSavedLightValue(EnumSkyBlock.Sky, var1, var2, var3) > this.rand.nextInt(32))
+        {
             return false;
-        } else {
+        }
+        else
+        {
             int var4 = this.worldObj.getBlockLightValue(var1, var2, var3);
 
-            if (this.worldObj.isThundering()) {
+            if (this.worldObj.isThundering())
+            {
                 int var5 = this.worldObj.skylightSubtracted;
                 this.worldObj.skylightSubtracted = 10;
                 var4 = this.worldObj.getBlockLightValue(var1, var2, var3);
@@ -141,11 +172,13 @@ public abstract class EntityMob extends EntityCreature implements IMob {
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
-    public boolean getCanSpawnHere() {
+    public boolean getCanSpawnHere()
+    {
         return this.worldObj.difficultySetting > 0 && this.isValidLightLevel() && super.getCanSpawnHere();
     }
 
-    protected void func_110147_ax() {
+    protected void func_110147_ax()
+    {
         super.func_110147_ax();
         this.func_110140_aT().func_111150_b(SharedMonsterAttributes.field_111264_e);
     }

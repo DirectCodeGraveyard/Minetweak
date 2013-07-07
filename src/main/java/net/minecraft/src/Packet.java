@@ -123,7 +123,6 @@ public abstract class Packet {
      * Read a packet, prefixed by its ID, from the data stream.
      */
     public static Packet readPacket(ILogAgent par0ILogAgent, DataInput par1DataInput, boolean par2, Socket par3Socket) throws IOException {
-        boolean var4 = false;
         Packet var5;
         int var6 = par3Socket.getSoTimeout();
         int var9;

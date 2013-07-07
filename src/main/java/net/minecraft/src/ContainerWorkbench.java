@@ -50,7 +50,7 @@ public class ContainerWorkbench extends Container {
      * Callback for when the crafting gui is closed.
      */
     public void onCraftGuiClosed(EntityPlayer par1EntityPlayer) {
-        super.onCraftGuiClosed(par1EntityPlayer);
+        super.onContainerClosed(par1EntityPlayer);
 
         if (!this.worldObj.isRemote) {
             for (int var2 = 0; var2 < 9; ++var2) {
@@ -64,7 +64,7 @@ public class ContainerWorkbench extends Container {
     }
 
     public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-        return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != Block.workbench.blockID ? false : par1EntityPlayer.getDistanceSq((double) this.posX + 0.5D, (double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
+        return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) == Block.workbench.blockID && par1EntityPlayer.getDistanceSq((double) this.posX + 0.5D, (double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
     }
 
     /**

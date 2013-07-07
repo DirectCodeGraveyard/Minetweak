@@ -3,7 +3,7 @@ package net.minecraft.src;
 public class MaterialLogic extends Material {
     public MaterialLogic(MapColor par1MapColor) {
         super(par1MapColor);
-        this.setAlwaysHarvested();
+        this.setAdventureModeExempt();
     }
 
     public boolean isSolid() {

@@ -21,7 +21,7 @@ class CallableLevelStorageVersion implements Callable<String> {
                 case 19133:
                     var1 = "Anvil";
             }
-        } catch (Throwable var3) {
+        } catch (Throwable ignored) {
         }
 
         return String.format("0x%05X - %s", WorldInfo.getSaveVersion(this.worldInfoInstance), var1);

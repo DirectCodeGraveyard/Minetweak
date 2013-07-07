@@ -6,52 +6,6 @@ import java.util.Iterator;
 
 public class ServerCommandManager extends CommandHandler implements IAdminCommand {
     public ServerCommandManager() {
-        this.registerCommand(new CommandTime());
-        this.registerCommand(new CommandGameMode());
-        this.registerCommand(new CommandDifficulty());
-        this.registerCommand(new CommandDefaultGameMode());
-        this.registerCommand(new CommandKill());
-        this.registerCommand(new CommandToggleDownfall());
-        this.registerCommand(new CommandWeather());
-        this.registerCommand(new CommandXP());
-        this.registerCommand(new CommandServerTp());
-        this.registerCommand(new CommandGive());
-        this.registerCommand(new CommandEffect());
-        this.registerCommand(new CommandEnchant());
-        this.registerCommand(new CommandServerEmote());
-        this.registerCommand(new CommandShowSeed());
-        this.registerCommand(new CommandHelp());
-        this.registerCommand(new CommandDebug());
-        this.registerCommand(new CommandServerMessage());
-        this.registerCommand(new CommandServerSay());
-        this.registerCommand(new CommandSetSpawnpoint());
-        this.registerCommand(new CommandGameRule());
-        this.registerCommand(new CommandClearInventory());
-        this.registerCommand(new ServerCommandTestFor());
-        this.registerCommand(new CommandSpreadPlayers());
-        this.registerCommand(new CommandPlaySound());
-        this.registerCommand(new ServerCommandScoreboard());
-
-        if (MinecraftServer.getServer().isDedicatedServer()) {
-            this.registerCommand(new CommandServerOp());
-            this.registerCommand(new CommandServerDeop());
-            this.registerCommand(new CommandServerStop());
-            this.registerCommand(new CommandServerSaveAll());
-            this.registerCommand(new CommandServerSaveOff());
-            this.registerCommand(new CommandServerSaveOn());
-            this.registerCommand(new CommandServerBanIp());
-            this.registerCommand(new CommandServerPardonIp());
-            this.registerCommand(new CommandServerBan());
-            this.registerCommand(new CommandServerBanlist());
-            this.registerCommand(new CommandServerPardon());
-            this.registerCommand(new CommandServerKick());
-            this.registerCommand(new CommandServerList());
-            this.registerCommand(new CommandServerWhitelist());
-        } else {
-            this.registerCommand(new CommandServerPublishLocal());
-        }
-
-        CommandBase.setAdminCommander(this);
     }
 
     /**

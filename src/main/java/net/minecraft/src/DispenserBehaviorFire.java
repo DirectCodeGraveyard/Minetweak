@@ -16,7 +16,7 @@ final class DispenserBehaviorFire extends BehaviorDefaultDispenseItem {
         if (var4.isAirBlock(var5, var6, var7)) {
             var4.setBlock(var5, var6, var7, Block.fire.blockID);
 
-            if (par2ItemStack.func_96631_a(1, var4.rand)) {
+            if (par2ItemStack.attemptDamageItem(1, var4.rand)) {
                 par2ItemStack.stackSize = 0;
             }
         } else if (var4.getBlockId(var5, var6, var7) == Block.tnt.blockID) {

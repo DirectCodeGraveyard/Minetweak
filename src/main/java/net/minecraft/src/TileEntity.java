@@ -242,4 +242,8 @@ public class TileEntity {
         addMapping(TileEntityHopper.class, "Hopper");
         addMapping(TileEntityComparator.class, "Comparator");
     }
+
+    public boolean hasWorldObj() {
+        return worldObj!=null;
+    }
 }

@@ -13,7 +13,7 @@ public class Server {
 
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
-            MinecraftServer.getServer().getConfigurationManager().sendChatToAllPlayers(ChatMessageComponent.func_111077_e(String.format("[%s] %s", "Server", message)), true);
+            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111077_e(String.format("[%s] %s", "Server", message)));
             return true;
         } else {
             return false;

@@ -82,8 +82,8 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
      * Gets the username of the entity.
      */
     public String getEntityName() {
-        if (this.func_94056_bM()) {
-            return this.func_94057_bL();
+        if (this.hasCustomNameTag()) {
+            return this.getCustomNameTag();
         } else {
             int var1 = this.func_110265_bP();
 

@@ -126,7 +126,7 @@ public class ItemInWorldManager {
      * side. tryHarvestBlock can also be the result of this call
      */
     public void onBlockClicked(int par1, int par2, int par3, int par4) {
-        if (!this.gameType.isAdventure() || this.thisPlayerMP.canCurrentToolHarvestBlock(par1, par2, par3)) {
+        if (!this.gameType.isAdventure() || this.thisPlayerMP.canHarvestBlock(Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
             if (this.isCreative()) {
                 if (!this.theWorld.extinguishFire(null, par1, par2, par3, par4)) {
                     this.tryHarvestBlock(par1, par2, par3);
@@ -233,7 +233,7 @@ public class ItemInWorldManager {
 
 
             event = new BlockBreakEvent(block, Minetweak.getPlayerByName(this.thisPlayerMP.username));
-            event.setCancelled(this.gameType.isAdventure() || !this.thisPlayerMP.canCurrentToolHarvestBlock(par1, par2, par3));
+            event.setCancelled(this.gameType.isAdventure() || !this.thisPlayerMP.canHarvestBlock(Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)]));
             Block nmsBlock = Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
 
             if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && !this.thisPlayerMP.canHarvestBlock(nmsBlock))

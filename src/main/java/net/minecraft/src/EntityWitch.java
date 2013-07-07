@@ -11,7 +11,7 @@ public class EntityWitch extends EntityMob implements IRangedAttackMob {
     /**
      * List of items a witch should drop on death.
      */
-    private static final int[] witchDrops = new int[]{Item.lightStoneDust.itemID, Item.sugar.itemID, Item.redstone.itemID, Item.spiderEye.itemID, Item.glassBottle.itemID, Item.gunpowder.itemID, Item.stick.itemID, Item.stick.itemID};
+    private static final int[] witchDrops = new int[]{Item.glowstone.itemID, Item.sugar.itemID, Item.redstone.itemID, Item.spiderEye.itemID, Item.glassBottle.itemID, Item.gunpowder.itemID, Item.stick.itemID, Item.stick.itemID};
 
     /**
      * Timer used as interval for a witch's attack, decremented every tick if aggressive and when reaches zero the witch

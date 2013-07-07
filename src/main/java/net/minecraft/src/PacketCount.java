@@ -12,12 +12,12 @@ public class PacketCount {
     /**
      * A count of the total number of each packet sent grouped by IDs.
      */
-    private static final Map packetCountForID = new HashMap();
+    private static final Map<Number, Long> packetCountForID = new HashMap<Number, Long>();
 
     /**
      * A count of the total size of each packet sent grouped by IDs.
      */
-    private static final Map sizeCountForID = new HashMap();
+    private static final Map<Number, Long> sizeCountForID = new HashMap<Number, Long>();
 
     /**
      * Used to make threads queue to add packets
@@ -29,12 +29,12 @@ public class PacketCount {
             Object var3 = lock;
 
             synchronized (lock) {
-                if (packetCountForID.containsKey(Integer.valueOf(par0))) {
-                    packetCountForID.put(Integer.valueOf(par0), Long.valueOf(((Long) packetCountForID.get(Integer.valueOf(par0))).longValue() + 1L));
-                    sizeCountForID.put(Integer.valueOf(par0), Long.valueOf(((Long) sizeCountForID.get(Integer.valueOf(par0))).longValue() + par1));
+                if (packetCountForID.containsKey(par0)) {
+                    packetCountForID.put(par0, packetCountForID.get(par0) + 1L);
+                    sizeCountForID.put(par0, sizeCountForID.get(par0) + par1);
                 } else {
-                    packetCountForID.put(Integer.valueOf(par0), Long.valueOf(1L));
-                    sizeCountForID.put(Integer.valueOf(par0), Long.valueOf(par1));
+                    packetCountForID.put(par0, 1L);
+                    sizeCountForID.put(par0, par1);
                 }
             }
         }

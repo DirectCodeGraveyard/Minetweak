@@ -268,7 +268,7 @@ public class EntityOcelot extends EntityTameable {
      * Gets the username of the entity.
      */
     public String getEntityName() {
-        return this.func_94056_bM() ? this.func_94057_bL() : (this.isTamed() ? "entity.Cat.name" : super.getEntityName());
+        return this.hasCustomNameTag() ? this.getCustomNameTag() : (this.isTamed() ? "entity.Cat.name" : super.getEntityName());
     }
 
     public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {

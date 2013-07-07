@@ -29,6 +29,6 @@ public class BlockGlowStone extends Block {
      */
     @Override
     public int idDropped(int par1, Random par2Random, int par3) {
-        return Item.lightStoneDust.itemID;
+        return Item.glowstone.itemID;
     }
 }

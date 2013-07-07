@@ -29,14 +29,14 @@ public abstract class EntityAgeable extends EntityCreature {
                         this.worldObj.spawnEntityInWorld(var4);
 
                         if (var2.hasDisplayName()) {
-                            var4.func_94058_c(var2.getDisplayName());
+                            var4.setCustomNameTag(var2.getDisplayName());
                         }
 
                         if (!par1EntityPlayer.capabilities.isCreativeMode) {
                             --var2.stackSize;
 
                             if (var2.stackSize <= 0) {
-                                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
+                                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, null);
                             }
                         }
                     }
@@ -51,7 +51,7 @@ public abstract class EntityAgeable extends EntityCreature {
 
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(12, new Integer(0));
+        this.dataWatcher.addObject(12, 0);
     }
 
     /**
@@ -79,7 +79,7 @@ public abstract class EntityAgeable extends EntityCreature {
      * positive, it get's decremented each tick. With a negative value the Entity is considered a child.
      */
     public void setGrowingAge(int par1) {
-        this.dataWatcher.updateObject(12, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(12, par1);
         this.func_98054_a(this.isChild());
     }
 

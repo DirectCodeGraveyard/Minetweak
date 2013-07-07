@@ -54,7 +54,7 @@ public class ContainerPlayer extends Container {
      * Callback for when the crafting gui is closed.
      */
     public void onCraftGuiClosed(EntityPlayer par1EntityPlayer) {
-        super.onCraftGuiClosed(par1EntityPlayer);
+        super.onContainerClosed(par1EntityPlayer);
 
         for (int var2 = 0; var2 < 4; ++var2) {
             ItemStack var3 = this.craftMatrix.getStackInSlotOnClosing(var2);

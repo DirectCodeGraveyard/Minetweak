@@ -146,7 +146,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         if (!var3 && this.isEntityAlive() && !this.isTrading() && !this.isChild()) {
             if (!this.worldObj.isRemote) {
                 this.setCustomer(par1EntityPlayer);
-                par1EntityPlayer.displayGUIMerchant(this, this.func_94057_bL());
+                par1EntityPlayer.displayGUIMerchant(this, this.getCustomNameTag());
             }
 
             return true;

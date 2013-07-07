@@ -4,7 +4,6 @@ import net.minecraft.server.MinecraftServer;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.security.PrivateKey;
@@ -99,8 +98,8 @@ public class NetLoginHandler extends NetHandler {
         } else {
             PublicKey var2 = this.mcServer.getKeyPair().getPublic();
 
-            if (par1Packet2ClientProtocol.getProtocolVersion() != 73) {
-                if (par1Packet2ClientProtocol.getProtocolVersion() > 73) {
+            if (par1Packet2ClientProtocol.getProtocolVersion() != 74) {
+                if (par1Packet2ClientProtocol.getProtocolVersion() > 74) {
                     this.kickUser("Outdated server!");
                 } else {
                     this.kickUser("Outdated client!");
@@ -180,7 +179,7 @@ public class NetLoginHandler extends NetHandler {
             if (par1Packet254ServerPing.func_140050_d()) {
                 var3 = this.mcServer.getMOTD() + "\u00a7" + var2.getCurrentPlayerCount() + "\u00a7" + var2.getMaxPlayers();
             } else {
-                List var4 = Arrays.asList(new Serializable[]{Integer.valueOf(1), Integer.valueOf(73), this.mcServer.getMinecraftVersion(), this.mcServer.getMOTD(), Integer.valueOf(var2.getCurrentPlayerCount()), Integer.valueOf(var2.getMaxPlayers())});
+                List var4 = Arrays.asList(1, 74, this.mcServer.getMinecraftVersion(), this.mcServer.getMOTD(), var2.getCurrentPlayerCount(), var2.getMaxPlayers());
                 Object var6;
 
                 for (Iterator var5 = var4.iterator(); var5.hasNext(); var3 = var3 + var6.toString().replaceAll("\u0000", "")) {

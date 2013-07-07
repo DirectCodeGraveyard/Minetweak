@@ -56,7 +56,7 @@ public class Packet252SharedKey extends Packet {
      * Return the secret AES sharedKey (used by client only)
      */
     public SecretKey getSharedKey() {
-        return this.getSharedKey((PrivateKey) null);
+        return this.getSharedKey(null);
     }
 
     /**

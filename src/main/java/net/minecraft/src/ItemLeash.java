@@ -1,6 +1,5 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class ItemLeash extends Item {
@@ -35,10 +34,9 @@ public class ItemLeash extends Item {
         List var9 = par1World.getEntitiesWithinAABB(EntityLiving.class, AxisAlignedBB.getAABBPool().getAABB((double) par2 - var7, (double) par3 - var7, (double) par4 - var7, (double) par2 + var7, (double) par3 + var7, (double) par4 + var7));
 
         if (var9 != null) {
-            Iterator var10 = var9.iterator();
 
-            while (var10.hasNext()) {
-                EntityLiving var11 = (EntityLiving) var10.next();
+            for (Object aVar9 : var9) {
+                EntityLiving var11 = (EntityLiving) aVar9;
 
                 if (var11.func_110167_bD() && var11.func_110166_bE() == par0EntityPlayer) {
                     if (var5 == null) {

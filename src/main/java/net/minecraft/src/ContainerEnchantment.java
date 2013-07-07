@@ -175,7 +175,7 @@ public class ContainerEnchantment extends Container {
      * Callback for when the crafting gui is closed.
      */
     public void onCraftGuiClosed(EntityPlayer par1EntityPlayer) {
-        super.onCraftGuiClosed(par1EntityPlayer);
+        super.onContainerClosed(par1EntityPlayer);
 
         if (!this.worldPointer.isRemote) {
             ItemStack var2 = this.tableInventory.getStackInSlotOnClosing(0);
@@ -187,7 +187,7 @@ public class ContainerEnchantment extends Container {
     }
 
     public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
-        return this.worldPointer.getBlockId(this.posX, this.posY, this.posZ) != Block.enchantmentTable.blockID ? false : par1EntityPlayer.getDistanceSq((double) this.posX + 0.5D, (double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
+        return this.worldPointer.getBlockId(this.posX, this.posY, this.posZ) == Block.enchantmentTable.blockID && par1EntityPlayer.getDistanceSq((double) this.posX + 0.5D, (double) this.posY + 0.5D, (double) this.posZ + 0.5D) <= 64.0D;
     }
 
     /**

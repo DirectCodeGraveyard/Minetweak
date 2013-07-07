@@ -112,9 +112,9 @@ public class ContainerMerchant extends Container {
      * Callback for when the crafting gui is closed.
      */
     public void onCraftGuiClosed(EntityPlayer par1EntityPlayer) {
-        super.onCraftGuiClosed(par1EntityPlayer);
-        this.theMerchant.setCustomer((EntityPlayer) null);
-        super.onCraftGuiClosed(par1EntityPlayer);
+        super.onContainerClosed(par1EntityPlayer);
+        this.theMerchant.setCustomer(null);
+        super.onContainerClosed(par1EntityPlayer);
 
         if (!this.theWorld.isRemote) {
             ItemStack var2 = this.merchantInventory.getStackInSlotOnClosing(0);

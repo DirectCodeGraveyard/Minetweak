@@ -283,7 +283,7 @@ public abstract class EntityCreature extends EntityLiving {
 
             if (this instanceof EntityTameable && ((EntityTameable) this).isSitting()) {
                 if (var2 > 10.0F) {
-                    this.func_110160_i(true);
+                    this.func_110160_i(true, true);
                 }
 
                 return;
@@ -309,7 +309,7 @@ public abstract class EntityCreature extends EntityLiving {
             }
 
             if (var2 > 10.0F) {
-                this.func_110160_i(true);
+                this.func_110160_i(true, true);
             }
         } else if (!this.func_110167_bD() && this.field_110180_bt) {
             this.field_110180_bt = false;

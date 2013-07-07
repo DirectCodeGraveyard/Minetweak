@@ -196,7 +196,7 @@ public class Player implements CommandSender {
      * @param speedFloat Speed parameter
      */
     public void setSpeedOnGround(float speedFloat) {
-        getPlayerMP().setSpeedOnGround(speedFloat);
+        getPlayerMP().setAIMoveSpeed(speedFloat);
     }
 
     /**
@@ -204,7 +204,7 @@ public class Player implements CommandSender {
      * @return Speed on ground
      */
     public float getSpeedOnGround() {
-        return getPlayerMP().getSpeedOnGround();
+        return getPlayerMP().getAIMoveSpeed();
     }
 
     /**
@@ -212,7 +212,7 @@ public class Player implements CommandSender {
      * @return Player health
      */
     public float getPlayerHealth() {
-        return getPlayerMP().getLastHealth();
+        return getPlayerMP().prevHealth;
     }
 
     /**

@@ -1,29 +1,34 @@
 package net.minecraft.src;
 
-public class TileEntityComparator extends TileEntity {
-    private int field_96101_a;
+public class TileEntityComparator extends TileEntity
+{
+    private int outputSignal;
 
     /**
      * Writes a tile entity to NBT.
      */
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
+    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
+    {
         super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setInteger("OutputSignal", this.field_96101_a);
+        par1NBTTagCompound.setInteger("OutputSignal", this.outputSignal);
     }
 
     /**
      * Reads a tile entity from NBT.
      */
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
+    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
         super.readFromNBT(par1NBTTagCompound);
-        this.field_96101_a = par1NBTTagCompound.getInteger("OutputSignal");
+        this.outputSignal = par1NBTTagCompound.getInteger("OutputSignal");
     }
 
-    public int func_96100_a() {
-        return this.field_96101_a;
+    public int getOutputSignal()
+    {
+        return this.outputSignal;
     }
 
-    public void func_96099_a(int par1) {
-        this.field_96101_a = par1;
+    public void setOutputSignal(int par1)
+    {
+        this.outputSignal = par1;
     }
 }

@@ -16,7 +16,7 @@ class CallableMinecraftVersion implements Callable<String> {
      * The current version of Minecraft
      */
     public String minecraftVersion() {
-        return "1.6.1";
+        return "1.6.2";
     }
 
     @Override

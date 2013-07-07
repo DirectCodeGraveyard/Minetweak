@@ -29,7 +29,7 @@ public class RecipeFireworks implements IRecipe {
                     ++var5;
                 } else if (var10.itemID == Item.paper.itemID) {
                     ++var3;
-                } else if (var10.itemID == Item.lightStoneDust.itemID) {
+                } else if (var10.itemID == Item.glowstone.itemID) {
                     ++var7;
                 } else if (var10.itemID == Item.diamond.itemID) {
                     ++var7;
@@ -91,7 +91,7 @@ public class RecipeFireworks implements IRecipe {
                     if (var14 != null) {
                         if (var14.itemID == Item.dyePowder.itemID) {
                             var12.add(Integer.valueOf(ItemDye.dyeColors[var14.getItemDamage()]));
-                        } else if (var14.itemID == Item.lightStoneDust.itemID) {
+                        } else if (var14.itemID == Item.glowstone.itemID) {
                             var18.setBoolean("Flicker", true);
                         } else if (var14.itemID == Item.diamond.itemID) {
                             var18.setBoolean("Trail", true);

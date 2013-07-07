@@ -252,7 +252,7 @@ public class AnvilChunkLoader implements IChunkLoader, IThreadedFileIO {
                 var15.setInteger("y", var14.yCoord);
                 var15.setInteger("z", var14.zCoord);
                 var15.setInteger("t", (int) (var14.scheduledTime - var19));
-                var15.setInteger("p", var14.field_82754_f);
+                var15.setInteger("p", var14.priority);
                 var12.appendTag(var15);
             }
 
