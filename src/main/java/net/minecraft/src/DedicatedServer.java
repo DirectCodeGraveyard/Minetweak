@@ -77,7 +77,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             this.setServerPort(MinetweakConfig.getInteger("server.port", 25565));
         }
 
-        this.logInfo("Generating keypair");
         this.setKeyPair(CryptManager.generateKeyPair());
         this.logInfo("Starting Minecraft server on " + (this.getServerHostname().length() == 0 ? "*" : this.getServerHostname()) + ":" + this.getServerPort());
 
