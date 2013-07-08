@@ -213,13 +213,11 @@ public class ItemInWorldManager {
     /**
      * Attempts to harvest a block at the given coordinate
      */
-    public boolean tryHarvestBlock(int par1, int par2, int par3)
-    {
+    public boolean tryHarvestBlock(int par1, int par2, int par3) {
         BlockBreakEvent event = null;
 
-        if (this.thisPlayerMP != null)
-        {
-            if (this.isCreative() && this.thisPlayerMP.getCurrentEquippedItem()!=null && this.thisPlayerMP.getCurrentEquippedItem().getItem().equals(Item.swordDiamond)) {
+        if (this.thisPlayerMP != null) {
+            if (this.isCreative() && this.thisPlayerMP.getCurrentEquippedItem() != null && this.thisPlayerMP.getCurrentEquippedItem().getItem().equals(Item.swordDiamond)) {
                 return false;
             }
             org.minetweak.event.block.Block block = this.theWorld.getWorld().getBlockAt(par1, par2, par3);
@@ -236,10 +234,8 @@ public class ItemInWorldManager {
             event.setCancelled(this.gameType.isAdventure() || !this.thisPlayerMP.canHarvestBlock(Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)]));
             Block nmsBlock = Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
 
-            if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && !this.thisPlayerMP.canHarvestBlock(nmsBlock))
-            {
-                if (!(nmsBlock.func_71906_q_CodeFix_Public() && EnchantmentHelper.getSilkTouchModifier(this.thisPlayerMP)))
-                {
+            if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && !this.thisPlayerMP.canHarvestBlock(nmsBlock)) {
+                if (!(nmsBlock.func_71906_q_CodeFix_Public() && EnchantmentHelper.getSilkTouchModifier(this.thisPlayerMP))) {
                     int data = block.getData();
                     int bonusLevel = EnchantmentHelper.getFortuneModifier(this.thisPlayerMP);
                     event.setExpToDrop(nmsBlock.getExpDrop(this.theWorld, data, bonusLevel));
@@ -248,15 +244,13 @@ public class ItemInWorldManager {
 
             Minetweak.getEventBus().post(event);
 
-            if (event.isCancelled())
-            {
+            if (event.isCancelled()) {
                 // Let the client know the block still exists
                 this.thisPlayerMP.playerNetServerHandler.sendPacket(new Packet53BlockChange(par1, par2, par3, this.theWorld));
                 // Update any tile entity data for this block
                 TileEntity tileentity = this.theWorld.getBlockTileEntity(par1, par2, par3);
 
-                if (tileentity != null)
-                {
+                if (tileentity != null) {
                     this.thisPlayerMP.playerNetServerHandler.sendPacket(tileentity.getDescriptionPacket());
                 }
 
@@ -266,15 +260,13 @@ public class ItemInWorldManager {
 
         int l = this.theWorld.getBlockId(par1, par2, par3);
 
-        if (Block.blocksList[l] == null)
-        {
+        if (Block.blocksList[l] == null) {
             return false;
         }
 
         int i1 = this.theWorld.getBlockMetadata(par1, par2, par3);
 
-        if (l == Block.skull.blockID && !this.isCreative())
-        {
+        if (l == Block.skull.blockID && !this.isCreative()) {
             Block.skull.dropBlockAsItemWithChance(theWorld, par1, par2, par3, i1, 1.0F, 0);
             return this.removeBlock(par1, par2, par3);
         }
@@ -282,22 +274,17 @@ public class ItemInWorldManager {
         this.theWorld.playAuxSFXAtEntity(this.thisPlayerMP, 2001, par1, par2, par3, l + (this.theWorld.getBlockMetadata(par1, par2, par3) << 12));
         boolean flag = false;
 
-        if (this.isCreative())
-        {
+        if (this.isCreative()) {
             flag = this.removeBlock(par1, par2, par3);
             this.thisPlayerMP.playerNetServerHandler.sendPacket(new Packet53BlockChange(par1, par2, par3, this.theWorld));
-        }
-        else
-        {
+        } else {
             ItemStack itemstack = this.thisPlayerMP.getCurrentEquippedItem();
             int var4 = this.theWorld.getBlockId(par1, par2, par3);
 
-            if (itemstack != null)
-            {
+            if (itemstack != null) {
                 itemstack.onBlockDestroyed(this.theWorld, l, par1, par2, par3, this.thisPlayerMP);
 
-                if (itemstack.stackSize == 0)
-                {
+                if (itemstack.stackSize == 0) {
                     this.thisPlayerMP.destroyCurrentEquippedItem();
                 }
             }
@@ -307,8 +294,7 @@ public class ItemInWorldManager {
             flag = this.removeBlock(par1, par2, par3);
         }
 
-        if (flag && event != null)
-        {
+        if (flag && event != null) {
             Block.blocksList[l].func_71923_g_CodeFix_Public(this.theWorld, par1, par2, par3, event.getExpToDrop());
         }
 

@@ -3,7 +3,6 @@ package net.minecraft.src;
 import java.util.*;
 
 public class PotionHelper {
-    public static final String field_77924_a = null;
     public static final String sugarEffect;
     public static final String ghastTearEffect = "+0-1-2-3&4-4+13";
     public static final String spiderEyeEffect;
@@ -15,12 +14,12 @@ public class PotionHelper {
     public static final String glowstoneEffect;
     public static final String gunpowderEffect;
     public static final String goldenCarrotEffect;
-    private static final HashMap potionRequirements = new HashMap();
+    private static final HashMap<Integer, String> potionRequirements = new HashMap<Integer, String>();
 
     /**
      * Potion effect amplifier map
      */
-    private static final HashMap potionAmplifiers = new HashMap();
+    private static final HashMap<Integer, String> potionAmplifiers = new HashMap<Integer, String>();
     private static final HashMap field_77925_n;
 
     /**
@@ -64,16 +63,15 @@ public class PotionHelper {
             float var3 = 0.0F;
             float var4 = 0.0F;
             float var5 = 0.0F;
-            Iterator var6 = par0Collection.iterator();
 
-            while (var6.hasNext()) {
-                PotionEffect var7 = (PotionEffect) var6.next();
+            for (Object aPar0Collection : par0Collection) {
+                PotionEffect var7 = (PotionEffect) aPar0Collection;
                 int var8 = Potion.potionTypes[var7.getPotionID()].getLiquidColor();
 
                 for (int var9 = 0; var9 <= var7.getAmplifier(); ++var9) {
                     var2 += (float) (var8 >> 16 & 255) / 255.0F;
                     var3 += (float) (var8 >> 8 & 255) / 255.0F;
-                    var4 += (float) (var8 >> 0 & 255) / 255.0F;
+                    var4 += (float) (var8 & 255) / 255.0F;
                     ++var5;
                 }
             }
@@ -279,23 +277,20 @@ public class PotionHelper {
     /**
      * Returns a list of effects for the specified potion damage value.
      */
-    public static List getPotionEffects(int par0, boolean par1) {
-        ArrayList var2 = null;
+    public static List<PotionEffect> getPotionEffects(int par0, boolean par1) {
+        ArrayList<PotionEffect> var2 = null;
         Potion[] var3 = Potion.potionTypes;
-        int var4 = var3.length;
 
-        for (int var5 = 0; var5 < var4; ++var5) {
-            Potion var6 = var3[var5];
-
+        for (Potion var6 : var3) {
             if (var6 != null && (!var6.isUsable() || par1)) {
-                String var7 = (String) potionRequirements.get(Integer.valueOf(var6.getId()));
+                String var7 = potionRequirements.get(Integer.valueOf(var6.getId()));
 
                 if (var7 != null) {
                     int var8 = parsePotionEffects(var7, 0, var7.length(), par0);
 
                     if (var8 > 0) {
                         int var9 = 0;
-                        String var10 = (String) potionAmplifiers.get(Integer.valueOf(var6.getId()));
+                        String var10 = potionAmplifiers.get(Integer.valueOf(var6.getId()));
 
                         if (var10 != null) {
                             var9 = parsePotionEffects(var10, 0, var10.length(), par0);
@@ -318,7 +313,7 @@ public class PotionHelper {
                         }
 
                         if (var2 == null) {
-                            var2 = new ArrayList();
+                            var2 = new ArrayList<PotionEffect>();
                         }
 
                         PotionEffect var11 = new PotionEffect(var6.getId(), var8, var9);
@@ -435,33 +430,33 @@ public class PotionHelper {
     }
 
     static {
-        potionRequirements.put(Integer.valueOf(Potion.regeneration.getId()), "0 & !1 & !2 & !3 & 0+6");
+        potionRequirements.put(Potion.regeneration.getId(), "0 & !1 & !2 & !3 & 0+6");
         sugarEffect = "-0+1-2-3&4-4+13";
-        potionRequirements.put(Integer.valueOf(Potion.moveSpeed.getId()), "!0 & 1 & !2 & !3 & 1+6");
+        potionRequirements.put(Potion.moveSpeed.getId(), "!0 & 1 & !2 & !3 & 1+6");
         magmaCreamEffect = "+0+1-2-3&4-4+13";
-        potionRequirements.put(Integer.valueOf(Potion.fireResistance.getId()), "0 & 1 & !2 & !3 & 0+6");
+        potionRequirements.put(Potion.fireResistance.getId(), "0 & 1 & !2 & !3 & 0+6");
         speckledMelonEffect = "+0-1+2-3&4-4+13";
-        potionRequirements.put(Integer.valueOf(Potion.heal.getId()), "0 & !1 & 2 & !3");
+        potionRequirements.put(Potion.heal.getId(), "0 & !1 & 2 & !3");
         spiderEyeEffect = "-0-1+2-3&4-4+13";
-        potionRequirements.put(Integer.valueOf(Potion.poison.getId()), "!0 & !1 & 2 & !3 & 2+6");
+        potionRequirements.put(Potion.poison.getId(), "!0 & !1 & 2 & !3 & 2+6");
         fermentedSpiderEyeEffect = "-0+3-4+13";
-        potionRequirements.put(Integer.valueOf(Potion.weakness.getId()), "!0 & !1 & !2 & 3 & 3+6");
-        potionRequirements.put(Integer.valueOf(Potion.harm.getId()), "!0 & !1 & 2 & 3");
-        potionRequirements.put(Integer.valueOf(Potion.moveSlowdown.getId()), "!0 & 1 & !2 & 3 & 3+6");
+        potionRequirements.put(Potion.weakness.getId(), "!0 & !1 & !2 & 3 & 3+6");
+        potionRequirements.put(Potion.harm.getId(), "!0 & !1 & 2 & 3");
+        potionRequirements.put(Potion.moveSlowdown.getId(), "!0 & 1 & !2 & 3 & 3+6");
         blazePowderEffect = "+0-1-2+3&4-4+13";
-        potionRequirements.put(Integer.valueOf(Potion.damageBoost.getId()), "0 & !1 & !2 & 3 & 3+6");
+        potionRequirements.put(Potion.damageBoost.getId(), "0 & !1 & !2 & 3 & 3+6");
         goldenCarrotEffect = "-0+1+2-3+13&4-4";
-        potionRequirements.put(Integer.valueOf(Potion.nightVision.getId()), "!0 & 1 & 2 & !3 & 2+6");
-        potionRequirements.put(Integer.valueOf(Potion.invisibility.getId()), "!0 & 1 & 2 & 3 & 2+6");
+        potionRequirements.put(Potion.nightVision.getId(), "!0 & 1 & 2 & !3 & 2+6");
+        potionRequirements.put(Potion.invisibility.getId(), "!0 & 1 & 2 & 3 & 2+6");
         glowstoneEffect = "+5-6-7";
-        potionAmplifiers.put(Integer.valueOf(Potion.moveSpeed.getId()), "5");
-        potionAmplifiers.put(Integer.valueOf(Potion.digSpeed.getId()), "5");
-        potionAmplifiers.put(Integer.valueOf(Potion.damageBoost.getId()), "5");
-        potionAmplifiers.put(Integer.valueOf(Potion.regeneration.getId()), "5");
-        potionAmplifiers.put(Integer.valueOf(Potion.harm.getId()), "5");
-        potionAmplifiers.put(Integer.valueOf(Potion.heal.getId()), "5");
-        potionAmplifiers.put(Integer.valueOf(Potion.resistance.getId()), "5");
-        potionAmplifiers.put(Integer.valueOf(Potion.poison.getId()), "5");
+        potionAmplifiers.put(Potion.moveSpeed.getId(), "5");
+        potionAmplifiers.put(Potion.digSpeed.getId(), "5");
+        potionAmplifiers.put(Potion.damageBoost.getId(), "5");
+        potionAmplifiers.put(Potion.regeneration.getId(), "5");
+        potionAmplifiers.put(Potion.harm.getId(), "5");
+        potionAmplifiers.put(Potion.heal.getId(), "5");
+        potionAmplifiers.put(Potion.resistance.getId(), "5");
+        potionAmplifiers.put(Potion.poison.getId(), "5");
         redstoneEffect = "-5+6-7";
         gunpowderEffect = "+14&13-13";
         field_77925_n = new HashMap();

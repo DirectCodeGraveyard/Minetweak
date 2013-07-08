@@ -4,7 +4,6 @@ import net.minecraft.server.MinecraftServer;
 import org.minetweak.config.MinetweakConfig;
 
 import java.io.*;
-import java.util.Iterator;
 
 public class DedicatedPlayerList extends ServerConfigurationManager {
     private File opsList;

@@ -28,7 +28,7 @@ public class ItemBoat extends Item {
         float var20 = var14 * var16;
         double var21 = 5.0D;
         Vec3 var23 = var13.addVector((double) var18 * var21, (double) var17 * var21, (double) var20 * var21);
-        MovingObjectPosition var24 = par2World.rayTraceBlocks_do(var13, var23, true);
+        MovingObjectPosition var24 = par2World.rayTraceBlocks(var13, var23, true);
 
         if (var24 == null) {
             return par1ItemStack;

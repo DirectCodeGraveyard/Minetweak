@@ -244,6 +244,6 @@ public class TileEntity {
     }
 
     public boolean hasWorldObj() {
-        return worldObj!=null;
+        return worldObj != null;
     }
 }

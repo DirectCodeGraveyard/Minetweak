@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import org.minetweak.config.MinetweakConfig;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -15,11 +17,6 @@ public class RConThreadMain extends RConThreadBase {
      * Port RCon is running on
      */
     private int rconPort;
-
-    /**
-     * Port the server is running on
-     */
-    private int serverPort;
 
     /**
      * Hostname RCon is running on
@@ -39,25 +36,26 @@ public class RConThreadMain extends RConThreadBase {
     /**
      * A map of client addresses to their running Threads
      */
-    private Map clientThreads;
+    private Map<Object, RConThreadClient> clientThreads;
 
     public RConThreadMain(IServer par1IServer) {
         super(par1IServer);
         this.rconPort = par1IServer.getIntProperty("rcon.port", 0);
         this.rconPassword = par1IServer.getStringProperty("rcon.password", "");
         this.hostname = par1IServer.getHostname();
-        this.serverPort = par1IServer.getPort();
+        /*
+      Port the server is running on
+     */
+        int serverPort = par1IServer.getPort();
 
         if (0 == this.rconPort) {
-            this.rconPort = this.serverPort + 10;
+            this.rconPort = serverPort + 10;
             this.logInfo("Setting default rcon port to " + this.rconPort);
-            par1IServer.setProperty("rcon.port", Integer.valueOf(this.rconPort));
+            MinetweakConfig.set("rcon.port", "" + this.rconPort);
 
             if (0 == this.rconPassword.length()) {
-                par1IServer.setProperty("rcon.password", "");
+                MinetweakConfig.set("rcon.password", "");
             }
-
-            par1IServer.saveProperties();
         }
 
         if (0 == this.hostname.length()) {
@@ -69,19 +67,19 @@ public class RConThreadMain extends RConThreadBase {
     }
 
     private void initClientThreadList() {
-        this.clientThreads = new HashMap();
+        this.clientThreads = new HashMap<Object, RConThreadClient>();
     }
 
     /**
      * Cleans up the clientThreads map by removing client Threads that are not running
      */
     private void cleanClientThreadsMap() {
-        Iterator var1 = this.clientThreads.entrySet().iterator();
+        Iterator<Entry<Object, RConThreadClient>> var1 = this.clientThreads.entrySet().iterator();
 
         while (var1.hasNext()) {
-            Entry var2 = (Entry) var1.next();
+            Entry<Object, RConThreadClient> var2 = var1.next();
 
-            if (!((RConThreadClient) var2.getValue()).isRunning()) {
+            if (!(var2.getValue()).isRunning()) {
                 var1.remove();
             }
         }
@@ -102,9 +100,7 @@ public class RConThreadMain extends RConThreadBase {
                 } catch (SocketTimeoutException var7) {
                     this.cleanClientThreadsMap();
                 } catch (IOException var8) {
-                    if (this.running) {
-                        this.logInfo("IO: " + var8.getMessage());
-                    }
+                    this.logInfo("IO: " + var8.getMessage());
                 }
             }
         } finally {

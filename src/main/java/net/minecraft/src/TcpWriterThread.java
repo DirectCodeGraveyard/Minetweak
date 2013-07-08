@@ -17,7 +17,7 @@ class TcpWriterThread extends Thread {
             while (TcpConnection.isRunning(this.theTcpConnection)) {
                 boolean var1;
 
-                for (var1 = false; TcpConnection.sendNetworkPacket(this.theTcpConnection); var1 = true);
+                for (var1 = false; TcpConnection.sendNetworkPacket(this.theTcpConnection); var1 = true) ;
 
                 try {
                     if (var1 && TcpConnection.getOutputStream(this.theTcpConnection) != null) {

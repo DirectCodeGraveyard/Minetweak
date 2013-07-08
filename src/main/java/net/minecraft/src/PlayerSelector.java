@@ -2,7 +2,10 @@ package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,7 +70,7 @@ public class PlayerSelector {
             int var9 = getDefaultCount(var4);
             int var10 = EnumGameType.NOT_SET.getID();
             ChunkCoordinates var11 = par0ICommandSender.getCommandSenderPosition();
-            Map<? extends String, ? extends Number> var12 = func_96560_a(var3);
+            Map<String, Integer> var12 = func_96560_a(var3);
             String var13 = null;
             String var14 = null;
             boolean var15 = false;
@@ -140,8 +143,8 @@ public class PlayerSelector {
         }
     }
 
-    public static Map<? extends String, ? extends Number> func_96560_a(Map<String, String> par0Map) {
-        HashMap<String, Number> var1 = new HashMap<String, Number>();
+    public static Map<String, Integer> func_96560_a(Map<String, String> par0Map) {
+        HashMap<String, Integer> var1 = new HashMap<String, Integer>();
 
         for (String var3 : par0Map.keySet()) {
             if (var3.startsWith("score_") && var3.length() > "score_".length()) {
@@ -192,7 +195,7 @@ public class PlayerSelector {
      * Returns whether the given token has any arguments set.
      */
     public static boolean hasArguments(String par0Str) {
-        return hasTheseArguments(par0Str, (String) null);
+        return hasTheseArguments(par0Str, null);
     }
 
     /**

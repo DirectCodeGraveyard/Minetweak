@@ -120,10 +120,9 @@ public class Chunk {
         }
 
         Arrays.fill(this.precipitationHeightMap, -999);
-        Arrays.fill(this.blockBiomeArray, (byte) - 1);
+        Arrays.fill(this.blockBiomeArray, (byte) -1);
 
-        if (!(this instanceof EmptyChunk))
-        {
+        if (!(this instanceof EmptyChunk)) {
             this.MineTweakChunk = new MinetweakChunk(this);
         }
         Arrays.fill(this.blockBiomeArray, (byte) -1);

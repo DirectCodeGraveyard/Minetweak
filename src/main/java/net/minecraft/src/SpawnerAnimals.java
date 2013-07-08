@@ -35,7 +35,7 @@ public final class SpawnerAnimals {
             int var8;
 
             for (var5 = 0; var5 < par1WorldServer.playerEntities.size(); ++var5) {
-                EntityPlayer var6 = (EntityPlayer) par1WorldServer.playerEntities.get(var5);
+                EntityPlayer var6 = par1WorldServer.playerEntities.get(var5);
                 int var7 = MathHelper.floor_double(var6.posX / 16.0D);
                 var8 = MathHelper.floor_double(var6.posZ / 16.0D);
                 byte var9 = 8;

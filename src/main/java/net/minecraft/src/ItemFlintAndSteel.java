@@ -15,64 +15,51 @@ public class ItemFlintAndSteel extends Item {
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
      * True if something happen and false if it don't. This is for ITEMS, not BLOCKS
      */
-    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
-    {
+    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
         int clickedX = par4, clickedY = par5, clickedZ = par6; // CraftBukkit
 
-        if (par7 == 0)
-        {
+        if (par7 == 0) {
             --par5;
         }
 
-        if (par7 == 1)
-        {
+        if (par7 == 1) {
             ++par5;
         }
 
-        if (par7 == 2)
-        {
+        if (par7 == 2) {
             --par6;
         }
 
-        if (par7 == 3)
-        {
+        if (par7 == 3) {
             ++par6;
         }
 
-        if (par7 == 4)
-        {
+        if (par7 == 4) {
             --par4;
         }
 
-        if (par7 == 5)
-        {
+        if (par7 == 5) {
             ++par4;
         }
 
-        if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack))
-        {
+        if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack)) {
             return false;
-        }
-        else
-        {
-            if (par3World.isAirBlock(par4, par5, par6))
-            {
+        } else {
+            if (par3World.isAirBlock(par4, par5, par6)) {
                 // CraftBukkit start - Store the clicked block
-                if (MinetweakEventFactory.callBlockIgniteEvent(par3World, par4, par5, par6, org.minetweak.event.block.BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL, par2EntityPlayer).isCancelled())
-                {
+                if (MinetweakEventFactory.callBlockIgniteEvent(par3World, par4, par5, par6, org.minetweak.event.block.BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL, par2EntityPlayer).isCancelled()) {
                     par1ItemStack.damageItem(1, par2EntityPlayer);
                     return false;
                 }
 
                 MinetweakBlockState blockState = MinetweakBlockState.getBlockState(par3World, par4, par5, par6);
                 // CraftBukkit end
-                par3World.playSoundEffect((double)par4 + 0.5D, (double)par5 + 0.5D, (double)par6 + 0.5D, "fire.ignite", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
+                par3World.playSoundEffect((double) par4 + 0.5D, (double) par5 + 0.5D, (double) par6 + 0.5D, "fire.ignite", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
                 par3World.setBlock(par4, par5, par6, Block.fire.blockID);
                 // CraftBukkit start
                 org.minetweak.event.block.BlockPlaceEvent placeEvent = MinetweakEventFactory.callBlockPlaceEvent(par3World, par2EntityPlayer, blockState, clickedX, clickedY, clickedZ);
 
-                if (placeEvent.isCancelled() || !placeEvent.canBuild())
-                {
+                if (placeEvent.isCancelled() || !placeEvent.canBuild()) {
                     placeEvent.getBlockPlaced().setTypeIdAndData(0, (byte) 0, false);
                     return false;
                 }

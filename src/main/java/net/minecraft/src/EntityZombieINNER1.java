@@ -1,5 +1,4 @@
 package net.minecraft.src;
 
-class EntityZombieINNER1
-{
+class EntityZombieINNER1 {
 }

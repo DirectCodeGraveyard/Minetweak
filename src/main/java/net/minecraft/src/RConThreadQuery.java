@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.config.MinetweakConfig;
 
 import java.io.IOException;
 import java.net.*;
@@ -10,6 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class RConThreadQuery extends RConThreadBase {
     /**
      * The time of the last client auth check
@@ -70,12 +72,7 @@ public class RConThreadQuery extends RConThreadBase {
     /**
      * A map of SocketAddress objects to RConThreadQueryAuth objects
      */
-    private Map queryClients;
-
-    /**
-     * The time that this RConThreadQuery was constructed, from (new Date()).getTime()
-     */
-    private long time;
+    private Map<Object, RConThreadQueryAuth> queryClients;
 
     /**
      * The RConQuery output stream
@@ -114,15 +111,16 @@ public class RConThreadQuery extends RConThreadBase {
         if (0 == this.queryPort) {
             this.queryPort = this.serverPort;
             this.logInfo("Setting default query port to " + this.queryPort);
-            par1IServer.setProperty("query.port", Integer.valueOf(this.queryPort));
-            par1IServer.setProperty("debug", Boolean.valueOf(false));
-            par1IServer.saveProperties();
+            MinetweakConfig.set("query.port", "" + this.queryPort);
+            MinetweakConfig.set("debug", "" + false);
         }
 
         this.field_72644_p = new HashMap();
         this.output = new RConOutputStream(1460);
-        this.queryClients = new HashMap();
-        this.time = (new Date()).getTime();
+        this.queryClients = new HashMap<Object, RConThreadQueryAuth>();
+        /*
+      The time that this RConThreadQuery was constructed, from (new Date()).getTime()
+     */
     }
 
     /**
@@ -146,7 +144,7 @@ public class RConThreadQuery extends RConThreadBase {
 
             switch (var2[2]) {
                 case 0:
-                    if (!this.verifyClientAuth(par1DatagramPacket).booleanValue()) {
+                    if (!this.verifyClientAuth(par1DatagramPacket)) {
                         this.logDebug("Invalid challenge [" + var4 + "]");
                         return false;
                     } else if (15 == var3) {
@@ -243,7 +241,7 @@ public class RConThreadQuery extends RConThreadBase {
      * Returns the request ID provided by the authorized client
      */
     private byte[] getRequestID(SocketAddress par1SocketAddress) {
-        return ((RConThreadQueryAuth) this.queryClients.get(par1SocketAddress)).getRequestId();
+        return (this.queryClients.get(par1SocketAddress)).getRequestId();
     }
 
     /**
@@ -253,10 +251,10 @@ public class RConThreadQuery extends RConThreadBase {
         SocketAddress var2 = par1DatagramPacket.getSocketAddress();
 
         if (!this.queryClients.containsKey(var2)) {
-            return Boolean.valueOf(false);
+            return false;
         } else {
             byte[] var3 = par1DatagramPacket.getData();
-            return ((RConThreadQueryAuth) this.queryClients.get(var2)).getRandomChallenge() != RConUtils.getBytesAsBEint(var3, 7, par1DatagramPacket.getLength()) ? Boolean.valueOf(false) : Boolean.valueOf(true);
+            return (this.queryClients.get(var2)).getRandomChallenge() != RConUtils.getBytesAsBEint(var3, 7, par1DatagramPacket.getLength()) ? Boolean.valueOf(false) : Boolean.valueOf(true);
         }
     }
 
@@ -278,12 +276,12 @@ public class RConThreadQuery extends RConThreadBase {
 
             if (var1 >= this.lastAuthCheckTime + 30000L) {
                 this.lastAuthCheckTime = var1;
-                Iterator var3 = this.queryClients.entrySet().iterator();
+                Iterator<Entry<Object, RConThreadQueryAuth>> var3 = this.queryClients.entrySet().iterator();
 
                 while (var3.hasNext()) {
-                    Entry var4 = (Entry) var3.next();
+                    Entry<Object, RConThreadQueryAuth> var4 = var3.next();
 
-                    if (((RConThreadQueryAuth) var4.getValue()).hasExpired(var1).booleanValue()) {
+                    if ((var4.getValue()).hasExpired(var1)) {
                         var3.remove();
                     }
                 }
@@ -304,8 +302,8 @@ public class RConThreadQuery extends RConThreadBase {
                     this.parseIncomingPacket(this.incomingPacket);
                 } catch (SocketTimeoutException var7) {
                     this.cleanQueryClientsMap();
-                } catch (PortUnreachableException var8) {
-                    ;
+                } catch (PortUnreachableException ignored) {
+
                 } catch (IOException var9) {
                     this.stopWithException(var9);
                 }

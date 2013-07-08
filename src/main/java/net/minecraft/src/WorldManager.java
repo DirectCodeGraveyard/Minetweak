@@ -2,8 +2,6 @@ package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
 
-import java.util.Iterator;
-
 public class WorldManager implements IWorldAccess {
     /**
      * Reference to the MinecraftServer object.

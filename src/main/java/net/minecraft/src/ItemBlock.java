@@ -74,15 +74,13 @@ public class ItemBlock extends Item {
         }
     }
 
-    public static boolean processBlockPlace(final World world, final EntityPlayer entityplayer, final ItemStack itemstack, final int x, final int y, final int z, final int id, final int data, final int clickedX, final int clickedY, final int clickedZ)
-    {
+    public static boolean processBlockPlace(final World world, final EntityPlayer entityplayer, final ItemStack itemstack, final int x, final int y, final int z, final int id, final int data, final int clickedX, final int clickedY, final int clickedZ) {
         org.minetweak.event.block.BlockState blockstate = MinetweakBlockState.getBlockState(world, x, y, z);
         world.callingPlaceEvent = true;
         world.setBlock(x, y, z, id, data, 2);
         org.minetweak.event.block.BlockPlaceEvent event = MinetweakEventFactory.callBlockPlaceEvent(world, entityplayer, blockstate, clickedX, clickedY, clickedZ);
 
-        if (event.isCancelled() || !event.canBuild())
-        {
+        if (event.isCancelled() || !event.canBuild()) {
             blockstate.update(true, false);
             world.callingPlaceEvent = false;
             return false;
@@ -101,15 +99,13 @@ public class ItemBlock extends Item {
         world.notifyBlockChange(x, y, z, newId);
 
         // Skulls don't get block data applied to them
-        if (block != null && block != Block.skull)
-        {
+        if (block != null && block != Block.skull) {
             block.onBlockPlacedBy(world, x, y, z, entityplayer, itemstack);
             block.onPostBlockPlaced(world, x, y, z, newData);
-            world.playSoundEffect((double)((float) x + 0.5F), (double)((float) y + 0.5F), (double)((float) z + 0.5F), block.stepSound.getPlaceSound(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
+            world.playSoundEffect((double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F), block.stepSound.getPlaceSound(), (block.stepSound.getVolume() + 1.0F) / 2.0F, block.stepSound.getPitch() * 0.8F);
         }
 
-        if (itemstack != null)
-        {
+        if (itemstack != null) {
             --itemstack.stackSize;
         }
 

@@ -41,7 +41,7 @@ public class PropertyManager {
                 if (var3 != null) {
                     try {
                         var3.close();
-                    } catch (IOException var12) {
+                    } catch (IOException ignored) {
                     }
                 }
             }
@@ -75,7 +75,7 @@ public class PropertyManager {
             if (var1 != null) {
                 try {
                     var1.close();
-                } catch (IOException var10) {
+                } catch (IOException ignored) {
                 }
             }
         }
@@ -112,22 +112,4 @@ public class PropertyManager {
         }
     }
 
-    /**
-     * Gets a boolean property. If it does not exist, set it to the specified value.
-     */
-    public boolean getBooleanProperty(String par1Str, boolean par2) {
-        try {
-            return Boolean.parseBoolean(this.getStringProperty(par1Str, "" + par2));
-        } catch (Exception var4) {
-            this.serverProperties.setProperty(par1Str, "" + par2);
-            return par2;
-        }
-    }
-
-    /**
-     * Saves an Object with the given property name.
-     */
-    public void setProperty(String par1Str, Object par2Obj) {
-        this.serverProperties.setProperty(par1Str, "" + par2Obj);
-    }
 }

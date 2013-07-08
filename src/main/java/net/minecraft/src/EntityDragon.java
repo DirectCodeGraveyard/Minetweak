@@ -410,7 +410,7 @@ public class EntityDragon extends EntityLiving implements IEntityMultiPart, IMob
         this.forceNewTarget = false;
 
         if (this.rand.nextInt(2) == 0 && !this.worldObj.playerEntities.isEmpty()) {
-            this.target = (Entity) this.worldObj.playerEntities.get(this.rand.nextInt(this.worldObj.playerEntities.size()));
+            this.target = this.worldObj.playerEntities.get(this.rand.nextInt(this.worldObj.playerEntities.size()));
         } else {
             boolean var1 = false;
 
