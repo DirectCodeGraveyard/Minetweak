@@ -30,7 +30,6 @@ dependencies {
 
 javadoc {
     title 'Minetweak'
-
 }
 
 compileJava {
