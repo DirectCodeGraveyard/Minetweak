@@ -43,10 +43,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         var1.start();
         this.logInfo("Starting minecraft server version 1.6.2");
 
-        if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
-            this.getLogAgent().logInfo("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar MinetweakLauncher.jar\"");
-        }
-
         this.minetweakInfo("Loading Configuration");
         this.setOnlineMode(MinetweakConfig.getBoolean("server.online", true));
         this.setHostname(MinetweakConfig.get("server.ip", ""));
