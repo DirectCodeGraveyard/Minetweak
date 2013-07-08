@@ -1109,7 +1109,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         return new ChunkCoordinates(0, 0, 0);
     }
 
-    public World func_130014_f_() {
+    public World getOverworld() {
         return this.worldServers[0];
     }
 

@@ -18,5 +18,5 @@ public interface ICommandSender {
      */
     ChunkCoordinates getCommandSenderPosition();
 
-    World func_130014_f_();
+    World getOverworld();
 }

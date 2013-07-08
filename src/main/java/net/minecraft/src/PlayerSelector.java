@@ -124,7 +124,7 @@ public class PlayerSelector {
                 var13 = var3.get("name");
             }
 
-            World var16 = var15 ? par0ICommandSender.func_130014_f_() : null;
+            World var16 = var15 ? par0ICommandSender.getOverworld() : null;
             List var17;
 
             if (!var4.equals("p") && !var4.equals("a")) {

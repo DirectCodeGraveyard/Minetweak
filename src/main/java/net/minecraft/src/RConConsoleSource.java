@@ -52,7 +52,7 @@ public class RConConsoleSource implements ICommandSender {
         return new ChunkCoordinates(0, 0, 0);
     }
 
-    public World func_130014_f_() {
-        return MinecraftServer.getServer().func_130014_f_();
+    public World getOverworld() {
+        return MinecraftServer.getServer().getOverworld();
     }
 }

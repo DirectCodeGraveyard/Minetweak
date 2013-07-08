@@ -1654,7 +1654,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         return this.username;
     }
 
-    public World func_130014_f_() {
+    public World getOverworld() {
         return this.worldObj;
     }
 

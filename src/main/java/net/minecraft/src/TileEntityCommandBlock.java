@@ -95,7 +95,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         return new ChunkCoordinates(this.xCoord, this.yCoord, this.zCoord);
     }
 
-    public World func_130014_f_() {
+    public World getOverworld() {
         return this.getWorldObj();
     }
 
