@@ -246,6 +246,10 @@ public class Minetweak {
         registerCommand("clear", new CommandClearInv());
     }
 
+    /**
+     * Return the HashMap with the players. Key is the username, Value is the Player instance.
+     * @return Players HashMap
+     */
     public static HashMap<String, Player> getPlayers() {
         return players;
     }
