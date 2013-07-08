@@ -64,7 +64,7 @@ public class Minetweak {
     private static EventBus eventBus = new EventBus();
 
     public static void main(String[] args) {
-        System.out.println("Minetweak v" + getServerVersion() + " using Minecraft v" + getMinecraftVersion());
+        System.out.println("Minetweak v" + getAPIVersion() + " using Minecraft v" + getMinecraftVersion());
 
         PermissionsLoader.load();
         MinetweakConfig.initialize();
@@ -96,10 +96,10 @@ public class Minetweak {
     }
 
     /**
-     * What Minetweak server version are we running?
-     * @return Minetweak Server Version
+     * What Minetweak API version are we running?
+     * @return Minetweak API Version
      */
-    public static String getServerVersion() {
+    public static String getAPIVersion() {
         return serverVersion;
     }
 
@@ -244,6 +244,7 @@ public class Minetweak {
         registerCommand("reload", new CommandReload());
         registerCommand("loaddata", new CommandLoadData());
         registerCommand("clear", new CommandClearInv());
+        registerCommand("version", new CommandVersion());
     }
 
     /**
@@ -252,5 +253,9 @@ public class Minetweak {
      */
     public static HashMap<String, Player> getPlayers() {
         return players;
+    }
+
+    public static HashMap<String, CommandExecutor> getCommandExecutors() {
+        return commandExecutors;
     }
 }
