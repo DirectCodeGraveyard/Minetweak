@@ -1,11 +1,8 @@
 package org.minetweak.event.block;
 
-import net.minecraft.src.ItemStack;
 import org.minetweak.material.Material;
 import org.minetweak.world.Chunk;
 import org.minetweak.world.World;
-
-import java.util.Collection;
 
 /**
  * Represents a block. This is a live object, and only one Block may exist for

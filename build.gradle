@@ -4,7 +4,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 
-def version = '0.5'
+def version = '0.6'
 def groupId = 'org.minetweak'
 repositories {
     mavenCentral()
@@ -30,7 +30,6 @@ dependencies {
 
 javadoc {
     title 'Minetweak'
-
 }
 
 compileJava {
@@ -46,6 +45,7 @@ jar {
 }
 
 task wrapper(type: Wrapper) {
+    description = 'Downloads Gradle for distribution to users who may not have it'
     gradleVersion = '1.6'
 }
 
@@ -64,30 +64,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
-artifacts {
-    archives sourcesJar
-    archives javadocJar
-    archives jar
-}
-
-if (!hasProperty('ciUsername')) {
-    ext.ciUsername = ''
-}
-if (!hasProperty('ciPassword')) {
-    ext.ciPassword = ''
-}
-
-uploadArchives {
-    repositories.mavenDeployer {
-        configuration = configurations.deployerJars
-        repository(url: 'ftp://ci.directmyfile.com/var/www/snapshots/') {
-            authentication(userName: ciUsername, password: ciPassword)
-        }
-        pom.groupId = groupId
-        pom.version = version
-    }
-}
-
 task standaloneJar(type: Jar) {
     description = 'Makes a JAR with Minetweak dependencies inside'
     classifier = 'standalone'
@@ -103,4 +79,26 @@ task apiJar(type: Jar) {
     classifier = 'api'
     from sourceSets.main.output
     include("org/minetweak/*")
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+    archives jar
+    archives standaloneJar
+    archives apiJar
+}
+
+if (!hasProperty('ciUsername')) { ext.ciUsername = '' }
+if (!hasProperty('ciPassword')) { ext.ciPassword = '' }
+
+uploadArchives {
+    repositories.mavenDeployer {
+        configuration = configurations.deployerJars
+        repository(url: 'ftp://ci.directmyfile.com/var/www/snapshots/') {
+            authentication(userName: ciUsername, password: ciPassword)
+        }
+        pom.groupId = groupId
+        pom.version = version
+    }
 }

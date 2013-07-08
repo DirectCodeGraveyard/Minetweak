@@ -246,6 +246,7 @@ public class Minetweak {
         registerCommand("pardon", new CommandPardon());
         registerCommand("reload", new CommandReload());
         registerCommand("loaddata", new CommandLoadData());
+        registerCommand("clear", new CommandClearInv());
     }
 
     public static HashMap<String, Player> getPlayers() {
