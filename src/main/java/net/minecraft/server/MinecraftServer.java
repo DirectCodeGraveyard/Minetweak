@@ -1094,11 +1094,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     public abstract NetworkListenThread getNetworkThread();
 
-    /**
-     * On dedicated does nothing. On integrated, sets commandsAllowedForAll, gameType and allows external connections.
-     */
-    public abstract String shareToLAN(EnumGameType var1, boolean var2);
-
     public int getTickCounter() {
         return this.tickCounter;
     }

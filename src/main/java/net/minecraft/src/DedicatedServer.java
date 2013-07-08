@@ -311,13 +311,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     }
 
     /**
-     * On dedicated does nothing. On integrated, sets commandsAllowedForAll, gameType and allows external connections.
-     */
-    public String shareToLAN(EnumGameType par1EnumGameType, boolean par2) {
-        return "";
-    }
-
-    /**
      * Return whether command blocks are enabled.
      */
     public boolean isCommandBlockEnabled() {
