@@ -2,7 +2,7 @@ package org.minetweak.inventory;
 
 import org.minetweak.item.ItemStack;
 
-public class InventoryPlayer {
+public class InventoryPlayer implements Inventory {
     private net.minecraft.src.InventoryPlayer playerInventory;
 
     public InventoryPlayer(net.minecraft.src.InventoryPlayer playerInventory) {
