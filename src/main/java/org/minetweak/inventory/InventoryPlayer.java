@@ -1,12 +1,11 @@
-package org.minetweak.container;
+package org.minetweak.inventory;
 
-import net.minecraft.src.InventoryPlayer;
 import org.minetweak.item.ItemStack;
 
-public class Inventory {
-    private InventoryPlayer playerInventory;
+public class InventoryPlayer {
+    private net.minecraft.src.InventoryPlayer playerInventory;
 
-    public Inventory(InventoryPlayer playerInventory) {
+    public InventoryPlayer(net.minecraft.src.InventoryPlayer playerInventory) {
         this.playerInventory = playerInventory;
     }
 

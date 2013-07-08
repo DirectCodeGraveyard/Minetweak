@@ -3,7 +3,7 @@ package org.minetweak.entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.*;
 import org.minetweak.command.CommandSender;
-import org.minetweak.container.Inventory;
+import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
 
 import java.util.ArrayList;
@@ -286,8 +286,8 @@ public class Player implements CommandSender {
      * Gets the inventory of the Player
      * @return inventory of player
      */
-    public Inventory getInventory() {
-        return new Inventory(entityPlayerMP.inventory);
+    public InventoryPlayer getInventory() {
+        return new InventoryPlayer(entityPlayerMP.inventory);
     }
 
 }
