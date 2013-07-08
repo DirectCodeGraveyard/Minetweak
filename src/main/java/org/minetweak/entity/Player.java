@@ -3,6 +3,7 @@ package org.minetweak.entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.*;
 import org.minetweak.command.CommandSender;
+import org.minetweak.container.Inventory;
 import org.minetweak.permissions.Permissions;
 
 import java.util.ArrayList;
@@ -251,7 +252,7 @@ public class Player implements CommandSender {
     /**
      * Give the player a potion effect. Uses the vanilla class: PotionEffect to process effects.
      * Might be moved to a separate class like PotionEffect, but with documentation, unlike Vanilla's.
-     * @param potionEffect
+     * @param potionEffect the potion effect
      */
     public void addPotionEffect(PotionEffect potionEffect) {
         getPlayerMP().addPotionEffect(potionEffect);
@@ -279,6 +280,14 @@ public class Player implements CommandSender {
      */
     public void extinguishFire() {
         getPlayerMP().extinguish();
+    }
+
+    /**
+     * Gets the inventory of the Player
+     * @return inventory of player
+     */
+    public Inventory getInventory() {
+        return new Inventory(entityPlayerMP.inventory);
     }
 
 }
