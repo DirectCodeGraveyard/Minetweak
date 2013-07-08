@@ -87,7 +87,7 @@ uploadArchives {
     }
 }
 
-task standalone(type: Jar) {
+task standaloneJar(type: Jar) {
     description = 'Makes a JAR with Minetweak dependencies inside'
     classifier = 'standalone'
     from sourceSets.main.output
