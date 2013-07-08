@@ -64,7 +64,6 @@ public class Minetweak {
     private static EventBus eventBus = new EventBus();
 
     public static void main(String[] args) {
-        System.out.println("Success is very tasty.");
         System.out.println("Minetweak v" + getServerVersion() + " using Minecraft v" + getMinecraftVersion());
 
         PermissionsLoader.load();
@@ -84,9 +83,7 @@ public class Minetweak {
 
     private static void ramCheck() {
         if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
-            System.out.println("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
-        } else {
-            System.out.println("Good, you are using plenty of RAM to run Minetweak, I believe it is thanking you already!");
+            System.out.println("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar MinetweakLauncher.jar\"");
         }
     }
 
