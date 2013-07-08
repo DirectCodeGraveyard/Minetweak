@@ -1,8 +1,9 @@
 package org.minetweak.event.player;
 
+import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
 
-public class PlayerOpEvent {
+public class PlayerOpEvent extends PlayerEvent {
 
     private Player player;
     private String username;
@@ -10,12 +11,13 @@ public class PlayerOpEvent {
     private boolean isOfflinePlayer;
 
     public PlayerOpEvent(Player playerInstance) {
-        this.player = playerInstance;
+        super(playerInstance);
         this.username = playerInstance.getName();
         isOfflinePlayer = false;
     }
 
     public PlayerOpEvent(String playerUsername) {
+        super(null);
         this.username = playerUsername;
         isOfflinePlayer = true;
     }
@@ -26,15 +28,6 @@ public class PlayerOpEvent {
      */
     public boolean isOfflinePlayer() {
         return isOfflinePlayer;
-    }
-
-    /**
-     * Gets player instance
-     * @return player instance
-     */
-    public Player getPlayer() {
-        if (isOfflinePlayer) return null;
-        return player;
     }
 
     /**

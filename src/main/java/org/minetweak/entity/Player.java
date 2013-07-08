@@ -7,6 +7,7 @@ import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents the player, and allows you to
@@ -18,19 +19,26 @@ import java.util.ArrayList;
  * complete control over the methods inside of both
  * of those classes.
  */
-public class Player implements CommandSender {
+public class Player extends Entity implements CommandSender {
 
     private String playerDisplayName;
-
-    private EntityPlayerMP entityPlayerMP;
 
     /**
      * Initialize a player
      * @param playerDisplayName Player's username
      */
     public Player(String playerDisplayName) {
+        super(MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerDisplayName));
         this.playerDisplayName = playerDisplayName;
-        entityPlayerMP = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerDisplayName);
+    }
+
+    /**
+     * Initialize a player
+     * @param playerMP EntityPlayerMP Instance
+     */
+    public Player(EntityPlayerMP playerMP) {
+        super(playerMP);
+        this.playerDisplayName = playerMP.getEntityName();
     }
 
     /**
@@ -128,7 +136,7 @@ public class Player implements CommandSender {
     }
 
     public ItemStack getItemInHand() {
-        return entityPlayerMP.inventory.getCurrentItem();
+        return getPlayerMP().inventory.getCurrentItem();
     }
 
     /**
@@ -136,7 +144,7 @@ public class Player implements CommandSender {
      * @return EntityPlayerMP corresponding class
      */
     public EntityPlayerMP getPlayerMP() {
-        return entityPlayerMP;
+        return (EntityPlayerMP) entity;
     }
 
     /**
@@ -144,7 +152,7 @@ public class Player implements CommandSender {
      * @return NetServerHandler corresponding class
      */
     public NetServerHandler getNetServerHandler() {
-        return entityPlayerMP.playerNetServerHandler;
+        return getPlayerMP().playerNetServerHandler;
     }
 
     /**
@@ -287,7 +295,25 @@ public class Player implements CommandSender {
      * @return inventory of player
      */
     public InventoryPlayer getInventory() {
-        return new InventoryPlayer(entityPlayerMP.inventory);
+        return new InventoryPlayer(getPlayerMP().inventory);
     }
 
+    /**
+     * Gets the nearby list of Mobs
+     * @param range range around player
+     * @return list of Mobs
+     */
+    public ArrayList<Mob> getNearbyMobs(int range) {
+        ArrayList<Mob> mobs = new ArrayList<Mob>();
+        Double posX = getPlayerMP().posX;
+        Double posY = getPlayerMP().posY;
+        Double posZ = getPlayerMP().posZ;
+        List<net.minecraft.src.Entity> entityList = getPlayerMP().worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + range, posY + range, posZ + range));
+        for (net.minecraft.src.Entity entity : entityList) {
+            if (entity instanceof EntityMob) {
+                mobs.add(new Mob((EntityMob) entity));
+            }
+        }
+        return mobs;
+    }
 }

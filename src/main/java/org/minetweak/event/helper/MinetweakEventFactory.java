@@ -3,10 +3,10 @@ package org.minetweak.event.helper;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
-import org.minetweak.event.block.Block;
+import org.minetweak.block.Block;
 import org.minetweak.event.block.BlockIgniteEvent;
 import org.minetweak.event.block.BlockPlaceEvent;
-import org.minetweak.event.block.BlockState;
+import org.minetweak.block.BlockState;
 import org.minetweak.world.MinetweakWorld;
 
 /**

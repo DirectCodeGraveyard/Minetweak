@@ -1,7 +1,8 @@
 package org.minetweak.event.block;
 
 import net.minecraft.src.ItemStack;
-import org.minetweak.Minetweak;
+import org.minetweak.block.Block;
+import org.minetweak.block.BlockState;
 import org.minetweak.entity.Player;
 import org.minetweak.event.helper.Cancellable;
 

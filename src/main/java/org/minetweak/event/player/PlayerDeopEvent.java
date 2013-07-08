@@ -2,7 +2,7 @@ package org.minetweak.event.player;
 
 import org.minetweak.entity.Player;
 
-public class PlayerDeopEvent {
+public class PlayerDeopEvent extends PlayerEvent {
 
     private Player player;
     private String username;
@@ -10,12 +10,14 @@ public class PlayerDeopEvent {
     private boolean isOfflinePlayer;
 
     public PlayerDeopEvent(Player playerInstance) {
+        super(playerInstance);
         this.player = playerInstance;
         this.username = playerInstance.getName();
         isOfflinePlayer = false;
     }
 
     public PlayerDeopEvent(String playerUsername) {
+        super(null);
         this.username = playerUsername;
         isOfflinePlayer = true;
     }
@@ -29,20 +31,10 @@ public class PlayerDeopEvent {
     }
 
     /**
-     * Gets player instance
-     * @return player instance
-     */
-    public Player getPlayer() {
-        if (isOfflinePlayer) return null;
-        return player;
-    }
-
-    /**
      * Gets player username
      * @return player username
      */
     public String getPlayerUsername() {
         return username;
     }
-
 }

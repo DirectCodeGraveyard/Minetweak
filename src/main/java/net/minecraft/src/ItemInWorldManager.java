@@ -3,7 +3,7 @@ package net.minecraft.src;
 import org.minetweak.Minetweak;
 import org.minetweak.event.block.BlockBreakEvent;
 import org.minetweak.event.block.BlockUseEvent;
-import org.minetweak.event.block.MinetweakBlock;
+import org.minetweak.block.MinetweakBlock;
 import org.minetweak.world.MinetweakChunk;
 
 public class ItemInWorldManager {
@@ -220,7 +220,7 @@ public class ItemInWorldManager {
             if (this.isCreative() && this.thisPlayerMP.getCurrentEquippedItem() != null && this.thisPlayerMP.getCurrentEquippedItem().getItem().equals(Item.swordDiamond)) {
                 return false;
             }
-            org.minetweak.event.block.Block block = this.theWorld.getWorld().getBlockAt(par1, par2, par3);
+            org.minetweak.block.Block block = this.theWorld.getWorld().getBlockAt(par1, par2, par3);
 
             if (theWorld.getBlockTileEntity(par1, par2, par3) == null) {
                 Packet53BlockChange packet = new Packet53BlockChange(par1, par2, par3, this.theWorld);

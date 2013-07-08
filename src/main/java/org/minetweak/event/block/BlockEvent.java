@@ -1,5 +1,7 @@
 package org.minetweak.event.block;
 
+import org.minetweak.block.Block;
+
 /**
  * Represents a block related event.
  */

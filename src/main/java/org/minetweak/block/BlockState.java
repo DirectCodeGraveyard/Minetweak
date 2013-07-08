@@ -1,4 +1,4 @@
-package org.minetweak.event.block;
+package org.minetweak.block;
 
 import org.minetweak.material.Material;
 import org.minetweak.world.Chunk;

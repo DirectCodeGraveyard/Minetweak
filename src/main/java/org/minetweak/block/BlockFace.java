@@ -1,4 +1,4 @@
-package org.minetweak.event.block;
+package org.minetweak.block;
 
 /**
  * Represents the face of a block

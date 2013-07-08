@@ -7,18 +7,12 @@ import org.minetweak.entity.Player;
  * Called when a player drinks a potion
  * @see net.minecraft.src.ItemPotion
  */
-public class PlayerDrinkPotionEvent {
-
-    private Player player;
+public class PlayerDrinkPotionEvent extends PlayerEvent {
     private PotionEffect potionEffect;
 
     public PlayerDrinkPotionEvent(Player player, PotionEffect potionEffect) {
-        this.player = player;
+        super(player);
         this.potionEffect = potionEffect;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public PotionEffect getPotionEffect() {

@@ -1,7 +1,7 @@
 package org.minetweak.world;
 
-import org.minetweak.event.block.Block;
-import org.minetweak.event.block.MinetweakBlock;
+import org.minetweak.block.Block;
+import org.minetweak.block.MinetweakBlock;
 
 import java.lang.ref.WeakReference;
 

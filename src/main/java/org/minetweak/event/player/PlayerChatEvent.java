@@ -3,12 +3,13 @@ package org.minetweak.event.player;
 import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
 
-public class PlayerChatEvent {
+public class PlayerChatEvent extends PlayerEvent {
 
     private String username;
     private String message;
 
     public PlayerChatEvent(String username, String message) {
+        super(Minetweak.getPlayerByName(username));
         this.username = username;
         this.message = message;
     }
@@ -19,14 +20,6 @@ public class PlayerChatEvent {
      */
     public String getUsername() {
         return username;
-    }
-
-    /**
-     * Returns Player instance
-     * @return player instance
-     */
-    public Player getPlayer() {
-        return Minetweak.getPlayerByName(username);
     }
 
     /**

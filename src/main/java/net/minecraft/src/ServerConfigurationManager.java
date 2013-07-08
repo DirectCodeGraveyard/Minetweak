@@ -3,7 +3,9 @@ package net.minecraft.src;
 import com.google.common.base.Charsets;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
+import org.minetweak.entity.Player;
 import org.minetweak.event.player.PlayerJoinEvent;
+import org.minetweak.event.player.PlayerLeaveEvent;
 
 import java.io.File;
 import java.net.SocketAddress;
@@ -191,6 +193,7 @@ public abstract class ServerConfigurationManager {
         for (EntityPlayerMP aPlayerEntityList : this.playerEntityList) {
             par1EntityPlayerMP.playerNetServerHandler.sendPacket(new Packet201PlayerInfo(aPlayerEntityList.getCommandSenderName(), true, aPlayerEntityList.ping));
         }
+
         Minetweak.registerPlayer(par1EntityPlayerMP.getCommandSenderName());
         Minetweak.getEventBus().post(new PlayerJoinEvent(Minetweak.getPlayerByName(par1EntityPlayerMP.getEntityName())));
     }
@@ -219,6 +222,7 @@ public abstract class ServerConfigurationManager {
         var2.getPlayerManager().removePlayer(par1EntityPlayerMP);
         this.playerEntityList.remove(par1EntityPlayerMP);
         this.sendPacketToAllPlayers(new Packet201PlayerInfo(par1EntityPlayerMP.getCommandSenderName(), false, 9999));
+        Minetweak.getEventBus().post(new PlayerLeaveEvent(new Player(par1EntityPlayerMP)));
     }
 
     /**

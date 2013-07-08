@@ -1,6 +1,6 @@
 package org.minetweak.world;
 
-import org.minetweak.event.block.Block;
+import org.minetweak.block.Block;
 
 /**
  * Represents a chunk of blocks

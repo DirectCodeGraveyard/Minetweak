@@ -1,6 +1,6 @@
 package org.minetweak.event.block;
 
-import net.minecraft.src.Entity;
+import org.minetweak.block.Block;
 import org.minetweak.entity.Player;
 import org.minetweak.event.helper.Cancellable;
 

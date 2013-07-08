@@ -1,5 +1,7 @@
 package org.minetweak.event.block;
 
+import org.minetweak.block.Block;
+
 /**
  * An event that's called when a block yields experience.
  */

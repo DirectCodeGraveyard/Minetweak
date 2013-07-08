@@ -1,13 +1,6 @@
 package org.minetweak.world;
 
-import org.minetweak.event.block.Block;
-
-import java.io.File;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import org.minetweak.block.Block;
 
 
 /**

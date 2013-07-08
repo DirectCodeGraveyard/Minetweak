@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-import org.minetweak.event.block.MinetweakBlockState;
+import org.minetweak.block.MinetweakBlockState;
 import org.minetweak.event.helper.MinetweakEventFactory;
 
 public class ItemFlintAndSteel extends Item {
