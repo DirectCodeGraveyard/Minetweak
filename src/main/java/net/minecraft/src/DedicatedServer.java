@@ -44,10 +44,10 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.logInfo("Starting minecraft server version 1.6.2");
 
         if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
-            this.getLogAgent().logInfo("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar minecraft_server.jar\"");
+            this.getLogAgent().logInfo("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar MinetweakLauncher.jar\"");
         }
 
-        this.logInfo("Loading Configuration");
+        this.minetweakInfo("Loading Configuration");
         this.setOnlineMode(MinetweakConfig.getBoolean("server.online", true));
         this.setHostname(MinetweakConfig.get("server.ip", ""));
         this.setCanSpawnAnimals(MinetweakConfig.getBoolean("server.spawn-animals", true));
@@ -56,6 +56,9 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.setAllowFlight(MinetweakConfig.getBoolean("server.allow-flight", false));
         this.setTexturePack(MinetweakConfig.get("server.texture-pack", ""));
         this.setMOTD(MinetweakConfig.get("server.motd", "A Minetweak Server"));
+
+        MinetweakConfig.getBoolean("server.enable-command-block", true);
+
         this.func_104055_i(MinetweakConfig.getBoolean("server.force-gamemode", false));
 
         if (MinetweakConfig.getInteger("server.difficulty", 1) < 0) {
@@ -97,7 +100,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             this.getLogAgent().logWarning("**** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!");
             this.getLogAgent().logWarning("The server will make no attempt to authenticate usernames. Beware.");
             this.getLogAgent().logWarning("While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.");
-            this.getLogAgent().logWarning("To change this, set \"online-mode\" to \"true\" in the server.properties file.");
+            this.getLogAgent().logWarning("To change this, set \"online-mode\" to \"true\" in the minetweak.cfg file.");
         }
 
         this.setConfigurationManager(new DedicatedPlayerList(this));
