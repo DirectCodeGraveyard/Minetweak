@@ -21,4 +21,10 @@ public class StringUtilsTest {
         String actual = StringUtils.toString(original);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void isInteger() {
+        assertTrue(StringUtils.isInteger("25"));
+        assertFalse(StringUtils.isInteger("NotAnInteger"));
+    }
 }
