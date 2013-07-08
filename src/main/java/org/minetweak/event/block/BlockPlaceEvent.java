@@ -1,25 +1,25 @@
 package org.minetweak.event.block;
 
 import net.minecraft.src.ItemStack;
-import org.minetweak.block.Block;
-import org.minetweak.block.BlockState;
+import org.minetweak.block.IBlock;
+import org.minetweak.block.IBlockState;
 import org.minetweak.entity.Player;
 import org.minetweak.event.helper.Cancellable;
 
 /**
  * Called when a block is placed by a player.
  * <p>
- * If a Block Place event is cancelled, the block will not be placed.
+ * If a TweakBlock Place event is cancelled, the block will not be placed.
  */
 public class BlockPlaceEvent extends BlockEvent implements Cancellable {
     protected boolean cancel;
     protected boolean canBuild;
-    protected Block placedAgainst;
-    protected BlockState replacedBlockState;
+    protected IBlock placedAgainst;
+    protected IBlockState replacedBlockState;
     protected ItemStack itemInHand;
     protected Player player;
 
-    public BlockPlaceEvent(final Block placedBlock, final BlockState replacedBlockState, final Block placedAgainst, final ItemStack itemInHand, final Player thePlayer, final boolean canBuild) {
+    public BlockPlaceEvent(final IBlock placedBlock, final IBlockState replacedBlockState, final IBlock placedAgainst, final ItemStack itemInHand, final Player thePlayer, final boolean canBuild) {
         super(placedBlock);
         this.placedAgainst = placedAgainst;
         this.itemInHand = itemInHand;
@@ -50,27 +50,27 @@ public class BlockPlaceEvent extends BlockEvent implements Cancellable {
      * Clarity method for getting the placed block. Not really needed
      * except for reasons of clarity.
      *
-     * @return The Block that was placed
+     * @return The TweakBlock that was placed
      */
-    public Block getBlockPlaced() {
+    public IBlock getBlockPlaced() {
         return getBlock();
     }
 
     /**
-     * Gets the BlockState for the block which was replaced. Material type air mostly.
+     * Gets the TweakBlockState for the block which was replaced. Material type air mostly.
      *
-     * @return The BlockState for the block which was replaced.
+     * @return The TweakBlockState for the block which was replaced.
      */
-    public BlockState getBlockReplacedState() {
+    public IBlockState getBlockReplacedState() {
         return this.replacedBlockState;
     }
 
     /**
      * Gets the block that this block was placed against
      *
-     * @return Block the block that the new block was placed against
+     * @return TweakBlock the block that the new block was placed against
      */
-    public Block getBlockAgainst() {
+    public IBlock getBlockAgainst() {
         return placedAgainst;
     }
 

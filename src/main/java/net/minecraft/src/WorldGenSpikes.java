@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class WorldGenSpikes extends WorldGenerator {
     /**
-     * The Block ID that the generator is allowed to replace while generating the terrain.
+     * The TweakBlock ID that the generator is allowed to replace while generating the terrain.
      */
     private int replaceID;
 

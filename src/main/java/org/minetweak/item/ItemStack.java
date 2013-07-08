@@ -2,11 +2,11 @@ package org.minetweak.item;
 
 public class ItemStack {
     private net.minecraft.src.ItemStack stack;
-    private Item item;
+    private TweakItem tweakItem;
 
     public ItemStack(net.minecraft.src.ItemStack stack) {
         this.stack = stack;
-        this.item = new Item(stack.getItem());
+        this.tweakItem = new TweakItem(stack.getItem());
     }
 
     public net.minecraft.src.ItemStack getItemStack() {
@@ -21,8 +21,8 @@ public class ItemStack {
         return stack.stackSize;
     }
 
-    public Item getItem() {
-        return item;
+    public TweakItem getTweakItem() {
+        return tweakItem;
     }
 
     public Integer getMaxStackSize() {

@@ -433,7 +433,7 @@ public class WorldServer extends World {
                             Block.blocksList[var6].updateTick(this, var4.xCoord, var4.yCoord, var4.zCoord, this.rand);
                         } catch (Throwable var13) {
                             CrashReport var8 = CrashReport.makeCrashReport(var13, "Exception while ticking a block");
-                            CrashReportCategory var9 = var8.makeCategory("Block being ticked");
+                            CrashReportCategory var9 = var8.makeCategory("TweakBlock being ticked");
                             int var10;
 
                             try {

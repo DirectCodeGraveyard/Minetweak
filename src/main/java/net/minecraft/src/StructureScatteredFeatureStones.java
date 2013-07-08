@@ -7,7 +7,7 @@ class StructureScatteredFeatureStones extends StructurePieceBlockSelector {
     }
 
     /**
-     * picks Block Ids and Metadata (Silverfish)
+     * picks TweakBlock Ids and Metadata (Silverfish)
      */
     public void selectBlocks(Random par1Random, int par2, int par3, int par4, boolean par5) {
         if (par1Random.nextFloat() < 0.4F) {

@@ -1,6 +1,6 @@
 package org.minetweak.event.block;
 
-import org.minetweak.block.Block;
+import org.minetweak.block.IBlock;
 
 /**
  * An event that's called when a block yields experience.
@@ -8,7 +8,7 @@ import org.minetweak.block.Block;
 public class BlockExpEvent extends BlockEvent {
     private int exp;
 
-    public BlockExpEvent(Block block, int exp) {
+    public BlockExpEvent(IBlock block, int exp) {
         super(block);
 
         this.exp = exp;

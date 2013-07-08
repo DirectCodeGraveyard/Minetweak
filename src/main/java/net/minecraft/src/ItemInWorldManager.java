@@ -1,10 +1,9 @@
 package net.minecraft.src;
 
 import org.minetweak.Minetweak;
+import org.minetweak.block.TweakBlock;
 import org.minetweak.event.block.BlockBreakEvent;
 import org.minetweak.event.block.BlockUseEvent;
-import org.minetweak.block.MinetweakBlock;
-import org.minetweak.world.MinetweakChunk;
 
 public class ItemInWorldManager {
     /**
@@ -86,7 +85,7 @@ public class ItemInWorldManager {
             if (var2 == 0) {
                 this.receivedFinishDiggingPacket = false;
             } else {
-                Block var3 = Block.blocksList[var2];
+                net.minecraft.src.Block var3 = net.minecraft.src.Block.blocksList[var2];
                 var4 = var3.getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, this.posX, this.posY, this.posZ) * (float) (var1 + 1);
                 var5 = (int) (var4 * 10.0F);
 
@@ -102,7 +101,7 @@ public class ItemInWorldManager {
             }
         } else if (this.isDestroyingBlock) {
             var1 = this.theWorld.getBlockId(this.curBlockX, this.curBlockY, this.curBlockZ);
-            Block var6 = Block.blocksList[var1];
+            net.minecraft.src.Block var6 = net.minecraft.src.Block.blocksList[var1];
 
             if (var6 == null) {
                 this.theWorld.destroyBlockInWorldPartially(this.thisPlayerMP.entityId, this.curBlockX, this.curBlockY, this.curBlockZ, -1);
@@ -126,7 +125,7 @@ public class ItemInWorldManager {
      * side. tryHarvestBlock can also be the result of this call
      */
     public void onBlockClicked(int par1, int par2, int par3, int par4) {
-        if (!this.gameType.isAdventure() || this.thisPlayerMP.canHarvestBlock(Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
+        if (!this.gameType.isAdventure() || this.thisPlayerMP.canHarvestBlock(net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
             if (this.isCreative()) {
                 if (!this.theWorld.extinguishFire(null, par1, par2, par3, par4)) {
                     this.tryHarvestBlock(par1, par2, par3);
@@ -138,8 +137,8 @@ public class ItemInWorldManager {
                 int var6 = this.theWorld.getBlockId(par1, par2, par3);
 
                 if (var6 > 0) {
-                    Block.blocksList[var6].onBlockClicked(this.theWorld, par1, par2, par3, this.thisPlayerMP);
-                    var5 = Block.blocksList[var6].getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, par1, par2, par3);
+                    net.minecraft.src.Block.blocksList[var6].onBlockClicked(this.theWorld, par1, par2, par3, this.thisPlayerMP);
+                    var5 = net.minecraft.src.Block.blocksList[var6].getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, par1, par2, par3);
                 }
 
                 if (var6 > 0 && var5 >= 1.0F) {
@@ -163,7 +162,7 @@ public class ItemInWorldManager {
             int var5 = this.theWorld.getBlockId(par1, par2, par3);
 
             if (var5 != 0) {
-                Block var6 = Block.blocksList[var5];
+                net.minecraft.src.Block var6 = net.minecraft.src.Block.blocksList[var5];
                 float var7 = var6.getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, par1, par2, par3) * (float) (var4 + 1);
 
                 if (var7 >= 0.7F) {
@@ -194,7 +193,7 @@ public class ItemInWorldManager {
      * Removes a block and triggers the appropriate events
      */
     private boolean removeBlock(int par1, int par2, int par3) {
-        Block var4 = Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
+        net.minecraft.src.Block var4 = net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
         int var5 = this.theWorld.getBlockMetadata(par1, par2, par3);
 
         if (var4 != null) {
@@ -220,7 +219,7 @@ public class ItemInWorldManager {
             if (this.isCreative() && this.thisPlayerMP.getCurrentEquippedItem() != null && this.thisPlayerMP.getCurrentEquippedItem().getItem().equals(Item.swordDiamond)) {
                 return false;
             }
-            org.minetweak.block.Block block = this.theWorld.getWorld().getBlockAt(par1, par2, par3);
+            TweakBlock tweakBlock = this.theWorld.getWorld().getBlockAt(par1, par2, par3);
 
             if (theWorld.getBlockTileEntity(par1, par2, par3) == null) {
                 Packet53BlockChange packet = new Packet53BlockChange(par1, par2, par3, this.theWorld);
@@ -230,13 +229,13 @@ public class ItemInWorldManager {
             }
 
 
-            event = new BlockBreakEvent(block, Minetweak.getPlayerByName(this.thisPlayerMP.username));
-            event.setCancelled(this.gameType.isAdventure() || !this.thisPlayerMP.canHarvestBlock(Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)]));
-            Block nmsBlock = Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
+            event = new BlockBreakEvent(tweakBlock, Minetweak.getPlayerByName(this.thisPlayerMP.username));
+            event.setCancelled(this.gameType.isAdventure() || !this.thisPlayerMP.canHarvestBlock(net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)]));
+            net.minecraft.src.Block nmsBlock = net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
 
             if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && !this.thisPlayerMP.canHarvestBlock(nmsBlock)) {
                 if (!(nmsBlock.func_71906_q_CodeFix_Public() && EnchantmentHelper.getSilkTouchModifier(this.thisPlayerMP))) {
-                    int data = block.getData();
+                    int data = tweakBlock.getData();
                     int bonusLevel = EnchantmentHelper.getFortuneModifier(this.thisPlayerMP);
                     event.setExpToDrop(nmsBlock.getExpDrop(this.theWorld, data, bonusLevel));
                 }
@@ -245,9 +244,9 @@ public class ItemInWorldManager {
             Minetweak.getEventBus().post(event);
 
             if (event.isCancelled()) {
-                // Let the client know the block still exists
+                // Let the client know the tweakBlock still exists
                 this.thisPlayerMP.playerNetServerHandler.sendPacket(new Packet53BlockChange(par1, par2, par3, this.theWorld));
-                // Update any tile entity data for this block
+                // Update any tile entity data for this tweakBlock
                 TileEntity tileentity = this.theWorld.getBlockTileEntity(par1, par2, par3);
 
                 if (tileentity != null) {
@@ -260,14 +259,14 @@ public class ItemInWorldManager {
 
         int l = this.theWorld.getBlockId(par1, par2, par3);
 
-        if (Block.blocksList[l] == null) {
+        if (net.minecraft.src.Block.blocksList[l] == null) {
             return false;
         }
 
         int i1 = this.theWorld.getBlockMetadata(par1, par2, par3);
 
-        if (l == Block.skull.blockID && !this.isCreative()) {
-            Block.skull.dropBlockAsItemWithChance(theWorld, par1, par2, par3, i1, 1.0F, 0);
+        if (l == net.minecraft.src.Block.skull.blockID && !this.isCreative()) {
+            net.minecraft.src.Block.skull.dropBlockAsItemWithChance(theWorld, par1, par2, par3, i1, 1.0F, 0);
             return this.removeBlock(par1, par2, par3);
         }
 
@@ -288,14 +287,14 @@ public class ItemInWorldManager {
                     this.thisPlayerMP.destroyCurrentEquippedItem();
                 }
             }
-            if (this.thisPlayerMP.canHarvestBlock(Block.blocksList[var4])) {
-                Block.blocksList[var4].harvestBlock(this.theWorld, this.thisPlayerMP, par1, par2, par3, i1);
+            if (this.thisPlayerMP.canHarvestBlock(net.minecraft.src.Block.blocksList[var4])) {
+                net.minecraft.src.Block.blocksList[var4].harvestBlock(this.theWorld, this.thisPlayerMP, par1, par2, par3, i1);
             }
             flag = this.removeBlock(par1, par2, par3);
         }
 
         if (flag && event != null) {
-            Block.blocksList[l].func_71923_g_CodeFix_Public(this.theWorld, par1, par2, par3, event.getExpToDrop());
+            net.minecraft.src.Block.blocksList[l].func_71923_g_CodeFix_Public(this.theWorld, par1, par2, par3, event.getExpToDrop());
         }
 
         return flag;
@@ -344,12 +343,12 @@ public class ItemInWorldManager {
         if (!par1EntityPlayer.isSneaking() || par1EntityPlayer.getHeldItem() == null) {
             var11 = par2World.getBlockId(par4, par5, par6);
 
-            BlockUseEvent event = new BlockUseEvent(Minetweak.getPlayerByName(par1EntityPlayer.getCommandSenderName()), new MinetweakBlock(new MinetweakChunk(par2World.getChunkFromBlockCoords(par4, par5)), par4, par5, par6));
+            BlockUseEvent event = new BlockUseEvent(Minetweak.getPlayerByName(par1EntityPlayer.getCommandSenderName()), new TweakBlock(new org.minetweak.world.Chunk(par2World.getChunkFromBlockCoords(par4, par5)), par4, par5, par6));
             Minetweak.getEventBus().post(event);
             if (event.isCancelled()) {
                 return false;
             }
-            if (var11 > 0 && Block.blocksList[var11].onBlockActivated(par2World, par4, par5, par6, par1EntityPlayer, par7, par8, par9, par10)) {
+            if (var11 > 0 && net.minecraft.src.Block.blocksList[var11].onBlockActivated(par2World, par4, par5, par6, par1EntityPlayer, par7, par8, par9, par10)) {
                 return true;
             }
         }

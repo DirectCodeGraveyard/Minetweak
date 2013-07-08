@@ -6,17 +6,17 @@ import java.io.IOException;
 
 public class Packet53BlockChange extends Packet {
     /**
-     * Block X position.
+     * TweakBlock X position.
      */
     public int xPosition;
 
     /**
-     * Block Y position.
+     * TweakBlock Y position.
      */
     public int yPosition;
 
     /**
-     * Block Z position.
+     * TweakBlock Z position.
      */
     public int zPosition;
 

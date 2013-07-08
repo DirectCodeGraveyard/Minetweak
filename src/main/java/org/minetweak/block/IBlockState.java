@@ -12,14 +12,14 @@ import org.minetweak.world.World;
  * the state of the block and you will not know, or they may change the block to
  * another type entirely, causing your BlockState to become invalid.
  */
-public interface BlockState {
+public interface IBlockState {
 
     /**
      * Gets the block represented by this BlockState
      *
      * @return Block that this BlockState represents
      */
-    Block getBlock();
+    IBlock getBlock();
 
     /**
      * Gets the type of this block

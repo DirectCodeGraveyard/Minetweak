@@ -161,8 +161,8 @@ public class CrashReportCategory {
     }
 
     public static void func_85068_a(CrashReportCategory par0CrashReportCategory, int par1, int par2, int par3, int par4, int par5) {
-        par0CrashReportCategory.addCrashSectionCallable("Block type", new CallableBlockType(par4));
-        par0CrashReportCategory.addCrashSectionCallable("Block data value", new CallableBlockDataValue(par5));
-        par0CrashReportCategory.addCrashSectionCallable("Block location", new CallableBlockLocation(par1, par2, par3));
+        par0CrashReportCategory.addCrashSectionCallable("TweakBlock type", new CallableBlockType(par4));
+        par0CrashReportCategory.addCrashSectionCallable("TweakBlock data value", new CallableBlockDataValue(par5));
+        par0CrashReportCategory.addCrashSectionCallable("TweakBlock location", new CallableBlockLocation(par1, par2, par3));
     }
 }

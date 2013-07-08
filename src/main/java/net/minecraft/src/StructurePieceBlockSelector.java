@@ -7,7 +7,7 @@ public abstract class StructurePieceBlockSelector {
     protected int selectedBlockMetaData;
 
     /**
-     * picks Block Ids and Metadata (Silverfish)
+     * picks TweakBlock Ids and Metadata (Silverfish)
      */
     public abstract void selectBlocks(Random var1, int var2, int var3, int var4, boolean var5);
 

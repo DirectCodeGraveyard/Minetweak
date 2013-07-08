@@ -1,40 +1,64 @@
 package org.minetweak.world;
 
-import org.minetweak.block.Block;
+import org.minetweak.block.TweakBlock;
 
-/**
- * Represents a chunk of blocks
- */
-public interface Chunk {
+import java.lang.ref.WeakReference;
 
-    /**
-     * Gets the X-coordinate of this chunk
-     *
-     * @return X-coordinate
-     */
-    int getX();
+public class Chunk {
+    private WeakReference<net.minecraft.src.Chunk> weakChunk;
+    private final net.minecraft.src.WorldServer worldServer;
+    private final int x;
+    private final int z;
+    private static final byte[] emptyData = new byte[2048];
+    private static final short[] emptyBlockIDs = new short[4096];
+    private static final byte[] emptySkyLight = new byte[2048];
 
-    /**
-     * Gets the Z-coordinate of this chunk
-     *
-     * @return Z-coordinate
-     */
-    int getZ();
+    public Chunk(net.minecraft.src.Chunk chunk) {
+        if (!(chunk instanceof net.minecraft.src.EmptyChunk)) {
+            this.weakChunk = new WeakReference<net.minecraft.src.Chunk>(chunk);
+        }
 
-    /**
-     * Gets the world containing this chunk
-     *
-     * @return Parent World
-     */
-    World getWorld();
+        worldServer = (net.minecraft.src.WorldServer) getHandle().worldObj;
+        x = getHandle().xPosition;
+        z = getHandle().zPosition;
+    }
 
-    /**
-     * Gets a block from this chunk
-     *
-     * @param x 0-15
-     * @param y 0-127
-     * @param z 0-15
-     * @return the Block
-     */
-    Block getBlock(int x, int y, int z);
+    public World getWorld() {
+        return worldServer.getWorld();
+    }
+
+    public World getCraftWorld() {
+        return getWorld();
+    }
+
+    public net.minecraft.src.Chunk getHandle() {
+        net.minecraft.src.Chunk c = weakChunk.get();
+
+        if (c == null) {
+            c = worldServer.getChunkFromChunkCoords(x, z);
+
+            if (!(c instanceof net.minecraft.src.EmptyChunk)) {
+                weakChunk = new WeakReference<net.minecraft.src.Chunk>(c);
+            }
+        }
+
+        return c;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getZ() {
+        return z;
+    }
+
+    @Override
+    public String toString() {
+        return "Chunk{" + "x=" + getX() + "z=" + getZ() + '}';
+    }
+
+    public TweakBlock getBlock(int x, int y, int z) {
+        return new TweakBlock(this, (getX() << 4) | (x & 0xF), y & 0xFF, (getZ() << 4) | (z & 0xF));
+    }
 }

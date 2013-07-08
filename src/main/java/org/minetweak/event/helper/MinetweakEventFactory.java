@@ -2,19 +2,19 @@ package org.minetweak.event.helper;
 
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
+import org.minetweak.block.IBlock;
+import org.minetweak.block.IBlockState;
 import org.minetweak.entity.Player;
-import org.minetweak.block.Block;
 import org.minetweak.event.block.BlockIgniteEvent;
 import org.minetweak.event.block.BlockPlaceEvent;
-import org.minetweak.block.BlockState;
-import org.minetweak.world.MinetweakWorld;
+import org.minetweak.world.World;
 
 /**
  * Is our call event helper
  */
 public class MinetweakEventFactory {
 
-    private static boolean canBuild(MinetweakWorld world, Player player, int x, int z) {
+    private static boolean canBuild(World world, Player player, int x, int z) {
         net.minecraft.src.WorldServer worldServer = world.getHandle();
         int spawnSize = MinecraftServer.getServer().getSpawnProtectionSize();
 
@@ -29,15 +29,15 @@ public class MinetweakEventFactory {
     }
 
     /**
-     * Block place methods
+     * TweakBlock place methods
      */
-    public static BlockPlaceEvent callBlockPlaceEvent(net.minecraft.src.World world, net.minecraft.src.EntityPlayer who, BlockState replacedBlockState, int clickedX, int clickedY, int clickedZ) {
-        MinetweakWorld craftWorld = world.getWorld();
+    public static BlockPlaceEvent callBlockPlaceEvent(net.minecraft.src.World world, net.minecraft.src.EntityPlayer who, IBlockState replacedBlockState, int clickedX, int clickedY, int clickedZ) {
+        World craftWorld = world.getWorld();
 
         Player player = (who == null) ? null : (Player) Minetweak.getPlayerByName(who.getEntityName());
 
-        Block blockClicked = craftWorld.getBlockAt(clickedX, clickedY, clickedZ);
-        Block placedBlock = replacedBlockState.getBlock();
+        IBlock blockClicked = craftWorld.getBlockAt(clickedX, clickedY, clickedZ);
+        IBlock placedBlock = replacedBlockState.getBlock();
 
         boolean canBuild = canBuild(craftWorld, player, placedBlock.getX(), placedBlock.getZ());
 
@@ -49,7 +49,7 @@ public class MinetweakEventFactory {
 
     public static BlockIgniteEvent callBlockIgniteEvent(net.minecraft.src.World world, int x, int y, int z, int igniterX, int igniterY, int igniterZ) {
         org.minetweak.world.World bukkitWorld = world.getWorld();
-        Block igniter = bukkitWorld.getBlockAt(igniterX, igniterY, igniterZ);
+        IBlock igniter = bukkitWorld.getBlockAt(igniterX, igniterY, igniterZ);
         BlockIgniteEvent.IgniteCause cause;
         switch (igniter.getType()) {
             case LAVA:

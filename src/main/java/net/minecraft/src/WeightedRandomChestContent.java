@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class WeightedRandomChestContent extends WeightedRandomItem {
     /**
-     * The Item/Block ID to generate in the Chest.
+     * The Item/TweakBlock ID to generate in the Chest.
      */
     private ItemStack theItemId;
 

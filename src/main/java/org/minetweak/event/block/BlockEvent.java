@@ -1,23 +1,23 @@
 package org.minetweak.event.block;
 
-import org.minetweak.block.Block;
+import org.minetweak.block.IBlock;
 
 /**
  * Represents a block related event.
  */
 public abstract class BlockEvent {
-    protected Block block;
+    protected IBlock block;
 
-    public BlockEvent(final Block theBlock) {
+    public BlockEvent(final IBlock theBlock) {
         block = theBlock;
     }
 
     /**
      * Gets the block involved in this event.
      *
-     * @return The Block which block is involved in this event
+     * @return The TweakBlock which block is involved in this event
      */
-    public final Block getBlock() {
+    public final IBlock getBlock() {
         return block;
     }
 }

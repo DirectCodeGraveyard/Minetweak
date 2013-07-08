@@ -235,7 +235,7 @@ public class Block {
     protected float blockResistance;
 
     /**
-     * set to true when Block's constructor is called through the chain of super()'s. Note: Never used
+     * set to true when TweakBlock's constructor is called through the chain of super()'s. Note: Never used
      *
      * protected boolean blockConstructorCalled = true;
      */
@@ -252,7 +252,7 @@ public class Block {
     protected boolean needsRandomTick;
 
     /**
-     * true if the Block contains a Tile Entity
+     * true if the TweakBlock contains a Tile Entity
      */
     protected boolean isBlockContainer;
 
@@ -293,7 +293,7 @@ public class Block {
     public float blockParticleGravity;
 
     /**
-     * Block material definition.
+     * TweakBlock material definition.
      */
     public final Material blockMaterial;
 
@@ -1005,7 +1005,7 @@ public class Block {
     }
 
     /**
-     * Block's chance to react to an entity falling on it.
+     * TweakBlock's chance to react to an entity falling on it.
      */
     public void onFallenUpon(World par1World, int par2, int par3, int par4, Entity par5Entity, float par6) {
     }

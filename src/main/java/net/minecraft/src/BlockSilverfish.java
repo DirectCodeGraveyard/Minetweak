@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class BlockSilverfish extends Block {
     /**
-     * Block names that can be a silverfish stone.
+     * TweakBlock names that can be a silverfish stone.
      */
     public static final String[] silverfishStoneTypes = new String[]{"stone", "cobble", "brick"};
 

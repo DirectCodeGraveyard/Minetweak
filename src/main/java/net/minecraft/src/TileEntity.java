@@ -39,7 +39,7 @@ public class TileEntity {
     public int blockMetadata = -1;
 
     /**
-     * the Block type that this TileEntity is contained within
+     * the TweakBlock type that this TileEntity is contained within
      */
     public Block blockType;
 

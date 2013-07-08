@@ -1,7 +1,5 @@
 package net.minecraft.src;
 
-import org.minetweak.world.MinetweakChunk;
-
 import java.util.*;
 
 public class Chunk {
@@ -11,7 +9,7 @@ public class Chunk {
     public static boolean isLit;
 
     /**
-     * Used to store block IDs, block MSBs, Sky-light maps, Block-light maps, and metadata. Each entry corresponds to a
+     * Used to store block IDs, block MSBs, Sky-light maps, TweakBlock-light maps, and metadata. Each entry corresponds to a
      * logical segment of 16x16x16 blocks, stacked vertically.
      */
     private ExtendedBlockStorage[] storageArrays;
@@ -123,7 +121,7 @@ public class Chunk {
         Arrays.fill(this.blockBiomeArray, (byte) -1);
 
         if (!(this instanceof EmptyChunk)) {
-            this.MineTweakChunk = new MinetweakChunk(this);
+            this.MineTweakChunk = new org.minetweak.world.Chunk(this);
         }
         Arrays.fill(this.blockBiomeArray, (byte) -1);
     }

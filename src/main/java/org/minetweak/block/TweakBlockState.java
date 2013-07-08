@@ -3,32 +3,30 @@ package org.minetweak.block;
 import org.minetweak.material.Material;
 import org.minetweak.material.MaterialData;
 import org.minetweak.world.Chunk;
-import org.minetweak.world.MinetweakChunk;
-import org.minetweak.world.MinetweakWorld;
 import org.minetweak.world.World;
 
-public class MinetweakBlockState implements BlockState {
-    private final MinetweakWorld world;
-    private final MinetweakChunk chunk;
+public class TweakBlockState implements IBlockState {
+    private final World world;
+    private final Chunk chunk;
     private final int x;
     private final int y;
     private final int z;
     protected int type;
     protected MaterialData data;
 
-    public MinetweakBlockState(final Block block) {
-        this.world = (MinetweakWorld) block.getWorld();
-        this.x = block.getX();
-        this.y = block.getY();
-        this.z = block.getZ();
-        this.type = block.getTypeId();
-        this.chunk = (MinetweakChunk) block.getChunk();
+    public TweakBlockState(final TweakBlock tweakBlock) {
+        this.world = (World) tweakBlock.getWorld();
+        this.x = tweakBlock.getX();
+        this.y = tweakBlock.getY();
+        this.z = tweakBlock.getZ();
+        this.type = tweakBlock.getTypeId();
+        this.chunk = (Chunk) tweakBlock.getChunk();
 
-        createData(block.getData());
+        createData(tweakBlock.getData());
     }
 
-    public static MinetweakBlockState getBlockState(net.minecraft.src.World world, int x, int y, int z) {
-        return new MinetweakBlockState(world.getWorld().getBlockAt(x, y, z));
+    public static TweakBlockState getBlockState(net.minecraft.src.World world, int x, int y, int z) {
+        return new TweakBlockState(world.getWorld().getBlockAt(x, y, z));
     }
 
     public World getWorld() {
@@ -91,7 +89,7 @@ public class MinetweakBlockState implements BlockState {
         return type;
     }
 
-    public Block getBlock() {
+    public TweakBlock getBlock() {
         return world.getBlockAt(x, y, z);
     }
 
@@ -104,17 +102,17 @@ public class MinetweakBlockState implements BlockState {
     }
 
     public boolean update(boolean force, boolean applyPhysics) {
-        Block block = getBlock();
+        TweakBlock tweakBlock = getBlock();
 
-        if (block.getType() != getType()) {
+        if (tweakBlock.getType() != getType()) {
             if (force) {
-                block.setTypeId(getTypeId(), applyPhysics);
+                tweakBlock.setTypeId(getTypeId(), applyPhysics);
             } else {
                 return false;
             }
         }
 
-        block.setData(getRawData(), applyPhysics);
+        tweakBlock.setData(getRawData(), applyPhysics);
         world.getHandle().markBlockForUpdate(x, y, z);
 
         return true;
@@ -145,7 +143,7 @@ public class MinetweakBlockState implements BlockState {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final MinetweakBlockState other = (MinetweakBlockState) obj;
+        final TweakBlockState other = (TweakBlockState) obj;
         if (this.world != other.world && (this.world == null || !this.world.equals(other.world))) {
             return false;
         }

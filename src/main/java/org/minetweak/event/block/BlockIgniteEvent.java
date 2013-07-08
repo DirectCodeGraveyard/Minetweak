@@ -1,29 +1,29 @@
 package org.minetweak.event.block;
 
-import org.minetweak.block.Block;
+import org.minetweak.block.IBlock;
 import org.minetweak.entity.Player;
 import org.minetweak.event.helper.Cancellable;
 
 /**
  * Called when a block is ignited. If you want to catch when a Player places fire, you need to use {@link BlockPlaceEvent}.
  * <p>
- * If a Block Ignite event is cancelled, the block will not be ignited.
+ * If a TweakBlock Ignite event is cancelled, the block will not be ignited.
  */
 public class BlockIgniteEvent extends BlockEvent implements Cancellable {
     private final IgniteCause cause;
-    private final Block ignitingBlock;
+    private final IBlock ignitingBlock;
     private boolean cancel;
     private final Player ignitingEntity;
 
-    public BlockIgniteEvent(final Block theBlock, final IgniteCause cause, final Player ignitingEntity) {
+    public BlockIgniteEvent(final IBlock theBlock, final IgniteCause cause, final Player ignitingEntity) {
         this(theBlock, cause, ignitingEntity, null);
     }
 
-    public BlockIgniteEvent(final Block theBlock, final IgniteCause cause, final Block ignitingBlock) {
+    public BlockIgniteEvent(final IBlock theBlock, final IgniteCause cause, final IBlock ignitingBlock) {
         this(theBlock, cause, null, ignitingBlock);
     }
 
-    public BlockIgniteEvent(final Block theBlock, final IgniteCause cause, final Player ignitingEntity, final Block ignitingBlock) {
+    public BlockIgniteEvent(final IBlock theBlock, final IgniteCause cause, final Player ignitingEntity, final IBlock ignitingBlock) {
         super(theBlock);
         this.cause = cause;
         this.ignitingEntity = ignitingEntity;
@@ -61,9 +61,9 @@ public class BlockIgniteEvent extends BlockEvent implements Cancellable {
     /**
      * Gets the block who ignited this block
      *
-     * @return The Block that placed/ignited the fire block, or null if not ignited by a Block.
+     * @return The TweakBlock that placed/ignited the fire block, or null if not ignited by a TweakBlock.
      */
-    public Block getIgnitingBlock() {
+    public IBlock getIgnitingBlock() {
         return ignitingBlock;
     }
 
@@ -73,31 +73,31 @@ public class BlockIgniteEvent extends BlockEvent implements Cancellable {
     public enum IgniteCause {
 
         /**
-         * Block ignition caused by lava.
+         * TweakBlock ignition caused by lava.
          */
         LAVA,
         /**
-         * Block ignition caused by a player or dispenser using flint-and-steel.
+         * TweakBlock ignition caused by a player or dispenser using flint-and-steel.
          */
         FLINT_AND_STEEL,
         /**
-         * Block ignition caused by dynamic spreading of fire.
+         * TweakBlock ignition caused by dynamic spreading of fire.
          */
         SPREAD,
         /**
-         * Block ignition caused by lightning.
+         * TweakBlock ignition caused by lightning.
          */
         LIGHTNING,
         /**
-         * Block ignition caused by an entity using a fireball.
+         * TweakBlock ignition caused by an entity using a fireball.
          */
         FIREBALL,
         /**
-         * Block ignition caused by an Ender Crystal.
+         * TweakBlock ignition caused by an Ender Crystal.
          */
         ENDER_CRYSTAL,
         /**
-         * Block ignition caused by explosion.
+         * TweakBlock ignition caused by explosion.
          */
         EXPLOSION,
     }

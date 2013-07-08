@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
-import org.minetweak.world.MinetweakWorld;
 
 import java.util.*;
 
@@ -28,7 +27,7 @@ public abstract class World implements IBlockAccess {
      * The log agent for this world.
      */
     private final ILogAgent worldLogAgent;
-    private final MinetweakWorld world;
+    private final org.minetweak.world.World world;
     /**
      * boolean; if true updates scheduled by scheduleBlockUpdate happen immediately
      */
@@ -135,7 +134,7 @@ public abstract class World implements IBlockAccess {
         this.lightUpdateBlockList = new int[32768];
         this.saveHandler = par1ISaveHandler;
         this.theProfiler = par5Profiler;
-        this.world = new MinetweakWorld((WorldServer) this);
+        this.world = new org.minetweak.world.World((WorldServer) this);
         this.mapStorage = new MapStorage(par1ISaveHandler);
         this.worldLogAgent = par6ILogAgent;
         this.worldInfo = par1ISaveHandler.loadWorldInfo();
@@ -189,7 +188,7 @@ public abstract class World implements IBlockAccess {
         this.calculateInitialWeather();
     }
 
-    public MinetweakWorld getWorld() {
+    public org.minetweak.world.World getWorld() {
         return this.world;
     }
 
@@ -596,7 +595,7 @@ public abstract class World implements IBlockAccess {
                     var6.onNeighborBlockChange(this, par1, par2, par3, par4);
                 } catch (Throwable var13) {
                     CrashReport var8 = CrashReport.makeCrashReport(var13, "Exception while updating neighbours");
-                    CrashReportCategory var9 = var8.makeCategory("Block being updated");
+                    CrashReportCategory var9 = var8.makeCategory("TweakBlock being updated");
                     int var10;
 
                     try {
@@ -3034,7 +3033,7 @@ public abstract class World implements IBlockAccess {
         } catch (Throwable var10) {
             CrashReport var8 = CrashReport.makeCrashReport(var10, "Playing level event");
             CrashReportCategory var9 = var8.makeCategory("Level event being played");
-            var9.addCrashSection("Block coordinates", CrashReportCategory.getLocationInfo(par3, par4, par5));
+            var9.addCrashSection("TweakBlock coordinates", CrashReportCategory.getLocationInfo(par3, par4, par5));
             var9.addCrashSection("Event source", par1EntityPlayer);
             var9.addCrashSection("Event type", par2);
             var9.addCrashSection("Event data", par6);

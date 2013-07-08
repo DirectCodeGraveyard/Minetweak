@@ -1,6 +1,6 @@
 package org.minetweak.event.block;
 
-import org.minetweak.block.Block;
+import org.minetweak.block.IBlock;
 import org.minetweak.entity.Player;
 import org.minetweak.event.helper.Cancellable;
 
@@ -20,13 +20,13 @@ import org.minetweak.event.helper.Cancellable;
  * Plugins wanting to simulate a traditional block drop should set the block to air and utilize their own methods for determining
  *   what the default drop for the block being broken is and what to do about it, if anything.
  * <p>
- * If a Block Break event is cancelled, the block will not break and experience will not drop.
+ * If a TweakBlock Break event is cancelled, the block will not break and experience will not drop.
  */
 public class BlockBreakEvent extends BlockExpEvent implements Cancellable {
     private final Player player;
     private boolean cancel;
 
-    public BlockBreakEvent(final Block theBlock, Player username) {
+    public BlockBreakEvent(final IBlock theBlock, Player username) {
         super(theBlock, 0);
 
         this.player = username;

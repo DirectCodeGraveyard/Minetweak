@@ -2,12 +2,12 @@ package net.minecraft.src;
 
 public class ItemSeedFood extends ItemFood {
     /**
-     * Block ID of the crop this seed food should place.
+     * TweakBlock ID of the crop this seed food should place.
      */
     private int cropId;
 
     /**
-     * Block ID of the soil this seed food should be planted on.
+     * TweakBlock ID of the soil this seed food should be planted on.
      */
     private int soilId;
 

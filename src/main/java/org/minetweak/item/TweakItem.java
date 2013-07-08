@@ -1,9 +1,9 @@
 package org.minetweak.item;
 
-public class Item {
+public class TweakItem {
     private net.minecraft.src.Item item;
 
-    public Item(net.minecraft.src.Item item) {
+    public TweakItem(net.minecraft.src.Item item) {
         this.item = item;
     }
 

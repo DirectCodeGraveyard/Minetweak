@@ -1,6 +1,6 @@
 package org.minetweak.event.block;
 
-import org.minetweak.block.Block;
+import org.minetweak.block.IBlock;
 import org.minetweak.entity.Player;
 import org.minetweak.event.helper.Cancellable;
 
@@ -8,7 +8,7 @@ public class BlockUseEvent extends BlockEvent implements Cancellable {
     private Player player;
     private boolean cancel;
 
-    public BlockUseEvent(Player player, Block theBlock) {
+    public BlockUseEvent(Player player, IBlock theBlock) {
         super(theBlock);
         this.player = player;
         this.cancel = false;
@@ -35,9 +35,9 @@ public class BlockUseEvent extends BlockEvent implements Cancellable {
     /**
      * Clarity method for getting the placed block. Not really needed
      * except for reasons of clarity.
-     * @return The Block that was placed
+     * @return The TweakBlock that was placed
      */
-    public Block getBlockUsed() {
+    public IBlock getBlockUsed() {
         return getBlock();
     }
 }

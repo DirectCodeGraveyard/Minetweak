@@ -10,7 +10,7 @@ import org.minetweak.world.World;
  * to your own handling of it; use block.getState() to get a snapshot state of a
  * block which will not be modified.
  */
-public interface Block {
+public interface IBlock {
 
     /**
      * Gets the metadata for this block
