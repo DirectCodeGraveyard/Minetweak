@@ -86,3 +86,20 @@ uploadArchives {
         pom.version = version
     }
 }
+
+task standalone(type: Jar) {
+    description = 'Makes a JAR with Minetweak dependencies inside'
+    classifier = 'standalone'
+    from sourceSets.main.output
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    manifest {
+        attributes('Main-class': 'org.minetweak.Minetweak')
+    }
+}
+
+task apiJar(type: Jar) {
+    description = 'Makes a JAR containing only the Minetweak API'
+    classifier = 'api'
+    from sourceSets.main.output
+    include("org/minetweak/*")
+}
