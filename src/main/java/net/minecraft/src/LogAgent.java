@@ -46,27 +46,31 @@ public class LogAgent implements ILogAgent {
     }
 
     public void logInfo(String par1Str) {
-        this.serverLogger.log(Level.INFO, par1Str);
+        this.serverLogger.log(Level.INFO, "[Minecraft] " + par1Str);
     }
 
     public void logWarning(String par1Str) {
-        this.serverLogger.log(Level.WARNING, par1Str);
+        this.serverLogger.log(Level.WARNING, "[Minecraft] " + par1Str);
     }
 
     public void logWarningFormatted(String par1Str, Object... par2ArrayOfObj) {
-        this.serverLogger.log(Level.WARNING, par1Str, par2ArrayOfObj);
+        this.serverLogger.log(Level.WARNING, "[Minecraft] " + par1Str, par2ArrayOfObj);
     }
 
     public void logWarningException(String par1Str, Throwable par2Throwable) {
-        this.serverLogger.log(Level.WARNING, par1Str, par2Throwable);
+        this.serverLogger.log(Level.WARNING, "[Minecraft] " + par1Str, par2Throwable);
     }
 
     public void logSevere(String par1Str) {
-        this.serverLogger.log(Level.SEVERE, par1Str);
+        this.serverLogger.log(Level.SEVERE, "[Minecraft] " + par1Str);
     }
 
     public void logSevereException(String par1Str, Throwable par2Throwable) {
-        this.serverLogger.log(Level.SEVERE, par1Str, par2Throwable);
+        this.serverLogger.log(Level.SEVERE, "[Minecraft] " + par1Str, par2Throwable);
+    }
+
+    public void logNoPrefix(String string) {
+        this.serverLogger.log(Level.INFO, string);
     }
 
     static String getLogPrefix(LogAgent par0LogAgent) {

@@ -33,7 +33,7 @@ public class ContainerHopper extends Container {
      */
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack var3 = null;
-        Slot var4 = (Slot) this.inventorySlots.get(par2);
+        Slot var4 = this.inventorySlots.get(par2);
 
         if (var4 != null && var4.getHasStack()) {
             ItemStack var5 = var4.getStack();

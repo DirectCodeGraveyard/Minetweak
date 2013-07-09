@@ -61,7 +61,7 @@ public class ContainerEnchantment extends Container {
         super.detectAndSendChanges();
 
         for (int var1 = 0; var1 < this.crafters.size(); ++var1) {
-            ICrafting var2 = (ICrafting) this.crafters.get(var1);
+            ICrafting var2 = this.crafters.get(var1);
             var2.sendProgressBarUpdate(this, 0, this.enchantLevels[0]);
             var2.sendProgressBarUpdate(this, 1, this.enchantLevels[1]);
             var2.sendProgressBarUpdate(this, 2, this.enchantLevels[2]);
@@ -195,7 +195,7 @@ public class ContainerEnchantment extends Container {
      */
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack var3 = null;
-        Slot var4 = (Slot) this.inventorySlots.get(par2);
+        Slot var4 = this.inventorySlots.get(par2);
 
         if (var4 != null && var4.getHasStack()) {
             ItemStack var5 = var4.getStack();
@@ -206,15 +206,15 @@ public class ContainerEnchantment extends Container {
                     return null;
                 }
             } else {
-                if (((Slot) this.inventorySlots.get(0)).getHasStack() || !((Slot) this.inventorySlots.get(0)).isItemValid(var5)) {
+                if ((this.inventorySlots.get(0)).getHasStack() || !(this.inventorySlots.get(0)).isItemValid(var5)) {
                     return null;
                 }
 
                 if (var5.hasTagCompound() && var5.stackSize == 1) {
-                    ((Slot) this.inventorySlots.get(0)).putStack(var5.copy());
+                    (this.inventorySlots.get(0)).putStack(var5.copy());
                     var5.stackSize = 0;
                 } else if (var5.stackSize >= 1) {
-                    ((Slot) this.inventorySlots.get(0)).putStack(new ItemStack(var5.itemID, 1, var5.getItemDamage()));
+                    (this.inventorySlots.get(0)).putStack(new ItemStack(var5.itemID, 1, var5.getItemDamage()));
                     --var5.stackSize;
                 }
             }

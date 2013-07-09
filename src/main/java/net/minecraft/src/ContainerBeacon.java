@@ -56,7 +56,7 @@ public class ContainerBeacon extends Container {
      */
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack var3 = null;
-        Slot var4 = (Slot) this.inventorySlots.get(par2);
+        Slot var4 = this.inventorySlots.get(par2);
 
         if (var4 != null && var4.getHasStack()) {
             ItemStack var5 = var4.getStack();
@@ -85,7 +85,7 @@ public class ContainerBeacon extends Container {
             }
 
             if (var5.stackSize == 0) {
-                var4.putStack((ItemStack) null);
+                var4.putStack(null);
             } else {
                 var4.onSlotChanged();
             }

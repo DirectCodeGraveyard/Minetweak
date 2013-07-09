@@ -673,7 +673,7 @@ public class NetServerHandler extends NetHandler {
                 ArrayList<ItemStack> var3 = new ArrayList<ItemStack>();
 
                 for (int var4 = 0; var4 < this.playerEntity.openContainer.inventorySlots.size(); ++var4) {
-                    var3.add(((Slot) this.playerEntity.openContainer.inventorySlots.get(var4)).getStack());
+                    var3.add((this.playerEntity.openContainer.inventorySlots.get(var4)).getStack());
                 }
 
                 this.playerEntity.updateCraftingInventory(this.playerEntity.openContainer, var3);

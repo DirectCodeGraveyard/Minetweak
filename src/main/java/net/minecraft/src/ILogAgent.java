@@ -16,4 +16,6 @@ public interface ILogAgent {
     void logSevere(String var1);
 
     void logSevereException(String var1, Throwable var2);
+
+    void logNoPrefix(String string);
 }

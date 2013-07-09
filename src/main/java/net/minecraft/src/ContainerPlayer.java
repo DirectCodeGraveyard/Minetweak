@@ -76,7 +76,7 @@ public class ContainerPlayer extends Container {
      */
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack var3 = null;
-        Slot var4 = (Slot) this.inventorySlots.get(par2);
+        Slot var4 = this.inventorySlots.get(par2);
 
         if (var4 != null && var4.getHasStack()) {
             ItemStack var5 = var4.getStack();
@@ -96,7 +96,7 @@ public class ContainerPlayer extends Container {
                 if (!this.mergeItemStack(var5, 9, 45, false)) {
                     return null;
                 }
-            } else if (var3.getItem() instanceof ItemArmor && !((Slot) this.inventorySlots.get(5 + ((ItemArmor) var3.getItem()).armorType)).getHasStack()) {
+            } else if (var3.getItem() instanceof ItemArmor && !(this.inventorySlots.get(5 + ((ItemArmor) var3.getItem()).armorType)).getHasStack()) {
                 int var6 = 5 + ((ItemArmor) var3.getItem()).armorType;
 
                 if (!this.mergeItemStack(var5, var6, var6 + 1, false)) {

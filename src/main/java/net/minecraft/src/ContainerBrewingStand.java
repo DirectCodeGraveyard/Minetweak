@@ -40,7 +40,7 @@ public class ContainerBrewingStand extends Container {
         super.detectAndSendChanges();
 
         for (int var1 = 0; var1 < this.crafters.size(); ++var1) {
-            ICrafting var2 = (ICrafting) this.crafters.get(var1);
+            ICrafting var2 = this.crafters.get(var1);
 
             if (this.brewTime != this.tileBrewingStand.getBrewTime()) {
                 var2.sendProgressBarUpdate(this, 0, this.tileBrewingStand.getBrewTime());
@@ -59,7 +59,7 @@ public class ContainerBrewingStand extends Container {
      */
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
         ItemStack var3 = null;
-        Slot var4 = (Slot) this.inventorySlots.get(par2);
+        Slot var4 = this.inventorySlots.get(par2);
 
         if (var4 != null && var4.getHasStack()) {
             ItemStack var5 = var4.getStack();
