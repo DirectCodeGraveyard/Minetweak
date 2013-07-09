@@ -1,5 +1,6 @@
 package org.bukkit.plugin.java;
 
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescription;
 import org.bukkit.plugin.PluginLogger;
 import org.minetweak.Server;
@@ -8,7 +9,7 @@ import org.minetweak.plugins.PluginLoader;
 
 import java.io.File;
 
-public abstract class JavaPlugin extends MinetweakPlugin {
+public abstract class JavaPlugin extends Plugin {
     private boolean isEnabled = false;
     private boolean initialized = false;
     private PluginLoader loader = null;

@@ -2,6 +2,8 @@ package org.minetweak.plugins;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.bukkit.plugin.Plugin;
+import org.minetweak.Minetweak;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,8 +81,12 @@ public class PluginLoader {
         loader = new URLClassLoader(urls.toArray(new URL[urls.size()]), this.getClass().getClassLoader());
         for (String c : classes) {
             try {
-                Class mc = Class.forName(c, true, loader);
-                MinetweakPlugin plugin = (MinetweakPlugin) mc.newInstance();
+                Class pc = Class.forName(c, true, loader);
+                if (Plugin.class.isInstance(pc)) {
+                    Minetweak.info("Found Bukkit Plugin. Skipping until full support is added.");
+                    continue;
+                }
+                MinetweakPlugin plugin = (MinetweakPlugin) pc.newInstance();
                 plugin.setPluginInfo(pluginInformation.get(c));
                 // Note that we override plugins even if they exist. This allows for alphabetical file-name plugin overriding
                 plugins.put(plugin.getPluginInfo().getName(), plugin);
