@@ -22,6 +22,9 @@ public abstract class MinetweakPlugin {
         return pluginInfo;
     }
 
+    /** Allows you to override Plugin Info on the fly
+     * @param pluginInfo the plugin info instance to set
+     */
     protected void setPluginInfo(PluginInfo pluginInfo) {
         this.pluginInfo = pluginInfo;
     }

@@ -121,37 +121,37 @@ public class ItemInWorldManager {
     }
 
     /**
-     * if not creative, it calls destroyBlockInWorldPartially untill the block is broken first. par4 is the specific
+     * if not creative, it calls destroyBlockInWorldPartially until the block is broken first. par4 is the specific
      * side. tryHarvestBlock can also be the result of this call
      */
     public void onBlockClicked(int par1, int par2, int par3, int par4) {
+        if (this.isCreative()) {
+            if (!this.theWorld.extinguishFire(null, par1, par2, par3, par4)) {
+                this.tryHarvestBlock(par1, par2, par3);
+            }
+            return;
+        }
         if (!this.gameType.isAdventure() || this.thisPlayerMP.canHarvestBlock(net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
-            if (this.isCreative()) {
-                if (!this.theWorld.extinguishFire(null, par1, par2, par3, par4)) {
-                    this.tryHarvestBlock(par1, par2, par3);
-                }
+            this.theWorld.extinguishFire(null, par1, par2, par3, par4);
+            this.initialDamage = this.curblockDamage;
+            float var5 = 1.0F;
+            int var6 = this.theWorld.getBlockId(par1, par2, par3);
+
+            if (var6 > 0) {
+                net.minecraft.src.Block.blocksList[var6].onBlockClicked(this.theWorld, par1, par2, par3, this.thisPlayerMP);
+                var5 = net.minecraft.src.Block.blocksList[var6].getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, par1, par2, par3);
+            }
+
+            if (var6 > 0 && var5 >= 1.0F) {
+                this.tryHarvestBlock(par1, par2, par3);
             } else {
-                this.theWorld.extinguishFire(null, par1, par2, par3, par4);
-                this.initialDamage = this.curblockDamage;
-                float var5 = 1.0F;
-                int var6 = this.theWorld.getBlockId(par1, par2, par3);
-
-                if (var6 > 0) {
-                    net.minecraft.src.Block.blocksList[var6].onBlockClicked(this.theWorld, par1, par2, par3, this.thisPlayerMP);
-                    var5 = net.minecraft.src.Block.blocksList[var6].getPlayerRelativeBlockHardness(this.thisPlayerMP, this.thisPlayerMP.worldObj, par1, par2, par3);
-                }
-
-                if (var6 > 0 && var5 >= 1.0F) {
-                    this.tryHarvestBlock(par1, par2, par3);
-                } else {
-                    this.isDestroyingBlock = true;
-                    this.curBlockX = par1;
-                    this.curBlockY = par2;
-                    this.curBlockZ = par3;
-                    int var7 = (int) (var5 * 10.0F);
-                    this.theWorld.destroyBlockInWorldPartially(this.thisPlayerMP.entityId, par1, par2, par3, var7);
-                    this.durabilityRemainingOnBlock = var7;
-                }
+                this.isDestroyingBlock = true;
+                this.curBlockX = par1;
+                this.curBlockY = par2;
+                this.curBlockZ = par3;
+                int var7 = (int) (var5 * 10.0F);
+                this.theWorld.destroyBlockInWorldPartially(this.thisPlayerMP.entityId, par1, par2, par3, var7);
+                this.durabilityRemainingOnBlock = var7;
             }
         }
     }
@@ -230,7 +230,9 @@ public class ItemInWorldManager {
 
 
             event = new BlockBreakEvent(tweakBlock, Minetweak.getPlayerByName(this.thisPlayerMP.username));
-            event.setCancelled(this.gameType.isAdventure() || !this.thisPlayerMP.canHarvestBlock(net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)]));
+            if (getGameType().isAdventure() && !getGameType().isCreative() || !this.thisPlayerMP.canHarvestBlock(net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
+                event.setCancelled(true);
+            }
             net.minecraft.src.Block nmsBlock = net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
 
             if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && !this.thisPlayerMP.canHarvestBlock(nmsBlock)) {

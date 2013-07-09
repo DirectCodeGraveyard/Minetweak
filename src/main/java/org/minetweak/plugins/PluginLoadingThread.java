@@ -1,5 +1,8 @@
 package org.minetweak.plugins;
 
+/**
+ * Loads each plugin in a thread
+ */
 public class PluginLoadingThread extends Thread {
     private MinetweakPlugin plugin;
 

@@ -32,12 +32,20 @@ public class PluginLoader {
         enableAll();
     }
 
+    /**
+     * Enable a plugin - must be loaded
+     * @param pluginName the plugin name
+     */
     public static void enable(String pluginName) {
         if (plugins.containsKey(pluginName)) {
             new PluginLoadingThread(plugins.get(pluginName)).start();
         }
     }
 
+    /**
+     * Disable a plugin - must be enabled
+     * @param pluginName the plugin name
+     */
     public static void disable(String pluginName) {
         if (plugins.containsKey(pluginName)) {
             plugins.get(pluginName).onDisable();
@@ -45,6 +53,9 @@ public class PluginLoader {
         }
     }
 
+    /**
+     * Loads plugins
+     */
     public void setupPlugins() {
         createDir();
         getPluginFiles();
@@ -79,12 +90,20 @@ public class PluginLoader {
         }
     }
 
+    /**
+     * Enable all Plugins
+     */
     public static void enableAll() {
         for (String plugin : plugins.keySet()) {
             enable(plugin);
         }
     }
 
+    /**
+     * Gets plugin info
+     * @param file jar file
+     * @return plugin info
+     */
     private PluginInfo getPluginInfo(File file) {
         try {
             JarFile jf = new JarFile(file);
@@ -98,6 +117,9 @@ public class PluginLoader {
         }
     }
 
+    /**
+     * Returns a list of Plugin files
+     */
     private void getPluginFiles() {
         try {
             FileVisitor<Path> visitor = new FileProcessor(this);
@@ -107,6 +129,9 @@ public class PluginLoader {
         }
     }
 
+    /**
+     * Disables all Plugins
+     */
     public static void disableAll() {
         for (MinetweakPlugin plugin : plugins.values()) {
             plugin.onDisable();
@@ -122,6 +147,9 @@ public class PluginLoader {
         initialize();
     }
 
+    /**
+     * Creates the plugins directory
+     */
     private void createDir() {
         File f = new File("plugins");
         if (!f.isDirectory()) {

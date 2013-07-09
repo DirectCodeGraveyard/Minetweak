@@ -147,10 +147,13 @@ public class TcpConnection implements INetworkManager {
      */
     public void addToSendQueue(Packet par1Packet) {
         if (!this.isServerTerminating) {
-
             synchronized (this.sendQueueLock) {
                 this.sendQueueByteLength += par1Packet.getPacketSize() + 1;
-                this.dataPackets.add(par1Packet);
+                if (this.dataPackets != null) {
+                    this.dataPackets.add(par1Packet);
+                } else {
+                    MinecraftServer.getServer().logSevere("Oh Crap. It seems something has happened!");
+                }
             }
         }
     }

@@ -9,6 +9,9 @@ import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;
 
 @SuppressWarnings("UnusedDeclaration")
+/**
+ * This is a class for managing the MinecraftServer
+ */
 public class Server {
 
     public static boolean broadcastMessage(String message) {

@@ -6,6 +6,13 @@ import net.minecraft.src.WorldProvider;
 import net.minecraft.src.WorldServer;
 
 public class TeleportHelper {
+    /**
+     * Attempts to move an Entity to a World
+     * @param entity Entity to Move
+     * @param dimension dimension to move to
+     * @param worldserver original server
+     * @param worldserver1 new server
+     */
     public static void transferEntityToWorld(Entity entity, int dimension, WorldServer worldserver, WorldServer worldserver1) {
         double moveFactor = 1;
         double d0;

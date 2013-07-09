@@ -255,6 +255,10 @@ public class Minetweak {
         return players;
     }
 
+    /**
+     * Gets the Command Executors for Strings
+      * @return a HashMap of the commands to their executors
+     */
     public static HashMap<String, CommandExecutor> getCommandExecutors() {
         return commandExecutors;
     }
