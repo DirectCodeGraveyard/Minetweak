@@ -662,7 +662,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     /**
-     * Logs the message with a level of INFO.
+     * Logs the message with a level of INFO with prefix Minetweak.
      */
     public void logInfo(String par1Str) {
         this.getLogAgent().logInfo(par1Str);
