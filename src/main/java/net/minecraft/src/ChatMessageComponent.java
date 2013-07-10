@@ -263,7 +263,7 @@ public class ChatMessageComponent {
         return var2;
     }
 
-    public String toJSON() {
+    public String toJson() {
         return field_111089_a.toJson(this);
     }
 }

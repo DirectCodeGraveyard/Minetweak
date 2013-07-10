@@ -150,7 +150,8 @@ public abstract class Packet {
             ++receivedID;
             receivedSize += (long) var5.getPacketSize();
         } catch (EOFException var8) {
-            par0ILogAgent.logSevere("Reached end of stream for " + par3Socket.getInetAddress());
+            // This normally prints that message, however, this causes problems with the Query Information
+            // par0ILogAgent.logSevere("Reached end of stream for " + par3Socket.getInetAddress());
             return null;
         }
 

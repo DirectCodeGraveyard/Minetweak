@@ -5,6 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import org.minetweak.command.*;
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
+import org.minetweak.entity.player.PlayerTracker;
 import org.minetweak.permissions.PermissionsLoader;
 import org.minetweak.plugins.PluginLoaderHook;
 import org.minetweak.recipe.RecipeManager;
@@ -75,6 +76,8 @@ public class Minetweak {
         registerListener(new ManagementThread());
         // Used to run plugin startup inside the Server
         registerListener(new PluginLoaderHook());
+        // Loads joined player list
+        registerListener(PlayerTracker.getInstance());
 
         ramCheck();
 

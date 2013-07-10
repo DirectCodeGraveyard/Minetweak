@@ -3,6 +3,7 @@ package org.minetweak.thread;
 import com.google.common.eventbus.Subscribe;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
+import org.minetweak.entity.player.PlayerTracker;
 import org.minetweak.event.server.ServerFinishedStartupEvent;
 import org.minetweak.permissions.PermissionsLoader;
 
@@ -16,6 +17,7 @@ public class ManagementThread extends Thread {
         while (true) {
             loadBans();
             loadPerms();
+            loadPlayers();
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
@@ -42,6 +44,10 @@ public class ManagementThread extends Thread {
      */
     public void loadPerms() {
         PermissionsLoader.load();
+    }
+
+    public void loadPlayers() {
+        PlayerTracker.getInstance().loadList();
     }
 
     @Subscribe
