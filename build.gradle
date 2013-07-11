@@ -24,13 +24,13 @@ dependencies {
     compile 'commons-io:commons-io:2.4'
     compile 'org.apache.commons:commons-lang3:3.1'
     testCompile 'junit:junit:4.10'
-    deployerJars "org.apache.maven.wagon:wagon-ftp:2.2"
+    deployerJars 'org.apache.maven.wagon:wagon-ftp:2.2'
     compile files('libs/bcprov-jdk15on-1.47.jar')
 }
 
 javadoc {
     title 'Minetweak'
-    exclude "**/net/minecraft/**"
+    exclude '**/net/minecraft/**'
 }
 
 compileJava {
@@ -56,11 +56,13 @@ tasks.withType(Test) {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
+    description = 'Makes a JAR with Minetweak Sourcesc'
     classifier = 'sources'
     from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
+    description = 'Makes a JAR with Minetweak Javadoc'
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
@@ -71,7 +73,7 @@ task standaloneJar(type: Jar) {
     from sourceSets.main.output
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     manifest {
-        attributes('Main-class': 'org.minetweak.Minetweak')
+        attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': version, '')
     }
 }
 
@@ -79,7 +81,8 @@ task apiJar(type: Jar) {
     description = 'Makes a JAR containing only the Minetweak API'
     classifier = 'api'
     from sourceSets.main.output
-    include("org/minetweak/*")
+    include('org/minetweak/*')
+    include('org/bukkit/*')
 }
 
 artifacts {
