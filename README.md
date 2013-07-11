@@ -6,19 +6,12 @@ _Minetweak_ is the Minecraft server application programming interface(API) that 
 
 **Links**
 
-[Issue Tracker]
-[Build Server]
+[Issue Tracker](https://minetweak.atlassian.net/)
+[Build Server](http://ci.minetweak.org:8085/browse/MT)
 **Who made Minetweak?**
 
 Current Team:
-    [Logan Gorence]
-    [Kenneth Endfinger]
-    [samrg472]
-    [GenPage]
-
-[Logan Gorence](https://github.com/logangorence)
-[Kenneth Endfinger](https://github.com/kaendfinger)
-[samrg472](https://github.com/samrg472)
-[GenPage](https://github.com/GenPage)
-[Issue Tracker](https://minetweak.atlassian.net/)
-[Build Server](http://ci.minetweak.org:8085/browse/MT)
+    * [Logan Gorence](https://github.com/logangorence)
+    * [Kenneth Endfinger](https://github.com/kaendfinger)
+    * [samrg472](https://github.com/samrg472)
+    * [GenPage](https://github.com/GenPage)
