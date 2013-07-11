@@ -48,7 +48,7 @@ public class Mob extends Entity {
      * Sets a Mob on fire
      * @param length time for mob to be on fire
      */
-    public void setOnFire(Integer length) {
+    public void setOnFire(int length) {
         getEntityMob().setFire(length);
     }
 

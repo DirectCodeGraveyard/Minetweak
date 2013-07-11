@@ -555,6 +555,10 @@ public class Item {
         return this;
     }
 
+    public CreativeTabs getCreativeTab() {
+        return tabToDisplayOn;
+    }
+
     static {
         StatList.initStats();
     }

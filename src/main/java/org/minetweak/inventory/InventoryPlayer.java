@@ -23,7 +23,7 @@ public class InventoryPlayer implements Inventory {
     }
 
     @Override
-    public Integer getSize() {
+    public int getSize() {
         return playerInventory.getSizeInventory();
     }
 

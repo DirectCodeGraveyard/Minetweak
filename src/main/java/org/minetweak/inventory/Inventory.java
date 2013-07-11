@@ -8,7 +8,7 @@ public interface Inventory {
      * Gets Inventory size
      * @return size of inventory
      */
-    public Integer getSize();
+    public int getSize();
 
     /**
      * Sets a slots contents

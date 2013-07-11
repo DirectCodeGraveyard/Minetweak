@@ -31,7 +31,7 @@ public class ItemStack {
      * Gets stack size
      * @return stack size
      */
-    public Integer getSize() {
+    public int getSize() {
         return stack.stackSize;
     }
 
@@ -47,7 +47,7 @@ public class ItemStack {
      * Gets the max stack size
      * @return max stack size
      */
-    public Integer getMaxStackSize() {
+    public int getMaxStackSize() {
         return stack.getMaxStackSize();
     }
 

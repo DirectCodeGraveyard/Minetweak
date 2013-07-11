@@ -305,9 +305,9 @@ public class Player extends Entity implements CommandSender {
      */
     public ArrayList<Mob> getNearbyMobs(int range) {
         ArrayList<Mob> mobs = new ArrayList<Mob>();
-        Double posX = getPlayerMP().posX;
-        Double posY = getPlayerMP().posY;
-        Double posZ = getPlayerMP().posZ;
+        double posX = getPlayerMP().posX;
+        double posY = getPlayerMP().posY;
+        double posZ = getPlayerMP().posZ;
         List<net.minecraft.src.Entity> entityList = getPlayerMP().worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + range, posY + range, posZ + range));
         for (net.minecraft.src.Entity entity : entityList) {
             if (entity instanceof EntityMob) {
