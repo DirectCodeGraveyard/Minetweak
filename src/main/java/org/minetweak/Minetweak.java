@@ -78,7 +78,7 @@ public class Minetweak {
         registerListener(new PluginLoaderHook());
         // Loads joined player list
         registerListener(PlayerTracker.getInstance());
-
+        // Checks RAM usage to ensure that the user has enough
         ramCheck();
 
         MinecraftServer.main(args);
@@ -231,6 +231,9 @@ public class Minetweak {
         MinecraftServer.getServer().minetweakInfo(line);
     }
 
+    /**
+     * Registers Default Server Commands
+     */
     protected static void registerServerCommands() {
         registerCommand("ban", new CommandBan());
         registerCommand("deop", new CommandDeop());
