@@ -6,6 +6,11 @@ apply plugin: 'maven'
 
 def version = '0.6.3'
 def groupId = 'org.minetweak'
+
+launch4j {
+    mainClassName = "com.minetweak.Minetweak"
+}
+
 repositories {
     mavenCentral()
 
