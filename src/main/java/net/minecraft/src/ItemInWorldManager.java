@@ -216,7 +216,7 @@ public class ItemInWorldManager {
         BlockBreakEvent event = null;
 
         if (this.thisPlayerMP != null) {
-            if (this.isCreative() && this.thisPlayerMP.getCurrentEquippedItem() != null && this.thisPlayerMP.getCurrentEquippedItem().getItem().equals(Item.swordDiamond)) {
+            if (this.isCreative() && this.thisPlayerMP.getCurrentEquippedItem() != null && this.thisPlayerMP.getCurrentEquippedItem().getItem() instanceof ItemSword) {
                 return false;
             }
             TweakBlock tweakBlock = this.theWorld.getWorld().getBlockAt(par1, par2, par3);
@@ -230,7 +230,7 @@ public class ItemInWorldManager {
 
 
             event = new BlockBreakEvent(tweakBlock, Minetweak.getPlayerByName(this.thisPlayerMP.username));
-            if (getGameType().isAdventure() && !getGameType().isCreative() || !this.thisPlayerMP.canHarvestBlock(net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
+            if (getGameType().isAdventure() || !this.thisPlayerMP.canHarvestBlock(net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
                 event.setCancelled(true);
             }
             net.minecraft.src.Block nmsBlock = net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
@@ -273,7 +273,7 @@ public class ItemInWorldManager {
         }
 
         this.theWorld.playAuxSFXAtEntity(this.thisPlayerMP, 2001, par1, par2, par3, l + (this.theWorld.getBlockMetadata(par1, par2, par3) << 12));
-        boolean flag = false;
+        boolean flag;
 
         if (this.isCreative()) {
             flag = this.removeBlock(par1, par2, par3);

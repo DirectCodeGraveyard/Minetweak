@@ -17,6 +17,11 @@ public class CommandGamemode extends CommandExecutor {
             return;
         }
 
+        if (sender instanceof Console) {
+            sender.sendMessage("Consoles can not run this command.");
+            return;
+        }
+
         int gamemode = -1;
 
         if (!StringUtils.isInteger(args[0])) {
@@ -30,10 +35,6 @@ public class CommandGamemode extends CommandExecutor {
         }
 
         if (args.length == 1) {
-            if (sender instanceof Console) {
-                sender.sendMessage("Consoles can not run this command.");
-                return;
-            }
             Player player = Minetweak.getPlayerByName(sender.getName());
 
             if (gamemode == 0) player.setGameMode(EnumGameType.SURVIVAL);
