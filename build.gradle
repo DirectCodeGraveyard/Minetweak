@@ -47,7 +47,7 @@ jar {
 
 task wrapper(type: Wrapper) {
     description = 'Downloads Gradle for distribution to users who may not have it'
-    gradleVersion = '1.6'
+    gradleVersion = '1.7-rc-1'
 }
 
 tasks.withType(Test) {
