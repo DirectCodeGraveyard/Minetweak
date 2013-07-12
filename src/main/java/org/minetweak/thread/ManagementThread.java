@@ -23,7 +23,7 @@ public class ManagementThread extends Thread {
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
-                MinecraftServer.getServer().getLogAgent().getLogger().log(Level.WARNING, "[Minetweak] Stopping Management Thread");
+                Minetweak.getLogger().logWarningException("Stopping Management Thread", e);
                 break;
             }
             for (Runnable runnable : runnables) {
@@ -62,6 +62,7 @@ public class ManagementThread extends Thread {
     @Subscribe
     public void serverReadyCallback(ServerFinishedStartupEvent event) {
         Minetweak.info("Starting Management Thread");
+        this.setDaemon(true);
         this.start();
     }
 
