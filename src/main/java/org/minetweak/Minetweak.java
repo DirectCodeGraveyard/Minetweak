@@ -185,7 +185,7 @@ public class Minetweak {
 
     /**
      * Get the class to the corresponding command label specified. Return null if no command exists with that label.
-     * @param commandLabel Command label to get
+     * @param commandLabel PluginCommand label to get
      * @return CommandExecutor for specified command label
      */
     public static CommandExecutor getCommandByName(String commandLabel) {
@@ -266,7 +266,7 @@ public class Minetweak {
     }
 
     /**
-     * Gets the Command Executors for Strings
+     * Gets the PluginCommand Executors for Strings
       * @return a HashMap of the commands to their executors
      */
     public static HashMap<String, CommandExecutor> getCommandExecutors() {

@@ -1,10 +1,10 @@
 package org.bukkit.plugin.java;
 
+import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescription;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLogger;
 import org.minetweak.Server;
-import org.minetweak.plugins.MinetweakPlugin;
 import org.minetweak.plugins.PluginInfo;
 import org.minetweak.plugins.PluginLoader;
 
@@ -16,15 +16,15 @@ public abstract class JavaPlugin extends Plugin {
     private PluginLoader loader = null;
     private Server server = null;
     private File file = null;
-    private File dataFolder = null;
-    private ClassLoader classLoader = null;
+    private File dataFolder = new File(".");
+    private ClassLoader classLoader = PluginLoader.loader;
     private boolean naggable = true;
     private File configFile = null;
-    private PluginLogger logger = null;
-    private PluginDescription description;
+    private PluginLogger logger;
+    private PluginDescriptionFile description;
     private PluginInfo pluginInfo;
 
-    public PluginDescription getDescription() {
+    public PluginDescriptionFile getDescription() {
         return description;
     }
 
@@ -38,5 +38,11 @@ public abstract class JavaPlugin extends Plugin {
 
     public void setPluginInfo(PluginInfo pluginInfo) {
         this.pluginInfo = pluginInfo;
+        this.description = new PluginDescriptionFile(pluginInfo.getName(), pluginInfo.getName());
+        this.logger = new PluginLogger(this);
+    }
+
+    public PluginCommand getCommand(String name) {
+        return new PluginCommand(name);
     }
 }

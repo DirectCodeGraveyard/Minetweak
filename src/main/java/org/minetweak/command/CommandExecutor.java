@@ -2,12 +2,12 @@ package org.minetweak.command;
 
 import org.minetweak.util.StringUtils;
 
-public abstract class CommandExecutor {
+public abstract class CommandExecutor implements ICommandExecutor {
 
     /**
-     * Executes the Command
-     * @param sender Sender of the Command
-     * @param overallCommand Command that it was executed with
+     * Executes the PluginCommand
+     * @param sender Sender of the PluginCommand
+     * @param overallCommand PluginCommand that it was executed with
      * @param args arguments as an array
      */
     public abstract void executeCommand(CommandSender sender, String overallCommand, String[] args);

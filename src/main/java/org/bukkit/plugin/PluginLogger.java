@@ -1,7 +1,7 @@
 package org.bukkit.plugin;
 
-import net.minecraft.server.MinecraftServer;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.minetweak.Minetweak;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +14,7 @@ public class PluginLogger extends Logger {
         super(context.getClass().getCanonicalName(), null);
         String prefix = context.getDescription().getPrefix();
         pluginName = prefix != null ? "[" + prefix + "] " : "[" + context.getDescription().getName() + "] ";
-        setParent(MinecraftServer.getServer().getLogAgent().getLogger());
+        setParent(Minetweak.getLogger().getLogger());
         setLevel(Level.ALL);
     }
 }

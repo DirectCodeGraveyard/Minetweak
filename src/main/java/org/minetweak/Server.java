@@ -71,7 +71,7 @@ public class Server {
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
         } else {
-            player.addChatMessage(EnumChatFormatting.RED + "No Such Command: " + commandOnly);
+            player.addChatMessage(EnumChatFormatting.RED + "No Such PluginCommand: " + commandOnly);
         }
     }
 

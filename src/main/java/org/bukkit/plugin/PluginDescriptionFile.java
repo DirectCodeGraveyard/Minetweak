@@ -1,10 +1,10 @@
 package org.bukkit.plugin;
 
-public class PluginDescription {
+public class PluginDescriptionFile {
     private String prefix;
     private String name;
 
-    public PluginDescription(String prefix, String name) {
+    public PluginDescriptionFile(String prefix, String name) {
         this.prefix = prefix;
         this.name = name;
     }

@@ -70,7 +70,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
      */
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setString("Command", this.command);
+        par1NBTTagCompound.setString("PluginCommand", this.command);
         par1NBTTagCompound.setInteger("SuccessCount", this.succesCount);
         par1NBTTagCompound.setString("CustomName", this.commandSenderName);
     }
@@ -80,7 +80,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
      */
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
-        this.command = par1NBTTagCompound.getString("Command");
+        this.command = par1NBTTagCompound.getString("PluginCommand");
         this.succesCount = par1NBTTagCompound.getInteger("SuccessCount");
 
         if (par1NBTTagCompound.hasKey("CustomName")) {

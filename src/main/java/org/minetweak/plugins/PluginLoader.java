@@ -2,8 +2,9 @@ package org.minetweak.plugins;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.bukkit.plugin.MinetweakHelper;
+import org.bukkit.minetweak.MinetweakHelper;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.minetweak.Minetweak;
 
 import java.io.File;
@@ -84,7 +85,7 @@ public class PluginLoader {
         for (String c : classes) {
             try {
                 Class pc = Class.forName(c, true, loader);
-                if (Plugin.class.isInstance(pc)) {
+                if (JavaPlugin.class.isInstance(pc)) {
                     Minetweak.info("Found Bukkit Plugin. Skipping until full support is added.");
                     continue;
                 }
@@ -117,10 +118,10 @@ public class PluginLoader {
             JarFile jf = new JarFile(file);
             ZipEntry entry = jf.getEntry("plugin.json");
             ZipEntry bukkitYAML = jf.getEntry("plugin.yaml");
-            if (bukkitYAML!=null) {
-                return MinetweakHelper.parsePluginYAML(jf);
-            }
             if (entry==null) {
+                if (bukkitYAML!=null) {
+                    return MinetweakHelper.parsePluginYAML(jf);
+                }
                 return null;
             }
             return gson.fromJson(new InputStreamReader(jf.getInputStream(entry)), PluginInfo.class);
