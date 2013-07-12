@@ -10,7 +10,9 @@ import org.minetweak.permissions.PermissionsLoader;
 import org.minetweak.plugins.PluginLoaderHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
+import org.minetweak.util.MinetweakLog;
 
+import java.io.File;
 import java.util.HashMap;
 
 /**
@@ -63,6 +65,8 @@ public class Minetweak {
      * and tell the EventBus that an event needs to be fired.
      */
     private static EventBus eventBus = new EventBus();
+
+    private static MinetweakLog logger = new MinetweakLog("Minetweak", null, (new File("./", "minetweak.log")).getAbsolutePath());
 
     public static void main(String[] args) {
         System.out.println("Minetweak v" + getAPIVersion() + " using Minecraft v" + getMinecraftVersion());
@@ -224,11 +228,11 @@ public class Minetweak {
     }
 
     /**
-     * Log Minetweak Info to Console
+     * MinetweakLog Minetweak Info to Console
      * @param line line to log
      */
     public static void info(String line) {
-        MinecraftServer.getServer().minetweakInfo(line);
+        getLogger().logInfo(line);
     }
 
     /**
@@ -267,5 +271,12 @@ public class Minetweak {
      */
     public static HashMap<String, CommandExecutor> getCommandExecutors() {
         return commandExecutors;
+    }
+
+    /**
+     * Gets the Minetweak Logger
+     */
+    public static MinetweakLog getLogger() {
+        return logger;
     }
 }

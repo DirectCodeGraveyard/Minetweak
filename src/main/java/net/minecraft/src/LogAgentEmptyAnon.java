@@ -1,4 +1,4 @@
 package net.minecraft.src;
 
-class LogAgentEmptyAnon {
+public class LogAgentEmptyAnon {
 }

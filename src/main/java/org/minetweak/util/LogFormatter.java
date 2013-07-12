@@ -1,4 +1,6 @@
-package net.minecraft.src;
+package org.minetweak.util;
+
+import net.minecraft.src.LogAgentEmptyAnon;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -9,9 +11,9 @@ import java.util.logging.LogRecord;
 public class LogFormatter extends Formatter {
     private SimpleDateFormat field_98228_b;
 
-    final LogAgent field_98229_a;
+    final MinetweakLog field_98229_a;
 
-    private LogFormatter(LogAgent par1LogAgent) {
+    private LogFormatter(MinetweakLog par1LogAgent) {
         this.field_98229_a = par1LogAgent;
         this.field_98228_b = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
@@ -20,8 +22,8 @@ public class LogFormatter extends Formatter {
         StringBuilder var2 = new StringBuilder();
         var2.append(this.field_98228_b.format(par1LogRecord.getMillis()));
 
-        if (LogAgent.getLogPrefix(this.field_98229_a) != null) {
-            var2.append(LogAgent.getLogPrefix(this.field_98229_a));
+        if (MinetweakLog.getLogPrefix(this.field_98229_a) != null) {
+            var2.append(MinetweakLog.getLogPrefix(this.field_98229_a));
         }
 
         var2.append(" [").append(par1LogRecord.getLevel().getName()).append("] ");
@@ -38,7 +40,7 @@ public class LogFormatter extends Formatter {
         return var2.toString();
     }
 
-    LogFormatter(LogAgent par1LogAgent, LogAgentEmptyAnon par2LogAgentEmptyAnon) {
+    LogFormatter(MinetweakLog par1LogAgent, LogAgentEmptyAnon par2LogAgentEmptyAnon) {
         this(par1LogAgent);
     }
 }

@@ -60,28 +60,28 @@ public abstract class RConThreadBase implements Runnable {
     }
 
     /**
-     * Log debug message
+     * MinetweakLog debug message
      */
     protected void logDebug(String par1Str) {
         this.server.logDebug(par1Str);
     }
 
     /**
-     * Log information message
+     * MinetweakLog information message
      */
     protected void logInfo(String par1Str) {
         this.server.logInfo(par1Str);
     }
 
     /**
-     * Log warning message
+     * MinetweakLog warning message
      */
     protected void logWarning(String par1Str) {
         this.server.logWarning(par1Str);
     }
 
     /**
-     * Log severe error message
+     * MinetweakLog severe error message
      */
     protected void logSevere(String par1Str) {
         this.server.logSevere(par1Str);
