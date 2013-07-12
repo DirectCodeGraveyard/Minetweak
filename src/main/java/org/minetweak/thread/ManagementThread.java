@@ -46,20 +46,35 @@ public class ManagementThread extends Thread {
         PermissionsLoader.load();
     }
 
+    /**
+     * Loads the player list. Can by used for example, if a user wants a reset
+     */
     public void loadPlayers() {
         PlayerTracker.getInstance().loadList();
     }
 
+    /**
+     * Starts the Management Thread on Server Finished Startup
+     * @param event event of the subscription
+     */
     @Subscribe
     public void serverReadyCallback(ServerFinishedStartupEvent event) {
         Minetweak.info("Starting Management Thread");
         this.start();
     }
 
+    /**
+     * Adds a Runnable to the queue of things to run
+     * @param runnable the runnable instance
+     */
     public void runInThread(Runnable runnable) {
         runnables.add(runnable);
     }
 
+    /**
+     * Gets the ManagementThread main instance
+     * @return instance
+     */
     public static ManagementThread getInstance() {
         return instance;
     }
