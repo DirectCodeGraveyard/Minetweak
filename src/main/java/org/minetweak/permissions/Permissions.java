@@ -17,20 +17,15 @@ public class Permissions {
     public static boolean addPermission(String user, String permission) {
         ArrayList<String> perms = new ArrayList<String>();
         if (permissions.containsKey(user)) {
-            perms.addAll(permissions.get(user));
             if (perms.contains(permission)) {
                 return false;
             }
-            perms.add(permission);
-            permissions.put(user, perms);
-            PermissionsLoader.save();
-            return true;
-        } else {
-            perms.add(permission);
-            permissions.put(user, perms);
-            PermissionsLoader.save();
-            return true;
+            perms.addAll(getPermissions(user));
         }
+        perms.add(permission);
+        permissions.put(user, perms);
+        PermissionsLoader.save();
+        return true;
     }
 
     /**
@@ -40,7 +35,7 @@ public class Permissions {
      * @return if permission was removed
      */
     public static boolean removePermission(String user, String permission) {
-        ArrayList<String> userPerms = permissions.get(user);
+        ArrayList<String> userPerms = getPermissions(user);
         if (userPerms==null) {
             return false;
         } else if (!userPerms.contains(permission)) {
@@ -59,7 +54,7 @@ public class Permissions {
      * @return if the player has permission
      */
     public static boolean hasPermission(String user, String permission) {
-        ArrayList<String> perms = permissions.get(user);
+        ArrayList<String> perms = getPermissions(user);
         return perms != null && (perms.contains("*") || perms.contains(permission)) || MinecraftServer.getServer().getConfigurationManager().getOps().contains(user);
     }
 
@@ -78,5 +73,12 @@ public class Permissions {
      */
     public static HashMap<String, ArrayList<String>> getPermissions() {
         return permissions;
+    }
+
+    /**
+     * Set Permissions Map
+     */
+    protected static void setPermissions(HashMap<String, ArrayList<String>> permissions) {
+        Permissions.permissions = permissions;
     }
 }

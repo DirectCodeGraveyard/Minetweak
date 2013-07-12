@@ -38,7 +38,7 @@ public class PermissionsLoader {
                 return;
             }
             reader.close();
-            Permissions.permissions.clear();
+            Permissions.getPermissions().clear();
             for (PermissionsFile.entry entry : permissionsFile.entries) {
                 Permissions.addPermission(entry.player, entry.permission);
             }
@@ -51,10 +51,11 @@ public class PermissionsLoader {
 
     public static void save() {
         try {
-            file.delete();
-            file.createNewFile();
+            if (!(file.delete() && file.createNewFile())) {
+                Minetweak.getLogger().logSevere("Unable to create/delete permissions file at " + file.getAbsolutePath());
+            }
             FileWriter writer = new FileWriter(file);
-            writer.write(gson.toJson(Permissions.permissions));
+            writer.write(gson.toJson(Permissions.getPermissions()));
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
