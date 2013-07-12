@@ -45,15 +45,15 @@ public class MinetweakConfig {
         config.unlock();
     }
 
-    public static Integer getInteger(String key) {
+    public static int getInteger(String key) {
         return getInteger(key, 0);
     }
 
-    public static Boolean getBoolean(String key) {
+    public static boolean getBoolean(String key) {
         return getBoolean(key, true);
     }
 
-    public static Boolean getBoolean(String key, boolean value) {
+    public static boolean getBoolean(String key, boolean value) {
         return get(new Property(key, "" + value)).equals("true");
     }
 
@@ -61,7 +61,7 @@ public class MinetweakConfig {
         return get(new Property(key, value));
     }
 
-    public static Integer getInteger(String key, Integer value) {
+    public static int getInteger(String key, Integer value) {
         return Integer.parseInt(get(new Property(key, "" + value.toString())));
     }
 
