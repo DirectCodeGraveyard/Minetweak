@@ -73,7 +73,7 @@ public class Minetweak {
         registerServerCommands();
 
         registerListener(RecipeManager.getInstance());
-        registerListener(new ManagementThread());
+        registerListener(ManagementThread.getInstance());
         // Used to run plugin startup inside the Server
         registerListener(new PluginLoaderHook());
         // Loads joined player list

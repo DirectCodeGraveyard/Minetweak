@@ -11,7 +11,8 @@ import java.util.ArrayList;
 
 public class ManagementThread extends Thread {
     private ArrayList<Runnable> runnables = new ArrayList<Runnable>();
-    private static ManagementThread instance;
+    private static ManagementThread instance = new ManagementThread();
+
     @Override
     public void run() {
         while (true) {
