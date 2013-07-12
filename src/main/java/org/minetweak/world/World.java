@@ -14,20 +14,41 @@ public class World {
         return getChunkAt(x >> 4, z >> 4).getBlock(x & 0xF, y & 0xFF, z & 0xF);
     }
 
+    /**
+     * Gets the Block ID of the block at a position
+     * @param x X Position
+     * @param y Y Position
+     * @param z Z Position
+     * @return block id of position of block
+     */
     public int getBlockTypeIdAt(int x, int y, int z) {
         return world.getBlockId(x, y, z);
     }
 
+    /**
+     * Gets a Chunk at the specified Location
+     * @param x X Position
+     * @param z Z Position
+     * @return Chunk at position
+     */
     public Chunk getChunkAt(int x, int z) {
         return this.world.theChunkProviderServer.loadChunk(x, z).MineTweakChunk;
     }
 
+    /**
+     * Gets the Chunk  a block is in
+     * @param tweakBlock the block
+     * @return the chunk
+     */
     public Chunk getChunkAt(TweakBlock tweakBlock) {
         return getChunkAt(tweakBlock.getX() >> 4, tweakBlock.getZ() >> 4);
     }
 
+    /**
+     * Gets the WorldServer
+     * @return WorldServer instance for world
+     */
     public net.minecraft.src.WorldServer getHandle() {
         return world;
     }
-
 }

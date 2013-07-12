@@ -4,11 +4,20 @@ public class PluginInfo {
     private String main;
     private String name;
     private String description;
+    private boolean isBukkitPlugin;
 
     public PluginInfo(String mainClass, String pluginName, String description) {
         this.main = mainClass;
         this.name = pluginName;
         this.description = description;
+        this.isBukkitPlugin = false;
+    }
+
+    public PluginInfo(String mainClass, String pluginName, String description, boolean isBukkitPlugin) {
+        this.main = mainClass;
+        this.name = pluginName;
+        this.description = description;
+        this.isBukkitPlugin = isBukkitPlugin;
     }
 
     /**
@@ -33,5 +42,12 @@ public class PluginInfo {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Checks if Plugin is a Bukkit Plugin
+     */
+    public boolean isBukkitPlugin() {
+        return isBukkitPlugin;
     }
 }

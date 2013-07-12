@@ -33,14 +33,6 @@ public class MinetweakLog implements ILogAgent {
         ConsoleHandler var7 = new ConsoleHandler();
         var7.setFormatter(var6);
         this.serverLogger.addHandler(var7);
-
-        try {
-            FileHandler var8 = new FileHandler(this.logFile, true);
-            var8.setFormatter(var6);
-            this.serverLogger.addHandler(var8);
-        } catch (Exception var5) {
-            this.serverLogger.log(Level.WARNING, "Failed to log " + this.loggerName + " to " + this.logFile, var5);
-        }
     }
 
     public Logger getLogger() {

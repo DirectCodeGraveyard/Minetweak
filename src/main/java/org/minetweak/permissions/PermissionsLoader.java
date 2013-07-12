@@ -11,6 +11,10 @@ public class PermissionsLoader {
     private static File file = new File("./permissions.json");
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     private static String lastData = "";
+
+    /**
+     * Loads the permissions file
+     */
     public static void load() {
         if (!file.exists()) {
             try {

@@ -4,13 +4,13 @@ package org.minetweak.plugins;
  * Loads each plugin in a thread
  */
 public class PluginLoadingThread extends Thread {
-    private MinetweakPlugin plugin;
+    private IPlugin plugin;
 
     /**
      * Creates an instance of PluginLoadingThread
      * @param plugin plugin to load
      */
-    protected PluginLoadingThread(MinetweakPlugin plugin) {
+    protected PluginLoadingThread(IPlugin plugin) {
         this.plugin = plugin;
     }
 

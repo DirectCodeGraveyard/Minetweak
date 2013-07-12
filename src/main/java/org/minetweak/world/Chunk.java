@@ -23,14 +23,26 @@ public class Chunk {
         z = getHandle().zPosition;
     }
 
+    /**
+     * Gets the World the Chunk is in
+     * @return world of chunk
+     */
     public World getWorld() {
         return worldServer.getWorld();
     }
 
+    /**
+     * Gets the World the Chunk is in
+     * @return world of chunk
+     */
     public World getCraftWorld() {
         return getWorld();
     }
 
+    /**
+     * Gets the MC Chunk
+     * @return minecraft chunk
+     */
     public net.minecraft.src.Chunk getHandle() {
         net.minecraft.src.Chunk c = weakChunk.get();
 
@@ -45,10 +57,18 @@ public class Chunk {
         return c;
     }
 
+    /**
+     * X Position
+     * @return x position
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Z Position
+     * @return z position
+     */
     public int getZ() {
         return z;
     }
@@ -58,6 +78,13 @@ public class Chunk {
         return "Chunk{" + "x=" + getX() + "z=" + getZ() + '}';
     }
 
+    /**
+     * Gets a block in a chunk
+     * @param x x-position
+     * @param y y-position
+     * @param z z-position
+     * @return block
+     */
     public TweakBlock getBlock(int x, int y, int z) {
         return new TweakBlock(this, (getX() << 4) | (x & 0xF), y & 0xFF, (getZ() << 4) | (z & 0xF));
     }

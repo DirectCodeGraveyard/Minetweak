@@ -1,6 +1,9 @@
 package org.minetweak.config;
 
+import org.minetweak.Minetweak;
+
 import java.io.File;
+import java.util.logging.Level;
 
 public class MinetweakConfig {
     private static File configFile = new File("minetweak.cfg");
@@ -8,9 +11,10 @@ public class MinetweakConfig {
 
     public static void initialize() {
         header("This is the Minetweak main configuration file");
-        newLine();
         get(new Property("player.autoOp").addComment("Allows for Whitelisted players to be oped on join"));
         get(new Property("server.stop.message").addComment("Sets the disconnect message to be displayed to users when the server is stopping"));
+        String logLevel = get(new Property("minetweak.log.level", "INFO").addComment("Log Level for Minetweak: Values: INFO/DEBUG/FINE/SEVERE/WARNING"));
+        Minetweak.getLogger().getLogger().setLevel(Level.parse(logLevel));
     }
 
     public static void set(String key, String value) {

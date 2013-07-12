@@ -1,4 +1,7 @@
 package org.bukkit.plugin;
 
-public class Plugin {
+import org.minetweak.plugins.IPlugin;
+
+public abstract class Plugin implements IPlugin {
+
 }

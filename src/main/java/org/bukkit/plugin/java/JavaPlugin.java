@@ -5,6 +5,7 @@ import org.bukkit.plugin.PluginDescription;
 import org.bukkit.plugin.PluginLogger;
 import org.minetweak.Server;
 import org.minetweak.plugins.MinetweakPlugin;
+import org.minetweak.plugins.PluginInfo;
 import org.minetweak.plugins.PluginLoader;
 
 import java.io.File;
@@ -21,6 +22,7 @@ public abstract class JavaPlugin extends Plugin {
     private File configFile = null;
     private PluginLogger logger = null;
     private PluginDescription description;
+    private PluginInfo pluginInfo;
 
     public PluginDescription getDescription() {
         return description;
@@ -28,5 +30,13 @@ public abstract class JavaPlugin extends Plugin {
 
     public Server getServer() {
         return server;
+    }
+
+    public PluginInfo getPluginInfo() {
+        return pluginInfo;
+    }
+
+    public void setPluginInfo(PluginInfo pluginInfo) {
+        this.pluginInfo = pluginInfo;
     }
 }

@@ -2,6 +2,7 @@ package org.minetweak.plugins;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.bukkit.plugin.MinetweakHelper;
 import org.bukkit.plugin.Plugin;
 import org.minetweak.Minetweak;
 
@@ -21,7 +22,7 @@ public class PluginLoader {
 
     private ArrayList<File> files = new ArrayList<File>();
     public static URLClassLoader loader;
-    public static HashMap<String, MinetweakPlugin> plugins = new HashMap<String, MinetweakPlugin>();
+    public static HashMap<String, IPlugin> plugins = new HashMap<String, IPlugin>();
     public static ArrayList<String> enabledPlugins = new ArrayList<String>();
     private Gson gson = new GsonBuilder().create();
 
@@ -67,6 +68,7 @@ public class PluginLoader {
         for (File f : files) {
             PluginInfo pluginInfo = getPluginInfo(f);
             if (pluginInfo == null || pluginInfo.getMainClass()==null) {
+                Minetweak.getLogger().logInfo("Skipping Plugin JAR: " + f.getName() + ": Missing plugin information or main class");
                 continue;
             }
             pluginInformation.put(pluginInfo.getMainClass(), pluginInfo);
@@ -86,7 +88,7 @@ public class PluginLoader {
                     Minetweak.info("Found Bukkit Plugin. Skipping until full support is added.");
                     continue;
                 }
-                MinetweakPlugin plugin = (MinetweakPlugin) pc.newInstance();
+                IPlugin plugin = (IPlugin) pc.newInstance();
                 plugin.setPluginInfo(pluginInformation.get(c));
                 // Note that we override plugins even if they exist. This allows for alphabetical file-name plugin overriding
                 plugins.put(plugin.getPluginInfo().getName(), plugin);
@@ -114,6 +116,10 @@ public class PluginLoader {
         try {
             JarFile jf = new JarFile(file);
             ZipEntry entry = jf.getEntry("plugin.json");
+            ZipEntry bukkitYAML = jf.getEntry("plugin.yaml");
+            if (bukkitYAML!=null) {
+                return MinetweakHelper.parsePluginYAML(jf);
+            }
             if (entry==null) {
                 return null;
             }
@@ -139,7 +145,7 @@ public class PluginLoader {
      * Disables all Plugins
      */
     public static void disableAll() {
-        for (MinetweakPlugin plugin : plugins.values()) {
+        for (IPlugin plugin : plugins.values()) {
             plugin.onDisable();
             enabledPlugins.remove(plugin.getPluginInfo().getName());
         }

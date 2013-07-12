@@ -1150,7 +1150,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public void minetweakInfo(String line) {
-        this.getLogAgent().logNoPrefix("[Minetweak] " + line);
+        Minetweak.getLogger().logInfo(line);
     }
 
     public int getOpPermissionLevel() {
