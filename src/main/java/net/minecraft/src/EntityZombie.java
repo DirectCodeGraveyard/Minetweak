@@ -4,9 +4,9 @@ import java.util.Calendar;
 import java.util.UUID;
 
 public class EntityZombie extends EntityMob {
-    protected static final Attribute field_110186_bp = (new RangedAttribute("zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D)).func_111117_a("Spawn Reinforcements Chance");
+    protected static final Attribute reinforcementsAttribute = (new RangedAttribute("zombie.spawnReinforcements", 0.0D, 0.0D, 1.0D)).func_111117_a("Spawn Reinforcements Chance");
     private static final UUID field_110187_bq = UUID.fromString("B9766B59-9566-4402-BC1F-2EE2A276D836");
-    private static final AttributeModifier field_110188_br = new AttributeModifier(field_110187_bq, "Baby speed boost", 0.5D, 1);
+    private static final AttributeModifier babySpeedBoost = new AttributeModifier(field_110187_bq, "Baby speed boost", 0.5D, 1);
 
     /**
      * Ticker used to determine the time remaining for this zombie to convert into a villager when cured.
@@ -35,7 +35,7 @@ public class EntityZombie extends EntityMob {
         this.func_110148_a(SharedMonsterAttributes.field_111265_b).func_111128_a(40.0D);
         this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.23000000417232513D);
         this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(3.0D);
-        this.func_110140_aT().func_111150_b(field_110186_bp).func_111128_a(this.rand.nextDouble() * 0.10000000149011612D);
+        this.func_110140_aT().func_111150_b(reinforcementsAttribute).func_111128_a(this.rand.nextDouble() * 0.10000000149011612D);
     }
 
     protected void entityInit() {
@@ -76,14 +76,14 @@ public class EntityZombie extends EntityMob {
      * Set whether this zombie is a child.
      */
     public void setChild(boolean par1) {
-        this.getDataWatcher().updateObject(12, Byte.valueOf((byte) (par1 ? 1 : 0)));
+        this.getDataWatcher().updateObject(12, (byte) (par1 ? 1 : 0));
 
         if (this.worldObj != null && !this.worldObj.isRemote) {
             AttributeInstance var2 = this.func_110148_a(SharedMonsterAttributes.field_111263_d);
-            var2.func_111124_b(field_110188_br);
+            var2.func_111124_b(babySpeedBoost);
 
             if (par1) {
-                var2.func_111121_a(field_110188_br);
+                var2.func_111121_a(babySpeedBoost);
             }
         }
     }
@@ -99,7 +99,7 @@ public class EntityZombie extends EntityMob {
      * Set whether this zombie is a villager.
      */
     public void setVillager(boolean par1) {
-        this.getDataWatcher().updateObject(13, Byte.valueOf((byte) (par1 ? 1 : 0)));
+        this.getDataWatcher().updateObject(13, (byte) (par1 ? 1 : 0));
     }
 
     /**
@@ -120,7 +120,7 @@ public class EntityZombie extends EntityMob {
 
                         if (var3.getItemDamageForDisplay() >= var3.getMaxDamage()) {
                             this.renderBrokenItemStack(var3);
-                            this.setCurrentItemOrArmor(4, (ItemStack) null);
+                            this.setCurrentItemOrArmor(4, null);
                         }
                     }
 
@@ -153,7 +153,7 @@ public class EntityZombie extends EntityMob {
                 var3 = (EntityLivingBase) par1DamageSource.getEntity();
             }
 
-            if (var3 != null && this.worldObj.difficultySetting >= 3 && (double) this.rand.nextFloat() < this.func_110148_a(field_110186_bp).func_111126_e()) {
+            if (var3 != null && this.worldObj.difficultySetting >= 3 && (double) this.rand.nextFloat() < this.func_110148_a(reinforcementsAttribute).func_111126_e()) {
                 int var4 = MathHelper.floor_double(this.posX);
                 int var5 = MathHelper.floor_double(this.posY);
                 int var6 = MathHelper.floor_double(this.posZ);
@@ -170,9 +170,9 @@ public class EntityZombie extends EntityMob {
                         if (this.worldObj.checkNoEntityCollision(var7.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var7, var7.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(var7.boundingBox)) {
                             this.worldObj.spawnEntityInWorld(var7);
                             var7.setAttackTarget(var3);
-                            var7.func_110161_a((EntityLivingData) null);
-                            this.func_110148_a(field_110186_bp).func_111121_a(new AttributeModifier("Zombie reinforcement caller charge", -0.05000000074505806D, 0));
-                            var7.func_110148_a(field_110186_bp).func_111121_a(new AttributeModifier("Zombie reinforcement callee charge", -0.05000000074505806D, 0));
+                            var7.func_110161_a(null);
+                            this.func_110148_a(reinforcementsAttribute).func_111121_a(new AttributeModifier("Zombie reinforcement caller charge", -0.05000000074505806D, 0));
+                            var7.func_110148_a(reinforcementsAttribute).func_111121_a(new AttributeModifier("Zombie reinforcement callee charge", -0.05000000074505806D, 0));
                             break;
                         }
                     }
@@ -331,7 +331,7 @@ public class EntityZombie extends EntityMob {
             EntityZombie var2 = new EntityZombie(this.worldObj);
             var2.copyLocationAndAnglesFrom(par1EntityLivingBase);
             this.worldObj.removeEntity(par1EntityLivingBase);
-            var2.func_110161_a((EntityLivingData) null);
+            var2.func_110161_a(null);
             var2.setVillager(true);
 
             if (par1EntityLivingBase.isChild()) {
@@ -339,7 +339,7 @@ public class EntityZombie extends EntityMob {
             }
 
             this.worldObj.spawnEntityInWorld(var2);
-            this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+            this.worldObj.playAuxSFXAtEntity(null, 1016, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
         }
     }
 
@@ -349,7 +349,7 @@ public class EntityZombie extends EntityMob {
         this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * var2);
 
         if (par1EntityLivingData1 == null) {
-            par1EntityLivingData1 = new EntityZombieGroupData(this, this.worldObj.rand.nextFloat() < 0.05F, this.worldObj.rand.nextFloat() < 0.05F, (EntityZombieINNER1) null);
+            par1EntityLivingData1 = new EntityZombieGroupData(this, this.worldObj.rand.nextFloat() < 0.05F, this.worldObj.rand.nextFloat() < 0.05F, null);
         }
 
         if (par1EntityLivingData1 instanceof EntityZombieGroupData) {
@@ -380,7 +380,7 @@ public class EntityZombie extends EntityMob {
         this.func_110148_a(SharedMonsterAttributes.field_111265_b).func_111121_a(new AttributeModifier("Random zombie-spawn bonus", this.rand.nextDouble() * 1.5D, 2));
 
         if (this.rand.nextFloat() < var2 * 0.05F) {
-            this.func_110148_a(field_110186_bp).func_111121_a(new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 0.25D + 0.5D, 0));
+            this.func_110148_a(reinforcementsAttribute).func_111121_a(new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 0.25D + 0.5D, 0));
             this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111121_a(new AttributeModifier("Leader zombie bonus", this.rand.nextDouble() * 3.0D + 1.0D, 2));
         }
 
@@ -399,7 +399,7 @@ public class EntityZombie extends EntityMob {
             }
 
             if (var2.stackSize <= 0) {
-                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack) null);
+                par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, null);
             }
 
             if (!this.worldObj.isRemote) {

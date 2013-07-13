@@ -90,7 +90,7 @@ public enum EnumChatFormatting {
         int var1 = var0.length;
 
         for (EnumChatFormatting var3 : var0) {
-            field_96321_w.put(Character.valueOf(var3.func_96298_a()), var3);
+            field_96321_w.put(var3.func_96298_a(), var3);
             field_96331_x.put(var3.func_96297_d(), var3);
         }
     }

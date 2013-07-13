@@ -25,7 +25,7 @@ public class EntityPigZombie extends EntityZombie {
 
     protected void func_110147_ax() {
         super.func_110147_ax();
-        this.func_110148_a(field_110186_bp).func_111128_a(0.0D);
+        this.func_110148_a(reinforcementsAttribute).func_111128_a(0.0D);
         this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.5D);
         this.func_110148_a(SharedMonsterAttributes.field_111264_e).func_111128_a(5.0D);
     }
