@@ -5,12 +5,9 @@ import com.google.gson.GsonBuilder;
 import org.minetweak.Minetweak;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.jar.JarFile;
@@ -128,11 +125,24 @@ public class PluginLoader {
      * Returns a list of Plugin files
      */
     private void getPluginFiles() {
-        try {
-            FileVisitor<Path> visitor = new FileProcessor(this);
-            Files.walkFileTree(Paths.get("plugins"), visitor);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        File pluginDirectory = new File("./plugins/");
+        if (!pluginDirectory.exists()) {
+            if (!pluginDirectory.mkdirs()) {
+                Minetweak.getLogger().logWarning("Unable to create plugin directory. Skipping Loading Plugins.");
+                return;
+            }
+        }
+        File[] fileList = pluginDirectory.listFiles();
+        if (fileList==null) {
+            return;
+        }
+        for (File file : fileList) {
+            if (file.isDirectory()) {
+                continue;
+            }
+            if (file.getName().endsWith(".jar")) {
+                files.add(file);
+            }
         }
     }
 
@@ -182,22 +192,5 @@ public class PluginLoader {
      */
     public static boolean doesPluginExist(String pluginName) {
         return plugins.keySet().contains(pluginName);
-    }
-
-    private static final class FileProcessor extends SimpleFileVisitor<Path> {
-
-        public PluginLoader instance;
-
-        public FileProcessor(PluginLoader instance) {
-            this.instance = instance;
-        }
-
-        @Override
-        public FileVisitResult visitFile(Path path, BasicFileAttributes attributes) throws IOException {
-            if (path.toString().endsWith(".jar")) {
-                instance.files.add(path.toFile());
-            }
-            return FileVisitResult.CONTINUE;
-        }
     }
 }
