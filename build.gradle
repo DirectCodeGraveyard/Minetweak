@@ -78,8 +78,8 @@ task apiJar(type: Jar) {
     description = 'Makes a JAR containing only the Minetweak API'
     classifier = 'api'
     from sourceSets.main.output
-    include('org/minetweak/*')
-    include('org/bukkit/*')
+    include('org/minetweak/**/*')
+    include('org/bukkit/**/*')
 }
 
 artifacts {
