@@ -53,7 +53,7 @@ tasks.withType(Test) {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    description = 'Makes a JAR with Minetweak Sourcesc'
+    description = 'Makes a JAR with Minetweak Sources'
     classifier = 'sources'
     from sourceSets.main.allSource
 }

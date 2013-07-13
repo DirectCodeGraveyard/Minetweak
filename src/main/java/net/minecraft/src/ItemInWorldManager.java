@@ -216,9 +216,6 @@ public class ItemInWorldManager {
         BlockBreakEvent event = null;
 
         if (this.thisPlayerMP != null) {
-            if (this.isCreative() && this.thisPlayerMP.getCurrentEquippedItem() != null && this.thisPlayerMP.getCurrentEquippedItem().getItem() instanceof ItemSword) {
-                return false;
-            }
             TweakBlock tweakBlock = this.theWorld.getWorld().getBlockAt(par1, par2, par3);
 
             if (theWorld.getBlockTileEntity(par1, par2, par3) == null) {
@@ -228,9 +225,11 @@ public class ItemInWorldManager {
                 this.thisPlayerMP.playerNetServerHandler.sendPacket(packet);
             }
 
-
             event = new BlockBreakEvent(tweakBlock, Minetweak.getPlayerByName(this.thisPlayerMP.username));
-            if (getGameType().isAdventure() || !this.thisPlayerMP.canHarvestBlock(net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
+            if (!isCreative() && !getGameType().isAdventure() && !this.thisPlayerMP.canHarvestBlock(net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
+                event.setCancelled(true);
+            }
+            if (getGameType().isAdventure()) {
                 event.setCancelled(true);
             }
             net.minecraft.src.Block nmsBlock = net.minecraft.src.Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
