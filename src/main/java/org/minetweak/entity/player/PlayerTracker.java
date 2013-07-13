@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
+import org.minetweak.event.player.NewPlayerEvent;
 import org.minetweak.event.player.PlayerJoinEvent;
 import org.minetweak.event.server.ServerInitializedEvent;
 
@@ -34,8 +35,9 @@ public class PlayerTracker {
             // This player is new
             Minetweak.info("New Player: " + event.getPlayer().getName());
             players.add(event.getPlayer().getName());
+            Minetweak.getEventBus().post(new NewPlayerEvent(event.getPlayer()));
+            saveList();
         }
-        saveList();
     }
 
     @Subscribe
