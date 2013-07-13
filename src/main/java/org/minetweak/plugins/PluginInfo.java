@@ -46,8 +46,17 @@ public class PluginInfo {
 
     /**
      * Checks if Plugin is a Bukkit Plugin
+     * @return if it is a bukkit plugin
      */
     public boolean isBukkitPlugin() {
         return isBukkitPlugin;
+    }
+
+    /**
+     * Checks if a Plugin is a Minetweak Plugin
+     * @return if it is a minetweak plugin
+     */
+    public boolean isMinetweakPlugin() {
+        return !isBukkitPlugin;
     }
 }

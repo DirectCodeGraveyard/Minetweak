@@ -8,7 +8,6 @@ import org.minetweak.event.server.ServerFinishedStartupEvent;
 import org.minetweak.permissions.PermissionsLoader;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 public class ManagementThread extends Thread {
     private ArrayList<Runnable> runnables = new ArrayList<Runnable>();

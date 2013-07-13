@@ -39,7 +39,9 @@ public class PluginLoader {
      */
     public static void enable(String pluginName) {
         if (plugins.containsKey(pluginName)) {
-            new PluginLoadingThread(plugins.get(pluginName)).start();
+            IPlugin plugin = plugins.get(pluginName);
+            plugin.onEnable();
+            enabledPlugins.add(pluginName);
         }
     }
 
@@ -96,9 +98,7 @@ public class PluginLoader {
      * Enable all Plugins
      */
     public static void enableAll() {
-        for (String plugin : plugins.keySet()) {
-            enable(plugin);
-        }
+        new PluginLoadingThread().start();
     }
 
     /**

@@ -31,7 +31,7 @@ dependencies {
 }
 
 javadoc {
-    title 'Minetweak'
+    title 'Minetweak v' + version
     exclude '**/net/minecraft/**'
 }
 
