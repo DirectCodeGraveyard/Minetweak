@@ -69,8 +69,9 @@ task standaloneJar(type: Jar) {
     classifier = 'standalone'
     from sourceSets.main.output
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+
     manifest {
-        attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': version, '')
+        attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': version)
     }
 }
 
