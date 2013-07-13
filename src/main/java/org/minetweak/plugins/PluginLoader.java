@@ -110,7 +110,12 @@ public class PluginLoader {
         try {
             JarFile jf = new JarFile(file);
             ZipEntry entry = jf.getEntry("plugin.json");
+            ZipEntry bukkitYaml = jf.getEntry("plugin.yaml");
             if (entry==null) {
+                if (bukkitYaml!=null) {
+                    Minetweak.info("Found Bukkit Plugin in " + file.getName() + ". Skipping....");
+                    return null;
+                }
                 return null;
             }
             return gson.fromJson(new InputStreamReader(jf.getInputStream(entry)), PluginInfo.class);
