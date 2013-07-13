@@ -96,7 +96,7 @@ if (!hasProperty('ciPassword')) { ext.ciPassword = '' }
 uploadArchives {
     repositories.mavenDeployer {
         configuration = configurations.deployerJars
-        repository(url: 'ftp://ci.directmyfile.com/var/www/snapshots/') {
+        repository(url: 'ftp://ci.minetweak.org/var/www/snapshots/') {
             authentication(userName: ciUsername, password: ciPassword)
         }
         pom.groupId = groupId
