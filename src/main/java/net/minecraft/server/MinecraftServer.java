@@ -2,6 +2,7 @@ package net.minecraft.server;
 
 import net.minecraft.src.*;
 import org.minetweak.Minetweak;
+import org.minetweak.command.TabCompletion;
 import org.minetweak.event.server.WorldsLoadingEvent;
 
 import java.awt.*;
@@ -13,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -800,7 +802,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         if (par2Str.startsWith("/")) {
             par2Str = par2Str.substring(1);
             boolean var10 = !par2Str.contains(" ");
-            List var11 = this.commandManager.getPossibleCommands(par1ICommandSender, par2Str);
+            Set<String> var11 = TabCompletion.getCommands();
 
             if (var11 != null) {
                 for (Object aVar11 : var11) {
