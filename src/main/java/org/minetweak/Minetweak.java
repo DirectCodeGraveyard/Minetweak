@@ -261,6 +261,7 @@ public class Minetweak {
         registerCommand("clear", new CommandClearInv());
         registerCommand("version", new CommandVersion());
         registerCommand("give", new CommandGive());
+        registerCommand("save", new CommandSave());
     }
 
     /**

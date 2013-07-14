@@ -17,7 +17,7 @@ public class Server {
 
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
-            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111077_e(String.format("[%s] %s", "Server", message)));
+            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111077_e(String.format("[%s%s%s] %s", EnumChatFormatting.GOLD, "Server", EnumChatFormatting.RESET, message)));
             return true;
         } else {
             return false;
@@ -72,7 +72,7 @@ public class Server {
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
         } else {
-            player.addChatMessage(EnumChatFormatting.RED + "No Such PluginCommand: " + commandOnly);
+            player.addChatMessage(EnumChatFormatting.RED + "No Such Command: " + commandOnly);
         }
     }
 
@@ -87,6 +87,8 @@ public class Server {
 
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(console, commandOnly, args);
+        } else {
+            console.sendMessage(EnumChatFormatting.RED + "No Such Command: " + commandOnly);
         }
     }
 
@@ -105,5 +107,16 @@ public class Server {
 
     public static boolean isWhitelistEnabled() {
         return MinetweakConfig.getBoolean("server.whitelist-enabled");
+    }
+
+    public static void sendToOps(String message) {
+        Minetweak.info(message);
+        for (String op : MinecraftServer.getServer().getConfigurationManager().getOps()) {
+            Player player = Minetweak.getPlayerByName(op);
+            if (player==null) {
+                continue;
+            }
+            player.sendMessage(message);
+        }
     }
 }

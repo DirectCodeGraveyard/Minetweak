@@ -36,7 +36,7 @@ public class CommandServerSaveAll extends CommandBase {
                     var5 = var3.worldServers[var4];
                     var6 = var5.levelSaving;
                     var5.levelSaving = false;
-                    var5.saveAllChunks(true, (IProgressUpdate) null);
+                    var5.saveAllChunks(true, null);
                     var5.levelSaving = var6;
                 }
             }
@@ -57,7 +57,7 @@ public class CommandServerSaveAll extends CommandBase {
                 par1ICommandSender.func_110122_a(ChatMessageComponent.func_111077_e("commands.save.flushEnd"));
             }
         } catch (MinecraftException var7) {
-            notifyAdmins(par1ICommandSender, "commands.save.failed", new Object[]{var7.getMessage()});
+            notifyAdmins(par1ICommandSender, "commands.save.failed", var7.getMessage());
             return;
         }
 

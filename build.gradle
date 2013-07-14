@@ -7,6 +7,8 @@ apply plugin: 'maven'
 def version = '0.6.3'
 def groupId = 'org.minetweak'
 
+defaultTasks 'jar'
+
 repositories {
     mavenCentral()
 
@@ -16,17 +18,21 @@ repositories {
 }
 
 configurations {
+    compile
     deployerJars
+    compileAndJar {
+        extendsFrom inJar
+    }
 }
 
 dependencies {
-    compile 'com.google.guava:guava:14.0.1'
-    compile 'com.google.code.gson:gson:2.2.4'
-    compile 'commons-io:commons-io:2.4'
-    compile 'org.apache.commons:commons-lang3:3.1'
+    compileAndJar 'com.google.guava:guava:14.0.1'
+    compileAndJar 'com.google.code.gson:gson:2.2.4'
+    compileAndJar 'commons-io:commons-io:2.4'
+    compileAndJar 'org.apache.commons:commons-lang3:3.1'
     testCompile 'junit:junit:4.10'
     deployerJars 'org.apache.maven.wagon:wagon-ftp:2.2'
-    compile files('libs/bcprov-jdk15on-1.47.jar')
+    compileAndJar files('libs/bcprov-jdk15on-1.47.jar')
 }
 
 javadoc {
@@ -38,6 +44,7 @@ compileJava {
     options.compilerArgs = ['-Xlint:none']
     sourceCompatibility = '1.6' 
     targetCompatibility = '1.6'
+    classpath = configurations.compileAndJar + configurations.compile + configurations.inJar
 }
 
 jar {
@@ -68,7 +75,7 @@ task standaloneJar(type: Jar) {
     description = 'Makes a JAR with Minetweak dependencies inside'
     classifier = 'standalone'
     from sourceSets.main.output
-    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    from configurations.inJar.collect { it.isDirectory() ? it : zipTree(it) }
 
     manifest {
         attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': version)
