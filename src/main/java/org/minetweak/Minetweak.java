@@ -73,7 +73,6 @@ public class Minetweak {
         System.out.println("Minetweak v" + getAPIVersion() + " using Minecraft v" + getMinecraftVersion());
 
         PermissionsLoader.load();
-        PlayerWhitelist.load();
         MinetweakConfig.initialize();
 
         registerServerCommands();

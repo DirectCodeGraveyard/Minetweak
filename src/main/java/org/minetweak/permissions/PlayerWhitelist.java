@@ -49,6 +49,7 @@ public class PlayerWhitelist {
     public static void load() {
         try {
             if (!whitelistFile.exists()) {
+                save();
                 return;
             }
             FileReader reader = new FileReader(whitelistFile);
