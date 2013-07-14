@@ -34,7 +34,7 @@ public class CommandGive extends CommandBase
 
             if (Item.itemsList[var4] == null)
             {
-                throw new NumberInvalidException("commands.give.notFound", new Object[] {Integer.valueOf(var4)});
+                throw new NumberInvalidException("commands.give.notFound", new Object[] {var4});
             }
             else
             {

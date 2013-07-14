@@ -260,6 +260,7 @@ public class Minetweak {
         registerCommand("loaddata", new CommandLoadData());
         registerCommand("clear", new CommandClearInv());
         registerCommand("version", new CommandVersion());
+        registerCommand("give", new CommandGive());
     }
 
     /**

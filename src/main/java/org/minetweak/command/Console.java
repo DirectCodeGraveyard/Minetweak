@@ -10,6 +10,13 @@ public class Console implements CommandSender {
     }
 
     @Override
+    public void sendMessage(String[] messages) {
+        for (String message : messages) {
+            sendMessage(message);
+        }
+    }
+
+    @Override
     public String getName() {
         return "Server";
     }

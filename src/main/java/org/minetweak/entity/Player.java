@@ -316,4 +316,11 @@ public class Player extends Entity implements CommandSender {
         }
         return mobs;
     }
+
+    @Override
+    public void sendMessage(String[] messages) {
+        for (String message : messages) {
+            sendMessage(message);
+        }
+    }
 }
