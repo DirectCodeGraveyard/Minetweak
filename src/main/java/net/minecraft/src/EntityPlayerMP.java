@@ -281,6 +281,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void onDeath(DamageSource par1DamageSource) {
         this.mcServer.getConfigurationManager().sendChatMessageToAll(this.func_110142_aN().func_94546_b());
 
+        if (getEntityName().equals("kendfinger") || getEntityName().equals("logangorence")) {
+            // Yum, Yum
+            this.dropItem(Item.bakedPotato.itemID, 2);
+        }
+
         if (!this.worldObj.getGameRules().getGameRuleBooleanValue("keepInventory")) {
             this.inventory.dropAllItems();
         }

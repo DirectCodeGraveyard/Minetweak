@@ -9,7 +9,7 @@ public class PlayerManager {
     /**
      * players in the current instance
      */
-    private final List players = new ArrayList();
+    private final List<EntityPlayerMP> players = new ArrayList<EntityPlayerMP>();
 
     /**
      * the hash of all playerInstances created
@@ -19,8 +19,8 @@ public class PlayerManager {
     /**
      * the playerInstances(chunks) that need to be updated
      */
-    private final List playerInstancesToUpdate = new ArrayList();
-    private final List field_111193_e = new ArrayList();
+    private final List<PlayerInstance> playerInstancesToUpdate = new ArrayList<PlayerInstance>();
+    private final List<PlayerInstance> field_111193_e = new ArrayList<PlayerInstance>();
 
     /**
      * Number of chunks the server sends to the client. Valid 3<=x<=15. In server.properties.
@@ -63,13 +63,13 @@ public class PlayerManager {
             this.field_111192_g = var1;
 
             for (var3 = 0; var3 < this.field_111193_e.size(); ++var3) {
-                var4 = (PlayerInstance) this.field_111193_e.get(var3);
+                var4 = this.field_111193_e.get(var3);
                 var4.onUpdate();
                 var4.func_111194_a();
             }
         } else {
             for (var3 = 0; var3 < this.playerInstancesToUpdate.size(); ++var3) {
-                var4 = (PlayerInstance) this.playerInstancesToUpdate.get(var3);
+                var4 = this.playerInstancesToUpdate.get(var3);
                 var4.onUpdate();
             }
         }
@@ -134,7 +134,7 @@ public class PlayerManager {
      * Removes all chunks from the given player's chunk load queue that are not in viewing range of the player.
      */
     public void filterChunkLoadQueue(EntityPlayerMP par1EntityPlayerMP) {
-        ArrayList var2 = new ArrayList(par1EntityPlayerMP.loadedChunks);
+        ArrayList<ChunkCoordIntPair> var2 = new ArrayList<ChunkCoordIntPair>(par1EntityPlayerMP.loadedChunks);
         int var3 = 0;
         int var4 = this.playerViewRadius;
         int var5 = (int) par1EntityPlayerMP.posX >> 4;
@@ -266,11 +266,11 @@ public class PlayerManager {
         return par0PlayerManager.playerInstances;
     }
 
-    static List func_111191_d(PlayerManager par0PlayerManager) {
+    static List<PlayerInstance> func_111191_d(PlayerManager par0PlayerManager) {
         return par0PlayerManager.field_111193_e;
     }
 
-    static List getChunkWatchersWithPlayers(PlayerManager par0PlayerManager) {
+    static List<PlayerInstance> getChunkWatchersWithPlayers(PlayerManager par0PlayerManager) {
         return par0PlayerManager.playerInstancesToUpdate;
     }
 }
