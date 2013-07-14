@@ -9,6 +9,7 @@ public class Block {
      */
     private CreativeTabs displayOnCreativeTab;
     protected String field_111026_f;
+
     public static final StepSound soundPowderFootstep = new StepSound("stone", 1.0F, 1.0F);
     public static final StepSound soundWoodFootstep = new StepSound("wood", 1.0F, 1.0F);
     public static final StepSound soundGravelFootstep = new StepSound("gravel", 1.0F, 1.0F);
@@ -1162,5 +1163,17 @@ public class Block {
 
     public void func_71923_g_CodeFix_Public(net.minecraft.src.World a, int b, int c, int d, int e) {
         dropXpOnBlockBreak(a, b, c, d, e);
+    }
+
+    /**
+     * Returns true or false based on whether the block this block is attached to is providing indirect power.
+     */
+    public boolean isIndirectlyPowered(World par1World, int par2, int par3, int par4) {
+        int var5 = par1World.getBlockMetadata(par2, par3, par4);
+        return var5 == 5 && par1World.getIndirectPowerOutput(par2, par3 - 1, par4, 0) || (var5 == 3 && par1World.getIndirectPowerOutput(par2, par3, par4 - 1, 2) || (var5 == 4 && par1World.getIndirectPowerOutput(par2, par3, par4 + 1, 3) || (var5 == 1 && par1World.getIndirectPowerOutput(par2 - 1, par3, par4, 4) || var5 == 2 && par1World.getIndirectPowerOutput(par2 + 1, par3, par4, 5))));
+    }
+
+    public boolean isPowered(World world, int x, int y, int z) {
+        return world.isBlockProvidingPowerTo(x, y, z, 0) == 1;
     }
 }

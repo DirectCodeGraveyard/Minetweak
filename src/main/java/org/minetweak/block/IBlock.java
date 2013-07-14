@@ -1,5 +1,6 @@
 package org.minetweak.block;
 
+import net.minecraft.src.Block;
 import org.minetweak.material.Material;
 import org.minetweak.world.Chunk;
 import org.minetweak.world.World;
@@ -108,4 +109,9 @@ public interface IBlock {
      */
     boolean setTypeIdAndData(int type, byte data, boolean applyPhysics);
 
+    boolean isPowered();
+
+    void setPowered(boolean powered);
+
+    Block getMCBlock();
 }

@@ -1,5 +1,6 @@
 package org.minetweak.block;
 
+import net.minecraft.src.Block;
 import org.minetweak.material.Material;
 import org.minetweak.world.Chunk;
 import org.minetweak.world.World;
@@ -9,6 +10,7 @@ public class TweakBlock implements IBlock {
     private final int x;
     private final int y;
     private final int z;
+    private boolean powered;
 
     public TweakBlock(Chunk chunk, int x, int y, int z) {
         this.x = x;
@@ -31,6 +33,10 @@ public class TweakBlock implements IBlock {
 
     public int getZ() {
         return z;
+    }
+
+    public int getBlockID() {
+        return getWorld().getHandle().getBlockId(x, y, z);
     }
 
     public Chunk getChunk() {
@@ -93,5 +99,18 @@ public class TweakBlock implements IBlock {
 
     public int getTypeId() {
         return chunk.getHandle().getBlockID(this.x & 0xF, this.y & 0xFF, this.z & 0xF);
+    }
+
+    public void setPowered(boolean powered) {
+        getWorld().getHandle().scheduleBlockUpdate(x, y, z, getBlockID(), 4);
+        this.powered = true;
+    }
+
+    public boolean isPowered() {
+        return powered;
+    }
+
+    public Block getMCBlock() {
+        return Block.blocksList[getBlockID()];
     }
 }

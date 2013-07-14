@@ -104,14 +104,6 @@ public class BlockRedstoneTorch extends BlockTorch {
     }
 
     /**
-     * Returns true or false based on whether the block the torch is attached to is providing indirect power.
-     */
-    private boolean isIndirectlyPowered(World par1World, int par2, int par3, int par4) {
-        int var5 = par1World.getBlockMetadata(par2, par3, par4);
-        return var5 == 5 && par1World.getIndirectPowerOutput(par2, par3 - 1, par4, 0) || (var5 == 3 && par1World.getIndirectPowerOutput(par2, par3, par4 - 1, 2) || (var5 == 4 && par1World.getIndirectPowerOutput(par2, par3, par4 + 1, 3) || (var5 == 1 && par1World.getIndirectPowerOutput(par2 - 1, par3, par4, 4) || var5 == 2 && par1World.getIndirectPowerOutput(par2 + 1, par3, par4, 5))));
-    }
-
-    /**
      * Ticks the block if it's been scheduled
      */
     @Override
@@ -190,5 +182,13 @@ public class BlockRedstoneTorch extends BlockTorch {
     @Override
     public boolean isAssociatedBlockID(int par1) {
         return par1 == Block.torchRedstoneIdle.blockID || par1 == Block.torchRedstoneActive.blockID;
+    }
+
+    public void setTorchActive(boolean torchActive) {
+        this.torchActive = torchActive;
+    }
+
+    public boolean isTorchActive() {
+        return torchActive;
     }
 }

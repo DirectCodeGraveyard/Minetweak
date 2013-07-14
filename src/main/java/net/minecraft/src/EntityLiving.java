@@ -140,7 +140,7 @@ public abstract class EntityLiving extends EntityLivingBase {
 
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(11, Byte.valueOf((byte) 0));
+        this.dataWatcher.addObject(11, (byte) 0);
         this.dataWatcher.addObject(10, "");
     }
 
@@ -373,10 +373,9 @@ public abstract class EntityLiving extends EntityLivingBase {
 
         if (!this.worldObj.isRemote && this.canPickUpLoot() && !this.dead && this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing")) {
             List var1 = this.worldObj.getEntitiesWithinAABB(EntityItem.class, this.boundingBox.expand(1.0D, 0.0D, 1.0D));
-            Iterator var2 = var1.iterator();
 
-            while (var2.hasNext()) {
-                EntityItem var3 = (EntityItem) var2.next();
+            for (Object aVar1 : var1) {
+                EntityItem var3 = (EntityItem) aVar1;
 
                 if (!var3.isDead && var3.getEntityItem() != null) {
                     ItemStack var4 = var3.getEntityItem();
@@ -869,7 +868,7 @@ public abstract class EntityLiving extends EntityLivingBase {
     }
 
     public void setAlwaysRenderNameTag(boolean par1) {
-        this.dataWatcher.updateObject(11, Byte.valueOf((byte) (par1 ? 1 : 0)));
+        this.dataWatcher.updateObject(11, (byte) (par1 ? 1 : 0));
     }
 
     public boolean getAlwaysRenderNameTag() {
@@ -913,7 +912,7 @@ public abstract class EntityLiving extends EntityLivingBase {
                 }
             }
 
-            return this.interact(par1EntityPlayer) ? true : super.func_130002_c(par1EntityPlayer);
+            return this.interact(par1EntityPlayer) || super.func_130002_c(par1EntityPlayer);
         }
     }
 
@@ -946,7 +945,7 @@ public abstract class EntityLiving extends EntityLivingBase {
             }
 
             if (!this.worldObj.isRemote && par1 && this.worldObj instanceof WorldServer) {
-                ((WorldServer) this.worldObj).getEntityTracker().sendPacketToTrackedPlayers(this, new Packet39AttachEntity(1, this, (Entity) null));
+                ((WorldServer) this.worldObj).getEntityTracker().sendPacketToTrackedPlayers(this, new Packet39AttachEntity(1, this, null));
             }
         }
     }
@@ -977,10 +976,9 @@ public abstract class EntityLiving extends EntityLivingBase {
             if (this.field_110170_bx.hasKey("UUIDMost") && this.field_110170_bx.hasKey("UUIDLeast")) {
                 UUID var5 = new UUID(this.field_110170_bx.getLong("UUIDMost"), this.field_110170_bx.getLong("UUIDLeast"));
                 List var6 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, this.boundingBox.expand(10.0D, 10.0D, 10.0D));
-                Iterator var7 = var6.iterator();
 
-                while (var7.hasNext()) {
-                    EntityLivingBase var8 = (EntityLivingBase) var7.next();
+                for (Object aVar6 : var6) {
+                    EntityLivingBase var8 = (EntityLivingBase) aVar6;
 
                     if (var8.func_110124_au().equals(var5)) {
                         this.field_110168_bw = var8;

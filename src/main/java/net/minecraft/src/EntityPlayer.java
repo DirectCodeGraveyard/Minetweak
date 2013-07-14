@@ -132,9 +132,9 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
-        this.dataWatcher.addObject(17, Float.valueOf(0.0F));
-        this.dataWatcher.addObject(18, Integer.valueOf(0));
+        this.dataWatcher.addObject(16, (byte) 0);
+        this.dataWatcher.addObject(17, 0.0F);
+        this.dataWatcher.addObject(18, 0);
     }
 
     /**
@@ -319,7 +319,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             int var1 = this.itemInUse.stackSize;
             ItemStack var2 = this.itemInUse.onFoodEaten(this.worldObj, this);
 
-            if (var2 != this.itemInUse || var2 != null && var2.stackSize != var1) {
+            if (var2 != this.itemInUse || var2.stackSize != var1) {
                 this.inventory.mainInventory[this.inventory.currentItem] = var2;
 
                 if (var2.stackSize == 0) {
@@ -369,7 +369,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
      */
     public void updateRidden() {
         if (!this.worldObj.isRemote && this.isSneaking()) {
-            this.mountEntity((Entity) null);
+            this.mountEntity(null);
             this.setSneaking(false);
         } else {
             double var1 = this.posX;
@@ -443,7 +443,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.cameraPitch += (var3 - this.cameraPitch) * 0.8F;
 
         if (this.func_110143_aJ() > 0.0F) {
-            AxisAlignedBB var4 = null;
+            AxisAlignedBB var4;
 
             if (this.ridingEntity != null && !this.ridingEntity.isDead) {
                 var4 = this.boundingBox.func_111270_a(this.ridingEntity.boundingBox).expand(1.0D, 0.0D, 1.0D);
@@ -477,7 +477,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
      * Set player's score
      */
     public void setScore(int par1) {
-        this.dataWatcher.updateObject(18, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(18, par1);
     }
 
     /**
@@ -485,7 +485,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
      */
     public void addScore(int par1) {
         int var2 = this.getScore();
-        this.dataWatcher.updateObject(18, Integer.valueOf(var2 + par1));
+        this.dataWatcher.updateObject(18, var2 + par1);
     }
 
     /**
@@ -566,7 +566,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         } else {
             EntityItem var3 = new EntityItem(this.worldObj, this.posX, this.posY - 0.30000001192092896D + (double) this.getEyeHeight(), this.posZ, par1ItemStack);
             var3.delayBeforeCanPickup = 40;
-            float var4 = 0.1F;
+            float var4;
             float var5;
 
             if (par2) {
@@ -800,7 +800,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     public boolean func_96122_a(EntityPlayer par1EntityPlayer) {
         Team var2 = this.getTeam();
         Team var3 = par1EntityPlayer.getTeam();
-        return var2 == null ? true : (!var2.func_142054_a(var3) ? true : var2.func_96665_g());
+        return var2 == null || (!var2.func_142054_a(var3) ? true : var2.func_96665_g());
     }
 
     protected void damageArmor(float par1) {
@@ -1255,9 +1255,9 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         byte var3 = this.dataWatcher.getWatchableObjectByte(16);
 
         if (par2) {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) (var3 | 1 << par1)));
+            this.dataWatcher.updateObject(16, (byte) (var3 | 1 << par1));
         } else {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) (var3 & ~(1 << par1))));
+            this.dataWatcher.updateObject(16, (byte) (var3 & ~(1 << par1)));
         }
     }
 
@@ -1717,7 +1717,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
             par1 = 0.0F;
         }
 
-        this.getDataWatcher().updateObject(17, Float.valueOf(par1));
+        this.getDataWatcher().updateObject(17, par1);
     }
 
     public float func_110139_bj() {

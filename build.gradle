@@ -75,7 +75,7 @@ task standaloneJar(type: Jar) {
     description = 'Makes a JAR with Minetweak dependencies inside'
     classifier = 'standalone'
     from sourceSets.main.output
-    from configurations.inJar.collect { it.isDirectory() ? it : zipTree(it) }
+    from configurations.compileAndJar.collect { it.isDirectory() ? it : zipTree(it) }
 
     manifest {
         attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': version)
