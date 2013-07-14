@@ -123,6 +123,7 @@ public class PluginLoader {
 
     /**
      * Returns a list of Plugin files
+     * NOTE: No longer uses NIO
      */
     private void getPluginFiles() {
         File pluginDirectory = new File("./plugins/");
