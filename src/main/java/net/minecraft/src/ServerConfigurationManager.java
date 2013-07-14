@@ -3,9 +3,11 @@ package net.minecraft.src;
 import com.google.common.base.Charsets;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
+import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.event.player.PlayerJoinEvent;
 import org.minetweak.event.player.PlayerLeaveEvent;
+import org.minetweak.permissions.PlayerWhitelist;
 
 import java.io.File;
 import java.net.SocketAddress;
@@ -63,6 +65,7 @@ public abstract class ServerConfigurationManager {
         this.bannedPlayers.setListActive(false);
         this.bannedIPs.setListActive(false);
         this.maxPlayers = 8;
+        this.whiteListEnforced = MinetweakConfig.getBoolean("server.whitelist-enabled");
     }
 
     public void initializeConnectionToPlayer(INetworkManager par1INetworkManager, EntityPlayerMP par2EntityPlayerMP) {
@@ -526,7 +529,7 @@ public abstract class ServerConfigurationManager {
      */
     public boolean isAllowedToLogin(String par1Str) {
         par1Str = par1Str.trim().toLowerCase();
-        return !this.whiteListEnforced || this.ops.contains(par1Str) || this.whiteListedPlayers.contains(par1Str);
+        return !this.whiteListEnforced || this.ops.contains(par1Str) || PlayerWhitelist.getWhitelistedPlayers().contains(par1Str);
     }
 
     /**
@@ -727,6 +730,7 @@ public abstract class ServerConfigurationManager {
      * Either does nothing, or calls readWhiteList.
      */
     public void loadWhiteList() {
+
     }
 
     /**

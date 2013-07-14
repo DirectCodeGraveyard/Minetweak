@@ -7,6 +7,7 @@ import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.entity.player.PlayerTracker;
 import org.minetweak.permissions.PermissionsLoader;
+import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.plugins.PluginLoaderHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
@@ -72,6 +73,7 @@ public class Minetweak {
         System.out.println("Minetweak v" + getAPIVersion() + " using Minecraft v" + getMinecraftVersion());
 
         PermissionsLoader.load();
+        PlayerWhitelist.load();
         MinetweakConfig.initialize();
 
         registerServerCommands();
@@ -149,6 +151,10 @@ public class Minetweak {
                     return false;
                 }
             } else {
+                if (!PlayerWhitelist.isPlayerWhitelisted(playerUsername)) {
+                    targetPlayerInstance.kickPlayer("You are not whitelisted on this server!");
+                    return false;
+                }
                 players.put(playerUsername, targetPlayerInstance);
             }
             targetPlayerInstance.sendMessage("You were registered within Minetweak. Please check within the console for errors.");

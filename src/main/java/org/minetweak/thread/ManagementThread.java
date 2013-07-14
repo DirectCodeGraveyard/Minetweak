@@ -6,6 +6,7 @@ import org.minetweak.Minetweak;
 import org.minetweak.entity.player.PlayerTracker;
 import org.minetweak.event.server.ServerFinishedStartupEvent;
 import org.minetweak.permissions.PermissionsLoader;
+import org.minetweak.permissions.PlayerWhitelist;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,7 @@ public class ManagementThread extends Thread {
             loadBans();
             loadPerms();
             loadPlayers();
+            loadWhitelist();
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
@@ -45,6 +47,13 @@ public class ManagementThread extends Thread {
      */
     public void loadPerms() {
         PermissionsLoader.load();
+    }
+
+    /**
+     * Loads the whitelisted players
+     */
+    public void loadWhitelist() {
+        PlayerWhitelist.load();
     }
 
     /**

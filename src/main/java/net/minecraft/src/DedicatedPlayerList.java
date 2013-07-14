@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.config.MinetweakConfig;
+import org.minetweak.permissions.PlayerWhitelist;
 
 import java.io.*;
 
@@ -12,10 +13,8 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     public DedicatedPlayerList(DedicatedServer par1DedicatedServer) {
         super(par1DedicatedServer);
         this.opsList = par1DedicatedServer.getFile("ops.txt");
-        this.whiteList = par1DedicatedServer.getFile("white-list.txt");
         this.viewDistance = par1DedicatedServer.getIntProperty("view-distance", 10);
         this.maxPlayers = par1DedicatedServer.getIntProperty("max-players", 20);
-        this.setWhiteListEnabled(par1DedicatedServer.getBooleanProperty("white-list", false));
         this.getBannedPlayers().setListActive(true);
         this.getBannedIPs().setListActive(true);
         this.getBannedPlayers().loadBanList();
@@ -23,12 +22,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
         this.getBannedIPs().loadBanList();
         this.getBannedIPs().saveToFileWithHeader();
         this.loadOpsList();
-        this.readWhiteList();
         this.saveOpsList();
-
-        if (!this.whiteList.exists()) {
-            this.saveWhiteList();
-        }
     }
 
     public void setWhiteListEnabled(boolean par1) {
@@ -107,34 +101,11 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     }
 
     private void readWhiteList() {
-        try {
-            this.getWhiteListedPlayers().clear();
-            BufferedReader var1 = new BufferedReader(new FileReader(this.whiteList));
-            String var2;
 
-            while ((var2 = var1.readLine()) != null) {
-                this.getWhiteListedPlayers().add(var2.trim().toLowerCase());
-            }
-
-            var1.close();
-        } catch (Exception var3) {
-            this.getDedicatedServerInstance().getLogAgent().logWarning("Failed to load white-list: " + var3);
-        }
     }
 
     private void saveWhiteList() {
-        try {
-            PrintWriter var1 = new PrintWriter(new FileWriter(this.whiteList, false));
 
-            for (Object o : this.getWhiteListedPlayers()) {
-                String var3 = (String) o;
-                var1.println(var3);
-            }
-
-            var1.close();
-        } catch (Exception var4) {
-            this.getDedicatedServerInstance().getLogAgent().logWarning("Failed to save white-list: " + var4);
-        }
     }
 
     /**
@@ -142,7 +113,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
      */
     public boolean isAllowedToLogin(String par1Str) {
         par1Str = par1Str.trim().toLowerCase();
-        return !this.isWhiteListEnabled() || this.areCommandsAllowed(par1Str) || this.getWhiteListedPlayers().contains(par1Str);
+        return !MinetweakConfig.getBoolean("server.whitelist-enabled") || this.areCommandsAllowed(par1Str) || PlayerWhitelist.isPlayerWhitelisted(par1Str);
     }
 
     public DedicatedServer getDedicatedServerInstance() {

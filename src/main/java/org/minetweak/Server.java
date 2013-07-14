@@ -5,6 +5,7 @@ import net.minecraft.src.ChatMessageComponent;
 import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.EnumChatFormatting;
 import org.minetweak.command.Console;
+import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;
 
@@ -100,5 +101,9 @@ public class Server {
 
     public static void pardonPlayer(String playerUsername) {
         MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().remove(playerUsername);
+    }
+
+    public static boolean isWhitelistEnabled() {
+        return MinetweakConfig.getBoolean("server.whitelist-enabled");
     }
 }
