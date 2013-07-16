@@ -135,6 +135,10 @@ public class Player extends Entity implements CommandSender {
         return true;
     }
 
+    public ItemStack getItemInHand() {
+        return getPlayerMP().inventory.getCurrentItem();
+    }
+
     /**
      * Get the instance of EntityPlayerMP for this player
      * @return EntityPlayerMP corresponding class
