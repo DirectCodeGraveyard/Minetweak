@@ -197,7 +197,7 @@ public abstract class ServerConfigurationManager {
             par1EntityPlayerMP.playerNetServerHandler.sendPacket(new Packet201PlayerInfo(aPlayerEntityList.getCommandSenderName(), true, aPlayerEntityList.ping));
         }
 
-        Minetweak.registerPlayer(par1EntityPlayerMP.getCommandSenderName());
+        Minetweak.registerPlayer(par1EntityPlayerMP.getCommandSenderName().toLowerCase());
         Minetweak.getEventBus().post(new PlayerJoinEvent(Minetweak.getPlayerByName(par1EntityPlayerMP.getEntityName())));
     }
 
@@ -212,7 +212,7 @@ public abstract class ServerConfigurationManager {
      * Called when a player disconnects from the game. Writes player data to disk and removes them from the world.
      */
     public void playerLoggedOut(EntityPlayerMP par1EntityPlayerMP) {
-        Minetweak.unregisterPlayer(par1EntityPlayerMP.getCommandSenderName());
+        Minetweak.unregisterPlayer(par1EntityPlayerMP.getCommandSenderName().toLowerCase());
         this.writePlayerData(par1EntityPlayerMP);
         WorldServer var2 = par1EntityPlayerMP.getServerForPlayer();
 

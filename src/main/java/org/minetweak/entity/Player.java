@@ -46,7 +46,7 @@ public class Player extends Entity implements CommandSender {
      * @return Player's display name
      */
     public String getDisplayName() {
-        return playerDisplayName;
+        return playerDisplayName.toLowerCase();
     }
 
     /**
@@ -135,10 +135,6 @@ public class Player extends Entity implements CommandSender {
         return true;
     }
 
-    public ItemStack getItemInHand() {
-        return getPlayerMP().inventory.getCurrentItem();
-    }
-
     /**
      * Get the instance of EntityPlayerMP for this player
      * @return EntityPlayerMP corresponding class
@@ -160,21 +156,21 @@ public class Player extends Entity implements CommandSender {
      * @return True if the player is an op
      */
     public boolean isOperator() {
-        return MinecraftServer.getServer().getConfigurationManager().getOps().contains(playerDisplayName);
+        return MinecraftServer.getServer().getConfigurationManager().getOps().contains(playerDisplayName.toLowerCase());
     }
 
     /**
      * Op the player
      */
     public void opPlayer() {
-        MinecraftServer.getServer().getConfigurationManager().addOp(playerDisplayName);
+        MinecraftServer.getServer().getConfigurationManager().addOp(playerDisplayName.toLowerCase());
     }
 
     /**
      * Deop the player
      */
     public void deopPlayer() {
-        MinecraftServer.getServer().getConfigurationManager().removeOp(playerDisplayName);
+        MinecraftServer.getServer().getConfigurationManager().removeOp(playerDisplayName.toLowerCase());
     }
 
     /**

@@ -55,7 +55,7 @@ public class Permissions {
      */
     public static boolean hasPermission(String user, String permission) {
         ArrayList<String> perms = getPermissions(user);
-        return perms != null && (perms.contains("*") || perms.contains(permission)) || MinecraftServer.getServer().getConfigurationManager().getOps().contains(user);
+        return perms != null && (perms.contains("*") || perms.contains(permission)) || MinecraftServer.getServer().getConfigurationManager().getOps().contains(user.toLowerCase());
     }
 
     /**

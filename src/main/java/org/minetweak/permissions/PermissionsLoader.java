@@ -2,6 +2,7 @@ package org.minetweak.permissions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import org.apache.commons.io.IOUtils;
 import org.minetweak.Minetweak;
 
@@ -32,12 +33,18 @@ public class PermissionsLoader {
                 reader.close();
                 return;
             } else {
-                if (Minetweak.isServerDoneLoading()) {
-                    Minetweak.info("Detected Permissions File Change. Loading....");
-                }
+                if (Minetweak.isServerDoneLoading()) Minetweak.info("Detected Permissions file change.");
                 lastData = data;
             }
-            PermissionsFile permissionsFile = gson.fromJson(data, PermissionsFile.class);
+
+            PermissionsFile permissionsFile = null;
+
+            try {
+                permissionsFile = gson.fromJson(data, PermissionsFile.class);
+            } catch (JsonSyntaxException exception) {
+                Minetweak.info("There was a syntax error in your Permissions file.");
+            }
+
             if (permissionsFile==null || permissionsFile.entries==null) {
                 return;
             }
