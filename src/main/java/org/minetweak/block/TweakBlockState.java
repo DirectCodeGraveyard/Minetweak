@@ -15,12 +15,12 @@ public class TweakBlockState implements IBlockState {
     protected MaterialData data;
 
     public TweakBlockState(final TweakBlock tweakBlock) {
-        this.world = (World) tweakBlock.getWorld();
+        this.world = tweakBlock.getWorld();
         this.x = tweakBlock.getX();
         this.y = tweakBlock.getY();
         this.z = tweakBlock.getZ();
         this.type = tweakBlock.getTypeId();
-        this.chunk = (Chunk) tweakBlock.getChunk();
+        this.chunk = tweakBlock.getChunk();
 
         createData(tweakBlock.getData());
     }
