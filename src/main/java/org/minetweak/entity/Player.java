@@ -7,7 +7,6 @@ import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class represents the player, and allows you to
@@ -296,25 +295,6 @@ public class Player extends Entity implements CommandSender {
      */
     public InventoryEnderChest getEnderChest() {
         return getPlayerMP().getInventoryEnderChest();
-    }
-
-    /**
-     * Gets the nearby list of Mobs
-     * @param range range around player
-     * @return list of Mobs
-     */
-    public ArrayList<Mob> getNearbyMobs(int range) {
-        ArrayList<Mob> mobs = new ArrayList<Mob>();
-        double posX = getPlayerMP().posX;
-        double posY = getPlayerMP().posY;
-        double posZ = getPlayerMP().posZ;
-        List<net.minecraft.src.Entity> entityList = getPlayerMP().worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + range, posY + range, posZ + range));
-        for (net.minecraft.src.Entity entity : entityList) {
-            if (entity instanceof EntityMob) {
-                mobs.add(new Mob((EntityMob) entity));
-            }
-        }
-        return mobs;
     }
 
     @Override

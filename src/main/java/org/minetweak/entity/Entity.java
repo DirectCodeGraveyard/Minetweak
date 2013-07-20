@@ -1,5 +1,11 @@
 package org.minetweak.entity;
 
+import net.minecraft.src.AxisAlignedBB;
+import net.minecraft.src.EntityMob;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Entity {
     protected net.minecraft.src.Entity entity;
 
@@ -48,5 +54,24 @@ public class Entity {
      */
     public boolean isDead() {
         return entity.isDead;
+    }
+
+    /**
+     * Gets the nearby list of Mobs
+     * @param range range around mob
+     * @return list of Mobs
+     */
+    public ArrayList<Mob> getNearbyMobs(int range) {
+        ArrayList<Mob> mobs = new ArrayList<Mob>();
+        double posX = entity.posX;
+        double posY = entity.posY;
+        double posZ = entity.posZ;
+        List<net.minecraft.src.Entity> entityList = entity.worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + range, posY + range, posZ + range));
+        for (net.minecraft.src.Entity entity : entityList) {
+            if (entity instanceof EntityMob) {
+                mobs.add(new Mob((EntityMob) entity));
+            }
+        }
+        return mobs;
     }
 }
