@@ -69,23 +69,34 @@ public class Minetweak {
 
     private static MinetweakLog logger = new MinetweakLog("Minetweak", null, (new File("./", "minetweak.log")).getAbsolutePath());
 
+    /**
+     * Runs the Minetweak Server.
+     * @param args the arguments to pass to MinecraftServer
+     */
     public static void main(String[] args) {
         System.out.println("Minetweak v" + getAPIVersion() + " using Minecraft v" + getMinecraftVersion());
 
-        PermissionsLoader.load();
+        // Load the most important things first
         MinetweakConfig.initialize();
+        PermissionsLoader.load();
 
+        // Ensure Server Commands get registered first, so they can be overridden
         registerServerCommands();
 
+        // Register Instances of Threads and Managers
         registerListener(RecipeManager.getInstance());
         registerListener(ManagementThread.getInstance());
+
         // Used to run plugin startup inside the Server
         registerListener(new PluginLoaderHook());
+
         // Loads joined player list
         registerListener(PlayerTracker.getInstance());
+
         // Checks RAM usage to ensure that the user has enough
         ramCheck();
 
+        // Finally, launch the Minecraft Server
         MinecraftServer.main(args);
     }
 
