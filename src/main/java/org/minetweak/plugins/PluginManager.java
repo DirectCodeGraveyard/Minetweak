@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
-public class PluginLoader {
+public class PluginManager {
 
     private ArrayList<File> files = new ArrayList<File>();
     public static URLClassLoader loader;
@@ -25,7 +25,7 @@ public class PluginLoader {
      * Creates an instance of PluginLoader and runs setupPlugins
      */
     public static void initialize() {
-        PluginLoader loader = new PluginLoader();
+        PluginManager loader = new PluginManager();
         loader.setupPlugins();
         enableAll();
     }
