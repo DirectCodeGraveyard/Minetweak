@@ -74,4 +74,20 @@ public class Entity {
         }
         return mobs;
     }
+
+    /**
+     * Set the entity on fire for an amount of time, in seconds.
+     * Cannot be used if the passed time was below the amount of fire seconds that already are in place.
+     * @param seconds Amount of time in seconds that you were to catch the entity on fire for.
+     */
+    public void setFire(int seconds) {
+        entity.setFire(seconds);
+    }
+
+    /**
+     * Extinguish the entity from fire.
+     */
+    public void extinguishFire() {
+        entity.extinguish();
+    }
 }
