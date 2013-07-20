@@ -181,7 +181,7 @@ public class Player extends Entity implements CommandSender {
      * Kill the player
      */
     public void killPlayer() {
-        getPlayerMP().attackEntityFrom(DamageSource.outOfWorld, 5000);
+        getPlayerMP().attackEntityFrom(DamageSource.outOfWorld, 10000);
     }
 
     /**
@@ -250,14 +250,6 @@ public class Player extends Entity implements CommandSender {
     }
 
     /**
-     * Return the item held by the player as an ItemStack.
-     * @return ItemStack of the currently held item.
-     */
-    public ItemStack getHeldItem() {
-        return getPlayerMP().getHeldItem();
-    }
-
-    /**
      * Give the player a potion effect. Uses the vanilla class: PotionEffect to process effects.
      * Might be moved to a separate class like PotionEffect, but with documentation, unlike Vanilla's.
      * @param potionEffect the potion effect
@@ -299,6 +291,14 @@ public class Player extends Entity implements CommandSender {
     }
 
     /**
+     * Gets the inventory of the Player's ender chest
+     * @return player's ender chest
+     */
+    public InventoryEnderChest getEnderChest() {
+        return getPlayerMP().getInventoryEnderChest();
+    }
+
+    /**
      * Gets the nearby list of Mobs
      * @param range range around player
      * @return list of Mobs
@@ -322,5 +322,29 @@ public class Player extends Entity implements CommandSender {
         for (String message : messages) {
             sendMessage(message);
         }
+    }
+
+    /**
+     * Is the Player flying?
+     * @return True if the player is flying
+     */
+    public boolean isFlying() {
+        return getPlayerMP().capabilities.isFlying;
+    }
+
+    /**
+     * Can the Player fly?
+     * @return True if the player can fly
+     */
+    public boolean canFly() {
+        return getPlayerMP().capabilities.allowFlying;
+    }
+
+    /**
+     * Is the Player in creative mode?
+     * @return True if the player is in creative mode
+     */
+    public boolean isInCreativeMode() {
+        return getPlayerMP().capabilities.isCreativeMode;
     }
 }
