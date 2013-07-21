@@ -38,6 +38,7 @@ dependencies {
 javadoc {
     title 'Minetweak v' + version
     exclude '**/net/minecraft/**'
+    classpath = configurations.compileAndJar + configurations.compile
 }
 
 compileJava {
