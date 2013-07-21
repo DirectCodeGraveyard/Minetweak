@@ -1,12 +1,12 @@
 package org.minetweak.command;
 
-import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
 
 public class Console implements CommandSender {
 
     @Override
     public void sendMessage(String message) {
-        MinecraftServer.getServer().logInfo(message);
+        Minetweak.info(message  );
     }
 
     @Override
