@@ -37,4 +37,8 @@ public class Location {
         return posZ;
     }
 
+    public World getWorld() {
+        return world;
+    }
+
 }
