@@ -21,7 +21,7 @@ configurations {
     compile
     deployerJars
     compileAndJar {
-        extendsFrom inJar
+        extendsFrom compile
     }
 }
 
@@ -44,7 +44,7 @@ compileJava {
     options.compilerArgs = ['-Xlint:none']
     sourceCompatibility = '1.6' 
     targetCompatibility = '1.6'
-    classpath = configurations.compileAndJar + configurations.compile + configurations.inJar
+    classpath = configurations.compileAndJar + configurations.compile
 }
 
 jar {
