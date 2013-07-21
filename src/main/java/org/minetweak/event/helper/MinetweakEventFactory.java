@@ -15,10 +15,10 @@ import org.minetweak.world.World;
 public class MinetweakEventFactory {
 
     private static boolean canBuild(World world, Player player, int x, int z) {
-        net.minecraft.src.WorldServer worldServer = world.getHandle();
+        net.minecraft.src.WorldServer worldServer = world.getWorldServer();
         int spawnSize = MinecraftServer.getServer().getSpawnProtectionSize();
 
-        if (world.getHandle().provider.dimensionId != 0) return true;
+        if (world.getWorldServer().provider.dimensionId != 0) return true;
         if (spawnSize <= 0) return true;
         if (player.isOperator()) return true;
 

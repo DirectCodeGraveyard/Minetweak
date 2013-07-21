@@ -48,7 +48,7 @@ public class World {
      * Gets the WorldServer
      * @return WorldServer instance for world
      */
-    public net.minecraft.src.WorldServer getHandle() {
+    public net.minecraft.src.WorldServer getWorldServer() {
         return world;
     }
 }

@@ -36,7 +36,7 @@ public class TweakBlock implements IBlock {
     }
 
     public int getBlockID() {
-        return getWorld().getHandle().getBlockId(x, y, z);
+        return getWorld().getWorldServer().getBlockId(x, y, z);
     }
 
     public Chunk getChunk() {
@@ -102,7 +102,7 @@ public class TweakBlock implements IBlock {
     }
 
     public void setPowered(boolean powered) {
-        getWorld().getHandle().scheduleBlockUpdate(x, y, z, getBlockID(), 4);
+        getWorld().getWorldServer().scheduleBlockUpdate(x, y, z, getBlockID(), 4);
         this.powered = true;
     }
 

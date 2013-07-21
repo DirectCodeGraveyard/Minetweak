@@ -113,7 +113,7 @@ public class TweakBlockState implements IBlockState {
         }
 
         tweakBlock.setData(getRawData(), applyPhysics);
-        world.getHandle().markBlockForUpdate(x, y, z);
+        world.getWorldServer().markBlockForUpdate(x, y, z);
 
         return true;
     }
