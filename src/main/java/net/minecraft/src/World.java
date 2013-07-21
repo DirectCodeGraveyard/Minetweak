@@ -3177,4 +3177,20 @@ public abstract class World implements IBlockAccess {
 
         return MathHelper.func_76131_a(var4, 0.0F, var5 ? 1.5F : 1.0F);
     }
+
+    /**
+     * Does this world allow spawning peaceful mobs?
+     * @return True if peaceful mobs can spawn
+     */
+    public boolean spawnPeacefulMobs() {
+        return spawnPeacefulMobs;
+    }
+
+    /**
+     * Does this world allow spawning hostile mobs?
+     * @return True if hostile mobs can spawn
+     */
+    public boolean spawnHostileMobs() {
+        return spawnHostileMobs;
+    }
 }

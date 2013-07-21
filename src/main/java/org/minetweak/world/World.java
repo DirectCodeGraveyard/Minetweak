@@ -51,4 +51,29 @@ public class World {
     public net.minecraft.src.WorldServer getWorldServer() {
         return world;
     }
+
+    /**
+     * Can peaceful mobs spawn in this world?
+     * @return True if peaceful mobs can spawn
+     */
+    public boolean canPeacefulMobsSpawn() {
+        return getWorldServer().spawnPeacefulMobs();
+    }
+
+    /**
+     * Can hostile mobs spawn in this world?
+     * @return True if hostile mobs can spawn
+     */
+    public boolean canHostileMobsSpawn() {
+        return getWorldServer().spawnHostileMobs();
+    }
+
+    /**
+     * Set the ability of mob spawns by type, peaceful or hostile.
+     * @param peacefulSpawnAbility Peaceful mobs spawn ability
+     * @param hostileSpawnAbility Hostile mobs spawn ability
+     */
+    public void setMobTypeSpawnAbility(boolean peacefulSpawnAbility, boolean hostileSpawnAbility) {
+        getWorldServer().setAllowedSpawnTypes(hostileSpawnAbility, peacefulSpawnAbility);
+    }
 }
