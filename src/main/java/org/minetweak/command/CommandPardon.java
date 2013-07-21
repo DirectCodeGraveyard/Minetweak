@@ -10,7 +10,7 @@ public class CommandPardon extends CommandExecutor {
             sender.sendMessage("Usage: /ban <player> [reason]");
             return;
         } else if (!sender.hasPermission("minetweak.command.pardon")) {
-            sender.sendMessage("You don't have the permissions to do that.");
+            noPermission(sender, "pardon banned players");
             return;
         }
         Server.pardonPlayer(args[1]);

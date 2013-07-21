@@ -13,6 +13,6 @@ public class CommandReload extends CommandExecutor {
             Server.broadcastMessage("Done Reloading Plugins");
             return;
         }
-        sender.sendMessage(EnumChatFormatting.RED + "You do not have permission to reload plugins.");
+        noPermission(sender, "reload plugins");
     }
 }
