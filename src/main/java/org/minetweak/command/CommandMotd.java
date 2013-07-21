@@ -17,9 +17,9 @@ public class CommandMotd extends CommandExecutor {
         }
         if (sender.hasPermission("minetweak.command.motd")) {
             MinecraftServer.getServer().setMOTD(motd);
-            sender.sendMessage("Set MOTD!");
+            sender.sendMessage("MOTD Set.");
         } else {
-            sender.sendMessage(EnumChatFormatting.RED + "Sorry! You do not have permission to set the MOTD.");
+            noPermission(sender, "set the MOTD");
         }
     }
 }

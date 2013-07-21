@@ -12,7 +12,7 @@ public class CommandDeop extends CommandExecutor {
             sender.sendMessage("Usage: /deop <player>");
             return;
         } else if (!sender.hasPermission("minetweak.command.deop")) {
-            sender.sendMessage("You don't have the permissions to do that.");
+            noPermission(sender);
             return;
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);

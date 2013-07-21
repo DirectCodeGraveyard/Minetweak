@@ -37,22 +37,22 @@ public class CommandWeather extends CommandBase {
             if ("clear".equalsIgnoreCase(par2ArrayOfStr[0])) {
                 var5.setRaining(false);
                 var5.setThundering(false);
-                notifyAdmins(par1ICommandSender, "commands.weather.clear", new Object[0]);
+                notifyAdmins(par1ICommandSender, "commands.weather.clear");
             } else if ("rain".equalsIgnoreCase(par2ArrayOfStr[0])) {
                 var5.setRaining(true);
                 var5.setThundering(false);
-                notifyAdmins(par1ICommandSender, "commands.weather.rain", new Object[0]);
+                notifyAdmins(par1ICommandSender, "commands.weather.rain");
             } else {
                 if (!"thunder".equalsIgnoreCase(par2ArrayOfStr[0])) {
-                    throw new WrongUsageException("commands.weather.usage", new Object[0]);
+                    throw new WrongUsageException("commands.weather.usage");
                 }
 
                 var5.setRaining(true);
                 var5.setThundering(true);
-                notifyAdmins(par1ICommandSender, "commands.weather.thunder", new Object[0]);
+                notifyAdmins(par1ICommandSender, "commands.weather.thunder");
             }
         } else {
-            throw new WrongUsageException("commands.weather.usage", new Object[0]);
+            throw new WrongUsageException("commands.weather.usage");
         }
     }
 
@@ -60,6 +60,6 @@ public class CommandWeather extends CommandBase {
      * Adds the strings available in this command to the given list of tab completion options.
      */
     public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
-        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, new String[]{"clear", "rain", "thunder"}) : null;
+        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, "clear", "rain", "thunder") : null;
     }
 }

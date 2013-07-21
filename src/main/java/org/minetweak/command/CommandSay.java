@@ -9,7 +9,7 @@ public class CommandSay extends CommandExecutor {
             sender.sendMessage("Usage: /say <message>");
             return;
         } else if (!sender.hasPermission("minetweak.command.say")) {
-            sender.sendMessage("You don't have the permissions to do that.");
+            noPermission(sender, "broadcast a message");
             return;
         }
 

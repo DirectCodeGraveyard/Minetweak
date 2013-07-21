@@ -42,7 +42,7 @@ public class PermissionsLoader {
             try {
                 permissionsFile = gson.fromJson(data, PermissionsFile.class);
             } catch (JsonSyntaxException exception) {
-                Minetweak.info("There was a syntax error in your Permissions file.");
+                Minetweak.getLogger().logWarning("There was a syntax error in your Permissions file.");
             }
 
             if (permissionsFile==null || permissionsFile.entries==null) {

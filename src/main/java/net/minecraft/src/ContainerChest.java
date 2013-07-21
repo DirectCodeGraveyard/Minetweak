@@ -53,7 +53,7 @@ public class ContainerChest extends Container {
             }
 
             if (var5.stackSize == 0) {
-                var4.putStack((ItemStack) null);
+                var4.putStack(null);
             } else {
                 var4.onSlotChanged();
             }
@@ -67,7 +67,12 @@ public class ContainerChest extends Container {
      */
     public void onCraftGuiClosed(EntityPlayer par1EntityPlayer) {
         super.onContainerClosed(par1EntityPlayer);
-        this.lowerChestInventory.closeChest();
+        getLowerChestInventory().closeChest();
+    }
+
+    @Override
+    public void onContainerClosed(EntityPlayer player) {
+        onCraftGuiClosed(player);
     }
 
     /**

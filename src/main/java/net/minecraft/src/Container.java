@@ -68,8 +68,8 @@ public abstract class Container {
                 var3 = var2 == null ? null : var2.copy();
                 this.inventoryItemStacks.set(var1, var3);
 
-                for (int var4 = 0; var4 < this.crafters.size(); ++var4) {
-                    (this.crafters.get(var4)).sendSlotContents(this, var1, var3);
+                for (ICrafting crafter : this.crafters) {
+                    crafter.sendSlotContents(this, var1, var3);
                 }
             }
         }
@@ -83,9 +83,7 @@ public abstract class Container {
     }
 
     public Slot getSlotFromInventory(IInventory par1IInventory, int par2) {
-        for (int var3 = 0; var3 < this.inventorySlots.size(); ++var3) {
-            Slot var4 = this.inventorySlots.get(var3);
-
+        for (Slot var4 : this.inventorySlots) {
             if (var4.isHere(par1IInventory, par2)) {
                 return var4;
             }
@@ -139,11 +137,8 @@ public abstract class Container {
                 if (!this.field_94537_h.isEmpty()) {
                     var17 = var6.getItemStack().copy();
                     var9 = var6.getItemStack().stackSize;
-                    Iterator<Slot> var10 = this.field_94537_h.iterator();
 
-                    while (var10.hasNext()) {
-                        Slot var11 = var10.next();
-
+                    for (Slot var11 : this.field_94537_h) {
                         if (var11 != null && func_94527_a(var11, var6.getItemStack(), true) && var11.isItemValid(var6.getItemStack()) && var6.getItemStack().stackSize >= this.field_94537_h.size() && this.canDragIntoSlot(var11)) {
                             ItemStack var12 = var17.copy();
                             int var13 = var11.getHasStack() ? var11.getStack().stackSize : 0;
@@ -187,14 +182,14 @@ public abstract class Container {
                     if (var6.getItemStack() != null && par1 == -999) {
                         if (par2 == 0) {
                             par4EntityPlayer.dropPlayerItem(var6.getItemStack());
-                            var6.setItemStack((ItemStack) null);
+                            var6.setItemStack(null);
                         }
 
                         if (par2 == 1) {
                             par4EntityPlayer.dropPlayerItem(var6.getItemStack().splitStack(1));
 
                             if (var6.getItemStack().stackSize == 0) {
-                                var6.setItemStack((ItemStack) null);
+                                var6.setItemStack(null);
                             }
                         }
                     }
@@ -245,7 +240,7 @@ public abstract class Container {
                                 }
 
                                 if (var19.stackSize == 0) {
-                                    var6.setItemStack((ItemStack) null);
+                                    var6.setItemStack(null);
                                 }
                             }
                         } else if (var16.canTakeStack(par4EntityPlayer)) {
@@ -255,7 +250,7 @@ public abstract class Container {
                                 var6.setItemStack(var23);
 
                                 if (var17.stackSize == 0) {
-                                    var16.putStack((ItemStack) null);
+                                    var16.putStack(null);
                                 }
 
                                 var16.onPickupFromSlot(par4EntityPlayer, var6.getItemStack());
@@ -274,7 +269,7 @@ public abstract class Container {
                                     var19.splitStack(var21);
 
                                     if (var19.stackSize == 0) {
-                                        var6.setItemStack((ItemStack) null);
+                                        var6.setItemStack(null);
                                     }
 
                                     var17.stackSize += var21;
@@ -290,7 +285,7 @@ public abstract class Container {
                                     var17 = var16.decrStackSize(var21);
 
                                     if (var17.stackSize == 0) {
-                                        var16.putStack((ItemStack) null);
+                                        var16.putStack(null);
                                     }
 
                                     var16.onPickupFromSlot(par4EntityPlayer, var6.getItemStack());
@@ -322,7 +317,7 @@ public abstract class Container {
                             if (var21 > -1) {
                                 var6.addItemStackToInventory(var17);
                                 var16.decrStackSize(var23.stackSize);
-                                var16.putStack((ItemStack) null);
+                                var16.putStack(null);
                                 var16.onPickupFromSlot(par4EntityPlayer, var23);
                             }
                         } else {
@@ -331,7 +326,7 @@ public abstract class Container {
                             var16.onPickupFromSlot(par4EntityPlayer, var23);
                         }
                     } else if (!var16.getHasStack() && var17 != null && var16.isItemValid(var17)) {
-                        var6.setInventorySlotContents(par2, (ItemStack) null);
+                        var6.setInventorySlotContents(par2, null);
                         var16.putStack(var17);
                     }
                 }
@@ -369,7 +364,7 @@ public abstract class Container {
                                 var17.stackSize += var14;
 
                                 if (var15.stackSize <= 0) {
-                                    var24.putStack((ItemStack) null);
+                                    var24.putStack(null);
                                 }
 
                                 var24.onPickupFromSlot(par4EntityPlayer, var15);
@@ -401,7 +396,7 @@ public abstract class Container {
 
         if (var2.getItemStack() != null) {
             par1EntityPlayer.dropPlayerItem(var2.getItemStack());
-            var2.setItemStack((ItemStack) null);
+            var2.setItemStack(null);
         }
     }
 
@@ -440,7 +435,7 @@ public abstract class Container {
     public abstract boolean canInteractWith(EntityPlayer var1);
 
     /**
-     * merges provided ItemStack with the first avaliable one in the container/player inventory
+     * merges provided ItemStack with the first available one in the container/player inventory
      */
     protected boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4) {
         boolean var5 = false;
