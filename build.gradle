@@ -51,7 +51,6 @@ jar {
     manifest {
         attributes('Main-class': 'org.minetweak.Minetweak')
     }
-    include("org/minetweak/**/*")
 }
 
 tasks.withType(Test) {
