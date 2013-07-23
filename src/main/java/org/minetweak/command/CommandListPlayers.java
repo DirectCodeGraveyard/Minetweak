@@ -14,4 +14,9 @@ public class CommandListPlayers extends CommandExecutor {
         sender.sendMessage("Online Players: " + MinecraftServer.getServer().getConfigurationManager().getPlayerListAsString());
     }
 
+    @Override
+    public String getHelpInfo() {
+        return "Lists Online Players";
+    }
+
 }

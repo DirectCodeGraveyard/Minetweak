@@ -10,7 +10,7 @@ public class CommandClearInv extends CommandExecutor {
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         String username;
         if (!sender.hasPermission("minetweak.command.clearinv")) {
-            sender.sendMessage(EnumChatFormatting.RED + "You do not have permission to clear inventories!");
+            noPermission(sender, "clear inventories");
             return;
         }
         if (args.length>=1) {

@@ -15,4 +15,9 @@ public class CommandPardon extends CommandExecutor {
         }
         Server.pardonPlayer(args[1]);
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Un-bans a player";
+    }
 }

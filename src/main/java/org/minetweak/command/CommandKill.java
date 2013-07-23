@@ -11,7 +11,7 @@ public class CommandKill extends CommandExecutor {
             sender.sendMessage("Usage: /kill <player>");
             return;
         } else if (!sender.hasPermission("minetweak.command.kill")) {
-            sender.sendMessage("You don't have the permissions to do that.");
+            noPermission(sender, "kill players");
             return;
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);

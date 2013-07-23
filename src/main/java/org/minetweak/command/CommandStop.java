@@ -24,4 +24,9 @@ public class CommandStop extends CommandExecutor {
         Server.shutdownServer();
     }
 
+    @Override
+    public String getHelpInfo() {
+        return "Stops the Server";
+    }
+
 }

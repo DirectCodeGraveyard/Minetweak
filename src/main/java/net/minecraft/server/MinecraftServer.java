@@ -1,35 +1,35 @@
 package net.minecraft.server;
 
 import net.minecraft.block.behavior.DispenserBehaviors;
-import net.minecraft.utils.callable.CallableIsServerModded;
-import net.minecraft.utils.callable.CallableServerMemoryStats;
-import net.minecraft.utils.callable.CallableServerProfiler;
 import net.minecraft.command.ICommandManager;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.exception.MinecraftException;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumGameType;
 import net.minecraft.logging.ILogAgent;
-import net.minecraft.server.network.NetworkListenThread;
-import net.minecraft.server.network.packet.Packet;
-import net.minecraft.server.network.packet.Packet4UpdateTime;
 import net.minecraft.player.IPlayerUsage;
 import net.minecraft.player.PlayerUsageSnooper;
 import net.minecraft.server.demo.DemoWorldServer;
+import net.minecraft.server.network.NetworkListenThread;
+import net.minecraft.server.network.packet.Packet;
+import net.minecraft.server.network.packet.Packet4UpdateTime;
 import net.minecraft.server.rcon.RConConsoleSource;
 import net.minecraft.src.*;
 import net.minecraft.stats.StatList;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.callable.CallableIsServerModded;
+import net.minecraft.utils.callable.CallableServerMemoryStats;
+import net.minecraft.utils.callable.CallableServerProfiler;
 import net.minecraft.utils.chat.ChatMessageComponent;
+import net.minecraft.utils.enums.EnumGameType;
 import net.minecraft.world.*;
 import net.minecraft.world.anvil.AnvilSaveConverter;
 import net.minecraft.world.chunk.ChunkCoordinates;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import org.minetweak.Minetweak;
-import org.minetweak.command.TabCompletion;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.event.server.WorldsLoadingEvent;
 
 import java.awt.*;
@@ -41,7 +41,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -823,15 +822,13 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     /**
      * If par2Str begins with /, then it searches for commands, otherwise it returns players.
      */
-    public List<CharSequence> getPossibleCompletions(ICommandSender par1ICommandSender, String par2Str) {
-        ArrayList<CharSequence> var3 = new ArrayList<CharSequence>();
-
-        Set<String> matches = TabCompletion.getMatches(par2Str);
-
+    public List<CharSequence> getPossibleCompletions(ICommandSender sender, String input) {
+        ArrayList<CharSequence> output = new ArrayList<CharSequence>();
+        ArrayList<String> matches = TabCompletion.getMatches(input);
         for (String match : matches) {
-            var3.add(match);
+            output.add(match);
         }
-        return var3;
+        return output;
     }
 
     /**

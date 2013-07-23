@@ -14,4 +14,9 @@ public class CommandReload extends CommandExecutor {
         }
         noPermission(sender, "reload plugins");
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Reloads Plugins";
+    }
 }

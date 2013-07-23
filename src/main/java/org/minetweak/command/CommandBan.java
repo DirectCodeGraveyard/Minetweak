@@ -12,7 +12,7 @@ public class CommandBan extends CommandExecutor {
             sender.sendMessage("Usage: /ban <player> [reason]");
             return;
         } else if (!sender.hasPermission("minetweak.command.ban")) {
-            sender.sendMessage("You don't have the permissions to do that.");
+            noPermission(sender, "ban players");
             return;
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);
@@ -23,6 +23,11 @@ public class CommandBan extends CommandExecutor {
             String reason = mergeArgs(args);
             targetPlayer.banPlayer(reason);
         }
+    }
+
+    @Override
+    public String getHelpInfo() {
+        return "Bans a Player";
     }
 
 }

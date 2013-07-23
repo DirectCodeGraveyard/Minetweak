@@ -12,7 +12,7 @@ public class CommandDeop extends CommandExecutor {
             sender.sendMessage("Usage: /deop <player>");
             return;
         } else if (!sender.hasPermission("minetweak.command.deop")) {
-            noPermission(sender);
+            noPermission(sender, "deop players");
             return;
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);
@@ -26,5 +26,11 @@ public class CommandDeop extends CommandExecutor {
             sender.sendMessage("You deopped " + args[0] + " which is offline");
         }
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Deops a Player";
+    }
+
 
 }

@@ -1365,7 +1365,6 @@ public abstract class Entity {
      */
     protected NBTTagList newFloatNBTList(float... par1ArrayOfFloat) {
         NBTTagList var2 = new NBTTagList();
-        int var4 = par1ArrayOfFloat.length;
 
         for (float var6 : par1ArrayOfFloat) {
             var2.appendTag(new NBTTagFloat(null, var6));
