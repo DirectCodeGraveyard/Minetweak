@@ -35,7 +35,7 @@ public class PluginManager {
      * @param pluginName the plugin name
      */
     public static void enable(String pluginName) {
-        if (plugins.containsKey(pluginName)) {
+        if (doesPluginExist(pluginName)) {
             IPlugin plugin = plugins.get(pluginName);
             plugin.onEnable();
             enabledPlugins.add(pluginName);
@@ -47,8 +47,10 @@ public class PluginManager {
      * @param pluginName the plugin name
      */
     public static void disable(String pluginName) {
-        if (plugins.containsKey(pluginName)) {
-            plugins.get(pluginName).onDisable();
+        IPlugin plugin = plugins.get(pluginName);
+        if (isPluginEnabled(pluginName)) {
+            plugin.purgeRegistrations();
+            plugin.onDisable();
             enabledPlugins.remove(pluginName);
         }
     }
@@ -111,7 +113,6 @@ public class PluginManager {
             if (entry==null) {
                 if (bukkitYaml!=null) {
                     Minetweak.info("Found Bukkit Plugin in " + file.getName() + ". Skipping....");
-                    return null;
                 }
                 return null;
             }
@@ -151,9 +152,9 @@ public class PluginManager {
      * Disables all Plugins
      */
     public static void disableAll() {
-        for (IPlugin plugin : plugins.values()) {
-            plugin.onDisable();
-            enabledPlugins.remove(plugin.getPluginInfo().getName());
+        ArrayList<String> pluginsToDisable = (ArrayList<String>) enabledPlugins.clone();
+        for (String pluginName : pluginsToDisable) {
+            disable(pluginName);
         }
     }
 
@@ -162,6 +163,9 @@ public class PluginManager {
      */
     public static void reloadPlugins() {
         disableAll();
+        for (String pluginName : plugins.keySet()) {
+            plugins.remove(pluginName);
+        }
         initialize();
     }
 

@@ -298,4 +298,12 @@ public class Minetweak {
     public static MinetweakLog getLogger() {
         return logger;
     }
+
+    /**
+     * Un-registers a command
+     * @param label the commands name
+     */
+    public static void unregisterCommand(String label) {
+        commandExecutors.remove(label);
+    }
 }

@@ -23,4 +23,10 @@ public interface IPlugin {
      * @param pluginInfo the plugin info instance to set
      */
     public void setPluginInfo(PluginInfo pluginInfo);
+
+    /**
+     * This is called by PluginManager on disable to remove
+     * all the commands and listeners created by the plugin
+     */
+    public void purgeRegistrations();
 }

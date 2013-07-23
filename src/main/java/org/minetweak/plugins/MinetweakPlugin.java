@@ -1,10 +1,18 @@
 package org.minetweak.plugins;
 
+import org.minetweak.Minetweak;
+import org.minetweak.command.CommandExecutor;
+
+import java.util.ArrayList;
+
 /**
  * Base Class for Plugins
  */
 public abstract class MinetweakPlugin implements IPlugin {
     private PluginInfo pluginInfo;
+    private ArrayList<String> commands = new ArrayList<String>();
+    private ArrayList<Object> listeners = new ArrayList<Object>();
+
     /**
      * Called when plugins are loaded before server is started.
      */
@@ -12,8 +20,19 @@ public abstract class MinetweakPlugin implements IPlugin {
 
     /**
      * Called when plugins are unloaded before server is stopped.
+     * Note: Do not unregister commands and listeners here.
+     * Un-registration is done automatically.
      */
     public void onDisable() {}
+
+    public void purgeRegistrations() {
+        for (String command : commands) {
+            Minetweak.unregisterCommand(command);
+        }
+        for (Object listener : listeners) {
+            Minetweak.getEventBus().unregister(listener);
+        }
+    }
 
     /**
      * Gets Plugin Info
@@ -27,5 +46,24 @@ public abstract class MinetweakPlugin implements IPlugin {
      */
     public void setPluginInfo(PluginInfo pluginInfo) {
         this.pluginInfo = pluginInfo;
+    }
+
+    /**
+     * Registers a Command for this Plugin
+     * @param label the command label
+     * @param executor the command executor
+     */
+    public void registerCommand(String label, CommandExecutor executor) {
+        commands.add(label);
+        Minetweak.registerCommand(label, executor);
+    }
+
+    /**
+     * Registers an Event Listener
+     * @param listener the listener
+     */
+    public void registerListener(Object listener) {
+        listeners.add(listener);
+        Minetweak.registerListener(listener);
     }
 }
