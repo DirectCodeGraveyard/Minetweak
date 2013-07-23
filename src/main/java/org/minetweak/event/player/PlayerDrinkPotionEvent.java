@@ -1,11 +1,11 @@
 package org.minetweak.event.player;
 
-import net.minecraft.src.PotionEffect;
+import net.minecraft.potion.PotionEffect;
 import org.minetweak.entity.Player;
 
 /**
  * Called when a player drinks a potion
- * @see net.minecraft.src.ItemPotion
+ * @see net.minecraft.item.ItemPotion
  */
 public class PlayerDrinkPotionEvent extends PlayerEvent {
     private PotionEffect potionEffect;

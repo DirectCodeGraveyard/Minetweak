@@ -1,12 +1,13 @@
 package org.minetweak.world;
 
+import net.minecraft.world.WorldServer;
 import org.minetweak.block.TweakBlock;
 
 public class World {
 
-    private final net.minecraft.src.WorldServer world;
+    private final WorldServer world;
 
-    public World(net.minecraft.src.WorldServer world) {
+    public World(WorldServer world) {
         this.world = world;
     }
 
@@ -48,7 +49,7 @@ public class World {
      * Gets the WorldServer
      * @return WorldServer instance for world
      */
-    public net.minecraft.src.WorldServer getWorldServer() {
+    public WorldServer getWorldServer() {
         return world;
     }
 

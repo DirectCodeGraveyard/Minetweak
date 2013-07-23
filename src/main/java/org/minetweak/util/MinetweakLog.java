@@ -1,6 +1,6 @@
 package org.minetweak.util;
 
-import net.minecraft.src.ILogAgent;
+import net.minecraft.logging.ILogAgent;
 
 import java.util.logging.*;
 

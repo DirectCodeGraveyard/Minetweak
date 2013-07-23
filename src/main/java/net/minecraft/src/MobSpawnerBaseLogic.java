@@ -1,5 +1,14 @@
 package net.minecraft.src;
 
+import net.minecraft.entity.*;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.utils.AxisAlignedBB;
+import net.minecraft.utils.weighted.WeightedRandom;
+import net.minecraft.utils.weighted.WeightedRandomMinecart;
+import net.minecraft.world.World;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

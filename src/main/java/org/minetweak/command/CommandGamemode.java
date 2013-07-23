@@ -1,6 +1,6 @@
 package org.minetweak.command;
 
-import net.minecraft.src.EnumGameType;
+import net.minecraft.utils.enums.EnumGameType;
 import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;

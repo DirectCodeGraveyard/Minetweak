@@ -1,12 +1,12 @@
 package org.minetweak.item;
 
-import net.minecraft.src.Enchantment;
+import net.minecraft.enchantment.Enchantment;
 
 public class ItemStack {
-    private net.minecraft.src.ItemStack stack;
+    private net.minecraft.item.ItemStack stack;
     private TweakItem tweakItem;
 
-    public ItemStack(net.minecraft.src.ItemStack stack) {
+    public ItemStack(net.minecraft.item.ItemStack stack) {
         this.stack = stack;
         this.tweakItem = new TweakItem(stack.getItem());
     }
@@ -15,7 +15,7 @@ public class ItemStack {
      * Gets the MC Style ItemStack
      * @return ItemStack from MC
      */
-    public net.minecraft.src.ItemStack getItemStack() {
+    public net.minecraft.item.ItemStack getItemStack() {
         return stack;
     }
 

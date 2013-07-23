@@ -1,6 +1,9 @@
 package org.minetweak.event.helper;
 
+import net.minecraft.entity.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.ChunkCoordinates;
 import org.minetweak.Minetweak;
 import org.minetweak.block.IBlock;
 import org.minetweak.block.IBlockState;
@@ -15,14 +18,14 @@ import org.minetweak.world.World;
 public class MinetweakEventFactory {
 
     private static boolean canBuild(World world, Player player, int x, int z) {
-        net.minecraft.src.WorldServer worldServer = world.getWorldServer();
+        WorldServer worldServer = world.getWorldServer();
         int spawnSize = MinecraftServer.getServer().getSpawnProtectionSize();
 
         if (world.getWorldServer().provider.dimensionId != 0) return true;
         if (spawnSize <= 0) return true;
         if (player.isOperator()) return true;
 
-        net.minecraft.src.ChunkCoordinates chunkcoordinates = worldServer.getSpawnPoint();
+        ChunkCoordinates chunkcoordinates = worldServer.getSpawnPoint();
 
         int distanceFromSpawn = Math.max(Math.abs(x - chunkcoordinates.posX), Math.abs(z - chunkcoordinates.posZ));
         return distanceFromSpawn >= spawnSize;
@@ -31,7 +34,7 @@ public class MinetweakEventFactory {
     /**
      * TweakBlock place methods
      */
-    public static BlockPlaceEvent callBlockPlaceEvent(net.minecraft.src.World world, net.minecraft.src.EntityPlayer who, IBlockState replacedBlockState, int clickedX, int clickedY, int clickedZ) {
+    public static BlockPlaceEvent callBlockPlaceEvent(net.minecraft.world.World world, EntityPlayer who, IBlockState replacedBlockState, int clickedX, int clickedY, int clickedZ) {
         World craftWorld = world.getWorld();
 
         Player player = (who == null) ? null : (Player) Minetweak.getPlayerByName(who.getEntityName());
@@ -47,7 +50,7 @@ public class MinetweakEventFactory {
         return event;
     }
 
-    public static BlockIgniteEvent callBlockIgniteEvent(net.minecraft.src.World world, int x, int y, int z, int igniterX, int igniterY, int igniterZ) {
+    public static BlockIgniteEvent callBlockIgniteEvent(net.minecraft.world.World world, int x, int y, int z, int igniterX, int igniterY, int igniterZ) {
         org.minetweak.world.World bukkitWorld = world.getWorld();
         IBlock igniter = bukkitWorld.getBlockAt(igniterX, igniterY, igniterZ);
         BlockIgniteEvent.IgniteCause cause;
@@ -66,7 +69,7 @@ public class MinetweakEventFactory {
         return event;
     }
 
-    public static BlockIgniteEvent callBlockIgniteEvent(net.minecraft.src.World world, int x, int y, int z, BlockIgniteEvent.IgniteCause cause, net.minecraft.src.EntityPlayer igniter) {
+    public static BlockIgniteEvent callBlockIgniteEvent(net.minecraft.world.World world, int x, int y, int z, BlockIgniteEvent.IgniteCause cause, EntityPlayer igniter) {
         BlockIgniteEvent event = new BlockIgniteEvent(world.getWorld().getBlockAt(x, y, z), cause, Minetweak.getPlayerByName(igniter.getEntityName()));
         Minetweak.getEventBus().post(event);
         return event;

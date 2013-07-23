@@ -1,5 +1,8 @@
 package net.minecraft.src;
 
+import net.minecraft.material.Material;
+import net.minecraft.tileentity.TileEntity;
+
 public interface IBlockAccess {
     /**
      * Returns the block ID at coords x,y,z

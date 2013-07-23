@@ -1,7 +1,7 @@
 package org.minetweak.item;
 
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.Item;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class TweakItem {
     private Item item;
@@ -14,7 +14,7 @@ public class TweakItem {
      * Gets the MC Item
      * @return MC Item
      */
-    public net.minecraft.src.Item getItem() {
+    public Item getItem() {
         return item;
     }
 

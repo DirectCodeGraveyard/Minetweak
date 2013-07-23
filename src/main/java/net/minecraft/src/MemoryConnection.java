@@ -1,5 +1,10 @@
 package net.minecraft.src;
 
+import net.minecraft.logging.ILogAgent;
+import net.minecraft.server.network.INetworkManager;
+import net.minecraft.server.network.NetHandler;
+import net.minecraft.server.network.packet.Packet;
+
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.List;

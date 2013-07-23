@@ -1,6 +1,6 @@
 package org.minetweak.event.item;
 
-import net.minecraft.src.ItemStack;
+import net.minecraft.item.ItemStack;
 
 public class ItemEvent {
     private ItemStack stack;

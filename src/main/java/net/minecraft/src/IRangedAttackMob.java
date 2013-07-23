@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.entity.EntityLivingBase;
+
 public interface IRangedAttackMob {
     /**
      * Attack the specified entity using a ranged attack.

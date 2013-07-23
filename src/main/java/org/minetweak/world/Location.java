@@ -1,7 +1,7 @@
 package org.minetweak.world;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.WorldServer;
+import net.minecraft.world.WorldServer;
 
 public class Location {
 

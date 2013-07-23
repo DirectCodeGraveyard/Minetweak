@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.block.Block;
+
 public class ExtendedBlockStorage {
     /**
      * Contains the bottom-most Y block represented by this ExtendedBlockStorage. Typically a multiple of 16.

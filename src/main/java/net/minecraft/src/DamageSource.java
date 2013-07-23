@@ -1,5 +1,9 @@
 package net.minecraft.src;
 
+import net.minecraft.entity.*;
+import net.minecraft.stats.StatCollector;
+import net.minecraft.utils.chat.ChatMessageComponent;
+
 public class DamageSource {
     public static DamageSource inFire = (new DamageSource("inFire")).setFireDamage();
     public static DamageSource onFire = (new DamageSource("onFire")).setDamageBypassesArmor().setFireDamage();

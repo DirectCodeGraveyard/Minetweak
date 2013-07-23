@@ -1,6 +1,5 @@
 package org.minetweak.command;
 
-import net.minecraft.src.EnumChatFormatting;
 import org.minetweak.Server;
 import org.minetweak.plugins.PluginManager;
 

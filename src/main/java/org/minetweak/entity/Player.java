@@ -1,7 +1,16 @@
 package org.minetweak.entity;
 
+import net.minecraft.entity.EntityPlayerMP;
+import net.minecraft.utils.enums.EnumGameType;
+import net.minecraft.inventory.InventoryEnderChest;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.NetServerHandler;
+import net.minecraft.player.achievement.Achievement;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.ban.BanEntry;
 import net.minecraft.src.*;
+import net.minecraft.utils.chat.ChatMessageComponent;
 import org.minetweak.command.CommandSender;
 import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;

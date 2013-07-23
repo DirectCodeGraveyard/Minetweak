@@ -1,6 +1,6 @@
 package org.minetweak.command;
 
-import net.minecraft.src.EnumChatFormatting;
+import net.minecraft.utils.enums.EnumChatFormatting;
 import org.minetweak.util.StringUtils;
 
 public abstract class CommandExecutor implements ICommandExecutor {

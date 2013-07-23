@@ -1,5 +1,8 @@
 package net.minecraft.src;
 
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.utils.MathHelper;
+
 import java.util.Random;
 
 public class RandomPositionGenerator {

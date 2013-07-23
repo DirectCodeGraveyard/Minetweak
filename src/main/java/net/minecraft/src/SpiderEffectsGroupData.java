@@ -1,5 +1,8 @@
 package net.minecraft.src;
 
+import net.minecraft.entity.EntityLivingData;
+import net.minecraft.potion.Potion;
+
 import java.util.Random;
 
 public class SpiderEffectsGroupData implements EntityLivingData {

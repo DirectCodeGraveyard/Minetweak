@@ -1,8 +1,8 @@
 package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.MinecraftException;
-import net.minecraft.src.WorldServer;
+import net.minecraft.crash.exception.MinecraftException;
+import net.minecraft.world.WorldServer;
 import org.minetweak.Server;
 
 public class CommandSave extends CommandExecutor {

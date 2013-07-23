@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.utils.MathHelper;
+
 public class Direction {
     public static final int[] offsetX = new int[]{0, -1, 0, 1};
     public static final int[] offsetZ = new int[]{1, 0, -1, 0};

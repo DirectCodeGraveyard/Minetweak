@@ -1,5 +1,11 @@
 package net.minecraft.src;
 
+import net.minecraft.crash.CrashReport;
+import net.minecraft.crash.CrashReportCategory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.packet.Packet;
+import net.minecraft.world.chunk.ChunkCoordinates;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;

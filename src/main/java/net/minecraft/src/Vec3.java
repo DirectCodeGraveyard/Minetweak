@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.utils.MathHelper;
+
 public class Vec3 {
     /**
      * A global Vec3Pool that always creates new vectors instead of reusing them and is thread-safe.

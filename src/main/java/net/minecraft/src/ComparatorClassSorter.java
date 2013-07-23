@@ -1,11 +1,13 @@
 package net.minecraft.src;
 
+import net.minecraft.utils.callable.CallableSuspiciousClasses;
+
 import java.util.Comparator;
 
-class ComparatorClassSorter implements Comparator<Class> {
+public class ComparatorClassSorter implements Comparator<Class> {
     final CallableSuspiciousClasses theSuspiciousClasses;
 
-    ComparatorClassSorter(CallableSuspiciousClasses par1CallableSuspiciousClasses) {
+    public ComparatorClassSorter(CallableSuspiciousClasses par1CallableSuspiciousClasses) {
         this.theSuspiciousClasses = par1CallableSuspiciousClasses;
     }
 

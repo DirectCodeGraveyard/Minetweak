@@ -1,6 +1,6 @@
 package org.minetweak.entity;
 
-import net.minecraft.src.EntityMob;
+import net.minecraft.entity.EntityMob;
 
 public class Mob extends Entity {
 

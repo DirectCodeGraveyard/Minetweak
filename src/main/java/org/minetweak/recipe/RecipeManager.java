@@ -1,7 +1,10 @@
 package org.minetweak.recipe;
 
 import com.google.common.eventbus.Subscribe;
-import net.minecraft.src.*;
+import net.minecraft.crafting.CraftingManager;
+import net.minecraft.crafting.FurnaceRecipes;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import org.minetweak.event.server.CraftingReadyEvent;
 
 public class RecipeManager {
@@ -17,8 +20,8 @@ public class RecipeManager {
     }
 
     /**
-     * Adds a shaped recipe
-     * @param output output of recipe
+     * Adds a shaped crafting
+     * @param output output of crafting
      * @param data the item list and string values
      */
     public void addRecipe(ItemStack output, Object... data) {
@@ -26,8 +29,8 @@ public class RecipeManager {
     }
 
     /**
-     * Adds a shapeless recipe
-     * @param output output of recipe
+     * Adds a shapeless crafting
+     * @param output output of crafting
      * @param inputs input list
      */
     public void addShapelessRecipe(ItemStack output, Object... inputs) {
@@ -35,7 +38,7 @@ public class RecipeManager {
     }
 
     /**
-     * Adds a furnace recipe
+     * Adds a furnace crafting
      * @param input the input
      * @param output the output
      * @param xp amount of XP given

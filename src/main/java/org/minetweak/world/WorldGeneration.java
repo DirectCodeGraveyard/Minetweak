@@ -1,6 +1,6 @@
 package org.minetweak.world;
 
-import net.minecraft.src.WorldGenerator;
+import net.minecraft.world.gen.world.WorldGenerator;
 
 @SuppressWarnings("UnusedDeclaration")
 public class WorldGeneration {

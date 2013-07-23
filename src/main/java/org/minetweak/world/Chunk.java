@@ -1,24 +1,26 @@
 package org.minetweak.world;
 
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.EmptyChunk;
 import org.minetweak.block.TweakBlock;
 
 import java.lang.ref.WeakReference;
 
 public class Chunk {
-    private WeakReference<net.minecraft.src.Chunk> weakChunk;
-    private final net.minecraft.src.WorldServer worldServer;
+    private WeakReference<net.minecraft.world.chunk.Chunk> weakChunk;
+    private final WorldServer worldServer;
     private final int x;
     private final int z;
     private static final byte[] emptyData = new byte[2048];
     private static final short[] emptyBlockIDs = new short[4096];
     private static final byte[] emptySkyLight = new byte[2048];
 
-    public Chunk(net.minecraft.src.Chunk chunk) {
-        if (!(chunk instanceof net.minecraft.src.EmptyChunk)) {
-            this.weakChunk = new WeakReference<net.minecraft.src.Chunk>(chunk);
+    public Chunk(net.minecraft.world.chunk.Chunk chunk) {
+        if (!(chunk instanceof EmptyChunk)) {
+            this.weakChunk = new WeakReference<net.minecraft.world.chunk.Chunk>(chunk);
         }
 
-        worldServer = (net.minecraft.src.WorldServer) getHandle().worldObj;
+        worldServer = (WorldServer) getHandle().worldObj;
         x = getHandle().xPosition;
         z = getHandle().zPosition;
     }
@@ -43,14 +45,14 @@ public class Chunk {
      * Gets the MC Chunk
      * @return minecraft chunk
      */
-    public net.minecraft.src.Chunk getHandle() {
-        net.minecraft.src.Chunk c = weakChunk.get();
+    public net.minecraft.world.chunk.Chunk getHandle() {
+        net.minecraft.world.chunk.Chunk c = weakChunk.get();
 
         if (c == null) {
             c = worldServer.getChunkFromChunkCoords(x, z);
 
-            if (!(c instanceof net.minecraft.src.EmptyChunk)) {
-                weakChunk = new WeakReference<net.minecraft.src.Chunk>(c);
+            if (!(c instanceof EmptyChunk)) {
+                weakChunk = new WeakReference<net.minecraft.world.chunk.Chunk>(c);
             }
         }
 

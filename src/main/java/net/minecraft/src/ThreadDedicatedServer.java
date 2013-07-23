@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.server.DedicatedServer;
+
 public final class ThreadDedicatedServer extends Thread {
     final DedicatedServer field_96244_a;
 

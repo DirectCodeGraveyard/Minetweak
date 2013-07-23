@@ -1,8 +1,8 @@
 package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.EnumChatFormatting;
-import net.minecraft.src.WorldInfo;
+import net.minecraft.utils.enums.EnumChatFormatting;
+import net.minecraft.world.WorldInfo;
 
 public class CommandWeather extends CommandExecutor {
     @Override

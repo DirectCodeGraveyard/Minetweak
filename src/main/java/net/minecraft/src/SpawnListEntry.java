@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.utils.weighted.WeightedRandomItem;
+
 public class SpawnListEntry extends WeightedRandomItem {
     /**
      * Holds the class of the entity to be spawned.

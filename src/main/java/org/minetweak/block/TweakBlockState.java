@@ -25,7 +25,7 @@ public class TweakBlockState implements IBlockState {
         createData(tweakBlock.getData());
     }
 
-    public static TweakBlockState getBlockState(net.minecraft.src.World world, int x, int y, int z) {
+    public static TweakBlockState getBlockState(net.minecraft.world.World world, int x, int y, int z) {
         return new TweakBlockState(world.getWorld().getBlockAt(x, y, z));
     }
 

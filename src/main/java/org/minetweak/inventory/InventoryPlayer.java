@@ -3,19 +3,19 @@ package org.minetweak.inventory;
 import org.minetweak.item.ItemStack;
 
 public class InventoryPlayer implements Inventory {
-    private net.minecraft.src.InventoryPlayer playerInventory;
+    private net.minecraft.inventory.InventoryPlayer playerInventory;
 
     /**
      * Creates an Inventory from MC's Inventory Player
      * @param playerInventory Minetweak Inventory
      */
-    public InventoryPlayer(net.minecraft.src.InventoryPlayer playerInventory) {
+    public InventoryPlayer(net.minecraft.inventory.InventoryPlayer playerInventory) {
         this.playerInventory = playerInventory;
     }
 
     @Override
     public ItemStack getStackInSlot(Integer slotID) {
-        net.minecraft.src.ItemStack stack = playerInventory.getStackInSlot(slotID);
+        net.minecraft.item.ItemStack stack = playerInventory.getStackInSlot(slotID);
         if (stack==null)
             return null;
         else

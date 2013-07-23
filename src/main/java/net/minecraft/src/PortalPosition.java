@@ -1,5 +1,8 @@
 package net.minecraft.src;
 
+import net.minecraft.world.Teleporter;
+import net.minecraft.world.chunk.ChunkCoordinates;
+
 public class PortalPosition extends ChunkCoordinates {
     /**
      * The worldtime at which this PortalPosition was last verified

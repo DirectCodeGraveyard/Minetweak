@@ -1,6 +1,6 @@
 package org.minetweak.event.block;
 
-import net.minecraft.src.ItemStack;
+import net.minecraft.item.ItemStack;
 import org.minetweak.block.IBlock;
 import org.minetweak.block.IBlockState;
 import org.minetweak.entity.Player;

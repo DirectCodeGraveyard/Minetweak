@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.EnumChatFormatting;
+import net.minecraft.utils.enums.EnumChatFormatting;
 
 import java.text.DecimalFormat;
 

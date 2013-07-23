@@ -1,4 +1,4 @@
 package net.minecraft.src;
 
-class Empty3 {
+public class Empty3 {
 }

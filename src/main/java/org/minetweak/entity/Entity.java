@@ -1,19 +1,19 @@
 package org.minetweak.entity;
 
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.EntityMob;
+import net.minecraft.utils.AxisAlignedBB;
+import net.minecraft.entity.EntityMob;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Entity {
-    protected net.minecraft.src.Entity entity;
+    protected net.minecraft.entity.Entity entity;
 
     /**
      * Constructor that allows you to generate an Entity using Minetweak's API
      * @param entity MC Entity
      */
-    public Entity(net.minecraft.src.Entity entity) {
+    public Entity(net.minecraft.entity.Entity entity) {
         this.entity = entity;
     }
 
@@ -21,7 +21,7 @@ public class Entity {
      * Gets the MC Entity
      * @return MC Entity
      */
-    public net.minecraft.src.Entity getEntity() {
+    public net.minecraft.entity.Entity getEntity() {
         return entity;
     }
 
@@ -66,8 +66,8 @@ public class Entity {
         double posX = entity.posX;
         double posY = entity.posY;
         double posZ = entity.posZ;
-        List<net.minecraft.src.Entity> entityList = entity.worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + range, posY + range, posZ + range));
-        for (net.minecraft.src.Entity entity : entityList) {
+        List<net.minecraft.entity.Entity> entityList = entity.worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + range, posY + range, posZ + range));
+        for (net.minecraft.entity.Entity entity : entityList) {
             if (entity instanceof EntityMob) {
                 mobs.add(new Mob((EntityMob) entity));
             }
@@ -143,7 +143,7 @@ public class Entity {
      * Mount this entity onto another
      * @param mountedEntity Entity to mount the class's upon
      */
-    public void mountEntity(net.minecraft.src.Entity mountedEntity) {
+    public void mountEntity(net.minecraft.entity.Entity mountedEntity) {
         entity.mountEntity(mountedEntity);
     }
 

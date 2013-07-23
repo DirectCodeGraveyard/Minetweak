@@ -1,5 +1,17 @@
 package net.minecraft.src;
 
+import net.minecraft.block.Block;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.enchantment.EnchantmentProtection;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityPlayer;
+import net.minecraft.entity.EntityTNTPrimed;
+import net.minecraft.utils.AxisAlignedBB;
+import net.minecraft.utils.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.ChunkPosition;
+
 import java.util.*;
 
 @SuppressWarnings("FieldCanBeLocal")

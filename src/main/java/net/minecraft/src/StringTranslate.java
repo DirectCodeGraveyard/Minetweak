@@ -49,7 +49,7 @@ public class StringTranslate {
     /**
      * Return the StringTranslate singleton instance
      */
-    static StringTranslate getInstance() {
+    public static StringTranslate getInstance() {
         return instance;
     }
 

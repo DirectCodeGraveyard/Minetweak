@@ -1,6 +1,6 @@
 package org.minetweak.event.server;
 
-import net.minecraft.src.CraftingManager;
+import net.minecraft.crafting.CraftingManager;
 
 public class CraftingReadyEvent {
     private CraftingManager craftingManager;

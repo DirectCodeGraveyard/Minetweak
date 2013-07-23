@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import net.minecraft.crash.CrashReport;
+
 public class ReportedException extends RuntimeException {
     /**
      * Instance of CrashReport.

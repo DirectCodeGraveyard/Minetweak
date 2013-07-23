@@ -1,18 +1,20 @@
 package net.minecraft.src;
 
+import net.minecraft.server.network.NetLoginHandler;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLEncoder;
 
-class ThreadLoginVerifier extends Thread {
+public class ThreadLoginVerifier extends Thread {
     /**
      * The login handler that spawned this thread.
      */
     final NetLoginHandler loginHandler;
 
-    ThreadLoginVerifier(NetLoginHandler par1NetLoginHandler) {
+    public ThreadLoginVerifier(NetLoginHandler par1NetLoginHandler) {
         this.loginHandler = par1NetLoginHandler;
     }
 

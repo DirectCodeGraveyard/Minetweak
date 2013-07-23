@@ -1,6 +1,6 @@
 package org.minetweak.block;
 
-import net.minecraft.src.Block;
+import net.minecraft.block.Block;
 import org.minetweak.material.Material;
 import org.minetweak.world.Chunk;
 import org.minetweak.world.World;

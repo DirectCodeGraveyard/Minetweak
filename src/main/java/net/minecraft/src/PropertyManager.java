@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import net.minecraft.logging.ILogAgent;
 import net.minecraft.server.MinecraftServer;
 
 import java.io.File;

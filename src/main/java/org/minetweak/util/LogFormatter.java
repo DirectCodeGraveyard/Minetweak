@@ -1,6 +1,6 @@
 package org.minetweak.util;
 
-import net.minecraft.src.LogAgentEmptyAnon;
+import net.minecraft.logging.LogAgentEmptyAnon;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

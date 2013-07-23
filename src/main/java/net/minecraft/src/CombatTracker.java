@@ -1,5 +1,13 @@
 package net.minecraft.src;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.chat.ChatMessageComponent;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,10 +1,6 @@
 package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.EnumChatFormatting;
-import org.minetweak.Minetweak;
-import org.minetweak.entity.Player;
-import org.minetweak.util.StringUtils;
 
 public class CommandMotd extends CommandExecutor {
 
