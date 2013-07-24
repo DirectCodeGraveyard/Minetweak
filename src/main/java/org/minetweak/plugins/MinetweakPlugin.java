@@ -2,6 +2,7 @@ package org.minetweak.plugins;
 
 import org.minetweak.Minetweak;
 import org.minetweak.command.CommandExecutor;
+import org.minetweak.language.LanguageObject;
 
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public abstract class MinetweakPlugin implements IPlugin {
     private PluginInfo pluginInfo;
     private ArrayList<String> commands = new ArrayList<String>();
     private ArrayList<Object> listeners = new ArrayList<Object>();
+    private ArrayList<LanguageObject> languageObjects = new ArrayList<LanguageObject>();
 
     /**
      * Called when plugins are loaded before server is started.
@@ -65,5 +67,20 @@ public abstract class MinetweakPlugin implements IPlugin {
     public void registerListener(Object listener) {
         listeners.add(listener);
         Minetweak.registerListener(listener);
+    }
+
+    /**
+     * Register a language object
+     * @param languageObject Language object to register
+     */
+    public void registerLanguageObject(LanguageObject languageObject) {
+        languageObjects.add(languageObject);
+    }
+
+    /**
+     * Get the translated object name
+     */
+    public String getTranslatedName(LanguageObject languageObject) {
+        return languageObject.getTranslatedName();
     }
 }

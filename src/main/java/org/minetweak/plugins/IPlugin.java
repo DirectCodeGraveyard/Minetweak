@@ -1,5 +1,7 @@
 package org.minetweak.plugins;
 
+import org.minetweak.language.LanguageObject;
+
 /**
  * Base Class for Plugins
  */
@@ -29,4 +31,11 @@ public interface IPlugin {
      * all the commands and listeners created by the plugin
      */
     public void purgeRegistrations();
+
+    /**
+     * Register a language object
+     */
+    public void registerLanguageObject(LanguageObject languageObject);
+
+    public String getTranslatedName(LanguageObject languageObject);
 }

@@ -110,12 +110,14 @@ public class PluginManager {
             JarFile jf = new JarFile(file);
             ZipEntry entry = jf.getEntry("plugin.json");
             ZipEntry bukkitYaml = jf.getEntry("plugin.yaml");
+            ZipEntry langFolder = jf.getEntry("lang/");
             if (entry==null) {
                 if (bukkitYaml!=null) {
                     Minetweak.info("Found Bukkit Plugin in " + file.getName() + ". Skipping....");
                 }
                 return null;
             }
+            if (langFolder != null) registerLanguageFiles(jf);
             return gson.fromJson(new InputStreamReader(jf.getInputStream(entry)), PluginInfo.class);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -197,5 +199,9 @@ public class PluginManager {
      */
     public static boolean doesPluginExist(String pluginName) {
         return plugins.keySet().contains(pluginName);
+    }
+
+    public void registerLanguageFiles(JarFile file) {
+
     }
 }
