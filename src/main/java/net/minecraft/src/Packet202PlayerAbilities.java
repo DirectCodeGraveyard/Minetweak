@@ -28,6 +28,7 @@ public class Packet202PlayerAbilities extends Packet {
     private float walkSpeed;
 
     public Packet202PlayerAbilities() {
+
     }
 
     public Packet202PlayerAbilities(PlayerCapabilities par1PlayerCapabilities) {
@@ -50,6 +51,7 @@ public class Packet202PlayerAbilities extends Packet {
         this.setCreativeMode((var2 & 8) > 0);
         this.setFlySpeed(par1DataInput.readFloat());
         this.setWalkSpeed(par1DataInput.readFloat());
+
     }
 
     /**

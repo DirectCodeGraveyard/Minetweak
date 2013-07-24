@@ -799,38 +799,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     public List<CharSequence> getPossibleCompletions(ICommandSender par1ICommandSender, String par2Str) {
         ArrayList<CharSequence> var3 = new ArrayList<CharSequence>();
 
-        if (par2Str.startsWith("/")) {
-            par2Str = par2Str.substring(1);
-            boolean var10 = !par2Str.contains(" ");
-            Set<String> var11 = TabCompletion.getCommands();
+        Set<String> matches = TabCompletion.getMatches(par2Str);
 
-            if (var11 != null) {
-                for (Object aVar11 : var11) {
-                    String var13 = (String) aVar11;
-
-                    if (var10) {
-                        var3.add("/" + var13);
-                    } else {
-                        var3.add(var13);
-                    }
-                }
-            }
-
-            return var3;
-        } else {
-            String[] var4 = par2Str.split(" ", -1);
-            String var5 = var4[var4.length - 1];
-            String[] var6 = this.serverConfigManager.getAllUsernames();
-            int var7 = var6.length;
-
-            for (String var9 : var6) {
-                if (CommandBase.doesStringStartWith(var5, var9)) {
-                    var3.add(var9);
-                }
-            }
-
-            return var3;
+        for (String match : matches) {
+            var3.add(match);
         }
+        return var3;
     }
 
     /**

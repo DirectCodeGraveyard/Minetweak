@@ -274,6 +274,7 @@ public class Minetweak {
         registerCommand("give", new CommandGive());
         registerCommand("save", new CommandSave());
         registerCommand("weather", new CommandWeather());
+        registerCommand("tps", new CommandTps());
     }
 
     /**
