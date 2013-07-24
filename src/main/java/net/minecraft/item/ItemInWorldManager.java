@@ -238,7 +238,13 @@ public class ItemInWorldManager {
             if (!isCreative() && !getGameType().isAdventure() && !this.thisPlayerMP.canHarvestBlock(Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
                 event.setCancelled(true);
             }
+
             if (getGameType().isAdventure()) {
+                event.setCancelled(true);
+            }
+
+            Item currentItem = thisPlayerMP.getCurrentEquippedItem().getItem();
+            if (isCreative() && currentItem!=null &&currentItem instanceof ItemSword) {
                 event.setCancelled(true);
             }
             Block nmsBlock = Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];

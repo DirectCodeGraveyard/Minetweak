@@ -17,6 +17,7 @@ import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
+import org.minetweak.world.Location;
 
 import java.util.ArrayList;
 
@@ -357,5 +358,47 @@ public class Player extends Entity implements CommandSender {
      */
     public boolean isInCreativeMode() {
         return getPlayerMP().capabilities.isCreativeMode;
+    }
+
+    /**
+     * Teleports the Player to the Given Position
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param z z coordinate
+     */
+    public void teleportToPosition(double x, double y, double z) {
+        getPlayerMP().setPosition(x, y, z);
+    }
+
+    /**
+     * Teleports the Player to the Given Location
+     * @param location the location instance
+     */
+    public void teleportToPosition(Location location) {
+        getPlayerMP().setPosition(location.getPosX(), location.getPosY(), location.getPosZ());
+    }
+
+    /**
+     * Gets the X Coordinate of Player Position
+     * @return X Coordinate
+     */
+    public double getX() {
+        return getPlayerMP().posX;
+    }
+
+    /**
+     * Gets the Y Coordinate of Player Position
+     * @return Y Coordinate
+     */
+    public double getY() {
+        return getPlayerMP().posY;
+    }
+
+    /**
+     * Gets the Z Coordinate of Player Position
+     * @return Z Coordinate
+     */
+    public double getZ() {
+        return getPlayerMP().posZ;
     }
 }
