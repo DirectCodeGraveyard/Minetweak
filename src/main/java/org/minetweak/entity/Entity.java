@@ -10,7 +10,7 @@ public class Entity {
     protected net.minecraft.src.Entity entity;
 
     /**
-     * Creates a Minetweak Entity from MC's Entity
+     * Constructor that allows you to generate an Entity using Minetweak's API
      * @param entity MC Entity
      */
     public Entity(net.minecraft.src.Entity entity) {
@@ -89,5 +89,53 @@ public class Entity {
      */
     public void extinguishFire() {
         entity.extinguish();
+    }
+
+    /**
+     * Set the air level for the entity
+     * @param airLevel Entity air level
+     */
+    public void setAir(int airLevel) {
+        entity.setAir(airLevel);
+    }
+
+    /**
+     * Get the air level for the entity
+     * @return Entity air level
+     */
+    public int getAir() {
+        return entity.getAir();
+    }
+
+    /**
+     * Set the entity to sprint
+     * @param sprinting Sprinting toggle boolean; true if sprinting
+     */
+    public void setSprinting(boolean sprinting) {
+        entity.setSprinting(sprinting);
+    }
+
+    /**
+     * Check if the entity is sprinting
+     * @return True if sprinting
+     */
+    public boolean isSprinting() {
+        return entity.isSprinting();
+    }
+
+    /**
+     * Set the entity to sneak
+     * @param sneaking Sneaking toggle boolean; true if sneaking
+     */
+    public void setSneaking(boolean sneaking) {
+        entity.setSneaking(sneaking);
+    }
+
+    /**
+     * Check if the entity is sneaking
+     * @return True if sneaking
+     */
+    public boolean isSneaking() {
+        return entity.isSneaking();
     }
 }
