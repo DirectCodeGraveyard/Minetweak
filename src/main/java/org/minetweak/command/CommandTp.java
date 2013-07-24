@@ -7,7 +7,7 @@ import org.minetweak.entity.Player;
 public class CommandTp extends CommandExecutor {
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
-        if (args.length>2) {
+        if (args.length>2 || args.length==0) {
             sender.sendMessage(getUsage());
             return;
         }
@@ -29,7 +29,7 @@ public class CommandTp extends CommandExecutor {
             sender.sendMessage(ChatFormatting.RED + args[1] + " is not online.");
             return;
         }
-        sender.sendMessage(ChatFormatting.GOLD + "Teleporting " + ChatFormatting.BLUE + args[0] + ChatFormatting.RESET + " to " + ChatFormatting.BLUE + args[1]);
+        sender.sendMessage(ChatFormatting.GOLD + "Teleporting " + ChatFormatting.BLUE + player.getName() + ChatFormatting.RESET + " to " + ChatFormatting.BLUE + target.getName());
         player.teleportToPosition(target.getX(), target.getY(), target.getZ());
     }
 
