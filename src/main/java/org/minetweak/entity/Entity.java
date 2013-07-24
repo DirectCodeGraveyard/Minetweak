@@ -138,4 +138,12 @@ public class Entity {
     public boolean isSneaking() {
         return entity.isSneaking();
     }
+
+    /**
+     * Mount this entity onto another
+     * @param mountedEntity Entity to mount the class's upon
+     */
+    public void mountEntity(net.minecraft.src.Entity mountedEntity) {
+        entity.mountEntity(mountedEntity);
+    }
 }
