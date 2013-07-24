@@ -1,8 +1,8 @@
 package net.minecraft.entity;
 
 import net.minecraft.block.Block;
-import net.minecraft.src.MobSpawnerBaseLogic;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.src.MobSpawnerBaseLogic;
 import net.minecraft.world.World;
 
 public class EntityMinecartMobSpawner extends EntityMinecart {

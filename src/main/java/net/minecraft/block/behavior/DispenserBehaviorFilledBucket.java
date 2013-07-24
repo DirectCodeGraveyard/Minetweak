@@ -4,8 +4,8 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
-import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.src.IBlockSource;
+import net.minecraft.utils.enums.EnumFacing;
 
 final class DispenserBehaviorFilledBucket extends BehaviorDefaultDispenseItem {
     private final BehaviorDefaultDispenseItem defaultDispenserItemBehavior = new BehaviorDefaultDispenseItem();

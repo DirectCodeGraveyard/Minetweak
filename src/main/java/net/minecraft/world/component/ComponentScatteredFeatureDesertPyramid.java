@@ -3,9 +3,9 @@ package net.minecraft.world.component;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.src.Direction;
-import net.minecraft.world.structure.StructureBoundingBox;
 import net.minecraft.utils.weighted.WeightedRandomChestContent;
 import net.minecraft.world.World;
+import net.minecraft.world.structure.StructureBoundingBox;
 
 import java.util.Random;
 

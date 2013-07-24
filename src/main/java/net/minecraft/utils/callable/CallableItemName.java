@@ -1,7 +1,7 @@
 package net.minecraft.utils.callable;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.inventory.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 
 import java.util.concurrent.Callable;
 

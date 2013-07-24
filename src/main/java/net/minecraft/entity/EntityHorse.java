@@ -1,12 +1,13 @@
 package net.minecraft.entity;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.stepsound.StepSound;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.attribute.Attribute;
 import net.minecraft.entity.attribute.AttributeInstance;
 import net.minecraft.entity.attribute.RangedAttribute;
 import net.minecraft.entity.attribute.SharedMonsterAttributes;
-import net.minecraft.block.Block;
-import net.minecraft.block.stepsound.StepSound;
+import net.minecraft.entity.pathfinding.PathEntity;
 import net.minecraft.inventory.AnimalChest;
 import net.minecraft.inventory.IInvBasic;
 import net.minecraft.inventory.InventoryBasic;
@@ -14,9 +15,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.entity.pathfinding.PathEntity;
 import net.minecraft.potion.Potion;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
 import net.minecraft.stats.StatCollector;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;

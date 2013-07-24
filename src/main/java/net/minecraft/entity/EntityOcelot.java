@@ -2,12 +2,12 @@ package net.minecraft.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.src.DamageSource;
 import net.minecraft.utils.MathHelper;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.world.World;
 
 public class EntityOcelot extends EntityTameable {

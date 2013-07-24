@@ -1,10 +1,10 @@
 package net.minecraft.world.component;
 
 import net.minecraft.utils.enums.EnumDoor;
+import net.minecraft.world.World;
 import net.minecraft.world.structure.StructureBoundingBox;
 import net.minecraft.world.structure.StructureComponent;
 import net.minecraft.world.structure.StructureStrongholdPieces;
-import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;

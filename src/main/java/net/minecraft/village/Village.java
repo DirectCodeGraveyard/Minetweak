@@ -4,9 +4,9 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.src.Vec3;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.utils.MathHelper;
-import net.minecraft.src.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkCoordinates;
 

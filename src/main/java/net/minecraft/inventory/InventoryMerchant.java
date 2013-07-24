@@ -1,10 +1,10 @@
 package net.minecraft.inventory;
 
-import net.minecraft.entity.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.crafting.merchant.IMerchant;
 import net.minecraft.crafting.merchant.MerchantRecipe;
 import net.minecraft.crafting.merchant.MerchantRecipeList;
+import net.minecraft.entity.EntityPlayer;
+import net.minecraft.item.ItemStack;
 
 public class InventoryMerchant implements IInventory {
     private final IMerchant theMerchant;

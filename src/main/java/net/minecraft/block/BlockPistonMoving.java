@@ -2,7 +2,8 @@ package net.minecraft.block;
 
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.Facing;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityPiston;
 import net.minecraft.utils.AxisAlignedBB;

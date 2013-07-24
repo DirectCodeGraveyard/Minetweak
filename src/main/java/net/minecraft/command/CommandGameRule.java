@@ -1,9 +1,9 @@
 package net.minecraft.command;
 
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.utils.chat.ChatMessageComponent;
-import net.minecraft.src.GameRules;
 import net.minecraft.crash.exception.WrongUsageException;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.src.GameRules;
+import net.minecraft.utils.chat.ChatMessageComponent;
 
 import java.util.List;
 

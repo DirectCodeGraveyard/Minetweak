@@ -3,10 +3,10 @@ package net.minecraft.world.component;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLever;
 import net.minecraft.item.Item;
-import net.minecraft.world.structure.StructureBoundingBox;
-import net.minecraft.world.structure.StructureScatteredFeatureStones;
 import net.minecraft.utils.weighted.WeightedRandomChestContent;
 import net.minecraft.world.World;
+import net.minecraft.world.structure.StructureBoundingBox;
+import net.minecraft.world.structure.StructureScatteredFeatureStones;
 
 import java.util.Random;
 

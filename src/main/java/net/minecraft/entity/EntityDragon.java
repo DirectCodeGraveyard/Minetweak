@@ -1,9 +1,12 @@
 package net.minecraft.entity;
 
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEndPortal;
-import net.minecraft.src.*;
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.Explosion;
+import net.minecraft.src.IMob;
+import net.minecraft.src.Vec3;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;

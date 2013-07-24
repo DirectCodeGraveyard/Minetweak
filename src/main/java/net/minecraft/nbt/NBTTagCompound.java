@@ -1,10 +1,10 @@
 package net.minecraft.nbt;
 
-import net.minecraft.utils.callable.CallableTagCompound1;
-import net.minecraft.utils.callable.CallableTagCompound2;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.src.ReportedException;
+import net.minecraft.utils.callable.CallableTagCompound1;
+import net.minecraft.utils.callable.CallableTagCompound2;
 
 import java.io.DataInput;
 import java.io.DataOutput;

@@ -1,7 +1,7 @@
 package net.minecraft.command;
 
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.crash.exception.WrongUsageException;
+import net.minecraft.server.MinecraftServer;
 
 import java.util.List;
 

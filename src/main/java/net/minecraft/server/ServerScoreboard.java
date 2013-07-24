@@ -1,8 +1,8 @@
 package net.minecraft.server;
 
 import net.minecraft.entity.EntityPlayerMP;
-import net.minecraft.server.network.packet.*;
 import net.minecraft.player.score.*;
+import net.minecraft.server.network.packet.*;
 
 import java.util.*;
 

@@ -3,8 +3,8 @@ package net.minecraft.world.component;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EntityWitch;
-import net.minecraft.world.structure.StructureBoundingBox;
 import net.minecraft.world.World;
+import net.minecraft.world.structure.StructureBoundingBox;
 
 import java.util.Random;
 

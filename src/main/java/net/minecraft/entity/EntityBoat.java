@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.material.Material;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;

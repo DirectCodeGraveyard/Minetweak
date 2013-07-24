@@ -1,7 +1,7 @@
 package net.minecraft.utils.callable;
 
-import net.minecraft.src.ComparatorClassSorter;
 import net.minecraft.crash.CrashReport;
+import net.minecraft.src.ComparatorClassSorter;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

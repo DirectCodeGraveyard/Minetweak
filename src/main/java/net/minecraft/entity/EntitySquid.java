@@ -1,10 +1,10 @@
 package net.minecraft.entity;
 
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.material.Material;
 import net.minecraft.utils.MathHelper;
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.world.World;
 
 public class EntitySquid extends EntityWaterMob {

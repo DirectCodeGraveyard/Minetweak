@@ -1,6 +1,5 @@
 package org.minetweak.command;
 
-import net.minecraft.utils.enums.EnumChatFormatting;
 import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
 

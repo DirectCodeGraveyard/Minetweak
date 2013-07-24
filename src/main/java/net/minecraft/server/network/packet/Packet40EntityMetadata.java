@@ -1,7 +1,7 @@
 package net.minecraft.server.network.packet;
 
-import net.minecraft.src.DataWatcher;
 import net.minecraft.server.network.NetHandler;
+import net.minecraft.src.DataWatcher;
 
 import java.io.DataInput;
 import java.io.DataOutput;

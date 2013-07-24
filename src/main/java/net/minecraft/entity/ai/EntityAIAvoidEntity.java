@@ -3,7 +3,8 @@ package net.minecraft.entity.ai;
 import net.minecraft.entity.*;
 import net.minecraft.entity.pathfinding.PathEntity;
 import net.minecraft.entity.pathfinding.PathNavigate;
-import net.minecraft.src.*;
+import net.minecraft.src.RandomPositionGenerator;
+import net.minecraft.src.Vec3;
 
 import java.util.List;
 

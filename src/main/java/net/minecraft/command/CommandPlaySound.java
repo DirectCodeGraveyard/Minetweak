@@ -1,8 +1,8 @@
 package net.minecraft.command;
 
+import net.minecraft.crash.exception.WrongUsageException;
 import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.server.network.packet.Packet62LevelSound;
-import net.minecraft.crash.exception.WrongUsageException;
 
 public class CommandPlaySound extends CommandBase {
     public String getCommandName() {

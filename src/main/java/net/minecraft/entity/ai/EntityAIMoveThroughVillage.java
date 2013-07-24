@@ -2,7 +2,8 @@ package net.minecraft.entity.ai;
 
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.pathfinding.PathEntity;
-import net.minecraft.src.*;
+import net.minecraft.src.RandomPositionGenerator;
+import net.minecraft.src.Vec3;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.village.Village;
 import net.minecraft.village.VillageDoorInfo;

@@ -1,19 +1,20 @@
 package net.minecraft.entity;
 
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.utils.enums.EnumCreatureAttribute;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.player.achievement.AchievementList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.IRangedAttackMob;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumCreatureAttribute;
 import net.minecraft.world.World;
 import net.minecraft.world.provider.WorldProviderHell;
 

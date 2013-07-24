@@ -6,8 +6,8 @@ import net.minecraft.block.behavior.IBehaviorDispenseItem;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumArmorMaterial;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.utils.enums.EnumArmorMaterial;
 import net.minecraft.world.World;
 
 public class ItemArmor extends Item {

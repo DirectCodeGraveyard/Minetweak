@@ -2,9 +2,9 @@ package net.minecraft.world.chunk;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntitySelector;
-import net.minecraft.utils.enums.EnumSkyBlock;
-import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.utils.AxisAlignedBB;
+import net.minecraft.utils.enums.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import java.util.List;

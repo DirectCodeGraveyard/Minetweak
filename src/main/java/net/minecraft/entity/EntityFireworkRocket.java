@@ -1,8 +1,8 @@
 package net.minecraft.entity;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.utils.MathHelper;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityFireworkRocket extends Entity {

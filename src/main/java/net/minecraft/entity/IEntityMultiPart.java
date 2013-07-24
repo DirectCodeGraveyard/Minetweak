@@ -1,6 +1,5 @@
 package net.minecraft.entity;
 
-import net.minecraft.entity.EntityDragonPart;
 import net.minecraft.src.DamageSource;
 import net.minecraft.world.World;
 

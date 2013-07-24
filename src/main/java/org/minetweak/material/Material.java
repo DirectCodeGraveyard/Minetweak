@@ -1,12 +1,11 @@
 package org.minetweak.material;
 
+import com.google.common.collect.Maps;
+import org.apache.commons.lang3.Validate;
+
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.util.Map;
-
-import org.apache.commons.lang3.Validate;
-
-import com.google.common.collect.Maps;
 
 /**
  * An enum of all material ids accepted by the official server + client

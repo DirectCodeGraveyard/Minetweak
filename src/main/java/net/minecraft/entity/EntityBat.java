@@ -1,9 +1,9 @@
 package net.minecraft.entity;
 
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.src.DamageSource;
 import net.minecraft.utils.MathHelper;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkCoordinates;
 

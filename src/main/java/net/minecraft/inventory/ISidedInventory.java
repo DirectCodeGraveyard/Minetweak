@@ -1,6 +1,5 @@
 package net.minecraft.inventory;
 
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 public interface ISidedInventory extends IInventory {

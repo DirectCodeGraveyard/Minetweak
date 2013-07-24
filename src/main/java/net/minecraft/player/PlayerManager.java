@@ -2,9 +2,9 @@ package net.minecraft.player;
 
 import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.src.LongHashMap;
-import net.minecraft.world.provider.WorldProvider;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.ChunkCoordIntPair;
+import net.minecraft.world.provider.WorldProvider;
 
 import java.util.ArrayList;
 import java.util.List;

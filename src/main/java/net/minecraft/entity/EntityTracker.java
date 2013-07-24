@@ -1,10 +1,12 @@
 package net.minecraft.entity;
 
-import net.minecraft.utils.callable.CallableEntityTracker;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.server.network.packet.Packet;
-import net.minecraft.src.*;
+import net.minecraft.src.IAnimals;
+import net.minecraft.src.IntHashMap;
+import net.minecraft.src.ReportedException;
+import net.minecraft.utils.callable.CallableEntityTracker;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 

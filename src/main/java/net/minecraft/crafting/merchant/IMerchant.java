@@ -1,7 +1,5 @@
 package net.minecraft.crafting.merchant;
 
-import net.minecraft.crafting.merchant.MerchantRecipe;
-import net.minecraft.crafting.merchant.MerchantRecipeList;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.item.ItemStack;
 

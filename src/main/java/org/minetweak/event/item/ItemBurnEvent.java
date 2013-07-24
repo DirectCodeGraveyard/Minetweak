@@ -1,7 +1,7 @@
 package org.minetweak.event.item;
 
-import net.minecraft.world.chunk.ChunkCoordinates;
 import net.minecraft.item.Item;
+import net.minecraft.world.chunk.ChunkCoordinates;
 
 public class ItemBurnEvent {
     private Item item;

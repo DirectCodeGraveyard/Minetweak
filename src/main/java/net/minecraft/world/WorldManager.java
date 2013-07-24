@@ -3,10 +3,10 @@ package net.minecraft.world;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.entity.EntityPlayerMP;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.packet.Packet55BlockDestroy;
 import net.minecraft.server.network.packet.Packet61DoorChange;
 import net.minecraft.server.network.packet.Packet62LevelSound;
-import net.minecraft.server.MinecraftServer;
 
 public class WorldManager implements IWorldAccess {
     /**

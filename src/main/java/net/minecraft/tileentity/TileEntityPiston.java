@@ -3,8 +3,8 @@ package net.minecraft.tileentity;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.src.Facing;
+import net.minecraft.utils.AxisAlignedBB;
 
 import java.util.ArrayList;
 import java.util.List;

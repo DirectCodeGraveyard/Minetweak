@@ -6,7 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 

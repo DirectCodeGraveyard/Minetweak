@@ -1,12 +1,12 @@
 package net.minecraft.world.map;
 
 import net.minecraft.utils.MathHelper;
-import net.minecraft.world.structure.StructureStart;
-import net.minecraft.world.structure.StructureStrongholdStart;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.ChunkCoordIntPair;
 import net.minecraft.world.chunk.ChunkPosition;
 import net.minecraft.world.component.ComponentStrongholdStairs2;
+import net.minecraft.world.structure.StructureStart;
+import net.minecraft.world.structure.StructureStrongholdStart;
 
 import java.util.*;
 import java.util.Map.Entry;

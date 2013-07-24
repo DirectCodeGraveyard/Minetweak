@@ -1,7 +1,7 @@
 package net.minecraft.utils.callable;
 
-import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.crash.CrashReport;
+import net.minecraft.utils.AxisAlignedBB;
 
 import java.util.concurrent.Callable;
 

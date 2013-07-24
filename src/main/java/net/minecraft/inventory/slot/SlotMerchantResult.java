@@ -1,10 +1,10 @@
 package net.minecraft.inventory.slot;
 
+import net.minecraft.crafting.merchant.IMerchant;
+import net.minecraft.crafting.merchant.MerchantRecipe;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.inventory.InventoryMerchant;
 import net.minecraft.item.ItemStack;
-import net.minecraft.crafting.merchant.IMerchant;
-import net.minecraft.crafting.merchant.MerchantRecipe;
 
 public class SlotMerchantResult extends Slot {
     /**

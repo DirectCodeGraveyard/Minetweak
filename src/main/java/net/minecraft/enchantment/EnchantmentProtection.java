@@ -2,8 +2,8 @@ package net.minecraft.enchantment;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.src.DamageSource;
-import net.minecraft.utils.enums.EnumEnchantmentType;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumEnchantmentType;
 
 public class EnchantmentProtection extends Enchantment {
     /**

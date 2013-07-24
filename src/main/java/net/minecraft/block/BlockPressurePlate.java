@@ -3,8 +3,8 @@ package net.minecraft.block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumMobType;
 import net.minecraft.material.Material;
+import net.minecraft.utils.enums.EnumMobType;
 import net.minecraft.world.World;
 
 import java.util.List;

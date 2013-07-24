@@ -1,8 +1,8 @@
 package net.minecraft.world.anvil;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.src.*;
-import net.minecraft.world.*;
+import net.minecraft.src.ThreadedFileIOBase;
+import net.minecraft.world.WorldInfo;
 import net.minecraft.world.chunk.IChunkLoader;
 import net.minecraft.world.provider.WorldProvider;
 import net.minecraft.world.provider.WorldProviderEnd;

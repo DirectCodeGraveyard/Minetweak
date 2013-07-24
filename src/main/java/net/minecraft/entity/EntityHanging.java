@@ -2,7 +2,8 @@ package net.minecraft.entity;
 
 import net.minecraft.material.Material;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.Direction;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 

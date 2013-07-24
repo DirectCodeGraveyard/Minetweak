@@ -5,7 +5,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
 import net.minecraft.world.World;
 
 public abstract class EntityMinecartContainer extends EntityMinecart implements IInventory {

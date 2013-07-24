@@ -1,9 +1,9 @@
 package net.minecraft.entity;
 
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.block.Block;
 import net.minecraft.crafting.CraftingManager;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.container.ContainerSheep;
 import net.minecraft.item.Item;

@@ -1,8 +1,6 @@
 package org.minetweak.command;
 
-import org.minetweak.Minetweak;
 import org.minetweak.Server;
-import org.minetweak.entity.Player;
 
 public class CommandStop extends CommandExecutor {
 

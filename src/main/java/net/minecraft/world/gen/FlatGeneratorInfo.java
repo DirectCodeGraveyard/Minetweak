@@ -1,8 +1,8 @@
 package net.minecraft.world.gen;
 
+import net.minecraft.block.Block;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.block.Block;
 
 import java.util.*;
 import java.util.Map.Entry;

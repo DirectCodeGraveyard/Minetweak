@@ -1,12 +1,12 @@
 package net.minecraft.block.behavior;
 
 import net.minecraft.block.BlockDispenser;
-import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.IBlockSource;
 import net.minecraft.tileentity.TileEntityDispenser;
+import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.world.World;
 
 final class DispenserBehaviorEmptyBucket extends BehaviorDefaultDispenseItem {

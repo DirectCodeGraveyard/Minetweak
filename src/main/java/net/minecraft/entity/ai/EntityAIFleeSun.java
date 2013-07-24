@@ -1,8 +1,8 @@
 package net.minecraft.entity.ai;
 
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.utils.MathHelper;
 import net.minecraft.src.Vec3;
+import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.Random;

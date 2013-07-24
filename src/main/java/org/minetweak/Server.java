@@ -1,8 +1,8 @@
 package org.minetweak;
 
+import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.utils.chat.ChatMessageComponent;
-import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.utils.enums.EnumChatFormatting;
 import org.minetweak.chat.ChatFormatting;
 import org.minetweak.command.Console;

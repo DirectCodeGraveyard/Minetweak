@@ -4,8 +4,8 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.utils.enums.EnumGameType;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumGameType;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkCoordinates;
 

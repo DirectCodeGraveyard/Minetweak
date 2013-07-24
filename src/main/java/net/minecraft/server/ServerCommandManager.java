@@ -2,10 +2,9 @@ package net.minecraft.server;
 
 import net.minecraft.command.*;
 import net.minecraft.entity.EntityPlayerMP;
+import net.minecraft.tileentity.TileEntityCommandBlock;
 import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.utils.enums.EnumChatFormatting;
-import net.minecraft.command.IAdminCommand;
-import net.minecraft.tileentity.TileEntityCommandBlock;
 
 public class ServerCommandManager extends CommandHandler implements IAdminCommand
 {

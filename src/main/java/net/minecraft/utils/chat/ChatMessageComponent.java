@@ -3,8 +3,8 @@ package net.minecraft.utils.chat;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.utils.enums.EnumChatFormatting;
 import net.minecraft.stats.StatCollector;
+import net.minecraft.utils.enums.EnumChatFormatting;
 
 import java.util.Iterator;
 import java.util.List;

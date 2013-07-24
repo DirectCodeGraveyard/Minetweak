@@ -3,7 +3,7 @@ package net.minecraft.world;
 import net.minecraft.crash.exception.MinecraftException;
 import net.minecraft.logging.ILogAgent;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.*;
+import net.minecraft.src.Profiler;
 import net.minecraft.world.storage.ISaveHandler;
 
 public class WorldServerMulti extends WorldServer {

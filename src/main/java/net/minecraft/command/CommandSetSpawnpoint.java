@@ -1,8 +1,8 @@
 package net.minecraft.command;
 
+import net.minecraft.crash.exception.WrongUsageException;
 import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.crash.exception.WrongUsageException;
 import net.minecraft.world.chunk.ChunkCoordinates;
 
 import java.util.List;

@@ -3,14 +3,14 @@ package net.minecraft.item;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPlayer;
+import net.minecraft.server.network.packet.Packet;
+import net.minecraft.server.network.packet.Packet131MapData;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.map.MapColor;
 import net.minecraft.world.map.MapData;
 import net.minecraft.world.map.MapInfo;
-import net.minecraft.server.network.packet.Packet;
-import net.minecraft.server.network.packet.Packet131MapData;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 
 public class ItemMap extends ItemMapBase {
     protected ItemMap(int par1) {

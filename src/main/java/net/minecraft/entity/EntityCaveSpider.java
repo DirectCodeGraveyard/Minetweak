@@ -1,8 +1,8 @@
 package net.minecraft.entity;
 
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.world.World;
 
 public class EntityCaveSpider extends EntitySpider {

@@ -8,7 +8,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.IRangedAttackMob;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 

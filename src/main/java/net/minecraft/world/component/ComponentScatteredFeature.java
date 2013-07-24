@@ -1,8 +1,8 @@
 package net.minecraft.world.component;
 
+import net.minecraft.world.World;
 import net.minecraft.world.structure.StructureBoundingBox;
 import net.minecraft.world.structure.StructureComponent;
-import net.minecraft.world.World;
 
 import java.util.Random;
 

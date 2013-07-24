@@ -1,8 +1,8 @@
 package net.minecraft.world.component;
 
 import net.minecraft.block.Block;
-import net.minecraft.utils.enums.EnumDoor;
 import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.utils.enums.EnumDoor;
 import net.minecraft.world.World;
 import net.minecraft.world.structure.StructureBoundingBox;
 import net.minecraft.world.structure.StructureComponent;

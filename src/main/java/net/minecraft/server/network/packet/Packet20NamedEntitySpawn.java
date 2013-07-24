@@ -2,9 +2,9 @@ package net.minecraft.server.network.packet;
 
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.network.NetHandler;
 import net.minecraft.src.DataWatcher;
 import net.minecraft.utils.MathHelper;
-import net.minecraft.server.network.NetHandler;
 
 import java.io.DataInput;
 import java.io.DataOutput;

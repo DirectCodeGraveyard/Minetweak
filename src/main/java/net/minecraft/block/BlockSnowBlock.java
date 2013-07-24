@@ -1,9 +1,9 @@
 package net.minecraft.block;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.utils.enums.EnumSkyBlock;
 import net.minecraft.item.Item;
 import net.minecraft.material.Material;
+import net.minecraft.utils.enums.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import java.util.Random;

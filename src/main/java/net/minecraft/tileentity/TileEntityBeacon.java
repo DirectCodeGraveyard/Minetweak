@@ -6,11 +6,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.network.packet.Packet;
 import net.minecraft.server.network.packet.Packet132TileEntityData;
 import net.minecraft.utils.AxisAlignedBB;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 
 import java.util.Iterator;
 import java.util.List;

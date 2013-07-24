@@ -1,15 +1,15 @@
 package net.minecraft.item;
 
 import com.google.common.collect.Multimap;
-import net.minecraft.entity.attribute.AttributeModifier;
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityPlayer;
+import net.minecraft.entity.attribute.AttributeModifier;
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
+import net.minecraft.material.Material;
 import net.minecraft.utils.enums.EnumAction;
 import net.minecraft.utils.enums.EnumToolMaterial;
-import net.minecraft.material.Material;
 import net.minecraft.world.World;
 
 public class ItemSword extends Item {

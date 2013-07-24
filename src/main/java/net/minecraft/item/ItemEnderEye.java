@@ -5,8 +5,9 @@ import net.minecraft.block.BlockEndPortalFrame;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityEnderEye;
 import net.minecraft.entity.EntityPlayer;
+import net.minecraft.src.Direction;
+import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.utils.enums.EnumMovingObjectType;
-import net.minecraft.src.*;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPosition;
 

@@ -1,7 +1,7 @@
 package net.minecraft.world.biome;
 
 import net.minecraft.entity.EntityWolf;
-import net.minecraft.src.*;
+import net.minecraft.src.SpawnListEntry;
 import net.minecraft.world.gen.world.WorldGenTaiga1;
 import net.minecraft.world.gen.world.WorldGenTaiga2;
 import net.minecraft.world.gen.world.WorldGenerator;

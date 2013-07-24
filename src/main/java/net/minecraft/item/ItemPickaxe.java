@@ -1,8 +1,8 @@
 package net.minecraft.item;
 
 import net.minecraft.block.Block;
-import net.minecraft.utils.enums.EnumToolMaterial;
 import net.minecraft.material.Material;
+import net.minecraft.utils.enums.EnumToolMaterial;
 
 public class ItemPickaxe extends ItemTool {
     /**

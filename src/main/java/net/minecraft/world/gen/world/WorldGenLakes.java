@@ -1,10 +1,10 @@
 package net.minecraft.world.gen.world;
 
-import net.minecraft.utils.enums.EnumSkyBlock;
+import net.minecraft.block.Block;
 import net.minecraft.material.Material;
+import net.minecraft.utils.enums.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.block.Block;
 
 import java.util.Random;
 

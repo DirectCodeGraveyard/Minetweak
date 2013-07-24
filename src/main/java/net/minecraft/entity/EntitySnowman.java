@@ -1,10 +1,12 @@
 package net.minecraft.entity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.attribute.SharedMonsterAttributes;
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.IMob;
+import net.minecraft.src.IRangedAttackMob;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 

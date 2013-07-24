@@ -1,13 +1,13 @@
 package net.minecraft.entity.pathfinding;
 
-import net.minecraft.entity.attribute.AttributeInstance;
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.attribute.AttributeInstance;
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.material.Material;
-import net.minecraft.utils.MathHelper;
 import net.minecraft.src.Vec3;
+import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 
 public class PathNavigate {

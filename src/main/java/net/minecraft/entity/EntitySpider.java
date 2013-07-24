@@ -1,12 +1,12 @@
 package net.minecraft.entity;
 
 import net.minecraft.entity.attribute.SharedMonsterAttributes;
-import net.minecraft.utils.enums.EnumCreatureAttribute;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.src.*;
+import net.minecraft.src.SpiderEffectsGroupData;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumCreatureAttribute;
 import net.minecraft.world.World;
 
 public class EntitySpider extends EntityMob {

@@ -1,7 +1,7 @@
 package net.minecraft.world.chunk;
 
-import net.minecraft.utils.MathHelper;
 import net.minecraft.src.Vec3;
+import net.minecraft.utils.MathHelper;
 
 public class ChunkPosition {
     /**

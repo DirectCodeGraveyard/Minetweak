@@ -3,9 +3,9 @@ package net.minecraft.command;
 import net.minecraft.crash.exception.NumberInvalidException;
 import net.minecraft.crash.exception.WrongUsageException;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumChatFormatting;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.utils.chat.ChatMessageComponent;
+import net.minecraft.utils.enums.EnumChatFormatting;
 
 import java.util.Arrays;
 import java.util.Collections;

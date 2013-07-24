@@ -6,7 +6,7 @@ import net.minecraft.entity.attribute.AttributeInstance;
 import net.minecraft.entity.attribute.AttributeModifier;
 import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.entity.pathfinding.PathEntity;
-import net.minecraft.src.*;
+import net.minecraft.src.Vec3;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkCoordinates;

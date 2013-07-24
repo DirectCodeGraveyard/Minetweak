@@ -2,9 +2,9 @@ package net.minecraft.command;
 
 import net.minecraft.crash.exception.WrongUsageException;
 import net.minecraft.entity.EntityPlayerMP;
-import net.minecraft.utils.enums.EnumChatFormatting;
 import net.minecraft.player.PlayerSelector;
 import net.minecraft.utils.chat.ChatMessageComponent;
+import net.minecraft.utils.enums.EnumChatFormatting;
 
 import java.util.*;
 import java.util.Map.Entry;

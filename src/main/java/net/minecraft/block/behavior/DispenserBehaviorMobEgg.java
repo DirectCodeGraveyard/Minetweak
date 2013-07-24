@@ -6,8 +6,8 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.src.IBlockSource;
+import net.minecraft.utils.enums.EnumFacing;
 
 final class DispenserBehaviorMobEgg extends BehaviorDefaultDispenseItem {
     /**

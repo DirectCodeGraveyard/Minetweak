@@ -3,11 +3,12 @@ package net.minecraft.item;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.*;
-import net.minecraft.utils.enums.EnumMovingObjectType;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.Facing;
+import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.stats.StatCollector;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumMovingObjectType;
 import net.minecraft.world.World;
 
 public class ItemMonsterPlacer extends Item {

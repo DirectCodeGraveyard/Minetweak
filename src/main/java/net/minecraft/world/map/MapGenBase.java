@@ -1,7 +1,7 @@
 package net.minecraft.world.map;
 
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
 
 import java.util.Random;
 

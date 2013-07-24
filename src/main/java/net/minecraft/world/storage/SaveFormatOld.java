@@ -1,7 +1,7 @@
 package net.minecraft.world.storage;
 
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.src.IProgressUpdate;
 import net.minecraft.world.WorldInfo;
 

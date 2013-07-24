@@ -2,13 +2,13 @@ package net.minecraft.tileentity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
+import net.minecraft.crafting.FurnaceRecipes;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.*;
+import net.minecraft.material.Material;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.crafting.FurnaceRecipes;
-import net.minecraft.material.Material;
 
 public class TileEntityFurnace extends TileEntity implements ISidedInventory {
     private static final int[] field_102010_d = new int[]{0};

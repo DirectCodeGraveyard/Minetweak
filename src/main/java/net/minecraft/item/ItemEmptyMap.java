@@ -2,8 +2,8 @@ package net.minecraft.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.world.map.MapData;
 import net.minecraft.world.World;
+import net.minecraft.world.map.MapData;
 
 public class ItemEmptyMap extends ItemMapBase {
     protected ItemEmptyMap(int par1) {

@@ -2,8 +2,8 @@ package net.minecraft.entity.ai;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityTameable;
-import net.minecraft.utils.MathHelper;
 import net.minecraft.entity.pathfinding.PathNavigate;
+import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityAIFollowOwner extends EntityAIBase {

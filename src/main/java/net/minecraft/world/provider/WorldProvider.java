@@ -1,12 +1,11 @@
 package net.minecraft.world.provider;
 
-import net.minecraft.world.gen.FlatGeneratorInfo;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.block.Block;
 import net.minecraft.world.chunk.*;
+import net.minecraft.world.gen.FlatGeneratorInfo;
 
 public abstract class WorldProvider {
     public static final float[] field_111203_a = new float[]{1.0F, 0.75F, 0.5F, 0.25F, 0.0F, 0.25F, 0.5F, 0.75F};

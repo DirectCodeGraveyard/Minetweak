@@ -1,8 +1,8 @@
 package net.minecraft.command;
 
 import net.minecraft.entity.EntityPlayerMP;
-import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.src.DamageSource;
+import net.minecraft.utils.chat.ChatMessageComponent;
 
 public class CommandKill extends CommandBase {
     public String getCommandName() {

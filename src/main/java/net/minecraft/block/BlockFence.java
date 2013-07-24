@@ -5,7 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.item.ItemLeash;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.world.World;
 

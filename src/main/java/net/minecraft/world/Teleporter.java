@@ -4,8 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.src.Direction;
 import net.minecraft.src.LongHashMap;
-import net.minecraft.utils.MathHelper;
 import net.minecraft.src.PortalPosition;
+import net.minecraft.utils.MathHelper;
 import net.minecraft.world.chunk.ChunkCoordIntPair;
 
 import java.util.ArrayList;

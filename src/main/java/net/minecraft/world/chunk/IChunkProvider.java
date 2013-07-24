@@ -1,7 +1,7 @@
 package net.minecraft.world.chunk;
 
-import net.minecraft.utils.enums.EnumCreatureType;
 import net.minecraft.src.IProgressUpdate;
+import net.minecraft.utils.enums.EnumCreatureType;
 import net.minecraft.world.World;
 
 import java.util.List;

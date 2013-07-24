@@ -1,12 +1,12 @@
 package net.minecraft.block;
 
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumStatus;
 import net.minecraft.item.Item;
 import net.minecraft.material.Material;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.utils.enums.EnumStatus;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.src.*;
 import net.minecraft.world.chunk.ChunkCoordinates;
 
 import java.util.Random;

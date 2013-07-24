@@ -1,7 +1,7 @@
 package net.minecraft.utils.callable;
 
-import net.minecraft.world.map.MapGenStructure;
 import net.minecraft.world.chunk.ChunkCoordIntPair;
+import net.minecraft.world.map.MapGenStructure;
 
 import java.util.concurrent.Callable;
 

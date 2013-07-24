@@ -3,7 +3,7 @@ package net.minecraft.world.biome;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityChicken;
 import net.minecraft.entity.EntityOcelot;
-import net.minecraft.src.*;
+import net.minecraft.src.SpawnListEntry;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.world.*;
 

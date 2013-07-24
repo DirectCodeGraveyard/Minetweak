@@ -1,11 +1,11 @@
 package net.minecraft.world.chunk;
 
-import net.minecraft.world.gen.layer.GenLayer;
 import net.minecraft.src.IntCache;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.gen.layer.GenLayer;
 
 import java.util.ArrayList;
 import java.util.List;

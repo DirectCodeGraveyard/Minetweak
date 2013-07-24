@@ -1,12 +1,12 @@
 package net.minecraft.inventory.slot;
 
+import net.minecraft.crafting.FurnaceRecipes;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.entity.EntityXPOrb;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.player.achievement.AchievementList;
-import net.minecraft.crafting.FurnaceRecipes;
 import net.minecraft.utils.MathHelper;
 
 public class SlotFurnace extends Slot {

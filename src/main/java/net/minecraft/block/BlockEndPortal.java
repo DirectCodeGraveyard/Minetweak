@@ -2,7 +2,7 @@ package net.minecraft.block;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityEndPortal;
 import net.minecraft.utils.AxisAlignedBB;

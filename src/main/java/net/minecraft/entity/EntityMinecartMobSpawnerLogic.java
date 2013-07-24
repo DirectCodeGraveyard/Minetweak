@@ -1,7 +1,7 @@
 package net.minecraft.entity;
 
-import net.minecraft.utils.MathHelper;
 import net.minecraft.src.MobSpawnerBaseLogic;
+import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 
 class EntityMinecartMobSpawnerLogic extends MobSpawnerBaseLogic {

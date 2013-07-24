@@ -4,12 +4,12 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityItem;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.entity.EntityPlayerMP;
-import net.minecraft.utils.enums.EnumArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.material.Material;
 import net.minecraft.utils.AxisAlignedBB;
+import net.minecraft.utils.enums.EnumArmorMaterial;
 import net.minecraft.world.World;
 
 import java.util.List;

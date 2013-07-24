@@ -2,7 +2,8 @@ package net.minecraft.world.chunk;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.src.*;
+import net.minecraft.src.NibbleArray;
+import net.minecraft.src.NibbleArrayReader;
 import net.minecraft.world.anvil.AnvilConverterData;
 
 public class ChunkLoader {

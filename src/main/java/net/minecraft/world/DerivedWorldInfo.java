@@ -1,8 +1,8 @@
 package net.minecraft.world;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.utils.enums.EnumGameType;
 import net.minecraft.src.GameRules;
+import net.minecraft.utils.enums.EnumGameType;
 
 public class DerivedWorldInfo extends WorldInfo {
     /**

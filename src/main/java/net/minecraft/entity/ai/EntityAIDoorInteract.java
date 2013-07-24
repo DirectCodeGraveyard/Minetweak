@@ -3,10 +3,10 @@ package net.minecraft.entity.ai;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.utils.MathHelper;
 import net.minecraft.entity.pathfinding.PathEntity;
 import net.minecraft.entity.pathfinding.PathNavigate;
 import net.minecraft.entity.pathfinding.PathPoint;
+import net.minecraft.utils.MathHelper;
 
 public abstract class EntityAIDoorInteract extends EntityAIBase {
     protected EntityLiving theEntity;

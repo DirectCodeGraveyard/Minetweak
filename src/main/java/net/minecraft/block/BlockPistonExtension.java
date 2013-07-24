@@ -2,7 +2,8 @@ package net.minecraft.block;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.Facing;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.world.World;
 

@@ -1,12 +1,13 @@
 package net.minecraft.block;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.utils.enums.EnumSkyBlock;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Icon;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityDaylightDetector;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import java.util.Random;

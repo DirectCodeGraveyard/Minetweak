@@ -1,7 +1,7 @@
 package net.minecraft.entity;
 
-import net.minecraft.utils.MathHelper;
 import net.minecraft.entity.attribute.SharedMonsterAttributes;
+import net.minecraft.utils.MathHelper;
 
 public class EntityMoveHelper {
     /**

@@ -1,10 +1,10 @@
 package net.minecraft.command;
 
+import net.minecraft.crash.exception.WrongUsageException;
 import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.utils.enums.EnumGameType;
-import net.minecraft.crash.exception.WrongUsageException;
 import net.minecraft.world.WorldSettings;
 
 import java.util.List;
