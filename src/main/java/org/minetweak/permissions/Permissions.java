@@ -59,7 +59,7 @@ public class Permissions {
             return false;
         } else if (perms.contains("*")) {
             return true;
-        } else if (MinecraftServer.getServer().getConfigurationManager().getOps().contains(user.toLowerCase())) {
+        } else if (ServerOps.isPlayerOp(user)) {
             return true;
         } else if (perms.contains(permission)) {
             return true;

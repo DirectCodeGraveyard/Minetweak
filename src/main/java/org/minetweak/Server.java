@@ -8,6 +8,7 @@ import org.minetweak.chat.ChatFormatting;
 import org.minetweak.command.Console;
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
+import org.minetweak.permissions.ServerOps;
 import org.minetweak.util.StringUtils;
 
 @SuppressWarnings("UnusedDeclaration")
@@ -120,7 +121,7 @@ public class Server {
             out = "[" + ChatFormatting.GOLD + "Server" + ChatFormatting.RESET + "] " + message;
         }
 
-        for (String op : MinecraftServer.getServer().getConfigurationManager().getOps()) {
+        for (String op : ServerOps.getOps()) {
             Player player = Minetweak.getPlayerByName(op);
             if (player==null) {
                 continue;

@@ -7,6 +7,8 @@ import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.entity.player.PlayerTracker;
 import org.minetweak.permissions.PermissionsLoader;
+import org.minetweak.permissions.PlayerWhitelist;
+import org.minetweak.permissions.ServerOps;
 import org.minetweak.plugins.PluginLoaderHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
@@ -76,6 +78,8 @@ public class Minetweak {
         // Load the most important things first
         MinetweakConfig.initialize();
         PermissionsLoader.load();
+        PlayerWhitelist.load();
+        ServerOps.load();
 
         // Ensure Server Commands get registered first, so they can be overridden
         registerServerCommands();

@@ -35,6 +35,7 @@ import org.minetweak.entity.Player;
 import org.minetweak.event.player.PlayerJoinEvent;
 import org.minetweak.event.player.PlayerLeaveEvent;
 import org.minetweak.permissions.PlayerWhitelist;
+import org.minetweak.permissions.ServerOps;
 
 import java.io.File;
 import java.net.SocketAddress;
@@ -63,7 +64,7 @@ public abstract class ServerConfigurationManager {
     /**
      * A set containing the OPs.
      */
-    private Set<String> ops = new HashSet<String>();
+    private Set<String> ops;
     /**
      * The Set of all whitelisted players.
      */
@@ -530,14 +531,14 @@ public abstract class ServerConfigurationManager {
      * This adds a username to the ops list, then saves the op list
      */
     public void addOp(String par1Str) {
-        this.ops.add(par1Str.toLowerCase());
+        ServerOps.addOp(par1Str);
     }
 
     /**
      * This removes a username from the ops list, then saves the op list
      */
     public void removeOp(String par1Str) {
-        this.ops.remove(par1Str.toLowerCase());
+        ServerOps.addOp(par1Str);
     }
 
     /**
@@ -545,14 +546,14 @@ public abstract class ServerConfigurationManager {
      */
     public boolean isAllowedToLogin(String par1Str) {
         par1Str = par1Str.trim().toLowerCase();
-        return !this.whiteListEnforced || this.ops.contains(par1Str) || PlayerWhitelist.isPlayerWhitelisted(par1Str);
+        return !this.whiteListEnforced || ServerOps.isPlayerOp(par1Str) || PlayerWhitelist.isPlayerWhitelisted(par1Str);
     }
 
     /**
      * Returns true if the specific player is allowed to use commands.
      */
     public boolean areCommandsAllowed(String par1Str) {
-        return this.ops.contains(par1Str.trim().toLowerCase()) || this.commandsAllowedForAll;
+        return ServerOps.isPlayerOp(par1Str.trim().toLowerCase()) || this.commandsAllowedForAll;
     }
 
     /**
@@ -739,7 +740,7 @@ public abstract class ServerConfigurationManager {
     }
 
     public Set<String> getOps() {
-        return this.ops;
+        return ServerOps.getOps();
     }
 
     /**

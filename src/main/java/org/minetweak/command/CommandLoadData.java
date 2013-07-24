@@ -2,7 +2,7 @@ package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.permissions.PermissionsLoader;
-import org.minetweak.permissions.PlayerWhitelist;
+import org.minetweak.permissions.ServerOps;
 
 public class CommandLoadData extends CommandExecutor {
     @Override
@@ -18,7 +18,7 @@ public class CommandLoadData extends CommandExecutor {
         sender.sendMessage("Loading Permissions");
         PermissionsLoader.load();
         sender.sendMessage("Loading Whitelist");
-        PlayerWhitelist.load();
+        ServerOps.load();
         sender.sendMessage("Loading Bans");
         MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().loadBanList();
     }

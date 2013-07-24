@@ -4,6 +4,7 @@ import net.minecraft.server.MinecraftServer;
 import org.minetweak.Server;
 import org.minetweak.chat.ChatFormatting;
 import org.minetweak.permissions.PlayerWhitelist;
+import org.minetweak.permissions.ServerOps;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ public class CommandWhitelist extends CommandExecutor {
             }
 
             if (args[0].equals("list")) {
-                PlayerWhitelist.load();
+                ServerOps.load();
                 ArrayList<String> players = PlayerWhitelist.getWhitelistedPlayers();
                 sender.sendMessage(ChatFormatting.GOLD + "Whitelisted Players" + ChatFormatting.RESET + ":");
                 boolean flag = false;
@@ -57,13 +58,13 @@ public class CommandWhitelist extends CommandExecutor {
                     return;
                 }
 
-                PlayerWhitelist.removePlayer(args[1]);
+                PlayerWhitelist.addPlayer(args[1]);
                 Server.sendToOps("Removed " + args[1] + " from whitelist.", true);
                 return;
             }
 
             if (args[0].equals("reload")) {
-                PlayerWhitelist.load();
+                ServerOps.load();
                 Server.sendToOps("Loaded Whitelist.", true);
             }
         }
