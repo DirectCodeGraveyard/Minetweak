@@ -545,7 +545,7 @@ public abstract class ServerConfigurationManager {
      */
     public boolean isAllowedToLogin(String par1Str) {
         par1Str = par1Str.trim().toLowerCase();
-        return !this.whiteListEnforced || this.ops.contains(par1Str) || PlayerWhitelist.getWhitelistedPlayers().contains(par1Str);
+        return !this.whiteListEnforced || this.ops.contains(par1Str) || PlayerWhitelist.isPlayerWhitelisted(par1Str);
     }
 
     /**

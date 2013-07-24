@@ -24,6 +24,7 @@ public class CommandWhitelist extends CommandExecutor {
             }
 
             if (args[0].equals("list")) {
+                PlayerWhitelist.load();
                 ArrayList<String> players = PlayerWhitelist.getWhitelistedPlayers();
                 sender.sendMessage(ChatFormatting.GOLD + "Whitelisted Players" + ChatFormatting.RESET + ":");
                 boolean flag = false;
@@ -45,7 +46,7 @@ public class CommandWhitelist extends CommandExecutor {
                     sender.sendMessage(getUsage());
                     return;
                 }
-                MinecraftServer.getServer().getConfigurationManager().addToWhiteList(args[1]);
+                PlayerWhitelist.addPlayer(args[1]);
                 Server.sendToOps("Added " + args[1] + " to the whitelist.", true);
                 return;
             }
@@ -56,16 +57,17 @@ public class CommandWhitelist extends CommandExecutor {
                     return;
                 }
 
-                MinecraftServer.getServer().getConfigurationManager().removeFromWhitelist(args[1]);
+                PlayerWhitelist.removePlayer(args[1]);
                 Server.sendToOps("Removed " + args[1] + " from whitelist.", true);
                 return;
             }
 
             if (args[0].equals("reload")) {
-                MinecraftServer.getServer().getConfigurationManager().loadWhiteList();
+                PlayerWhitelist.load();
                 Server.sendToOps("Loaded Whitelist.", true);
             }
         }
+        sender.sendMessage(getUsage());
     }
 
     public String getUsage() {
