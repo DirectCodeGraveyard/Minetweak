@@ -255,7 +255,7 @@ public abstract class World implements IBlockAccess {
     public int getFirstUncoveredBlock(int par1, int par2) {
         int var3;
         int i;
-        for (var3 = 63; !this.isAirBlock(par1, var3 + 1, par2) ; i = 0) {
+        for (var3 = 63; !this.isAirBlock(par1, var3 + 1, par2); i = 0) {
             ++var3;
         }
 
@@ -3150,6 +3150,7 @@ public abstract class World implements IBlockAccess {
 
     /**
      * Get the World Scoreboard
+     *
      * @return World Scoreboard
      */
     public Scoreboard getScoreboard() {
@@ -3208,6 +3209,7 @@ public abstract class World implements IBlockAccess {
 
     /**
      * Does this world allow spawning peaceful mobs?
+     *
      * @return True if peaceful mobs can spawn
      */
     public boolean spawnPeacefulMobs() {
@@ -3216,6 +3218,7 @@ public abstract class World implements IBlockAccess {
 
     /**
      * Does this world allow spawning hostile mobs?
+     *
      * @return True if hostile mobs can spawn
      */
     public boolean spawnHostileMobs() {

@@ -25,7 +25,6 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
-    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -33,7 +32,6 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
-    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
         return par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && super.canPlaceBlockAt(par1World, par2, par3, par4);
     }
@@ -41,7 +39,6 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     /**
      * Can this block stay at this position.  Similar to canPlaceBlockAt except gets checked often with plants.
      */
-    @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
         return par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) && super.canBlockStay(par1World, par2, par3, par4);
     }
@@ -49,12 +46,11 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     /**
      * Ticks the block if it's been scheduled
      */
-    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         int var6 = par1World.getBlockMetadata(par2, par3, par4);
 
         if (!this.func_94476_e(par1World, par2, par3, par4, var6)) {
-            boolean var7 = this.func_94478_d(par1World, par2, par3, par4, var6);
+            boolean var7 = this.isGettingInput(par1World, par2, par3, par4, var6);
 
             if (this.isRepeaterPowered && !var7) {
                 par1World.setBlock(par2, par3, par4, this.func_94484_i().blockID, var6, 2);
@@ -62,7 +58,7 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
                 par1World.setBlock(par2, par3, par4, this.func_94485_e().blockID, var6, 2);
 
                 if (!var7) {
-                    par1World.addBlockEvent(par2, par3, par4, this.func_94485_e().blockID, this.func_94486_g(var6), -1);
+                    par1World.scheduleBlockUpdateWithPriority(par2, par3, par4, this.func_94485_e().blockID, this.func_94486_g(var6), -1);
                 }
             }
         }
@@ -71,7 +67,6 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     /**
      * The type of render function that is called for this block
      */
-    @Override
     public int getRenderType() {
         return 36;
     }
@@ -84,7 +79,6 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
      * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
      * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    @Override
     public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return this.isProvidingWeakPower(par1IBlockAccess, par2, par3, par4, par5);
     }
@@ -94,7 +88,6 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
      * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
      * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    @Override
     public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         int var6 = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
 
@@ -110,7 +103,6 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
-    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (!this.canBlockStay(par1World, par2, par3, par4)) {
             this.dropBlockAsItem(par1World, par2, par3, par4, par1World.getBlockMetadata(par2, par3, par4), 0);
@@ -130,7 +122,7 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
         int var6 = par1World.getBlockMetadata(par2, par3, par4);
 
         if (!this.func_94476_e(par1World, par2, par3, par4, var6)) {
-            boolean var7 = this.func_94478_d(par1World, par2, par3, par4, var6);
+            boolean var7 = this.isGettingInput(par1World, par2, par3, par4, var6);
 
             if ((this.isRepeaterPowered && !var7 || !this.isRepeaterPowered && var7) && !par1World.isBlockTickScheduledThisTick(par2, par3, par4, this.blockID)) {
                 byte var8 = -1;
@@ -141,7 +133,7 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
                     var8 = -2;
                 }
 
-                par1World.addBlockEvent(par2, par3, par4, this.blockID, this.func_94481_j_(var6), var8);
+                par1World.scheduleBlockUpdateWithPriority(par2, par3, par4, this.blockID, this.func_94481_j_(var6), var8);
             }
         }
     }
@@ -150,7 +142,7 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
         return false;
     }
 
-    protected boolean func_94478_d(World par1World, int par2, int par3, int par4, int par5) {
+    protected boolean isGettingInput(World par1World, int par2, int par3, int par4, int par5) {
         return this.getInputStrength(par1World, par2, par3, par4, par5) > 0;
     }
 
@@ -162,7 +154,7 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
         int var7 = par2 + Direction.offsetX[var6];
         int var8 = par4 + Direction.offsetZ[var6];
         int var9 = par1World.getIndirectPowerLevelTo(var7, par3, var8, Direction.directionToFacing[var6]);
-        return var9 >= 15 ? var9 : Math.max(var9, par1World.getBlockId(var7, par3, var8) == redstoneWire.blockID ? par1World.getBlockMetadata(var7, par3, var8) : 0);
+        return var9 >= 15 ? var9 : Math.max(var9, par1World.getBlockId(var7, par3, var8) == Block.redstoneWire.blockID ? par1World.getBlockMetadata(var7, par3, var8) : 0);
     }
 
     protected int func_94482_f(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
@@ -172,11 +164,9 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
             case 0:
             case 2:
                 return Math.max(this.func_94488_g(par1IBlockAccess, par2 - 1, par3, par4, 4), this.func_94488_g(par1IBlockAccess, par2 + 1, par3, par4, 5));
-
             case 1:
             case 3:
                 return Math.max(this.func_94488_g(par1IBlockAccess, par2, par3, par4 + 1, 3), this.func_94488_g(par1IBlockAccess, par2, par3, par4 - 1, 2));
-
             default:
                 return 0;
         }
@@ -184,13 +174,12 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
 
     protected int func_94488_g(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         int var6 = par1IBlockAccess.getBlockId(par2, par3, par4);
-        return this.func_94477_d(var6) ? (var6 == redstoneWire.blockID ? par1IBlockAccess.getBlockMetadata(par2, par3, par4) : par1IBlockAccess.isBlockProvidingPowerTo(par2, par3, par4, par5)) : 0;
+        return this.func_94477_d(var6) ? (var6 == Block.redstoneWire.blockID ? par1IBlockAccess.getBlockMetadata(par2, par3, par4) : par1IBlockAccess.isBlockProvidingPowerTo(par2, par3, par4, par5)) : 0;
     }
 
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
-    @Override
     public boolean canProvidePower() {
         return true;
     }
@@ -198,11 +187,10 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     /**
      * Called when the block is placed in the world.
      */
-    @Override
     public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
         int var7 = ((MathHelper.floor_double((double) (par5EntityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3) + 2) % 4;
         par1World.setBlockMetadata(par2, par3, par4, var7, 3);
-        boolean var8 = this.func_94478_d(par1World, par2, par3, par4, var7);
+        boolean var8 = this.isGettingInput(par1World, par2, par3, par4, var7);
 
         if (var8) {
             par1World.scheduleBlockUpdate(par2, par3, par4, this.blockID, 1);
@@ -212,7 +200,6 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         this.func_94483_i_(par1World, par2, par3, par4);
     }
@@ -244,7 +231,6 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     /**
      * Called right before the block is destroyed by a player.  Args: world, x, y, z, metaData
      */
-    @Override
     public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
         if (this.isRepeaterPowered) {
             par1World.notifyBlocksOfNeighborChange(par2 + 1, par3, par4, this.blockID);
@@ -262,13 +248,12 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
-    @Override
     public boolean isOpaqueCube() {
         return false;
     }
 
     protected boolean func_94477_d(int par1) {
-        Block var2 = blocksList[par1];
+        Block var2 = Block.blocksList[par1];
         return var2 != null && var2.canProvidePower();
     }
 
@@ -277,7 +262,7 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
     }
 
     public static boolean isRedstoneRepeaterBlockID(int par0) {
-        return redstoneRepeaterIdle.func_94487_f(par0) || redstoneComparatorIdle.func_94487_f(par0);
+        return Block.redstoneRepeaterIdle.func_94487_f(par0) || Block.redstoneComparatorIdle.func_94487_f(par0);
     }
 
     public boolean func_94487_f(int par1) {
@@ -310,7 +295,6 @@ public abstract class BlockRedstoneLogic extends BlockDirectional {
      * Returns true if the given block ID is equivalent to this one. Example: redstoneTorchOn matches itself and
      * redstoneTorchOff, and vice versa. Most blocks only match themselves.
      */
-    @Override
     public boolean isAssociatedBlockID(int par1) {
         return this.func_94487_f(par1);
     }

@@ -1189,11 +1189,6 @@ public class Block {
      * Returns true or false based on whether the block this block is attached to is providing indirect power.
      */
     public boolean isIndirectlyPowered(World par1World, int par2, int par3, int par4) {
-        int var5 = par1World.getBlockMetadata(par2, par3, par4);
-        return var5 == 5 && par1World.getIndirectPowerOutput(par2, par3 - 1, par4, 0) || (var5 == 3 && par1World.getIndirectPowerOutput(par2, par3, par4 - 1, 2) || (var5 == 4 && par1World.getIndirectPowerOutput(par2, par3, par4 + 1, 3) || (var5 == 1 && par1World.getIndirectPowerOutput(par2 - 1, par3, par4, 4) || var5 == 2 && par1World.getIndirectPowerOutput(par2 + 1, par3, par4, 5))));
-    }
-
-    public boolean isPowered(World world, int x, int y, int z) {
-        return world.isBlockProvidingPowerTo(x, y, z, 0) == 1;
+        return false;
     }
 }

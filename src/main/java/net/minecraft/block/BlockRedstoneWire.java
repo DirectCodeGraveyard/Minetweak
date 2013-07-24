@@ -30,7 +30,6 @@ public class BlockRedstoneWire extends Block {
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
-    @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         return null;
     }
@@ -39,7 +38,6 @@ public class BlockRedstoneWire extends Block {
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
-    @Override
     public boolean isOpaqueCube() {
         return false;
     }
@@ -47,7 +45,6 @@ public class BlockRedstoneWire extends Block {
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
-    @Override
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -55,7 +52,6 @@ public class BlockRedstoneWire extends Block {
     /**
      * The type of render function that is called for this block
      */
-    @Override
     public int getRenderType() {
         return 5;
     }
@@ -63,9 +59,8 @@ public class BlockRedstoneWire extends Block {
     /**
      * Checks to see if its valid to put this block at the specified coordinates. Args: world, x, y, z
      */
-    @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
-        return par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) || par1World.getBlockId(par2, par3 - 1, par4) == glowStone.blockID;
+        return par1World.doesBlockHaveSolidTopSurface(par2, par3 - 1, par4) || par1World.getBlockId(par2, par3 - 1, par4) == Block.glowStone.blockID;
     }
 
     /**
@@ -77,7 +72,8 @@ public class BlockRedstoneWire extends Block {
         ArrayList<ChunkPosition> var5 = new ArrayList<ChunkPosition>(this.blocksNeedingUpdate);
         this.blocksNeedingUpdate.clear();
 
-        for (ChunkPosition var7 : var5) {
+        for (Object aVar5 : var5) {
+            ChunkPosition var7 = (ChunkPosition) aVar5;
             par1World.notifyBlocksOfNeighborChange(var7.x, var7.y, var7.z, this.blockID);
         }
     }
@@ -172,7 +168,6 @@ public class BlockRedstoneWire extends Block {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         super.onBlockAdded(par1World, par2, par3, par4);
 
@@ -214,7 +209,6 @@ public class BlockRedstoneWire extends Block {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
-    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         super.breakBlock(par1World, par2, par3, par4, par5, par6);
 
@@ -274,7 +268,6 @@ public class BlockRedstoneWire extends Block {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
-    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (!par1World.isRemote) {
             boolean var6 = this.canPlaceBlockAt(par1World, par2, par3, par4);
@@ -293,7 +286,6 @@ public class BlockRedstoneWire extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
-    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return Item.redstone.itemID;
     }
@@ -302,7 +294,6 @@ public class BlockRedstoneWire extends Block {
      * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
      * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    @Override
     public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return !this.wiresProvidePower ? 0 : this.isProvidingWeakPower(par1IBlockAccess, par2, par3, par4, par5);
     }
@@ -312,7 +303,6 @@ public class BlockRedstoneWire extends Block {
      * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
      * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    @Override
     public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         if (!this.wiresProvidePower) {
             return 0;
@@ -355,7 +345,6 @@ public class BlockRedstoneWire extends Block {
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
-    @Override
     public boolean canProvidePower() {
         return this.wiresProvidePower;
     }
@@ -367,12 +356,12 @@ public class BlockRedstoneWire extends Block {
     public static boolean isPowerProviderOrWire(IBlockAccess par0IBlockAccess, int par1, int par2, int par3, int par4) {
         int var5 = par0IBlockAccess.getBlockId(par1, par2, par3);
 
-        if (var5 == redstoneWire.blockID) {
+        if (var5 == Block.redstoneWire.blockID) {
             return true;
         } else if (var5 == 0) {
             return false;
-        } else if (!redstoneRepeaterIdle.func_94487_f(var5)) {
-            return blocksList[var5].canProvidePower() && par4 != -1;
+        } else if (!Block.redstoneRepeaterIdle.func_94487_f(var5)) {
+            return Block.blocksList[var5].canProvidePower() && par4 != -1;
         } else {
             int var6 = par0IBlockAccess.getBlockMetadata(par1, par2, par3);
             return par4 == (var6 & 3) || par4 == Direction.footInvisibleFaceRemap[var6 & 3];
@@ -389,7 +378,7 @@ public class BlockRedstoneWire extends Block {
         } else {
             int var5 = par0IBlockAccess.getBlockId(par1, par2, par3);
 
-            if (var5 == redstoneRepeaterActive.blockID) {
+            if (var5 == Block.redstoneRepeaterActive.blockID) {
                 int var6 = par0IBlockAccess.getBlockMetadata(par1, par2, par3);
                 return par4 == (var6 & 3);
             } else {
