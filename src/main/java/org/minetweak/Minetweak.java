@@ -7,7 +7,6 @@ import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.entity.player.PlayerTracker;
 import org.minetweak.permissions.PermissionsLoader;
-import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.plugins.PluginLoaderHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
@@ -74,8 +73,6 @@ public class Minetweak {
      * @param args the arguments to pass to MinecraftServer
      */
     public static void main(String[] args) {
-        System.out.println("Minetweak v" + getAPIVersion() + " using Minecraft v" + getMinecraftVersion());
-
         // Load the most important things first
         MinetweakConfig.initialize();
         PermissionsLoader.load();
@@ -93,7 +90,7 @@ public class Minetweak {
         // Loads joined player list
         registerListener(PlayerTracker.getInstance());
 
-        // Checks RAM usage to ensure that the user has enough
+        // Checks RAM usage to ensure that the server has enough
         ramCheck();
 
         // Finally, launch the Minecraft Server
@@ -146,48 +143,12 @@ public class Minetweak {
     }
 
     /**
-     * Register a player into Minetweak
-     * @param playerUsername Player name we are registering
-     */
-    public static boolean registerPlayer(String playerUsername) {
-        Player targetPlayerInstance = new Player(playerUsername);
-        if (isServerLockedDown()) {
-            targetPlayerInstance.kickPlayer("This server is currently under lockdown.");
-            return false;
-        } else {
-            if (players.containsKey(playerUsername)) {
-                if (isPlayerOnline(playerUsername)) {
-                    targetPlayerInstance.kickPlayer("There was a problem connecting you to the server");
-                    return false;
-                }
-            } else {
-                if (!PlayerWhitelist.isPlayerWhitelisted(playerUsername)) {
-                    targetPlayerInstance.kickPlayer("You are not whitelisted on this server!");
-                    return false;
-                }
-                players.put(playerUsername, targetPlayerInstance);
-            }
-            targetPlayerInstance.sendMessage("You were registered within Minetweak. Please check within the console for errors.");
-            if (targetPlayerInstance.isOperator()) targetPlayerInstance.sendMessage("You are an op.");
-            return true;
-        }
-    }
-
-    /**
-     * Take the target player and unregister them
-     * @param playerUsername Player name we marking as offline
-     */
-    public static void unregisterPlayer(String playerUsername) {
-        players.remove(playerUsername);
-    }
-
-    /**
      * Get a specific player by their username, either online or offline, if they are online
      * @param playerName Player's username
      * @return Instance of player
      */
     public static Player getPlayerByName(String playerName) {
-       return players.get(playerName);
+       return players.get(playerName.toLowerCase());
     }
 
     /**

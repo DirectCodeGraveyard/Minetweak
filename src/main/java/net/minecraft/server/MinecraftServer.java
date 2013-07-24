@@ -9,7 +9,6 @@ import net.minecraft.entity.EntityPlayer;
 import net.minecraft.logging.ILogAgent;
 import net.minecraft.player.IPlayerUsage;
 import net.minecraft.player.PlayerUsageSnooper;
-import net.minecraft.server.demo.DemoWorldServer;
 import net.minecraft.server.network.NetworkListenThread;
 import net.minecraft.server.network.packet.Packet;
 import net.minecraft.server.network.packet.Packet4UpdateTime;
@@ -158,7 +157,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     private KeyPair serverKeyPair;
 
     private String folderName;
-    private boolean isDemo;
     private boolean enableBonusChest;
 
     /**
@@ -251,11 +249,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             }
 
             if (var10 == 0) {
-                if (this.isDemo()) {
-                    this.worldServers[var10] = new DemoWorldServer(this, var7, par2Str, var11, this.theProfiler, this.getLogAgent());
-                } else {
-                    this.worldServers[var10] = new WorldServer(this, var7, par2Str, var11, var8, this.theProfiler, this.getLogAgent());
-                }
+                this.worldServers[var10] = new WorldServer(this, var7, par2Str, var11, var8, this.theProfiler, this.getLogAgent());
             } else {
                 this.worldServers[var10] = new WorldServerMulti(this, var7, par2Str, var11, var8, this.worldServers[0], this.theProfiler, this.getLogAgent());
             }
@@ -637,8 +631,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     } catch (NumberFormatException ignored) {
 
                     }
-                } else if (var10.equals("--demo")) {
-                    var6 = true;
                 } else if (var10.equals("--bonusChest")) {
                     var7 = true;
                 }
@@ -657,10 +649,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
             if (var8 >= 0) {
                 var16.setServerPort(var8);
-            }
-
-            if (var6) {
-                var16.setDemo(true);
             }
 
             if (var7) {
@@ -906,20 +894,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     protected boolean allowSpawnMonsters() {
         return true;
-    }
-
-    /**
-     * Gets whether this is a demo or not.
-     */
-    public boolean isDemo() {
-        return this.isDemo;
-    }
-
-    /**
-     * Sets whether this is a demo or not.
-     */
-    public void setDemo(boolean par1) {
-        this.isDemo = par1;
     }
 
     public void canCreateBonusChest(boolean par1) {

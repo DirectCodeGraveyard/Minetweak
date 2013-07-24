@@ -1,11 +1,8 @@
 package net.minecraft.server.network;
 
-import net.minecraft.utils.callable.CallablePacketClass;
-import net.minecraft.utils.callable.CallablePacketID;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.*;
-import net.minecraft.utils.enums.EnumChatFormatting;
 import net.minecraft.inventory.InventoryPlayer;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerBeacon;
@@ -17,19 +14,25 @@ import net.minecraft.item.ItemEditableBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemWritableBook;
 import net.minecraft.nbt.NBTTagString;
-import net.minecraft.server.network.packet.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ban.BanEntry;
-import net.minecraft.src.*;
+import net.minecraft.server.network.packet.*;
+import net.minecraft.src.IntHashMap;
+import net.minecraft.src.ReportedException;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBeacon;
 import net.minecraft.tileentity.TileEntityCommandBlock;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.utils.AxisAlignedBB;
+import net.minecraft.utils.callable.CallablePacketClass;
+import net.minecraft.utils.callable.CallablePacketID;
 import net.minecraft.utils.chat.ChatAllowedCharacters;
 import net.minecraft.utils.chat.ChatMessageComponent;
+import net.minecraft.utils.enums.EnumChatFormatting;
 import net.minecraft.world.WorldServer;
+import org.minetweak.Minetweak;
 import org.minetweak.Server;
+import org.minetweak.event.player.PlayerChatEvent;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -559,6 +562,7 @@ public class NetServerHandler extends NetHandler {
 
                     ChatMessageComponent var4 = ChatMessageComponent.func_111082_b("chat.type.text", this.playerEntity.getTranslatedEntityName(), var2);
                     this.mcServer.getConfigurationManager().sendChatMessageToAll(var4, false);
+                    Minetweak.getEventBus().post(new PlayerChatEvent(Minetweak.getPlayerByName(this.playerEntity.getEntityName()), var2));
                 }
 
                 this.chatSpamThresholdCount += 20;
