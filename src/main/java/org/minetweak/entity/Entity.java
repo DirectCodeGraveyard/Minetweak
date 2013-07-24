@@ -146,4 +146,11 @@ public class Entity {
     public void mountEntity(net.minecraft.src.Entity mountedEntity) {
         entity.mountEntity(mountedEntity);
     }
+
+    /**
+     * Dismount this entity from another one
+     */
+    public void dismount() {
+        entity.mountEntity(null);
+    }
 }
