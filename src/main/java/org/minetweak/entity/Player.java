@@ -2,9 +2,11 @@ package org.minetweak.entity;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.*;
+import org.minetweak.Minetweak;
 import org.minetweak.command.CommandSender;
 import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
+import org.minetweak.permissions.PlayerWhitelist;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,40 @@ public class Player extends Entity implements CommandSender {
     public Player(EntityPlayerMP playerMP) {
         super(playerMP);
         this.playerDisplayName = playerMP.getEntityName();
+    }
+
+    /**
+     * Register a player into Minetweak
+     * @param playerUsername Player name we are registering
+     */
+    public static boolean registerPlayer(String playerUsername) {
+        Player targetPlayerInstance = new Player(playerUsername);
+        if (Minetweak.isServerLockedDown()) {
+            targetPlayerInstance.kickPlayer("This server is currently under lockdown.");
+            return false;
+        } else {
+            if (Minetweak.getPlayers().containsKey(playerUsername)) {
+                if (Minetweak.isPlayerOnline(playerUsername)) {
+                    targetPlayerInstance.kickPlayer("There was a problem connecting you to the server");
+                    return false;
+                }
+            } else {
+                if (!PlayerWhitelist.isPlayerWhitelisted(playerUsername)) {
+                    targetPlayerInstance.kickPlayer("You are not whitelisted on this server!");
+                    return false;
+                }
+                Minetweak.getPlayers().put(playerUsername, targetPlayerInstance);
+            }
+            return true;
+        }
+    }
+
+    /**
+     * Take the target player and unregister them
+     * @param playerUsername Player name we marking as offline
+     */
+    public static void unregisterPlayer(String playerUsername) {
+        Minetweak.getPlayers().remove(playerUsername);
     }
 
     /**

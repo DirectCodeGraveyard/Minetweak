@@ -7,7 +7,6 @@ import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.entity.player.PlayerTracker;
 import org.minetweak.permissions.PermissionsLoader;
-import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.plugins.PluginLoaderHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
@@ -143,41 +142,6 @@ public class Minetweak {
      */
     public static boolean isServerLockedDown() {
         return lockdownEnabled;
-    }
-
-    /**
-     * Register a player into Minetweak
-     * @param playerUsername Player name we are registering
-     */
-    public static boolean registerPlayer(String playerUsername) {
-        Player targetPlayerInstance = new Player(playerUsername);
-        if (isServerLockedDown()) {
-            targetPlayerInstance.kickPlayer("This server is currently under lockdown.");
-            return false;
-        } else {
-            if (players.containsKey(playerUsername)) {
-                if (isPlayerOnline(playerUsername)) {
-                    targetPlayerInstance.kickPlayer("There was a problem connecting you to the server");
-                    return false;
-                }
-            } else {
-                if (!PlayerWhitelist.isPlayerWhitelisted(playerUsername)) {
-                    targetPlayerInstance.kickPlayer("You are not whitelisted on this server!");
-                    return false;
-                }
-                players.put(playerUsername, targetPlayerInstance);
-            }
-            if (targetPlayerInstance.isOperator()) targetPlayerInstance.sendMessage("You are an op.");
-            return true;
-        }
-    }
-
-    /**
-     * Take the target player and unregister them
-     * @param playerUsername Player name we marking as offline
-     */
-    public static void unregisterPlayer(String playerUsername) {
-        players.remove(playerUsername);
     }
 
     /**

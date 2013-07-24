@@ -16,7 +16,8 @@ import java.util.*;
 import java.util.Map.Entry;
 
 @SuppressWarnings("UnusedDeclaration")
-public abstract class ServerConfigurationManager {
+public abstract class
+        ServerConfigurationManager {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd \'at\' HH:mm:ss z");
     /**
      * A list of player entities that exist on this server.
@@ -197,7 +198,7 @@ public abstract class ServerConfigurationManager {
             par1EntityPlayerMP.playerNetServerHandler.sendPacket(new Packet201PlayerInfo(aPlayerEntityList.getCommandSenderName(), true, aPlayerEntityList.ping));
         }
 
-        Minetweak.registerPlayer(par1EntityPlayerMP.getCommandSenderName().toLowerCase());
+        Player.registerPlayer(par1EntityPlayerMP.getCommandSenderName().toLowerCase());
         Minetweak.getEventBus().post(new PlayerJoinEvent(Minetweak.getPlayerByName(par1EntityPlayerMP.getEntityName())));
     }
 
@@ -212,7 +213,7 @@ public abstract class ServerConfigurationManager {
      * Called when a player disconnects from the game. Writes player data to disk and removes them from the world.
      */
     public void playerLoggedOut(EntityPlayerMP par1EntityPlayerMP) {
-        Minetweak.unregisterPlayer(par1EntityPlayerMP.getCommandSenderName().toLowerCase());
+        Player.unregisterPlayer(par1EntityPlayerMP.getCommandSenderName().toLowerCase());
         this.writePlayerData(par1EntityPlayerMP);
         WorldServer var2 = par1EntityPlayerMP.getServerForPlayer();
 
