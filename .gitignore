@@ -1,4 +1,6 @@
 *.iml
+*.iws
+*.ipr
 .idea/
 /out/
 /jar/
@@ -7,4 +9,3 @@
 /.gradle
 *.*~
 /classes/
-*.ipr
