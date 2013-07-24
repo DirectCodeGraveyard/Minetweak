@@ -31,4 +31,9 @@ public class CommandWeather extends CommandExecutor {
             noPermission(sender, "change the weather");
         }
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Changes Weather";
+    }
 }

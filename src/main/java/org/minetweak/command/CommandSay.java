@@ -16,4 +16,9 @@ public class CommandSay extends CommandExecutor {
         String message = mergeArgs(args);
         Server.broadcastMessage(message);
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Broadcasts a Message";
+    }
 }

@@ -45,4 +45,9 @@ public class CommandSave extends CommandExecutor {
             Server.broadcastMessage("World Save Failed.");
         }
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Saves Server Data";
+    }
 }

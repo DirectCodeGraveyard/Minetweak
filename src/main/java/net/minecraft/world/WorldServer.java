@@ -31,12 +31,12 @@ public class WorldServer extends World {
     private final MinecraftServer mcServer;
     private final EntityTracker theEntityTracker;
     private final PlayerManager thePlayerManager;
-    private Set pendingTickListEntriesHashSet;
+    private Set<NextTickListEntry> pendingTickListEntriesHashSet;
 
     /**
      * All work to do in future ticks.
      */
-    private TreeSet pendingTickListEntriesTreeSet;
+    private TreeSet<NextTickListEntry> pendingTickListEntriesTreeSet;
     public ChunkProviderServer theChunkProviderServer;
 
     /**
@@ -63,7 +63,7 @@ public class WorldServer extends World {
      */
     private int blockEventCacheIndex;
     private static final WeightedRandomChestContent[] bonusChestContent = new WeightedRandomChestContent[]{new WeightedRandomChestContent(Item.stick.itemID, 0, 1, 3, 10), new WeightedRandomChestContent(Block.planks.blockID, 0, 1, 3, 10), new WeightedRandomChestContent(Block.wood.blockID, 0, 1, 3, 10), new WeightedRandomChestContent(Item.axeStone.itemID, 0, 1, 1, 3), new WeightedRandomChestContent(Item.axeWood.itemID, 0, 1, 1, 5), new WeightedRandomChestContent(Item.pickaxeStone.itemID, 0, 1, 1, 3), new WeightedRandomChestContent(Item.pickaxeWood.itemID, 0, 1, 1, 5), new WeightedRandomChestContent(Item.appleRed.itemID, 0, 2, 3, 5), new WeightedRandomChestContent(Item.bread.itemID, 0, 2, 3, 3)};
-    private List pendingTickListEntriesThisTick = new ArrayList();
+    private List<NextTickListEntry> pendingTickListEntriesThisTick = new ArrayList<NextTickListEntry>();
 
     /**
      * An IntHashMap of entity IDs (integers) to their Entity objects.
@@ -81,11 +81,11 @@ public class WorldServer extends World {
         }
 
         if (this.pendingTickListEntriesHashSet == null) {
-            this.pendingTickListEntriesHashSet = new HashSet();
+            this.pendingTickListEntriesHashSet = new HashSet<NextTickListEntry>();
         }
 
         if (this.pendingTickListEntriesTreeSet == null) {
-            this.pendingTickListEntriesTreeSet = new TreeSet();
+            this.pendingTickListEntriesTreeSet = new TreeSet<NextTickListEntry>();
         }
 
         this.field_85177_Q = new Teleporter(this);
@@ -170,11 +170,8 @@ public class WorldServer extends World {
      */
     public void updateAllPlayersSleepingFlag() {
         this.allPlayersSleeping = !this.playerEntities.isEmpty();
-        Iterator var1 = this.playerEntities.iterator();
 
-        while (var1.hasNext()) {
-            EntityPlayer var2 = (EntityPlayer) var1.next();
-
+        for (EntityPlayer var2 : this.playerEntities) {
             if (!var2.isPlayerSleeping()) {
                 this.allPlayersSleeping = false;
                 break;
@@ -184,11 +181,8 @@ public class WorldServer extends World {
 
     protected void wakeAllPlayers() {
         this.allPlayersSleeping = false;
-        Iterator var1 = this.playerEntities.iterator();
 
-        while (var1.hasNext()) {
-            EntityPlayer var2 = (EntityPlayer) var1.next();
-
+        for (EntityPlayer var2 : this.playerEntities) {
             if (var2.isPlayerSleeping()) {
                 var2.wakeUpPlayer(false, false, true);
             }
@@ -206,7 +200,7 @@ public class WorldServer extends World {
 
     public boolean areAllPlayersAsleep() {
         if (this.allPlayersSleeping && !this.isRemote) {
-            Iterator var1 = this.playerEntities.iterator();
+            Iterator<EntityPlayer> var1 = this.playerEntities.iterator();
             EntityPlayer var2;
 
             do {
@@ -214,7 +208,7 @@ public class WorldServer extends World {
                     return true;
                 }
 
-                var2 = (EntityPlayer) var1.next();
+                var2 = var1.next();
             }
             while (var2.isPlayerFullyAsleep());
 
@@ -230,12 +224,8 @@ public class WorldServer extends World {
      */
     protected void tickBlocksAndAmbiance() {
         super.tickBlocksAndAmbiance();
-        int var1 = 0;
-        int var2 = 0;
-        Iterator var3 = this.activeChunkSet.iterator();
 
-        while (var3.hasNext()) {
-            ChunkCoordIntPair var4 = (ChunkCoordIntPair) var3.next();
+        for (ChunkCoordIntPair var4 : this.activeChunkSet) {
             int var5 = var4.chunkXPos * 16;
             int var6 = var4.chunkZPos * 16;
             this.theProfiler.startSection("getChunk");
@@ -307,11 +297,9 @@ public class WorldServer extends World {
                         int var15 = var13 >> 8 & 15;
                         int var16 = var13 >> 16 & 15;
                         int var17 = var21.getExtBlockID(var14, var16, var15);
-                        ++var2;
                         Block var18 = Block.blocksList[var17];
 
                         if (var18 != null && var18.getTickRandomly()) {
-                            ++var1;
                             var18.updateTick(this, var14 + var5, var16 + var21.getYLocation(), var15 + var6, this.rand);
                         }
                     }
@@ -428,7 +416,7 @@ public class WorldServer extends World {
             NextTickListEntry var4;
 
             for (int var3 = 0; var3 < var2; ++var3) {
-                var4 = (NextTickListEntry) this.pendingTickListEntriesTreeSet.first();
+                var4 = this.pendingTickListEntriesTreeSet.first();
 
                 if (!par1 && var4.scheduledTime > this.worldInfo.getWorldTotalTime()) {
                     break;
@@ -441,10 +429,10 @@ public class WorldServer extends World {
 
             this.theProfiler.endSection();
             this.theProfiler.startSection("ticking");
-            Iterator var14 = this.pendingTickListEntriesThisTick.iterator();
+            Iterator<NextTickListEntry> var14 = this.pendingTickListEntriesThisTick.iterator();
 
             while (var14.hasNext()) {
-                var4 = (NextTickListEntry) var14.next();
+                var4 = var14.next();
                 var14.remove();
                 byte var5 = 0;
 
@@ -481,7 +469,7 @@ public class WorldServer extends World {
     }
 
     public List getPendingBlockUpdates(Chunk par1Chunk, boolean par2) {
-        ArrayList var3 = null;
+        ArrayList<NextTickListEntry> var3 = null;
         ChunkCoordIntPair var4 = par1Chunk.getChunkCoordIntPair();
         int var5 = (var4.chunkXPos << 4) - 2;
         int var6 = var5 + 16 + 2;
@@ -489,7 +477,7 @@ public class WorldServer extends World {
         int var8 = var7 + 16 + 2;
 
         for (int var9 = 0; var9 < 2; ++var9) {
-            Iterator var10;
+            Iterator<NextTickListEntry> var10;
 
             if (var9 == 0) {
                 var10 = this.pendingTickListEntriesTreeSet.iterator();
@@ -502,7 +490,7 @@ public class WorldServer extends World {
             }
 
             while (var10.hasNext()) {
-                NextTickListEntry var11 = (NextTickListEntry) var10.next();
+                NextTickListEntry var11 = var10.next();
 
                 if (var11.xCoord >= var5 && var11.xCoord < var6 && var11.zCoord >= var7 && var11.zCoord < var8) {
                     if (par2) {
@@ -511,7 +499,7 @@ public class WorldServer extends World {
                     }
 
                     if (var3 == null) {
-                        var3 = new ArrayList();
+                        var3 = new ArrayList<NextTickListEntry>();
                     }
 
                     var3.add(var11);
@@ -550,12 +538,10 @@ public class WorldServer extends World {
     /**
      * get a list of tileEntity's
      */
-    public List getTileEntityList(int par1, int par2, int par3, int par4, int par5, int par6) {
-        ArrayList var7 = new ArrayList();
+    public List<TileEntity> getTileEntityList(int par1, int par2, int par3, int par4, int par5, int par6) {
+        ArrayList<TileEntity> var7 = new ArrayList<TileEntity>();
 
-        for (int var8 = 0; var8 < this.loadedTileEntityList.size(); ++var8) {
-            TileEntity var9 = this.loadedTileEntityList.get(var8);
-
+        for (TileEntity var9 : this.loadedTileEntityList) {
             if (var9.xCoord >= par1 && var9.yCoord >= par2 && var9.zCoord >= par3 && var9.xCoord < par4 && var9.yCoord < par5 && var9.zCoord < par6) {
                 var7.add(var9);
             }
@@ -577,11 +563,11 @@ public class WorldServer extends World {
         }
 
         if (this.pendingTickListEntriesHashSet == null) {
-            this.pendingTickListEntriesHashSet = new HashSet();
+            this.pendingTickListEntriesHashSet = new HashSet<NextTickListEntry>();
         }
 
         if (this.pendingTickListEntriesTreeSet == null) {
-            this.pendingTickListEntriesTreeSet = new TreeSet();
+            this.pendingTickListEntriesTreeSet = new TreeSet<NextTickListEntry>();
         }
 
         this.createSpawnPosition(par1WorldSettings);
@@ -597,7 +583,7 @@ public class WorldServer extends World {
         } else {
             this.findingSpawnPoint = true;
             WorldChunkManager var2 = this.provider.worldChunkMgr;
-            List var3 = var2.getBiomesToSpawnIn();
+            List<BiomeGenBase> var3 = var2.getBiomesToSpawnIn();
             Random var4 = new Random(this.getSeed());
             ChunkPosition var5 = var2.findBiomePosition(0, 0, 256, var3, var4);
             int var6 = 0;
@@ -696,8 +682,8 @@ public class WorldServer extends World {
         Entity[] var2 = par1Entity.getParts();
 
         if (var2 != null) {
-            for (int var3 = 0; var3 < var2.length; ++var3) {
-                this.entityIdMap.addKey(var2[var3].entityId, var2[var3]);
+            for (Entity aVar2 : var2) {
+                this.entityIdMap.addKey(aVar2.entityId, aVar2);
             }
         }
     }
@@ -708,8 +694,8 @@ public class WorldServer extends World {
         Entity[] var2 = par1Entity.getParts();
 
         if (var2 != null) {
-            for (int var3 = 0; var3 < var2.length; ++var3) {
-                this.entityIdMap.removeObject(var2[var3].entityId);
+            for (Entity aVar2 : var2) {
+                this.entityIdMap.removeObject(aVar2.entityId);
             }
         }
     }
@@ -755,11 +741,7 @@ public class WorldServer extends World {
             var11.affectedBlockPositions.clear();
         }
 
-        Iterator var12 = this.playerEntities.iterator();
-
-        while (var12.hasNext()) {
-            EntityPlayer var13 = (EntityPlayer) var12.next();
-
+        for (EntityPlayer var13 : this.playerEntities) {
             if (var13.getDistanceSq(par2, par4, par6) < 4096.0D) {
                 ((EntityPlayerMP) var13).playerNetServerHandler.sendPacket(new Packet60Explosion(par2, par4, par6, par8, var11.affectedBlockPositions, (Vec3) var11.func_77277_b().get(var13)));
             }
@@ -795,10 +777,9 @@ public class WorldServer extends World {
         while (!this.blockEventCache[this.blockEventCacheIndex].isEmpty()) {
             int var1 = this.blockEventCacheIndex;
             this.blockEventCacheIndex ^= 1;
-            Iterator var2 = this.blockEventCache[var1].iterator();
 
-            while (var2.hasNext()) {
-                BlockEventData var3 = (BlockEventData) var2.next();
+            for (Object o : this.blockEventCache[var1]) {
+                BlockEventData var3 = (BlockEventData) o;
 
                 if (this.onBlockEventReceived(var3)) {
                     this.mcServer.getConfigurationManager().sendPacketToPlayersAroundPoint((double) var3.getX(), (double) var3.getY(), (double) var3.getZ(), 64.0D, this.provider.dimensionId, new Packet54PlayNoteBlock(var3.getX(), var3.getY(), var3.getZ(), var3.getBlockID(), var3.getEventID(), var3.getEventParameter()));
@@ -814,7 +795,7 @@ public class WorldServer extends World {
      */
     private boolean onBlockEventReceived(BlockEventData par1BlockEventData) {
         int var2 = this.getBlockId(par1BlockEventData.getX(), par1BlockEventData.getY(), par1BlockEventData.getZ());
-        return var2 == par1BlockEventData.getBlockID() ? Block.blocksList[var2].onBlockEventReceived(this, par1BlockEventData.getX(), par1BlockEventData.getY(), par1BlockEventData.getZ(), par1BlockEventData.getEventID(), par1BlockEventData.getEventParameter()) : false;
+        return var2 == par1BlockEventData.getBlockID() && Block.blocksList[var2].onBlockEventReceived(this, par1BlockEventData.getX(), par1BlockEventData.getY(), par1BlockEventData.getZ(), par1BlockEventData.getEventID(), par1BlockEventData.getEventParameter());
     }
 
     /**

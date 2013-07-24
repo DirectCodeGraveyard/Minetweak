@@ -18,4 +18,9 @@ public class CommandMotd extends CommandExecutor {
             noPermission(sender, "set the MOTD");
         }
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Gets/Sets the MOTD";
+    }
 }

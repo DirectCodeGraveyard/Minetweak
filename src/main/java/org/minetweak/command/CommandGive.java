@@ -8,7 +8,7 @@ public class CommandGive extends CommandExecutor {
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         if (!sender.hasPermission("minetweak.command.give")) {
-            sender.sendMessage("Sorry, you do not have permission to Give Items!");
+            noPermission(sender, "give items");
             return;
         }
 

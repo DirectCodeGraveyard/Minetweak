@@ -35,4 +35,9 @@ public class CommandTps extends CommandExecutor {
 
         return (double) var2 / (double) tickArray.length * 1.0E-6D;
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Gets the Ticks Per Second of the Server";
+    }
 }

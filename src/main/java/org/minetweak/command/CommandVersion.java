@@ -15,4 +15,9 @@ public class CommandVersion extends CommandExecutor {
         sender.sendMessage("You are running " + EnumChatFormatting.BLUE + "Minetweak" + EnumChatFormatting.RESET + " v" + Minetweak.getAPIVersion() + ", using Minecraft v" + Minetweak.getMinecraftVersion());
     }
 
+    @Override
+    public String getHelpInfo() {
+        return "Gets the Server Version";
+    }
+
 }

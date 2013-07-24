@@ -13,7 +13,7 @@ public class CommandGamemode extends CommandExecutor {
             sender.sendMessage("Usage: /gamemode <gamemode> [player]");
             return;
         } else if (!sender.hasPermission("minetweak.command.gamemode")) {
-            sender.sendMessage("You don't have the permissions to do that.");
+            noPermission(sender, "change gamemodes");
             return;
         }
 
@@ -55,6 +55,11 @@ public class CommandGamemode extends CommandExecutor {
             if (gamemode == 1) player.sendMessage("Your gamemode was set to creative");
             if (gamemode == 2) player.sendMessage("Your gamemode was set to adventure");
         }
+    }
+
+    @Override
+    public String getHelpInfo() {
+        return "Changes a Players Gamemode";
     }
 
 }

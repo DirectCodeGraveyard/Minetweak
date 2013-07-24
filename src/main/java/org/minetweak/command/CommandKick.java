@@ -12,7 +12,7 @@ public class CommandKick extends CommandExecutor {
             sender.sendMessage("Usage: /kick <player> [reason]");
             return;
         } else if (!sender.hasPermission("minetweak.command.kick")) {
-            sender.sendMessage("You don't have the permissions to do that.");
+            noPermission(sender, "kick players");
             return;
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);

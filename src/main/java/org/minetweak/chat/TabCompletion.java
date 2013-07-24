@@ -1,7 +1,8 @@
-package org.minetweak.command;
+package org.minetweak.chat;
 
 import org.minetweak.Minetweak;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,13 +11,13 @@ public class TabCompletion {
         return Minetweak.getCommandExecutors().keySet();
     }
 
-    public static Set<String> getMatches(String input) {
+    public static ArrayList<String> getMatches(String input) {
         Set<String> matches = new HashSet<String>();
         if (input.startsWith("/")) {
             Set<String> commands = getCommands();
             input = input.substring(1);
             if (!input.equals("")) {
-                return getCommandsMatching(input);
+                return new ArrayList<String>(getCommandsMatching(input));
             } else {
                 for (String command : commands) {
                     matches.add("/" + command);
@@ -25,7 +26,7 @@ public class TabCompletion {
         } else {
             matches = getPlayersMatching(input);
         }
-        return matches;
+        return new ArrayList<String>(matches);
     }
 
     public static Set<String> getPlayersMatching(String input) {

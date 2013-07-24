@@ -27,4 +27,9 @@ public class CommandOp extends CommandExecutor {
         }
     }
 
+    @Override
+    public String getHelpInfo() {
+        return "Ops a Player";
+    }
+
 }
