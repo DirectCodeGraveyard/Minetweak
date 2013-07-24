@@ -4,6 +4,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.utils.enums.EnumChatFormatting;
+import org.minetweak.chat.ChatFormatting;
 import org.minetweak.command.Console;
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
@@ -110,13 +111,22 @@ public class Server {
     }
 
     public static void sendToOps(String message) {
-        Minetweak.info(message);
+        sendToOps(message, false);
+    }
+
+    public static void sendToOps(String message, boolean pretty) {
+        String out = message;
+        if (pretty) {
+            out = "[" + ChatFormatting.GOLD + "Server" + ChatFormatting.RESET + "] " + message;
+        }
+
         for (String op : MinecraftServer.getServer().getConfigurationManager().getOps()) {
             Player player = Minetweak.getPlayerByName(op);
             if (player==null) {
                 continue;
             }
-            player.sendMessage(message);
+            player.sendMessage(out);
         }
+        Minetweak.info(message);
     }
 }
