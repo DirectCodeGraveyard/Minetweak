@@ -92,7 +92,7 @@ public abstract class ServerConfigurationManager {
         this.bannedPlayers.setListActive(false);
         this.bannedIPs.setListActive(false);
         this.maxPlayers = 8;
-        this.whiteListEnforced = MinetweakConfig.getBoolean("server.whitelist-enabled");
+        this.whiteListEnforced = MinetweakConfig.getBoolean("server.whitelist-enabled", false);
     }
 
     public void initializeConnectionToPlayer(INetworkManager par1INetworkManager, EntityPlayerMP par2EntityPlayerMP) {
