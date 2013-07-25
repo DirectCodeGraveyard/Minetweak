@@ -37,6 +37,8 @@ public enum ChatFormatting {
     private final boolean field_96303_A;
     private final String field_96304_B;
 
+    private static ArrayList<String> colorNodes = new ArrayList<String>();
+
     private ChatFormatting(char par3) {
         this(par3, false);
     }
@@ -45,6 +47,35 @@ public enum ChatFormatting {
         this.field_96329_z = par3;
         this.field_96303_A = par4;
         this.field_96304_B = "\u00a7" + par3;
+    }
+
+    public static void initializeColorNodes() {
+        colorNodes.add(String.valueOf('\u00a7') + "0");
+        colorNodes.add(String.valueOf('\u00a7') + "1");
+        colorNodes.add(String.valueOf('\u00a7') + "2");
+        colorNodes.add(String.valueOf('\u00a7') + "3");
+        colorNodes.add(String.valueOf('\u00a7') + "4");
+        colorNodes.add(String.valueOf('\u00a7') + "5");
+        colorNodes.add(String.valueOf('\u00a7') + "6");
+        colorNodes.add(String.valueOf('\u00a7') + "7");
+        colorNodes.add(String.valueOf('\u00a7') + "8");
+        colorNodes.add(String.valueOf('\u00a7') + "9");
+        colorNodes.add(String.valueOf('\u00a7') + "a");
+        colorNodes.add(String.valueOf('\u00a7') + "b");
+        colorNodes.add(String.valueOf('\u00a7') + "c");
+        colorNodes.add(String.valueOf('\u00a7') + "d");
+        colorNodes.add(String.valueOf('\u00a7') + "e");
+        colorNodes.add(String.valueOf('\u00a7') + "f");
+        colorNodes.add(String.valueOf('\u00a7') + "k");
+        colorNodes.add(String.valueOf('\u00a7') + "l");
+        colorNodes.add(String.valueOf('\u00a7') + "m");
+        colorNodes.add(String.valueOf('\u00a7') + "n");
+        colorNodes.add(String.valueOf('\u00a7') + "o");
+        colorNodes.add(String.valueOf('\u00a7') + "r");
+    }
+
+    public static ArrayList<String> getColorNodes() {
+        return colorNodes;
     }
 
     public char func_96298_a() {
