@@ -242,8 +242,8 @@ public class ItemInWorldManager {
             if (getGameType().isAdventure()) {
                 event.setCancelled(true);
             }
-
-            Item currentItem = thisPlayerMP.getCurrentEquippedItem().getItem();
+            Item currentItem = null;
+            if (thisPlayerMP.getCurrentEquippedItem() != null) currentItem = thisPlayerMP.getCurrentEquippedItem().getItem();
             if (isCreative() && currentItem!=null &&currentItem instanceof ItemSword) {
                 event.setCancelled(true);
             }
