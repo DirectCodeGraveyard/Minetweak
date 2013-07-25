@@ -73,8 +73,6 @@ public class Minetweak {
      * @param args the arguments to pass to MinecraftServer
      */
     public static void main(String[] args) {
-        System.out.println("Minetweak v" + getAPIVersion() + " using Minecraft v" + getMinecraftVersion());
-
         // Load the most important things first
         MinetweakConfig.initialize();
         PermissionsLoader.load();
@@ -92,7 +90,7 @@ public class Minetweak {
         // Loads joined player list
         registerListener(PlayerTracker.getInstance());
 
-        // Checks RAM usage to ensure that the user has enough
+        // Checks RAM usage to ensure that the server has enough
         ramCheck();
 
         // Finally, launch the Minecraft Server
