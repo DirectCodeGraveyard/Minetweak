@@ -35,8 +35,9 @@ public class Minetweak {
 
     /**
      * This is the Minetweak version we are currently running on.
+     * TODO: Make this automatic through Gradle
      */
-    private static final String serverVersion = "0.6.3";
+    private static final String serverVersion = "0.6.4";
 
     /**
      * This boolean will return true if the server has finished loading, will
