@@ -1,16 +1,16 @@
 package org.minetweak.entity;
 
 import net.minecraft.entity.EntityPlayerMP;
-import net.minecraft.utils.enums.EnumGameType;
 import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.NetServerHandler;
 import net.minecraft.player.achievement.Achievement;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ban.BanEntry;
-import net.minecraft.src.*;
+import net.minecraft.server.network.NetServerHandler;
+import net.minecraft.src.DamageSource;
 import net.minecraft.utils.chat.ChatMessageComponent;
+import net.minecraft.utils.enums.EnumGameType;
 import org.minetweak.Minetweak;
 import org.minetweak.command.CommandSender;
 import org.minetweak.inventory.InventoryPlayer;
@@ -56,6 +56,7 @@ public class Player extends Entity implements CommandSender {
      * @param playerUsername Player name we are registering
      */
     public static boolean registerPlayer(String playerUsername) {
+        playerUsername = playerUsername.toLowerCase();
         Player targetPlayerInstance = new Player(playerUsername);
         if (Minetweak.isServerLockedDown()) {
             targetPlayerInstance.kickPlayer("This server is currently under lockdown.");
@@ -82,7 +83,7 @@ public class Player extends Entity implements CommandSender {
      * @param playerUsername Player name we marking as offline
      */
     public static void unregisterPlayer(String playerUsername) {
-        Minetweak.getPlayers().remove(playerUsername);
+        Minetweak.getPlayers().remove(playerUsername.toLowerCase());
     }
 
     /**

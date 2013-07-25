@@ -7,7 +7,6 @@ import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.entity.player.PlayerTracker;
 import org.minetweak.permissions.PermissionsLoader;
-import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.plugins.PluginLoaderHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
@@ -151,7 +150,7 @@ public class Minetweak {
      * @return Instance of player
      */
     public static Player getPlayerByName(String playerName) {
-       return players.get(playerName);
+       return players.get(playerName.toLowerCase());
     }
 
     /**
