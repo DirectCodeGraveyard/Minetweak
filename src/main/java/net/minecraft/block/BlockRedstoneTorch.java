@@ -30,7 +30,9 @@ public class BlockRedstoneTorch extends BlockTorch {
 
         int var7 = 0;
 
-        for (RedstoneUpdateInfo var9 : var6) {
+        for (Object aVar6 : var6) {
+            RedstoneUpdateInfo var9 = (RedstoneUpdateInfo) aVar6;
+
             if (var9.x == par2 && var9.y == par3 && var9.z == par4) {
                 ++var7;
 
@@ -53,7 +55,6 @@ public class BlockRedstoneTorch extends BlockTorch {
     /**
      * How many world ticks before ticking
      */
-    @Override
     public int tickRate(World par1World) {
         return 2;
     }
@@ -61,7 +62,6 @@ public class BlockRedstoneTorch extends BlockTorch {
     /**
      * Called whenever the block is added into the world. Args: world, x, y, z
      */
-    @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4) {
         if (par1World.getBlockMetadata(par2, par3, par4) == 0) {
             super.onBlockAdded(par1World, par2, par3, par4);
@@ -80,7 +80,6 @@ public class BlockRedstoneTorch extends BlockTorch {
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
-    @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         if (this.torchActive) {
             par1World.notifyBlocksOfNeighborChange(par2, par3 - 1, par4, this.blockID);
@@ -97,7 +96,6 @@ public class BlockRedstoneTorch extends BlockTorch {
      * returns true, standard redstone propagation rules will apply instead and this will not be called. Args: World, X,
      * Y, Z, side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    @Override
     public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         if (!this.torchActive) {
             return 0;
@@ -110,7 +108,6 @@ public class BlockRedstoneTorch extends BlockTorch {
     /**
      * Ticks the block if it's been scheduled
      */
-    @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         boolean var6 = this.isIndirectlyPowered(par1World, par2, par3, par4);
         List<RedstoneUpdateInfo> var7 = redstoneUpdateInfoCache.get(par1World);
@@ -121,7 +118,7 @@ public class BlockRedstoneTorch extends BlockTorch {
 
         if (this.torchActive) {
             if (var6) {
-                par1World.setBlock(par2, par3, par4, torchRedstoneIdle.blockID, par1World.getBlockMetadata(par2, par3, par4), 3);
+                par1World.setBlock(par2, par3, par4, Block.torchRedstoneIdle.blockID, par1World.getBlockMetadata(par2, par3, par4), 3);
 
                 if (this.checkForBurnout(par1World, par2, par3, par4, true)) {
                     par1World.playSoundEffect((double) ((float) par2 + 0.5F), (double) ((float) par3 + 0.5F), (double) ((float) par4 + 0.5F), "random.fizz", 0.5F, 2.6F + (par1World.rand.nextFloat() - par1World.rand.nextFloat()) * 0.8F);
@@ -135,7 +132,7 @@ public class BlockRedstoneTorch extends BlockTorch {
                 }
             }
         } else if (!var6 && !this.checkForBurnout(par1World, par2, par3, par4, false)) {
-            par1World.setBlock(par2, par3, par4, torchRedstoneActive.blockID, par1World.getBlockMetadata(par2, par3, par4), 3);
+            par1World.setBlock(par2, par3, par4, Block.torchRedstoneActive.blockID, par1World.getBlockMetadata(par2, par3, par4), 3);
         }
     }
 
@@ -143,7 +140,6 @@ public class BlockRedstoneTorch extends BlockTorch {
      * Lets the block know when one of its neighbor changes. Doesn't know which neighbor changed (coordinates passed are
      * their own) Args: x, y, z, neighbor blockID
      */
-    @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
         if (!this.func_94397_d(par1World, par2, par3, par4, par5)) {
             boolean var6 = this.isIndirectlyPowered(par1World, par2, par3, par4);
@@ -158,7 +154,6 @@ public class BlockRedstoneTorch extends BlockTorch {
      * Returns true if the block is emitting direct/strong redstone power on the specified side. Args: World, X, Y, Z,
      * side. Note that the side is reversed - eg it is 1 (up) when checking the bottom of the block.
      */
-    @Override
     public int isProvidingStrongPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return par5 == 0 ? this.isProvidingWeakPower(par1IBlockAccess, par2, par3, par4, par5) : 0;
     }
@@ -166,15 +161,13 @@ public class BlockRedstoneTorch extends BlockTorch {
     /**
      * Returns the ID of the items to drop on destruction.
      */
-    @Override
     public int idDropped(int par1, Random par2Random, int par3) {
-        return torchRedstoneActive.blockID;
+        return Block.torchRedstoneActive.blockID;
     }
 
     /**
      * Can this block provide power. Only wire currently seems to have this change based on its state.
      */
-    @Override
     public boolean canProvidePower() {
         return true;
     }
@@ -183,16 +176,13 @@ public class BlockRedstoneTorch extends BlockTorch {
      * Returns true if the given block ID is equivalent to this one. Example: redstoneTorchOn matches itself and
      * redstoneTorchOff, and vice versa. Most blocks only match themselves.
      */
-    @Override
     public boolean isAssociatedBlockID(int par1) {
-        return par1 == torchRedstoneIdle.blockID || par1 == torchRedstoneActive.blockID;
+        return par1 == Block.torchRedstoneIdle.blockID || par1 == Block.torchRedstoneActive.blockID;
     }
 
-    public void setTorchActive(boolean torchActive) {
-        this.torchActive = torchActive;
-    }
-
-    public boolean isTorchActive() {
-        return torchActive;
+    @Override
+    public boolean isIndirectlyPowered(World par1World, int par2, int par3, int par4) {
+        int var5 = par1World.getBlockMetadata(par2, par3, par4);
+        return var5 == 5 && par1World.getIndirectPowerOutput(par2, par3 - 1, par4, 0) || (var5 == 3 && par1World.getIndirectPowerOutput(par2, par3, par4 - 1, 2) || (var5 == 4 && par1World.getIndirectPowerOutput(par2, par3, par4 + 1, 3) || (var5 == 1 && par1World.getIndirectPowerOutput(par2 - 1, par3, par4, 4) || var5 == 2 && par1World.getIndirectPowerOutput(par2 + 1, par3, par4, 5))));
     }
 }

@@ -2,16 +2,14 @@ package net.minecraft.server;
 
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.permissions.PlayerWhitelist;
+import org.minetweak.permissions.ServerOps;
 
 import java.io.*;
 
 public class DedicatedPlayerList extends ServerConfigurationManager {
-    private File opsList;
-    private File whiteList;
 
     public DedicatedPlayerList(DedicatedServer par1DedicatedServer) {
         super(par1DedicatedServer);
-        this.opsList = par1DedicatedServer.getFile("ops.txt");
         this.viewDistance = par1DedicatedServer.getIntProperty("view-distance", 10);
         this.maxPlayers = par1DedicatedServer.getIntProperty("max-players", 20);
         this.getBannedPlayers().setListActive(true);
@@ -69,34 +67,11 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     }
 
     private void loadOpsList() {
-        try {
-            this.getOps().clear();
-            BufferedReader var1 = new BufferedReader(new FileReader(this.opsList));
-            String var2;
-
-            while ((var2 = var1.readLine()) != null) {
-                this.getOps().add(var2.trim().toLowerCase());
-            }
-
-            var1.close();
-        } catch (Exception var3) {
-            this.getDedicatedServerInstance().getLogAgent().logWarning("Failed to load operators list: " + var3);
-        }
+        ServerOps.load();
     }
 
     private void saveOpsList() {
-        try {
-            PrintWriter var1 = new PrintWriter(new FileWriter(this.opsList, false));
-
-            for (Object o : this.getOps()) {
-                String var3 = (String) o;
-                var1.println(var3);
-            }
-
-            var1.close();
-        } catch (Exception var4) {
-            this.getDedicatedServerInstance().getLogAgent().logWarning("Failed to save operators list: " + var4);
-        }
+        ServerOps.save();
     }
 
     private void readWhiteList() {

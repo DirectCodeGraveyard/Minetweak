@@ -2,11 +2,12 @@ package org.minetweak.permissions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
 import org.apache.commons.io.IOUtils;
 import org.minetweak.Minetweak;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PermissionsLoader {
     private static File file = new File("./permissions.json");
@@ -37,22 +38,11 @@ public class PermissionsLoader {
                 lastData = data;
             }
 
-            PermissionsFile permissionsFile = null;
-
-            try {
-                permissionsFile = gson.fromJson(data, PermissionsFile.class);
-            } catch (JsonSyntaxException exception) {
-                Minetweak.getLogger().logWarning("There was a syntax error in your Permissions file.");
-            }
-
-            if (permissionsFile==null || permissionsFile.entries==null) {
+            HashMap<String, ArrayList<String>> permissions = gson.fromJson(data, HashMap.class);
+            if (permissions==null) {
                 return;
             }
-            reader.close();
-            Permissions.getPermissions().clear();
-            for (PermissionsFile.entry entry : permissionsFile.entries) {
-                Permissions.addPermission(entry.player, entry.permission);
-            }
+            Permissions.setPermissions(permissions);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

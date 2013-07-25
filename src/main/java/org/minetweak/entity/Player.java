@@ -16,6 +16,7 @@ import org.minetweak.command.CommandSender;
 import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
 import org.minetweak.permissions.PlayerWhitelist;
+import org.minetweak.permissions.ServerOps;
 
 import java.util.ArrayList;
 
@@ -205,7 +206,7 @@ public class Player extends Entity implements CommandSender {
      * @return True if the player is an op
      */
     public boolean isOperator() {
-        return MinecraftServer.getServer().getConfigurationManager().getOps().contains(playerDisplayName.toLowerCase());
+        return ServerOps.isPlayerOp(playerDisplayName.toLowerCase());
     }
 
     /**
