@@ -247,6 +247,7 @@ public class Minetweak {
         registerCommand("spawn", new CommandSpawn());
         registerCommand("whitelist", new CommandWhitelist());
         registerCommand("tp", new CommandTp());
+        registerCommand("tpall", new CommandTpAll());
     }
 
     /**
