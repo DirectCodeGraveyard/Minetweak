@@ -5,6 +5,7 @@ import org.minetweak.entity.Player;
 
 /**
  * Called when a player drinks a potion
+ *
  * @see net.minecraft.item.ItemPotion
  */
 public class PlayerDrinkPotionEvent extends PlayerEvent {

@@ -8,6 +8,7 @@ public class WorldGeneration {
 
     /**
      * This is a stub
+     *
      * @param generator the world gen to add
      */
     public static void addWorldGenerator(WorldGenerator generator) {

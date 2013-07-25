@@ -31,6 +31,11 @@ public class Console implements CommandSender {
     }
 
     @Override
+    public boolean isPlayer() {
+        return false;
+    }
+
+    @Override
     public boolean hasPermission(String permission) {
         return true;
     }

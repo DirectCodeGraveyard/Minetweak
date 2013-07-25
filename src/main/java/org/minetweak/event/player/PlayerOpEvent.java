@@ -23,6 +23,7 @@ public class PlayerOpEvent extends PlayerEvent {
 
     /**
      * Checks if the player is offline
+     *
      * @return if player is offline
      */
     public boolean isOfflinePlayer() {
@@ -31,6 +32,7 @@ public class PlayerOpEvent extends PlayerEvent {
 
     /**
      * Gets player username
+     *
      * @return player username
      */
     public String getPlayerUsername() {

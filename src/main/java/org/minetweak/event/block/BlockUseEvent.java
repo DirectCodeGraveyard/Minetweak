@@ -26,6 +26,7 @@ public class BlockUseEvent extends BlockEvent implements Cancellable {
 
     /**
      * Gets the player who placed the block involved in this event.
+     *
      * @return The Player who placed the block involved in this event
      */
     public Player getPlayer() {
@@ -35,6 +36,7 @@ public class BlockUseEvent extends BlockEvent implements Cancellable {
     /**
      * Clarity method for getting the placed block. Not really needed
      * except for reasons of clarity.
+     *
      * @return The TweakBlock that was placed
      */
     public IBlock getBlockUsed() {

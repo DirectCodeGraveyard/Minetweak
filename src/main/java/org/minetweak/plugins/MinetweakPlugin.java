@@ -18,14 +18,16 @@ public abstract class MinetweakPlugin implements IPlugin {
     /**
      * Called when plugins are loaded before server is started.
      */
-    public void onEnable() {}
+    public void onEnable() {
+    }
 
     /**
      * Called when plugins are unloaded before server is stopped.
      * Note: Do not unregister commands and listeners here.
      * Un-registration is done automatically.
      */
-    public void onDisable() {}
+    public void onDisable() {
+    }
 
     public void purgeRegistrations() {
         for (String command : commands) {
@@ -43,7 +45,9 @@ public abstract class MinetweakPlugin implements IPlugin {
         return pluginInfo;
     }
 
-    /** Allows you to override Plugin Info on the fly
+    /**
+     * Allows you to override Plugin Info on the fly
+     *
      * @param pluginInfo the plugin info instance to set
      */
     public void setPluginInfo(PluginInfo pluginInfo) {
@@ -52,7 +56,8 @@ public abstract class MinetweakPlugin implements IPlugin {
 
     /**
      * Registers a Command for this Plugin
-     * @param label the command label
+     *
+     * @param label    the command label
      * @param executor the command executor
      */
     public void registerCommand(String label, CommandExecutor executor) {
@@ -62,6 +67,7 @@ public abstract class MinetweakPlugin implements IPlugin {
 
     /**
      * Registers an Event Listener
+     *
      * @param listener the listener
      */
     public void registerListener(Object listener) {
@@ -71,6 +77,7 @@ public abstract class MinetweakPlugin implements IPlugin {
 
     /**
      * Register a language object
+     *
      * @param languageObject Language object to register
      */
     public void registerLanguageObject(LanguageObject languageObject) {

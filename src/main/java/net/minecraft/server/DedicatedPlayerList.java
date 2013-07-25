@@ -4,8 +4,6 @@ import org.minetweak.config.MinetweakConfig;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
 
-import java.io.*;
-
 public class DedicatedPlayerList extends ServerConfigurationManager {
 
     public DedicatedPlayerList(DedicatedServer par1DedicatedServer) {

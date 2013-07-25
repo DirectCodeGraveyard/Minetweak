@@ -74,4 +74,9 @@ public class CommandWhitelist extends CommandExecutor {
     public String getUsage() {
         return "Usage: /whitelist add/remove/on/off/reload [add/remove:player]";
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Manages the Whitelist";
+    }
 }

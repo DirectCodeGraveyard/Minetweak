@@ -73,6 +73,7 @@ public class Minetweak {
 
     /**
      * Runs the Minetweak Server.
+     *
      * @param args the arguments to pass to MinecraftServer
      */
     public static void main(String[] args) {
@@ -113,6 +114,7 @@ public class Minetweak {
 
     /**
      * What Minecraft version are we running?
+     *
      * @return Minecraft Version
      */
     public static String getMinecraftVersion() {
@@ -121,6 +123,7 @@ public class Minetweak {
 
     /**
      * What Minetweak API version are we running?
+     *
      * @return Minetweak API Version
      */
     public static String getAPIVersion() {
@@ -129,6 +132,7 @@ public class Minetweak {
 
     /**
      * Is the server done loading?
+     *
      * @return Server done loading
      */
     public static boolean isServerDoneLoading() {
@@ -144,6 +148,7 @@ public class Minetweak {
 
     /**
      * Check to see if the server is in "lockdown" mode
+     *
      * @return Lockdown status
      */
     public static boolean isServerLockedDown() {
@@ -152,15 +157,17 @@ public class Minetweak {
 
     /**
      * Get a specific player by their username, either online or offline, if they are online
+     *
      * @param playerName Player's username
      * @return Instance of player
      */
     public static Player getPlayerByName(String playerName) {
-       return players.get(playerName.toLowerCase());
+        return players.get(playerName.toLowerCase());
     }
 
     /**
      * Check to ensure that a command exists.
+     *
      * @param command Target command label
      * @return True if the command does exist
      */
@@ -170,6 +177,7 @@ public class Minetweak {
 
     /**
      * Get the class to the corresponding command label specified. Return null if no command exists with that label.
+     *
      * @param commandLabel PluginCommand label to get
      * @return CommandExecutor for specified command label
      */
@@ -180,7 +188,8 @@ public class Minetweak {
 
     /**
      * Register a command within Minetweak
-     * @param commandLabel Label that the command uses
+     *
+     * @param commandLabel    Label that the command uses
      * @param commandExecutor CommandExecutor class that we will use to execute the command
      */
     public static void registerCommand(String commandLabel, CommandExecutor commandExecutor) {
@@ -189,6 +198,7 @@ public class Minetweak {
 
     /**
      * Get the EventBus that handles all events that go on in the server
+     *
      * @return Server EventBus
      */
     public static EventBus getEventBus() {
@@ -196,7 +206,8 @@ public class Minetweak {
     }
 
     /**
-     .* Registers a Guava Event Listener
+     * .* Registers a Guava Event Listener
+     *
      * @param object the instance of the listener
      */
     public static void registerListener(Object object) {
@@ -205,6 +216,7 @@ public class Minetweak {
 
     /**
      * Check whether a player is on by username
+     *
      * @param playerUsername The players username
      * @return if the player is online
      */
@@ -214,6 +226,7 @@ public class Minetweak {
 
     /**
      * MinetweakLog Minetweak Info to Console
+     *
      * @param line line to log
      */
     public static void info(String line) {
@@ -252,6 +265,7 @@ public class Minetweak {
 
     /**
      * Return the HashMap with the players. Key is the username, Value is the Player instance.
+     *
      * @return Players HashMap
      */
     public static HashMap<String, Player> getPlayers() {
@@ -260,7 +274,8 @@ public class Minetweak {
 
     /**
      * Gets the PluginCommand Executors for Strings
-      * @return a HashMap of the commands to their executors
+     *
+     * @return a HashMap of the commands to their executors
      */
     public static HashMap<String, CommandExecutor> getCommandExecutors() {
         return commandExecutors;
@@ -275,6 +290,7 @@ public class Minetweak {
 
     /**
      * Un-registers a command
+     *
      * @param label the commands name
      */
     public static void unregisterCommand(String label) {

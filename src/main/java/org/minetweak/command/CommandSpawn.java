@@ -12,7 +12,7 @@ public class CommandSpawn extends CommandExecutor {
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         EntityPlayerMP playerMP;
         if (sender.hasPermission("minetweak.command.spawn")) {
-            if (args.length>1) {
+            if (args.length > 1) {
                 sender.sendMessage("Usage: /" + overallCommand + " [player]");
                 return;
             }
@@ -21,11 +21,11 @@ public class CommandSpawn extends CommandExecutor {
                 return;
             }
             String playerName = sender.getName();
-            if (args.length==1) {
+            if (args.length == 1) {
                 playerName = args[0];
             }
             Player player = Minetweak.getPlayerByName(playerName);
-            if (player==null) {
+            if (player == null) {
                 sender.sendMessage(ChatFormatting.RED + "Can't teleport an offline player.");
                 return;
             }

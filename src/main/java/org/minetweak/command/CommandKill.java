@@ -25,4 +25,9 @@ public class CommandKill extends CommandExecutor {
         }
     }
 
+    @Override
+    public String getHelpInfo() {
+        return "Kills a Player";
+    }
+
 }

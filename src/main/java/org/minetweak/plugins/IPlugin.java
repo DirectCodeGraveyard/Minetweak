@@ -21,7 +21,9 @@ public interface IPlugin {
      */
     public PluginInfo getPluginInfo();
 
-    /** Allows you to override Plugin Info on the fly
+    /**
+     * Allows you to override Plugin Info on the fly
+     *
      * @param pluginInfo the plugin info instance to set
      */
     public void setPluginInfo(PluginInfo pluginInfo);

@@ -24,6 +24,7 @@ public class PlayerDeopEvent extends PlayerEvent {
 
     /**
      * Check if player is offline
+     *
      * @return if player is offline
      */
     public boolean isOfflinePlayer() {
@@ -32,6 +33,7 @@ public class PlayerDeopEvent extends PlayerEvent {
 
     /**
      * Gets player username
+     *
      * @return player username
      */
     public String getPlayerUsername() {

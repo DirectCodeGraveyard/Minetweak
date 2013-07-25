@@ -1,3 +1,4 @@
 package org.minetweak.event.server;
 
-public class ServerInitializedEvent {}
+public class ServerInitializedEvent {
+}

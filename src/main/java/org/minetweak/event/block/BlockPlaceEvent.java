@@ -8,7 +8,7 @@ import org.minetweak.event.helper.Cancellable;
 
 /**
  * Called when a block is placed by a player.
- * <p>
+ * <p/>
  * If a TweakBlock Place event is cancelled, the block will not be placed.
  */
 public class BlockPlaceEvent extends BlockEvent implements Cancellable {

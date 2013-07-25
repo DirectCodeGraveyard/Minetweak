@@ -7,6 +7,7 @@ public class PlayerEvent {
 
     /**
      * Creates a Player Event
+     *
      * @param player player involved
      */
     public PlayerEvent(Player player) {
@@ -15,6 +16,7 @@ public class PlayerEvent {
 
     /**
      * Gets the Player Involved in the Event
+     *
      * @return Player
      */
     public Player getPlayer() {

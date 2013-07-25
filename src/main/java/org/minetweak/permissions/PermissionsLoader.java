@@ -39,7 +39,7 @@ public class PermissionsLoader {
             }
 
             HashMap<String, ArrayList<String>> permissions = gson.fromJson(data, HashMap.class);
-            if (permissions==null) {
+            if (permissions == null) {
                 return;
             }
             Permissions.setPermissions(permissions);

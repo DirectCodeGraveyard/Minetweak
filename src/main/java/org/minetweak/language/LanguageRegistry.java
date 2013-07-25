@@ -6,7 +6,8 @@ public class LanguageRegistry {
 
     /**
      * Register a language entry using an object
-     * @param targetPlugin Plugin to register object to
+     *
+     * @param targetPlugin   Plugin to register object to
      * @param languageObject LanguageObject that contains the object and translation
      */
     public static void addName(IPlugin targetPlugin, LanguageObject languageObject) {

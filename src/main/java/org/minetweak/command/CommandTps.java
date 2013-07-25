@@ -6,7 +6,8 @@ import net.minecraft.utils.enums.EnumChatFormatting;
 import java.text.DecimalFormat;
 
 public class CommandTps extends CommandExecutor {
-    private static final DecimalFormat	DF	= new DecimalFormat("########0.000");
+    private static final DecimalFormat DF = new DecimalFormat("########0.000");
+
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         String tps = getTPS(MinecraftServer.getServer().tickTimeArray);

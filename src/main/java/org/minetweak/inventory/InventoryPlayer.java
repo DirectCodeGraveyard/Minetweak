@@ -7,6 +7,7 @@ public class InventoryPlayer implements Inventory {
 
     /**
      * Creates an Inventory from MC's Inventory Player
+     *
      * @param playerInventory Minetweak Inventory
      */
     public InventoryPlayer(net.minecraft.inventory.InventoryPlayer playerInventory) {
@@ -16,7 +17,7 @@ public class InventoryPlayer implements Inventory {
     @Override
     public ItemStack getStackInSlot(Integer slotID) {
         net.minecraft.item.ItemStack stack = playerInventory.getStackInSlot(slotID);
-        if (stack==null)
+        if (stack == null)
             return null;
         else
             return new ItemStack(stack);
@@ -30,7 +31,7 @@ public class InventoryPlayer implements Inventory {
 
     @Override
     public void setStackInSlot(Integer slotId, ItemStack stack) {
-        if (stack==null) {
+        if (stack == null) {
             playerInventory.setInventorySlotContents(slotId, null);
         } else {
             playerInventory.setInventorySlotContents(slotId, stack.getItemStack());
@@ -39,9 +40,9 @@ public class InventoryPlayer implements Inventory {
 
     @Override
     public void clear() {
-        for (int i = 0; i<getSize(); i++) {
+        for (int i = 0; i < getSize(); i++) {
             ItemStack stack = getStackInSlot(i);
-            if (stack!=null) {
+            if (stack != null) {
                 setStackInSlot(i, null);
             }
         }

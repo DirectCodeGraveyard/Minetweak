@@ -28,28 +28,28 @@ public class Server {
 
     public static boolean kickPlayer(String playerName) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
-        if(targetPlayer == null) return false;
+        if (targetPlayer == null) return false;
         targetPlayer.kickPlayer();
         return true;
     }
 
     public static boolean kickPlayer(String playerName, String kickReason) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
-        if(targetPlayer == null) return false;
+        if (targetPlayer == null) return false;
         targetPlayer.kickPlayer(kickReason);
         return true;
     }
 
     public static boolean banPlayer(String playerName) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
-        if(targetPlayer == null) return false;
+        if (targetPlayer == null) return false;
         targetPlayer.banPlayer();
         return true;
     }
 
     public static boolean banPlayer(String playerName, String banReason) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
-        if(targetPlayer == null) return false;
+        if (targetPlayer == null) return false;
         targetPlayer.kickPlayer(banReason);
         return true;
     }
@@ -60,8 +60,7 @@ public class Server {
     }
 
     public static void handleCommand(EntityPlayerMP player, String command) {
-        if (command.startsWith("/"))
-        {
+        if (command.startsWith("/")) {
             command = command.substring(1);
         } else {
             return;
@@ -123,7 +122,7 @@ public class Server {
 
         for (String op : ServerOps.getOps()) {
             Player player = Minetweak.getPlayerByName(op);
-            if (player==null) {
+            if (player == null) {
                 continue;
             }
             player.sendMessage(out);

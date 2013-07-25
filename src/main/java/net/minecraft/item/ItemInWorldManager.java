@@ -243,8 +243,9 @@ public class ItemInWorldManager {
                 event.setCancelled(true);
             }
             Item currentItem = null;
-            if (thisPlayerMP.getCurrentEquippedItem() != null) currentItem = thisPlayerMP.getCurrentEquippedItem().getItem();
-            if (isCreative() && currentItem!=null &&currentItem instanceof ItemSword) {
+            if (thisPlayerMP.getCurrentEquippedItem() != null)
+                currentItem = thisPlayerMP.getCurrentEquippedItem().getItem();
+            if (isCreative() && currentItem != null && currentItem instanceof ItemSword) {
                 event.setCancelled(true);
             }
             Block nmsBlock = Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];

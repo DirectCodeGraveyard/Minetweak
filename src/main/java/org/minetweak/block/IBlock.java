@@ -19,6 +19,7 @@ public interface IBlock {
      * @return block specific metadata
      */
     byte getData();
+
     /**
      * Gets the type-id of this block
      *
@@ -53,6 +54,7 @@ public interface IBlock {
      * @return z-coordinate
      */
     int getZ();
+
     /**
      * Sets the metadata for this block
      *
@@ -63,7 +65,7 @@ public interface IBlock {
     /**
      * Sets the metadata for this block
      *
-     * @param data New block specific metadata
+     * @param data         New block specific metadata
      * @param applyPhysics False to cancel physics from the changed block.
      */
     void setData(byte data, boolean applyPhysics);
@@ -93,7 +95,7 @@ public interface IBlock {
     /**
      * Sets the type-id of this block
      *
-     * @param type Type-Id to change this block to
+     * @param type         Type-Id to change this block to
      * @param applyPhysics False to cancel physics on the changed block.
      * @return whether the block was changed
      */
@@ -102,8 +104,8 @@ public interface IBlock {
     /**
      * Sets the type-id of this block
      *
-     * @param type Type-Id to change this block to
-     * @param data The data value to change this block to
+     * @param type         Type-Id to change this block to
+     * @param data         The data value to change this block to
      * @param applyPhysics False to cancel physics on the changed block
      * @return whether the block was changed
      */

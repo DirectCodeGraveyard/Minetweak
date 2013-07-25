@@ -6,6 +6,7 @@ public class Mob extends Entity {
 
     /**
      * Creates a Mob from EntityMob
+     *
      * @param mob EntityMob
      */
     public Mob(EntityMob mob) {
@@ -14,6 +15,7 @@ public class Mob extends Entity {
 
     /**
      * Gets the MC EntityMob
+     *
      * @return MC EntityMob
      */
     public EntityMob getEntityMob() {
@@ -22,6 +24,7 @@ public class Mob extends Entity {
 
     /**
      * Sets the health of the mob
+     *
      * @param health new health
      */
     public void setHealth(float health) {
@@ -30,6 +33,7 @@ public class Mob extends Entity {
 
     /**
      * Gets the Mob Health
+     *
      * @return health of mob
      */
     public float getHealth() {
@@ -38,6 +42,7 @@ public class Mob extends Entity {
 
     /**
      * Heals a Mob
+     *
      * @param health health to add
      */
     public void heal(float health) {
@@ -46,6 +51,7 @@ public class Mob extends Entity {
 
     /**
      * Sets a Mob on fire
+     *
      * @param length time for mob to be on fire
      */
     public void setOnFire(int length) {
@@ -54,6 +60,7 @@ public class Mob extends Entity {
 
     /**
      * Checks if a Mob is on FIre
+     *
      * @return if mob is on fire
      */
     public boolean isOnFire() {
@@ -62,6 +69,7 @@ public class Mob extends Entity {
 
     /**
      * Checks if Mob is immune to Fire
+     *
      * @return if mob is immune to fire
      */
     public boolean isImmuneToFire() {
@@ -70,6 +78,7 @@ public class Mob extends Entity {
 
     /**
      * Sets a Mob Position
+     *
      * @param x x-pos
      * @param y y-pos
      * @param z z-pos

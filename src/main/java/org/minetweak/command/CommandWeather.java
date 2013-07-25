@@ -7,7 +7,7 @@ import net.minecraft.world.WorldInfo;
 public class CommandWeather extends CommandExecutor {
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
-        if (args.length==0) {
+        if (args.length == 0) {
             sender.sendMessage("Usage: /" + overallCommand + " rain/clear/thunder [rain: time]");
             return;
         }
