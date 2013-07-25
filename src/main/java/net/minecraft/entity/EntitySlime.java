@@ -31,11 +31,11 @@ public class EntitySlime extends EntityLiving implements IMob {
 
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(16, new Byte((byte) 1));
+        this.dataWatcher.addObject(16, (byte) 1);
     }
 
     protected void setSlimeSize(int par1) {
-        this.dataWatcher.updateObject(16, new Byte((byte) par1));
+        this.dataWatcher.updateObject(16, (byte) par1);
         this.setSize(0.6F * (float) par1, 0.6F * (float) par1);
         this.setPosition(this.posX, this.posY, this.posZ);
         this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a((double) (par1 * par1));
@@ -144,7 +144,7 @@ public class EntitySlime extends EntityLiving implements IMob {
             }
 
             this.moveStrafing = 1.0F - this.rand.nextFloat() * 2.0F;
-            this.moveForward = (float) (1 * this.getSlimeSize());
+            this.moveForward = (float) (this.getSlimeSize());
         } else {
             this.isJumping = false;
 
@@ -272,7 +272,7 @@ public class EntitySlime extends EntityLiving implements IMob {
     }
 
     /**
-     * The speed it takes to move the entityliving's rotationPitch through the faceEntity method. This is only currently
+     * The speed it takes to move the EntityLiving's rotationPitch through the faceEntity method. This is only currently
      * use in wolves.
      */
     public int getVerticalFaceSpeed() {

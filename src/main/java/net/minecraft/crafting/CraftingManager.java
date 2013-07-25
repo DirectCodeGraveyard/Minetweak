@@ -25,7 +25,7 @@ public class CraftingManager {
     /**
      * Returns the static instance of this class
      */
-    public static final CraftingManager getInstance() {
+    public static CraftingManager getInstance() {
         return instance;
     }
 
@@ -97,59 +97,59 @@ public class CraftingManager {
         this.addRecipe(new ItemStack(Item.cauldron, 1), "# #", "# #", "###", '#', Item.ingotIron);
         this.addRecipe(new ItemStack(Item.brewingStand, 1), " B ", "###", '#', Block.cobblestone, 'B', Item.blazeRod);
         this.addRecipe(new ItemStack(Block.pumpkinLantern, 1), "A", "B", 'A', Block.pumpkin, 'B', Block.torchWood);
-        this.addRecipe(new ItemStack(Item.minecartCrate, 1), new Object[]{"A", "B", 'A', Block.chest, 'B', Item.minecartEmpty});
+        this.addRecipe(new ItemStack(Item.minecartCrate, 1), "A", "B", 'A', Block.chest, 'B', Item.minecartEmpty);
         this.addRecipe(new ItemStack(Item.minecartPowered, 1), "A", "B", 'A', Block.furnaceIdle, 'B', Item.minecartEmpty);
-        this.addRecipe(new ItemStack(Item.tntMinecart, 1), new Object[]{"A", "B", 'A', Block.tnt, 'B', Item.minecartEmpty});
+        this.addRecipe(new ItemStack(Item.tntMinecart, 1), "A", "B", 'A', Block.tnt, 'B', Item.minecartEmpty);
         this.addRecipe(new ItemStack(Item.hopperMinecart, 1), "A", "B", 'A', Block.hopperBlock, 'B', Item.minecartEmpty);
-        this.addRecipe(new ItemStack(Item.boat, 1), new Object[]{"# #", "###", '#', Block.planks});
-        this.addRecipe(new ItemStack(Item.bucketEmpty, 1), new Object[]{"# #", " # ", '#', Item.ingotIron});
-        this.addRecipe(new ItemStack(Item.flowerPot, 1), new Object[]{"# #", " # ", '#', Item.brick});
-        this.addRecipe(new ItemStack(Item.flintAndSteel, 1), new Object[]{"A ", " B", 'A', Item.ingotIron, 'B', Item.flint});
-        this.addRecipe(new ItemStack(Item.bread, 1), new Object[]{"###", '#', Item.wheat});
-        this.addRecipe(new ItemStack(Block.stairsWoodOak, 4), new Object[]{"#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 0)});
-        this.addRecipe(new ItemStack(Block.stairsWoodBirch, 4), new Object[]{"#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 2)});
-        this.addRecipe(new ItemStack(Block.stairsWoodSpruce, 4), new Object[]{"#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 1)});
-        this.addRecipe(new ItemStack(Block.stairsWoodJungle, 4), new Object[]{"#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 3)});
-        this.addRecipe(new ItemStack(Item.fishingRod, 1), new Object[]{"  #", " #X", "# X", '#', Item.stick, 'X', Item.silk});
+        this.addRecipe(new ItemStack(Item.boat, 1), "# #", "###", '#', Block.planks);
+        this.addRecipe(new ItemStack(Item.bucketEmpty, 1), "# #", " # ", '#', Item.ingotIron);
+        this.addRecipe(new ItemStack(Item.flowerPot, 1), "# #", " # ", '#', Item.brick);
+        this.addRecipe(new ItemStack(Item.flintAndSteel, 1), "A ", " B", 'A', Item.ingotIron, 'B', Item.flint);
+        this.addRecipe(new ItemStack(Item.bread, 1), "###", '#', Item.wheat);
+        this.addRecipe(new ItemStack(Block.stairsWoodOak, 4), "#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 0));
+        this.addRecipe(new ItemStack(Block.stairsWoodBirch, 4), "#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 2));
+        this.addRecipe(new ItemStack(Block.stairsWoodSpruce, 4), "#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 1));
+        this.addRecipe(new ItemStack(Block.stairsWoodJungle, 4), "#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 3));
+        this.addRecipe(new ItemStack(Item.fishingRod, 1), "  #", " #X", "# X", '#', Item.stick, 'X', Item.silk);
         this.addRecipe(new ItemStack(Item.carrotOnAStick, 1), new Object[]{"# ", " X", '#', Item.fishingRod, 'X', Item.carrot}).func_92100_c();
-        this.addRecipe(new ItemStack(Block.stairsCobblestone, 4), new Object[]{"#  ", "## ", "###", '#', Block.cobblestone});
-        this.addRecipe(new ItemStack(Block.stairsBrick, 4), new Object[]{"#  ", "## ", "###", '#', Block.brick});
-        this.addRecipe(new ItemStack(Block.stairsStoneBrick, 4), new Object[]{"#  ", "## ", "###", '#', Block.stoneBrick});
-        this.addRecipe(new ItemStack(Block.stairsNetherBrick, 4), new Object[]{"#  ", "## ", "###", '#', Block.netherBrick});
-        this.addRecipe(new ItemStack(Block.stairsSandStone, 4), new Object[]{"#  ", "## ", "###", '#', Block.sandStone});
-        this.addRecipe(new ItemStack(Block.stairsNetherQuartz, 4), new Object[]{"#  ", "## ", "###", '#', Block.blockNetherQuartz});
-        this.addRecipe(new ItemStack(Item.painting, 1), new Object[]{"###", "#X#", "###", '#', Item.stick, 'X', Block.cloth});
-        this.addRecipe(new ItemStack(Item.itemFrame, 1), new Object[]{"###", "#X#", "###", '#', Item.stick, 'X', Item.leather});
-        this.addRecipe(new ItemStack(Item.appleGold, 1, 0), new Object[]{"###", "#X#", "###", '#', Item.ingotGold, 'X', Item.appleRed});
-        this.addRecipe(new ItemStack(Item.appleGold, 1, 1), new Object[]{"###", "#X#", "###", '#', Block.blockGold, 'X', Item.appleRed});
-        this.addRecipe(new ItemStack(Item.goldenCarrot, 1, 0), new Object[]{"###", "#X#", "###", '#', Item.goldNugget, 'X', Item.carrot});
-        this.addRecipe(new ItemStack(Item.speckledMelon, 1), new Object[]{"###", "#X#", "###", '#', Item.goldNugget, 'X', Item.melon});
-        this.addRecipe(new ItemStack(Block.lever, 1), new Object[]{"X", "#", '#', Block.cobblestone, 'X', Item.stick});
-        this.addRecipe(new ItemStack(Block.tripWireSource, 2), new Object[]{"I", "S", "#", '#', Block.planks, 'S', Item.stick, 'I', Item.ingotIron});
-        this.addRecipe(new ItemStack(Block.torchRedstoneActive, 1), new Object[]{"X", "#", '#', Item.stick, 'X', Item.redstone});
-        this.addRecipe(new ItemStack(Item.redstoneRepeater, 1), new Object[]{"#X#", "III", '#', Block.torchRedstoneActive, 'X', Item.redstone, 'I', Block.stone});
-        this.addRecipe(new ItemStack(Item.comparator, 1), new Object[]{" # ", "#X#", "III", '#', Block.torchRedstoneActive, 'X', Item.netherQuartz, 'I', Block.stone});
-        this.addRecipe(new ItemStack(Item.pocketSundial, 1), new Object[]{" # ", "#X#", " # ", '#', Item.ingotGold, 'X', Item.redstone});
-        this.addRecipe(new ItemStack(Item.compass, 1), new Object[]{" # ", "#X#", " # ", '#', Item.ingotIron, 'X', Item.redstone});
-        this.addRecipe(new ItemStack(Item.emptyMap, 1), new Object[]{"###", "#X#", "###", '#', Item.paper, 'X', Item.compass});
-        this.addRecipe(new ItemStack(Block.stoneButton, 1), new Object[]{"#", '#', Block.stone});
-        this.addRecipe(new ItemStack(Block.woodenButton, 1), new Object[]{"#", '#', Block.planks});
-        this.addRecipe(new ItemStack(Block.pressurePlateStone, 1), new Object[]{"##", '#', Block.stone});
-        this.addRecipe(new ItemStack(Block.pressurePlatePlanks, 1), new Object[]{"##", '#', Block.planks});
-        this.addRecipe(new ItemStack(Block.pressurePlateIron, 1), new Object[]{"##", '#', Item.ingotIron});
-        this.addRecipe(new ItemStack(Block.pressurePlateGold, 1), new Object[]{"##", '#', Item.ingotGold});
-        this.addRecipe(new ItemStack(Block.dispenser, 1), new Object[]{"###", "#X#", "#R#", '#', Block.cobblestone, 'X', Item.bow, 'R', Item.redstone});
-        this.addRecipe(new ItemStack(Block.dropper, 1), new Object[]{"###", "# #", "#R#", '#', Block.cobblestone, 'R', Item.redstone});
-        this.addRecipe(new ItemStack(Block.pistonBase, 1), new Object[]{"TTT", "#X#", "#R#", '#', Block.cobblestone, 'X', Item.ingotIron, 'R', Item.redstone, 'T', Block.planks});
-        this.addRecipe(new ItemStack(Block.pistonStickyBase, 1), new Object[]{"S", "P", 'S', Item.slimeBall, 'P', Block.pistonBase});
-        this.addRecipe(new ItemStack(Item.bed, 1), new Object[]{"###", "XXX", '#', Block.cloth, 'X', Block.planks});
-        this.addRecipe(new ItemStack(Block.enchantmentTable, 1), new Object[]{" B ", "D#D", "###", '#', Block.obsidian, 'B', Item.book, 'D', Item.diamond});
-        this.addRecipe(new ItemStack(Block.anvil, 1), new Object[]{"III", " i ", "iii", 'I', Block.blockIron, 'i', Item.ingotIron});
-        this.addShapelessRecipe(new ItemStack(Item.eyeOfEnder, 1), new Object[]{Item.enderPearl, Item.blazePowder});
-        this.addShapelessRecipe(new ItemStack(Item.fireballCharge, 3), new Object[]{Item.gunpowder, Item.blazePowder, Item.coal});
-        this.addShapelessRecipe(new ItemStack(Item.fireballCharge, 3), new Object[]{Item.gunpowder, Item.blazePowder, new ItemStack(Item.coal, 1, 1)});
-        this.addRecipe(new ItemStack(Block.daylightSensor), new Object[]{"GGG", "QQQ", "WWW", 'G', Block.glass, 'Q', Item.netherQuartz, 'W', Block.woodSingleSlab});
-        this.addRecipe(new ItemStack(Block.hopperBlock), new Object[]{"I I", "ICI", " I ", 'I', Item.ingotIron, 'C', Block.chest});
+        this.addRecipe(new ItemStack(Block.stairsCobblestone, 4), "#  ", "## ", "###", '#', Block.cobblestone);
+        this.addRecipe(new ItemStack(Block.stairsBrick, 4), "#  ", "## ", "###", '#', Block.brick);
+        this.addRecipe(new ItemStack(Block.stairsStoneBrick, 4), "#  ", "## ", "###", '#', Block.stoneBrick);
+        this.addRecipe(new ItemStack(Block.stairsNetherBrick, 4), "#  ", "## ", "###", '#', Block.netherBrick);
+        this.addRecipe(new ItemStack(Block.stairsSandStone, 4), "#  ", "## ", "###", '#', Block.sandStone);
+        this.addRecipe(new ItemStack(Block.stairsNetherQuartz, 4), "#  ", "## ", "###", '#', Block.blockNetherQuartz);
+        this.addRecipe(new ItemStack(Item.painting, 1), "###", "#X#", "###", '#', Item.stick, 'X', Block.cloth);
+        this.addRecipe(new ItemStack(Item.itemFrame, 1), "###", "#X#", "###", '#', Item.stick, 'X', Item.leather);
+        this.addRecipe(new ItemStack(Item.appleGold, 1, 0), "###", "#X#", "###", '#', Item.ingotGold, 'X', Item.appleRed);
+        this.addRecipe(new ItemStack(Item.appleGold, 1, 1), "###", "#X#", "###", '#', Block.blockGold, 'X', Item.appleRed);
+        this.addRecipe(new ItemStack(Item.goldenCarrot, 1, 0), "###", "#X#", "###", '#', Item.goldNugget, 'X', Item.carrot);
+        this.addRecipe(new ItemStack(Item.speckledMelon, 1), "###", "#X#", "###", '#', Item.goldNugget, 'X', Item.melon);
+        this.addRecipe(new ItemStack(Block.lever, 1), "X", "#", '#', Block.cobblestone, 'X', Item.stick);
+        this.addRecipe(new ItemStack(Block.tripWireSource, 2), "I", "S", "#", '#', Block.planks, 'S', Item.stick, 'I', Item.ingotIron);
+        this.addRecipe(new ItemStack(Block.torchRedstoneActive, 1), "X", "#", '#', Item.stick, 'X', Item.redstone);
+        this.addRecipe(new ItemStack(Item.redstoneRepeater, 1), "#X#", "III", '#', Block.torchRedstoneActive, 'X', Item.redstone, 'I', Block.stone);
+        this.addRecipe(new ItemStack(Item.comparator, 1), " # ", "#X#", "III", '#', Block.torchRedstoneActive, 'X', Item.netherQuartz, 'I', Block.stone);
+        this.addRecipe(new ItemStack(Item.pocketSundial, 1), " # ", "#X#", " # ", '#', Item.ingotGold, 'X', Item.redstone);
+        this.addRecipe(new ItemStack(Item.compass, 1), " # ", "#X#", " # ", '#', Item.ingotIron, 'X', Item.redstone);
+        this.addRecipe(new ItemStack(Item.emptyMap, 1), "###", "#X#", "###", '#', Item.paper, 'X', Item.compass);
+        this.addRecipe(new ItemStack(Block.stoneButton, 1), "#", '#', Block.stone);
+        this.addRecipe(new ItemStack(Block.woodenButton, 1), "#", '#', Block.planks);
+        this.addRecipe(new ItemStack(Block.pressurePlateStone, 1), "##", '#', Block.stone);
+        this.addRecipe(new ItemStack(Block.pressurePlatePlanks, 1), "##", '#', Block.planks);
+        this.addRecipe(new ItemStack(Block.pressurePlateIron, 1), "##", '#', Item.ingotIron);
+        this.addRecipe(new ItemStack(Block.pressurePlateGold, 1), "##", '#', Item.ingotGold);
+        this.addRecipe(new ItemStack(Block.dispenser, 1), "###", "#X#", "#R#", '#', Block.cobblestone, 'X', Item.bow, 'R', Item.redstone);
+        this.addRecipe(new ItemStack(Block.dropper, 1), "###", "# #", "#R#", '#', Block.cobblestone, 'R', Item.redstone);
+        this.addRecipe(new ItemStack(Block.pistonBase, 1), "TTT", "#X#", "#R#", '#', Block.cobblestone, 'X', Item.ingotIron, 'R', Item.redstone, 'T', Block.planks);
+        this.addRecipe(new ItemStack(Block.pistonStickyBase, 1), "S", "P", 'S', Item.slimeBall, 'P', Block.pistonBase);
+        this.addRecipe(new ItemStack(Item.bed, 1), "###", "XXX", '#', Block.cloth, 'X', Block.planks);
+        this.addRecipe(new ItemStack(Block.enchantmentTable, 1), " B ", "D#D", "###", '#', Block.obsidian, 'B', Item.book, 'D', Item.diamond);
+        this.addRecipe(new ItemStack(Block.anvil, 1), "III", " i ", "iii", 'I', Block.blockIron, 'i', Item.ingotIron);
+        this.addShapelessRecipe(new ItemStack(Item.eyeOfEnder, 1), Item.enderPearl, Item.blazePowder);
+        this.addShapelessRecipe(new ItemStack(Item.fireballCharge, 3), Item.gunpowder, Item.blazePowder, Item.coal);
+        this.addShapelessRecipe(new ItemStack(Item.fireballCharge, 3), Item.gunpowder, Item.blazePowder, new ItemStack(Item.coal, 1, 1));
+        this.addRecipe(new ItemStack(Block.daylightSensor), "GGG", "QQQ", "WWW", 'G', Block.glass, 'Q', Item.netherQuartz, 'W', Block.woodSingleSlab);
+        this.addRecipe(new ItemStack(Block.hopperBlock), "I I", "ICI", " I ", 'I', Item.ingotIron, 'C', Block.chest);
         Collections.sort(this.recipes, new RecipeSorter(this));
     }
 
@@ -160,10 +160,9 @@ public class CraftingManager {
         int var6 = 0;
 
         if (par2ArrayOfObj[var4] instanceof String[]) {
-            String[] var7 = (String[]) ((String[]) par2ArrayOfObj[var4++]);
+            String[] var7 = (String[]) par2ArrayOfObj[var4++];
 
-            for (int var8 = 0; var8 < var7.length; ++var8) {
-                String var9 = var7[var8];
+            for (String var9 : var7) {
                 ++var6;
                 var5 = var9.length();
                 var3 = var3 + var9;
@@ -213,19 +212,15 @@ public class CraftingManager {
 
     public void addShapelessRecipe(ItemStack par1ItemStack, Object... par2ArrayOfObj) {
         ArrayList<ItemStack> var3 = new ArrayList<ItemStack>();
-        Object[] var4 = par2ArrayOfObj;
-        int var5 = par2ArrayOfObj.length;
 
-        for (int var6 = 0; var6 < var5; ++var6) {
-            Object var7 = var4[var6];
-
+        for (Object var7 : par2ArrayOfObj) {
             if (var7 instanceof ItemStack) {
                 var3.add(((ItemStack) var7).copy());
             } else if (var7 instanceof Item) {
                 var3.add(new ItemStack((Item) var7));
             } else {
                 if (!(var7 instanceof Block)) {
-                    throw new RuntimeException("Invalid shapeless recipy!");
+                    throw new RuntimeException("Invalid shapeless recipe!");
                 }
 
                 var3.add(new ItemStack((Block) var7));

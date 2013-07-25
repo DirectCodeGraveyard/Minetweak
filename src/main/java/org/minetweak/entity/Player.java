@@ -17,6 +17,7 @@ import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
+import org.minetweak.server.GameMode;
 import org.minetweak.world.Location;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 /**
  * This class represents the player, and allows you to
  * call many API methods that are buried deep in
- * vanilla code. It extends CommandSender, which allows
+ * vanilla code. It implements CommandSender, which allows
  * the player to send commands. It also retrieves the
  * EntityPlayerMP and NetServerHandler for the player
  * when a instance is created for him/her. This gives
@@ -264,10 +265,10 @@ public class Player extends Entity implements CommandSender {
     /**
      * Set the gamemode of the player.
      *
-     * @param gameType Gametype from EnumGameType
+     * @param gameMode GameMode
      */
-    public void setGameMode(EnumGameType gameType) {
-        getPlayerMP().setGameType(gameType);
+    public void setGameMode(GameMode gameMode) {
+        getPlayerMP().setGameType(EnumGameType.getByID(gameMode.getID()));
     }
 
     /**
@@ -441,5 +442,9 @@ public class Player extends Entity implements CommandSender {
      */
     public double getZ() {
         return getPlayerMP().posZ;
+    }
+
+    public GameMode getGameMode() {
+        return GameMode.getByID(getPlayerMP().getGameType().getID());
     }
 }

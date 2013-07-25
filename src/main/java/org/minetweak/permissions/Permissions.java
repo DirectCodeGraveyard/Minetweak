@@ -14,6 +14,7 @@ public class Permissions {
      * @return if permission was added
      */
     public static boolean addPermission(String user, String permission) {
+        user = user.toLowerCase();
         ArrayList<String> perms = new ArrayList<String>();
         if (permissions.containsKey(user)) {
             if (perms.contains(permission)) {
@@ -35,6 +36,7 @@ public class Permissions {
      * @return if permission was removed
      */
     public static boolean removePermission(String user, String permission) {
+        user = user.toLowerCase();
         ArrayList<String> userPerms = getPermissions(user);
         if (userPerms == null) {
             return false;
@@ -55,6 +57,7 @@ public class Permissions {
      * @return if the player has permission
      */
     public static boolean hasPermission(String user, String permission) {
+        user = user.toLowerCase();
         ArrayList<String> perms = getPermissions(user);
         if (perms == null) {
             return false;
@@ -75,6 +78,7 @@ public class Permissions {
      * @return ArrayList of permissions
      */
     public static ArrayList<String> getPermissions(String user) {
+        user = user.toLowerCase();
         return permissions.get(user);
     }
 
