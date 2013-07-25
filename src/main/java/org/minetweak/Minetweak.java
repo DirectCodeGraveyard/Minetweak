@@ -53,7 +53,7 @@ public class Minetweak {
      * This boolean will return true if the server is currently under lockdown,
      * and non-op players are kicked out.
      */
-    private static boolean lockdownEnabled = false;
+    private static boolean isLockedDown = false;
 
     /**
      * This is where we store the player's information at, inside of the Player
@@ -160,7 +160,7 @@ public class Minetweak {
      * @return Lockdown status
      */
     public static boolean isServerLockedDown() {
-        return lockdownEnabled;
+        return isLockedDown;
     }
 
     /**
@@ -269,6 +269,7 @@ public class Minetweak {
         registerCommand("whitelist", new CommandWhitelist());
         registerCommand("tp", new CommandTp());
         registerCommand("tpall", new CommandTpAll());
+        registerCommand("lockdown", new CommandLockdown());
     }
 
     /**
@@ -318,11 +319,22 @@ public class Minetweak {
                     JarFile file = new JarFile(new File(url.toURI()));
                     Attributes attributes = file.getManifest().getMainAttributes();
                     String version = attributes.getValue("Minetweak-version");
-                    if (version!=null) {
+                    if (version != null) {
                         serverVersion = version;
                     }
-                } catch (URISyntaxException ignored) {}
-            } catch (IOException ignored) {}
+                } catch (URISyntaxException ignored) {
+                }
+            } catch (IOException ignored) {
+            }
         }
+    }
+
+    /**
+     * Sets the Servers Lockdown Mode
+     *
+     * @param lockdownEnabled whether the server lockdown is enabled
+     */
+    public static void setLockedDown(boolean lockdownEnabled) {
+        Minetweak.isLockedDown = lockdownEnabled;
     }
 }
