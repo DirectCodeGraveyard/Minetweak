@@ -1,5 +1,6 @@
 package net.minecraft.server.network.tcp;
 
+@SuppressWarnings("deprecation")
 class TcpMasterThread extends Thread {
     final TcpConnection theTcpConnection;
 
@@ -7,7 +8,7 @@ class TcpMasterThread extends Thread {
         this.theTcpConnection = par1TcpConnection;
     }
 
-    @SuppressWarnings("deprecation")
+    @Override
     public void run() {
         try {
             Thread.sleep(5000L);

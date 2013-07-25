@@ -1,10 +1,11 @@
 package org.minetweak.command;
 
-import net.minecraft.utils.enums.EnumGameType;
 import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
 import org.minetweak.server.GameMode;
 import org.minetweak.util.StringUtils;
+
+import java.util.ArrayList;
 
 public class CommandGamemode extends CommandExecutor {
 
@@ -61,6 +62,18 @@ public class CommandGamemode extends CommandExecutor {
     @Override
     public String getHelpInfo() {
         return "Changes a Players Gamemode";
+    }
+
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        String newInput = input.substring(input.lastIndexOf(" "));
+        if (StringUtils.isInteger(newInput)) {
+            completions.addAll(Minetweak.getPlayers().keySet());
+        } else {
+            completions.add("0");
+            completions.add("1");
+            completions.add("2");
+        }
     }
 
 }

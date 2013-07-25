@@ -402,16 +402,16 @@ public abstract class ServerConfigurationManager {
         par3WorldServer.theProfiler.startSection("moving");
 
         if (par1Entity.dimension == -1) {
-            var5 /= var9;
-            var7 /= var9;
+            var5 /= 8.0;
+            var7 /= 8.0;
             par1Entity.setLocationAndAngles(var5, par1Entity.posY, var7, par1Entity.rotationYaw, par1Entity.rotationPitch);
 
             if (par1Entity.isEntityAlive()) {
                 par3WorldServer.updateEntityWithOptionalForce(par1Entity, false);
             }
         } else if (par1Entity.dimension == 0) {
-            var5 *= var9;
-            var7 *= var9;
+            var5 *= 8.0;
+            var7 *= 8.0;
             par1Entity.setLocationAndAngles(var5, par1Entity.posY, var7, par1Entity.rotationYaw, par1Entity.rotationPitch);
 
             if (par1Entity.isEntityAlive()) {

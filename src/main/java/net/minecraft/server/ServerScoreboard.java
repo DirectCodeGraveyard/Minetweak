@@ -8,7 +8,7 @@ import java.util.*;
 
 public class ServerScoreboard extends Scoreboard {
     private final MinecraftServer field_96555_a;
-    private final Set field_96553_b = new HashSet();
+    private final Set<ScoreObjective> field_96553_b = new HashSet<ScoreObjective>();
     private ScoreboardSaveData field_96554_c;
 
     public ServerScoreboard(MinecraftServer par1MinecraftServer) {
@@ -56,7 +56,7 @@ public class ServerScoreboard extends Scoreboard {
 
     public void func_96521_a(String par1Str, ScorePlayerTeam par2ScorePlayerTeam) {
         super.func_96521_a(par1Str, par2ScorePlayerTeam);
-        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Arrays.asList(new String[]{par1Str}), 3));
+        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Arrays.asList(par1Str), 3));
         this.func_96551_b();
     }
 
@@ -66,7 +66,7 @@ public class ServerScoreboard extends Scoreboard {
      */
     public void removePlayerFromTeam(String par1Str, ScorePlayerTeam par2ScorePlayerTeam) {
         super.removePlayerFromTeam(par1Str, par2ScorePlayerTeam);
-        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Arrays.asList(new String[]{par1Str}), 4));
+        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Arrays.asList(par1Str), 4));
         this.func_96551_b();
     }
 
@@ -123,8 +123,8 @@ public class ServerScoreboard extends Scoreboard {
         }
     }
 
-    public List func_96550_d(ScoreObjective par1ScoreObjective) {
-        ArrayList var2 = new ArrayList();
+    public List<Packet> func_96550_d(ScoreObjective par1ScoreObjective) {
+        ArrayList<Packet> var2 = new ArrayList<Packet>();
         var2.add(new Packet206SetObjective(par1ScoreObjective, 0));
 
         for (int var3 = 0; var3 < 3; ++var3) {
@@ -133,10 +133,8 @@ public class ServerScoreboard extends Scoreboard {
             }
         }
 
-        Iterator var5 = this.func_96534_i(par1ScoreObjective).iterator();
-
-        while (var5.hasNext()) {
-            Score var4 = (Score) var5.next();
+        for (Object o : this.func_96534_i(par1ScoreObjective)) {
+            Score var4 = (Score) o;
             var2.add(new Packet207SetScore(var4, 0));
         }
 
@@ -144,15 +142,11 @@ public class ServerScoreboard extends Scoreboard {
     }
 
     public void func_96549_e(ScoreObjective par1ScoreObjective) {
-        List var2 = this.func_96550_d(par1ScoreObjective);
-        Iterator var3 = this.field_96555_a.getConfigurationManager().playerEntityList.iterator();
+        List<Packet> var2 = this.func_96550_d(par1ScoreObjective);
 
-        while (var3.hasNext()) {
-            EntityPlayerMP var4 = (EntityPlayerMP) var3.next();
-            Iterator var5 = var2.iterator();
+        for (EntityPlayerMP var4 : this.field_96555_a.getConfigurationManager().playerEntityList) {
 
-            while (var5.hasNext()) {
-                Packet var6 = (Packet) var5.next();
+            for (Packet var6 : var2) {
                 var4.playerNetServerHandler.sendPacket(var6);
             }
         }
@@ -160,8 +154,8 @@ public class ServerScoreboard extends Scoreboard {
         this.field_96553_b.add(par1ScoreObjective);
     }
 
-    public List func_96548_f(ScoreObjective par1ScoreObjective) {
-        ArrayList var2 = new ArrayList();
+    public List<Packet> func_96548_f(ScoreObjective par1ScoreObjective) {
+        ArrayList<Packet> var2 = new ArrayList<Packet>();
         var2.add(new Packet206SetObjective(par1ScoreObjective, 1));
 
         for (int var3 = 0; var3 < 3; ++var3) {
@@ -174,15 +168,10 @@ public class ServerScoreboard extends Scoreboard {
     }
 
     public void func_96546_g(ScoreObjective par1ScoreObjective) {
-        List var2 = this.func_96548_f(par1ScoreObjective);
-        Iterator var3 = this.field_96555_a.getConfigurationManager().playerEntityList.iterator();
+        List<Packet> var2 = this.func_96548_f(par1ScoreObjective);
 
-        while (var3.hasNext()) {
-            EntityPlayerMP var4 = (EntityPlayerMP) var3.next();
-            Iterator var5 = var2.iterator();
-
-            while (var5.hasNext()) {
-                Packet var6 = (Packet) var5.next();
+        for (EntityPlayerMP var4 : this.field_96555_a.getConfigurationManager().playerEntityList) {
+            for (Packet var6 : var2) {
                 var4.playerNetServerHandler.sendPacket(var6);
             }
         }

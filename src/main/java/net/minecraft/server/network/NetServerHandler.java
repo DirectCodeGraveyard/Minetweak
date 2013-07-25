@@ -837,7 +837,7 @@ public class NetServerHandler extends NetHandler {
         StringBuilder builder = new StringBuilder();
         int i = 0;
 
-        for (String part : TabCompletion.getMatches(packet.getText())) {
+        for (String part : TabCompletion.getMatches(Minetweak.getPlayerByName(playerEntity.getCommandSenderName().toLowerCase()), packet.getText())) {
             if (i>0) {
                 builder.append("\u0000");
             }

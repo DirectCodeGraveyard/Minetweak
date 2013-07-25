@@ -1,7 +1,10 @@
 package org.minetweak.command;
 
 import net.minecraft.utils.enums.EnumChatFormatting;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.util.StringUtils;
+
+import java.util.ArrayList;
 
 public abstract class CommandExecutor implements ICommandExecutor {
 
@@ -50,5 +53,10 @@ public abstract class CommandExecutor implements ICommandExecutor {
      */
     public void noPermission(CommandSender sender, String action) {
         sender.sendMessage(EnumChatFormatting.RED + "You do not have permission to " + action + ".");
+    }
+
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        completions.addAll(TabCompletion.getPlayersMatching(input));
     }
 }
