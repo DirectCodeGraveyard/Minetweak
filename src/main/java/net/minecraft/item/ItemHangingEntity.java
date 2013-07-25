@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityHanging;
 import net.minecraft.entity.EntityItemFrame;
 import net.minecraft.entity.EntityPainting;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.src.*;
+import net.minecraft.src.Direction;
 import net.minecraft.world.World;
 
 public class ItemHangingEntity extends Item {

@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.crash.exception.MinecraftException;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 import org.minetweak.Server;
 

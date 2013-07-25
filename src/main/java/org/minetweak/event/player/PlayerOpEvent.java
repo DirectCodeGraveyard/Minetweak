@@ -1,6 +1,5 @@
 package org.minetweak.event.player;
 
-import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
 
 public class PlayerOpEvent extends PlayerEvent {

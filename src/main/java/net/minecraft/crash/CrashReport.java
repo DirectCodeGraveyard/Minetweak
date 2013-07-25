@@ -1,8 +1,8 @@
 package net.minecraft.crash;
 
-import net.minecraft.utils.callable.*;
 import net.minecraft.logging.ILogAgent;
 import net.minecraft.src.ReportedException;
+import net.minecraft.utils.callable.*;
 
 import java.io.*;
 import java.text.SimpleDateFormat;

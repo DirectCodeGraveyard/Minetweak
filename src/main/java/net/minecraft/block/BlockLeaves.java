@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.Icon;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 

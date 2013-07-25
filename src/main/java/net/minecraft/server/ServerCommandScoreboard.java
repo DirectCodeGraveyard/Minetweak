@@ -1,22 +1,16 @@
 package net.minecraft.server;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.crash.exception.SyntaxErrorException;
 import net.minecraft.crash.exception.WrongUsageException;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumChatFormatting;
 import net.minecraft.player.score.*;
 import net.minecraft.utils.chat.ChatMessageComponent;
+import net.minecraft.utils.enums.EnumChatFormatting;
+
+import java.util.*;
 
 public class ServerCommandScoreboard extends CommandBase
 {

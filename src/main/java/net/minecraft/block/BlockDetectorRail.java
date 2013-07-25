@@ -5,7 +5,7 @@ import net.minecraft.entity.EntityMinecart;
 import net.minecraft.entity.IEntitySelector;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.src.*;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.world.World;
 

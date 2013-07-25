@@ -1,7 +1,7 @@
 package net.minecraft.block;
 
-import net.minecraft.tileentity.ITileEntityProvider;
 import net.minecraft.material.Material;
+import net.minecraft.tileentity.ITileEntityProvider;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 

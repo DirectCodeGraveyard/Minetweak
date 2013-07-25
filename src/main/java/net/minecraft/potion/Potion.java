@@ -1,10 +1,10 @@
 package net.minecraft.potion;
 
 import com.google.common.collect.Maps;
-import net.minecraft.entity.attribute.*;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.src.*;
+import net.minecraft.entity.attribute.*;
+import net.minecraft.src.DamageSource;
 
 import java.util.Iterator;
 import java.util.Map;

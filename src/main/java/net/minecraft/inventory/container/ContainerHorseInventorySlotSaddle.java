@@ -1,9 +1,9 @@
 package net.minecraft.inventory.container;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.slot.Slot;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 class ContainerHorseInventorySlotSaddle extends Slot {
     final ContainerHorseInventory field_111239_a;

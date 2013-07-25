@@ -5,10 +5,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityBoat;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumMovingObjectType;
-import net.minecraft.src.*;
+import net.minecraft.src.MovingObjectPosition;
+import net.minecraft.src.Vec3;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumMovingObjectType;
 import net.minecraft.world.World;
 
 import java.util.List;

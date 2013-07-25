@@ -2,18 +2,18 @@ package net.minecraft.world.anvil;
 
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.src.*;
-import net.minecraft.world.storage.ISaveHandler;
-import net.minecraft.world.storage.SaveFormatOld;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.src.IProgressUpdate;
 import net.minecraft.world.WorldInfo;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.chunk.ChunkLoader;
 import net.minecraft.world.chunk.WorldChunkManager;
 import net.minecraft.world.chunk.WorldChunkManagerHell;
 import net.minecraft.world.region.RegionFile;
 import net.minecraft.world.region.RegionFileCache;
+import net.minecraft.world.storage.ISaveHandler;
+import net.minecraft.world.storage.SaveFormatOld;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

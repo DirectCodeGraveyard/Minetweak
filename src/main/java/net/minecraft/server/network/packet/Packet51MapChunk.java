@@ -1,7 +1,7 @@
 package net.minecraft.server.network.packet;
 
-import net.minecraft.src.ExtendedBlockStorage;
 import net.minecraft.server.network.NetHandler;
+import net.minecraft.src.ExtendedBlockStorage;
 import net.minecraft.src.NibbleArray;
 import net.minecraft.world.chunk.Chunk;
 

@@ -2,7 +2,7 @@ package net.minecraft.server;
 
 import com.google.common.collect.Sets;
 import net.minecraft.entity.attribute.*;
-import net.minecraft.src.*;
+import net.minecraft.src.LowerStringMap;
 
 import java.util.*;
 

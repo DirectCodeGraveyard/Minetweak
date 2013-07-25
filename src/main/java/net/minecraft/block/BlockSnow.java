@@ -2,13 +2,13 @@ package net.minecraft.block;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumSkyBlock;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.stats.StatList;
 import net.minecraft.utils.AxisAlignedBB;
+import net.minecraft.utils.enums.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import java.util.Random;

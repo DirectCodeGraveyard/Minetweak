@@ -1,9 +1,9 @@
 package net.minecraft.world.map;
 
 import net.minecraft.utils.MathHelper;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.structure.StructureStart;
 import net.minecraft.world.structure.StructureVillageStart;
-import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.*;
 import java.util.Map.Entry;

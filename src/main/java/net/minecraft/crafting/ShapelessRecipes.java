@@ -1,6 +1,5 @@
 package net.minecraft.crafting;
 
-import net.minecraft.crafting.IRecipe;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

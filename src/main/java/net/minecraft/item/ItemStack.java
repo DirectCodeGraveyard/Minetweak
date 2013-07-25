@@ -2,8 +2,6 @@ package net.minecraft.item;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import net.minecraft.entity.attribute.AttributeModifier;
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentDurability;
@@ -12,11 +10,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityItemFrame;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumAction;
+import net.minecraft.entity.attribute.AttributeModifier;
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.stats.StatList;
+import net.minecraft.utils.enums.EnumAction;
 import net.minecraft.world.World;
 
 import java.text.DecimalFormat;

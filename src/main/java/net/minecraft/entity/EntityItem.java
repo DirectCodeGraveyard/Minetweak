@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.material.Material;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.player.achievement.AchievementList;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
 import net.minecraft.stats.StatCollector;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;

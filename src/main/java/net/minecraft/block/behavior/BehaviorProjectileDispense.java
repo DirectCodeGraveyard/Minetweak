@@ -3,10 +3,10 @@ package net.minecraft.block.behavior;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.src.IBlockSource;
 import net.minecraft.src.IPosition;
 import net.minecraft.src.IProjectile;
+import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.world.World;
 
 public abstract class BehaviorProjectileDispense extends BehaviorDefaultDispenseItem {

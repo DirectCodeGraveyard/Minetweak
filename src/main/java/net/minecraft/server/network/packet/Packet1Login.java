@@ -1,7 +1,7 @@
 package net.minecraft.server.network.packet;
 
-import net.minecraft.utils.enums.EnumGameType;
 import net.minecraft.server.network.NetHandler;
+import net.minecraft.utils.enums.EnumGameType;
 import net.minecraft.world.WorldType;
 
 import java.io.DataInput;

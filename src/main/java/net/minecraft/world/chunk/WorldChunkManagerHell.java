@@ -1,8 +1,6 @@
 package net.minecraft.world.chunk;
 
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.chunk.ChunkPosition;
-import net.minecraft.world.chunk.WorldChunkManager;
 
 import java.util.Arrays;
 import java.util.List;

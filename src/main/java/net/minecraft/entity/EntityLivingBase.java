@@ -1,25 +1,27 @@
 package net.minecraft.entity;
 
-import net.minecraft.entity.attribute.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.stepsound.StepSound;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.utils.enums.EnumCreatureAttribute;
+import net.minecraft.entity.attribute.*;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.material.Material;
 import net.minecraft.nbt.*;
-import net.minecraft.server.network.packet.Packet18Animation;
-import net.minecraft.server.network.packet.Packet22Collect;
-import net.minecraft.server.network.packet.Packet5PlayerInventory;
 import net.minecraft.player.Team;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.server.ServersideAttributeMap;
-import net.minecraft.src.*;
+import net.minecraft.server.network.packet.Packet18Animation;
+import net.minecraft.server.network.packet.Packet22Collect;
+import net.minecraft.server.network.packet.Packet5PlayerInventory;
+import net.minecraft.src.CombatTracker;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.Vec3;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumCreatureAttribute;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 

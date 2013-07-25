@@ -3,9 +3,9 @@ package net.minecraft.crafting;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.map.MapData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraft.world.map.MapData;
 
 public class RecipesMapExtending extends ShapedRecipes {
     public RecipesMapExtending() {

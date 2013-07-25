@@ -1,8 +1,8 @@
 package net.minecraft.command;
 
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.crash.exception.SyntaxErrorException;
 import net.minecraft.crash.exception.WrongUsageException;
+import net.minecraft.server.MinecraftServer;
 
 import java.util.List;
 import java.util.regex.Matcher;

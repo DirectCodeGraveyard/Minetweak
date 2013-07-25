@@ -4,9 +4,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.logging.ILogAgent;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.network.NetHandler;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.*;
+import net.minecraft.server.network.NetHandler;
+import net.minecraft.src.IntHashMap;
 
 import java.io.DataInput;
 import java.io.DataOutput;

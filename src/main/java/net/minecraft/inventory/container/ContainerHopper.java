@@ -1,10 +1,10 @@
 package net.minecraft.inventory.container;
 
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryPlayer;
 import net.minecraft.inventory.slot.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ContainerHopper extends Container {
     private final IInventory field_94538_a;

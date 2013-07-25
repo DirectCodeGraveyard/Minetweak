@@ -1,11 +1,11 @@
 package net.minecraft.world.storage;
 
+import net.minecraft.crash.exception.MinecraftException;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.player.IPlayerFileData;
-import net.minecraft.crash.exception.MinecraftException;
 import net.minecraft.world.WorldInfo;
-import net.minecraft.world.provider.WorldProvider;
 import net.minecraft.world.chunk.IChunkLoader;
+import net.minecraft.world.provider.WorldProvider;
 
 import java.io.File;
 

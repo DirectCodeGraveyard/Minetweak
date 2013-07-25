@@ -2,8 +2,8 @@ package net.minecraft.world.biome;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
+import net.minecraft.src.SpawnListEntry;
 import net.minecraft.utils.enums.EnumCreatureType;
-import net.minecraft.src.*;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.world.*;
 

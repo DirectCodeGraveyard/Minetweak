@@ -5,8 +5,8 @@ import net.minecraft.block.BlockDoor;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.WorldSavedData;
 import net.minecraft.world.chunk.ChunkCoordinates;
+import net.minecraft.world.storage.WorldSavedData;
 
 import java.util.ArrayList;
 import java.util.Iterator;

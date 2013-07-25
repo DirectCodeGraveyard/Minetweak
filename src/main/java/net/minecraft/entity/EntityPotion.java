@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.src.*;
+import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.world.World;
 

@@ -6,9 +6,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.entity.EntitySelectorArmoredMob;
 import net.minecraft.item.ItemStack;
+import net.minecraft.src.IBlockSource;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.utils.enums.EnumFacing;
-import net.minecraft.src.IBlockSource;
 
 import java.util.List;
 

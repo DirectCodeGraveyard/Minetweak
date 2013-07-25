@@ -1,8 +1,8 @@
 package net.minecraft.server.gui;
 
-import net.minecraft.server.DedicatedServer;
-import net.minecraft.player.PlayerListComponent;
 import net.minecraft.logging.TextAreaLogHandler;
+import net.minecraft.player.PlayerListComponent;
+import net.minecraft.server.DedicatedServer;
 import net.minecraft.stats.StatsComponent;
 
 import javax.swing.*;

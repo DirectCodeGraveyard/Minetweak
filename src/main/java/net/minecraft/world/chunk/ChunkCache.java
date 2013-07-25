@@ -2,7 +2,8 @@ package net.minecraft.world.chunk;
 
 import net.minecraft.block.Block;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Vec3Pool;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 

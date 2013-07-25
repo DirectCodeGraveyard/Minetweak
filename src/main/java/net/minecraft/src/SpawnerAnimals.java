@@ -1,16 +1,16 @@
 package net.minecraft.src;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingData;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumCreatureType;
 import net.minecraft.material.Material;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumCreatureType;
 import net.minecraft.utils.weighted.WeightedRandom;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.block.Block;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkCoordIntPair;
 import net.minecraft.world.chunk.ChunkCoordinates;

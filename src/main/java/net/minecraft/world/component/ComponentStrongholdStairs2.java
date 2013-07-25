@@ -1,7 +1,7 @@
 package net.minecraft.world.component;
 
-import net.minecraft.world.structure.StructureStrongholdPieceWeight;
 import net.minecraft.world.chunk.ChunkPosition;
+import net.minecraft.world.structure.StructureStrongholdPieceWeight;
 
 import java.util.ArrayList;
 import java.util.List;

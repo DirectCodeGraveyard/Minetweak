@@ -1,9 +1,9 @@
 package net.minecraft.world.map;
 
+import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagShort;
-import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldSavedData;
 

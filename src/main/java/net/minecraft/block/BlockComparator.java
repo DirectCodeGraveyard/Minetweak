@@ -2,7 +2,8 @@ package net.minecraft.block;
 
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.src.*;
+import net.minecraft.src.Direction;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.tileentity.ITileEntityProvider;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityComparator;

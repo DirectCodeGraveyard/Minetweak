@@ -2,8 +2,8 @@ package net.minecraft.item;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumAction;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.utils.enums.EnumAction;
 import net.minecraft.world.World;
 
 public class ItemFood extends Item {

@@ -1,12 +1,12 @@
 package net.minecraft.world.chunk;
 
-import net.minecraft.utils.enums.EnumCreatureType;
-import net.minecraft.src.*;
-import net.minecraft.utils.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
+import net.minecraft.src.IProgressUpdate;
+import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumCreatureType;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.noise.NoiseGeneratorOctaves;
 
 import java.util.List;

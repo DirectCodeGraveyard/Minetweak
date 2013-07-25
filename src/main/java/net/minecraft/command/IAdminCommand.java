@@ -1,7 +1,5 @@
 package net.minecraft.command;
 
-import net.minecraft.command.ICommandSender;
-
 public interface IAdminCommand {
     /**
      * Sends a message to the admins of the server from a given CommandSender with the given resource string and given

@@ -1,11 +1,13 @@
 package net.minecraft.entity;
 
 import net.minecraft.block.Block;
-import net.minecraft.utils.enums.EnumMovingObjectType;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.src.*;
+import net.minecraft.src.IProjectile;
+import net.minecraft.src.MovingObjectPosition;
+import net.minecraft.src.Vec3;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumMovingObjectType;
 import net.minecraft.world.World;
 
 import java.util.List;

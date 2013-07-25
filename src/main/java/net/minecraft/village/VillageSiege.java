@@ -2,10 +2,10 @@ package net.minecraft.village;
 
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.entity.EntityZombie;
-import net.minecraft.utils.enums.EnumCreatureType;
-import net.minecraft.utils.MathHelper;
 import net.minecraft.src.SpawnerAnimals;
 import net.minecraft.src.Vec3;
+import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumCreatureType;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkCoordinates;
 

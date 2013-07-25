@@ -1,8 +1,8 @@
 package net.minecraft.world.provider;
 
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.ChunkProviderHell;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.chunk.WorldChunkManagerHell;
 
 public class WorldProviderHell extends WorldProvider {

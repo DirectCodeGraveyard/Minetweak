@@ -3,7 +3,9 @@ package net.minecraft.entity;
 import net.minecraft.block.Block;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.Explosion;
+import net.minecraft.src.MovingObjectPosition;
 import net.minecraft.world.World;
 
 public class EntityWitherSkull extends EntityFireball {

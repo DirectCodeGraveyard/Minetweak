@@ -2,8 +2,8 @@ package net.minecraft.entity;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.utils.enums.EnumArt;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.utils.enums.EnumArt;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;

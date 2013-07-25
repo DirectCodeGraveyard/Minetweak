@@ -1,9 +1,10 @@
 package net.minecraft.command;
 
-import java.util.List;
+import net.minecraft.crash.exception.WrongUsageException;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.utils.chat.ChatMessageComponent;
-import net.minecraft.crash.exception.WrongUsageException;
+
+import java.util.List;
 
 public class CommandServerEmote extends CommandBase
 {

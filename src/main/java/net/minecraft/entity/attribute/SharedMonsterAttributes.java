@@ -1,8 +1,8 @@
 package net.minecraft.entity.attribute;
 
+import net.minecraft.logging.ILogAgent;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.logging.ILogAgent;
 
 import java.util.Collection;
 import java.util.Iterator;

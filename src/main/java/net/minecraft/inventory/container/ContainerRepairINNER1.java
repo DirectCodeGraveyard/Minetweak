@@ -1,7 +1,7 @@
 package net.minecraft.inventory.container;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.inventory.InventoryBasic;
+import net.minecraft.item.ItemStack;
 
 class ContainerRepairINNER1 extends InventoryBasic {
     final ContainerRepair field_135010_a;

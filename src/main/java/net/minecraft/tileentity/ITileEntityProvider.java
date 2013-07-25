@@ -1,6 +1,5 @@
 package net.minecraft.tileentity;
 
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public interface ITileEntityProvider {

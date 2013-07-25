@@ -1,8 +1,8 @@
 package net.minecraft.block;
 
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.src.IBlockAccess;
 import net.minecraft.item.Item;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;

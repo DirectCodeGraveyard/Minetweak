@@ -1,8 +1,8 @@
 package net.minecraft.server.network.packet;
 
 import net.minecraft.entity.EntityPainting;
-import net.minecraft.utils.enums.EnumArt;
 import net.minecraft.server.network.NetHandler;
+import net.minecraft.utils.enums.EnumArt;
 
 import java.io.DataInput;
 import java.io.DataOutput;

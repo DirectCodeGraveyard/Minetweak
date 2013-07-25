@@ -1,9 +1,9 @@
 package net.minecraft.entity;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.src.DamageSource;
 import net.minecraft.stats.StatCollector;
+import net.minecraft.utils.chat.ChatMessageComponent;
 
 public class EntityDamageSource extends DamageSource {
     protected Entity damageSourceEntity;

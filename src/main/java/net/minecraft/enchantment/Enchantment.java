@@ -3,8 +3,8 @@ package net.minecraft.enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.DamageSource;
-import net.minecraft.utils.enums.EnumEnchantmentType;
 import net.minecraft.stats.StatCollector;
+import net.minecraft.utils.enums.EnumEnchantmentType;
 
 import java.util.ArrayList;
 

@@ -5,11 +5,11 @@ import net.minecraft.block.BlockHalfSlab;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityPlayer;
+import net.minecraft.entity.pathfinding.PathFinder;
+import net.minecraft.entity.pathfinding.PathPoint;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.utils.MathHelper;
-import net.minecraft.entity.pathfinding.PathFinder;
-import net.minecraft.entity.pathfinding.PathPoint;
 
 public class EntityAIControlledByPlayer extends EntityAIBase {
     private final EntityLiving thisEntity;

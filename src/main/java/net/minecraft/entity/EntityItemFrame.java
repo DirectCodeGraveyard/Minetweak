@@ -3,9 +3,9 @@ package net.minecraft.entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.map.MapData;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraft.world.map.MapData;
 
 public class EntityItemFrame extends EntityHanging {
     /**

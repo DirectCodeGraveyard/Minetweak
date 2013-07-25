@@ -1,7 +1,7 @@
 package net.minecraft.block;
 
-import net.minecraft.src.IBlockAccess;
 import net.minecraft.material.Material;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;

@@ -1,8 +1,8 @@
 package net.minecraft.world.component;
 
 import net.minecraft.block.Block;
-import net.minecraft.utils.enums.EnumDoor;
 import net.minecraft.item.Item;
+import net.minecraft.utils.enums.EnumDoor;
 import net.minecraft.utils.weighted.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraft.world.structure.StructureBoundingBox;

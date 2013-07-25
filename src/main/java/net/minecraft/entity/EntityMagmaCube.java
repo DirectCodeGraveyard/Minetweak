@@ -1,7 +1,7 @@
 package net.minecraft.entity;
 
-import net.minecraft.item.Item;
 import net.minecraft.entity.attribute.SharedMonsterAttributes;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 public class EntityMagmaCube extends EntitySlime {

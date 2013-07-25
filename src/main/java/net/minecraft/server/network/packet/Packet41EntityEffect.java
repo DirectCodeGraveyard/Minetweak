@@ -1,7 +1,7 @@
 package net.minecraft.server.network.packet;
 
-import net.minecraft.server.network.NetHandler;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.network.NetHandler;
 
 import java.io.DataInput;
 import java.io.DataOutput;

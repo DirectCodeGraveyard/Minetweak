@@ -3,8 +3,8 @@ package net.minecraft.item;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.MathHelper;
 import net.minecraft.tileentity.TileEntitySign;
+import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 
 public class ItemSign extends Item {

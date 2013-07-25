@@ -2,8 +2,8 @@ package net.minecraft.entity.ai;
 
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.utils.MathHelper;
 import net.minecraft.entity.pathfinding.PathEntity;
+import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityAIAttackOnCollide extends EntityAIBase {

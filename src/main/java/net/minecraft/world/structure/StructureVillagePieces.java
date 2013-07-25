@@ -1,8 +1,8 @@
 package net.minecraft.world.structure;
 
-import net.minecraft.world.map.MapGenVillage;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.component.*;
+import net.minecraft.world.map.MapGenVillage;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -3,8 +3,8 @@ package net.minecraft.server;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
-import net.minecraft.tileentity.TileEntityCommandBlock;
 import net.minecraft.crash.exception.WrongUsageException;
+import net.minecraft.tileentity.TileEntityCommandBlock;
 
 public class ServerCommandTestFor extends CommandBase
 {

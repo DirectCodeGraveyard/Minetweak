@@ -1,7 +1,5 @@
 package net.minecraft.entity;
 
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.block.Block;
 import net.minecraft.crafting.merchant.IMerchant;
 import net.minecraft.crafting.merchant.MerchantRecipe;
@@ -9,12 +7,17 @@ import net.minecraft.crafting.merchant.MerchantRecipeList;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.IMob;
+import net.minecraft.src.INpc;
+import net.minecraft.src.Tuple;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;

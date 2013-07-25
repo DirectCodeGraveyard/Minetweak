@@ -4,7 +4,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.*;
 import net.minecraft.item.Item;
 import net.minecraft.material.Material;
-import net.minecraft.src.*;
+import net.minecraft.src.Explosion;
 import net.minecraft.world.World;
 
 import java.util.Random;

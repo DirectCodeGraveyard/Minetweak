@@ -4,7 +4,7 @@ import net.minecraft.block.behavior.BehaviorDefaultDispenseItem;
 import net.minecraft.block.behavior.IBehaviorDispenseItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.*;
+import net.minecraft.src.Facing;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityDispenser;
 import net.minecraft.tileentity.TileEntityDropper;

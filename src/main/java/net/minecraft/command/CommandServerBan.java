@@ -1,9 +1,9 @@
 package net.minecraft.command;
 
+import net.minecraft.crash.exception.WrongUsageException;
 import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ban.BanEntry;
-import net.minecraft.crash.exception.WrongUsageException;
 
 import java.util.List;
 

@@ -1,14 +1,14 @@
 package net.minecraft.world.storage;
 
+import net.minecraft.crash.exception.MinecraftException;
 import net.minecraft.entity.EntityPlayer;
+import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.player.IPlayerFileData;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.nbt.CompressedStreamTools;
-import net.minecraft.crash.exception.MinecraftException;
 import net.minecraft.world.WorldInfo;
-import net.minecraft.world.provider.WorldProvider;
 import net.minecraft.world.chunk.IChunkLoader;
+import net.minecraft.world.provider.WorldProvider;
 
 import java.io.*;
 

@@ -1,12 +1,12 @@
 package net.minecraft.server.network.tcp;
 
+import net.minecraft.logging.ILogAgent;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.INetworkManager;
 import net.minecraft.server.network.NetHandler;
 import net.minecraft.server.network.packet.Packet;
 import net.minecraft.server.network.packet.Packet252SharedKey;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.CryptManager;
-import net.minecraft.logging.ILogAgent;
-import net.minecraft.server.network.INetworkManager;
 
 import javax.crypto.SecretKey;
 import java.io.*;

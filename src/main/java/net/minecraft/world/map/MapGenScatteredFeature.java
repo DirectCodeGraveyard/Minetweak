@@ -1,11 +1,11 @@
 package net.minecraft.world.map;
 
 import net.minecraft.entity.EntityWitch;
-import net.minecraft.utils.MathHelper;
 import net.minecraft.src.SpawnListEntry;
+import net.minecraft.utils.MathHelper;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.structure.StructureScatteredFeatureStart;
 import net.minecraft.world.structure.StructureStart;
-import net.minecraft.world.biome.BiomeGenBase;
 
 import java.util.*;
 import java.util.Map.Entry;

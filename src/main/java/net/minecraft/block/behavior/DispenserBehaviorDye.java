@@ -3,8 +3,8 @@ package net.minecraft.block.behavior;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
-import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.src.IBlockSource;
+import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.world.World;
 
 final class DispenserBehaviorDye extends BehaviorDefaultDispenseItem {

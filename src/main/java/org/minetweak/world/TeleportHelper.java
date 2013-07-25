@@ -1,8 +1,8 @@
 package org.minetweak.world;
 
-import net.minecraft.world.chunk.ChunkCoordinates;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.chunk.ChunkCoordinates;
 
 public class TeleportHelper {
     /**

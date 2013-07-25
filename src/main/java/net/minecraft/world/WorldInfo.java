@@ -1,11 +1,11 @@
 package net.minecraft.world;
 
-import net.minecraft.utils.callable.*;
 import net.minecraft.crash.CrashReportCategory;
-import net.minecraft.utils.enums.EnumGameType;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.*;
+import net.minecraft.src.GameRules;
+import net.minecraft.utils.callable.*;
+import net.minecraft.utils.enums.EnumGameType;
 
 public class WorldInfo {
     /**

@@ -1,9 +1,9 @@
 package net.minecraft.command;
 
-import net.minecraft.entity.EntityPlayerMP;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.player.PlayerNotFoundException;
 import net.minecraft.crash.exception.WrongUsageException;
+import net.minecraft.entity.EntityPlayerMP;
+import net.minecraft.player.PlayerNotFoundException;
+import net.minecraft.server.MinecraftServer;
 
 import java.util.List;
 

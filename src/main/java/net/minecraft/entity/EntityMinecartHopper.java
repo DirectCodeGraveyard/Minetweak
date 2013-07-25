@@ -2,7 +2,8 @@ package net.minecraft.entity;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.Hopper;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.world.World;
 

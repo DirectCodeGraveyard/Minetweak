@@ -1,10 +1,11 @@
 package net.minecraft.entity;
 
+import net.minecraft.block.Block;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.attribute.AttributeModifier;
 import net.minecraft.entity.attribute.SharedMonsterAttributes;
-import net.minecraft.block.Block;
-import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.pathfinding.PathNavigate;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -13,8 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.network.packet.Packet39AttachEntity;
-import net.minecraft.entity.pathfinding.PathNavigate;
-import net.minecraft.src.*;
+import net.minecraft.src.IMob;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;

@@ -1,10 +1,10 @@
 package net.minecraft.world.provider;
 
-import net.minecraft.world.chunk.IChunkProvider;
-import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.block.Block;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.ChunkCoordinates;
 import net.minecraft.world.chunk.ChunkProviderEnd;
+import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.chunk.WorldChunkManagerHell;
 
 public class WorldProviderEnd extends WorldProvider {

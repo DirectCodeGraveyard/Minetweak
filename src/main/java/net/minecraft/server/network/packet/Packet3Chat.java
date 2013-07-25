@@ -1,7 +1,7 @@
 package net.minecraft.server.network.packet;
 
-import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.server.network.NetHandler;
+import net.minecraft.utils.chat.ChatMessageComponent;
 
 import java.io.DataInput;
 import java.io.DataOutput;

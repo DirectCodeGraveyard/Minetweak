@@ -1,9 +1,9 @@
 package net.minecraft.entity;
 
 import net.minecraft.block.Block;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.utils.MathHelper;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import java.util.List;

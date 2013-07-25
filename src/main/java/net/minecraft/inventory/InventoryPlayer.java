@@ -1,15 +1,15 @@
 package net.minecraft.inventory;
 
 import net.minecraft.block.Block;
-import net.minecraft.utils.callable.CallableItemName;
+import net.minecraft.crash.CrashReport;
+import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.src.ReportedException;
+import net.minecraft.utils.callable.CallableItemName;
 
 public class InventoryPlayer implements IInventory {
     /**

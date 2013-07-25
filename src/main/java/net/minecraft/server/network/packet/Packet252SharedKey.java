@@ -1,7 +1,7 @@
 package net.minecraft.server.network.packet;
 
-import net.minecraft.src.CryptManager;
 import net.minecraft.server.network.NetHandler;
+import net.minecraft.src.CryptManager;
 
 import javax.crypto.SecretKey;
 import java.io.DataInput;

@@ -1,11 +1,12 @@
 package net.minecraft.entity;
 
-import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSilverfish;
-import net.minecraft.utils.enums.EnumCreatureAttribute;
-import net.minecraft.src.*;
+import net.minecraft.entity.attribute.SharedMonsterAttributes;
+import net.minecraft.src.DamageSource;
+import net.minecraft.src.Facing;
 import net.minecraft.utils.MathHelper;
+import net.minecraft.utils.enums.EnumCreatureAttribute;
 import net.minecraft.world.World;
 
 public class EntitySilverfish extends EntityMob {

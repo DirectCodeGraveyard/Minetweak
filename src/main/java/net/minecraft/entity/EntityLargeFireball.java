@@ -1,8 +1,8 @@
 package net.minecraft.entity;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.MovingObjectPosition;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class EntityLargeFireball extends EntityFireball {

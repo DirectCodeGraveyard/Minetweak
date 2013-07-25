@@ -5,8 +5,8 @@ import net.minecraft.block.BlockRailBase;
 import net.minecraft.entity.EntityMinecart;
 import net.minecraft.item.ItemMinecart;
 import net.minecraft.item.ItemStack;
-import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.src.IBlockSource;
+import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.world.World;
 
 public final class BehaviorDispenseMinecart extends BehaviorDefaultDispenseItem {

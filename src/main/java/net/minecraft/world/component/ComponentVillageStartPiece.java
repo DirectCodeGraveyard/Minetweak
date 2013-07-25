@@ -1,8 +1,8 @@
 package net.minecraft.world.component;
 
-import net.minecraft.world.structure.StructureVillagePieceWeight;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.WorldChunkManager;
+import net.minecraft.world.structure.StructureVillagePieceWeight;
 
 import java.util.ArrayList;
 import java.util.List;

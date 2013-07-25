@@ -2,8 +2,8 @@ package net.minecraft.server.network.packet;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLightningBolt;
-import net.minecraft.utils.MathHelper;
 import net.minecraft.server.network.NetHandler;
+import net.minecraft.utils.MathHelper;
 
 import java.io.DataInput;
 import java.io.DataOutput;

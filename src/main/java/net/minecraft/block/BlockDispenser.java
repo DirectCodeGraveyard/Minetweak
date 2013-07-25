@@ -6,7 +6,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityItem;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
@@ -15,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.src.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityDispenser;
+import net.minecraft.utils.enums.EnumFacing;
 import net.minecraft.world.World;
 
 import java.util.Random;

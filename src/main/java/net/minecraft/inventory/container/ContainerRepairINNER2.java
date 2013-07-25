@@ -2,9 +2,9 @@ package net.minecraft.inventory.container;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.slot.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 class ContainerRepairINNER2 extends Slot {

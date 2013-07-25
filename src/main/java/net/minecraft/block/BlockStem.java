@@ -2,7 +2,7 @@ package net.minecraft.block;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.*;
+import net.minecraft.src.IBlockAccess;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
 

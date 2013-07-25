@@ -1,12 +1,12 @@
 package net.minecraft.stats;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.player.achievement.AchievementList;
 import net.minecraft.crafting.CraftingManager;
 import net.minecraft.crafting.FurnaceRecipes;
 import net.minecraft.crafting.IRecipe;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.player.achievement.AchievementList;
 
 import java.util.*;
 

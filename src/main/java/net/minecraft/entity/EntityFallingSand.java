@@ -6,7 +6,7 @@ import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.src.*;
+import net.minecraft.src.DamageSource;
 import net.minecraft.tileentity.ITileEntityProvider;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.utils.MathHelper;

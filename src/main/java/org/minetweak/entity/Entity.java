@@ -1,7 +1,7 @@
 package org.minetweak.entity;
 
-import net.minecraft.utils.AxisAlignedBB;
 import net.minecraft.entity.EntityMob;
+import net.minecraft.utils.AxisAlignedBB;
 
 import java.util.ArrayList;
 import java.util.List;

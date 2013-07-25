@@ -3,9 +3,9 @@ package net.minecraft.entity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.Explosion;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class EntityMinecartTNT extends EntityMinecart {

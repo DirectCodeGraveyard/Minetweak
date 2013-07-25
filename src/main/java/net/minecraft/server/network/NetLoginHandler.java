@@ -1,12 +1,12 @@
 package net.minecraft.server.network;
 
 import net.minecraft.entity.EntityPlayerMP;
-import net.minecraft.server.network.packet.*;
-import net.minecraft.server.network.tcp.TcpConnection;
 import net.minecraft.server.DedicatedServerListenThread;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerConfigurationManager;
-import net.minecraft.src.*;
+import net.minecraft.server.network.packet.*;
+import net.minecraft.server.network.tcp.TcpConnection;
+import net.minecraft.src.ThreadLoginVerifier;
 import net.minecraft.utils.StringUtils;
 
 import javax.crypto.SecretKey;

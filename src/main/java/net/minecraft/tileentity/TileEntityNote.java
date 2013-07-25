@@ -1,8 +1,8 @@
 package net.minecraft.tileentity;
 
 import net.minecraft.block.Block;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.material.Material;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public class TileEntityNote extends TileEntity {

@@ -4,11 +4,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.ServersideAttributeMap;
+import net.minecraft.server.network.packet.*;
+import net.minecraft.src.DataWatcher;
+import net.minecraft.src.IAnimals;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.map.MapData;
-import net.minecraft.server.network.packet.*;
-import net.minecraft.server.ServersideAttributeMap;
-import net.minecraft.src.*;
 
 import java.util.*;
 
