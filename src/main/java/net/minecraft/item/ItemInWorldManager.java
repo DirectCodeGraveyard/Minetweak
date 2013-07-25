@@ -238,9 +238,6 @@ public class ItemInWorldManager {
             if (!isCreative() && !getGameType().isAdventure() && !this.thisPlayerMP.canHarvestBlock(Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
                 event.setCancelled(true);
             }
-            if (thisPlayerMP.getHeldItem().getItem() instanceof ItemSword && isCreative()) {
-                event.setCancelled(true);
-            }
             if (getGameType().isAdventure()) {
                 event.setCancelled(true);
             }
