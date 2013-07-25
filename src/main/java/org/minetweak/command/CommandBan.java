@@ -4,6 +4,8 @@ import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;
 
+import java.util.ArrayList;
+
 public class CommandBan extends CommandExecutor {
 
     @Override
@@ -28,6 +30,16 @@ public class CommandBan extends CommandExecutor {
     @Override
     public String getHelpInfo() {
         return "Bans a Player";
+    }
+
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        int length = input.split(" ").length;
+
+        switch (length) {
+            case 1:
+                completions.addAll(Minetweak.getPlayers().keySet());
+        }
     }
 
 }

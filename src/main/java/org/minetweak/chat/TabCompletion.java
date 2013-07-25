@@ -24,7 +24,7 @@ public class TabCompletion {
                     executor.getTabCompletion(sender, input, matches);
                     return matches;
                 } else {
-                    matches.add(" ");
+                    // No Matches, because the user must add a space by themselves
                     return matches;
                 }
             }
@@ -64,9 +64,8 @@ public class TabCompletion {
         if (input.startsWith("/")) {
             input = input.substring(1);
         }
-        if (input.contains(" ")) {
-            return getPlayersMatching("");
-        }
+        input = input.split(" ")[0];
+
         for (String cmd : commands) {
             if (cmd.startsWith(input)) {
                 matches.add("/" + cmd);

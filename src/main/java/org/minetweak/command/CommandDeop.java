@@ -1,8 +1,10 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
-import org.minetweak.Server;
 import org.minetweak.entity.Player;
+import org.minetweak.permissions.ServerOps;
+
+import java.util.ArrayList;
 
 public class CommandDeop extends CommandExecutor {
 
@@ -17,13 +19,13 @@ public class CommandDeop extends CommandExecutor {
         }
         Player targetPlayer = Minetweak.getPlayerByName(args[0]);
 
-        Server.deopPlayer(args[0]);
+        ServerOps.removeOp(args[0]);
 
         if (Minetweak.isPlayerOnline(args[0])) {
             targetPlayer.sendMessage("You have been deopped by: " + sender.getName());
             sender.sendMessage("You deopped " + args[0]);
         } else {
-            sender.sendMessage("You deopped " + args[0] + " which is offline");
+            sender.sendMessage("You deopped " + args[0] + ", who is offline");
         }
     }
 
@@ -32,5 +34,14 @@ public class CommandDeop extends CommandExecutor {
         return "Deops a Player";
     }
 
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        int length = input.split(" ").length;
+
+        switch (length) {
+            case 1:
+                completions.addAll(Minetweak.getPlayers().keySet());
+        }
+    }
 
 }

@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.utils.enums.EnumChatFormatting;
+import org.minetweak.chat.ChatFormatting;
 
 import java.text.DecimalFormat;
 
@@ -12,11 +12,11 @@ public class CommandTps extends CommandExecutor {
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         String tps = getTPS(MinecraftServer.getServer().tickTimeArray);
         if (tps.equals("20")) {
-            tps = EnumChatFormatting.GREEN + tps;
+            tps = ChatFormatting.GREEN + tps;
         } else {
-            tps = EnumChatFormatting.YELLOW + tps;
+            tps = ChatFormatting.YELLOW + tps;
         }
-        sender.sendMessage(EnumChatFormatting.GOLD + "TPS" + EnumChatFormatting.RESET + ": " + tps);
+        sender.sendMessage(ChatFormatting.GOLD + "Server is running at" + ChatFormatting.RESET + " " + tps + ChatFormatting.GOLD + " TPS.");
     }
 
     public String getTPS(long[] tickArray) {

@@ -1,12 +1,15 @@
 package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
 import org.minetweak.Server;
 import org.minetweak.chat.ChatFormatting;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Set;
 
 public class CommandWhitelist extends CommandExecutor {
     @Override
@@ -78,5 +81,28 @@ public class CommandWhitelist extends CommandExecutor {
     @Override
     public String getHelpInfo() {
         return "Manages the Whitelist";
+    }
+
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        String[] split = input.split(" ");
+        int length = split.length;
+        Set<String> players = Minetweak.getPlayers().keySet();
+
+        switch (length) {
+            case 1:
+                completions.addAll(Arrays.asList("add", "remove", "reload"));
+            case 2:
+                String cmd = split[1];
+                if (cmd.equals("add")) {
+                    for (String player : players) {
+                        if (!PlayerWhitelist.getWhitelistedPlayers().contains(player)) {
+                            completions.add(player);
+                        }
+                    }
+                } else if (cmd.equals("remove")) {
+                    completions.addAll(PlayerWhitelist.getWhitelistedPlayers());
+                }
+        }
     }
 }

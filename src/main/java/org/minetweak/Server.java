@@ -94,11 +94,11 @@ public class Server {
     }
 
     public static void opPlayer(String playerUsername) {
-        MinecraftServer.getServer().getConfigurationManager().addOp(playerUsername);
+        ServerOps.addOp(playerUsername);
     }
 
     public static void deopPlayer(String playerUsername) {
-        MinecraftServer.getServer().getConfigurationManager().removeOp(playerUsername);
+        ServerOps.removeOp(playerUsername);
     }
 
 

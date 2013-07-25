@@ -4,6 +4,8 @@ import org.minetweak.Minetweak;
 import org.minetweak.chat.ChatFormatting;
 import org.minetweak.entity.Player;
 
+import java.util.ArrayList;
+
 public class CommandTp extends CommandExecutor {
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
@@ -40,5 +42,17 @@ public class CommandTp extends CommandExecutor {
     @Override
     public String getHelpInfo() {
         return "Teleports a Player to another Player";
+    }
+
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        int length = input.split(" ").length;
+
+        switch (length) {
+            case 1:
+                completions.addAll(Minetweak.getPlayers().keySet());
+            case 2:
+                completions.addAll(Minetweak.getPlayers().keySet());
+        }
     }
 }
