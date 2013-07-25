@@ -111,3 +111,11 @@ uploadArchives {
         pom.version = version
     }
 }
+
+idea {
+   module {
+       scopes.PROVIDED.plus += configurations.compileAndJar
+       downloadJavadoc = true
+       downloadSources = false
+   }
+}
