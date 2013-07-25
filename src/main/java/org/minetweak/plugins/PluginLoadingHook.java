@@ -6,7 +6,7 @@ import org.minetweak.event.server.ServerInitializedEvent;
 /**
  * Simple hook to initialize plugins once the server is initialized
  */
-public class PluginLoaderHook {
+public class PluginLoadingHook {
     @Subscribe
     public void onServerInitialized(ServerInitializedEvent event) {
         PluginManager.initialize();

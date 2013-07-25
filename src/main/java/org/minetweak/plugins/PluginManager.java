@@ -38,6 +38,7 @@ public class PluginManager {
     public static void enable(String pluginName) {
         if (doesPluginExist(pluginName)) {
             IPlugin plugin = plugins.get(pluginName);
+            plugin.registerListener(plugin);
             plugin.onEnable();
             enabledPlugins.add(pluginName);
         }
@@ -69,7 +70,7 @@ public class PluginManager {
         for (File f : files) {
             PluginInfo pluginInfo = getPluginInfo(f);
             if (pluginInfo == null || pluginInfo.getMainClass() == null) {
-                Minetweak.getLogger().logInfo("Skipping Plugin JAR: " + f.getName() + ": Missing plugin information or main class");
+                Minetweak.getLogger().logInfo("Skipping Plugin JAR: " + f.getName() + ": Missing Required Plugin Information.");
                 continue;
             }
             pluginInformation.put(pluginInfo.getMainClass(), pluginInfo);
@@ -112,7 +113,7 @@ public class PluginManager {
         try {
             JarFile jf = new JarFile(file);
             ZipEntry entry = jf.getEntry("plugin.json");
-            ZipEntry bukkitYaml = jf.getEntry("plugin.yaml");
+            ZipEntry bukkitYaml = jf.getEntry("plugin.yml");
             ZipEntry langFolder = jf.getEntry("lang/");
             if (entry == null) {
                 if (bukkitYaml != null) {
@@ -157,7 +158,7 @@ public class PluginManager {
      * Disables all Plugins
      */
     public static void disableAll() {
-        ArrayList<String> pluginsToDisable = (ArrayList<String>) enabledPlugins.clone();
+        ArrayList<String> pluginsToDisable = new ArrayList<String>(enabledPlugins);
         for (String pluginName : pluginsToDisable) {
             disable(pluginName);
         }
@@ -207,6 +208,6 @@ public class PluginManager {
     }
 
     public void registerLanguageFiles(JarFile file) {
-
+        // Stub
     }
 }

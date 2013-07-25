@@ -1,5 +1,6 @@
 package org.minetweak.plugins;
 
+import org.minetweak.command.CommandExecutor;
 import org.minetweak.language.LanguageObject;
 
 /**
@@ -40,4 +41,19 @@ public interface IPlugin {
     public void registerLanguageObject(LanguageObject languageObject);
 
     public String getTranslatedName(LanguageObject languageObject);
+
+    /**
+     * Registers an Event Listener
+     *
+     * @param object the listener
+     */
+    public void registerListener(Object object);
+
+    /**
+     * Registers a Command for this Plugin
+     *
+     * @param label    the command label
+     * @param executor the command executor
+     */
+    public void registerCommand(String label, CommandExecutor executor);
 }

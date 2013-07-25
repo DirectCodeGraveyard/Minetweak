@@ -1,10 +1,30 @@
 package org.minetweak.plugins;
 
 public class PluginInfo {
+    /**
+     * The Plugin's Main class
+     */
     private String main;
+
+    /**
+     * The Plugin's Name
+     */
     private String name;
+
+    /**
+     * A Description of a Plugin
+     */
     private String description;
+
+    /**
+     * Specifies if this is a Bukkit Plugin
+     */
     private boolean isBukkitPlugin;
+
+    /**
+     * The Authors Name
+     */
+    private String author;
 
     public PluginInfo(String mainClass, String pluginName, String description) {
         this.main = mainClass;
@@ -63,5 +83,13 @@ public class PluginInfo {
      */
     public boolean isMinetweakPlugin() {
         return !isBukkitPlugin;
+    }
+
+    /**
+     * Gets the Author of the Plugin
+     * @return plugin's author
+     */
+    public String getAuthor() {
+        return author;
     }
 }

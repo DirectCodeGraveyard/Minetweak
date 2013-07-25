@@ -29,6 +29,9 @@ public abstract class MinetweakPlugin implements IPlugin {
     public void onDisable() {
     }
 
+    /**
+     * Un-registers all Commands and Listeners for this plugin
+     */
     public void purgeRegistrations() {
         for (String command : commands) {
             Minetweak.unregisterCommand(command);
@@ -54,22 +57,13 @@ public abstract class MinetweakPlugin implements IPlugin {
         this.pluginInfo = pluginInfo;
     }
 
-    /**
-     * Registers a Command for this Plugin
-     *
-     * @param label    the command label
-     * @param executor the command executor
-     */
+    @Override
     public void registerCommand(String label, CommandExecutor executor) {
         commands.add(label);
         Minetweak.registerCommand(label, executor);
     }
 
-    /**
-     * Registers an Event Listener
-     *
-     * @param listener the listener
-     */
+    @Override
     public void registerListener(Object listener) {
         listeners.add(listener);
         Minetweak.registerListener(listener);

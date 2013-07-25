@@ -10,7 +10,7 @@ import org.minetweak.entity.player.PlayerTracker;
 import org.minetweak.permissions.PermissionsLoader;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
-import org.minetweak.plugins.PluginLoaderHook;
+import org.minetweak.plugins.PluginLoadingHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
 import org.minetweak.util.MinetweakLog;
@@ -99,7 +99,7 @@ public class Minetweak {
         registerListener(ManagementThread.getInstance());
 
         // Used to run plugin startup inside the Server
-        registerListener(new PluginLoaderHook());
+        registerListener(new PluginLoadingHook());
 
         // Loads joined player list
         registerListener(PlayerTracker.getInstance());

@@ -10,9 +10,8 @@ public class PluginLoadingThread extends Thread {
      */
     @Override
     public void run() {
-        for (IPlugin plugin : PluginManager.plugins.values()) {
-            plugin.onEnable();
-            PluginManager.enabledPlugins.add(plugin.getPluginInfo().getName());
+        for (String pluginName : PluginManager.plugins.keySet()) {
+            PluginManager.enable(pluginName);
         }
     }
 }
