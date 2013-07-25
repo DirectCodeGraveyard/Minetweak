@@ -146,40 +146,6 @@ public class Minetweak {
     }
 
     /**
-     * Register a player into Minetweak
-     * @param playerUsername Player name we are registering
-     */
-    public static boolean registerPlayer(String playerUsername) {
-        Player targetPlayerInstance = new Player(playerUsername);
-        if (isServerLockedDown()) {
-            targetPlayerInstance.kickPlayer("This server is currently under lockdown.");
-            return false;
-        } else {
-            if (players.containsKey(playerUsername)) {
-                if (isPlayerOnline(playerUsername)) {
-                    targetPlayerInstance.kickPlayer("There was a problem connecting you to the server");
-                    return false;
-                }
-            } else {
-                if (!PlayerWhitelist.isPlayerWhitelisted(playerUsername)) {
-                    targetPlayerInstance.kickPlayer("You are not whitelisted on this server!");
-                    return false;
-                }
-                players.put(playerUsername, targetPlayerInstance);
-            }
-            return true;
-        }
-    }
-
-    /**
-     * Take the target player and unregister them
-     * @param playerUsername Player name we marking as offline
-     */
-    public static void unregisterPlayer(String playerUsername) {
-        players.remove(playerUsername);
-    }
-
-    /**
      * Get a specific player by their username, either online or offline, if they are online
      * @param playerName Player's username
      * @return Instance of player
