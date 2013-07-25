@@ -16,7 +16,12 @@ import org.minetweak.thread.ManagementThread;
 import org.minetweak.util.MinetweakLog;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashMap;
+import java.util.jar.Attributes;
+import java.util.jar.JarFile;
 
 /**
  * Main entry point for Minetweak, basically defines fields
@@ -35,9 +40,8 @@ public class Minetweak {
 
     /**
      * This is the Minetweak version we are currently running on.
-     * TODO: Make this automatic through Gradle
      */
-    private static final String serverVersion = "0.6.4";
+    private static String serverVersion = "0.6.4";
 
     /**
      * This boolean will return true if the server has finished loading, will
@@ -78,6 +82,9 @@ public class Minetweak {
      * @param args the arguments to pass to MinecraftServer
      */
     public static void main(String[] args) {
+        // Runs a quick utility to get the Server Version
+        versionCheck();
+        Minetweak.info("Starting Minetweak v" + serverVersion + " implementing Minecraft v" + getMinecraftVersion());
         // Load the most important things first
         MinetweakConfig.initialize();
         PermissionsLoader.load();
@@ -296,5 +303,26 @@ public class Minetweak {
      */
     public static void unregisterCommand(String label) {
         commandExecutors.remove(label);
+    }
+
+    /**
+     * Does a Version Check from the Manifest.
+     */
+    private static void versionCheck() {
+        URL url = Minetweak.class.getProtectionDomain().getCodeSource().getLocation();
+        boolean isJar = url.getFile().endsWith(".jar");
+
+        if (isJar) {
+            try {
+                try {
+                    JarFile file = new JarFile(new File(url.toURI()));
+                    Attributes attributes = file.getManifest().getMainAttributes();
+                    String version = attributes.getValue("Minetweak-version");
+                    if (version!=null) {
+                        serverVersion = version;
+                    }
+                } catch (URISyntaxException ignored) {}
+            } catch (IOException ignored) {}
+        }
     }
 }

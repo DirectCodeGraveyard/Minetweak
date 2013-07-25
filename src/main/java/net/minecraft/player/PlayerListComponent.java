@@ -20,7 +20,7 @@ public class PlayerListComponent extends JList implements IUpdatePlayerListBox {
      */
     public void update() {
         if (this.field_120014_b++ % 20 == 0) {
-            Vector var1 = new Vector();
+            Vector<String> var1 = new Vector<String>();
 
             for (int var2 = 0; var2 < this.field_120015_a.getConfigurationManager().playerEntityList.size(); ++var2) {
                 var1.add((this.field_120015_a.getConfigurationManager().playerEntityList.get(var2)).getCommandSenderName());

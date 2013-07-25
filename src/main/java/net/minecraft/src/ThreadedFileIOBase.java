@@ -30,27 +30,27 @@ public class ThreadedFileIOBase implements Runnable {
      * Process the items that are in the queue
      */
     private void processQueue() {
-        for (int var1 = 0; var1 < this.threadedIOQueue.size(); ++var1) {
-            IThreadedFileIO var2 = this.threadedIOQueue.get(var1);
-            boolean var3 = var2.writeNextIO();
+        for (int i = 0; i < this.threadedIOQueue.size(); ++i) {
+            IThreadedFileIO var2 = this.threadedIOQueue.get(i);
+            boolean didWrite = var2.writeNextIO();
 
-            if (!var3) {
-                this.threadedIOQueue.remove(var1--);
+            if (!didWrite) {
+                this.threadedIOQueue.remove(i--);
                 ++this.savedIOCounter;
             }
 
             try {
                 Thread.sleep(this.isThreadWaiting ? 0L : 10L);
-            } catch (InterruptedException var6) {
-                var6.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 
         if (this.threadedIOQueue.isEmpty()) {
             try {
                 Thread.sleep(25L);
-            } catch (InterruptedException var5) {
-                var5.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -58,10 +58,10 @@ public class ThreadedFileIOBase implements Runnable {
     /**
      * threaded io
      */
-    public void queueIO(IThreadedFileIO par1IThreadedFileIO) {
-        if (!this.threadedIOQueue.contains(par1IThreadedFileIO)) {
+    public void queueIO(IThreadedFileIO threadedFileIO) {
+        if (!this.threadedIOQueue.contains(threadedFileIO)) {
             ++this.writeQueuedCounter;
-            this.threadedIOQueue.add(par1IThreadedFileIO);
+            this.threadedIOQueue.add(threadedFileIO);
         }
     }
 

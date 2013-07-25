@@ -3,8 +3,8 @@ package net.minecraft.potion;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.attribute.BaseAttributeMap;
 
-public class PotionAbsoption extends Potion {
-    protected PotionAbsoption(int par1, boolean par2, int par3) {
+public class PotionAbsorption extends Potion {
+    protected PotionAbsorption(int par1, boolean par2, int par3) {
         super(par1, par2, par3);
     }
 

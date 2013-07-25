@@ -8,7 +8,6 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class CrashReport {
@@ -26,7 +25,7 @@ public class CrashReport {
     /**
      * Holds the keys and values of all crash report sections.
      */
-    private final List crashReportSections = new ArrayList();
+    private final List<CrashReportCategory> crashReportSections = new ArrayList<CrashReportCategory>();
 
     /**
      * File of crash report.
@@ -79,10 +78,8 @@ public class CrashReport {
             par1StringBuilder.append("-- Head --\n");
             par1StringBuilder.append("Stacktrace:\n");
             StackTraceElement[] var2 = this.field_85060_g;
-            int var3 = var2.length;
 
-            for (int var4 = 0; var4 < var3; ++var4) {
-                StackTraceElement var5 = var2[var4];
+            for (StackTraceElement var5 : var2) {
                 par1StringBuilder.append("\t").append("at ").append(var5.toString());
                 par1StringBuilder.append("\n");
             }
@@ -90,10 +87,8 @@ public class CrashReport {
             par1StringBuilder.append("\n");
         }
 
-        Iterator var6 = this.crashReportSections.iterator();
-
-        while (var6.hasNext()) {
-            CrashReportCategory var7 = (CrashReportCategory) var6.next();
+        for (Object crashReportSection : this.crashReportSections) {
+            CrashReportCategory var7 = (CrashReportCategory) crashReportSection;
             var7.func_85072_a(par1StringBuilder);
             par1StringBuilder.append("\n\n");
         }
@@ -216,7 +211,7 @@ public class CrashReport {
             this.field_85059_f = var3.func_85069_a(var6, var7);
 
             if (var4 > 0 && !this.crashReportSections.isEmpty()) {
-                CrashReportCategory var8 = (CrashReportCategory) this.crashReportSections.get(this.crashReportSections.size() - 1);
+                CrashReportCategory var8 = this.crashReportSections.get(this.crashReportSections.size() - 1);
                 var8.func_85070_b(var4);
             } else if (var5 != null && var5.length >= var4) {
                 this.field_85060_g = new StackTraceElement[var5.length - var4];

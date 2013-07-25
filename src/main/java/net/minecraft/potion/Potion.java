@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityPlayer;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.src.DamageSource;
 
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -78,22 +77,14 @@ public class Potion {
      */
     public static final Potion wither = (new Potion(20, true, 3484199)).setPotionName("potion.wither").setIconIndex(1, 2).setEffectiveness(0.25D);
     public static final Potion field_76434_w = (new PotionHealthBoost(21, false, 16284963)).setPotionName("potion.healthBoost").setIconIndex(2, 2).func_111184_a(SharedMonsterAttributes.field_111267_a, "5D6F0BA2-1186-46AC-B896-C61C5CEE99CC", 4.0D, 0);
-    public static final Potion field_76444_x = (new PotionAbsoption(22, false, 2445989)).setPotionName("potion.absorption").setIconIndex(2, 2);
+    public static final Potion field_76444_x = (new PotionAbsorption(22, false, 2445989)).setPotionName("potion.absorption").setIconIndex(2, 2);
     public static final Potion field_76443_y = (new PotionHealth(23, false, 16262179)).setPotionName("potion.saturation");
-    public static final Potion field_76442_z = null;
-    public static final Potion field_76409_A = null;
-    public static final Potion field_76410_B = null;
-    public static final Potion field_76411_C = null;
-    public static final Potion field_76405_D = null;
-    public static final Potion field_76406_E = null;
-    public static final Potion field_76407_F = null;
-    public static final Potion field_76408_G = null;
 
     /**
      * The Id of a Potion object.
      */
     public final int id;
-    private final Map field_111188_I = Maps.newHashMap();
+    private final Map<Attribute, AttributeModifier> field_111188_I = Maps.newHashMap();
 
     /**
      * This field indicated if the effect is 'bad' - negative - for the entity.
@@ -209,13 +200,13 @@ public class Potion {
 
         if (this.id == regeneration.id) {
             var3 = 50 >> par2;
-            return var3 > 0 ? par1 % var3 == 0 : true;
+            return var3 <= 0 || par1 % var3 == 0;
         } else if (this.id == poison.id) {
             var3 = 25 >> par2;
-            return var3 > 0 ? par1 % var3 == 0 : true;
+            return var3 <= 0 || par1 % var3 == 0;
         } else if (this.id == wither.id) {
             var3 = 40 >> par2;
-            return var3 > 0 ? par1 % var3 == 0 : true;
+            return var3 <= 0 || par1 % var3 == 0;
         } else {
             return this.id == hunger.id;
         }
@@ -263,27 +254,23 @@ public class Potion {
     }
 
     public void func_111187_a(EntityLivingBase par1EntityLivingBase, BaseAttributeMap par2BaseAttributeMap, int par3) {
-        Iterator var4 = this.field_111188_I.entrySet().iterator();
 
-        while (var4.hasNext()) {
-            Entry var5 = (Entry) var4.next();
-            AttributeInstance var6 = par2BaseAttributeMap.func_111151_a((Attribute) var5.getKey());
+        for (Entry<Attribute, AttributeModifier> var5 : this.field_111188_I.entrySet()) {
+            AttributeInstance var6 = par2BaseAttributeMap.func_111151_a(var5.getKey());
 
             if (var6 != null) {
-                var6.func_111124_b((AttributeModifier) var5.getValue());
+                var6.func_111124_b(var5.getValue());
             }
         }
     }
 
     public void func_111185_a(EntityLivingBase par1EntityLivingBase, BaseAttributeMap par2BaseAttributeMap, int par3) {
-        Iterator var4 = this.field_111188_I.entrySet().iterator();
 
-        while (var4.hasNext()) {
-            Entry var5 = (Entry) var4.next();
-            AttributeInstance var6 = par2BaseAttributeMap.func_111151_a((Attribute) var5.getKey());
+        for (Entry<Attribute, AttributeModifier> var5 : this.field_111188_I.entrySet()) {
+            AttributeInstance var6 = par2BaseAttributeMap.func_111151_a(var5.getKey());
 
             if (var6 != null) {
-                AttributeModifier var7 = (AttributeModifier) var5.getValue();
+                AttributeModifier var7 = var5.getValue();
                 var6.func_111124_b(var7);
                 var6.func_111121_a(new AttributeModifier(var7.func_111167_a(), this.getName() + " " + par3, this.func_111183_a(par3, var7), var7.func_111169_c()));
             }

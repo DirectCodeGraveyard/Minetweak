@@ -25,7 +25,7 @@ public final class SpawnerAnimals {
     /**
      * The 17x17 area around the player where mobs can spawn
      */
-    private HashMap eligibleChunksForSpawning = new HashMap();
+    private HashMap<ChunkCoordIntPair, Boolean> eligibleChunksForSpawning = new HashMap<ChunkCoordIntPair, Boolean>();
 
     /**
      * Given a chunk, find a random position in it.
@@ -62,9 +62,9 @@ public final class SpawnerAnimals {
                         ChunkCoordIntPair var13 = new ChunkCoordIntPair(var10 + var7, var11 + var8);
 
                         if (!var12) {
-                            this.eligibleChunksForSpawning.put(var13, Boolean.valueOf(false));
+                            this.eligibleChunksForSpawning.put(var13, false);
                         } else if (!this.eligibleChunksForSpawning.containsKey(var13)) {
-                            this.eligibleChunksForSpawning.put(var13, Boolean.valueOf(true));
+                            this.eligibleChunksForSpawning.put(var13, true);
                         }
                     }
                 }
@@ -79,13 +79,13 @@ public final class SpawnerAnimals {
                 EnumCreatureType var37 = var35[var36];
 
                 if ((!var37.getPeacefulCreature() || par3) && (var37.getPeacefulCreature() || par2) && (!var37.getAnimal() || par4) && par1WorldServer.countEntities(var37.getCreatureClass()) <= var37.getMaxNumberOfCreature() * this.eligibleChunksForSpawning.size() / 256) {
-                    Iterator var39 = this.eligibleChunksForSpawning.keySet().iterator();
+                    Iterator<ChunkCoordIntPair> var39 = this.eligibleChunksForSpawning.keySet().iterator();
                     label110:
 
                     while (var39.hasNext()) {
-                        ChunkCoordIntPair var38 = (ChunkCoordIntPair) var39.next();
+                        ChunkCoordIntPair var38 = var39.next();
 
-                        if (!((Boolean) this.eligibleChunksForSpawning.get(var38)).booleanValue()) {
+                        if (!this.eligibleChunksForSpawning.get(var38)) {
                             ChunkPosition var40 = getRandomSpawningPointInChunk(par1WorldServer, var38.chunkXPos, var38.chunkZPos);
                             int var14 = var40.x;
                             int var15 = var40.y;

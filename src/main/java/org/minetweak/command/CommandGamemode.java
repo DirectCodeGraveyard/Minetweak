@@ -3,6 +3,7 @@ package org.minetweak.command;
 import net.minecraft.utils.enums.EnumGameType;
 import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
+import org.minetweak.server.GameMode;
 import org.minetweak.util.StringUtils;
 
 public class CommandGamemode extends CommandExecutor {
@@ -37,9 +38,9 @@ public class CommandGamemode extends CommandExecutor {
 
             Player player = Minetweak.getPlayerByName(sender.getName());
 
-            if (gamemode == 0) player.setGameMode(EnumGameType.SURVIVAL);
-            if (gamemode == 1) player.setGameMode(EnumGameType.CREATIVE);
-            if (gamemode == 2) player.setGameMode(EnumGameType.ADVENTURE);
+            if (gamemode == 0) player.setGameMode(GameMode.SURVIVAL);
+            if (gamemode == 1) player.setGameMode(GameMode.CREATIVE);
+            if (gamemode == 2) player.setGameMode(GameMode.ADVENTURE);
 
             if (gamemode == 0) player.sendMessage("Your gamemode was set to survival");
             if (gamemode == 1) player.sendMessage("Your gamemode was set to creative");
@@ -47,9 +48,9 @@ public class CommandGamemode extends CommandExecutor {
         } else {
             Player player = Minetweak.getPlayerByName(args[1]);
 
-            if (gamemode == 0) player.setGameMode(EnumGameType.SURVIVAL);
-            if (gamemode == 1) player.setGameMode(EnumGameType.CREATIVE);
-            if (gamemode == 2) player.setGameMode(EnumGameType.ADVENTURE);
+            if (gamemode == 0) player.setGameMode(GameMode.SURVIVAL);
+            if (gamemode == 1) player.setGameMode(GameMode.CREATIVE);
+            if (gamemode == 2) player.setGameMode(GameMode.ADVENTURE);
 
             if (gamemode == 0) player.sendMessage("Your gamemode was set to survival");
             if (gamemode == 1) player.sendMessage("Your gamemode was set to creative");

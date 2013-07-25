@@ -132,7 +132,7 @@ public class InventoryPlayer implements IInventory {
             }
 
             var3 += this.itemStack.stackSize;
-            this.setItemStack((ItemStack) null);
+            this.setItemStack(null);
         }
 
         return var3;
@@ -279,8 +279,8 @@ public class InventoryPlayer implements IInventory {
             } catch (Throwable var5) {
                 CrashReport var3 = CrashReport.makeCrashReport(var5, "Adding item to inventory");
                 CrashReportCategory var4 = var3.makeCategory("Item being added");
-                var4.addCrashSection("Item ID", Integer.valueOf(par1ItemStack.itemID));
-                var4.addCrashSection("Item data", Integer.valueOf(par1ItemStack.getItemDamage()));
+                var4.addCrashSection("Item ID", par1ItemStack.itemID);
+                var4.addCrashSection("Item data", par1ItemStack.getItemDamage());
                 var4.addCrashSectionCallable("Item name", new CallableItemName(this, par1ItemStack));
                 throw new ReportedException(var3);
             }
@@ -473,7 +473,7 @@ public class InventoryPlayer implements IInventory {
             return true;
         } else {
             ItemStack var2 = this.getStackInSlot(this.currentItem);
-            return var2 != null ? var2.canHarvestBlock(par1Block) : false;
+            return var2 != null && var2.canHarvestBlock(par1Block);
         }
     }
 
@@ -490,9 +490,9 @@ public class InventoryPlayer implements IInventory {
     public int getTotalArmorValue() {
         int var1 = 0;
 
-        for (int var2 = 0; var2 < this.armorInventory.length; ++var2) {
-            if (this.armorInventory[var2] != null && this.armorInventory[var2].getItem() instanceof ItemArmor) {
-                int var3 = ((ItemArmor) this.armorInventory[var2].getItem()).damageReduceAmount;
+        for (ItemStack anArmorInventory : this.armorInventory) {
+            if (anArmorInventory != null && anArmorInventory.getItem() instanceof ItemArmor) {
+                int var3 = ((ItemArmor) anArmorInventory.getItem()).damageReduceAmount;
                 var1 += var3;
             }
         }
@@ -561,7 +561,7 @@ public class InventoryPlayer implements IInventory {
      * Do not make give this method the name canInteractWith because it clashes with Container
      */
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-        return this.player.isDead ? false : par1EntityPlayer.getDistanceSqToEntity(this.player) <= 64.0D;
+        return !this.player.isDead && par1EntityPlayer.getDistanceSqToEntity(this.player) <= 64.0D;
     }
 
     /**

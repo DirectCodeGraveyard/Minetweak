@@ -168,7 +168,7 @@ public class InventoryMerchant implements IInventory {
         }
 
         if (var1 == null) {
-            this.setInventorySlotContents(2, (ItemStack) null);
+            this.setInventorySlotContents(2, null);
         } else {
             MerchantRecipeList var3 = this.theMerchant.getRecipes(this.thePlayer);
 
@@ -185,10 +185,10 @@ public class InventoryMerchant implements IInventory {
                         this.currentRecipe = var4;
                         this.setInventorySlotContents(2, var4.getItemToSell().copy());
                     } else {
-                        this.setInventorySlotContents(2, (ItemStack) null);
+                        this.setInventorySlotContents(2, null);
                     }
                 } else {
-                    this.setInventorySlotContents(2, (ItemStack) null);
+                    this.setInventorySlotContents(2, null);
                 }
             }
         }
