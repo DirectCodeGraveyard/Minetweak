@@ -9,15 +9,11 @@ import java.util.logging.Logger;
 
 public class MinetweakLog implements ILogAgent {
     private final Logger serverLogger;
-    private final String logFile;
-    private final String loggerName;
-    private final String loggerPrefix;
+    private final String prefix;
 
-    public MinetweakLog(String par1Str, String par2Str, String par3Str) {
-        this.serverLogger = Logger.getLogger(par1Str);
-        this.loggerName = par1Str;
-        this.loggerPrefix = par2Str;
-        this.logFile = par3Str;
+    public MinetweakLog(String loggerName, String prefix) {
+        this.serverLogger = Logger.getLogger(loggerName);
+        this.prefix = prefix;
         this.setupLogger();
     }
 
@@ -26,51 +22,51 @@ public class MinetweakLog implements ILogAgent {
      */
     private void setupLogger() {
         this.serverLogger.setUseParentHandlers(false);
-        Handler[] var1 = this.serverLogger.getHandlers();
+        Handler[] handlers = this.serverLogger.getHandlers();
 
-        for (Handler var4 : var1) {
-            this.serverLogger.removeHandler(var4);
+        for (Handler handler : handlers) {
+            this.serverLogger.removeHandler(handler);
         }
 
-        LogFormatter var6 = new LogFormatter(this, null);
-        ConsoleHandler var7 = new ConsoleHandler();
-        var7.setFormatter(var6);
-        this.serverLogger.addHandler(var7);
+        LogFormatter formatter = new LogFormatter(this);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(formatter);
+        this.serverLogger.addHandler(consoleHandler);
     }
 
     public Logger getLogger() {
         return this.serverLogger;
     }
 
-    public void logInfo(String par1Str) {
-        this.serverLogger.log(Level.INFO, "[Minetweak] " + par1Str);
+    public void logInfo(String line) {
+        this.serverLogger.log(Level.INFO, "[Minetweak] " + line);
     }
 
-    public void logWarning(String par1Str) {
-        this.serverLogger.log(Level.WARNING, "[Minetweak] " + par1Str);
+    public void logWarning(String line) {
+        this.serverLogger.log(Level.WARNING, "[Minetweak] " + line);
     }
 
-    public void logWarningFormatted(String par1Str, Object... par2ArrayOfObj) {
-        this.serverLogger.log(Level.WARNING, "[Minetweak] " + par1Str, par2ArrayOfObj);
+    public void logWarningFormatted(String line, Object... objects) {
+        this.serverLogger.log(Level.WARNING, "[Minetweak] " + line, objects);
     }
 
-    public void logWarningException(String par1Str, Throwable par2Throwable) {
-        this.serverLogger.log(Level.WARNING, "[Minetweak] " + par1Str, par2Throwable);
+    public void logWarningException(String line, Throwable exception) {
+        this.serverLogger.log(Level.WARNING, "[Minetweak] " + line, exception);
     }
 
-    public void logSevere(String par1Str) {
-        this.serverLogger.log(Level.SEVERE, "[Minetweak] " + par1Str);
+    public void logSevere(String line) {
+        this.serverLogger.log(Level.SEVERE, "[Minetweak] " + line);
     }
 
-    public void logSevereException(String par1Str, Throwable par2Throwable) {
-        this.serverLogger.log(Level.SEVERE, "[Minetweak] " + par1Str, par2Throwable);
+    public void logSevereException(String line, Throwable exception) {
+        this.serverLogger.log(Level.SEVERE, "[Minetweak] " + line, exception);
     }
 
-    public void logNoPrefix(String string) {
-        this.serverLogger.log(Level.INFO, string);
+    public void logNoPrefix(String line) {
+        this.serverLogger.log(Level.INFO, line);
     }
 
-    public static String getLogPrefix(MinetweakLog par0LogAgent) {
-        return par0LogAgent.loggerPrefix;
+    public static String getLogPrefix(MinetweakLog logger) {
+        return logger.prefix;
     }
 }

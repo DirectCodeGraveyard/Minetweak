@@ -1,7 +1,5 @@
 package org.minetweak.util;
 
-import net.minecraft.logging.LogAgentEmptyAnon;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
@@ -9,38 +7,34 @@ import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
 public class LogFormatter extends Formatter {
-    private SimpleDateFormat field_98228_b;
+    private SimpleDateFormat dateFormat;
 
-    final MinetweakLog field_98229_a;
+    final MinetweakLog logger;
 
-    private LogFormatter(MinetweakLog par1LogAgent) {
-        this.field_98229_a = par1LogAgent;
-        this.field_98228_b = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    protected LogFormatter(MinetweakLog logger) {
+        this.logger = logger;
+        this.dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
 
-    public String format(LogRecord par1LogRecord) {
-        StringBuilder var2 = new StringBuilder();
-        var2.append(this.field_98228_b.format(par1LogRecord.getMillis()));
+    public String format(LogRecord record) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.dateFormat.format(record.getMillis()));
 
-        if (MinetweakLog.getLogPrefix(this.field_98229_a) != null) {
-            var2.append(MinetweakLog.getLogPrefix(this.field_98229_a));
+        if (MinetweakLog.getLogPrefix(this.logger) != null) {
+            builder.append(MinetweakLog.getLogPrefix(this.logger));
         }
 
-        var2.append(" [").append(par1LogRecord.getLevel().getName()).append("] ");
-        var2.append(this.formatMessage(par1LogRecord));
-        var2.append('\n');
-        Throwable var3 = par1LogRecord.getThrown();
+        builder.append(" [").append(record.getLevel().getName()).append("] ");
+        builder.append(this.formatMessage(record));
+        builder.append('\n');
+        Throwable exception = record.getThrown();
 
-        if (var3 != null) {
-            StringWriter var4 = new StringWriter();
-            var3.printStackTrace(new PrintWriter(var4));
-            var2.append(var4.toString());
+        if (exception != null) {
+            StringWriter writer = new StringWriter();
+            exception.printStackTrace(new PrintWriter(writer));
+            builder.append(writer.toString());
         }
 
-        return var2.toString();
-    }
-
-    LogFormatter(MinetweakLog par1LogAgent, LogAgentEmptyAnon par2LogAgentEmptyAnon) {
-        this(par1LogAgent);
+        return builder.toString();
     }
 }

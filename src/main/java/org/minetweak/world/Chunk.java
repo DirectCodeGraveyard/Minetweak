@@ -11,9 +11,6 @@ public class Chunk {
     private final WorldServer worldServer;
     private final int x;
     private final int z;
-    private static final byte[] emptyData = new byte[2048];
-    private static final short[] emptyBlockIDs = new short[4096];
-    private static final byte[] emptySkyLight = new byte[2048];
 
     public Chunk(net.minecraft.world.chunk.Chunk chunk) {
         if (!(chunk instanceof EmptyChunk)) {
@@ -35,7 +32,7 @@ public class Chunk {
     }
 
     /**
-     * Gets the World the Chunk is in
+     * Gets the MC World the Chunk is in
      *
      * @return world of chunk
      */

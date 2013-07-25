@@ -9,7 +9,7 @@ public class Permissions {
     /**
      * Adds a permission
      *
-     * @param user       username for player
+     * @param user username for player
      * @param permission permissions node
      * @return if permission was added
      */

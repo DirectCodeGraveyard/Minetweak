@@ -15,7 +15,7 @@ public class Location {
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;
-        world = new World(MinecraftServer.getServer().worldServerForDimension(0));
+        world = MinecraftServer.getServer().worldServerForDimension(0).getWorld();
     }
 
     public Location(int posX, int posY, int posZ, WorldServer worldServer) {
@@ -40,5 +40,4 @@ public class Location {
     public World getWorld() {
         return world;
     }
-
 }

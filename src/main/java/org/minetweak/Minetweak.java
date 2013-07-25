@@ -74,7 +74,7 @@ public class Minetweak {
      */
     private static EventBus eventBus = new EventBus();
 
-    private static MinetweakLog logger = new MinetweakLog("Minetweak", null, (new File("./", "minetweak.log")).getAbsolutePath());
+    private static MinetweakLog logger = new MinetweakLog("Minetweak", null);
 
     /**
      * Runs the Minetweak Server.

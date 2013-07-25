@@ -10,9 +10,9 @@ public enum GameMode {
     int id;
     String name;
 
-    private GameMode(int par3, String par4Str) {
-        this.id = par3;
-        this.name = par4Str;
+    private GameMode(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     /**
@@ -32,19 +32,19 @@ public enum GameMode {
     /**
      * Configures the player capabilities based on the game type
      */
-    public void configurePlayerCapabilities(PlayerCapabilities par1PlayerCapabilities) {
+    public void configurePlayerCapabilities(PlayerCapabilities capabilities) {
         if (this == CREATIVE) {
-            par1PlayerCapabilities.allowFlying = true;
-            par1PlayerCapabilities.isCreativeMode = true;
-            par1PlayerCapabilities.disableDamage = true;
+            capabilities.allowFlying = true;
+            capabilities.isCreativeMode = true;
+            capabilities.disableDamage = true;
         } else {
-            par1PlayerCapabilities.allowFlying = false;
-            par1PlayerCapabilities.isCreativeMode = false;
-            par1PlayerCapabilities.disableDamage = false;
-            par1PlayerCapabilities.isFlying = false;
+            capabilities.allowFlying = false;
+            capabilities.isCreativeMode = false;
+            capabilities.disableDamage = false;
+            capabilities.isFlying = false;
         }
 
-        par1PlayerCapabilities.allowEdit = !this.isAdventure();
+        capabilities.allowEdit = !this.isAdventure();
     }
 
     /**
@@ -64,13 +64,12 @@ public enum GameMode {
     /**
      * Returns the game type with the specified ID, or SURVIVAL if none found. Args: id
      */
-    public static GameMode getByID(int par0) {
-        GameMode[] var1 = values();
-        int var2 = var1.length;
+    public static GameMode getByID(int id) {
+        GameMode[] modes = values();
 
-        for (GameMode var4 : var1) {
-            if (var4.id == par0) {
-                return var4;
+        for (GameMode mode : modes) {
+            if (mode.id == id) {
+                return mode;
             }
         }
 

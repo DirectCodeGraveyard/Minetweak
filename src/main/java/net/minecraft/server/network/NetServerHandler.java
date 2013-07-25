@@ -32,13 +32,13 @@ import net.minecraft.utils.enums.EnumChatFormatting;
 import net.minecraft.world.WorldServer;
 import org.minetweak.Minetweak;
 import org.minetweak.Server;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.event.player.PlayerChatEvent;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class NetServerHandler extends NetHandler {
@@ -833,19 +833,19 @@ public class NetServerHandler extends NetHandler {
         this.playerEntity.capabilities.isFlying = par1Packet202PlayerAbilities.getFlying() && this.playerEntity.capabilities.allowFlying;
     }
 
-    public void handleAutoComplete(Packet203AutoComplete par1Packet203AutoComplete) {
-        StringBuilder var2 = new StringBuilder();
-        String var4;
+    public void handleAutoComplete(Packet203AutoComplete packet) {
+        StringBuilder builder = new StringBuilder();
+        boolean flag = true;
 
-        for (Iterator var3 = this.mcServer.getPossibleCompletions(this.playerEntity, par1Packet203AutoComplete.getText()).iterator(); var3.hasNext(); var2.append(var4)) {
-            var4 = (String) var3.next();
-
-            if (var2.length() > 0) {
-                var2.append("\u0000");
+        for (String part : TabCompletion.getMatches(packet.getText())) {
+            if (flag) {
+                builder.append("\u0000");
+                flag = false;
             }
+            builder.append(part);
         }
 
-        this.playerEntity.playerNetServerHandler.sendPacket(new Packet203AutoComplete(var2.toString()));
+        this.playerEntity.playerNetServerHandler.sendPacket(new Packet203AutoComplete(builder.toString()));
     }
 
     public void handleClientInfo(Packet204ClientInfo par1Packet204ClientInfo) {

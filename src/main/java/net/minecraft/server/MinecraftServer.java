@@ -28,7 +28,6 @@ import net.minecraft.world.chunk.ChunkCoordinates;
 import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import org.minetweak.Minetweak;
-import org.minetweak.chat.TabCompletion;
 import org.minetweak.event.server.WorldsLoadingEvent;
 
 import java.awt.*;
@@ -805,18 +804,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         }
 
         return par1CrashReport;
-    }
-
-    /**
-     * If par2Str begins with /, then it searches for commands, otherwise it returns players.
-     */
-    public List<CharSequence> getPossibleCompletions(ICommandSender sender, String input) {
-        ArrayList<CharSequence> output = new ArrayList<CharSequence>();
-        ArrayList<String> matches = TabCompletion.getMatches(input);
-        for (String match : matches) {
-            output.add(match);
-        }
-        return output;
     }
 
     /**
