@@ -19,7 +19,6 @@ import net.minecraft.player.score.Scoreboard;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.server.ban.BanEntry;
 import net.minecraft.server.ban.BanList;
-import net.minecraft.server.demo.DemoWorldManager;
 import net.minecraft.server.network.INetworkManager;
 import net.minecraft.server.network.NetServerHandler;
 import net.minecraft.server.network.packet.*;
@@ -307,12 +306,8 @@ public abstract class ServerConfigurationManager {
             var4 = aVar2;
             var4.playerNetServerHandler.kickPlayer("You logged in from another location");
         }
-        ItemInWorldManager var6;
-        if (this.mcServer.isDemo()) {
-            var6 = new DemoWorldManager(this.mcServer.worldServerForDimension(0));
-        } else {
-            var6 = new ItemInWorldManager(this.mcServer.worldServerForDimension(0));
-        }
+        ItemInWorldManager var6 = new ItemInWorldManager(this.mcServer.worldServerForDimension(0));
+
         return new EntityPlayerMP(this.mcServer, this.mcServer.worldServerForDimension(0), par1Str, var6);
     }
 
@@ -328,14 +323,7 @@ public abstract class ServerConfigurationManager {
         ChunkCoordinates var4 = par1EntityPlayerMP.getBedLocation();
         boolean var5 = par1EntityPlayerMP.isSpawnForced();
         par1EntityPlayerMP.dimension = par2;
-        ItemInWorldManager var6;
-
-        if (this.mcServer.isDemo()) {
-            var6 = new DemoWorldManager(this.mcServer.worldServerForDimension(par1EntityPlayerMP.dimension));
-        } else {
-            var6 = new ItemInWorldManager(this.mcServer.worldServerForDimension(par1EntityPlayerMP.dimension));
-        }
-
+        ItemInWorldManager var6 = new ItemInWorldManager(this.mcServer.worldServerForDimension(par1EntityPlayerMP.dimension));
         EntityPlayerMP var7 = new EntityPlayerMP(this.mcServer, this.mcServer.worldServerForDimension(par1EntityPlayerMP.dimension), par1EntityPlayerMP.getCommandSenderName(), var6);
         var7.playerNetServerHandler = par1EntityPlayerMP.playerNetServerHandler;
         var7.clonePlayer(par1EntityPlayerMP, par3);
