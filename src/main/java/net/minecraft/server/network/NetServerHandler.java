@@ -835,14 +835,14 @@ public class NetServerHandler extends NetHandler {
 
     public void handleAutoComplete(Packet203AutoComplete packet) {
         StringBuilder builder = new StringBuilder();
-        boolean flag = true;
+        int i = 0;
 
         for (String part : TabCompletion.getMatches(packet.getText())) {
-            if (flag) {
+            if (i>0) {
                 builder.append("\u0000");
-                flag = false;
             }
             builder.append(part);
+            i++;
         }
 
         this.playerEntity.playerNetServerHandler.sendPacket(new Packet203AutoComplete(builder.toString()));
