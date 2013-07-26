@@ -270,6 +270,11 @@ public class Player extends Entity implements CommandSender {
      */
     public void setGameMode(GameMode gameMode) {
         getPlayerMP().setGameType(EnumGameType.getByID(gameMode.getID()));
+        getPlayerMP().fallDistance = 0.0F;
+        if (gameMode.isCreative()) {
+            getPlayerMP().capabilities.isCreativeMode = true;
+            getPlayerMP().capabilities.disableDamage = true;
+        }
     }
 
     /**
@@ -415,7 +420,7 @@ public class Player extends Entity implements CommandSender {
      * @param location the location instance
      */
     public void teleportToPosition(Location location) {
-        getPlayerMP().setPosition(location.getPosX(), location.getPosY(), location.getPosZ());
+        teleportToPosition(location.getPosX(), location.getPosY(), location.getPosZ());
     }
 
     /**
@@ -461,5 +466,14 @@ public class Player extends Entity implements CommandSender {
      */
     public World getCurrentWorld() {
         return getPlayerMP().worldObj.getWorld();
+    }
+
+    /**
+     * Makes the player fly
+     *
+     * @param isFlying is player flying
+     */
+    public void setFlying(boolean isFlying) {
+        getPlayerMP().capabilities.isFlying = true;
     }
 }
