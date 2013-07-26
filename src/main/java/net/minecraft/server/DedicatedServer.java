@@ -59,7 +59,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         DedicatedServerCommandThread var1 = new DedicatedServerCommandThread(this);
         var1.setDaemon(true);
         var1.start();
-        this.logInfo("Starting Minecraft server version 1.6.2");
 
         this.minetweakInfo("Loading Configuration");
         this.setOnlineMode(MinetweakConfig.getBoolean("server.online", true));
@@ -96,7 +95,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         }
 
         this.setKeyPair(CryptManager.generateKeyPair());
-        this.logInfo("Starting Minecraft server on " + (this.getServerHostname().length() == 0 ? "*" : this.getServerHostname()) + ":" + this.getServerPort());
 
         Minetweak.getEventBus().post(new ServerInitializedEvent());
 

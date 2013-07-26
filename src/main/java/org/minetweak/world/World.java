@@ -17,6 +17,7 @@ public class World {
 
     /**
      * Gets the Block ID of the block at a position
+     *
      * @param x X Position
      * @param y Y Position
      * @param z Z Position
@@ -28,6 +29,7 @@ public class World {
 
     /**
      * Gets a Chunk at the specified Location
+     *
      * @param x X Position
      * @param z Z Position
      * @return Chunk at position
@@ -38,6 +40,7 @@ public class World {
 
     /**
      * Gets the Chunk  a block is in
+     *
      * @param tweakBlock the block
      * @return the chunk
      */
@@ -47,6 +50,7 @@ public class World {
 
     /**
      * Gets the WorldServer
+     *
      * @return WorldServer instance for world
      */
     public WorldServer getWorldServer() {
@@ -55,6 +59,7 @@ public class World {
 
     /**
      * Can peaceful mobs spawn in this world?
+     *
      * @return True if peaceful mobs can spawn
      */
     public boolean canPeacefulMobsSpawn() {
@@ -63,6 +68,7 @@ public class World {
 
     /**
      * Can hostile mobs spawn in this world?
+     *
      * @return True if hostile mobs can spawn
      */
     public boolean canHostileMobsSpawn() {
@@ -71,8 +77,9 @@ public class World {
 
     /**
      * Set the ability of mob spawns by type, peaceful or hostile.
+     *
      * @param peacefulSpawnAbility Peaceful mobs spawn ability
-     * @param hostileSpawnAbility Hostile mobs spawn ability
+     * @param hostileSpawnAbility  Hostile mobs spawn ability
      */
     public void setMobTypeSpawnAbility(boolean peacefulSpawnAbility, boolean hostileSpawnAbility) {
         getWorldServer().setAllowedSpawnTypes(hostileSpawnAbility, peacefulSpawnAbility);

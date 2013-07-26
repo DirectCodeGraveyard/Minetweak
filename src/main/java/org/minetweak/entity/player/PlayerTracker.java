@@ -72,7 +72,7 @@ public class PlayerTracker {
             }
             FileReader reader = new FileReader(file);
             PlayerListFile playerList = gson.fromJson(reader, PlayerListFile.class);
-            if (playerList==null || playerList.players==null) {
+            if (playerList == null || playerList.players == null) {
                 reader.close();
                 return;
             }

@@ -3,7 +3,7 @@ package net.minecraft.src;
 import java.util.*;
 
 public class LowerStringMap implements Map {
-    private final Map internalMap = new LinkedHashMap();
+    private final Map<String, Object> internalMap = new LinkedHashMap<String, Object>();
 
     public int size() {
         return this.internalMap.size();
@@ -37,10 +37,9 @@ public class LowerStringMap implements Map {
     }
 
     public void putAll(Map par1Map) {
-        Iterator var2 = par1Map.entrySet().iterator();
 
-        while (var2.hasNext()) {
-            Entry var3 = (Entry) var2.next();
+        for (Object o : par1Map.entrySet()) {
+            Entry var3 = (Entry) o;
             this.putLower((String) var3.getKey(), var3.getValue());
         }
     }

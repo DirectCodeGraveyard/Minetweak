@@ -3,6 +3,7 @@ package org.minetweak.util;
 public class StringUtils {
     /**
      * Drops the first String
+     *
      * @param array Array of Strings
      * @return Array of Strings without first String
      */
@@ -14,6 +15,7 @@ public class StringUtils {
 
     /**
      * Makes a String out of a String array
+     *
      * @param array Array of Strings
      * @return stringed array
      */
@@ -22,7 +24,7 @@ public class StringUtils {
         int count = 0;
         for (String string : array) {
             count++;
-            if (count==array.length) {
+            if (count == array.length) {
                 builder.append(string);
             } else {
                 builder.append(string).append(" ");
@@ -33,6 +35,7 @@ public class StringUtils {
 
     /**
      * Checks if a String is an Integer
+     *
      * @param s string to check
      * @return if the string is an integer
      */

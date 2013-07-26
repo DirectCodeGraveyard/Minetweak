@@ -21,7 +21,7 @@ public class CommandTpAll extends CommandExecutor {
         Player player = Minetweak.getPlayerByName(sender.getName());
 
         for (Player p : Minetweak.getPlayers().values()) {
-            if (p.getDisplayName().toLowerCase() != sender.getName().toLowerCase()) {
+            if (!p.getDisplayName().toLowerCase().equals(sender.getName().toLowerCase())) {
                 p.teleportToPosition(player.getX(), player.getY(), player.getZ());
             }
         }
@@ -29,5 +29,10 @@ public class CommandTpAll extends CommandExecutor {
 
     public String getUsage() {
         return "Usage: /tpall";
+    }
+
+    @Override
+    public String getHelpInfo() {
+        return "Teleports all Players to your position";
     }
 }

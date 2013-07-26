@@ -91,14 +91,14 @@ public class RecipeFireworks implements IRecipe {
                 var15 = new NBTTagCompound();
                 var18 = new NBTTagCompound("Explosion");
                 byte var21 = 0;
-                ArrayList var12 = new ArrayList();
+                ArrayList<Integer> var12 = new ArrayList<Integer>();
 
                 for (int var13 = 0; var13 < par1InventoryCrafting.getSizeInventory(); ++var13) {
                     ItemStack var14 = par1InventoryCrafting.getStackInSlot(var13);
 
                     if (var14 != null) {
                         if (var14.itemID == Item.dyePowder.itemID) {
-                            var12.add(Integer.valueOf(ItemDye.dyeColors[var14.getItemDamage()]));
+                            var12.add(ItemDye.dyeColors[var14.getItemDamage()]);
                         } else if (var14.itemID == Item.glowstone.itemID) {
                             var18.setBoolean("Flicker", true);
                         } else if (var14.itemID == Item.diamond.itemID) {
@@ -118,7 +118,7 @@ public class RecipeFireworks implements IRecipe {
                 int[] var24 = new int[var12.size()];
 
                 for (int var27 = 0; var27 < var24.length; ++var27) {
-                    var24[var27] = ((Integer) var12.get(var27)).intValue();
+                    var24[var27] = var12.get(var27);
                 }
 
                 var18.setIntArray("Colors", var24);
@@ -127,14 +127,14 @@ public class RecipeFireworks implements IRecipe {
                 this.field_92102_a.setTagCompound(var15);
                 return true;
             } else if (var4 == 0 && var3 == 0 && var6 == 1 && var5 > 0 && var5 == var7) {
-                ArrayList var16 = new ArrayList();
+                ArrayList<Integer> var16 = new ArrayList<Integer>();
 
                 for (int var20 = 0; var20 < par1InventoryCrafting.getSizeInventory(); ++var20) {
                     ItemStack var11 = par1InventoryCrafting.getStackInSlot(var20);
 
                     if (var11 != null) {
                         if (var11.itemID == Item.dyePowder.itemID) {
-                            var16.add(Integer.valueOf(ItemDye.dyeColors[var11.getItemDamage()]));
+                            var16.add(ItemDye.dyeColors[var11.getItemDamage()]);
                         } else if (var11.itemID == Item.fireworkCharge.itemID) {
                             this.field_92102_a = var11.copy();
                             this.field_92102_a.stackSize = 1;
@@ -145,7 +145,7 @@ public class RecipeFireworks implements IRecipe {
                 int[] var17 = new int[var16.size()];
 
                 for (int var19 = 0; var19 < var17.length; ++var19) {
-                    var17[var19] = ((Integer) var16.get(var19)).intValue();
+                    var17[var19] = var16.get(var19);
                 }
 
                 if (this.field_92102_a != null && this.field_92102_a.hasTagCompound()) {

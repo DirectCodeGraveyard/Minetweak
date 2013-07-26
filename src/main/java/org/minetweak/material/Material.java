@@ -18,8 +18,7 @@ public enum Material {
     COBBLESTONE(4),
     LAVA(10, MaterialData.class),
     STATIONARY_LAVA(11, MaterialData.class),
-    FIRE(51),
-    ;
+    FIRE(51),;
 
     private final int id;
     private final Constructor<? extends MaterialData> ctor;
@@ -184,7 +183,8 @@ public enum Material {
 
         try {
             result = getMaterial(Integer.parseInt(name));
-        } catch (NumberFormatException ex) {}
+        } catch (NumberFormatException ex) {
+        }
 
         if (result == null) {
             String filtered = name.toUpperCase();

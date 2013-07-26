@@ -27,6 +27,7 @@ public class Chunk {
 
     /**
      * Gets the World the Chunk is in
+     *
      * @return world of chunk
      */
     public World getWorld() {
@@ -35,6 +36,7 @@ public class Chunk {
 
     /**
      * Gets the World the Chunk is in
+     *
      * @return world of chunk
      */
     public World getCraftWorld() {
@@ -43,6 +45,7 @@ public class Chunk {
 
     /**
      * Gets the MC Chunk
+     *
      * @return minecraft chunk
      */
     public net.minecraft.world.chunk.Chunk getHandle() {
@@ -61,6 +64,7 @@ public class Chunk {
 
     /**
      * X Position
+     *
      * @return x position
      */
     public int getX() {
@@ -69,6 +73,7 @@ public class Chunk {
 
     /**
      * Z Position
+     *
      * @return z position
      */
     public int getZ() {
@@ -82,6 +87,7 @@ public class Chunk {
 
     /**
      * Gets a block in a chunk
+     *
      * @param x x-position
      * @param y y-position
      * @param z z-position

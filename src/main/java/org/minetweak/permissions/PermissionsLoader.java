@@ -2,10 +2,12 @@ package org.minetweak.permissions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.IOUtils;
 import org.minetweak.Minetweak;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -38,8 +40,9 @@ public class PermissionsLoader {
                 lastData = data;
             }
 
-            HashMap<String, ArrayList<String>> permissions = gson.fromJson(data, HashMap.class);
-            if (permissions==null) {
+            Type dataType = new TypeToken<HashMap<String, ArrayList<String>>>(){}.getType();
+            HashMap<String, ArrayList<String>> permissions = gson.fromJson(data, dataType);
+            if (permissions == null) {
                 return;
             }
             Permissions.setPermissions(permissions);

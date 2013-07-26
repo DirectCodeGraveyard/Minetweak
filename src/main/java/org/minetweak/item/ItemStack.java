@@ -13,6 +13,7 @@ public class ItemStack {
 
     /**
      * Gets the MC Style ItemStack
+     *
      * @return ItemStack from MC
      */
     public net.minecraft.item.ItemStack getItemStack() {
@@ -21,6 +22,7 @@ public class ItemStack {
 
     /**
      * Gets the Item Display Name
+     *
      * @return item's display name
      */
     public String getDisplayName() {
@@ -29,6 +31,7 @@ public class ItemStack {
 
     /**
      * Gets stack size
+     *
      * @return stack size
      */
     public int getSize() {
@@ -37,6 +40,7 @@ public class ItemStack {
 
     /**
      * Gets the Minetweak Item
+     *
      * @return item in stack
      */
     public TweakItem getTweakItem() {
@@ -45,6 +49,7 @@ public class ItemStack {
 
     /**
      * Gets the max stack size
+     *
      * @return max stack size
      */
     public int getMaxStackSize() {
@@ -53,8 +58,9 @@ public class ItemStack {
 
     /**
      * Adds the Enchantment to the Stack
+     *
      * @param enchantment the enchantment
-     * @param level level of enchantment
+     * @param level       level of enchantment
      */
     public void addEnchantment(Enchantment enchantment, Integer level) {
         stack.addEnchantment(enchantment, level);

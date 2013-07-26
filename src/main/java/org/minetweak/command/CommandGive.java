@@ -12,17 +12,17 @@ public class CommandGive extends CommandExecutor {
             return;
         }
 
-        if (args.length<1 || args.length > 3) {
+        if (args.length < 1 || args.length > 3) {
             sender.sendMessage("Usage: /" + overallCommand + " itemID [user] [amount]");
             return;
         }
 
-        if (sender instanceof Console && !(args.length>=2)) {
+        if (sender instanceof Console && !(args.length >= 2)) {
             sender.sendMessage("Console cannot give items to itself.");
             return;
         }
 
-        if (args.length==1) {
+        if (args.length == 1) {
             Player player = Minetweak.getPlayerByName(sender.getName());
             if (StringUtils.isInteger(args[0])) {
                 player.getPlayerMP().dropItem(Integer.parseInt(args[0]), 1);
@@ -32,7 +32,7 @@ public class CommandGive extends CommandExecutor {
             return;
         }
 
-        if (args.length==2 && StringUtils.isInteger(args[1])) {
+        if (args.length == 2 && StringUtils.isInteger(args[1])) {
             Player player = Minetweak.getPlayerByName(sender.getName());
             if (StringUtils.isInteger(args[0])) {
                 player.getPlayerMP().dropItem(Integer.parseInt(args[0]), 1);
@@ -44,12 +44,12 @@ public class CommandGive extends CommandExecutor {
 
         Player player = Minetweak.getPlayerByName(args[1]);
 
-        if (player==null) {
+        if (player == null) {
             sender.sendMessage(args[1] + " is not online!");
             return;
         }
 
-        if (args.length==2) {
+        if (args.length == 2) {
             if (StringUtils.isInteger(args[0])) {
                 player.getPlayerMP().dropItem(Integer.parseInt(args[0]), 1);
             } else {

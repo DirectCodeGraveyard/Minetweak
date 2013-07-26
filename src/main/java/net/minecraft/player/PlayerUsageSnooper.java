@@ -10,7 +10,7 @@ public class PlayerUsageSnooper {
     /**
      * String map for report data
      */
-    private Map dataMap = new HashMap();
+    private Map<String, Object> dataMap = new HashMap<String, Object>();
     private final String uniqueID = UUID.randomUUID().toString();
 
     /**
@@ -67,26 +67,25 @@ public class PlayerUsageSnooper {
 
     private void addJvmArgsToSnooper() {
         RuntimeMXBean var1 = ManagementFactory.getRuntimeMXBean();
-        List var2 = var1.getInputArguments();
+        List<String> var2 = var1.getInputArguments();
         int var3 = 0;
-        Iterator var4 = var2.iterator();
 
-        while (var4.hasNext()) {
-            String var5 = (String) var4.next();
+        for (Object aVar2 : var2) {
+            String var5 = (String) aVar2;
 
             if (var5.startsWith("-X")) {
                 this.addData("jvm_arg[" + var3++ + "]", var5);
             }
         }
 
-        this.addData("jvm_args", Integer.valueOf(var3));
+        this.addData("jvm_args", var3);
     }
 
     public void addMemoryStatsToSnooper() {
-        this.addData("memory_total", Long.valueOf(Runtime.getRuntime().totalMemory()));
-        this.addData("memory_max", Long.valueOf(Runtime.getRuntime().maxMemory()));
-        this.addData("memory_free", Long.valueOf(Runtime.getRuntime().freeMemory()));
-        this.addData("cpu_cores", Integer.valueOf(Runtime.getRuntime().availableProcessors()));
+        this.addData("memory_total", Runtime.getRuntime().totalMemory());
+        this.addData("memory_max", Runtime.getRuntime().maxMemory());
+        this.addData("memory_free", Runtime.getRuntime().freeMemory());
+        this.addData("cpu_cores", Runtime.getRuntime().availableProcessors());
         this.playerStatsCollector.addServerStatsToSnooper(this);
     }
 
@@ -94,7 +93,6 @@ public class PlayerUsageSnooper {
      * Adds information to the report
      */
     public void addData(String par1Str, Object par2Obj) {
-        Object var3 = this.syncLock;
 
         synchronized (this.syncLock) {
             this.dataMap.put(par1Str, par2Obj);
@@ -121,7 +119,7 @@ public class PlayerUsageSnooper {
         return par0PlayerUsageSnooper.syncLock;
     }
 
-    static Map getDataMapFor(PlayerUsageSnooper par0PlayerUsageSnooper) {
+    static Map<String, Object> getDataMapFor(PlayerUsageSnooper par0PlayerUsageSnooper) {
         return par0PlayerUsageSnooper.dataMap;
     }
 

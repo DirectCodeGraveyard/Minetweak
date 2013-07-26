@@ -15,7 +15,7 @@ public class CallableIsServerModded implements Callable<String> {
     }
 
     public String func_96558_a() {
-        return this.mcServer.theProfiler.profilingEnabled ? this.mcServer.theProfiler.getNameOfLastSection() : "N/A (disabled)";
+        return this.mcServer.profiler.profilingEnabled ? this.mcServer.profiler.getNameOfLastSection() : "N/A (disabled)";
     }
 
     @Override

@@ -47,7 +47,7 @@ public class CommandDebug extends CommandBase {
             }
 
             if (par2ArrayOfStr[0].equals("stop")) {
-                if (!MinecraftServer.getServer().theProfiler.profilingEnabled) {
+                if (!MinecraftServer.getServer().profiler.profilingEnabled) {
                     throw new CommandException("commands.debug.notStarted", new Object[0]);
                 }
 
@@ -56,7 +56,7 @@ public class CommandDebug extends CommandBase {
                 long var6 = var3 - this.startTime;
                 int var8 = var5 - this.startTicks;
                 this.saveProfilerResults(var6, var8);
-                MinecraftServer.getServer().theProfiler.profilingEnabled = false;
+                MinecraftServer.getServer().profiler.profilingEnabled = false;
                 notifyAdmins(par1ICommandSender, "commands.debug.stop", new Object[]{Float.valueOf((float) var6 / 1000.0F), Integer.valueOf(var8)});
                 return;
             }
@@ -94,7 +94,7 @@ public class CommandDebug extends CommandBase {
     }
 
     private void getProfileDump(int par1, String par2Str, StringBuilder par3StringBuilder) {
-        List var4 = MinecraftServer.getServer().theProfiler.getProfilingData(par2Str);
+        List var4 = MinecraftServer.getServer().profiler.getProfilingData(par2Str);
 
         if (var4 != null && var4.size() >= 3) {
             for (int var5 = 1; var5 < var4.size(); ++var5) {

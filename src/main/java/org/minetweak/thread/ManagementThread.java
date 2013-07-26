@@ -74,6 +74,7 @@ public class ManagementThread extends Thread {
 
     /**
      * Starts the Management Thread on Server Finished Startup
+     *
      * @param event event of the subscription
      */
     @Subscribe
@@ -85,6 +86,7 @@ public class ManagementThread extends Thread {
 
     /**
      * Adds a Runnable to the queue of things to run
+     *
      * @param runnable the runnable instance
      */
     public void runInThread(Runnable runnable) {
@@ -93,6 +95,7 @@ public class ManagementThread extends Thread {
 
     /**
      * Gets the ManagementThread main instance
+     *
      * @return instance
      */
     public static ManagementThread getInstance() {

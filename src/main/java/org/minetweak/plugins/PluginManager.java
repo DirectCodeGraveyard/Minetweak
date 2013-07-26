@@ -32,6 +32,7 @@ public class PluginManager {
 
     /**
      * Enable a plugin - must be loaded
+     *
      * @param pluginName the plugin name
      */
     public static void enable(String pluginName) {
@@ -44,6 +45,7 @@ public class PluginManager {
 
     /**
      * Disable a plugin - must be enabled
+     *
      * @param pluginName the plugin name
      */
     public static void disable(String pluginName) {
@@ -66,7 +68,7 @@ public class PluginManager {
         HashMap<String, PluginInfo> pluginInformation = new HashMap<String, PluginInfo>();
         for (File f : files) {
             PluginInfo pluginInfo = getPluginInfo(f);
-            if (pluginInfo == null || pluginInfo.getMainClass()==null) {
+            if (pluginInfo == null || pluginInfo.getMainClass() == null) {
                 Minetweak.getLogger().logInfo("Skipping Plugin JAR: " + f.getName() + ": Missing plugin information or main class");
                 continue;
             }
@@ -102,6 +104,7 @@ public class PluginManager {
 
     /**
      * Gets plugin info
+     *
      * @param file jar file
      * @return plugin info
      */
@@ -111,8 +114,8 @@ public class PluginManager {
             ZipEntry entry = jf.getEntry("plugin.json");
             ZipEntry bukkitYaml = jf.getEntry("plugin.yaml");
             ZipEntry langFolder = jf.getEntry("lang/");
-            if (entry==null) {
-                if (bukkitYaml!=null) {
+            if (entry == null) {
+                if (bukkitYaml != null) {
                     Minetweak.info("Found Bukkit Plugin in " + file.getName() + ". Skipping....");
                 }
                 return null;
@@ -137,7 +140,7 @@ public class PluginManager {
             }
         }
         File[] fileList = pluginDirectory.listFiles();
-        if (fileList==null) {
+        if (fileList == null) {
             return;
         }
         for (File file : fileList) {
@@ -185,6 +188,7 @@ public class PluginManager {
 
     /**
      * Detect if a plugin is enabled
+     *
      * @param pluginName name of plugin
      * @return if the plugin is enabled
      */
@@ -194,6 +198,7 @@ public class PluginManager {
 
     /**
      * Detect if a plugin is registered. This does not mean they are enabled
+     *
      * @param pluginName name of plugin
      * @return if the plugin is registered
      */

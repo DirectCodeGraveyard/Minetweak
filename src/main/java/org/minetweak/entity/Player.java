@@ -17,6 +17,7 @@ import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
+import org.minetweak.server.GameMode;
 import org.minetweak.world.Location;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 /**
  * This class represents the player, and allows you to
  * call many API methods that are buried deep in
- * vanilla code. It extends CommandSender, which allows
+ * vanilla code. It implements CommandSender, which allows
  * the player to send commands. It also retrieves the
  * EntityPlayerMP and NetServerHandler for the player
  * when a instance is created for him/her. This gives
@@ -37,6 +38,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Initialize a player
+     *
      * @param playerDisplayName Player's username
      */
     public Player(String playerDisplayName) {
@@ -46,6 +48,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Initialize a player
+     *
      * @param playerMP EntityPlayerMP Instance
      */
     public Player(EntityPlayerMP playerMP) {
@@ -55,6 +58,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Register a player into Minetweak
+     *
      * @param playerUsername Player name we are registering
      */
     public static boolean registerPlayer(String playerUsername) {
@@ -82,6 +86,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Take the target player and unregister them
+     *
      * @param playerUsername Player name we marking as offline
      */
     public static void unregisterPlayer(String playerUsername) {
@@ -90,6 +95,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Retrieve the player's "display name", which is the username of the player.
+     *
      * @return Player's display name
      */
     public String getDisplayName() {
@@ -105,6 +111,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Kick the player from the server, including a kick reason
+     *
      * @param kickReason Reason why the player was kicked(will show up on their disconnected screen)
      */
     public void kickPlayer(String kickReason) {
@@ -120,6 +127,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Ban the player from the server, including a ban reason
+     *
      * @param banReason Reason why the player was banned(will show up on their disconnected screen)
      */
     public void banPlayer(String banReason) {
@@ -130,6 +138,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Give permission to the player
+     *
      * @param permissionNode Node of the permission that you want to give the player
      * @return True if the permission was successfully added, and that the permission did not already exist
      */
@@ -139,6 +148,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Get the player permissions
+     *
      * @return String list of permissions
      */
     public ArrayList<String> getPlayerPermissions() {
@@ -147,6 +157,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Check to see if this player has a specific permission node
+     *
      * @param permissionNode Target permission node
      * @return True if the player has the permission
      */
@@ -156,6 +167,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Send the player a message
+     *
      * @param message Target message towards the player
      */
     @Override
@@ -166,6 +178,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Get the player's name, basically is just a method wrap to getDisplayName()
+     *
      * @return The player's display name/username
      */
     @Override
@@ -175,10 +188,16 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Can we kick the player? We sure can.
+     *
      * @return True, if the player can be kickable
      */
     @Override
     public boolean isKickable() {
+        return true;
+    }
+
+    @Override
+    public boolean isPlayer() {
         return true;
     }
 
@@ -188,6 +207,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Get the instance of EntityPlayerMP for this player
+     *
      * @return EntityPlayerMP corresponding class
      */
     public EntityPlayerMP getPlayerMP() {
@@ -196,6 +216,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Get the NetServerHandler for this player
+     *
      * @return NetServerHandler corresponding class
      */
     public NetServerHandler getNetServerHandler() {
@@ -204,6 +225,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Check to see if this player has operator powers
+     *
      * @return True if the player is an op
      */
     public boolean isOperator() {
@@ -233,6 +255,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Check if the player is sleeping in a bed.
+     *
      * @return True if the player is sleeping
      */
     public boolean isPlayerSleeping() {
@@ -241,14 +264,16 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Set the gamemode of the player.
-     * @param gameType Gametype from EnumGameType
+     *
+     * @param gameMode GameMode
      */
-    public void setGameMode(EnumGameType gameType) {
-        getPlayerMP().setGameType(gameType);
+    public void setGameMode(GameMode gameMode) {
+        getPlayerMP().setGameType(EnumGameType.getByID(gameMode.getID()));
     }
 
     /**
      * Set the speed on ground.
+     *
      * @param speedFloat Speed parameter
      */
     public void setSpeedOnGround(float speedFloat) {
@@ -257,6 +282,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Retrieve the speed on ground.
+     *
      * @return Speed on ground
      */
     public float getSpeedOnGround() {
@@ -265,6 +291,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Retrieve the player's health.
+     *
      * @return Player health
      */
     public float getPlayerHealth() {
@@ -273,6 +300,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Set the player's health
+     *
      * @param health Health level for set
      */
     public void setPlayerHealth(float health) {
@@ -282,6 +310,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Retrieve the player's hunger level.
+     *
      * @return Hunger bar level
      */
     public int getPlayerHunger() {
@@ -290,6 +319,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Set the player's hunger level.
+     *
      * @param level Level to set hunger at
      */
     public void setPlayerHunger(int level) {
@@ -299,6 +329,7 @@ public class Player extends Entity implements CommandSender {
     /**
      * Give the player a potion effect. Uses the vanilla class: PotionEffect to process effects.
      * Might be moved to a separate class like PotionEffect, but with documentation, unlike Vanilla's.
+     *
      * @param potionEffect the potion effect
      */
     public void addPotionEffect(PotionEffect potionEffect) {
@@ -307,6 +338,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Award the player an achievement, they might deserve it.
+     *
      * @param awardedAchievement Achievement awarded, retrieve one from AchievementList
      */
     public void awardAchievement(Achievement awardedAchievement) {
@@ -315,6 +347,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Gets the inventory of the Player
+     *
      * @return inventory of player
      */
     public InventoryPlayer getInventory() {
@@ -323,6 +356,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Gets the inventory of the Player's ender chest
+     *
      * @return player's ender chest
      */
     public InventoryEnderChest getEnderChest() {
@@ -338,6 +372,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Is the Player flying?
+     *
      * @return True if the player is flying
      */
     public boolean isFlying() {
@@ -346,6 +381,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Can the Player fly?
+     *
      * @return True if the player can fly
      */
     public boolean canFly() {
@@ -354,6 +390,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Is the Player in creative mode?
+     *
      * @return True if the player is in creative mode
      */
     public boolean isInCreativeMode() {
@@ -362,6 +399,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Teleports the Player to the Given Position
+     *
      * @param x x coordinate
      * @param y y coordinate
      * @param z z coordinate
@@ -372,6 +410,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Teleports the Player to the Given Location
+     *
      * @param location the location instance
      */
     public void teleportToPosition(Location location) {
@@ -380,6 +419,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Gets the X Coordinate of Player Position
+     *
      * @return X Coordinate
      */
     public double getX() {
@@ -388,6 +428,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Gets the Y Coordinate of Player Position
+     *
      * @return Y Coordinate
      */
     public double getY() {
@@ -396,9 +437,14 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Gets the Z Coordinate of Player Position
+     *
      * @return Z Coordinate
      */
     public double getZ() {
         return getPlayerMP().posZ;
+    }
+
+    public GameMode getGameMode() {
+        return GameMode.getByID(getPlayerMP().getGameType().getID());
     }
 }

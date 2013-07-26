@@ -6,10 +6,8 @@ import net.minecraft.tileentity.TileEntityCommandBlock;
 import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.utils.enums.EnumChatFormatting;
 
-public class ServerCommandManager extends CommandHandler implements IAdminCommand
-{
-    public ServerCommandManager()
-    {
+public class ServerCommandManager extends CommandHandler implements IAdminCommand {
+    public ServerCommandManager() {
         this.registerCommand(new CommandTime());
         this.registerCommand(new CommandGameMode());
         this.registerCommand(new CommandDifficulty());
@@ -36,8 +34,7 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
         this.registerCommand(new CommandPlaySound());
         this.registerCommand(new ServerCommandScoreboard());
 
-        if (MinecraftServer.getServer().isDedicatedServer())
-        {
+        if (MinecraftServer.getServer().isDedicatedServer()) {
             this.registerCommand(new CommandServerOp());
             this.registerCommand(new CommandServerDeop());
             this.registerCommand(new CommandServerStop());
@@ -60,12 +57,10 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
      * Sends a message to the admins of the server from a given CommandSender with the given resource string and given
      * extra srings. If the int par2 is even or zero, the original sender is also notified.
      */
-    public void notifyAdmins(ICommandSender par1ICommandSender, int par2, String par3Str, Object ... par4ArrayOfObj)
-    {
+    public void notifyAdmins(ICommandSender par1ICommandSender, int par2, String par3Str, Object... par4ArrayOfObj) {
         boolean var5 = true;
 
-        if (par1ICommandSender instanceof TileEntityCommandBlock && !MinecraftServer.getServer().worldServers[0].getGameRules().getGameRuleBooleanValue("commandBlockOutput"))
-        {
+        if (par1ICommandSender instanceof TileEntityCommandBlock && !MinecraftServer.getServer().worldServers[0].getGameRules().getGameRuleBooleanValue("commandBlockOutput")) {
             var5 = false;
         }
 
@@ -73,8 +68,7 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
         var6.func_111059_a(EnumChatFormatting.GRAY);
         var6.func_111063_b(true);
 
-        if (var5)
-        {
+        if (var5) {
 
             for (EntityPlayerMP var8 : MinecraftServer.getServer().getConfigurationManager().playerEntityList) {
                 if (var8 != par1ICommandSender && MinecraftServer.getServer().getConfigurationManager().areCommandsAllowed(var8.getCommandSenderName())) {
@@ -83,13 +77,11 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
             }
         }
 
-        if (par1ICommandSender != MinecraftServer.getServer())
-        {
+        if (par1ICommandSender != MinecraftServer.getServer()) {
             MinecraftServer.getServer().func_110122_a(var6);
         }
 
-        if ((par2 & 1) != 1)
-        {
+        if ((par2 & 1) != 1) {
             par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b(par3Str, par4ArrayOfObj));
         }
     }

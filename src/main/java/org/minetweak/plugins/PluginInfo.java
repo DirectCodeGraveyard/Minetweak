@@ -22,6 +22,7 @@ public class PluginInfo {
 
     /**
      * Get the name of the main class
+     *
      * @return name of main class
      */
     public String getMainClass() {
@@ -30,6 +31,7 @@ public class PluginInfo {
 
     /**
      * Gets the name of the plugin
+     *
      * @return name of plugin
      */
     public String getName() {
@@ -38,6 +40,7 @@ public class PluginInfo {
 
     /**
      * Gets the description of the plugin
+     *
      * @return description
      */
     public String getDescription() {
@@ -46,6 +49,7 @@ public class PluginInfo {
 
     /**
      * Checks if Plugin is a Bukkit Plugin
+     *
      * @return if it is a bukkit plugin
      */
     public boolean isBukkitPlugin() {
@@ -54,6 +58,7 @@ public class PluginInfo {
 
     /**
      * Checks if a Plugin is a Minetweak Plugin
+     *
      * @return if it is a minetweak plugin
      */
     public boolean isMinetweakPlugin() {

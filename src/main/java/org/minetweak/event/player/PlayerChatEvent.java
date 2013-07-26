@@ -13,6 +13,7 @@ public class PlayerChatEvent extends PlayerEvent {
 
     /**
      * Gets the message
+     *
      * @return message
      */
     public String getMessage() {

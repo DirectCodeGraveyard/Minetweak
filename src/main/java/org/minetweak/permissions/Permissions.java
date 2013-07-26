@@ -1,7 +1,5 @@
 package org.minetweak.permissions;
 
-import net.minecraft.server.MinecraftServer;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,11 +8,13 @@ public class Permissions {
 
     /**
      * Adds a permission
-     * @param user username for player
+     *
+     * @param user       username for player
      * @param permission permissions node
      * @return if permission was added
      */
     public static boolean addPermission(String user, String permission) {
+        user = user.toLowerCase();
         ArrayList<String> perms = new ArrayList<String>();
         if (permissions.containsKey(user)) {
             if (perms.contains(permission)) {
@@ -30,13 +30,15 @@ public class Permissions {
 
     /**
      * Removes a permission
-     * @param user username of player
+     *
+     * @param user       username of player
      * @param permission permission node
      * @return if permission was removed
      */
     public static boolean removePermission(String user, String permission) {
+        user = user.toLowerCase();
         ArrayList<String> userPerms = getPermissions(user);
-        if (userPerms==null) {
+        if (userPerms == null) {
             return false;
         } else if (!userPerms.contains(permission)) {
             return false;
@@ -49,13 +51,15 @@ public class Permissions {
 
     /**
      * Checks for permission
-     * @param user username of player
+     *
+     * @param user       username of player
      * @param permission permission node
      * @return if the player has permission
      */
     public static boolean hasPermission(String user, String permission) {
+        user = user.toLowerCase();
         ArrayList<String> perms = getPermissions(user);
-        if (perms==null) {
+        if (perms == null) {
             return false;
         } else if (perms.contains("*")) {
             return true;
@@ -69,15 +73,18 @@ public class Permissions {
 
     /**
      * Gets all permissions for player
+     *
      * @param user username of player
      * @return ArrayList of permissions
      */
     public static ArrayList<String> getPermissions(String user) {
+        user = user.toLowerCase();
         return permissions.get(user);
     }
 
     /**
      * Gets all player permissions
+     *
      * @return permissions of everyone
      */
     public static HashMap<String, ArrayList<String>> getPermissions() {

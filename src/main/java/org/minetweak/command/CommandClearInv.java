@@ -12,7 +12,7 @@ public class CommandClearInv extends CommandExecutor {
             noPermission(sender, "clear inventories");
             return;
         }
-        if (args.length>=1) {
+        if (args.length >= 1) {
             username = args[0];
         } else {
             username = sender.getName();

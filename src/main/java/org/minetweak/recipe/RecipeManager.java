@@ -13,6 +13,7 @@ public class RecipeManager {
 
     /**
      * Get the global RecipeManager instance
+     *
      * @return the instance of RecipeManager
      */
     public static RecipeManager getInstance() {
@@ -21,8 +22,9 @@ public class RecipeManager {
 
     /**
      * Adds a shaped crafting
+     *
      * @param output output of crafting
-     * @param data the item list and string values
+     * @param data   the item list and string values
      */
     public void addRecipe(ItemStack output, Object... data) {
         craftingManager.addRecipe(output, data);
@@ -30,6 +32,7 @@ public class RecipeManager {
 
     /**
      * Adds a shapeless crafting
+     *
      * @param output output of crafting
      * @param inputs input list
      */
@@ -39,9 +42,10 @@ public class RecipeManager {
 
     /**
      * Adds a furnace crafting
-     * @param input the input
+     *
+     * @param input  the input
      * @param output the output
-     * @param xp amount of XP given
+     * @param xp     amount of XP given
      */
     public void addFurnaceRecipe(int input, ItemStack output, float xp) {
         FurnaceRecipes.smelting().addSmelting(input, output, xp);
@@ -49,6 +53,7 @@ public class RecipeManager {
 
     /**
      * Callback to set the CraftingManager
+     *
      * @param event event fired
      */
     @Subscribe

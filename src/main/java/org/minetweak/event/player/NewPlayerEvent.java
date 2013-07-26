@@ -8,6 +8,7 @@ import org.minetweak.entity.Player;
 public class NewPlayerEvent extends PlayerEvent {
     /**
      * Creates a New Player Event
+     *
      * @param player new player
      */
     public NewPlayerEvent(Player player) {

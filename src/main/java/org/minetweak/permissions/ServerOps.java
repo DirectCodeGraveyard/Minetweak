@@ -2,12 +2,14 @@ package org.minetweak.permissions;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import org.minetweak.Minetweak;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -53,7 +55,8 @@ public class ServerOps {
                 return;
             }
             FileReader reader = new FileReader(opListFile);
-            ops = gson.fromJson(reader, ops.getClass());
+            Type dataType = new TypeToken<Set<String>>(){}.getType();
+            ops = gson.fromJson(reader, dataType);
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();

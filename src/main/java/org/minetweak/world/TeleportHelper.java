@@ -7,9 +7,10 @@ import net.minecraft.world.chunk.ChunkCoordinates;
 public class TeleportHelper {
     /**
      * Attempts to move an Entity to a World
-     * @param entity Entity to Move
-     * @param dimension dimension to move to
-     * @param worldserver original server
+     *
+     * @param entity       Entity to Move
+     * @param dimension    dimension to move to
+     * @param worldserver  original server
      * @param worldserver1 new server
      */
     public static void transferEntityToWorld(Entity entity, int dimension, WorldServer worldserver, WorldServer worldserver1) {
@@ -21,26 +22,21 @@ public class TeleportHelper {
         double d5 = entity.posZ;
         float f = entity.rotationYaw;
 
-        if (entity.dimension == 1)
-        {
+        if (entity.dimension == 1) {
             ChunkCoordinates chunkcoordinates;
 
-            if (dimension == 1)
-            {
+            if (dimension == 1) {
                 chunkcoordinates = worldserver1.getSpawnPoint();
-            }
-            else
-            {
+            } else {
                 chunkcoordinates = worldserver1.getEntrancePortalLocation();
             }
 
-            d0 = (double)chunkcoordinates.posX;
-            entity.posY = (double)chunkcoordinates.posY;
-            d1 = (double)chunkcoordinates.posZ;
+            d0 = (double) chunkcoordinates.posX;
+            entity.posY = (double) chunkcoordinates.posY;
+            d1 = (double) chunkcoordinates.posZ;
             entity.setLocationAndAngles(d0, entity.posY, d1, 90.0F, 0.0F);
 
-            if (entity.isEntityAlive())
-            {
+            if (entity.isEntityAlive()) {
                 worldserver.updateEntityWithOptionalForce(entity, false);
             }
         }

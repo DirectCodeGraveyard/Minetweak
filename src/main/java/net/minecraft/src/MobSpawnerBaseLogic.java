@@ -10,7 +10,6 @@ import net.minecraft.utils.weighted.WeightedRandomMinecart;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public abstract class MobSpawnerBaseLogic {
@@ -23,7 +22,7 @@ public abstract class MobSpawnerBaseLogic {
     /**
      * List of minecart to spawn.
      */
-    private List minecartToSpawn;
+    private List<WeightedRandomMinecart> minecartToSpawn;
     private WeightedRandomMinecart randomMinecart;
     public double field_98287_c;
     public double field_98284_d;
@@ -141,10 +140,9 @@ public abstract class MobSpawnerBaseLogic {
         if (this.getRandomMinecart() != null) {
             NBTTagCompound var2 = new NBTTagCompound();
             par1Entity.addEntityID(var2);
-            Iterator var3 = this.getRandomMinecart().field_98222_b.getTags().iterator();
 
-            while (var3.hasNext()) {
-                NBTBase var4 = (NBTBase) var3.next();
+            for (Object o : this.getRandomMinecart().field_98222_b.getTags()) {
+                NBTBase var4 = (NBTBase) o;
                 var2.setTag(var4.getName(), var4.copy());
             }
 
@@ -163,10 +161,9 @@ public abstract class MobSpawnerBaseLogic {
                 if (var5 != null) {
                     NBTTagCompound var6 = new NBTTagCompound();
                     var5.addEntityID(var6);
-                    Iterator var7 = var10.getTags().iterator();
 
-                    while (var7.hasNext()) {
-                        NBTBase var8 = (NBTBase) var7.next();
+                    for (Object o : var10.getTags()) {
+                        NBTBase var8 = (NBTBase) o;
                         var6.setTag(var8.getName(), var8.copy());
                     }
 
@@ -183,7 +180,7 @@ public abstract class MobSpawnerBaseLogic {
                 var9 = var5;
             }
         } else if (par1Entity instanceof EntityLivingBase && par1Entity.worldObj != null) {
-            ((EntityLiving) par1Entity).func_110161_a((EntityLivingData) null);
+            ((EntityLiving) par1Entity).func_110161_a(null);
             this.getSpawnerWorld().spawnEntityInWorld(par1Entity);
         }
 
@@ -210,7 +207,7 @@ public abstract class MobSpawnerBaseLogic {
         this.spawnDelay = par1NBTTagCompound.getShort("Delay");
 
         if (par1NBTTagCompound.hasKey("SpawnPotentials")) {
-            this.minecartToSpawn = new ArrayList();
+            this.minecartToSpawn = new ArrayList<WeightedRandomMinecart>();
             NBTTagList var2 = par1NBTTagCompound.getTagList("SpawnPotentials");
 
             for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
@@ -223,7 +220,7 @@ public abstract class MobSpawnerBaseLogic {
         if (par1NBTTagCompound.hasKey("SpawnData")) {
             this.setRandomMinecart(new WeightedRandomMinecart(this, par1NBTTagCompound.getCompoundTag("SpawnData"), this.mobID));
         } else {
-            this.setRandomMinecart((WeightedRandomMinecart) null);
+            this.setRandomMinecart(null);
         }
 
         if (par1NBTTagCompound.hasKey("MinSpawnDelay")) {
@@ -264,10 +261,9 @@ public abstract class MobSpawnerBaseLogic {
             NBTTagList var2 = new NBTTagList();
 
             if (this.minecartToSpawn != null && this.minecartToSpawn.size() > 0) {
-                Iterator var3 = this.minecartToSpawn.iterator();
 
-                while (var3.hasNext()) {
-                    WeightedRandomMinecart var4 = (WeightedRandomMinecart) var3.next();
+                for (Object aMinecartToSpawn : this.minecartToSpawn) {
+                    WeightedRandomMinecart var4 = (WeightedRandomMinecart) aMinecartToSpawn;
                     var2.appendTag(var4.func_98220_a());
                 }
             } else {

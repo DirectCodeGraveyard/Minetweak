@@ -17,11 +17,11 @@ class PlayerUsageSnooperThread extends TimerTask {
 
     public void run() {
         if (PlayerUsageSnooper.getStatsCollectorFor(this.snooper).isSnooperEnabled()) {
-            HashMap var1;
+            HashMap<String, Object> var1;
 
             synchronized (PlayerUsageSnooper.getSyncLockFor(this.snooper)) {
-                var1 = new HashMap(PlayerUsageSnooper.getDataMapFor(this.snooper));
-                var1.put("snooper_count", Integer.valueOf(PlayerUsageSnooper.getSelfCounterFor(this.snooper)));
+                var1 = new HashMap<String, Object>(PlayerUsageSnooper.getDataMapFor(this.snooper));
+                var1.put("snooper_count", PlayerUsageSnooper.getSelfCounterFor(this.snooper));
             }
 
             HttpUtil.sendPost(PlayerUsageSnooper.getStatsCollectorFor(this.snooper).getLogAgent(), PlayerUsageSnooper.getServerUrlFor(this.snooper), var1, true);

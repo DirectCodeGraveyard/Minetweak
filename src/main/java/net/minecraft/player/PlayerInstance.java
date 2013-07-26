@@ -16,7 +16,7 @@ class PlayerInstance {
     /**
      * the list of all players in this instance (chunk)
      */
-    private final List players;
+    private final List<EntityPlayerMP> players;
 
     /**
      * the chunk the player currently resides in
@@ -39,7 +39,7 @@ class PlayerInstance {
 
     public PlayerInstance(PlayerManager par1PlayerManager, int par2, int par3) {
         this.thePlayerManager = par1PlayerManager;
-        this.players = new ArrayList();
+        this.players = new ArrayList<EntityPlayerMP>();
         this.blocksToUpdate = new short[64];
         this.currentChunk = new ChunkCoordIntPair(par2, par3);
         par1PlayerManager.getMinecraftServer().theChunkProviderServer.loadChunk(par2, par3);
@@ -122,9 +122,7 @@ class PlayerInstance {
      * sends the packet to all players in the current instance
      */
     public void sendPacketToPlayersInInstance(Packet par1Packet) {
-        for (int var2 = 0; var2 < this.players.size(); ++var2) {
-            EntityPlayerMP var3 = (EntityPlayerMP) this.players.get(var2);
-
+        for (EntityPlayerMP var3 : this.players) {
             if (!var3.loadedChunks.contains(this.currentChunk)) {
                 var3.playerNetServerHandler.sendPacket(par1Packet);
             }
@@ -157,10 +155,10 @@ class PlayerInstance {
                     for (var3 = 0; var3 < 16; ++var3) {
                         if ((this.field_73260_f & 1 << var3) != 0) {
                             var4 = var3 << 4;
-                            List var5 = PlayerManager.getWorldServer(this.thePlayerManager).getTileEntityList(var1, var4, var2, var1 + 16, var4 + 16, var2 + 16);
+                            List<TileEntity> var5 = PlayerManager.getWorldServer(this.thePlayerManager).getTileEntityList(var1, var4, var2, var1 + 16, var4 + 16, var2 + 16);
 
-                            for (int var6 = 0; var6 < var5.size(); ++var6) {
-                                this.updateTileEntity((TileEntity) var5.get(var6));
+                            for (TileEntity aVar5 : var5) {
+                                this.updateTileEntity(aVar5);
                             }
                         }
                     }
@@ -201,7 +199,7 @@ class PlayerInstance {
         return par0PlayerInstance.currentChunk;
     }
 
-    static List getPlayersInChunk(PlayerInstance par0PlayerInstance) {
+    static List<EntityPlayerMP> getPlayersInChunk(PlayerInstance par0PlayerInstance) {
         return par0PlayerInstance.players;
     }
 }

@@ -75,7 +75,6 @@ public class Configuration {
     /**
      * Creates a new line in the configuration if unlocked
      * Useful for formatting purposes
-     *
      */
     public void newLine() {
         writer.newLine();

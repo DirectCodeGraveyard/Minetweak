@@ -6,38 +6,28 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.crash.exception.WrongUsageException;
 import net.minecraft.tileentity.TileEntityCommandBlock;
 
-public class ServerCommandTestFor extends CommandBase
-{
-    public String getCommandName()
-    {
+public class ServerCommandTestFor extends CommandBase {
+    public String getCommandName() {
         return "testfor";
     }
 
     /**
      * Return the required permission level for this command.
      */
-    public int getRequiredPermissionLevel()
-    {
+    public int getRequiredPermissionLevel() {
         return 2;
     }
 
-    public String getCommandUsage(ICommandSender par1ICommandSender)
-    {
+    public String getCommandUsage(ICommandSender par1ICommandSender) {
         return "commands.testfor.usage";
     }
 
-    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr)
-    {
-        if (par2ArrayOfStr.length != 1)
-        {
+    public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
+        if (par2ArrayOfStr.length != 1) {
             throw new WrongUsageException("commands.testfor.usage", new Object[0]);
-        }
-        else if (!(par1ICommandSender instanceof TileEntityCommandBlock))
-        {
+        } else if (!(par1ICommandSender instanceof TileEntityCommandBlock)) {
             throw new CommandException("commands.testfor.failed", new Object[0]);
-        }
-        else
-        {
+        } else {
             func_82359_c(par1ICommandSender, par2ArrayOfStr[0]);
         }
     }
@@ -45,8 +35,7 @@ public class ServerCommandTestFor extends CommandBase
     /**
      * Return whether the specified command parameter index is a username parameter.
      */
-    public boolean isUsernameIndex(String[] par1ArrayOfStr, int par2)
-    {
+    public boolean isUsernameIndex(String[] par1ArrayOfStr, int par2) {
         return par2 == 0;
     }
 }

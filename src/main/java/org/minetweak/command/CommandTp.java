@@ -7,25 +7,25 @@ import org.minetweak.entity.Player;
 public class CommandTp extends CommandExecutor {
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
-        if (args.length>2 || args.length==0) {
+        if (args.length > 2 || args.length == 0) {
             sender.sendMessage(getUsage());
             return;
         }
         sender.sendMessage("Teleporting....");
         Player player;
         Player target;
-        if (args.length==1) {
+        if (args.length == 1) {
             player = Minetweak.getPlayerByName(sender.getName());
             target = Minetweak.getPlayerByName(args[0]);
         } else {
             player = Minetweak.getPlayerByName(args[0]);
             target = Minetweak.getPlayerByName(args[1]);
         }
-        if (player==null) {
+        if (player == null) {
             sender.sendMessage(ChatFormatting.RED + args[0] + " is not online.");
             return;
         }
-        if (target==null) {
+        if (target == null) {
             sender.sendMessage(ChatFormatting.RED + args[1] + " is not online.");
             return;
         }
@@ -35,5 +35,10 @@ public class CommandTp extends CommandExecutor {
 
     public String getUsage() {
         return "Usage: /tp [player] [target-player]";
+    }
+
+    @Override
+    public String getHelpInfo() {
+        return "Teleports a Player to another Player";
     }
 }

@@ -832,6 +832,14 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         this.playerNetServerHandler.sendPacket(new Packet70GameEvent(3, par1EnumGameType.getID()));
     }
 
+    /**
+     * Gets the GameMode
+     * @return gets the Game Type
+     */
+    public EnumGameType getGameType() {
+        return this.theItemInWorldManager.getGameType();
+    }
+
     public void sendChatToPlayer(ChatMessageComponent par1ChatMessageComponent) {
         this.playerNetServerHandler.sendPacket(new Packet3Chat(par1ChatMessageComponent));
     }
@@ -845,7 +853,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
      * Returns true if the command sender is allowed to use the given command.
      */
     public boolean canCommandSenderUseCommand(int par1, String par2Str) {
-        return "seed".equals(par2Str) && !this.mcServer.isDedicatedServer() ? true : (!"tell".equals(par2Str) && !"help".equals(par2Str) && !"me".equals(par2Str) ? (this.mcServer.getConfigurationManager().areCommandsAllowed(this.username) ? this.mcServer.func_110455_j() >= par1 : false) : true);
+        return "seed".equals(par2Str) && !this.mcServer.isDedicatedServer() || (!(!"tell".equals(par2Str) && !"help".equals(par2Str) && !"me".equals(par2Str)) || (this.mcServer.getConfigurationManager().areCommandsAllowed(this.username) && this.mcServer.func_110455_j() >= par1));
     }
 
     /**
@@ -877,7 +885,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     }
 
     /**
-     * on recieving this message the client (if permission is given) will download the requested textures
+     * on receiving this message the client (if permission is given) will download the requested textures
      */
     public void requestTexturePackLoad(String par1Str, int par2) {
         String var3 = par1Str + "\u0000" + par2;
