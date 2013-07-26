@@ -14,6 +14,7 @@ import org.minetweak.plugins.PluginLoadingHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
 import org.minetweak.util.MinetweakLog;
+import org.minetweak.world.World;
 
 import java.io.File;
 import java.io.IOException;
@@ -270,6 +271,8 @@ public class Minetweak {
         registerCommand("tp", new CommandTp());
         registerCommand("tpall", new CommandTpAll());
         registerCommand("lockdown", new CommandLockdown());
+        registerCommand("difficulty", new CommandDifficulty());
+        registerCommand("setspawn", new CommandSetSpawn());
     }
 
     /**
@@ -336,5 +339,14 @@ public class Minetweak {
      */
     public static void setLockedDown(boolean lockdownEnabled) {
         Minetweak.isLockedDown = lockdownEnabled;
+    }
+
+    /**
+     * Gets the Minetweak Overworld
+     *
+     * @return Overworld
+     */
+    public static World getOverworld() {
+        return new World(MinecraftServer.getServer().worldServerForDimension(0));
     }
 }

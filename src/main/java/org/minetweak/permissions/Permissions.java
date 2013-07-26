@@ -9,7 +9,7 @@ public class Permissions {
     /**
      * Adds a permission
      *
-     * @param user username for player
+     * @param user       username for player
      * @param permission permissions node
      * @return if permission was added
      */
@@ -59,11 +59,11 @@ public class Permissions {
     public static boolean hasPermission(String user, String permission) {
         user = user.toLowerCase();
         ArrayList<String> perms = getPermissions(user);
-        if (perms == null) {
+        if (ServerOps.isPlayerOp(user)) {
+            return true;
+        } else if (perms == null) {
             return false;
         } else if (perms.contains("*")) {
-            return true;
-        } else if (ServerOps.isPlayerOp(user)) {
             return true;
         } else if (perms.contains(permission)) {
             return true;

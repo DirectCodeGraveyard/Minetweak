@@ -34,12 +34,12 @@ public class CommandGameMode extends CommandBase {
             ChatMessageComponent var5 = ChatMessageComponent.func_111077_e("gameMode." + var3.getName());
 
             if (var4 != par1ICommandSender) {
-                notifyAdmins(par1ICommandSender, 1, "commands.gamemode.success.other", new Object[]{var4.getEntityName(), var5});
+                notifyAdmins(par1ICommandSender, 1, "commands.gamemode.success.other", var4.getEntityName(), var5);
             } else {
-                notifyAdmins(par1ICommandSender, 1, "commands.gamemode.success.self", new Object[]{var5});
+                notifyAdmins(par1ICommandSender, 1, "commands.gamemode.success.self", var5);
             }
         } else {
-            throw new WrongUsageException("commands.gamemode.usage", new Object[0]);
+            throw new WrongUsageException("commands.gamemode.usage");
         }
     }
 
@@ -54,7 +54,7 @@ public class CommandGameMode extends CommandBase {
      * Adds the strings available in this command to the given list of tab completion options.
      */
     public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
-        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, new String[]{"survival", "creative", "adventure"}) : (par2ArrayOfStr.length == 2 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, this.getListOfPlayerUsernames()) : null);
+        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, "survival", "creative", "adventure") : (par2ArrayOfStr.length == 2 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, this.getListOfPlayerUsernames()) : null);
     }
 
     /**

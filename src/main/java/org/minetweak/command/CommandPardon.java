@@ -13,7 +13,7 @@ public class CommandPardon extends CommandExecutor {
             noPermission(sender, "pardon banned players");
             return;
         }
-        Server.pardonPlayer(args[1]);
+        Server.pardonPlayer(args[0]);
     }
 
     @Override

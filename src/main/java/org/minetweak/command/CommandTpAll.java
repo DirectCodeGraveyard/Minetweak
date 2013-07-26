@@ -1,6 +1,8 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
+import org.minetweak.Server;
+import org.minetweak.chat.ChatFormatting;
 import org.minetweak.entity.Player;
 
 public class CommandTpAll extends CommandExecutor {
@@ -20,11 +22,13 @@ public class CommandTpAll extends CommandExecutor {
 
         Player player = Minetweak.getPlayerByName(sender.getName());
 
+        Server.broadcastMessage("Teleporting all players to " + sender.getName());
         for (Player p : Minetweak.getPlayers().values()) {
             if (!p.getDisplayName().toLowerCase().equals(sender.getName().toLowerCase())) {
                 p.teleportToPosition(player.getX(), player.getY(), player.getZ());
             }
         }
+        sender.sendMessage(ChatFormatting.GOLD + "All Players Have been teleported.");
     }
 
     public String getUsage() {

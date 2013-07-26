@@ -36,7 +36,7 @@ public class ServerOps {
         try {
             if (!opListFile.exists()) {
                 if (!opListFile.createNewFile()) {
-                    Minetweak.getLogger().logWarning("Unable to save whitelist. Could not create whitelist.json");
+                    Minetweak.getLogger().logWarning("Unable to save whitelist. Could not create ops.json");
                     return;
                 }
             }
@@ -55,7 +55,8 @@ public class ServerOps {
                 return;
             }
             FileReader reader = new FileReader(opListFile);
-            Type dataType = new TypeToken<Set<String>>(){}.getType();
+            Type dataType = new TypeToken<Set<String>>() {
+            }.getType();
             ops = gson.fromJson(reader, dataType);
             reader.close();
         } catch (IOException e) {

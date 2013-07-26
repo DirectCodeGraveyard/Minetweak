@@ -447,6 +447,4 @@ public class Player extends Entity implements CommandSender {
     public GameMode getGameMode() {
         return GameMode.getByID(getPlayerMP().getGameType().getID());
     }
-
-
 }

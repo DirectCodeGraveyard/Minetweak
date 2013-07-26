@@ -1,7 +1,12 @@
 package org.minetweak.world;
 
+import net.minecraft.world.WorldInfo;
 import net.minecraft.world.WorldServer;
+import org.minetweak.Minetweak;
 import org.minetweak.block.TweakBlock;
+import org.minetweak.chat.ChatFormatting;
+import org.minetweak.entity.Player;
+import org.minetweak.server.Difficulty;
 
 public class World {
 
@@ -83,5 +88,75 @@ public class World {
      */
     public void setMobTypeSpawnAbility(boolean peacefulSpawnAbility, boolean hostileSpawnAbility) {
         getWorldServer().setAllowedSpawnTypes(hostileSpawnAbility, peacefulSpawnAbility);
+    }
+
+    /**
+     * Sets the Spawn Location
+     *
+     * @param location Location
+     */
+    public void setSpawn(Location location) {
+        setSpawn(location.getPosX(), location.getPosY(), location.getPosZ());
+    }
+
+    /**
+     * Sets the Spawn Location
+     *
+     * @param x x
+     * @param y y
+     * @param z z
+     */
+    public void setSpawn(int x, int y, int z) {
+        getWorldServer().getWorldInfo().setSpawnPosition(x, y, z);
+    }
+
+    /**
+     * Gets the Spawn Location
+     *
+     * @return spawn location
+     */
+    public Location getSpawn() {
+        WorldInfo i = getWorldServer().getWorldInfo();
+        return new Location(i.getSpawnX(), i.getSpawnY(), i.getSpawnZ(), world);
+    }
+
+    /**
+     * Gets the World's seed
+     *
+     * @return seed
+     */
+    public long getSeed() {
+        return getWorldServer().getSeed();
+    }
+
+    /**
+     * Gets the Difficulty of the World
+     *
+     * @return difficulty
+     */
+    public Difficulty getDifficulty() {
+        return Difficulty.getByID(getWorldServer().difficultySetting);
+    }
+
+    /**
+     * Sets the difficulty of the World
+     *
+     * @param difficulty difficulty
+     */
+    public void setDifficulty(Difficulty difficulty) {
+        getWorldServer().difficultySetting = difficulty.getID();
+    }
+
+    /**
+     * Broadcasts a Message to All Players in the World
+     *
+     * @param message message to broadcast
+     */
+    public void broadcastMessage(String message) {
+        for (Player player : Minetweak.getPlayers().values()) {
+            if (player.getCurrentWorld().getWorldServer() == getWorldServer()) {
+                player.sendMessage(String.format("[%s%s%s] %s", ChatFormatting.GOLD, "Server", ChatFormatting.RESET, message));
+            }
+        }
     }
 }
