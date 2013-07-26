@@ -8,6 +8,7 @@ import net.minecraft.src.DamageSource;
 import net.minecraft.world.World;
 import org.minetweak.Minetweak;
 import org.minetweak.event.entity.CreeperChargeEvent;
+import org.minetweak.event.entity.CreeperExplodeEvent;
 
 public class EntityCreeper extends EntityMob {
     /**
@@ -127,8 +128,13 @@ public class EntityCreeper extends EntityMob {
 
                 if (!this.worldObj.isRemote) {
                     boolean var2 = this.worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+                    float explodeRadius = explosionRadius;
+                    if (this.getPowered()) explodeRadius = explodeRadius * 2;
 
-                    if (this.getPowered()) {
+                    CreeperExplodeEvent event = new CreeperExplodeEvent(this, explodeRadius);
+                    Minetweak.getEventBus().post(event);
+
+                    if (this.getPowered() && !event.isCancelled()) {
                         this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, (float) (this.explosionRadius * 2), var2);
                     } else {
                         this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, (float) this.explosionRadius, var2);
