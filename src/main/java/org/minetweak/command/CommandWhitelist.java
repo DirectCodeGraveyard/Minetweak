@@ -29,7 +29,7 @@ public class CommandWhitelist extends CommandExecutor {
 
             if (args[0].equals("list")) {
                 ServerOps.load();
-                ArrayList<String> players = PlayerWhitelist.getWhitelistedPlayers();
+                Set<String> players = PlayerWhitelist.getWhitelistedPlayers();
                 sender.sendMessage(ChatFormatting.GOLD + "Whitelisted Players" + ChatFormatting.RESET + ":");
                 boolean flag = false;
                 String line = "";
@@ -61,13 +61,13 @@ public class CommandWhitelist extends CommandExecutor {
                     return;
                 }
 
-                PlayerWhitelist.addPlayer(args[1]);
+                PlayerWhitelist.removePlayer(args[1]);
                 Server.sendToOps("Removed " + args[1] + " from whitelist.", true);
                 return;
             }
 
             if (args[0].equals("reload")) {
-                ServerOps.load();
+                PlayerWhitelist.load();
                 Server.sendToOps("Loaded Whitelist.", true);
                 return;
             }
