@@ -19,6 +19,7 @@ import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
 import org.minetweak.server.GameMode;
 import org.minetweak.world.Location;
+import org.minetweak.world.World;
 
 import java.util.ArrayList;
 
@@ -444,7 +445,21 @@ public class Player extends Entity implements CommandSender {
         return getPlayerMP().posZ;
     }
 
+    /**
+     * Gets the Players Gamemode
+     *
+     * @return gamemode
+     */
     public GameMode getGameMode() {
         return GameMode.getByID(getPlayerMP().getGameType().getID());
+    }
+
+    /**
+     * Gets the Current World the Player is in
+     *
+     * @return current world
+     */
+    public World getCurrentWorld() {
+        return getPlayerMP().worldObj.getWorld();
     }
 }
