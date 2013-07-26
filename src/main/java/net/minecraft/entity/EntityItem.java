@@ -10,6 +10,9 @@ import net.minecraft.src.DamageSource;
 import net.minecraft.stats.StatCollector;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.ChunkCoordinates;
+import org.minetweak.Minetweak;
+import org.minetweak.event.item.ItemBurnEvent;
 
 public class EntityItem extends Entity {
     /**
@@ -86,6 +89,9 @@ public class EntityItem extends Entity {
 
         if (var1 || this.ticksExisted % 25 == 0) {
             if (this.worldObj.getBlockMaterial(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)) == Material.lava) {
+                ItemBurnEvent event = new ItemBurnEvent(this.getEntityItem(), new ChunkCoordinates(this.chunkCoordX, this.chunkCoordY, this.chunkCoordZ));
+                Minetweak.getEventBus().post(event);
+
                 this.motionY = 0.20000000298023224D;
                 this.motionX = (double) ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);
                 this.motionZ = (double) ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F);

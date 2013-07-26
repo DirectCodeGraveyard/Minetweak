@@ -1,19 +1,19 @@
 package org.minetweak.event.item;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.chunk.ChunkCoordinates;
 
 public class ItemBurnEvent {
-    private Item item;
+    private ItemStack itemStack;
     private ChunkCoordinates coordinates;
 
-    public ItemBurnEvent(Item item, ChunkCoordinates coordinates) {
-        this.item = item;
+    public ItemBurnEvent(ItemStack itemStack, ChunkCoordinates coordinates) {
+        this.itemStack = itemStack;
         this.coordinates = coordinates;
     }
 
-    public Item getItem() {
-        return item;
+    public ItemStack getItemStack() {
+        return itemStack;
     }
 
     public ChunkCoordinates getCoordinates() {
