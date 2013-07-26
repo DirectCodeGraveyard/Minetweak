@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityCreeper;
 public class CreeperExplodeEvent implements EntityEvent {
 
     private EntityCreeper creeper;
+    private boolean radiusChanged;
     private float explosionRadius;
 
     private boolean cancelled;
@@ -30,4 +31,12 @@ public class CreeperExplodeEvent implements EntityEvent {
         this.cancelled = cancelled;
     }
 
+    public void setExplosionRadius(float radius) {
+        explosionRadius = radius;
+        radiusChanged = true;
+    }
+
+    public boolean explosionRadiusChanged() {
+        return radiusChanged;
+    }
 }

@@ -134,10 +134,16 @@ public class EntityCreeper extends EntityMob {
                     CreeperExplodeEvent event = new CreeperExplodeEvent(this, explodeRadius);
                     Minetweak.getEventBus().post(event);
 
-                    if (this.getPowered() && !event.isCancelled()) {
-                        this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, (float) (this.explosionRadius * 2), var2);
-                    } else {
-                        this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, (float) this.explosionRadius, var2);
+                    if (event.explosionRadiusChanged()) {
+                        explodeRadius = event.getExplosionRadius();
+                    }
+
+                    if (!event.isCancelled()) {
+                        if (this.getPowered()) {
+                            this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, explodeRadius, var2);
+                        } else {
+                            this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, explodeRadius, var2);
+                        }
                     }
 
                     this.setDead();
