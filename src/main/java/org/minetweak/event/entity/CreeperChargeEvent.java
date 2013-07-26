@@ -1,8 +1,9 @@
 package org.minetweak.event.entity;
 
 import org.minetweak.entity.Entity;
+import org.minetweak.event.helper.Cancellable;
 
-public class CreeperChargeEvent implements EntityEvent {
+public class CreeperChargeEvent implements EntityEvent, Cancellable {
 
     private boolean cancelled;
     private Entity creeper;
@@ -21,10 +22,12 @@ public class CreeperChargeEvent implements EntityEvent {
         return bolt;
     }
 
+    @Override
     public void setCancelled(boolean cancel) {
         cancelled = cancel;
     }
 
+    @Override
     public boolean isCancelled() {
         return cancelled;
     }

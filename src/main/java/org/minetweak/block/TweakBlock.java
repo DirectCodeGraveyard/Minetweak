@@ -19,18 +19,22 @@ public class TweakBlock implements IBlock {
         this.chunk = chunk;
     }
 
+    @Override
     public World getWorld() {
         return chunk.getWorld();
     }
 
+    @Override
     public int getX() {
         return x;
     }
 
+    @Override
     public int getY() {
         return y;
     }
 
+    @Override
     public int getZ() {
         return z;
     }
@@ -39,10 +43,12 @@ public class TweakBlock implements IBlock {
         return getWorld().getWorldServer().getBlockId(x, y, z);
     }
 
+    @Override
     public Chunk getChunk() {
         return chunk;
     }
 
+    @Override
     public void setData(final byte data) {
         chunk.getHandle().worldObj.setBlockMetadata(x, y, z, data, 3);
     }
@@ -57,10 +63,12 @@ public class TweakBlock implements IBlock {
         }
     }
 
+    @Override
     public Material getType() {
         return Material.getMaterial(getTypeId());
     }
 
+    @Override
     public void setData(final byte data, boolean applyPhysics) {
         if (applyPhysics) {
             chunk.getHandle().worldObj.setBlockMetadata(x, y, z, data, 3);
@@ -69,14 +77,17 @@ public class TweakBlock implements IBlock {
         }
     }
 
+    @Override
     public byte getData() {
         return (byte) chunk.getHandle().getBlockMetadata(this.x & 0xF, this.y & 0xFF, this.z & 0xF);
     }
 
+    @Override
     public boolean setTypeId(final int type) {
         return chunk.getHandle().worldObj.setBlock(x, y, z, type, getData(), 3);
     }
 
+    @Override
     public boolean setTypeId(final int type, final boolean applyPhysics) {
         if (applyPhysics) {
             return setTypeId(type);
@@ -85,6 +96,7 @@ public class TweakBlock implements IBlock {
         }
     }
 
+    @Override
     public boolean setTypeIdAndData(final int type, final byte data, final boolean applyPhysics) {
         if (applyPhysics) {
             return chunk.getHandle().worldObj.setBlock(x, y, z, type, data, 3);
@@ -97,19 +109,23 @@ public class TweakBlock implements IBlock {
         }
     }
 
+    @Override
     public int getTypeId() {
         return chunk.getHandle().getBlockID(this.x & 0xF, this.y & 0xFF, this.z & 0xF);
     }
 
+    @Override
     public void setPowered(boolean powered) {
         getWorld().getWorldServer().scheduleBlockUpdate(x, y, z, getBlockID(), 4);
         this.powered = true;
     }
 
+    @Override
     public boolean isPowered() {
         return powered;
     }
 
+    @Override
     public Block getMCBlock() {
         return Block.blocksList[getBlockID()];
     }

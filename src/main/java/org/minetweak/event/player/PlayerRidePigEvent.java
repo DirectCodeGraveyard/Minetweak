@@ -2,8 +2,9 @@ package org.minetweak.event.player;
 
 import net.minecraft.entity.EntityPig;
 import org.minetweak.entity.Player;
+import org.minetweak.event.helper.Cancellable;
 
-public class PlayerRidePigEvent extends PlayerEvent {
+public class PlayerRidePigEvent extends PlayerEvent implements Cancellable {
 
     private EntityPig pig;
 
@@ -11,6 +12,7 @@ public class PlayerRidePigEvent extends PlayerEvent {
 
     /**
      * Creates a Player Event
+     *
      * @param player player involved
      */
     public PlayerRidePigEvent(Player player, EntityPig pig) {
@@ -22,10 +24,12 @@ public class PlayerRidePigEvent extends PlayerEvent {
         return pig;
     }
 
+    @Override
     public boolean isCancelled() {
         return cancelled;
     }
 
+    @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }

@@ -39,4 +39,8 @@ public class PlayerOpEvent extends PlayerEvent {
         return username;
     }
 
+    @Override
+    public Player getPlayer() {
+        return player;
+    }
 }

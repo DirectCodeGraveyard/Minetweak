@@ -19,4 +19,9 @@ public class CommandLockdown extends CommandExecutor {
             Server.broadcastMessage("Server is no longer on lockdown.");
         }
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Toggles the Server Lockdown";
+    }
 }

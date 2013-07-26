@@ -18,5 +18,4 @@ public class CommandListPlayers extends CommandExecutor {
     public String getHelpInfo() {
         return "Lists Online Players";
     }
-
 }

@@ -40,4 +40,9 @@ public class CommandDifficulty extends CommandExecutor {
 
         world.broadcastMessage("Set difficulty to " + ChatFormatting.GREEN + difficulty.getName());
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Sets the Worlds Difficulty";
+    }
 }

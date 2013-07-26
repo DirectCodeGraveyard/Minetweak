@@ -29,22 +29,27 @@ public class TweakBlockState implements IBlockState {
         return new TweakBlockState(world.getWorld().getBlockAt(x, y, z));
     }
 
+    @Override
     public World getWorld() {
         return world;
     }
 
+    @Override
     public int getX() {
         return x;
     }
 
+    @Override
     public int getY() {
         return y;
     }
 
+    @Override
     public int getZ() {
         return z;
     }
 
+    @Override
     public Chunk getChunk() {
         return chunk;
     }
@@ -68,10 +73,12 @@ public class TweakBlockState implements IBlockState {
         return data;
     }
 
+    @Override
     public void setType(final Material type) {
         setTypeId(type.getId());
     }
 
+    @Override
     public boolean setTypeId(final int type) {
         if (this.type != type) {
             this.type = type;
@@ -81,26 +88,32 @@ public class TweakBlockState implements IBlockState {
         return true;
     }
 
+    @Override
     public Material getType() {
         return Material.getMaterial(getTypeId());
     }
 
+    @Override
     public int getTypeId() {
         return type;
     }
 
+    @Override
     public TweakBlock getBlock() {
         return world.getBlockAt(x, y, z);
     }
 
+    @Override
     public boolean update() {
         return update(false);
     }
 
+    @Override
     public boolean update(boolean force) {
         return update(force, true);
     }
 
+    @Override
     public boolean update(boolean force, boolean applyPhysics) {
         TweakBlock tweakBlock = getBlock();
 
@@ -127,10 +140,12 @@ public class TweakBlockState implements IBlockState {
         }
     }
 
+    @Override
     public byte getRawData() {
         return data.getData();
     }
 
+    @Override
     public void setRawData(byte data) {
         this.data.setData(data);
     }
@@ -144,25 +159,7 @@ public class TweakBlockState implements IBlockState {
             return false;
         }
         final TweakBlockState other = (TweakBlockState) obj;
-        if (this.world != other.world && (this.world == null || !this.world.equals(other.world))) {
-            return false;
-        }
-        if (this.x != other.x) {
-            return false;
-        }
-        if (this.y != other.y) {
-            return false;
-        }
-        if (this.z != other.z) {
-            return false;
-        }
-        if (this.type != other.type) {
-            return false;
-        }
-        if (this.data != other.data && (this.data == null || !this.data.equals(other.data))) {
-            return false;
-        }
-        return true;
+        return !(this.world != other.world && (this.world == null || !this.world.equals(other.world))) && this.x == other.x && this.y == other.y && this.z == other.z && this.type == other.type && !(this.data != other.data && (this.data == null || !this.data.equals(other.data)));
     }
 
     @Override

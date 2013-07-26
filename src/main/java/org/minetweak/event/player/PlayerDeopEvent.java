@@ -39,4 +39,9 @@ public class PlayerDeopEvent extends PlayerEvent {
     public String getPlayerUsername() {
         return username;
     }
+
+    @Override
+    public Player getPlayer() {
+        return player;
+    }
 }

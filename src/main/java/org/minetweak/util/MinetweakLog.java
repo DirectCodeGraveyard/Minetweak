@@ -34,34 +34,42 @@ public class MinetweakLog implements ILogAgent {
         this.serverLogger.addHandler(consoleHandler);
     }
 
+    @Override
     public Logger getLogger() {
         return this.serverLogger;
     }
 
+    @Override
     public void logInfo(String line) {
         this.serverLogger.log(Level.INFO, "[Minetweak] " + line);
     }
 
+    @Override
     public void logWarning(String line) {
         this.serverLogger.log(Level.WARNING, "[Minetweak] " + line);
     }
 
+    @Override
     public void logWarningFormatted(String line, Object... objects) {
         this.serverLogger.log(Level.WARNING, "[Minetweak] " + line, objects);
     }
 
+    @Override
     public void logWarningException(String line, Throwable exception) {
         this.serverLogger.log(Level.WARNING, "[Minetweak] " + line, exception);
     }
 
+    @Override
     public void logSevere(String line) {
         this.serverLogger.log(Level.SEVERE, "[Minetweak] " + line);
     }
 
+    @Override
     public void logSevereException(String line, Throwable exception) {
         this.serverLogger.log(Level.SEVERE, "[Minetweak] " + line, exception);
     }
 
+    @Override
     public void logNoPrefix(String line) {
         this.serverLogger.log(Level.INFO, line);
     }

@@ -104,7 +104,7 @@ public class MaterialData implements Cloneable {
     }
 
     @Override
-    public MaterialData clone() {
+    public MaterialData clone() throws CloneNotSupportedException {
         try {
             return (MaterialData) super.clone();
         } catch (CloneNotSupportedException e) {

@@ -21,4 +21,9 @@ public class CommandClearInv extends CommandExecutor {
         player.getInventory().clear();
         sender.sendMessage("You have cleared your inventory.");
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Clears Inventory";
+    }
 }

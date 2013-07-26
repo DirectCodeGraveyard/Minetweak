@@ -1,8 +1,9 @@
 package org.minetweak.event.entity;
 
 import net.minecraft.entity.EntityCreeper;
+import org.minetweak.event.helper.Cancellable;
 
-public class CreeperExplodeEvent implements EntityEvent {
+public class CreeperExplodeEvent implements EntityEvent, Cancellable {
 
     private EntityCreeper creeper;
     private boolean radiusChanged;
@@ -23,10 +24,12 @@ public class CreeperExplodeEvent implements EntityEvent {
         return explosionRadius;
     }
 
+    @Override
     public boolean isCancelled() {
         return cancelled;
     }
 
+    @Override
     public void setCancelled(boolean cancelled) {
         this.cancelled = cancelled;
     }

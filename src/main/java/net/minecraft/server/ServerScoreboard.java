@@ -15,6 +15,7 @@ public class ServerScoreboard extends Scoreboard {
         this.field_96555_a = par1MinecraftServer;
     }
 
+    @Override
     public void func_96536_a(Score par1Score) {
         super.func_96536_a(par1Score);
 
@@ -25,12 +26,14 @@ public class ServerScoreboard extends Scoreboard {
         this.func_96551_b();
     }
 
+    @Override
     public void func_96516_a(String par1Str) {
         super.func_96516_a(par1Str);
         this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet207SetScore(par1Str));
         this.func_96551_b();
     }
 
+    @Override
     public void func_96530_a(int par1, ScoreObjective par2ScoreObjective) {
         ScoreObjective var3 = this.func_96539_a(par1);
         super.func_96530_a(par1, par2ScoreObjective);
@@ -54,6 +57,7 @@ public class ServerScoreboard extends Scoreboard {
         this.func_96551_b();
     }
 
+    @Override
     public void func_96521_a(String par1Str, ScorePlayerTeam par2ScorePlayerTeam) {
         super.func_96521_a(par1Str, par2ScorePlayerTeam);
         this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Arrays.asList(par1Str), 3));
@@ -64,17 +68,20 @@ public class ServerScoreboard extends Scoreboard {
      * Removes the given username from the given ScorePlayerTeam. If the player is not on the team then an
      * IllegalStateException is thrown.
      */
+    @Override
     public void removePlayerFromTeam(String par1Str, ScorePlayerTeam par2ScorePlayerTeam) {
         super.removePlayerFromTeam(par1Str, par2ScorePlayerTeam);
         this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Arrays.asList(par1Str), 4));
         this.func_96551_b();
     }
 
+    @Override
     public void func_96522_a(ScoreObjective par1ScoreObjective) {
         super.func_96522_a(par1ScoreObjective);
         this.func_96551_b();
     }
 
+    @Override
     public void func_96532_b(ScoreObjective par1ScoreObjective) {
         super.func_96532_b(par1ScoreObjective);
 
@@ -85,6 +92,7 @@ public class ServerScoreboard extends Scoreboard {
         this.func_96551_b();
     }
 
+    @Override
     public void func_96533_c(ScoreObjective par1ScoreObjective) {
         super.func_96533_c(par1ScoreObjective);
 
@@ -95,18 +103,21 @@ public class ServerScoreboard extends Scoreboard {
         this.func_96551_b();
     }
 
+    @Override
     public void func_96523_a(ScorePlayerTeam par1ScorePlayerTeam) {
         super.func_96523_a(par1ScorePlayerTeam);
         this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par1ScorePlayerTeam, 0));
         this.func_96551_b();
     }
 
+    @Override
     public void func_96538_b(ScorePlayerTeam par1ScorePlayerTeam) {
         super.func_96538_b(par1ScorePlayerTeam);
         this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par1ScorePlayerTeam, 2));
         this.func_96551_b();
     }
 
+    @Override
     public void func_96513_c(ScorePlayerTeam par1ScorePlayerTeam) {
         super.func_96513_c(par1ScorePlayerTeam);
         this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par1ScorePlayerTeam, 1));

@@ -10,7 +10,6 @@ import org.minetweak.entity.Player;
 import org.minetweak.permissions.ServerOps;
 import org.minetweak.util.StringUtils;
 
-@SuppressWarnings("UnusedDeclaration")
 /**
  * This is a class for managing the MinecraftServer
  */

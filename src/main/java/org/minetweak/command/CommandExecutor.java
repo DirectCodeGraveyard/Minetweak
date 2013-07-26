@@ -8,22 +8,17 @@ import java.util.ArrayList;
 
 public abstract class CommandExecutor implements ICommandExecutor {
 
-    /**
-     * Executes the PluginCommand
-     *
-     * @param sender         Sender of the PluginCommand
-     * @param overallCommand PluginCommand that it was executed with
-     * @param args           arguments as an array
-     */
+    @Override
     public abstract void executeCommand(CommandSender sender, String overallCommand, String[] args);
 
-    /**
-     * Gets the message to be displayed on the help command
-     *
-     * @return help text
-     */
+    @Override
     public String getHelpInfo() {
         return "Not Specified";
+    }
+
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        completions.addAll(TabCompletion.getPlayersMatching(input));
     }
 
     /**
@@ -53,10 +48,5 @@ public abstract class CommandExecutor implements ICommandExecutor {
      */
     public void noPermission(CommandSender sender, String action) {
         sender.sendMessage(EnumChatFormatting.RED + "You do not have permission to " + action + ".");
-    }
-
-    @Override
-    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
-        completions.addAll(TabCompletion.getPlayersMatching(input));
     }
 }

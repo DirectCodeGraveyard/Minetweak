@@ -20,4 +20,9 @@ public class CommandSetSpawn extends CommandExecutor {
             sender.sendMessage(ChatFormatting.GOLD + "Spawn Location Set.");
         }
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Sets the Worlds Spawn";
+    }
 }

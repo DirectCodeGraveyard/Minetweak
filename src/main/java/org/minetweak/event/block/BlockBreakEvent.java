@@ -41,10 +41,12 @@ public class BlockBreakEvent extends BlockExpEvent implements Cancellable {
         return player;
     }
 
+    @Override
     public boolean isCancelled() {
         return cancel;
     }
 
+    @Override
     public void setCancelled(boolean cancel) {
         this.cancel = cancel;
     }

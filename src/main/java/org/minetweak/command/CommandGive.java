@@ -64,4 +64,9 @@ public class CommandGive extends CommandExecutor {
             sender.sendMessage(args[0] + " is not a valid item id");
         }
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Gives a Player Items";
+    }
 }

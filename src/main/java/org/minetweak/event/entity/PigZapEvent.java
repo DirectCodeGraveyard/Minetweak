@@ -3,8 +3,9 @@ package org.minetweak.event.entity;
 import net.minecraft.entity.EntityLightningBolt;
 import net.minecraft.entity.EntityPig;
 import net.minecraft.entity.EntityPigZombie;
+import org.minetweak.event.helper.Cancellable;
 
-public class PigZapEvent implements EntityEvent {
+public class PigZapEvent implements EntityEvent, Cancellable {
 
     private EntityPig pigEntity;
     private EntityPigZombie pigZombieEntity;
@@ -30,11 +31,13 @@ public class PigZapEvent implements EntityEvent {
         return boltEntity;
     }
 
+    @Override
     public boolean isCancelled() {
         return cancelled;
     }
 
+    @Override
     public void setCancelled(boolean cancelled) {
-        cancelled = false;
+        this.cancelled = cancelled;
     }
 }

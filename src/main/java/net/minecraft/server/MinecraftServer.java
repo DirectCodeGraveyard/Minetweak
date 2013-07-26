@@ -399,6 +399,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.serverRunning = false;
     }
 
+    @Override
     public void run() {
         try {
             if (this.startServer()) {
@@ -816,10 +817,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     /**
      * Gets the name of this command sender (usually username, but possibly "Rcon")
      */
+    @Override
     public String getCommandSenderName() {
         return "Server";
     }
 
+    @Override
     public void func_110122_a(ChatMessageComponent par1ChatMessageComponent) {
         this.getLogAgent().logInfo(par1ChatMessageComponent.toString());
     }
@@ -827,6 +830,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     /**
      * Returns true if the command sender is allowed to use the given command.
      */
+    @Override
     public boolean canCommandSenderUseCommand(int par1, String par2Str) {
         return true;
     }
@@ -917,6 +921,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.texturePack = par1Str;
     }
 
+    @Override
     public void addServerStatsToSnooper(PlayerUsageSnooper par1PlayerUsageSnooper) {
         par1PlayerUsageSnooper.addData("whitelist_enabled", false);
         par1PlayerUsageSnooper.addData("whitelist_count", 0);
@@ -950,6 +955,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         par1PlayerUsageSnooper.addData("worlds", var2);
     }
 
+    @Override
     public void addServerTypeToSnooper(PlayerUsageSnooper par1PlayerUsageSnooper) {
         par1PlayerUsageSnooper.addData("server_brand", this.getServerModName());
         par1PlayerUsageSnooper.addData("dedicated", this.isDedicatedServer());
@@ -958,8 +964,10 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     /**
      * Returns whether snooping is enabled or not.
      */
+    @Override
     public boolean isSnooperEnabled() {
-        return true;
+        // Disables Snooper
+        return false;
     }
 
     /**
@@ -1066,10 +1074,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     /**
      * Return the position for this command sender.
      */
+    @Override
     public ChunkCoordinates getCommandSenderPosition() {
         return new ChunkCoordinates(0, 0, 0);
     }
 
+    @Override
     public World getOverworld() {
         return this.worldServers[0];
     }
@@ -1085,6 +1095,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         return false;
     }
 
+    @Override
     public abstract ILogAgent getLogAgent();
 
     public void func_104055_i(boolean par1) {

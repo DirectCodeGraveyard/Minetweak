@@ -10,7 +10,6 @@ public class BlockExpEvent extends BlockEvent {
 
     public BlockExpEvent(IBlock block, int exp) {
         super(block);
-
         this.exp = exp;
     }
 

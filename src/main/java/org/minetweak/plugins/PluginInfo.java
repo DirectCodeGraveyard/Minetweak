@@ -33,6 +33,14 @@ public class PluginInfo {
         this.isBukkitPlugin = false;
     }
 
+    public PluginInfo(String mainClass, String pluginName, String description, String author) {
+        this.main = mainClass;
+        this.name = pluginName;
+        this.description = description;
+        this.isBukkitPlugin = false;
+        this.author = author;
+    }
+
     public PluginInfo(String mainClass, String pluginName, String description, boolean isBukkitPlugin) {
         this.main = mainClass;
         this.name = pluginName;
@@ -87,6 +95,7 @@ public class PluginInfo {
 
     /**
      * Gets the Author of the Plugin
+     *
      * @return plugin's author
      */
     public String getAuthor() {

@@ -28,4 +28,9 @@ public class CommandSlaughter extends CommandExecutor {
         }
         sender.sendMessage(ChatFormatting.GOLD + "Killed " + ChatFormatting.GREEN + mobs.size() + ChatFormatting.GOLD + " mobs.");
     }
+
+    @Override
+    public String getHelpInfo() {
+        return "Kills Nearby Mobs";
+    }
 }

@@ -14,6 +14,8 @@ public interface IPlugin {
 
     /**
      * Called when plugins are unloaded before server is stopped.
+     * Note: Do not unregister commands and listeners here.
+     * Un-registration is done automatically.
      */
     public void onDisable();
 
@@ -37,9 +39,14 @@ public interface IPlugin {
 
     /**
      * Register a language object
+     *
+     * @param languageObject Language object to register
      */
     public void registerLanguageObject(LanguageObject languageObject);
 
+    /**
+     * Get the translated object name
+     */
     public String getTranslatedName(LanguageObject languageObject);
 
     /**
