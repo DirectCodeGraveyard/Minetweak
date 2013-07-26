@@ -20,6 +20,7 @@ public class AnvilSaveHandler extends SaveHandler {
     /**
      * initializes and returns the chunk loader for the specified world provider
      */
+    @Override
     public IChunkLoader getChunkLoader(WorldProvider par1WorldProvider) {
         File var2 = this.getWorldDirectory();
         File var3;
@@ -40,6 +41,7 @@ public class AnvilSaveHandler extends SaveHandler {
     /**
      * Saves the given World Info with the given NBTTagCompound as the Player.
      */
+    @Override
     public void saveWorldInfoWithPlayer(WorldInfo par1WorldInfo, NBTTagCompound par2NBTTagCompound) {
         par1WorldInfo.setSaveVersion(19133);
         super.saveWorldInfoWithPlayer(par1WorldInfo, par2NBTTagCompound);
@@ -48,6 +50,7 @@ public class AnvilSaveHandler extends SaveHandler {
     /**
      * Called to flush all changes to disk, waiting for them to complete.
      */
+    @Override
     public void flush() {
         try {
             ThreadedFileIOBase.threadedIOInstance.waitForFinish();

@@ -25,6 +25,7 @@ public class MapGenNetherBridge extends MapGenStructure {
         return this.spawnList;
     }
 
+    @Override
     public boolean canSpawnStructureAtCoords(int par1, int par2) {
         int var3 = par1 >> 4;
         int var4 = par2 >> 4;
@@ -33,6 +34,7 @@ public class MapGenNetherBridge extends MapGenStructure {
         return this.rand.nextInt(3) == 0 && (par1 == (var3 << 4) + 4 + this.rand.nextInt(8) && par2 == (var4 << 4) + 4 + this.rand.nextInt(8));
     }
 
+    @Override
     public StructureStart getStructureStart(int par1, int par2) {
         return new StructureNetherBridgeStart(this.worldObj, this.rand, par1, par2);
     }

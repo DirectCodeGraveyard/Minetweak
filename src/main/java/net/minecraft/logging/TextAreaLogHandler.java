@@ -16,12 +16,15 @@ public class TextAreaLogHandler extends Handler {
         this.field_120026_d = par1JTextArea;
     }
 
+    @Override
     public void close() {
     }
 
+    @Override
     public void flush() {
     }
 
+    @Override
     public void publish(LogRecord par1LogRecord) {
         int var2 = this.field_120026_d.getDocument().getLength();
         this.field_120026_d.append(this.field_120029_a.format(par1LogRecord));

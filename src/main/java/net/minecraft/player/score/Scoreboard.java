@@ -6,22 +6,22 @@ public class Scoreboard {
     /**
      * Map of objective names to ScoreObjective objects.
      */
-    private final Map scoreObjectives = new HashMap();
-    private final Map field_96543_b = new HashMap();
-    private final Map field_96544_c = new HashMap();
+    private final Map<String, ScoreObjective> scoreObjectives = new HashMap<String, ScoreObjective>();
+    private final Map<ScoreObjectiveCriteria, ArrayList<ScoreObjective>> field_96543_b = new HashMap<ScoreObjectiveCriteria, ArrayList<ScoreObjective>>();
+    private final Map<String, Map<ScoreObjective, Score>> field_96544_c = new HashMap<String, Map<ScoreObjective, Score>>();
     private final ScoreObjective[] field_96541_d = new ScoreObjective[3];
-    private final Map field_96542_e = new HashMap();
+    private final Map<String, ScorePlayerTeam> field_96542_e = new HashMap<String, ScorePlayerTeam>();
 
     /**
      * Map of usernames to ScorePlayerTeam objects.
      */
-    private final Map teamMemberships = new HashMap();
+    private final Map<String, ScorePlayerTeam> teamMemberships = new HashMap<String, ScorePlayerTeam>();
 
     /**
      * Returns a ScoreObjective for the objective name
      */
     public ScoreObjective getObjective(String par1Str) {
-        return (ScoreObjective) this.scoreObjectives.get(par1Str);
+        return this.scoreObjectives.get(par1Str);
     }
 
     public ScoreObjective func_96535_a(String par1Str, ScoreObjectiveCriteria par2ScoreObjectiveCriteria) {
@@ -31,38 +31,38 @@ public class Scoreboard {
             throw new IllegalArgumentException("An objective with the name \'" + par1Str + "\' already exists!");
         } else {
             var3 = new ScoreObjective(this, par1Str, par2ScoreObjectiveCriteria);
-            Object var4 = (List) this.field_96543_b.get(par2ScoreObjectiveCriteria);
+            ArrayList<ScoreObjective> var4 = this.field_96543_b.get(par2ScoreObjectiveCriteria);
 
             if (var4 == null) {
-                var4 = new ArrayList();
+                var4 = new ArrayList<ScoreObjective>();
                 this.field_96543_b.put(par2ScoreObjectiveCriteria, var4);
             }
 
-            ((List) var4).add(var3);
+            (var4).add(var3);
             this.scoreObjectives.put(par1Str, var3);
             this.func_96522_a(var3);
             return var3;
         }
     }
 
-    public Collection func_96520_a(ScoreObjectiveCriteria par1ScoreObjectiveCriteria) {
-        Collection var2 = (Collection) this.field_96543_b.get(par1ScoreObjectiveCriteria);
-        return var2 == null ? new ArrayList() : new ArrayList(var2);
+    public Collection<ScoreObjective> func_96520_a(ScoreObjectiveCriteria par1ScoreObjectiveCriteria) {
+        Collection<ScoreObjective> var2 = this.field_96543_b.get(par1ScoreObjectiveCriteria);
+        return var2 == null ? new ArrayList<ScoreObjective>() : new ArrayList<ScoreObjective>(var2);
     }
 
     public Score func_96529_a(String par1Str, ScoreObjective par2ScoreObjective) {
-        Object var3 = (Map) this.field_96544_c.get(par1Str);
+        Map<ScoreObjective, Score> var3 = this.field_96544_c.get(par1Str);
 
         if (var3 == null) {
-            var3 = new HashMap();
+            var3 = new HashMap<ScoreObjective, Score>();
             this.field_96544_c.put(par1Str, var3);
         }
 
-        Score var4 = (Score) ((Map) var3).get(par2ScoreObjective);
+        Score var4 = (var3).get(par2ScoreObjective);
 
         if (var4 == null) {
             var4 = new Score(this, par2ScoreObjective, par1Str);
-            ((Map) var3).put(par2ScoreObjective, var4);
+            (var3).put(par2ScoreObjective, var4);
         }
 
         return var4;
@@ -70,11 +70,9 @@ public class Scoreboard {
 
     public Collection func_96534_i(ScoreObjective par1ScoreObjective) {
         ArrayList var2 = new ArrayList();
-        Iterator var3 = this.field_96544_c.values().iterator();
 
-        while (var3.hasNext()) {
-            Map var4 = (Map) var3.next();
-            Score var5 = (Score) var4.get(par1ScoreObjective);
+        for (Map<ScoreObjective, Score> var4 : this.field_96544_c.values()) {
+            Score var5 = var4.get(par1ScoreObjective);
 
             if (var5 != null) {
                 var2.add(var5);
@@ -85,43 +83,41 @@ public class Scoreboard {
         return var2;
     }
 
-    public Collection getScoreObjectives() {
+    public Collection<ScoreObjective> getScoreObjectives() {
         return this.scoreObjectives.values();
     }
 
-    public Collection getObjectiveNames() {
+    public Collection<String> getObjectiveNames() {
         return this.field_96544_c.keySet();
     }
 
     public void func_96515_c(String par1Str) {
-        Map var2 = (Map) this.field_96544_c.remove(par1Str);
+        Map<ScoreObjective, Score> var2 = this.field_96544_c.remove(par1Str);
 
         if (var2 != null) {
             this.func_96516_a(par1Str);
         }
     }
 
-    public Collection func_96528_e() {
-        Collection var1 = this.field_96544_c.values();
-        ArrayList var2 = new ArrayList();
-        Iterator var3 = var1.iterator();
+    public Collection<Score> func_96528_e() {
+        Collection<Map<ScoreObjective, Score>> var1 = this.field_96544_c.values();
+        ArrayList<Score> var2 = new ArrayList<Score>();
 
-        while (var3.hasNext()) {
-            Map var4 = (Map) var3.next();
+        for (Map<ScoreObjective, Score> var4 : var1) {
             var2.addAll(var4.values());
         }
 
         return var2;
     }
 
-    public Map func_96510_d(String par1Str) {
-        Object var2 = (Map) this.field_96544_c.get(par1Str);
+    public Map<ScoreObjective, Score> func_96510_d(String par1Str) {
+        Map<ScoreObjective, Score> var2 = this.field_96544_c.get(par1Str);
 
         if (var2 == null) {
-            var2 = new HashMap();
+            var2 = new HashMap<ScoreObjective, Score>();
         }
 
-        return (Map) var2;
+        return var2;
     }
 
     public void func_96519_k(ScoreObjective par1ScoreObjective) {
@@ -129,21 +125,18 @@ public class Scoreboard {
 
         for (int var2 = 0; var2 < 3; ++var2) {
             if (this.func_96539_a(var2) == par1ScoreObjective) {
-                this.func_96530_a(var2, (ScoreObjective) null);
+                this.func_96530_a(var2, null);
             }
         }
 
-        List var5 = (List) this.field_96543_b.get(par1ScoreObjective.getCriteria());
+        List<ScoreObjective> var5 = this.field_96543_b.get(par1ScoreObjective.getCriteria());
 
         if (var5 != null) {
             var5.remove(par1ScoreObjective);
         }
 
-        Iterator var3 = this.field_96544_c.values().iterator();
-
-        while (var3.hasNext()) {
-            Map var4 = (Map) var3.next();
-            var4.remove(par1ScoreObjective);
+        for (Map<ScoreObjective, Score> o : this.field_96544_c.values()) {
+            o.remove(par1ScoreObjective);
         }
 
         this.func_96533_c(par1ScoreObjective);
@@ -158,7 +151,7 @@ public class Scoreboard {
     }
 
     public ScorePlayerTeam func_96508_e(String par1Str) {
-        return (ScorePlayerTeam) this.field_96542_e.get(par1Str);
+        return this.field_96542_e.get(par1Str);
     }
 
     public ScorePlayerTeam func_96527_f(String par1Str) {
@@ -176,10 +169,9 @@ public class Scoreboard {
 
     public void func_96511_d(ScorePlayerTeam par1ScorePlayerTeam) {
         this.field_96542_e.remove(par1ScorePlayerTeam.func_96661_b());
-        Iterator var2 = par1ScorePlayerTeam.getMembershipCollection().iterator();
 
-        while (var2.hasNext()) {
-            String var3 = (String) var2.next();
+        for (Object o : par1ScorePlayerTeam.getMembershipCollection()) {
+            String var3 = (String) o;
             this.teamMemberships.remove(var3);
         }
 
@@ -219,11 +211,11 @@ public class Scoreboard {
         }
     }
 
-    public Collection func_96531_f() {
+    public Collection<String> func_96531_f() {
         return this.field_96542_e.keySet();
     }
 
-    public Collection func_96525_g() {
+    public Collection<ScorePlayerTeam> func_96525_g() {
         return this.field_96542_e.values();
     }
 
@@ -231,7 +223,7 @@ public class Scoreboard {
      * Gets the ScorePlayerTeam object for the given username.
      */
     public ScorePlayerTeam getPlayersTeam(String par1Str) {
-        return (ScorePlayerTeam) this.teamMemberships.get(par1Str);
+        return this.teamMemberships.get(par1Str);
     }
 
     public void func_96522_a(ScoreObjective par1ScoreObjective) {

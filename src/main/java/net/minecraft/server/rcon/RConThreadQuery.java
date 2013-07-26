@@ -289,6 +289,7 @@ public class RConThreadQuery extends RConThreadBase {
         }
     }
 
+    @Override
     public void run() {
         this.logInfo("Query running on " + this.serverHostname + ":" + this.queryPort);
         this.lastAuthCheckTime = MinecraftServer.func_130071_aq();
@@ -316,6 +317,7 @@ public class RConThreadQuery extends RConThreadBase {
     /**
      * Creates a new Thread object from this class and starts running
      */
+    @Override
     public void startThread() {
         if (!this.running) {
             if (0 < this.queryPort && 65535 >= this.queryPort) {

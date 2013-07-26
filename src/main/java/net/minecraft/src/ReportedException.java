@@ -19,10 +19,12 @@ public class ReportedException extends RuntimeException {
         return this.theReportedExceptionCrashReport;
     }
 
+    @Override
     public Throwable getCause() {
         return this.theReportedExceptionCrashReport.getCrashCause();
     }
 
+    @Override
     public String getMessage() {
         return this.theReportedExceptionCrashReport.getDescription();
     }

@@ -181,6 +181,7 @@ public class MapGenCaves extends MapGenBase {
     /**
      * Recursively called by generate() (generate) and optionally by itself.
      */
+    @Override
     protected void recursiveGenerate(World par1World, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte) {
         int var7 = this.rand.nextInt(this.rand.nextInt(this.rand.nextInt(40) + 1) + 1);
 

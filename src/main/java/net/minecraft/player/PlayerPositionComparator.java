@@ -21,6 +21,7 @@ public class PlayerPositionComparator implements Comparator {
         return var3 < var5 ? -1 : (var3 > var5 ? 1 : 0);
     }
 
+    @Override
     public int compare(Object par1Obj, Object par2Obj) {
         return this.comparePlayers((EntityPlayerMP) par1Obj, (EntityPlayerMP) par2Obj);
     }

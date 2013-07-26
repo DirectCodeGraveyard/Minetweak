@@ -15,6 +15,7 @@ public final class ProfilerResult implements Comparable {
         return par1ProfilerResult.field_76332_a < this.field_76332_a ? -1 : (par1ProfilerResult.field_76332_a > this.field_76332_a ? 1 : par1ProfilerResult.field_76331_c.compareTo(this.field_76331_c));
     }
 
+    @Override
     public int compareTo(Object par1Obj) {
         return this.func_76328_a((ProfilerResult) par1Obj);
     }

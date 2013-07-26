@@ -23,6 +23,7 @@ public class TileEntitySkull extends TileEntity {
     /**
      * Writes a tile entity to NBT.
      */
+    @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setByte("SkullType", (byte) (this.skullType & 255));
@@ -33,6 +34,7 @@ public class TileEntitySkull extends TileEntity {
     /**
      * Reads a tile entity from NBT.
      */
+    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
         this.skullType = par1NBTTagCompound.getByte("SkullType");
@@ -44,8 +46,9 @@ public class TileEntitySkull extends TileEntity {
     }
 
     /**
-     * Overriden in a sign to provide the text.
+     * Override in a sign to provide the text.
      */
+    @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound var1 = new NBTTagCompound();
         this.writeToNBT(var1);
@@ -75,7 +78,7 @@ public class TileEntitySkull extends TileEntity {
     }
 
     /**
-     * Get the extra data foor this skull, used as player username by player heads
+     * Get the extra data for this skull, used as player username by player heads
      */
     public String getExtraType() {
         return this.extraType;

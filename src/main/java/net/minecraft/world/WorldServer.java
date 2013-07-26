@@ -104,6 +104,7 @@ public class WorldServer extends World {
     /**
      * Runs a single tick for the world
      */
+    @Override
     public void tick() {
         super.tick();
 
@@ -168,6 +169,7 @@ public class WorldServer extends World {
     /**
      * Updates the flag that indicates whether or not all players in the world are sleeping.
      */
+    @Override
     public void updateAllPlayersSleepingFlag() {
         this.allPlayersSleeping = !this.playerEntities.isEmpty();
 
@@ -222,6 +224,7 @@ public class WorldServer extends World {
      * plays random cave ambient sounds and runs updateTick on random blocks within each chunk in the vacinity of a
      * player
      */
+    @Override
     protected void tickBlocksAndAmbiance() {
         super.tickBlocksAndAmbiance();
 
@@ -313,6 +316,7 @@ public class WorldServer extends World {
     /**
      * Returns true if the given block will receive a scheduled tick in this tick. Args: X, Y, Z, blockID
      */
+    @Override
     public boolean isBlockTickScheduledThisTick(int par1, int par2, int par3, int par4) {
         NextTickListEntry var5 = new NextTickListEntry(par1, par2, par3, par4);
         return this.pendingTickListEntriesThisTick.contains(var5);
@@ -321,10 +325,12 @@ public class WorldServer extends World {
     /**
      * Used to schedule a call to the updateTick method on the specified block.
      */
+    @Override
     public void scheduleBlockUpdate(int par1, int par2, int par3, int par4, int par5) {
         this.scheduleBlockUpdateWithPriority(par1, par2, par3, par4, par5, 0);
     }
 
+    @Override
     public void scheduleBlockUpdateWithPriority(int par1, int par2, int par3, int par4, int par5, int par6) {
         NextTickListEntry var7 = new NextTickListEntry(par1, par2, par3, par4);
         byte var8 = 0;
@@ -363,6 +369,7 @@ public class WorldServer extends World {
     /**
      * Schedules a block update from the saved information in a chunk. Called when the chunk is loaded.
      */
+    @Override
     public void scheduleBlockUpdateFromLoad(int par1, int par2, int par3, int par4, int par5, int par6) {
         NextTickListEntry var7 = new NextTickListEntry(par1, par2, par3, par4);
         var7.setPriority(par6);
@@ -380,6 +387,7 @@ public class WorldServer extends World {
     /**
      * Updates (and cleans up) entities and tile entities
      */
+    @Override
     public void updateEntities() {
         if (this.playerEntities.isEmpty()) {
             if (this.updateEntityTick++ >= 1200) {
@@ -402,6 +410,7 @@ public class WorldServer extends World {
     /**
      * Runs through the list of updates to run and ticks them
      */
+    @Override
     public boolean tickUpdates(boolean par1) {
         int var2 = this.pendingTickListEntriesTreeSet.size();
 
@@ -468,6 +477,7 @@ public class WorldServer extends World {
         }
     }
 
+    @Override
     public List getPendingBlockUpdates(Chunk par1Chunk, boolean par2) {
         ArrayList<NextTickListEntry> var3 = null;
         ChunkCoordIntPair var4 = par1Chunk.getChunkCoordIntPair();
@@ -514,6 +524,7 @@ public class WorldServer extends World {
      * Will update the entity in the world if the chunk the entity is in is currently loaded or its forced to update.
      * Args: entity, forceUpdate
      */
+    @Override
     public void updateEntityWithOptionalForce(Entity par1Entity, boolean par2) {
         if (!this.mcServer.getCanSpawnAnimals() && (par1Entity instanceof EntityAnimal || par1Entity instanceof EntityWaterMob)) {
             par1Entity.setDead();
@@ -529,6 +540,7 @@ public class WorldServer extends World {
     /**
      * Creates the chunk provider for this world. Called in the constructor. Retrieves provider from worldProvider?
      */
+    @Override
     protected IChunkProvider createChunkProvider() {
         IChunkLoader var1 = this.saveHandler.getChunkLoader(this.provider);
         this.theChunkProviderServer = new ChunkProviderServer(this, var1, this.provider.createChunkGenerator());
@@ -553,10 +565,12 @@ public class WorldServer extends World {
     /**
      * Called when checking if a certain block can be mined or not. The 'spawn safe zone' check is located here.
      */
+    @Override
     public boolean canMineBlock(EntityPlayer par1EntityPlayer, int par2, int par3, int par4) {
         return !this.mcServer.func_96290_a(this, par2, par3, par4, par1EntityPlayer);
     }
 
+    @Override
     protected void initialize(WorldSettings par1WorldSettings) {
         if (this.entityIdMap == null) {
             this.entityIdMap = new IntHashMap();
@@ -676,6 +690,7 @@ public class WorldServer extends World {
         this.mapStorage.saveAllData();
     }
 
+    @Override
     protected void onEntityAdded(Entity par1Entity) {
         super.onEntityAdded(par1Entity);
         this.entityIdMap.addKey(par1Entity.entityId, par1Entity);
@@ -688,6 +703,7 @@ public class WorldServer extends World {
         }
     }
 
+    @Override
     protected void onEntityRemoved(Entity par1Entity) {
         super.onEntityRemoved(par1Entity);
         this.entityIdMap.removeObject(par1Entity.entityId);
@@ -703,6 +719,7 @@ public class WorldServer extends World {
     /**
      * Returns the Entity with the given ID, or null if it doesn't exist in this World.
      */
+    @Override
     public Entity getEntityByID(int par1) {
         return (Entity) this.entityIdMap.lookup(par1);
     }
@@ -710,6 +727,7 @@ public class WorldServer extends World {
     /**
      * adds a lightning bolt to the list of lightning bolts in this world.
      */
+    @Override
     public boolean addWeatherEffect(Entity par1Entity) {
         if (super.addWeatherEffect(par1Entity)) {
             this.mcServer.getConfigurationManager().sendPacketToPlayersAroundPoint(par1Entity.posX, par1Entity.posY, par1Entity.posZ, 512.0D, this.provider.dimensionId, new Packet71Weather(par1Entity));
@@ -722,6 +740,7 @@ public class WorldServer extends World {
     /**
      * sends a Packet 38 (Entity Status) to all tracked players of that entity
      */
+    @Override
     public void setEntityState(Entity par1Entity, byte par2) {
         Packet38EntityStatus var3 = new Packet38EntityStatus(par1Entity.entityId, par2);
         this.getEntityTracker().sendPacketToTrackedPlayersAndTrackedEntity(par1Entity, var3);
@@ -730,6 +749,7 @@ public class WorldServer extends World {
     /**
      * returns a new explosion. Does initiation (at time of writing Explosion is not finished)
      */
+    @Override
     public Explosion newExplosion(Entity par1Entity, double par2, double par4, double par6, float par8, boolean par9, boolean par10) {
         Explosion var11 = new Explosion(this, par1Entity, par2, par4, par6, par8);
         var11.isFlaming = par9;
@@ -743,7 +763,7 @@ public class WorldServer extends World {
 
         for (EntityPlayer var13 : this.playerEntities) {
             if (var13.getDistanceSq(par2, par4, par6) < 4096.0D) {
-                ((EntityPlayerMP) var13).playerNetServerHandler.sendPacket(new Packet60Explosion(par2, par4, par6, par8, var11.affectedBlockPositions, (Vec3) var11.func_77277_b().get(var13)));
+                ((EntityPlayerMP) var13).playerNetServerHandler.sendPacket(new Packet60Explosion(par2, par4, par6, par8, var11.affectedBlockPositions, var11.func_77277_b().get(var13)));
             }
         }
 
@@ -754,6 +774,7 @@ public class WorldServer extends World {
      * Adds a block event with the given Args to the blockEventCache. During the next tick(), the block specified will
      * have its onBlockEvent handler called with the given parameters. Args: X,Y,Z, BlockID, EventID, EventParameter
      */
+    @Override
     public void addBlockEvent(int par1, int par2, int par3, int par4, int par5, int par6) {
         BlockEventData var7 = new BlockEventData(par1, par2, par3, par4, par5, par6);
         Iterator var8 = this.blockEventCache[this.blockEventCacheIndex].iterator();
@@ -808,6 +829,7 @@ public class WorldServer extends World {
     /**
      * Updates all weather states.
      */
+    @Override
     protected void updateWeather() {
         boolean var1 = this.isRaining();
         super.updateWeather();

@@ -11,12 +11,12 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class MapGenScatteredFeature extends MapGenStructure {
-    private static List biomelist = Arrays.asList(new BiomeGenBase[]{BiomeGenBase.desert, BiomeGenBase.desertHills, BiomeGenBase.jungle, BiomeGenBase.jungleHills, BiomeGenBase.swampland});
+    private static List<BiomeGenBase> biomelist = Arrays.asList(BiomeGenBase.desert, BiomeGenBase.desertHills, BiomeGenBase.jungle, BiomeGenBase.jungleHills, BiomeGenBase.swampland);
 
     /**
      * contains possible spawns for scattered features
      */
-    private List scatteredFeatureSpawnList;
+    private List<SpawnListEntry> scatteredFeatureSpawnList;
 
     /**
      * the maximum distance between scattered features
@@ -29,7 +29,7 @@ public class MapGenScatteredFeature extends MapGenStructure {
     private int minDistanceBetweenScatteredFeatures;
 
     public MapGenScatteredFeature() {
-        this.scatteredFeatureSpawnList = new ArrayList();
+        this.scatteredFeatureSpawnList = new ArrayList<SpawnListEntry>();
         this.maxDistanceBetweenScatteredFeatures = 32;
         this.minDistanceBetweenScatteredFeatures = 8;
         this.scatteredFeatureSpawnList.add(new SpawnListEntry(EntityWitch.class, 1, 1, 1));
@@ -37,10 +37,9 @@ public class MapGenScatteredFeature extends MapGenStructure {
 
     public MapGenScatteredFeature(Map par1Map) {
         this();
-        Iterator var2 = par1Map.entrySet().iterator();
 
-        while (var2.hasNext()) {
-            Entry var3 = (Entry) var2.next();
+        for (Object o : par1Map.entrySet()) {
+            Entry var3 = (Entry) o;
 
             if ((var3.getKey()).equals("distance")) {
                 this.maxDistanceBetweenScatteredFeatures = MathHelper.parseIntWithDefaultAndMax((String) var3.getValue(), this.maxDistanceBetweenScatteredFeatures, this.minDistanceBetweenScatteredFeatures + 1);
@@ -48,6 +47,7 @@ public class MapGenScatteredFeature extends MapGenStructure {
         }
     }
 
+    @Override
     public boolean canSpawnStructureAtCoords(int par1, int par2) {
         int var3 = par1;
         int var4 = par2;
@@ -70,11 +70,8 @@ public class MapGenScatteredFeature extends MapGenStructure {
 
         if (var3 == var5 && var4 == var6) {
             BiomeGenBase var8 = this.worldObj.getWorldChunkManager().getBiomeGenAt(var3 * 16 + 8, var4 * 16 + 8);
-            Iterator var9 = biomelist.iterator();
 
-            while (var9.hasNext()) {
-                BiomeGenBase var10 = (BiomeGenBase) var9.next();
-
+            for (BiomeGenBase var10 : biomelist) {
                 if (var8 == var10) {
                     return true;
                 }
@@ -84,6 +81,7 @@ public class MapGenScatteredFeature extends MapGenStructure {
         return false;
     }
 
+    @Override
     public StructureStart getStructureStart(int par1, int par2) {
         return new StructureScatteredFeatureStart(this.worldObj, this.rand, par1, par2);
     }

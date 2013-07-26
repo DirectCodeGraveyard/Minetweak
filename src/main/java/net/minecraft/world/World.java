@@ -265,6 +265,7 @@ public abstract class World implements IBlockAccess {
     /**
      * Returns the block ID at coords x,y,z
      */
+    @Override
     public int getBlockId(int par1, int par2, int par3) {
         if (par1 >= -30000000 && par3 >= -30000000 && par1 < 30000000 && par3 < 30000000) {
             if (par2 < 0) {
@@ -421,6 +422,7 @@ public abstract class World implements IBlockAccess {
     /**
      * Returns the block's material.
      */
+    @Override
     public Material getBlockMaterial(int par1, int par2, int par3) {
         int var4 = this.getBlockId(par1, par2, par3);
         return var4 == 0 ? Material.air : Block.blocksList[var4].blockMaterial;
@@ -429,6 +431,7 @@ public abstract class World implements IBlockAccess {
     /**
      * Returns the block metadata at coords x,y,z
      */
+    @Override
     public int getBlockMetadata(int par1, int par2, int par3) {
         if (par1 >= -30000000 && par3 >= -30000000 && par1 < 30000000 && par3 < 30000000) {
             if (par2 < 0) {
@@ -1904,6 +1907,7 @@ public abstract class World implements IBlockAccess {
     /**
      * Returns the TileEntity associated with a given block in X,Y,Z coordinates, or null if no TileEntity exists
      */
+    @Override
     public TileEntity getBlockTileEntity(int par1, int par2, int par3) {
         if (par2 >= 0 && par2 < 256) {
             TileEntity var4 = null;
@@ -2019,6 +2023,7 @@ public abstract class World implements IBlockAccess {
     /**
      * Returns true if the block at the specified coordinates is an opaque cube. Args: x, y, z
      */
+    @Override
     public boolean isBlockNormalCube(int par1, int par2, int par3) {
         return Block.isNormalCube(this.getBlockId(par1, par2, par3));
     }
@@ -2699,6 +2704,7 @@ public abstract class World implements IBlockAccess {
     /**
      * Is this block powering in the specified direction Args: x, y, z, direction
      */
+    @Override
     public int isBlockProvidingPowerTo(int par1, int par2, int par3, int par4) {
         int var5 = this.getBlockId(par1, par2, par3);
         return var5 == 0 ? 0 : Block.blocksList[var5].isProvidingStrongPower(this, par1, par2, par3, par4);
@@ -3134,6 +3140,7 @@ public abstract class World implements IBlockAccess {
     /**
      * Return the Vec3Pool object for this world.
      */
+    @Override
     public Vec3Pool getWorldVec3Pool() {
         return this.vecPool;
     }

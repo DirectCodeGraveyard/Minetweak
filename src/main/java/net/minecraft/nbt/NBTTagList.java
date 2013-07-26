@@ -28,6 +28,7 @@ public class NBTTagList extends NBTBase {
     /**
      * Write the actual data contents of the tag, implemented in NBT extension classes
      */
+    @Override
     void write(DataOutput par1DataOutput) throws IOException {
         if (!this.tagList.isEmpty()) {
             this.tagType = (this.tagList.get(0)).getId();
@@ -46,6 +47,7 @@ public class NBTTagList extends NBTBase {
     /**
      * Read the actual data contents of the tag, implemented in NBT extension classes
      */
+    @Override
     void load(DataInput par1DataInput, int par2) throws IOException {
         if (par2 > 512) {
             throw new RuntimeException("Tried to read NBT tag with too high complexity, depth > 512");
@@ -65,6 +67,7 @@ public class NBTTagList extends NBTBase {
     /**
      * Gets the type byte for the tag.
      */
+    @Override
     public byte getId() {
         return (byte) 9;
     }
@@ -99,6 +102,7 @@ public class NBTTagList extends NBTBase {
     /**
      * Creates a clone of the tag.
      */
+    @Override
     public NBTBase copy() {
         NBTTagList var1 = new NBTTagList(this.getName());
         var1.tagType = this.tagType;

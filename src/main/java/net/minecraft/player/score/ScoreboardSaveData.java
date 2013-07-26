@@ -7,7 +7,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.storage.WorldSavedData;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 public class ScoreboardSaveData extends WorldSavedData {
     private Scoreboard field_96507_a;
@@ -32,6 +31,7 @@ public class ScoreboardSaveData extends WorldSavedData {
     /**
      * reads in data from the NBTTagCompound into this MapDataBase
      */
+    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         if (this.field_96507_a == null) {
             this.field_96506_b = par1NBTTagCompound;
@@ -106,6 +106,7 @@ public class ScoreboardSaveData extends WorldSavedData {
     /**
      * write data to NBTTagCompound from this MapDataBase, similar to Entities and TileEntities
      */
+    @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         if (this.field_96507_a == null) {
             MinecraftServer.getServer().getLogAgent().logWarning("Tried to save scoreboard without having a scoreboard...");
@@ -120,10 +121,9 @@ public class ScoreboardSaveData extends WorldSavedData {
     protected NBTTagList func_96496_a() {
         NBTTagList var1 = new NBTTagList();
         Collection var2 = this.field_96507_a.func_96525_g();
-        Iterator var3 = var2.iterator();
 
-        while (var3.hasNext()) {
-            ScorePlayerTeam var4 = (ScorePlayerTeam) var3.next();
+        for (Object aVar2 : var2) {
+            ScorePlayerTeam var4 = (ScorePlayerTeam) aVar2;
             NBTTagCompound var5 = new NBTTagCompound();
             var5.setString("Name", var4.func_96661_b());
             var5.setString("DisplayName", var4.func_96669_c());
@@ -132,10 +132,9 @@ public class ScoreboardSaveData extends WorldSavedData {
             var5.setBoolean("AllowFriendlyFire", var4.func_96665_g());
             var5.setBoolean("SeeFriendlyInvisibles", var4.func_98297_h());
             NBTTagList var6 = new NBTTagList();
-            Iterator var7 = var4.getMembershipCollection().iterator();
 
-            while (var7.hasNext()) {
-                String var8 = (String) var7.next();
+            for (Object o : var4.getMembershipCollection()) {
+                String var8 = (String) o;
                 var6.appendTag(new NBTTagString("", var8));
             }
 

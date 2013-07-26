@@ -18,6 +18,7 @@ public class PlayerListComponent extends JList implements IUpdatePlayerListBox {
     /**
      * Updates the JList with a new model.
      */
+    @Override
     public void update() {
         if (this.field_120014_b++ % 20 == 0) {
             Vector<String> var1 = new Vector<String>();

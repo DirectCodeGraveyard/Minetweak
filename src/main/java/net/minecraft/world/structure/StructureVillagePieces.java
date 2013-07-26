@@ -10,21 +10,21 @@ import java.util.List;
 import java.util.Random;
 
 public class StructureVillagePieces {
-    public static List getStructureVillageWeightedPieceList(Random par0Random, int par1) {
-        ArrayList var2 = new ArrayList();
+    public static List<StructureVillagePieceWeight> getStructureVillageWeightedPieceList(Random par0Random, int par1) {
+        ArrayList<StructureVillagePieceWeight> var2 = new ArrayList<StructureVillagePieceWeight>();
         var2.add(new StructureVillagePieceWeight(ComponentVillageHouse4_Garden.class, 4, MathHelper.getRandomIntegerInRange(par0Random, 2 + par1, 4 + par1 * 2)));
-        var2.add(new StructureVillagePieceWeight(ComponentVillageChurch.class, 20, MathHelper.getRandomIntegerInRange(par0Random, 0 + par1, 1 + par1)));
-        var2.add(new StructureVillagePieceWeight(ComponentVillageHouse1.class, 20, MathHelper.getRandomIntegerInRange(par0Random, 0 + par1, 2 + par1)));
+        var2.add(new StructureVillagePieceWeight(ComponentVillageChurch.class, 20, MathHelper.getRandomIntegerInRange(par0Random, par1, 1 + par1)));
+        var2.add(new StructureVillagePieceWeight(ComponentVillageHouse1.class, 20, MathHelper.getRandomIntegerInRange(par0Random, par1, 2 + par1)));
         var2.add(new StructureVillagePieceWeight(ComponentVillageWoodHut.class, 3, MathHelper.getRandomIntegerInRange(par0Random, 2 + par1, 5 + par1 * 3)));
-        var2.add(new StructureVillagePieceWeight(ComponentVillageHall.class, 15, MathHelper.getRandomIntegerInRange(par0Random, 0 + par1, 2 + par1)));
+        var2.add(new StructureVillagePieceWeight(ComponentVillageHall.class, 15, MathHelper.getRandomIntegerInRange(par0Random, par1, 2 + par1)));
         var2.add(new StructureVillagePieceWeight(ComponentVillageField.class, 3, MathHelper.getRandomIntegerInRange(par0Random, 1 + par1, 4 + par1)));
         var2.add(new StructureVillagePieceWeight(ComponentVillageField2.class, 3, MathHelper.getRandomIntegerInRange(par0Random, 2 + par1, 4 + par1 * 2)));
         var2.add(new StructureVillagePieceWeight(ComponentVillageHouse2.class, 15, MathHelper.getRandomIntegerInRange(par0Random, 0, 1 + par1)));
-        var2.add(new StructureVillagePieceWeight(ComponentVillageHouse3.class, 8, MathHelper.getRandomIntegerInRange(par0Random, 0 + par1, 3 + par1 * 2)));
-        Iterator var3 = var2.iterator();
+        var2.add(new StructureVillagePieceWeight(ComponentVillageHouse3.class, 8, MathHelper.getRandomIntegerInRange(par0Random, par1, 3 + par1 * 2)));
+        Iterator<StructureVillagePieceWeight> var3 = var2.iterator();
 
         while (var3.hasNext()) {
-            if (((StructureVillagePieceWeight) var3.next()).villagePiecesLimit == 0) {
+            if ((var3.next()).villagePiecesLimit == 0) {
                 var3.remove();
             }
         }
@@ -50,7 +50,7 @@ public class StructureVillagePieces {
 
     private static ComponentVillage func_75083_a(ComponentVillageStartPiece par0ComponentVillageStartPiece, StructureVillagePieceWeight par1StructureVillagePieceWeight, List par2List, Random par3Random, int par4, int par5, int par6, int par7, int par8) {
         Class var9 = par1StructureVillagePieceWeight.villagePieceClass;
-        Object var10 = null;
+        ComponentVillage var10 = null;
 
         if (var9 == ComponentVillageHouse4_Garden.class) {
             var10 = ComponentVillageHouse4_Garden.func_74912_a(par0ComponentVillageStartPiece, par2List, par3Random, par4, par5, par6, par7, par8);
@@ -72,7 +72,7 @@ public class StructureVillagePieces {
             var10 = ComponentVillageHouse3.func_74921_a(par0ComponentVillageStartPiece, par2List, par3Random, par4, par5, par6, par7, par8);
         }
 
-        return (ComponentVillage) var10;
+        return var10;
     }
 
     /**
@@ -89,10 +89,9 @@ public class StructureVillagePieces {
             while (var9 < 5) {
                 ++var9;
                 int var10 = par2Random.nextInt(var8);
-                Iterator var11 = par0ComponentVillageStartPiece.structureVillageWeightedPieceList.iterator();
 
-                while (var11.hasNext()) {
-                    StructureVillagePieceWeight var12 = (StructureVillagePieceWeight) var11.next();
+                for (Object aStructureVillageWeightedPieceList : par0ComponentVillageStartPiece.structureVillageWeightedPieceList) {
+                    StructureVillagePieceWeight var12 = (StructureVillagePieceWeight) aStructureVillageWeightedPieceList;
                     var10 -= var12.villagePieceWeight;
 
                     if (var10 < 0) {

@@ -34,10 +34,12 @@ public class RConConsoleSource implements ICommandSender {
     /**
      * Gets the name of this command sender (usually username, but possibly "Rcon")
      */
+    @Override
     public String getCommandSenderName() {
         return "Rcon";
     }
 
+    @Override
     public void func_110122_a(ChatMessageComponent par1ChatMessageComponent) {
         this.buffer.append(par1ChatMessageComponent.toString());
     }
@@ -45,6 +47,7 @@ public class RConConsoleSource implements ICommandSender {
     /**
      * Returns true if the command sender is allowed to use the given command.
      */
+    @Override
     public boolean canCommandSenderUseCommand(int par1, String par2Str) {
         return true;
     }
@@ -52,10 +55,12 @@ public class RConConsoleSource implements ICommandSender {
     /**
      * Return the position for this command sender.
      */
+    @Override
     public ChunkCoordinates getCommandSenderPosition() {
         return new ChunkCoordinates(0, 0, 0);
     }
 
+    @Override
     public World getOverworld() {
         return MinecraftServer.getServer().getOverworld();
     }

@@ -48,7 +48,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     public DedicatedServer(File par1File) {
         super(par1File);
-        this.field_98131_l = new LogAgent("Minecraft-Server", null, (new File(par1File, "server.log")).getAbsolutePath());
+        this.field_98131_l = new LogAgent("Minecraft-Server", null);
         new DedicatedServerSleepThread(this);
     }
 

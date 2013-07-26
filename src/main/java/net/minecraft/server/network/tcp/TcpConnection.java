@@ -144,6 +144,7 @@ public class TcpConnection implements INetworkManager {
     /**
      * Sets the NetHandler for this NetworkManager. Server-only.
      */
+    @Override
     public void setNetHandler(NetHandler par1NetHandler) {
         this.theNetHandler = par1NetHandler;
     }
@@ -151,6 +152,7 @@ public class TcpConnection implements INetworkManager {
     /**
      * Adds the packet to the correct send queue (chunk data packets go to a separate queue).
      */
+    @Override
     public void addToSendQueue(Packet par1Packet) {
         if (!this.isServerTerminating) {
             synchronized (this.sendQueueLock) {
@@ -262,6 +264,7 @@ public class TcpConnection implements INetworkManager {
     /**
      * Wakes reader and writer threads
      */
+    @Override
     public void wakeThreads() {
         if (this.readThread != null) {
             this.readThread.interrupt();
@@ -331,6 +334,7 @@ public class TcpConnection implements INetworkManager {
      * Shuts down the network with the specified reason. Closes all streams and sockets, spawns NetworkMasterThread to
      * stop reading and writing threads.
      */
+    @Override
     public void networkShutdown(String par1Str, Object... par2ArrayOfObj) {
         if (this.isRunning) {
             this.isTerminating = true;
@@ -366,6 +370,7 @@ public class TcpConnection implements INetworkManager {
     /**
      * Checks timeouts and processes all pending read packets.
      */
+    @Override
     public void processReadPackets() {
         if (this.sendQueueByteLength > 2097152) {
             this.networkShutdown("disconnect.overflow");
@@ -396,6 +401,7 @@ public class TcpConnection implements INetworkManager {
     /**
      * Returns the socket address of the remote side. Server-only.
      */
+    @Override
     public SocketAddress getRemoteAddress() {
         return this.remoteSocketAddress;
     }
@@ -403,6 +409,7 @@ public class TcpConnection implements INetworkManager {
     /**
      * Shuts down the server. (Only actually used on the server)
      */
+    @Override
     public void serverShutdown() {
         if (!this.isServerTerminating) {
             this.wakeThreads();
@@ -431,6 +438,7 @@ public class TcpConnection implements INetworkManager {
     /**
      * Returns the number of chunk data packets waiting to be sent.
      */
+    @Override
     public int getNumChunkDataPackets() {
         return this.chunkDataPackets.size();
     }

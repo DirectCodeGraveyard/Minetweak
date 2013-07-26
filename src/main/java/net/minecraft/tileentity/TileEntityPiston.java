@@ -49,6 +49,7 @@ public class TileEntityPiston extends TileEntity {
     /**
      * Returns block data at the location of this entity (client-only).
      */
+    @Override
     public int getBlockMetadata() {
         return this.storedMetadata;
     }
@@ -123,6 +124,7 @@ public class TileEntityPiston extends TileEntity {
      * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
      * ticks and creates a new spawn inside its implementation.
      */
+    @Override
     public void updateEntity() {
         this.lastProgress = this.progress;
 
@@ -151,6 +153,7 @@ public class TileEntityPiston extends TileEntity {
     /**
      * Reads a tile entity from NBT.
      */
+    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
         this.storedBlockID = par1NBTTagCompound.getInteger("blockId");
@@ -163,6 +166,7 @@ public class TileEntityPiston extends TileEntity {
     /**
      * Writes a tile entity to NBT.
      */
+    @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("blockId", this.storedBlockID);

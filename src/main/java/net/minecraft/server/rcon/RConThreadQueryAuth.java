@@ -46,14 +46,14 @@ class RConThreadQueryAuth {
         this.requestId[3] = var3[6];
         this.requestIdAsString = new String(this.requestId);
         this.randomChallenge = (new Random()).nextInt(16777216);
-        this.challengeValue = String.format("\t%s%d\u0000", new Object[]{this.requestIdAsString, Integer.valueOf(this.randomChallenge)}).getBytes();
+        this.challengeValue = String.format("\t%s%d\u0000", new Object[]{this.requestIdAsString, this.randomChallenge}).getBytes();
     }
 
     /**
      * Returns true if the auth's creation timestamp is less than the given time, otherwise false
      */
     public Boolean hasExpired(long par1) {
-        return Boolean.valueOf(this.timestamp < par1);
+        return this.timestamp < par1;
     }
 
     /**

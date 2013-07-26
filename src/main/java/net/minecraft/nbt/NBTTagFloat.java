@@ -22,6 +22,7 @@ public class NBTTagFloat extends NBTBase {
     /**
      * Write the actual data contents of the tag, implemented in NBT extension classes
      */
+    @Override
     void write(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeFloat(this.data);
     }
@@ -29,6 +30,7 @@ public class NBTTagFloat extends NBTBase {
     /**
      * Read the actual data contents of the tag, implemented in NBT extension classes
      */
+    @Override
     void load(DataInput par1DataInput, int par2) throws IOException {
         this.data = par1DataInput.readFloat();
     }
@@ -36,6 +38,7 @@ public class NBTTagFloat extends NBTBase {
     /**
      * Gets the type byte for the tag.
      */
+    @Override
     public byte getId() {
         return (byte) 5;
     }
@@ -47,6 +50,7 @@ public class NBTTagFloat extends NBTBase {
     /**
      * Creates a clone of the tag.
      */
+    @Override
     public NBTBase copy() {
         return new NBTTagFloat(this.getName(), this.data);
     }

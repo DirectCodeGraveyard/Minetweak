@@ -23,6 +23,7 @@ public class NBTTagIntArray extends NBTBase {
     /**
      * Write the actual data contents of the tag, implemented in NBT extension classes
      */
+    @Override
     void write(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeInt(this.intArray.length);
 
@@ -34,6 +35,7 @@ public class NBTTagIntArray extends NBTBase {
     /**
      * Read the actual data contents of the tag, implemented in NBT extension classes
      */
+    @Override
     void load(DataInput par1DataInput, int par2) throws IOException {
         int var3 = par1DataInput.readInt();
         this.intArray = new int[var3];
@@ -46,10 +48,12 @@ public class NBTTagIntArray extends NBTBase {
     /**
      * Gets the type byte for the tag.
      */
+    @Override
     public byte getId() {
         return (byte) 11;
     }
 
+    @Override
     public String toString() {
         return "[" + this.intArray.length + " bytes]";
     }
@@ -57,6 +61,7 @@ public class NBTTagIntArray extends NBTBase {
     /**
      * Creates a clone of the tag.
      */
+    @Override
     public NBTBase copy() {
         int[] var1 = new int[this.intArray.length];
         System.arraycopy(this.intArray, 0, var1, 0, this.intArray.length);

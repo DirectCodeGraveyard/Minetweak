@@ -97,6 +97,7 @@ public class NetLoginHandler extends NetHandler {
         }
     }
 
+    @Override
     public void handleClientProtocol(Packet2ClientProtocol par1Packet2ClientProtocol) {
         this.clientUsername = par1Packet2ClientProtocol.getUsername();
 
@@ -120,6 +121,7 @@ public class NetLoginHandler extends NetHandler {
         }
     }
 
+    @Override
     public void handleSharedKey(Packet252SharedKey par1Packet252SharedKey) {
         PrivateKey var2 = this.mcServer.getKeyPair().getPrivate();
         this.sharedKey = par1Packet252SharedKey.getSharedKey(var2);
@@ -131,6 +133,7 @@ public class NetLoginHandler extends NetHandler {
         this.myTCPConnection.addToSendQueue(new Packet252SharedKey());
     }
 
+    @Override
     public void handleClientCommand(Packet205ClientCommand par1Packet205ClientCommand) {
         if (par1Packet205ClientCommand.forceRespawn == 0) {
             if (this.field_92079_k) {
@@ -148,6 +151,7 @@ public class NetLoginHandler extends NetHandler {
         }
     }
 
+    @Override
     public void handleLogin(Packet1Login par1Packet1Login) {
     }
 
@@ -170,6 +174,7 @@ public class NetLoginHandler extends NetHandler {
         this.finishedProcessing = true;
     }
 
+    @Override
     public void handleErrorMessage(String par1Str, Object[] par2ArrayOfObj) {
         this.mcServer.logInfo(this.getUsernameAndAddress() + " lost connection");
         this.finishedProcessing = true;
@@ -178,6 +183,7 @@ public class NetLoginHandler extends NetHandler {
     /**
      * Handle a server ping packet.
      */
+    @Override
     public void handleServerPing(Packet254ServerPing par1Packet254ServerPing) {
         try {
             ServerConfigurationManager var2 = this.mcServer.getConfigurationManager();
@@ -223,6 +229,7 @@ public class NetLoginHandler extends NetHandler {
      * Default handler called for packets that don't have their own handlers in NetServerHandler; kicks player from the
      * server.
      */
+    @Override
     public void unexpectedPacket(Packet par1Packet) {
         this.kickUser("Protocol error");
     }
@@ -234,6 +241,7 @@ public class NetLoginHandler extends NetHandler {
     /**
      * determine if it is a server handler
      */
+    @Override
     public boolean isServerHandler() {
         return true;
     }

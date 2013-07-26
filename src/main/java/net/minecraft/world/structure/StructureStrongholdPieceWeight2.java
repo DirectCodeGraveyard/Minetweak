@@ -5,6 +5,7 @@ final class StructureStrongholdPieceWeight2 extends StructureStrongholdPieceWeig
         super(par1Class, par2, par3);
     }
 
+    @Override
     public boolean canSpawnMoreStructuresOfType(int par1) {
         return super.canSpawnMoreStructuresOfType(par1) && par1 > 4;
     }

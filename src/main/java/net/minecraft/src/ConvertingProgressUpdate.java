@@ -18,12 +18,14 @@ public class ConvertingProgressUpdate implements IProgressUpdate {
     /**
      * Shows the 'Saving level' string.
      */
+    @Override
     public void displaySavingString(String par1Str) {
     }
 
     /**
      * Updates the progress bar on the loading screen to the specified amount. Args: loadProgress
      */
+    @Override
     public void setLoadingProgress(int par1) {
         if (MinecraftServer.func_130071_aq() - this.field_96245_b >= 1000L) {
             this.field_96245_b = MinecraftServer.func_130071_aq();
@@ -34,6 +36,7 @@ public class ConvertingProgressUpdate implements IProgressUpdate {
     /**
      * Displays a string on the loading screen supposed to indicate what is being done currently.
      */
+    @Override
     public void displayLoadingString(String par1Str) {
     }
 }

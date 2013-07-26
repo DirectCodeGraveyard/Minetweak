@@ -27,6 +27,7 @@ public class WorldChunkManagerHell extends WorldChunkManager {
     /**
      * Returns the BiomeGenBase related to the x, z position on the world.
      */
+    @Override
     public BiomeGenBase getBiomeGenAt(int par1, int par2) {
         return this.biomeGenerator;
     }
@@ -34,6 +35,7 @@ public class WorldChunkManagerHell extends WorldChunkManager {
     /**
      * Returns an array of biomes for the location input.
      */
+    @Override
     public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5) {
         if (par1ArrayOfBiomeGenBase == null || par1ArrayOfBiomeGenBase.length < par4 * par5) {
             par1ArrayOfBiomeGenBase = new BiomeGenBase[par4 * par5];
@@ -46,6 +48,7 @@ public class WorldChunkManagerHell extends WorldChunkManager {
     /**
      * Returns a list of temperatures to use for the specified blocks.  Args: listToReuse, x, y, width, length
      */
+    @Override
     public float[] getTemperatures(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5) {
         if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5) {
             par1ArrayOfFloat = new float[par4 * par5];
@@ -58,6 +61,7 @@ public class WorldChunkManagerHell extends WorldChunkManager {
     /**
      * Returns a list of rainfall values for the specified blocks. Args: listToReuse, x, z, width, length.
      */
+    @Override
     public float[] getRainfall(float[] par1ArrayOfFloat, int par2, int par3, int par4, int par5) {
         if (par1ArrayOfFloat == null || par1ArrayOfFloat.length < par4 * par5) {
             par1ArrayOfFloat = new float[par4 * par5];
@@ -71,6 +75,7 @@ public class WorldChunkManagerHell extends WorldChunkManager {
      * Returns biomes to use for the blocks and loads the other data like temperature and humidity onto the
      * WorldChunkManager Args: oldBiomeList, x, z, width, depth
      */
+    @Override
     public BiomeGenBase[] loadBlockGeneratorData(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5) {
         if (par1ArrayOfBiomeGenBase == null || par1ArrayOfBiomeGenBase.length < par4 * par5) {
             par1ArrayOfBiomeGenBase = new BiomeGenBase[par4 * par5];
@@ -84,6 +89,7 @@ public class WorldChunkManagerHell extends WorldChunkManager {
      * Return a list of biomes for the specified blocks. Args: listToReuse, x, y, width, length, cacheFlag (if false,
      * don't check biomeCache to avoid infinite loop in BiomeCacheBlock)
      */
+    @Override
     public BiomeGenBase[] getBiomeGenAt(BiomeGenBase[] par1ArrayOfBiomeGenBase, int par2, int par3, int par4, int par5, boolean par6) {
         return this.loadBlockGeneratorData(par1ArrayOfBiomeGenBase, par2, par3, par4, par5);
     }
@@ -91,6 +97,7 @@ public class WorldChunkManagerHell extends WorldChunkManager {
     /**
      * Finds a valid position within a range, that is once of the listed biomes.
      */
+    @Override
     public ChunkPosition findBiomePosition(int par1, int par2, int par3, List par4List, Random par5Random) {
         return par4List.contains(this.biomeGenerator) ? new ChunkPosition(par1 - par3 + par5Random.nextInt(par3 * 2 + 1), 0, par2 - par3 + par5Random.nextInt(par3 * 2 + 1)) : null;
     }
@@ -98,6 +105,7 @@ public class WorldChunkManagerHell extends WorldChunkManager {
     /**
      * checks given Chunk's Biomes against List of allowed ones
      */
+    @Override
     public boolean areBiomesViable(int par1, int par2, int par3, List par4List) {
         return par4List.contains(this.biomeGenerator);
     }

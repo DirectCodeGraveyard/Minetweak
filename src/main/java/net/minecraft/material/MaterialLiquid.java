@@ -12,6 +12,7 @@ public class MaterialLiquid extends Material {
     /**
      * Returns if blocks of these materials are liquids.
      */
+    @Override
     public boolean isLiquid() {
         return true;
     }
@@ -19,10 +20,12 @@ public class MaterialLiquid extends Material {
     /**
      * Returns if this material is considered solid or not
      */
+    @Override
     public boolean blocksMovement() {
         return false;
     }
 
+    @Override
     public boolean isSolid() {
         return false;
     }

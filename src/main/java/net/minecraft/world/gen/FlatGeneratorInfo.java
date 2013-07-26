@@ -169,7 +169,6 @@ public class FlatGeneratorInfo {
             ArrayList var1 = new ArrayList();
             String[] var2 = par0Str.split(",");
             int var3 = 0;
-            int var5 = var2.length;
 
             for (String var7 : var2) {
                 FlatLayerInfo var8 = func_82646_a(var7, var3);
@@ -213,7 +212,6 @@ public class FlatGeneratorInfo {
 
                     if (var2 > 0 && var1.length > var4) {
                         String[] var7 = var1[var4++].toLowerCase().split(",");
-                        int var9 = var7.length;
 
                         for (String var11 : var7) {
                             String[] var12 = var11.split("\\(", 2);

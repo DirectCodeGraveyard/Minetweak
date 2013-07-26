@@ -78,7 +78,7 @@ public class WorldInfo {
     private boolean thundering;
 
     /**
-     * Number of ticks untils next thunderbolt.
+     * Number of ticks until next thunderbolt.
      */
     private int thunderTime;
 
@@ -511,7 +511,7 @@ public class WorldInfo {
     }
 
     /**
-     * Return the map feautures enabled of a world
+     * Return the map features enabled of a world
      */
     public static boolean getMapFeaturesEnabled(WorldInfo par0WorldInfo) {
         return par0WorldInfo.mapFeaturesEnabled;
@@ -554,7 +554,7 @@ public class WorldInfo {
     }
 
     /**
-     * Returns wether it's raining or not.
+     * Returns whether it's raining or not.
      */
     public static boolean getRaining(WorldInfo par0WorldInfo) {
         return par0WorldInfo.raining;
@@ -565,7 +565,7 @@ public class WorldInfo {
     }
 
     /**
-     * Returns wether it's thundering or not.
+     * Returns whether it's thundering or not.
      */
     public static boolean getThundering(WorldInfo par0WorldInfo) {
         return par0WorldInfo.thundering;

@@ -15,9 +15,7 @@ public class RConUtils {
         int var3 = par2 - 1;
         int var4;
 
-        for (var4 = par1 > var3 ? var3 : par1; 0 != par0ArrayOfByte[var4] && var4 < var3; ++var4) {
-            ;
-        }
+        for (var4 = par1 > var3 ? var3 : par1; 0 != par0ArrayOfByte[var4] && var4 < var3; ++var4) ;
 
         try {
             return new String(par0ArrayOfByte, par1, var4 - par1, "UTF-8");

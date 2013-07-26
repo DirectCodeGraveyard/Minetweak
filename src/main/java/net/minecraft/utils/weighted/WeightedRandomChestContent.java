@@ -90,8 +90,7 @@ public class WeightedRandomChestContent extends WeightedRandomItem {
 
         int var5 = par1ArrayOfWeightedRandomChestContent.length;
 
-        for (int var6 = 0; var6 < var5; ++var6) {
-            WeightedRandomChestContent var7 = par1ArrayOfWeightedRandomChestContent[var6];
+        for (WeightedRandomChestContent var7 : par1ArrayOfWeightedRandomChestContent) {
             var2[var3++] = var7;
         }
 

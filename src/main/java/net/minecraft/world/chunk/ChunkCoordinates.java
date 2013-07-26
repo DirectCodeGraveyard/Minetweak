@@ -71,6 +71,7 @@ public class ChunkCoordinates implements Comparable {
         return this.getDistanceSquared(par1ChunkCoordinates.posX, par1ChunkCoordinates.posY, par1ChunkCoordinates.posZ);
     }
 
+    @Override
     public int compareTo(Object par1Obj) {
         return this.compareChunkCoordinate((ChunkCoordinates) par1Obj);
     }

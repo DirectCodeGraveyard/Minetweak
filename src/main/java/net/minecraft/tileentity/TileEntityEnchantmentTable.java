@@ -41,6 +41,7 @@ public class TileEntityEnchantmentTable extends TileEntity {
     /**
      * Writes a tile entity to NBT.
      */
+    @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
 
@@ -52,6 +53,7 @@ public class TileEntityEnchantmentTable extends TileEntity {
     /**
      * Reads a tile entity from NBT.
      */
+    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
 
@@ -64,6 +66,7 @@ public class TileEntityEnchantmentTable extends TileEntity {
      * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
      * ticks and creates a new spawn inside its implementation.
      */
+    @Override
     public void updateEntity() {
         super.updateEntity();
         this.bookSpreadPrev = this.bookSpread;
@@ -107,9 +110,7 @@ public class TileEntityEnchantmentTable extends TileEntity {
 
         float var7;
 
-        for (var7 = this.bookRotation - this.bookRotation2; var7 >= (float) Math.PI; var7 -= ((float) Math.PI * 2F)) {
-            ;
-        }
+        for (var7 = this.bookRotation - this.bookRotation2; var7 >= (float) Math.PI; var7 -= ((float) Math.PI * 2F)) ;
 
         while (var7 < -(float) Math.PI) {
             var7 += ((float) Math.PI * 2F);

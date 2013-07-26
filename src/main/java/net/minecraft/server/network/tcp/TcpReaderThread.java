@@ -8,6 +8,7 @@ class TcpReaderThread extends Thread {
         this.theTcpConnection = par1TcpConnection;
     }
 
+    @Override
     public void run() {
         TcpConnection.field_74471_a.getAndIncrement();
 

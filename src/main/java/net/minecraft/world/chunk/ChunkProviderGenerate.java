@@ -277,6 +277,7 @@ public class ChunkProviderGenerate implements IChunkProvider {
     /**
      * loads or generates the chunk at the chunk location specified
      */
+    @Override
     public Chunk loadChunk(int par1, int par2) {
         return this.provideChunk(par1, par2);
     }
@@ -285,6 +286,7 @@ public class ChunkProviderGenerate implements IChunkProvider {
      * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
      * specified chunk from the map seed and chunk seed
      */
+    @Override
     public Chunk provideChunk(int par1, int par2) {
         this.rand.setSeed((long) par1 * 341873128712L + (long) par2 * 132897987541L);
         byte[] var3 = new byte[32768];
@@ -339,8 +341,6 @@ public class ChunkProviderGenerate implements IChunkProvider {
         this.noise3 = this.noiseGen3.generateNoiseOctaves(this.noise3, par2, par3, par4, par5, par6, par7, var44 / 80.0D, var45 / 160.0D, var44 / 80.0D);
         this.noise1 = this.noiseGen1.generateNoiseOctaves(this.noise1, par2, par3, par4, par5, par6, par7, var44, var45, var44);
         this.noise2 = this.noiseGen2.generateNoiseOctaves(this.noise2, par2, par3, par4, par5, par6, par7, var44, var45, var44);
-        boolean var43 = false;
-        boolean var42 = false;
         int var12 = 0;
         int var13 = 0;
 
@@ -442,6 +442,7 @@ public class ChunkProviderGenerate implements IChunkProvider {
     /**
      * Checks to see if a chunk exists at x, y
      */
+    @Override
     public boolean chunkExists(int par1, int par2) {
         return true;
     }
@@ -449,6 +450,7 @@ public class ChunkProviderGenerate implements IChunkProvider {
     /**
      * Populates chunk with ores etc etc
      */
+    @Override
     public void populate(IChunkProvider par1IChunkProvider, int par2, int par3) {
         BlockSand.fallInstantly = true;
         int var4 = par2 * 16;
@@ -521,16 +523,19 @@ public class ChunkProviderGenerate implements IChunkProvider {
      * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
      * Return true if all chunks have been saved.
      */
+    @Override
     public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate) {
         return true;
     }
 
+    @Override
     public void func_104112_b() {
     }
 
     /**
      * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
      */
+    @Override
     public boolean unloadQueuedChunks() {
         return false;
     }
@@ -538,6 +543,7 @@ public class ChunkProviderGenerate implements IChunkProvider {
     /**
      * Returns if the IChunkProvider supports saving.
      */
+    @Override
     public boolean canSave() {
         return true;
     }
@@ -545,6 +551,7 @@ public class ChunkProviderGenerate implements IChunkProvider {
     /**
      * Converts the instance data to a readable string.
      */
+    @Override
     public String makeString() {
         return "RandomLevelSource";
     }
@@ -552,6 +559,7 @@ public class ChunkProviderGenerate implements IChunkProvider {
     /**
      * Returns a list of creatures of the specified type that can spawn at the given location.
      */
+    @Override
     public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4) {
         BiomeGenBase var5 = this.worldObj.getBiomeGenForCoords(par2, par4);
         return var5 == null ? null : (var5 == BiomeGenBase.swampland && par1EnumCreatureType == EnumCreatureType.monster && this.scatteredFeatureGenerator.hasStructureAt(par2, par3, par4) ? this.scatteredFeatureGenerator.getScatteredFeatureSpawnList() : var5.getSpawnableList(par1EnumCreatureType));
@@ -560,14 +568,17 @@ public class ChunkProviderGenerate implements IChunkProvider {
     /**
      * Returns the location of the closest structure of the specified type. If not found returns null.
      */
+    @Override
     public ChunkPosition findClosestStructure(World par1World, String par2Str, int par3, int par4, int par5) {
         return "Stronghold".equals(par2Str) && this.strongholdGenerator != null ? this.strongholdGenerator.getNearestInstance(par1World, par3, par4, par5) : null;
     }
 
+    @Override
     public int getLoadedChunkCount() {
         return 0;
     }
 
+    @Override
     public void recreateStructures(int par1, int par2) {
         if (this.mapFeaturesEnabled) {
             this.mineshaftGenerator.generate(this, this.worldObj, par1, par2, null);

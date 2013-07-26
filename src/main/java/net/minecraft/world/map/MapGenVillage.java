@@ -5,14 +5,17 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.structure.StructureStart;
 import net.minecraft.world.structure.StructureVillageStart;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 
 public class MapGenVillage extends MapGenStructure {
     /**
      * A list of all the biomes villages can spawn in.
      */
-    public static final List villageSpawnBiomes = Arrays.asList(new BiomeGenBase[]{BiomeGenBase.plains, BiomeGenBase.desert});
+    public static final List villageSpawnBiomes = Arrays.asList(BiomeGenBase.plains, BiomeGenBase.desert);
 
     /**
      * World terrain type, 0 for normal, 1 for flat map
@@ -28,19 +31,19 @@ public class MapGenVillage extends MapGenStructure {
 
     public MapGenVillage(Map par1Map) {
         this();
-        Iterator var2 = par1Map.entrySet().iterator();
 
-        while (var2.hasNext()) {
-            Entry var3 = (Entry) var2.next();
+        for (Object o : par1Map.entrySet()) {
+            Entry var3 = (Entry) o;
 
-            if (((String) var3.getKey()).equals("size")) {
+            if (var3.getKey().equals("size")) {
                 this.terrainType = MathHelper.parseIntWithDefaultAndMax((String) var3.getValue(), this.terrainType, 0);
-            } else if (((String) var3.getKey()).equals("distance")) {
+            } else if (var3.getKey().equals("distance")) {
                 this.field_82665_g = MathHelper.parseIntWithDefaultAndMax((String) var3.getValue(), this.field_82665_g, this.field_82666_h + 1);
             }
         }
     }
 
+    @Override
     public boolean canSpawnStructureAtCoords(int par1, int par2) {
         int var3 = par1;
         int var4 = par2;
@@ -72,6 +75,7 @@ public class MapGenVillage extends MapGenStructure {
         return false;
     }
 
+    @Override
     public StructureStart getStructureStart(int par1, int par2) {
         return new StructureVillageStart(this.worldObj, this.rand, par1, par2, this.terrainType);
     }

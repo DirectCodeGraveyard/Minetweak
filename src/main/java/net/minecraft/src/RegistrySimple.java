@@ -9,12 +9,13 @@ public class RegistrySimple implements IRegistry {
     /**
      * Objects registered on this registry.
      */
-    protected final Map registryObjects = this.func_111054_a();
+    protected final Map<Object, Object> registryObjects = this.func_111054_a();
 
-    protected HashMap func_111054_a() {
+    protected HashMap<Object, Object> func_111054_a() {
         return Maps.newHashMap();
     }
 
+    @Override
     public Object func_82594_a(Object par1Obj) {
         return this.registryObjects.get(par1Obj);
     }
@@ -22,6 +23,7 @@ public class RegistrySimple implements IRegistry {
     /**
      * Register an object on this registry.
      */
+    @Override
     public void putObject(Object par1Obj, Object par2Obj) {
         this.registryObjects.put(par1Obj, par2Obj);
     }

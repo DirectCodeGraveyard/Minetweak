@@ -282,6 +282,7 @@ public class VillageCollection extends WorldSavedData {
     /**
      * reads in data from the NBTTagCompound into this MapDataBase
      */
+    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         this.tickCounter = par1NBTTagCompound.getInteger("Tick");
         NBTTagList var2 = par1NBTTagCompound.getTagList("Villages");
@@ -297,6 +298,7 @@ public class VillageCollection extends WorldSavedData {
     /**
      * write data to NBTTagCompound from this MapDataBase, similar to Entities and TileEntities
      */
+    @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         par1NBTTagCompound.setInteger("Tick", this.tickCounter);
         NBTTagList var2 = new NBTTagList("Villages");

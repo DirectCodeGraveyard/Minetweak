@@ -9,17 +9,17 @@ public class NextTickListEntry implements Comparable {
     private static long nextTickEntryID;
 
     /**
-     * X position this tick is occuring at
+     * X position this tick is occurring at
      */
     public int xCoord;
 
     /**
-     * Y position this tick is occuring at
+     * Y position this tick is occurring at
      */
     public int yCoord;
 
     /**
-     * Z position this tick is occuring at
+     * Z position this tick is occurring at
      */
     public int zCoord;
 
@@ -40,7 +40,7 @@ public class NextTickListEntry implements Comparable {
     private long tickEntryID;
 
     public NextTickListEntry(int par1, int par2, int par3, int par4) {
-        this.tickEntryID = (long) (nextTickEntryID++);
+        this.tickEntryID = nextTickEntryID++;
         this.xCoord = par1;
         this.yCoord = par2;
         this.zCoord = par3;
@@ -84,6 +84,7 @@ public class NextTickListEntry implements Comparable {
         return this.blockID + ": (" + this.xCoord + ", " + this.yCoord + ", " + this.zCoord + "), " + this.scheduledTime + ", " + this.priority + ", " + this.tickEntryID;
     }
 
+    @Override
     public int compareTo(Object par1Obj) {
         return this.comparer((NextTickListEntry) par1Obj);
     }

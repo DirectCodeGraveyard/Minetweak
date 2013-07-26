@@ -28,6 +28,7 @@ public class TileEntityEnderChest extends TileEntity {
      * Allows the entity to update its state. Overridden in most subclasses, e.g. the mob spawner uses this to count
      * ticks and creates a new spawn inside its implementation.
      */
+    @Override
     public void updateEntity() {
         super.updateEntity();
 
@@ -75,6 +76,7 @@ public class TileEntityEnderChest extends TileEntity {
     /**
      * Called when a client event is received with the event number and argument, see World.sendClientEvent
      */
+    @Override
     public boolean receiveClientEvent(int par1, int par2) {
         if (par1 == 1) {
             this.numUsingPlayers = par2;
@@ -87,6 +89,7 @@ public class TileEntityEnderChest extends TileEntity {
     /**
      * invalidates a tile entity
      */
+    @Override
     public void invalidate() {
         this.updateContainingBlockInfo();
         super.invalidate();
@@ -103,6 +106,6 @@ public class TileEntityEnderChest extends TileEntity {
     }
 
     public boolean isUseableByPlayer(EntityPlayer par1EntityPlayer) {
-        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
+        return this.worldObj.getBlockTileEntity(this.xCoord, this.yCoord, this.zCoord) == this && par1EntityPlayer.getDistanceSq((double) this.xCoord + 0.5D, (double) this.yCoord + 0.5D, (double) this.zCoord + 0.5D) <= 64.0D;
     }
 }

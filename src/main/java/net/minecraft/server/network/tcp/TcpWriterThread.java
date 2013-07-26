@@ -10,6 +10,7 @@ class TcpWriterThread extends Thread {
         this.theTcpConnection = par1TcpConnection;
     }
 
+    @Override
     public void run() {
         TcpConnection.field_74469_b.getAndIncrement();
 

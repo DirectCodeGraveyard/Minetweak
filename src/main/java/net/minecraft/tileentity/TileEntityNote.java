@@ -19,6 +19,7 @@ public class TileEntityNote extends TileEntity {
     /**
      * Writes a tile entity to NBT.
      */
+    @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setByte("note", this.note);
@@ -27,6 +28,7 @@ public class TileEntityNote extends TileEntity {
     /**
      * Reads a tile entity from NBT.
      */
+    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
         this.note = par1NBTTagCompound.getByte("note");

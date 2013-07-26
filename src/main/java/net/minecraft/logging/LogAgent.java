@@ -7,15 +7,11 @@ import java.util.logging.Logger;
 
 public class LogAgent implements ILogAgent {
     private final Logger serverLogger;
-    private final String logFile;
-    private final String loggerName;
     private final String loggerPrefix;
 
-    public LogAgent(String par1Str, String par2Str, String par3Str) {
-        this.serverLogger = Logger.getLogger(par1Str);
-        this.loggerName = par1Str;
-        this.loggerPrefix = par2Str;
-        this.logFile = par3Str;
+    public LogAgent(String loggerName, String loggerPrefix) {
+        this.serverLogger = Logger.getLogger(loggerName);
+        this.loggerPrefix = loggerPrefix;
         this.setupLogger();
     }
 
@@ -30,40 +26,48 @@ public class LogAgent implements ILogAgent {
             this.serverLogger.removeHandler(var4);
         }
 
-        LogFormatter var6 = new LogFormatter(this, null);
+        LogFormatter var6 = new LogFormatter(this);
         ConsoleHandler var7 = new ConsoleHandler();
         var7.setFormatter(var6);
         this.serverLogger.addHandler(var7);
     }
 
+    @Override
     public Logger getLogger() {
         return this.serverLogger;
     }
 
+    @Override
     public void logInfo(String par1Str) {
         this.serverLogger.log(Level.INFO, "[Minecraft] " + par1Str);
     }
 
+    @Override
     public void logWarning(String par1Str) {
         this.serverLogger.log(Level.WARNING, "[Minecraft] " + par1Str);
     }
 
+    @Override
     public void logWarningFormatted(String par1Str, Object... par2ArrayOfObj) {
         this.serverLogger.log(Level.WARNING, "[Minecraft] " + par1Str, par2ArrayOfObj);
     }
 
+    @Override
     public void logWarningException(String par1Str, Throwable par2Throwable) {
         this.serverLogger.log(Level.WARNING, "[Minecraft] " + par1Str, par2Throwable);
     }
 
+    @Override
     public void logSevere(String par1Str) {
         this.serverLogger.log(Level.SEVERE, "[Minecraft] " + par1Str);
     }
 
+    @Override
     public void logSevereException(String par1Str, Throwable par2Throwable) {
         this.serverLogger.log(Level.SEVERE, "[Minecraft] " + par1Str, par2Throwable);
     }
 
+    @Override
     public void logNoPrefix(String string) {
         this.serverLogger.log(Level.INFO, string);
     }

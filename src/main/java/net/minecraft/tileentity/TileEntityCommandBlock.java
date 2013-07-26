@@ -52,6 +52,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     /**
      * Gets the name of this command sender (usually username, but possibly "Rcon")
      */
+    @Override
     public String getCommandSenderName() {
         return this.commandSenderName;
     }
@@ -63,12 +64,14 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
         this.commandSenderName = par1Str;
     }
 
+    @Override
     public void func_110122_a(ChatMessageComponent par1ChatMessageComponent) {
     }
 
     /**
      * Returns true if the command sender is allowed to use the given command.
      */
+    @Override
     public boolean canCommandSenderUseCommand(int par1, String par2Str) {
         return par1 <= 2;
     }
@@ -76,6 +79,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     /**
      * Writes a tile entity to NBT.
      */
+    @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setString("PluginCommand", this.command);
@@ -86,9 +90,10 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     /**
      * Reads a tile entity from NBT.
      */
+    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
-        this.command = par1NBTTagCompound.getString("PluginCommand");
+        this.command = par1NBTTagCompound.getString("Command");
         this.succesCount = par1NBTTagCompound.getInteger("SuccessCount");
 
         if (par1NBTTagCompound.hasKey("CustomName")) {
@@ -99,10 +104,12 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     /**
      * Return the position for this command sender.
      */
+    @Override
     public ChunkCoordinates getCommandSenderPosition() {
         return new ChunkCoordinates(this.xCoord, this.yCoord, this.zCoord);
     }
 
+    @Override
     public World getOverworld() {
         return this.getWorldObj();
     }
@@ -110,6 +117,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     /**
      * Overriden in a sign to provide the text.
      */
+    @Override
     public Packet getDescriptionPacket() {
         NBTTagCompound var1 = new NBTTagCompound();
         this.writeToNBT(var1);

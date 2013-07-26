@@ -31,6 +31,7 @@ public class MemoryConnection implements INetworkManager {
     /**
      * Sets the NetHandler for this NetworkManager. Server-only.
      */
+    @Override
     public void setNetHandler(NetHandler par1NetHandler) {
         this.myNetHandler = par1NetHandler;
     }
@@ -38,6 +39,7 @@ public class MemoryConnection implements INetworkManager {
     /**
      * Adds the packet to the correct send queue (chunk data packets go to a separate queue).
      */
+    @Override
     public void addToSendQueue(Packet par1Packet) {
         if (!this.shuttingDown) {
             this.pairedConnection.processOrCachePacket(par1Packet);
@@ -47,12 +49,14 @@ public class MemoryConnection implements INetworkManager {
     /**
      * Wakes reader and writer threads
      */
+    @Override
     public void wakeThreads() {
     }
 
     /**
      * Checks timeouts and processes all pending read packets.
      */
+    @Override
     public void processReadPackets() {
         int var1 = 2500;
 
@@ -73,6 +77,7 @@ public class MemoryConnection implements INetworkManager {
     /**
      * Returns the socket address of the remote side. Server-only.
      */
+    @Override
     public SocketAddress getRemoteAddress() {
         return mySocketAddress;
     }
@@ -80,6 +85,7 @@ public class MemoryConnection implements INetworkManager {
     /**
      * Shuts down the server. (Only actually used on the server)
      */
+    @Override
     public void serverShutdown() {
         this.shuttingDown = true;
     }
@@ -88,6 +94,7 @@ public class MemoryConnection implements INetworkManager {
      * Shuts down the network with the specified reason. Closes all streams and sockets, spawns NetworkMasterThread to
      * stop reading and writing threads.
      */
+    @Override
     public void networkShutdown(String par1Str, Object... par2ArrayOfObj) {
         this.shuttingDown = true;
         this.shutdownReason = par1Str;
@@ -97,6 +104,7 @@ public class MemoryConnection implements INetworkManager {
     /**
      * Returns the number of chunk data packets waiting to be sent.
      */
+    @Override
     public int getNumChunkDataPackets() {
         return 0;
     }

@@ -31,11 +31,11 @@ public class NBTTagCompound extends NBTBase {
     /**
      * Write the actual data contents of the tag, implemented in NBT extension classes
      */
+    @Override
     void write(DataOutput par1DataOutput) throws IOException {
-        Iterator var2 = this.tagMap.values().iterator();
 
-        while (var2.hasNext()) {
-            NBTBase var3 = (NBTBase) var2.next();
+        for (Object o : this.tagMap.values()) {
+            NBTBase var3 = (NBTBase) o;
             writeNamedTag(var3, par1DataOutput);
         }
 
@@ -45,6 +45,7 @@ public class NBTTagCompound extends NBTBase {
     /**
      * Read the actual data contents of the tag, implemented in NBT extension classes
      */
+    @Override
     void load(DataInput par1DataInput, int par2) throws IOException {
         if (par2 > 512) {
             throw new RuntimeException("Tried to read NBT tag with too high complexity, depth > 512");
@@ -68,6 +69,7 @@ public class NBTTagCompound extends NBTBase {
     /**
      * Gets the type byte for the tag.
      */
+    @Override
     public byte getId() {
         return (byte) 10;
     }
@@ -345,12 +347,12 @@ public class NBTTagCompound extends NBTBase {
     /**
      * Creates a clone of the tag.
      */
+    @Override
     public NBTBase copy() {
         NBTTagCompound var1 = new NBTTagCompound(this.getName());
-        Iterator var2 = this.tagMap.keySet().iterator();
 
-        while (var2.hasNext()) {
-            String var3 = (String) var2.next();
+        for (Object o : this.tagMap.keySet()) {
+            String var3 = (String) o;
             var1.setTag(var3, ((NBTBase) this.tagMap.get(var3)).copy());
         }
 

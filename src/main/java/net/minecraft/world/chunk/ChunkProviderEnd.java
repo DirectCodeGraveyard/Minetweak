@@ -143,6 +143,7 @@ public class ChunkProviderEnd implements IChunkProvider {
     /**
      * loads or generates the chunk at the chunk location specified
      */
+    @Override
     public Chunk loadChunk(int par1, int par2) {
         return this.provideChunk(par1, par2);
     }
@@ -151,6 +152,7 @@ public class ChunkProviderEnd implements IChunkProvider {
      * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
      * specified chunk from the map seed and chunk seed
      */
+    @Override
     public Chunk provideChunk(int par1, int par2) {
         this.endRNG.setSeed((long) par1 * 341873128712L + (long) par2 * 132897987541L);
         byte[] var3 = new byte[32768];
@@ -289,6 +291,7 @@ public class ChunkProviderEnd implements IChunkProvider {
     /**
      * Checks to see if a chunk exists at x, y
      */
+    @Override
     public boolean chunkExists(int par1, int par2) {
         return true;
     }
@@ -309,16 +312,19 @@ public class ChunkProviderEnd implements IChunkProvider {
      * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
      * Return true if all chunks have been saved.
      */
+    @Override
     public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate) {
         return true;
     }
 
+    @Override
     public void func_104112_b() {
     }
 
     /**
      * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
      */
+    @Override
     public boolean unloadQueuedChunks() {
         return false;
     }
@@ -326,6 +332,7 @@ public class ChunkProviderEnd implements IChunkProvider {
     /**
      * Returns if the IChunkProvider supports saving.
      */
+    @Override
     public boolean canSave() {
         return true;
     }
@@ -333,6 +340,7 @@ public class ChunkProviderEnd implements IChunkProvider {
     /**
      * Converts the instance data to a readable string.
      */
+    @Override
     public String makeString() {
         return "RandomLevelSource";
     }
@@ -340,6 +348,7 @@ public class ChunkProviderEnd implements IChunkProvider {
     /**
      * Returns a list of creatures of the specified type that can spawn at the given location.
      */
+    @Override
     public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4) {
         BiomeGenBase var5 = this.endWorld.getBiomeGenForCoords(par2, par4);
         return var5 == null ? null : var5.getSpawnableList(par1EnumCreatureType);
@@ -348,14 +357,17 @@ public class ChunkProviderEnd implements IChunkProvider {
     /**
      * Returns the location of the closest structure of the specified type. If not found returns null.
      */
+    @Override
     public ChunkPosition findClosestStructure(World par1World, String par2Str, int par3, int par4, int par5) {
         return null;
     }
 
+    @Override
     public int getLoadedChunkCount() {
         return 0;
     }
 
+    @Override
     public void recreateStructures(int par1, int par2) {
     }
 }

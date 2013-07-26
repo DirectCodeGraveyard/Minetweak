@@ -41,10 +41,9 @@ public abstract class StructureStart {
      */
     protected void updateBoundingBox() {
         this.boundingBox = StructureBoundingBox.getNewBoundingBox();
-        Iterator var1 = this.components.iterator();
 
-        while (var1.hasNext()) {
-            StructureComponent var2 = (StructureComponent) var1.next();
+        for (Object component : this.components) {
+            StructureComponent var2 = (StructureComponent) component;
             this.boundingBox.expandTo(var2.getBoundingBox());
         }
     }
@@ -62,17 +61,15 @@ public abstract class StructureStart {
 
         int var6 = var5 - this.boundingBox.maxY;
         this.boundingBox.offset(0, var6, 0);
-        Iterator var7 = this.components.iterator();
 
-        while (var7.hasNext()) {
-            StructureComponent var8 = (StructureComponent) var7.next();
+        for (Object component : this.components) {
+            StructureComponent var8 = (StructureComponent) component;
             var8.getBoundingBox().offset(0, var6, 0);
         }
     }
 
     protected void setRandomHeight(World par1World, Random par2Random, int par3, int par4) {
         int var5 = par4 - par3 + 1 - this.boundingBox.getYSize();
-        boolean var6 = true;
         int var10;
 
         if (var5 > 1) {
@@ -83,10 +80,9 @@ public abstract class StructureStart {
 
         int var7 = var10 - this.boundingBox.minY;
         this.boundingBox.offset(0, var7, 0);
-        Iterator var8 = this.components.iterator();
 
-        while (var8.hasNext()) {
-            StructureComponent var9 = (StructureComponent) var8.next();
+        for (Object component : this.components) {
+            StructureComponent var9 = (StructureComponent) component;
             var9.getBoundingBox().offset(0, var7, 0);
         }
     }

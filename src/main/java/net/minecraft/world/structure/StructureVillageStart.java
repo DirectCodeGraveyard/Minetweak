@@ -4,7 +4,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.component.ComponentVillageRoadPiece;
 import net.minecraft.world.component.ComponentVillageStartPiece;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -15,7 +14,7 @@ public class StructureVillageStart extends StructureStart {
     private boolean hasMoreThanTwoComponents;
 
     public StructureVillageStart(World par1World, Random par2Random, int par3, int par4, int par5) {
-        List var6 = StructureVillagePieces.getStructureVillageWeightedPieceList(par2Random, par5);
+        List<StructureVillagePieceWeight> var6 = StructureVillagePieces.getStructureVillageWeightedPieceList(par2Random, par5);
         ComponentVillageStartPiece var7 = new ComponentVillageStartPiece(par1World.getWorldChunkManager(), 0, par2Random, (par3 << 4) + 2, (par4 << 4) + 2, var6, par5);
         this.components.add(var7);
         var7.buildComponent(var7, this.components, par2Random);
@@ -39,10 +38,9 @@ public class StructureVillageStart extends StructureStart {
 
         this.updateBoundingBox();
         var10 = 0;
-        Iterator var13 = this.components.iterator();
 
-        while (var13.hasNext()) {
-            StructureComponent var12 = (StructureComponent) var13.next();
+        for (Object component : this.components) {
+            StructureComponent var12 = (StructureComponent) component;
 
             if (!(var12 instanceof ComponentVillageRoadPiece)) {
                 ++var10;
@@ -55,6 +53,7 @@ public class StructureVillageStart extends StructureStart {
     /**
      * currently only defined for Villages, returns true if Village has more than 2 non-road components
      */
+    @Override
     public boolean isSizeableStructure() {
         return this.hasMoreThanTwoComponents;
     }

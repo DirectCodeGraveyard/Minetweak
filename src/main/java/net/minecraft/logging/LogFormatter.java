@@ -11,11 +11,12 @@ public class LogFormatter extends Formatter {
 
     final LogAgent field_98229_a;
 
-    private LogFormatter(LogAgent par1LogAgent) {
+    public LogFormatter(LogAgent par1LogAgent) {
         this.field_98229_a = par1LogAgent;
         this.field_98228_b = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
 
+    @Override
     public String format(LogRecord par1LogRecord) {
         StringBuilder var2 = new StringBuilder();
         var2.append(this.field_98228_b.format(par1LogRecord.getMillis()));
@@ -36,9 +37,5 @@ public class LogFormatter extends Formatter {
         }
 
         return var2.toString();
-    }
-
-    LogFormatter(LogAgent par1LogAgent, LogAgentEmptyAnon par2LogAgentEmptyAnon) {
-        this(par1LogAgent);
     }
 }

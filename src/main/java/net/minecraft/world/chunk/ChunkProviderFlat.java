@@ -23,7 +23,7 @@ public class ChunkProviderFlat implements IChunkProvider {
     private final byte[] field_82700_c = new byte[256];
     private final byte[] field_82698_d = new byte[256];
     private final FlatGeneratorInfo field_82699_e;
-    private final List structureGenerators = new ArrayList();
+    private final List<MapGenStructure> structureGenerators = new ArrayList<MapGenStructure>();
     private final boolean field_82697_g;
     private final boolean field_82702_h;
     private WorldGenLakes waterLakeGenerator;
@@ -85,6 +85,7 @@ public class ChunkProviderFlat implements IChunkProvider {
     /**
      * loads or generates the chunk at the chunk location specified
      */
+    @Override
     public Chunk loadChunk(int par1, int par2) {
         return this.provideChunk(par1, par2);
     }
@@ -93,6 +94,7 @@ public class ChunkProviderFlat implements IChunkProvider {
      * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
      * specified chunk from the map seed and chunk seed
      */
+    @Override
     public Chunk provideChunk(int par1, int par2) {
         Chunk var3 = new Chunk(this.worldObj, par1, par2);
 
@@ -121,9 +123,8 @@ public class ChunkProviderFlat implements IChunkProvider {
             var10[var11] = (byte) var9[var11].biomeID;
         }
 
-        for (Object structureGenerator : this.structureGenerators) {
-            MapGenStructure var13 = (MapGenStructure) structureGenerator;
-            var13.generate(this, this.worldObj, par1, par2, null);
+        for (MapGenStructure structureGenerator : this.structureGenerators) {
+            structureGenerator.generate(this, this.worldObj, par1, par2, null);
         }
 
         var3.generateSkylightMap();
@@ -133,6 +134,7 @@ public class ChunkProviderFlat implements IChunkProvider {
     /**
      * Checks to see if a chunk exists at x, y
      */
+    @Override
     public boolean chunkExists(int par1, int par2) {
         return true;
     }
@@ -140,6 +142,7 @@ public class ChunkProviderFlat implements IChunkProvider {
     /**
      * Populates chunk with ores etc etc
      */
+    @Override
     public void populate(IChunkProvider par1IChunkProvider, int par2, int par3) {
         int var4 = par2 * 16;
         int var5 = par3 * 16;
@@ -150,11 +153,10 @@ public class ChunkProviderFlat implements IChunkProvider {
         long var10 = this.random.nextLong() / 2L * 2L + 1L;
         this.random.setSeed((long) par2 * var8 + (long) par3 * var10 ^ this.worldObj.getSeed());
 
-        for (Object structureGenerator : this.structureGenerators) {
-            MapGenStructure var13 = (MapGenStructure) structureGenerator;
-            boolean var14 = var13.generateStructuresInChunk(this.worldObj, this.random, par2, par3);
+        for (MapGenStructure structureGenerator : this.structureGenerators) {
+            boolean var14 = structureGenerator.generateStructuresInChunk(this.worldObj, this.random, par2, par3);
 
-            if (var13 instanceof MapGenVillage) {
+            if (structureGenerator instanceof MapGenVillage) {
                 var7 |= var14;
             }
         }
@@ -198,16 +200,19 @@ public class ChunkProviderFlat implements IChunkProvider {
      * Two modes of operation: if passed true, save all Chunks in one go.  If passed false, save up to two chunks.
      * Return true if all chunks have been saved.
      */
+    @Override
     public boolean saveChunks(boolean par1, IProgressUpdate par2IProgressUpdate) {
         return true;
     }
 
+    @Override
     public void func_104112_b() {
     }
 
     /**
      * Unloads chunks that are marked to be unloaded. This is not guaranteed to unload every such chunk.
      */
+    @Override
     public boolean unloadQueuedChunks() {
         return false;
     }
@@ -215,6 +220,7 @@ public class ChunkProviderFlat implements IChunkProvider {
     /**
      * Returns if the IChunkProvider supports saving.
      */
+    @Override
     public boolean canSave() {
         return true;
     }
@@ -222,6 +228,7 @@ public class ChunkProviderFlat implements IChunkProvider {
     /**
      * Converts the instance data to a readable string.
      */
+    @Override
     public String makeString() {
         return "FlatLevelSource";
     }
@@ -229,6 +236,7 @@ public class ChunkProviderFlat implements IChunkProvider {
     /**
      * Returns a list of creatures of the specified type that can spawn at the given location.
      */
+    @Override
     public List getPossibleCreatures(EnumCreatureType par1EnumCreatureType, int par2, int par3, int par4) {
         BiomeGenBase var5 = this.worldObj.getBiomeGenForCoords(par2, par4);
         return var5 == null ? null : var5.getSpawnableList(par1EnumCreatureType);
@@ -237,14 +245,14 @@ public class ChunkProviderFlat implements IChunkProvider {
     /**
      * Returns the location of the closest structure of the specified type. If not found returns null.
      */
+    @Override
     public ChunkPosition findClosestStructure(World par1World, String par2Str, int par3, int par4, int par5) {
         if ("Stronghold".equals(par2Str)) {
 
-            for (Object structureGenerator : this.structureGenerators) {
-                MapGenStructure var7 = (MapGenStructure) structureGenerator;
+            for (MapGenStructure structureGenerator : this.structureGenerators) {
 
-                if (var7 instanceof MapGenStronghold) {
-                    return var7.getNearestInstance(par1World, par3, par4, par5);
+                if (structureGenerator instanceof MapGenStronghold) {
+                    return structureGenerator.getNearestInstance(par1World, par3, par4, par5);
                 }
             }
         }
@@ -252,15 +260,16 @@ public class ChunkProviderFlat implements IChunkProvider {
         return null;
     }
 
+    @Override
     public int getLoadedChunkCount() {
         return 0;
     }
 
+    @Override
     public void recreateStructures(int par1, int par2) {
 
-        for (Object structureGenerator : this.structureGenerators) {
-            MapGenStructure var4 = (MapGenStructure) structureGenerator;
-            var4.generate(this, this.worldObj, par1, par2, null);
+        for (MapGenStructure structureGenerator : this.structureGenerators) {
+            structureGenerator.generate(this, this.worldObj, par1, par2, null);
         }
     }
 }

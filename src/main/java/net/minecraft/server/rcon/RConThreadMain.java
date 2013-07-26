@@ -86,6 +86,7 @@ public class RConThreadMain extends RConThreadBase {
         }
     }
 
+    @Override
     public void run() {
         this.logInfo("RCON running on " + this.hostname + ":" + this.rconPort);
 
@@ -112,6 +113,7 @@ public class RConThreadMain extends RConThreadBase {
     /**
      * Creates a new Thread object from this class and starts running
      */
+    @Override
     public void startThread() {
         if (0 == this.rconPassword.length()) {
             this.logWarning("No rcon password set in \'" + this.server.getSettingsFilename() + "\', rcon disabled!");

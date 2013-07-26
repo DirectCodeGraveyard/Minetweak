@@ -22,6 +22,7 @@ public class TileEntitySign extends TileEntity {
     /**
      * Writes a tile entity to NBT.
      */
+    @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setString("Text1", this.signText[0]);
@@ -33,6 +34,7 @@ public class TileEntitySign extends TileEntity {
     /**
      * Reads a tile entity from NBT.
      */
+    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         this.isEditable = false;
         super.readFromNBT(par1NBTTagCompound);
@@ -49,6 +51,7 @@ public class TileEntitySign extends TileEntity {
     /**
      * Overriden in a sign to provide the text.
      */
+    @Override
     public Packet getDescriptionPacket() {
         String[] var1 = new String[4];
         System.arraycopy(this.signText, 0, var1, 0, 4);

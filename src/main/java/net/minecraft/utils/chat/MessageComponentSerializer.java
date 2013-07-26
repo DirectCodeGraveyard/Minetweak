@@ -31,28 +31,28 @@ public class MessageComponentSerializer implements JsonDeserializer, JsonSeriali
         }
 
         if (var9 != null && var9.isJsonPrimitive()) {
-            var4.func_111071_a(Boolean.valueOf(var9.getAsBoolean()));
+            var4.func_111071_a(var9.getAsBoolean());
         }
 
         if (var10 != null && var10.isJsonPrimitive()) {
-            var4.func_111063_b(Boolean.valueOf(var10.getAsBoolean()));
+            var4.func_111063_b(var10.getAsBoolean());
         }
 
         if (var11 != null && var11.isJsonPrimitive()) {
-            var4.func_111081_c(Boolean.valueOf(var11.getAsBoolean()));
+            var4.func_111081_c(var11.getAsBoolean());
         }
 
         if (var12 != null && var12.isJsonPrimitive()) {
-            var4.func_111061_d(Boolean.valueOf(var12.getAsBoolean()));
+            var4.func_111061_d(var12.getAsBoolean());
         }
 
         if (var6 != null) {
             if (var6.isJsonArray()) {
                 JsonArray var18 = var6.getAsJsonArray();
-                Iterator var14 = var18.iterator();
+                Iterator<JsonElement> var14 = var18.iterator();
 
                 while (var14.hasNext()) {
-                    JsonElement var15 = (JsonElement) var14.next();
+                    JsonElement var15 = var14.next();
 
                     if (var15.isJsonPrimitive()) {
                         var4.func_111079_a(var15.getAsString());
@@ -68,22 +68,20 @@ public class MessageComponentSerializer implements JsonDeserializer, JsonSeriali
 
             if (var17 != null) {
                 if (var17.isJsonArray()) {
-                    ArrayList var20 = Lists.newArrayList();
-                    Iterator var19 = var17.getAsJsonArray().iterator();
+                    ArrayList<Object> var20 = Lists.newArrayList();
 
-                    while (var19.hasNext()) {
-                        JsonElement var16 = (JsonElement) var19.next();
+                    for (JsonElement o : var17.getAsJsonArray()) {
 
-                        if (var16.isJsonPrimitive()) {
-                            var20.add(var16.getAsString());
-                        } else if (var16.isJsonObject()) {
-                            var20.add(this.func_111056_a(var16, par2Type, par3JsonDeserializationContext));
+                        if (o.isJsonPrimitive()) {
+                            var20.add(o.getAsString());
+                        } else if (o.isJsonObject()) {
+                            var20.add(this.func_111056_a(o, par2Type, par3JsonDeserializationContext));
                         }
                     }
 
                     var4.func_111080_a(var7.getAsString(), var20.toArray());
                 } else if (var17.isJsonPrimitive()) {
-                    var4.func_111080_a(var7.getAsString(), new Object[]{var17.getAsString()});
+                    var4.func_111080_a(var7.getAsString(), var17.getAsString());
                 }
             } else {
                 var4.func_111072_b(var7.getAsString());
@@ -133,11 +131,8 @@ public class MessageComponentSerializer implements JsonDeserializer, JsonSeriali
 
     private JsonArray func_111057_b(ChatMessageComponent par1ChatMessageComponent, Type par2Type, JsonSerializationContext par3JsonSerializationContext) {
         JsonArray var4 = new JsonArray();
-        Iterator var5 = par1ChatMessageComponent.func_111069_h().iterator();
 
-        while (var5.hasNext()) {
-            ChatMessageComponent var6 = (ChatMessageComponent) var5.next();
-
+        for (ChatMessageComponent var6 : par1ChatMessageComponent.func_111069_h()) {
             if (var6.func_111075_f() != null) {
                 var4.add(new JsonPrimitive(var6.func_111075_f()));
             } else {
@@ -148,10 +143,12 @@ public class MessageComponentSerializer implements JsonDeserializer, JsonSeriali
         return var4;
     }
 
+    @Override
     public Object deserialize(JsonElement par1JsonElement, Type par2Type, JsonDeserializationContext par3JsonDeserializationContext) {
         return this.func_111056_a(par1JsonElement, par2Type, par3JsonDeserializationContext);
     }
 
+    @Override
     public JsonElement serialize(Object par1Obj, Type par2Type, JsonSerializationContext par3JsonSerializationContext) {
         return this.func_111055_a((ChatMessageComponent) par1Obj, par2Type, par3JsonSerializationContext);
     }

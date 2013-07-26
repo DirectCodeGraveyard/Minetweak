@@ -9,8 +9,8 @@ import java.util.Random;
 
 public class StructureStrongholdPieces {
     private static final StructureStrongholdPieceWeight[] pieceWeightArray = new StructureStrongholdPieceWeight[]{new StructureStrongholdPieceWeight(ComponentStrongholdStraight.class, 40, 0), new StructureStrongholdPieceWeight(ComponentStrongholdPrison.class, 5, 5), new StructureStrongholdPieceWeight(ComponentStrongholdLeftTurn.class, 20, 0), new StructureStrongholdPieceWeight(ComponentStrongholdRightTurn.class, 20, 0), new StructureStrongholdPieceWeight(ComponentStrongholdRoomCrossing.class, 10, 6), new StructureStrongholdPieceWeight(ComponentStrongholdStairsStraight.class, 5, 5), new StructureStrongholdPieceWeight(ComponentStrongholdStairs.class, 5, 5), new StructureStrongholdPieceWeight(ComponentStrongholdCrossing.class, 5, 4), new StructureStrongholdPieceWeight(ComponentStrongholdChestCorridor.class, 5, 4), new StructureStrongholdPieceWeight2(ComponentStrongholdLibrary.class, 10, 2), new StructureStrongholdPieceWeight3(ComponentStrongholdPortalRoom.class, 20, 1)};
-    private static List structurePieceList;
-    private static Class strongComponentType;
+    private static List<StructureStrongholdPieceWeight> structurePieceList;
+    private static Class<ComponentStrongholdCrossing> strongComponentType;
     static int totalWeight;
     private static final StructureStrongholdStones strongholdStones = new StructureStrongholdStones((StructureStrongholdPieceWeight2) null);
 
@@ -18,12 +18,10 @@ public class StructureStrongholdPieces {
      * sets up Arrays with the Structure pieces and their weights
      */
     public static void prepareStructurePieces() {
-        structurePieceList = new ArrayList();
+        structurePieceList = new ArrayList<StructureStrongholdPieceWeight>();
         StructureStrongholdPieceWeight[] var0 = pieceWeightArray;
-        int var1 = var0.length;
 
-        for (int var2 = 0; var2 < var1; ++var2) {
-            StructureStrongholdPieceWeight var3 = var0[var2];
+        for (StructureStrongholdPieceWeight var3 : var0) {
             var3.instancesSpawned = 0;
             structurePieceList.add(var3);
         }
@@ -36,8 +34,8 @@ public class StructureStrongholdPieces {
         totalWeight = 0;
         StructureStrongholdPieceWeight var2;
 
-        for (Iterator var1 = structurePieceList.iterator(); var1.hasNext(); totalWeight += var2.pieceWeight) {
-            var2 = (StructureStrongholdPieceWeight) var1.next();
+        for (Iterator<StructureStrongholdPieceWeight> var1 = structurePieceList.iterator(); var1.hasNext(); totalWeight += var2.pieceWeight) {
+            var2 = var1.next();
 
             if (var2.instancesLimit > 0 && var2.instancesSpawned < var2.instancesLimit) {
                 var0 = true;
@@ -51,7 +49,7 @@ public class StructureStrongholdPieces {
      * translates the PieceWeight class to the Component class
      */
     private static ComponentStronghold getStrongholdComponentFromWeightedPiece(Class par0Class, List par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7) {
-        Object var8 = null;
+        ComponentStronghold var8 = null;
 
         if (par0Class == ComponentStrongholdStraight.class) {
             var8 = ComponentStrongholdStraight.findValidPlacement(par1List, par2Random, par3, par4, par5, par6, par7);
@@ -77,7 +75,7 @@ public class StructureStrongholdPieces {
             var8 = ComponentStrongholdPortalRoom.findValidPlacement(par1List, par2Random, par3, par4, par5, par6, par7);
         }
 
-        return (ComponentStronghold) var8;
+        return var8;
     }
 
     private static ComponentStronghold getNextComponent(ComponentStrongholdStairs2 par0ComponentStrongholdStairs2, List par1List, Random par2Random, int par3, int par4, int par5, int par6, int par7) {
@@ -98,10 +96,8 @@ public class StructureStrongholdPieces {
             while (var13 < 5) {
                 ++var13;
                 int var9 = par2Random.nextInt(totalWeight);
-                Iterator var10 = structurePieceList.iterator();
 
-                while (var10.hasNext()) {
-                    StructureStrongholdPieceWeight var11 = (StructureStrongholdPieceWeight) var10.next();
+                for (StructureStrongholdPieceWeight var11 : structurePieceList) {
                     var9 -= var11.pieceWeight;
 
                     if (var9 < 0) {
@@ -156,7 +152,7 @@ public class StructureStrongholdPieces {
         return getNextValidComponent(par0ComponentStrongholdStairs2, par1List, par2Random, par3, par4, par5, par6, par7);
     }
 
-    public static Class setComponentType(Class par0Class) {
+    public static Class<ComponentStrongholdCrossing> setComponentType(Class<ComponentStrongholdCrossing> par0Class) {
         strongComponentType = par0Class;
         return par0Class;
     }

@@ -76,6 +76,7 @@ public class ComponentMineshaftCorridor extends StructureComponent {
     /**
      * Initiates construction of the Structure Component picked, at the current Location of StructGen
      */
+    @Override
     public void buildComponent(StructureComponent par1StructureComponent, List par2List, Random par3Random) {
         int var4 = this.getComponentType();
         int var5 = par3Random.nextInt(4);
@@ -155,6 +156,7 @@ public class ComponentMineshaftCorridor extends StructureComponent {
     /**
      * Used to generate chests with items in it. ex: Temple Chests, Village Blacksmith Chests, Mineshaft Chests.
      */
+    @Override
     protected boolean generateStructureChestContents(World par1World, StructureBoundingBox par2StructureBoundingBox, Random par3Random, int par4, int par5, int par6, WeightedRandomChestContent[] par7ArrayOfWeightedRandomChestContent, int par8) {
         int var9 = this.getXWithOffset(par4, par6);
         int var10 = this.getYWithOffset(par5);
@@ -175,6 +177,7 @@ public class ComponentMineshaftCorridor extends StructureComponent {
      * second Part of Structure generating, this for example places Spiderwebs, Mob Spawners, it closes Mineshafts at
      * the end, it adds Fences...
      */
+    @Override
     public boolean addComponentParts(World par1World, Random par2Random, StructureBoundingBox par3StructureBoundingBox) {
         if (this.isLiquidInStructureBoundingBox(par1World, par3StructureBoundingBox)) {
             return false;
@@ -215,11 +218,11 @@ public class ComponentMineshaftCorridor extends StructureComponent {
                 this.randomlyPlaceBlock(par1World, par3StructureBoundingBox, par2Random, 0.05F, 1, 2, var10 + 1, Block.torchWood.blockID, 0);
 
                 if (par2Random.nextInt(100) == 0) {
-                    this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 2, 0, var10 - 1, WeightedRandomChestContent.func_92080_a(StructureMineshaftPieces.func_78816_a(), new WeightedRandomChestContent[]{Item.enchantedBook.func_92114_b(par2Random)}), 3 + par2Random.nextInt(4));
+                    this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 2, 0, var10 - 1, WeightedRandomChestContent.func_92080_a(StructureMineshaftPieces.func_78816_a(), Item.enchantedBook.func_92114_b(par2Random)), 3 + par2Random.nextInt(4));
                 }
 
                 if (par2Random.nextInt(100) == 0) {
-                    this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 0, 0, var10 + 1, WeightedRandomChestContent.func_92080_a(StructureMineshaftPieces.func_78816_a(), new WeightedRandomChestContent[]{Item.enchantedBook.func_92114_b(par2Random)}), 3 + par2Random.nextInt(4));
+                    this.generateStructureChestContents(par1World, par3StructureBoundingBox, par2Random, 0, 0, var10 + 1, WeightedRandomChestContent.func_92080_a(StructureMineshaftPieces.func_78816_a(), Item.enchantedBook.func_92114_b(par2Random)), 3 + par2Random.nextInt(4));
                 }
 
                 if (this.hasSpiders && !this.spawnerPlaced) {

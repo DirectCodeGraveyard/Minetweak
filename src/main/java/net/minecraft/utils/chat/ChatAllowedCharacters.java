@@ -23,7 +23,7 @@ public class ChatAllowedCharacters {
 
         try {
             BufferedReader var1 = new BufferedReader(new InputStreamReader(ChatAllowedCharacters.class.getResourceAsStream("/font.txt"), "UTF-8"));
-            String var2 = "";
+            String var2;
 
             while ((var2 = var1.readLine()) != null) {
                 if (!var2.startsWith("#")) {
@@ -32,7 +32,7 @@ public class ChatAllowedCharacters {
             }
 
             var1.close();
-        } catch (Exception var3) {
+        } catch (Exception ignored) {
         }
 
         return var0;

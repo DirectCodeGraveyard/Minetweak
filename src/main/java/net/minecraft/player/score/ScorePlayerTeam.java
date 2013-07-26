@@ -26,6 +26,7 @@ public class ScorePlayerTeam extends Team {
         this.field_96673_d = par2Str;
     }
 
+    @Override
     public String func_96661_b() {
         return this.field_96675_b;
     }
@@ -79,6 +80,7 @@ public class ScorePlayerTeam extends Team {
         }
     }
 
+    @Override
     public String func_142053_d(String par1Str) {
         return this.getColorPrefix() + par1Str + this.getColorSuffix();
     }
@@ -90,6 +92,7 @@ public class ScorePlayerTeam extends Team {
         return par0Team == null ? par1Str : par0Team.func_142053_d(par1Str);
     }
 
+    @Override
     public boolean func_96665_g() {
         return this.field_96672_g;
     }

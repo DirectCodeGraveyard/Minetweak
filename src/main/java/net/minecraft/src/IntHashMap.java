@@ -91,7 +91,7 @@ public class IntHashMap {
      * Adds a key and associated value to this map
      */
     public void addKey(int par1, Object par2Obj) {
-        this.keySet.add(Integer.valueOf(par1));
+        this.keySet.add(par1);
         int var3 = computeHash(par1);
         int var4 = getSlotIndex(var3, this.slots.length);
 

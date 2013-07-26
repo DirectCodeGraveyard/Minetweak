@@ -6,7 +6,7 @@ import java.util.zip.GZIPOutputStream;
 
 public class CompressedStreamTools {
     /**
-     * Load the gzipped compound from the inputstream.
+     * Load the gzipped compound from the InputStream.
      */
     public static NBTTagCompound readCompressed(InputStream par0InputStream) throws IOException {
         DataInputStream var1 = new DataInputStream(new BufferedInputStream(new GZIPInputStream(par0InputStream)));
@@ -22,7 +22,7 @@ public class CompressedStreamTools {
     }
 
     /**
-     * Write the compound, gzipped, to the outputstream.
+     * Write the compound, gzipped, to the OutputStream.
      */
     public static void writeCompressed(NBTTagCompound par0NBTTagCompound, OutputStream par1OutputStream) throws IOException {
         DataOutputStream var2 = new DataOutputStream(new GZIPOutputStream(par1OutputStream));

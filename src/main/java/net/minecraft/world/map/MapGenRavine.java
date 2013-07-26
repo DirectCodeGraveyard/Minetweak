@@ -171,6 +171,7 @@ public class MapGenRavine extends MapGenBase {
     /**
      * Recursively called by generate() (generate) and optionally by itself.
      */
+    @Override
     protected void recursiveGenerate(World par1World, int par2, int par3, int par4, int par5, byte[] par6ArrayOfByte) {
         if (this.rand.nextInt(50) == 0) {
             double var7 = (double) (par2 * 16 + this.rand.nextInt(16));

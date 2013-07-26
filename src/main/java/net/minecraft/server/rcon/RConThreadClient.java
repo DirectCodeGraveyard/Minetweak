@@ -44,6 +44,7 @@ public class RConThreadClient extends RConThreadBase {
         this.logInfo("Rcon connection from: " + par2Socket.getInetAddress());
     }
 
+    @Override
     public void run() {
         try {
             while (true) {
@@ -100,13 +101,12 @@ public class RConThreadClient extends RConThreadBase {
                             continue;
 
                         default:
-                            this.sendMultipacketResponse(var5, String.format("Unknown request %s", new Object[]{Integer.toHexString(var6)}));
-                            continue;
+                            this.sendMultipacketResponse(var5, String.format("Unknown request %s", Integer.toHexString(var6)));
                     }
                 }
             }
-        } catch (SocketTimeoutException var17) {
-        } catch (IOException var18) {
+        } catch (SocketTimeoutException ignored) {
+        } catch (IOException ignored) {
         } catch (Exception var19) {
             System.out.println(var19);
         } finally {

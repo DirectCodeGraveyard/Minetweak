@@ -22,13 +22,13 @@ public class MapData extends WorldSavedData {
     /**
      * Holds a reference to the MapInfo of the players who own a copy of the map
      */
-    public List playersArrayList = new ArrayList();
+    public List<MapInfo> playersArrayList = new ArrayList<MapInfo>();
 
     /**
      * Holds a reference to the players who own a copy of the map and a reference to their MapInfo
      */
-    private Map playersHashMap = new HashMap();
-    public Map playersVisibleOnMap = new LinkedHashMap();
+    private Map<EntityPlayer, MapInfo> playersHashMap = new HashMap<EntityPlayer, MapInfo>();
+    public Map<String, MapCoord> playersVisibleOnMap = new LinkedHashMap<String, MapCoord>();
 
     public MapData(String par1Str) {
         super(par1Str);
@@ -37,6 +37,7 @@ public class MapData extends WorldSavedData {
     /**
      * reads in data from the NBTTagCompound into this MapDataBase
      */
+    @Override
     public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         this.dimension = par1NBTTagCompound.getByte("dimension");
         this.xCenter = par1NBTTagCompound.getInteger("xCenter");
@@ -81,6 +82,7 @@ public class MapData extends WorldSavedData {
     /**
      * write data to NBTTagCompound from this MapDataBase, similar to Entities and TileEntities
      */
+    @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         par1NBTTagCompound.setByte("dimension", this.dimension);
         par1NBTTagCompound.setInteger("xCenter", this.xCenter);
@@ -106,7 +108,7 @@ public class MapData extends WorldSavedData {
         }
 
         for (int var5 = 0; var5 < this.playersArrayList.size(); ++var5) {
-            MapInfo var4 = (MapInfo) this.playersArrayList.get(var5);
+            MapInfo var4 = this.playersArrayList.get(var5);
 
             if (!var4.entityplayerObj.isDead && (var4.entityplayerObj.inventory.hasItemStack(par2ItemStack) || par2ItemStack.isOnItemFrame())) {
                 if (!par2ItemStack.isOnItemFrame() && var4.entityplayerObj.dimension == this.dimension) {
@@ -173,7 +175,7 @@ public class MapData extends WorldSavedData {
      * Get byte array of packet data to send to players on map for updating map data
      */
     public byte[] getUpdatePacketData(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-        MapInfo var4 = (MapInfo) this.playersHashMap.get(par3EntityPlayer);
+        MapInfo var4 = this.playersHashMap.get(par3EntityPlayer);
         return var4 == null ? null : var4.getPlayersOnMap(par1ItemStack);
     }
 
@@ -184,9 +186,7 @@ public class MapData extends WorldSavedData {
     public void setColumnDirty(int par1, int par2, int par3) {
         super.markDirty();
 
-        for (int var4 = 0; var4 < this.playersArrayList.size(); ++var4) {
-            MapInfo var5 = (MapInfo) this.playersArrayList.get(var4);
-
+        for (MapInfo var5 : this.playersArrayList) {
             if (var5.field_76209_b[par1] < 0 || var5.field_76209_b[par1] > par2) {
                 var5.field_76209_b[par1] = par2;
             }
@@ -198,7 +198,7 @@ public class MapData extends WorldSavedData {
     }
 
     public MapInfo func_82568_a(EntityPlayer par1EntityPlayer) {
-        MapInfo var2 = (MapInfo) this.playersHashMap.get(par1EntityPlayer);
+        MapInfo var2 = this.playersHashMap.get(par1EntityPlayer);
 
         if (var2 == null) {
             var2 = new MapInfo(this, par1EntityPlayer);
