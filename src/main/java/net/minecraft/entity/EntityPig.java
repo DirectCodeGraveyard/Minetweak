@@ -9,6 +9,7 @@ import net.minecraft.player.achievement.AchievementList;
 import net.minecraft.world.World;
 import org.minetweak.Minetweak;
 import org.minetweak.event.entity.PigZapEvent;
+import org.minetweak.event.player.PlayerRidePigEvent;
 
 public class EntityPig extends EntityAnimal {
     /**
@@ -114,8 +115,15 @@ public class EntityPig extends EntityAnimal {
         if (super.interact(par1EntityPlayer)) {
             return true;
         } else if (this.getSaddled() && !this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer)) {
-            par1EntityPlayer.mountEntity(this);
-            return true;
+            PlayerRidePigEvent event = new PlayerRidePigEvent(Minetweak.getPlayerByName(par1EntityPlayer.username.toLowerCase()), this);
+            Minetweak.getEventBus().post(event);
+
+            if (event.isCancelled()) {
+                par1EntityPlayer.mountEntity(this);
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
