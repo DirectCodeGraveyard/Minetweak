@@ -273,6 +273,7 @@ public class Minetweak {
         registerCommand("lockdown", new CommandLockdown());
         registerCommand("difficulty", new CommandDifficulty());
         registerCommand("setspawn", new CommandSetSpawn());
+        registerCommand("slaughter", new CommandSlaughter());
     }
 
     /**
