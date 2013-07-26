@@ -69,6 +69,7 @@ public class CommandWhitelist extends CommandExecutor {
             if (args[0].equals("reload")) {
                 ServerOps.load();
                 Server.sendToOps("Loaded Whitelist.", true);
+                return;
             }
         }
         sender.sendMessage(getUsage());
