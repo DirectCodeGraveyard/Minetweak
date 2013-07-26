@@ -6,6 +6,8 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.src.DamageSource;
 import net.minecraft.world.World;
+import org.minetweak.Minetweak;
+import org.minetweak.event.entity.CreeperChargeEvent;
 
 public class EntityCreeper extends EntityMob {
     /**
@@ -202,7 +204,11 @@ public class EntityCreeper extends EntityMob {
      * Called when a lightning bolt hits the entity.
      */
     public void onStruckByLightning(EntityLightningBolt par1EntityLightningBolt) {
-        super.onStruckByLightning(par1EntityLightningBolt);
-        this.dataWatcher.updateObject(17, Byte.valueOf((byte) 1));
+        CreeperChargeEvent event = new CreeperChargeEvent(new org.minetweak.entity.Entity(this), new org.minetweak.entity.Entity(par1EntityLightningBolt));
+        Minetweak.getEventBus().post(event);
+        if (!event.isCancelled()) {
+            super.onStruckByLightning(par1EntityLightningBolt);
+            this.dataWatcher.updateObject(17, Byte.valueOf((byte) 1));
+        }
     }
 }
