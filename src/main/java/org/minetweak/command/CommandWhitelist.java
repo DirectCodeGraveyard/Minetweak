@@ -61,13 +61,13 @@ public class CommandWhitelist extends CommandExecutor {
                     return;
                 }
 
-                PlayerWhitelist.addPlayer(args[1]);
+                PlayerWhitelist.removePlayer(args[1]);
                 Server.sendToOps("Removed " + args[1] + " from whitelist.", true);
                 return;
             }
 
             if (args[0].equals("reload")) {
-                ServerOps.load();
+                PlayerWhitelist.load();
                 Server.sendToOps("Loaded Whitelist.", true);
                 return;
             }

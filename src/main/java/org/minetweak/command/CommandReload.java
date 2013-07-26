@@ -7,9 +7,9 @@ public class CommandReload extends CommandExecutor {
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         if (sender.hasPermission("minetweak.command.pardon")) {
-            Server.broadcastMessage("Reloading Plugins");
+            Server.sendToOps("Reloading Plugins");
             PluginManager.reloadPlugins();
-            Server.broadcastMessage("Done Reloading Plugins");
+            Server.sendToOps("Done Reloading Plugins");
             return;
         }
         noPermission(sender, "reload plugins");
