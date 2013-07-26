@@ -42,7 +42,7 @@ public class Minetweak {
     /**
      * This is the Minetweak version we are currently running on.
      */
-    private static String serverVersion = "0.6.4";
+    private static String serverVersion = "0.6.5";
 
     /**
      * This boolean will return true if the server has finished loading, will
