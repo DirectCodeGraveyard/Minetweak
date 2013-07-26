@@ -11,7 +11,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -57,7 +56,7 @@ public class PlayerWhitelist {
                 return;
             }
             FileReader reader = new FileReader(whitelistFile);
-            Type dataType = new TypeToken<ArrayList<String>>() {
+            Type dataType = new TypeToken<Set<String>>() {
             }.getType();
             whitelistedPlayers = gson.fromJson(reader, dataType);
             reader.close();
