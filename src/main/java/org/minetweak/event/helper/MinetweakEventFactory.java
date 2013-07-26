@@ -51,8 +51,8 @@ public class MinetweakEventFactory {
     }
 
     public static BlockIgniteEvent callBlockIgniteEvent(net.minecraft.world.World world, int x, int y, int z, int igniterX, int igniterY, int igniterZ) {
-        org.minetweak.world.World bukkitWorld = world.getWorld();
-        IBlock igniter = bukkitWorld.getBlockAt(igniterX, igniterY, igniterZ);
+        org.minetweak.world.World tweakWorld = world.getWorld();
+        IBlock igniter = tweakWorld.getBlockAt(igniterX, igniterY, igniterZ);
         BlockIgniteEvent.IgniteCause cause;
         switch (igniter.getType()) {
             case LAVA:
@@ -64,7 +64,7 @@ public class MinetweakEventFactory {
                 cause = BlockIgniteEvent.IgniteCause.SPREAD;
         }
 
-        BlockIgniteEvent event = new BlockIgniteEvent(bukkitWorld.getBlockAt(x, y, z), cause, igniter);
+        BlockIgniteEvent event = new BlockIgniteEvent(tweakWorld.getBlockAt(x, y, z), cause, igniter);
         Minetweak.getEventBus().post(event);
         return event;
     }
