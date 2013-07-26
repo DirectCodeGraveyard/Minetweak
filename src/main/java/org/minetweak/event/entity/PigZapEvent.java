@@ -10,6 +10,8 @@ public class PigZapEvent implements EntityEvent {
     private EntityPigZombie pigZombieEntity;
     private EntityLightningBolt boltEntity;
 
+    private boolean cancelled;
+
     public PigZapEvent(EntityPig pigEntity, EntityPigZombie pigZombieEntity, EntityLightningBolt boltEntity) {
         this.pigEntity = pigEntity;
         this.pigZombieEntity = pigZombieEntity;
@@ -21,6 +23,18 @@ public class PigZapEvent implements EntityEvent {
     }
 
     public EntityPigZombie getEntityPigZombie() {
+        return pigZombieEntity;
+    }
 
+    public EntityLightningBolt getBoltEntity() {
+        return boltEntity;
+    }
+
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    public void setCancelled(boolean cancelled) {
+        cancelled = false;
     }
 }

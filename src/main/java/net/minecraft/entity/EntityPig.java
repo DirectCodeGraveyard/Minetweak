@@ -7,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.player.achievement.AchievementList;
 import net.minecraft.world.World;
+import org.minetweak.Minetweak;
+import org.minetweak.event.entity.PigZapEvent;
 
 public class EntityPig extends EntityAnimal {
     /**
@@ -167,8 +169,18 @@ public class EntityPig extends EntityAnimal {
      * Called when a lightning bolt hits the entity.
      */
     public void onStruckByLightning(EntityLightningBolt par1EntityLightningBolt) {
+        EntityPigZombie var2 = new EntityPigZombie(this.worldObj);
+
+        PigZapEvent event = new PigZapEvent(this, var2, par1EntityLightningBolt);
+
+        Minetweak.getEventBus().post(event);
+
+        if (event.isCancelled()) {
+            return;
+        }
+
         if (!this.worldObj.isRemote) {
-            EntityPigZombie var2 = new EntityPigZombie(this.worldObj);
+
             var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
             this.worldObj.spawnEntityInWorld(var2);
             this.setDead();
