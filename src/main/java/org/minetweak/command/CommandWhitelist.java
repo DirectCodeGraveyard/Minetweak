@@ -29,7 +29,7 @@ public class CommandWhitelist extends CommandExecutor {
 
             if (args[0].equals("list")) {
                 ServerOps.load();
-                ArrayList<String> players = PlayerWhitelist.getWhitelistedPlayers();
+                Set<String> players = PlayerWhitelist.getWhitelistedPlayers();
                 sender.sendMessage(ChatFormatting.GOLD + "Whitelisted Players" + ChatFormatting.RESET + ":");
                 boolean flag = false;
                 String line = "";
