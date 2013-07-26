@@ -405,7 +405,7 @@ public class Player extends Entity implements CommandSender {
      * @param z z coordinate
      */
     public void teleportToPosition(double x, double y, double z) {
-        getPlayerMP().setPosition(x, y, z);
+        getPlayerMP().playerNetServerHandler.setPlayerLocation(x, y, z, getPlayerMP().rotationPitch, getPlayerMP().rotationYaw);
     }
 
     /**
