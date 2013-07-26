@@ -12,9 +12,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PlayerWhitelist {
-    private static ArrayList<String> whitelistedPlayers = new ArrayList<String>();
+    private static Set<String> whitelistedPlayers = new HashSet<String>();
     private static File whitelistFile = new File("whitelist.json");
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
@@ -28,7 +30,7 @@ public class PlayerWhitelist {
         save();
     }
 
-    public static ArrayList<String> getWhitelistedPlayers() {
+    public static Set<String> getWhitelistedPlayers() {
         return whitelistedPlayers;
     }
 
@@ -55,7 +57,8 @@ public class PlayerWhitelist {
                 return;
             }
             FileReader reader = new FileReader(whitelistFile);
-            Type dataType = new TypeToken<ArrayList<String>>(){}.getType();
+            Type dataType = new TypeToken<ArrayList<String>>() {
+            }.getType();
             whitelistedPlayers = gson.fromJson(reader, dataType);
             reader.close();
         } catch (IOException e) {
