@@ -159,4 +159,22 @@ public class World {
             }
         }
     }
+
+    /**
+     * Gets the World's time
+     *
+     * @return world time
+     */
+    public long getWorldTime() {
+        return getWorldServer().getWorldTime();
+    }
+
+    /**
+     * Sets the World's time
+     *
+     * @param time time to set
+     */
+    public void setWorldTime(long time) {
+        getWorldServer().setWorldTime(time);
+    }
 }
