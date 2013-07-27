@@ -63,6 +63,21 @@ public class PluginInfo {
         this.isBukkitPlugin = isBukkitPlugin;
     }
 
+    public PluginInfo(String mainClass, String pluginName, String description, ArrayList<SubPlugin> subPlugins) {
+        this.main = mainClass;
+        this.name = pluginName;
+        this.description = description;
+        this.subPlugins = subPlugins;
+    }
+
+    public PluginInfo(String mainClass, String pluginName, String description, ArrayList<SubPlugin> subPlugins, LoadingConfig loading) {
+        this.main = mainClass;
+        this.name = pluginName;
+        this.description = description;
+        this.subPlugins = subPlugins;
+        this.loading = loading;
+    }
+
     /**
      * Get the name of the main class
      *
@@ -126,6 +141,10 @@ public class PluginInfo {
         return subPlugins;
     }
 
+    /**
+     * Gets the Loading Configuration
+     * @return loading configuration
+     */
     public LoadingConfig getLoadingConfig() {
         return loading;
     }
@@ -133,6 +152,11 @@ public class PluginInfo {
     class SubPlugin {
         private String name;
         private String main;
+
+        public SubPlugin(String pluginName, String mainClass) {
+            this.name = pluginName;
+            this.main = mainClass;
+        }
 
         public String getName() {
             return name;
@@ -145,6 +169,9 @@ public class PluginInfo {
 
     class LoadingConfig {
         private int priority;
+        public LoadingConfig(int priority) {
+            this.priority = priority;
+        }
 
         public int getPriority() {
             return priority;

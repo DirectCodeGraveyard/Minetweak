@@ -20,37 +20,33 @@ repositories {
 configurations {
     compile
     deployerJars
-    compileAndJar {
-        extendsFrom compile
-    }
 }
 
 dependencies {
-    compileAndJar 'com.google.guava:guava:14.0.1'
-    compileAndJar 'com.google.code.gson:gson:2.2.4'
-    compileAndJar 'commons-io:commons-io:2.4'
-    compileAndJar 'org.apache.commons:commons-lang3:3.1'
+    compile 'com.google.guava:guava:14.0.1'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.apache.commons:commons-lang3:3.1'
+    compile files('libs/bcprov-jdk15on-1.47.jar')
     testCompile 'junit:junit:4.10'
     deployerJars 'org.apache.maven.wagon:wagon-ftp:2.2'
-    compileAndJar files('libs/bcprov-jdk15on-1.47.jar')
 }
 
 javadoc {
     title 'Minetweak v' + version
     exclude '**/net/minecraft/**'
-    classpath = configurations.compileAndJar + configurations.compile + sourceSets.main.output
+    classpath = configurations.compile + sourceSets.main.output
 }
 
 compileJava {
     options.compilerArgs = ['-Xlint:none']
     sourceCompatibility = '1.6'
     targetCompatibility = '1.6'
-    classpath = configurations.compileAndJar + configurations.compile
 }
 
 jar {
     manifest {
-        attributes('Main-class': 'org.minetweak.Minetweak')
+        attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': version)
     }
 }
 
@@ -75,7 +71,7 @@ task standaloneJar(type: Jar) {
     description = 'Makes a JAR with Minetweak dependencies inside'
     classifier = 'standalone'
     from sourceSets.main.output
-    from configurations.compileAndJar.collect { it.isDirectory() ? it : zipTree(it) }
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 
     manifest {
         attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': version)
@@ -97,6 +93,7 @@ artifacts {
     archives standaloneJar
     archives apiJar
 }
+
 def username = ''
 def password = ''
 Properties props = new Properties()
@@ -112,14 +109,13 @@ uploadArchives {
         repository(url: 'ftp://minetweak.org/var/www/snapshots/') {
             authentication(userName: username, password: password)
         }
-        pom.groupId = groupId
         pom.version = version
+        pom.groupId = groupId
     }
 }
 
 idea {
     module {
-        scopes.PROVIDED.plus += configurations.compileAndJar
         downloadJavadoc = true
         downloadSources = false
     }
