@@ -1,5 +1,7 @@
 package org.minetweak.plugins;
 
+import java.util.ArrayList;
+
 public class PluginInfo {
     /**
      * The Plugin's Main class
@@ -21,16 +23,29 @@ public class PluginInfo {
      */
     private boolean isBukkitPlugin;
 
+
+    private LoadingConfig loading;
+
     /**
      * The Authors Name
      */
     private String author;
+
+    /**
+     * Lists of SubPlugins
+     */
+    private ArrayList<SubPlugin> subPlugins;
 
     public PluginInfo(String mainClass, String pluginName, String description) {
         this.main = mainClass;
         this.name = pluginName;
         this.description = description;
         this.isBukkitPlugin = false;
+    }
+
+    public PluginInfo(String mainClass, String pluginName) {
+        this.main = mainClass;
+        this.name = pluginName;
     }
 
     public PluginInfo(String mainClass, String pluginName, String description, String author) {
@@ -100,5 +115,39 @@ public class PluginInfo {
      */
     public String getAuthor() {
         return author;
+    }
+
+    /**
+     * Gets the Sub Plugins
+     *
+     * @return sub plugins
+     */
+    public ArrayList<SubPlugin> getSubPlugins() {
+        return subPlugins;
+    }
+
+    public LoadingConfig getLoadingConfig() {
+        return loading;
+    }
+
+    class SubPlugin {
+        private String name;
+        private String main;
+
+        public String getName() {
+            return name;
+        }
+
+        public String getMainClass() {
+            return main;
+        }
+    }
+
+    class LoadingConfig {
+        private int priority;
+
+        public int getPriority() {
+            return priority;
+        }
     }
 }

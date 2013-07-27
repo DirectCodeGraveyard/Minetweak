@@ -38,12 +38,12 @@ dependencies {
 javadoc {
     title 'Minetweak v' + version
     exclude '**/net/minecraft/**'
-    classpath = configurations.compileAndJar + configurations.compile
+    classpath = configurations.compileAndJar + configurations.compile + sourceSets.main.output
 }
 
 compileJava {
     options.compilerArgs = ['-Xlint:none']
-    sourceCompatibility = '1.6' 
+    sourceCompatibility = '1.6'
     targetCompatibility = '1.6'
     classpath = configurations.compileAndJar + configurations.compile
 }
@@ -97,15 +97,20 @@ artifacts {
     archives standaloneJar
     archives apiJar
 }
-
-if (!hasProperty('ciUsername')) { ext.ciUsername = '' }
-if (!hasProperty('ciPassword')) { ext.ciPassword = '' }
-
+def username = ''
+def password = ''
+Properties props = new Properties()
+File file = new File(System.getProperty("user.home") + "/.gradle/minetweak.props")
+if (file.exists()) {
+    props.load(new FileInputStream(file))
+    username = props.getProperty("username")
+    password = props.getProperty("password")
+}
 uploadArchives {
     repositories.mavenDeployer {
         configuration = configurations.deployerJars
-        repository(url: 'ftp://ci.minetweak.org/var/www/snapshots/') {
-            authentication(userName: ciUsername, password: ciPassword)
+        repository(url: 'ftp://minetweak.org/var/www/snapshots/') {
+            authentication(userName: username, password: password)
         }
         pom.groupId = groupId
         pom.version = version
@@ -113,9 +118,9 @@ uploadArchives {
 }
 
 idea {
-   module {
-       scopes.PROVIDED.plus += configurations.compileAndJar
-       downloadJavadoc = true
-       downloadSources = false
-   }
+    module {
+        scopes.PROVIDED.plus += configurations.compileAndJar
+        downloadJavadoc = true
+        downloadSources = false
+    }
 }
