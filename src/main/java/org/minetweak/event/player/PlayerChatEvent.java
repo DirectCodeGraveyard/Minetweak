@@ -1,10 +1,13 @@
 package org.minetweak.event.player;
 
 import org.minetweak.entity.Player;
+import org.minetweak.event.helper.Cancellable;
 
-public class PlayerChatEvent extends PlayerEvent {
+public class PlayerChatEvent extends PlayerEvent implements Cancellable {
 
     private String message;
+
+    private boolean cancelled;
 
     public PlayerChatEvent(Player player, String message) {
         super(player);
@@ -18,5 +21,15 @@ public class PlayerChatEvent extends PlayerEvent {
      */
     public String getMessage() {
         return message;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return cancelled;
+    }
+
+    @Override
+    public void setCancelled(boolean cancel) {
+        cancelled = cancel;
     }
 }

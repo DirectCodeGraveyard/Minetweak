@@ -567,10 +567,13 @@ public class NetServerHandler extends NetHandler {
                         this.sendPacket(new Packet3Chat(ChatMessageComponent.func_111077_e("chat.cannotSend").func_111059_a(EnumChatFormatting.RED)));
                         return;
                     }
+                    PlayerChatEvent event = new PlayerChatEvent(Minetweak.getPlayerByName(this.playerEntity.getEntityName()), var2);
+                    Minetweak.getEventBus().post(event);
 
-                    ChatMessageComponent var4 = ChatMessageComponent.func_111082_b("chat.type.text", this.playerEntity.getTranslatedEntityName(), var2);
-                    this.mcServer.getConfigurationManager().sendChatMessageToAll(var4, false);
-                    Minetweak.getEventBus().post(new PlayerChatEvent(Minetweak.getPlayerByName(this.playerEntity.getEntityName()), var2));
+                    if (!event.isCancelled()) {
+                        ChatMessageComponent var4 = ChatMessageComponent.func_111082_b("chat.type.text", this.playerEntity.getTranslatedEntityName(), var2);
+                        this.mcServer.getConfigurationManager().sendChatMessageToAll(var4, false);
+                    } else return;
                 }
 
                 this.chatSpamThresholdCount += 20;
