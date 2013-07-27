@@ -4,6 +4,8 @@ import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
 import org.minetweak.Server;
 import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.TabCompletion;
+import org.minetweak.entity.Player;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
 
@@ -18,12 +20,18 @@ public class CommandWhitelist extends CommandExecutor {
             if (args[0].equals("on")) {
                 MinecraftServer.getServer().getConfigurationManager().setWhiteListEnabled(true);
                 Server.sendToOps("Whitelist has been enabled.", true);
+                if (sender.isPlayer() && !(((Player) sender).isOperator())) {
+                    sender.sendMessage(ChatFormatting.GOLD + "Whitelist has been enabled.");
+                }
                 return;
             }
 
             if (args[0].equals("off")) {
                 MinecraftServer.getServer().getConfigurationManager().setWhiteListEnabled(false);
                 Server.sendToOps("Whitelist Has been disabled.", true);
+                if (sender.isPlayer() && !(((Player) sender).isOperator())) {
+                    sender.sendMessage(ChatFormatting.GOLD + "Whitelist has been disabled.");
+                }
                 return;
             }
 
@@ -51,6 +59,9 @@ public class CommandWhitelist extends CommandExecutor {
                     return;
                 }
                 PlayerWhitelist.addPlayer(args[1]);
+                if (sender.isPlayer() && !(((Player) sender).isOperator())) {
+                    sender.sendMessage(ChatFormatting.GOLD + "Added " + ChatFormatting.GREEN + args[1] + ChatFormatting.GOLD + " to the whitelist.");
+                }
                 Server.sendToOps("Added " + args[1] + " to the whitelist.", true);
                 return;
             }
@@ -60,14 +71,19 @@ public class CommandWhitelist extends CommandExecutor {
                     sender.sendMessage(getUsage());
                     return;
                 }
-
                 PlayerWhitelist.removePlayer(args[1]);
+                if (sender.isPlayer() && !(((Player) sender).isOperator())) {
+                    sender.sendMessage(ChatFormatting.GOLD + "Removed " + ChatFormatting.GREEN + args[1] + ChatFormatting.GOLD + " from the whitelist.");
+                }
                 Server.sendToOps("Removed " + args[1] + " from whitelist.", true);
                 return;
             }
 
             if (args[0].equals("reload")) {
                 PlayerWhitelist.load();
+                if (sender.isPlayer() && !(((Player) sender).isOperator())) {
+                    sender.sendMessage(ChatFormatting.GOLD + "Reloaded Whitelist");
+                }
                 Server.sendToOps("Loaded Whitelist.", true);
                 return;
             }
@@ -89,12 +105,18 @@ public class CommandWhitelist extends CommandExecutor {
         String[] split = input.split(" ");
         int length = split.length;
         Set<String> players = Minetweak.getPlayers().keySet();
-
+        String cmd;
         switch (length) {
             case 1:
                 completions.addAll(Arrays.asList("add", "remove", "reload"));
+                if (PlayerWhitelist.isWhitelistEnabled()) {
+                    completions.add("off");
+                } else {
+                    completions.add("on");
+                }
+                return;
             case 2:
-                String cmd = split[1];
+                cmd = split[1];
                 if (cmd.equals("add")) {
                     for (String player : players) {
                         if (!PlayerWhitelist.getWhitelistedPlayers().contains(player)) {
@@ -103,6 +125,30 @@ public class CommandWhitelist extends CommandExecutor {
                     }
                 } else if (cmd.equals("remove")) {
                     completions.addAll(PlayerWhitelist.getWhitelistedPlayers());
+                } else if (!cmd.equals("on") && !cmd.equals("off") && !cmd.equals("reload")) {
+                    for (String command : Arrays.asList("off", "on", "add", "remove", "reload")) {
+                        if (command.startsWith(cmd)) {
+                            completions.add(command);
+                        }
+                    }
+                }
+                return;
+            case 3:
+                cmd = split[1];
+                String user = split[2];
+                if (cmd.equals("add")) {
+                    for (String player : players) {
+                        if (!PlayerWhitelist.getWhitelistedPlayers().contains(player)) {
+                            completions.addAll(TabCompletion.getPlayersMatching(user));
+                        }
+                    }
+                } else if (cmd.equals("remove")) {
+                    Set<String> whitelisted = PlayerWhitelist.getWhitelistedPlayers();
+                    for (String player : whitelisted) {
+                        if (player.startsWith(user)) {
+                            completions.add(player);
+                        }
+                    }
                 }
         }
     }

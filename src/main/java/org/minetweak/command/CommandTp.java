@@ -2,6 +2,7 @@ package org.minetweak.command;
 
 import org.minetweak.Minetweak;
 import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
 
 import java.util.ArrayList;
@@ -50,9 +51,9 @@ public class CommandTp extends CommandExecutor {
 
         switch (length) {
             case 1:
-                completions.addAll(Minetweak.getPlayers().keySet());
+                completions.addAll(TabCompletion.getPlayersMatching(input));
             case 2:
-                completions.addAll(Minetweak.getPlayers().keySet());
+                completions.addAll(TabCompletion.getPlayersMatching(input));
         }
     }
 }

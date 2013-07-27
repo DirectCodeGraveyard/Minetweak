@@ -2,7 +2,10 @@ package org.minetweak.command;
 
 import org.minetweak.Minetweak;
 import org.minetweak.Server;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
+
+import java.util.ArrayList;
 
 public class CommandOp extends CommandExecutor {
 
@@ -32,4 +35,8 @@ public class CommandOp extends CommandExecutor {
         return "Ops a Player";
     }
 
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        TabCompletion.getPlayersOnlyCommand(input, completions);
+    }
 }

@@ -16,6 +16,14 @@ public class World {
         this.world = world;
     }
 
+    /**
+     * Gets the Block at the specified position
+     *
+     * @param x x coord
+     * @param y y coord
+     * @param z z coord
+     * @return Block at position
+     */
     public TweakBlock getBlockAt(int x, int y, int z) {
         return getChunkAt(x >> 4, z >> 4).getBlock(x & 0xF, y & 0xFF, z & 0xF);
     }
@@ -176,5 +184,59 @@ public class World {
      */
     public void setWorldTime(long time) {
         getWorldServer().setWorldTime(time);
+    }
+
+    /**
+     * Turns rain on and off
+     *
+     * @param isRaining if it should rain
+     */
+    public void setRaining(boolean isRaining) {
+        getWorldServer().getWorldInfo().setRaining(isRaining);
+    }
+
+    /**
+     * Gets whether it is raining in the world
+     *
+     * @return if it is raining
+     */
+    public boolean isRaining() {
+        return getWorldServer().getWorldInfo().isRaining();
+    }
+
+    /**
+     * Sets the time it should rain in the world
+     *
+     * @param time time to rain
+     */
+    public void setRainTime(int time) {
+        getWorldServer().getWorldInfo().setRainTime(time);
+    }
+
+    /**
+     * Turns Thundering on and off
+     *
+     * @param isThundering if it should thunder
+     */
+    public void setThundering(boolean isThundering) {
+        getWorldServer().getWorldInfo().setThundering(isThundering);
+    }
+
+    /**
+     * Gets whether it is thundering in the world
+     *
+     * @return if it is thundering
+     */
+    public boolean isThundering() {
+        return getWorldServer().getWorldInfo().isThundering();
+    }
+
+    /**
+     * Sets the thunder time in the world
+     *
+     * @param time time to thunder
+     */
+    public void setThunderTime(int time) {
+        getWorldServer().getWorldInfo().setThunderTime(time);
     }
 }

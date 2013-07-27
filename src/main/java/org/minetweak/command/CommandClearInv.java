@@ -1,7 +1,10 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
+
+import java.util.ArrayList;
 
 public class CommandClearInv extends CommandExecutor {
 
@@ -25,5 +28,10 @@ public class CommandClearInv extends CommandExecutor {
     @Override
     public String getHelpInfo() {
         return "Clears Inventory";
+    }
+
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        TabCompletion.getPlayersOnlyCommand(input, completions);
     }
 }

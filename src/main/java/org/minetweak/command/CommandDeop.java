@@ -1,6 +1,7 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
 import org.minetweak.permissions.ServerOps;
 
@@ -36,12 +37,7 @@ public class CommandDeop extends CommandExecutor {
 
     @Override
     public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
-        int length = input.split(" ").length;
-
-        switch (length) {
-            case 1:
-                completions.addAll(Minetweak.getPlayers().keySet());
-        }
+        TabCompletion.getPlayersOnlyCommand(input, completions);
     }
 
 }

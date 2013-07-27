@@ -1,8 +1,7 @@
 package org.minetweak.command;
 
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.utils.enums.EnumChatFormatting;
-import net.minecraft.world.WorldInfo;
+import org.minetweak.Minetweak;
+import org.minetweak.chat.ChatFormatting;
 
 public class CommandWeather extends CommandExecutor {
     @Override
@@ -12,21 +11,22 @@ public class CommandWeather extends CommandExecutor {
             return;
         }
         if (sender.hasPermission("minetweak.command.weather")) {
-            WorldInfo info = MinecraftServer.getServer().worldServerForDimension(0).getWorldInfo();
             String id = args[0];
             if (id.equalsIgnoreCase("rain")) {
-                info.setRaining(true);
-                sender.sendMessage("Done.");
+                Minetweak.getOverworld().setRaining(true);
             } else if (id.equalsIgnoreCase("clear")) {
-                info.setRaining(false);
-                info.setThundering(false);
+                Minetweak.getOverworld().setRaining(false);
+                Minetweak.getOverworld().setThundering(false);
                 sender.sendMessage("Done.");
             } else if (id.equals("thunder")) {
-                info.setThundering(true);
+                Minetweak.getOverworld().setThundering(true);
+                Minetweak.getOverworld().setRaining(true);
                 sender.sendMessage("Done.");
             } else {
-                sender.sendMessage(EnumChatFormatting.RED + "Invalid Weather Type: " + id);
+                sender.sendMessage(ChatFormatting.RED + "Invalid Weather Type: " + id);
+                return;
             }
+            Minetweak.getOverworld().broadcastMessage("Weather changed to " + ChatFormatting.GREEN + id);
         } else {
             noPermission(sender, "change the weather");
         }
@@ -34,6 +34,6 @@ public class CommandWeather extends CommandExecutor {
 
     @Override
     public String getHelpInfo() {
-        return "Changes Weather";
+        return "Changes Weather in thw world.";
     }
 }
