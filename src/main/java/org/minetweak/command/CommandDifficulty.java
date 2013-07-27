@@ -7,6 +7,9 @@ import org.minetweak.server.Difficulty;
 import org.minetweak.util.StringUtils;
 import org.minetweak.world.World;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class CommandDifficulty extends CommandExecutor {
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
@@ -46,5 +49,20 @@ public class CommandDifficulty extends CommandExecutor {
     @Override
     public String getHelpInfo() {
         return "Sets the Worlds Difficulty";
+    }
+
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        String[] split = input.split(" ");
+        if (split.length == 2) {
+            String currentDifficulty = split[1];
+            for (String diff : Arrays.asList("peaceful", "easy", "hard", "normal")) {
+                if (diff.startsWith(currentDifficulty)) {
+                    completions.add(diff);
+                }
+            }
+        } else if (split.length == 1) {
+            completions.addAll(Arrays.asList("peaceful", "easy", "hard", "normal"));
+        }
     }
 }
