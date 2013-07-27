@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.minetweak.Minetweak;
-import org.minetweak.Server;
+import org.minetweak.config.MinetweakConfig;
 
 import java.io.File;
 import java.io.FileReader;
@@ -66,6 +66,14 @@ public class PlayerWhitelist {
     }
 
     public static boolean isPlayerWhitelisted(String name) {
-        return !Server.isWhitelistEnabled() || whitelistedPlayers.contains(name);
+        return whitelistedPlayers.contains(name);
+    }
+
+    public static boolean isWhitelistEnabled() {
+        return MinetweakConfig.getBoolean("server.whitelist-enabled", false);
+    }
+
+    public static void setWhitelistEnabled(boolean whitelistEnabled) {
+        MinetweakConfig.set("server.whitelist-enabled", "" + whitelistEnabled);
     }
 }

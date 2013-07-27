@@ -234,20 +234,19 @@ public class ItemInWorldManager {
                 this.thisPlayerMP.playerNetServerHandler.sendPacket(packet);
             }
 
-            event = new BlockBreakEvent(tweakBlock, Minetweak.getPlayerByName(this.thisPlayerMP.username));
-            if (!isCreative() && !getGameType().isAdventure() && !this.thisPlayerMP.canHarvestBlock(Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)])) {
+            event = new BlockBreakEvent(tweakBlock, Minetweak.getPlayerByName(this.thisPlayerMP.username.toLowerCase()));
+            if (!isCreative() && !getGameType().isAdventure() && !this.thisPlayerMP.canHarvestBlock(Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)]))
                 event.setCancelled(true);
-            }
 
-            if (getGameType().isAdventure()) {
+            if (getGameType().isAdventure())
                 event.setCancelled(true);
-            }
             Item currentItem = null;
             if (thisPlayerMP.getCurrentEquippedItem() != null)
                 currentItem = thisPlayerMP.getCurrentEquippedItem().getItem();
-            if (isCreative() && currentItem != null && currentItem instanceof ItemSword) {
+
+            if (isCreative() && currentItem != null && currentItem instanceof ItemSword)
                 event.setCancelled(true);
-            }
+
             Block nmsBlock = Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
 
             if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && !this.thisPlayerMP.canHarvestBlock(nmsBlock)) {

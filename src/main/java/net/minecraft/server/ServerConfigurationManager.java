@@ -61,14 +61,7 @@ public abstract class ServerConfigurationManager {
      */
     protected int maxPlayers;
     protected int viewDistance;
-    /**
-     * A set containing the OPs.
-     */
-    private Set<String> ops;
-    /**
-     * The Set of all whitelisted players.
-     */
-    private Set<String> whiteListedPlayers = new HashSet<String>();
+
     /**
      * Reference to the PlayerNBTManager object.
      */
@@ -546,7 +539,7 @@ public abstract class ServerConfigurationManager {
      */
     public boolean isAllowedToLogin(String par1Str) {
         par1Str = par1Str.trim().toLowerCase();
-        return !this.whiteListEnforced || ServerOps.isPlayerOp(par1Str) || PlayerWhitelist.isPlayerWhitelisted(par1Str);
+        return !PlayerWhitelist.isWhitelistEnabled() || ServerOps.isPlayerOp(par1Str) || PlayerWhitelist.isPlayerWhitelisted(par1Str);
     }
 
     /**
@@ -722,21 +715,21 @@ public abstract class ServerConfigurationManager {
      * Add the specified player to the white list.
      */
     public void addToWhiteList(String par1Str) {
-        this.whiteListedPlayers.add(par1Str);
+        PlayerWhitelist.addPlayer(par1Str);
     }
 
     /**
      * Remove the specified player from the whitelist.
      */
     public void removeFromWhitelist(String par1Str) {
-        this.whiteListedPlayers.remove(par1Str);
+        PlayerWhitelist.removePlayer(par1Str);
     }
 
     /**
      * Returns the whitelisted players.
      */
     public Set<String> getWhiteListedPlayers() {
-        return this.whiteListedPlayers;
+        return PlayerWhitelist.getWhitelistedPlayers();
     }
 
     public Set<String> getOps() {
@@ -747,7 +740,7 @@ public abstract class ServerConfigurationManager {
      * Either does nothing, or calls readWhiteList.
      */
     public void loadWhiteList() {
-
+        PlayerWhitelist.load();
     }
 
     /**
@@ -792,11 +785,11 @@ public abstract class ServerConfigurationManager {
     }
 
     public boolean isWhiteListEnabled() {
-        return this.whiteListEnforced;
+        return PlayerWhitelist.isWhitelistEnabled();
     }
 
     public void setWhiteListEnabled(boolean par1) {
-        this.whiteListEnforced = par1;
+        PlayerWhitelist.setWhitelistEnabled(par1);
     }
 
     public List<ICrafting> getPlayerList(String par1Str) {
@@ -844,7 +837,7 @@ public abstract class ServerConfigurationManager {
      */
     public void removeAllPlayers() {
         while (!this.playerEntityList.isEmpty()) {
-            (this.playerEntityList.get(0)).playerNetServerHandler.kickPlayer("Server closed");
+            (this.playerEntityList.get(0)).playerNetServerHandler.kickPlayer(MinetweakConfig.get("server"));
         }
     }
 
@@ -858,6 +851,4 @@ public abstract class ServerConfigurationManager {
     public void sendChatMessageToAll(ChatMessageComponent par1ChatMessageComponent) {
         this.sendChatMessageToAll(par1ChatMessageComponent, true);
     }
-
-
 }
