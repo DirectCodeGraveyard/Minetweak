@@ -54,6 +54,7 @@ public class Packet1Login extends Packet {
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
+    @Override
     public void readPacketData(DataInput par1DataInput) throws IOException {
         this.clientEntityId = par1DataInput.readInt();
         String var2 = readString(par1DataInput, 16);
@@ -76,6 +77,7 @@ public class Packet1Login extends Packet {
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
+    @Override
     public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeInt(this.clientEntityId);
         writeString(this.terrainType == null ? "" : this.terrainType.getWorldTypeName(), par1DataOutput);
@@ -95,6 +97,7 @@ public class Packet1Login extends Packet {
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
+    @Override
     public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleLogin(this);
     }
@@ -102,6 +105,7 @@ public class Packet1Login extends Packet {
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
+    @Override
     public int getPacketSize() {
         int var1 = 0;
 

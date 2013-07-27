@@ -7,7 +7,7 @@ public class CommandMotd extends CommandExecutor {
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         String motd = mergeArgs(args);
-        if (motd.equals("")) {
+        if (motd.isEmpty()) {
             sender.sendMessage(MinecraftServer.getServer().getMOTD());
             return;
         }

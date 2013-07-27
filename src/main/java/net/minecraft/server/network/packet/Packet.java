@@ -27,17 +27,17 @@ public abstract class Packet {
     /**
      * Maps packet class to packet id
      */
-    private static Map packetClassToIdMap = new HashMap();
+    private static Map<Class, Integer> packetClassToIdMap = new HashMap<Class, Integer>();
 
     /**
      * List of the client's packet IDs.
      */
-    private static Set clientPacketIdList = new HashSet();
+    private static Set<Integer> clientPacketIdList = new HashSet<Integer>();
 
     /**
      * List of the server's packet IDs.
      */
-    private static Set serverPacketIdList = new HashSet();
+    private static Set<Integer> serverPacketIdList = new HashSet<Integer>();
     protected ILogAgent field_98193_m;
 
     /**
@@ -122,7 +122,7 @@ public abstract class Packet {
      * Returns the ID of this packet.
      */
     public final int getPacketId() {
-        return (Integer) packetClassToIdMap.get(this.getClass());
+        return packetClassToIdMap.get(this.getClass());
     }
 
     /**

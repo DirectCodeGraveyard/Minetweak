@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CommandDifficulty extends CommandExecutor {
+
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         if (!sender.hasPermission("minetweak.command.difficulty")) {
@@ -38,7 +39,7 @@ public class CommandDifficulty extends CommandExecutor {
         } else {
             id = Difficulty.getByName(arg1).getID();
         }
-        MinetweakConfig.set("server.difficulty", "" + id);
+        MinetweakConfig.set("server.difficulty", String.valueOf(id));
         Difficulty difficulty = Difficulty.getByID(id);
         World world = player.getCurrentWorld();
         world.setDifficulty(difficulty);

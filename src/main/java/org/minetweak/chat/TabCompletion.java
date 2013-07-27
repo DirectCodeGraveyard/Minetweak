@@ -30,7 +30,7 @@ public class TabCompletion {
             }
             Set<String> commands = getCommands();
             input = input.substring(1);
-            if (!input.equals("")) {
+            if (!input.isEmpty()) {
                 return new ArrayList<String>(getCommandsMatching(input));
             } else {
                 for (String command : commands) {
@@ -45,7 +45,7 @@ public class TabCompletion {
 
     public static Set<String> getPlayersMatching(String input) {
         Set<String> matches = new HashSet<String>();
-        if (input.equals("")) {
+        if (input.isEmpty()) {
             return Minetweak.getPlayers().keySet();
         } else {
             Set<String> players = Minetweak.getPlayers().keySet();

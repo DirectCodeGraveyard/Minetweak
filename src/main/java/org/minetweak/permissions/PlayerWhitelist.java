@@ -74,6 +74,6 @@ public class PlayerWhitelist {
     }
 
     public static void setWhitelistEnabled(boolean whitelistEnabled) {
-        MinetweakConfig.set("server.whitelist-enabled", "" + whitelistEnabled);
+        MinetweakConfig.set("server.whitelist-enabled", String.valueOf(whitelistEnabled));
     }
 }

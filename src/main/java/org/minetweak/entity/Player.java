@@ -162,6 +162,7 @@ public class Player extends Entity implements CommandSender {
      * @param permissionNode Target permission node
      * @return True if the player has the permission
      */
+    @Override
     public boolean hasPermission(String permissionNode) {
         return Permissions.hasPermission(playerDisplayName, permissionNode);
     }

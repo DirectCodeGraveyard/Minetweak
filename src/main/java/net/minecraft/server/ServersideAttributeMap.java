@@ -4,10 +4,13 @@ import com.google.common.collect.Sets;
 import net.minecraft.entity.attribute.*;
 import net.minecraft.src.LowerStringMap;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class ServersideAttributeMap extends BaseAttributeMap {
-    private final Set field_111162_d = Sets.newHashSet();
+    private final Set<ModifiableAttributeInstance> field_111162_d = Sets.newHashSet();
     protected final Map field_111163_c = new LowerStringMap();
 
     public ModifiableAttributeInstance func_111159_c(Attribute par1Attribute) {
@@ -24,6 +27,7 @@ public class ServersideAttributeMap extends BaseAttributeMap {
         return (ModifiableAttributeInstance) var2;
     }
 
+    @Override
     public AttributeInstance func_111150_b(Attribute par1Attribute) {
         if (this.field_111153_b.containsKey(par1Attribute.func_111108_a())) {
             throw new IllegalArgumentException("Attribute is already registered!");
@@ -40,22 +44,22 @@ public class ServersideAttributeMap extends BaseAttributeMap {
         }
     }
 
+    @Override
     public void func_111149_a(ModifiableAttributeInstance par1ModifiableAttributeInstance) {
         if (par1ModifiableAttributeInstance.func_111123_a().func_111111_c()) {
             this.field_111162_d.add(par1ModifiableAttributeInstance);
         }
     }
 
-    public Set func_111161_b() {
+    public Set<ModifiableAttributeInstance> func_111161_b() {
         return this.field_111162_d;
     }
 
-    public Collection func_111160_c() {
-        HashSet var1 = Sets.newHashSet();
-        Iterator var2 = this.func_111146_a().iterator();
+    public Collection<AttributeInstance> func_111160_c() {
+        HashSet<AttributeInstance> var1 = Sets.newHashSet();
 
-        while (var2.hasNext()) {
-            AttributeInstance var3 = (AttributeInstance) var2.next();
+        for (Object o : this.func_111146_a()) {
+            AttributeInstance var3 = (AttributeInstance) o;
 
             if (var3.func_111123_a().func_111111_c()) {
                 var1.add(var3);
@@ -65,10 +69,12 @@ public class ServersideAttributeMap extends BaseAttributeMap {
         return var1;
     }
 
+    @Override
     public AttributeInstance func_111152_a(String par1Str) {
         return this.func_111158_b(par1Str);
     }
 
+    @Override
     public AttributeInstance func_111151_a(Attribute par1Attribute) {
         return this.func_111159_c(par1Attribute);
     }
