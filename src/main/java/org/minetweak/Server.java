@@ -108,15 +108,12 @@ public class Server {
         return MinetweakConfig.getBoolean("server.whitelist-enabled");
     }
 
+    /**
+     * Send a message to all operators on the server.
+     * @param message Message to send.
+     */
     public static void sendToOps(String message) {
-        sendToOps(message, false);
-    }
-
-    public static void sendToOps(String message, boolean pretty) {
-        String out = message;
-        if (pretty) {
-            out = "[" + ChatFormatting.GOLD + "Server" + ChatFormatting.RESET + "] " + message;
-        }
+        String out = "[" + ChatFormatting.GOLD + "Server" + ChatFormatting.RESET + "] " + message;
 
         if (ServerOps.getOps().size() == 0) return;
 

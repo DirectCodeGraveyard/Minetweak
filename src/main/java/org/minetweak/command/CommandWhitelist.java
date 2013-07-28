@@ -19,7 +19,7 @@ public class CommandWhitelist extends CommandExecutor {
         if (args.length >= 1) {
             if (args[0].equals("on")) {
                 MinecraftServer.getServer().getConfigurationManager().setWhiteListEnabled(true);
-                Server.sendToOps("Whitelist has been enabled.", true);
+                Server.sendToOps("Whitelist has been enabled.");
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
                     sender.sendMessage(ChatFormatting.GOLD + "Whitelist has been enabled.");
                 }
@@ -28,7 +28,7 @@ public class CommandWhitelist extends CommandExecutor {
 
             if (args[0].equals("off")) {
                 MinecraftServer.getServer().getConfigurationManager().setWhiteListEnabled(false);
-                Server.sendToOps("Whitelist Has been disabled.", true);
+                Server.sendToOps("Whitelist Has been disabled.");
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
                     sender.sendMessage(ChatFormatting.GOLD + "Whitelist has been disabled.");
                 }
@@ -62,7 +62,7 @@ public class CommandWhitelist extends CommandExecutor {
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
                     sender.sendMessage(ChatFormatting.GOLD + "Added " + ChatFormatting.GREEN + args[1] + ChatFormatting.GOLD + " to the whitelist.");
                 }
-                Server.sendToOps("Added " + args[1] + " to the whitelist.", true);
+                Server.sendToOps("Added " + args[1] + " to the whitelist.");
                 return;
             }
 
@@ -75,7 +75,7 @@ public class CommandWhitelist extends CommandExecutor {
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
                     sender.sendMessage(ChatFormatting.GOLD + "Removed " + ChatFormatting.GREEN + args[1] + ChatFormatting.GOLD + " from the whitelist.");
                 }
-                Server.sendToOps("Removed " + args[1] + " from whitelist.", true);
+                Server.sendToOps("Removed " + args[1] + " from whitelist.");
                 return;
             }
 
@@ -84,7 +84,7 @@ public class CommandWhitelist extends CommandExecutor {
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
                     sender.sendMessage(ChatFormatting.GOLD + "Reloaded Whitelist");
                 }
-                Server.sendToOps("Loaded Whitelist.", true);
+                Server.sendToOps("Loaded Whitelist.");
                 return;
             }
         }
