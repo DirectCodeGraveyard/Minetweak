@@ -324,7 +324,7 @@ public class Minetweak {
      * @param lockdownEnabled whether the server lockdown is enabled
      */
     public static void setLockedDown(boolean lockdownEnabled) {
-        Minetweak.isLockedDown = lockdownEnabled;
+        isLockedDown = lockdownEnabled;
     }
 
     /**
