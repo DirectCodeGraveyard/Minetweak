@@ -24,6 +24,11 @@ public class Server {
         }
     }
 
+    /**
+     * Kicks a player.
+     * @param playerName Player username to kick
+     * @return True on kick success
+     */
     public static boolean kickPlayer(String playerName) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
         if (targetPlayer == null) return false;
@@ -31,6 +36,12 @@ public class Server {
         return true;
     }
 
+    /**
+     * Kicks a player.
+     * @param playerName Player username to kick
+     * @param kickReason Reason to kick
+     * @return True on kick success
+     */
     public static boolean kickPlayer(String playerName, String kickReason) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
         if (targetPlayer == null) return false;
@@ -39,9 +50,9 @@ public class Server {
     }
 
     /**
-     * Bans a player
+     * Bans a player.
      * @param playerName Player username to ban
-     * @return Success on ban
+     * @return True on ban success
      */
     public static boolean banPlayer(String playerName) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
@@ -51,10 +62,10 @@ public class Server {
     }
 
     /**
-     * Bans a player
+     * Bans a player.
      * @param playerName Player username to ban
      * @param banReason Reason to ban the player
-     * @return Success on ban
+     * @return True on ban success
      */
     public static boolean banPlayer(String playerName, String banReason) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
