@@ -7,7 +7,7 @@ import org.minetweak.entity.Player;
 
 import java.util.ArrayList;
 
-public class CommandTp extends CommandExecutor {
+public class CommandTeleport extends CommandExecutor {
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         if (args.length > 2 || args.length == 0) {

@@ -5,7 +5,7 @@ import org.minetweak.Server;
 import org.minetweak.chat.ChatColors;
 import org.minetweak.entity.Player;
 
-public class CommandTpAll extends CommandExecutor {
+public class CommandTeleportAll extends CommandExecutor {
 
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
