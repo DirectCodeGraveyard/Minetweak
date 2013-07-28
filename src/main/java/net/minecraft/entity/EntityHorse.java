@@ -8,8 +8,8 @@ import net.minecraft.entity.attribute.AttributeInstance;
 import net.minecraft.entity.attribute.RangedAttribute;
 import net.minecraft.entity.attribute.SharedMonsterAttributes;
 import net.minecraft.entity.pathfinding.PathEntity;
-import net.minecraft.inventory.AnimalChest;
 import net.minecraft.inventory.IInvBasic;
+import net.minecraft.inventory.InventoryAnimalChest;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,7 +26,7 @@ import java.util.List;
 @SuppressWarnings({"MismatchedReadAndWriteOfArray", "UnusedDeclaration", "FieldCanBeLocal"})
 public class EntityHorse extends EntityAnimal implements IInvBasic {
     private static final IEntitySelector field_110276_bu = new EntityHorseBredSelector();
-    private static final Attribute field_110271_bv = (new RangedAttribute("horse.jumpStrength", 0.7D, 0.0D, 2.0D)).func_111117_a("Jump Strength").func_111112_a(true);
+    private static final Attribute horseAttributes = (new RangedAttribute("horse.jumpStrength", 0.7D, 0.0D, 2.0D)).func_111117_a("Jump Strength").func_111112_a(true);
     private static final int[] field_110272_by = new int[]{0, 5, 7, 11};
     private int field_110289_bD;
     private int field_110290_bE;
@@ -34,7 +34,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     public int field_110278_bp;
     public int field_110279_bq;
     protected boolean field_110275_br;
-    private AnimalChest field_110296_bG;
+    private InventoryAnimalChest animalInventory;
     private boolean field_110293_bH;
     protected int field_110274_bs;
     protected float field_110277_bt;
@@ -47,7 +47,6 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     private float field_110288_bO;
     private int field_110285_bP;
     private String field_110286_bQ;
-    private String[] field_110280_bR = new String[3];
 
     public EntityHorse(World par1World) {
         super(par1World);
@@ -63,7 +62,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         this.tasks.addTask(6, new EntityAIWander(this, 0.7D));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.func_110226_cD();
+        this.addInventory();
     }
 
     protected void entityInit() {
@@ -77,7 +76,6 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
 
     public void func_110214_p(int par1) {
         this.dataWatcher.updateObject(19, (byte) par1);
-        this.func_110230_cF();
     }
 
     public int func_110265_bP() {
@@ -86,7 +84,6 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
 
     public void func_110235_q(int par1) {
         this.dataWatcher.updateObject(20, par1);
-        this.func_110230_cF();
     }
 
     public int func_110202_bQ() {
@@ -211,7 +208,6 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
 
     public void func_110236_r(int par1) {
         this.dataWatcher.updateObject(22, par1);
-        this.func_110230_cF();
     }
 
     public void func_110242_l(boolean par1) {
@@ -324,36 +320,34 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         return this.func_110261_ca() && (var1 == 1 || var1 == 2) ? 17 : 2;
     }
 
-    private void func_110226_cD() {
-        AnimalChest var1 = this.field_110296_bG;
-        this.field_110296_bG = new AnimalChest("HorseChest", this.func_110225_cC());
-        this.field_110296_bG.func_110133_a(this.getEntityName());
+    private void addInventory() {
+        InventoryAnimalChest var1 = this.animalInventory;
+        this.animalInventory = new InventoryAnimalChest("HorseChest", this.func_110225_cC());
+        this.animalInventory.setInventoryTitle(this.getEntityName());
 
         if (var1 != null) {
-            var1.func_110132_b(this);
-            int var2 = Math.min(var1.getSizeInventory(), this.field_110296_bG.getSizeInventory());
+            var1.setEntity(this);
+            int var2 = Math.min(var1.getSizeInventory(), this.animalInventory.getSizeInventory());
 
             for (int var3 = 0; var3 < var2; ++var3) {
                 ItemStack var4 = var1.getStackInSlot(var3);
 
                 if (var4 != null) {
-                    this.field_110296_bG.setInventorySlotContents(var3, var4.copy());
+                    this.animalInventory.setInventorySlotContents(var3, var4.copy());
                 }
             }
-
-            var1 = null;
         }
 
-        this.field_110296_bG.func_110134_a(this);
+        this.animalInventory.func_110134_a(this);
         this.func_110232_cE();
     }
 
     private void func_110232_cE() {
         if (!this.worldObj.isRemote) {
-            this.func_110251_o(this.field_110296_bG.getStackInSlot(0) != null);
+            this.func_110251_o(this.animalInventory.getStackInSlot(0) != null);
 
             if (this.func_110259_cr()) {
-                this.func_110236_r(this.func_110260_d(this.field_110296_bG.getStackInSlot(1)));
+                this.func_110236_r(this.func_110260_d(this.animalInventory.getStackInSlot(1)));
             }
         }
     }
@@ -404,7 +398,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     }
 
     public double func_110215_cj() {
-        return this.func_110148_a(field_110271_bv).func_111126_e();
+        return this.func_110148_a(horseAttributes).func_111126_e();
     }
 
     /**
@@ -499,7 +493,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
 
     protected void func_110147_ax() {
         super.func_110147_ax();
-        this.func_110140_aT().func_111150_b(field_110271_bv);
+        this.func_110140_aT().func_111150_b(horseAttributes);
         this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(53.0D);
         this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(0.22499999403953552D);
     }
@@ -529,14 +523,10 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         return 400;
     }
 
-    private void func_110230_cF() {
-        this.field_110286_bQ = null;
-    }
-
     public void func_110199_f(EntityPlayer par1EntityPlayer) {
         if (!this.worldObj.isRemote && (this.riddenByEntity == null || this.riddenByEntity == par1EntityPlayer) && this.func_110248_bS()) {
-            this.field_110296_bG.func_110133_a(this.getEntityName());
-            par1EntityPlayer.func_110298_a(this, this.field_110296_bG);
+            this.animalInventory.setInventoryTitle(this.getEntityName());
+            par1EntityPlayer.func_110298_a(this, this.animalInventory);
         }
     }
 
@@ -658,7 +648,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
                     this.func_110207_m(true);
                     this.playSound("mob.chickenplop", 1.0F, (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
                     var3 = true;
-                    this.func_110226_cD();
+                    this.addInventory();
                 }
 
                 if (!var3 && this.func_110253_bW() && !this.func_110257_ck() && var2.itemID == Item.saddle.itemID) {
@@ -791,7 +781,6 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
 
         if (this.worldObj.isRemote && this.dataWatcher.hasObjectChanged()) {
             this.dataWatcher.func_111144_e();
-            this.func_110230_cF();
         }
 
         if (this.field_110290_bE > 0 && ++this.field_110290_bE > 30) {
@@ -920,11 +909,11 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     }
 
     public void func_110244_cA() {
-        this.func_110240_a(this, this.field_110296_bG);
+        this.func_110240_a(this, this.animalInventory);
         this.func_110224_ci();
     }
 
-    private void func_110240_a(Entity par1Entity, AnimalChest par2AnimalChest) {
+    private void func_110240_a(Entity par1Entity, InventoryAnimalChest par2AnimalChest) {
         if (par2AnimalChest != null && !this.worldObj.isRemote) {
             for (int var3 = 0; var3 < par2AnimalChest.getSizeInventory(); ++var3) {
                 ItemStack var4 = par2AnimalChest.getStackInSlot(var3);
@@ -1033,8 +1022,8 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         if (this.func_110261_ca()) {
             NBTTagList var2 = new NBTTagList();
 
-            for (int var3 = 2; var3 < this.field_110296_bG.getSizeInventory(); ++var3) {
-                ItemStack var4 = this.field_110296_bG.getStackInSlot(var3);
+            for (int var3 = 2; var3 < this.animalInventory.getSizeInventory(); ++var3) {
+                ItemStack var4 = this.animalInventory.getStackInSlot(var3);
 
                 if (var4 != null) {
                     NBTTagCompound var5 = new NBTTagCompound();
@@ -1047,12 +1036,12 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
             par1NBTTagCompound.setTag("Items", var2);
         }
 
-        if (this.field_110296_bG.getStackInSlot(1) != null) {
-            par1NBTTagCompound.setTag("ArmorItem", this.field_110296_bG.getStackInSlot(1).writeToNBT(new NBTTagCompound("ArmorItem")));
+        if (this.animalInventory.getStackInSlot(1) != null) {
+            par1NBTTagCompound.setTag("ArmorItem", this.animalInventory.getStackInSlot(1).writeToNBT(new NBTTagCompound("ArmorItem")));
         }
 
-        if (this.field_110296_bG.getStackInSlot(0) != null) {
-            par1NBTTagCompound.setTag("SaddleItem", this.field_110296_bG.getStackInSlot(0).writeToNBT(new NBTTagCompound("SaddleItem")));
+        if (this.animalInventory.getStackInSlot(0) != null) {
+            par1NBTTagCompound.setTag("SaddleItem", this.animalInventory.getStackInSlot(0).writeToNBT(new NBTTagCompound("SaddleItem")));
         }
     }
 
@@ -1077,14 +1066,14 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
 
         if (this.func_110261_ca()) {
             NBTTagList var3 = par1NBTTagCompound.getTagList("Items");
-            this.func_110226_cD();
+            this.addInventory();
 
             for (int var4 = 0; var4 < var3.tagCount(); ++var4) {
                 NBTTagCompound var5 = (NBTTagCompound) var3.tagAt(var4);
                 int var6 = var5.getByte("Slot") & 255;
 
-                if (var6 >= 2 && var6 < this.field_110296_bG.getSizeInventory()) {
-                    this.field_110296_bG.setInventorySlotContents(var6, ItemStack.loadItemStackFromNBT(var5));
+                if (var6 >= 2 && var6 < this.animalInventory.getSizeInventory()) {
+                    this.animalInventory.setInventorySlotContents(var6, ItemStack.loadItemStackFromNBT(var5));
                 }
             }
         }
@@ -1095,7 +1084,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
             var7 = ItemStack.loadItemStackFromNBT(par1NBTTagCompound.getCompoundTag("ArmorItem"));
 
             if (var7 != null && func_110211_v(var7.itemID)) {
-                this.field_110296_bG.setInventorySlotContents(1, var7);
+                this.animalInventory.setInventorySlotContents(1, var7);
             }
         }
 
@@ -1103,10 +1092,10 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
             var7 = ItemStack.loadItemStackFromNBT(par1NBTTagCompound.getCompoundTag("SaddleItem"));
 
             if (var7 != null && var7.itemID == Item.saddle.itemID) {
-                this.field_110296_bG.setInventorySlotContents(0, var7);
+                this.animalInventory.setInventorySlotContents(0, var7);
             }
         } else if (par1NBTTagCompound.getBoolean("Saddle")) {
-            this.field_110296_bG.setInventorySlotContents(0, new ItemStack(Item.saddle));
+            this.animalInventory.setInventorySlotContents(0, new ItemStack(Item.saddle));
         }
 
         this.func_110232_cE();
@@ -1174,8 +1163,8 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         var3.func_110214_p(var6);
         double var14 = this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111125_b() + par1EntityAgeable.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111125_b() + (double) this.func_110267_cL();
         var3.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(var14 / 3.0D);
-        double var13 = this.func_110148_a(field_110271_bv).func_111125_b() + par1EntityAgeable.func_110148_a(field_110271_bv).func_111125_b() + this.func_110245_cM();
-        var3.func_110148_a(field_110271_bv).func_111128_a(var13 / 3.0D);
+        double var13 = this.func_110148_a(horseAttributes).func_111125_b() + par1EntityAgeable.func_110148_a(horseAttributes).func_111125_b() + this.func_110245_cM();
+        var3.func_110148_a(horseAttributes).func_111128_a(var13 / 3.0D);
         double var11 = this.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111125_b() + par1EntityAgeable.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111125_b() + this.func_110203_cN();
         var3.func_110148_a(SharedMonsterAttributes.field_111263_d).func_111128_a(var11 / 3.0D);
         return var3;
@@ -1224,9 +1213,9 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         }
 
         if (var7 != 2 && var7 != 1) {
-            this.func_110148_a(field_110271_bv).func_111128_a(this.func_110245_cM());
+            this.func_110148_a(horseAttributes).func_111128_a(this.func_110245_cM());
         } else {
-            this.func_110148_a(field_110271_bv).func_111128_a(0.5D);
+            this.func_110148_a(horseAttributes).func_111128_a(0.5D);
         }
 
         this.setEntityHealth(this.func_110138_aP());

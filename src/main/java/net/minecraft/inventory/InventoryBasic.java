@@ -28,7 +28,7 @@ public class InventoryBasic implements IInventory {
         this.field_70480_d.add(par1IInvBasic);
     }
 
-    public void func_110132_b(IInvBasic par1IInvBasic) {
+    public void setEntity(IInvBasic par1IInvBasic) {
         this.field_70480_d.remove(par1IInvBasic);
     }
 
@@ -123,7 +123,7 @@ public class InventoryBasic implements IInventory {
         return this.field_94051_e;
     }
 
-    public void func_110133_a(String par1Str) {
+    public void setInventoryTitle(String par1Str) {
         this.field_94051_e = true;
         this.inventoryTitle = par1Str;
     }
