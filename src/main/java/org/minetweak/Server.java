@@ -118,12 +118,13 @@ public class Server {
             out = "[" + ChatFormatting.GOLD + "Server" + ChatFormatting.RESET + "] " + message;
         }
 
+        if (ServerOps.getOps().size() == 0) return;
+
         for (String op : ServerOps.getOps()) {
-            Player player = Minetweak.getPlayerByName(op);
-            if (player == null) {
-                continue;
+            if (Minetweak.isPlayerOnline(op)) {
+                Player player = Minetweak.getPlayerByName(op);
+                player.sendMessage(out);
             }
-            player.sendMessage(out);
         }
         Minetweak.info(message);
     }
