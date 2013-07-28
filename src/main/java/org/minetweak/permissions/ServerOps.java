@@ -19,12 +19,12 @@ public class ServerOps {
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static void addOp(String name) {
-        ops.add(name);
+        ops.add(name.toLowerCase());
         save();
     }
 
     public static void removeOp(String name) {
-        ops.remove(name);
+        ops.remove(name.toLowerCase());
         save();
     }
 
