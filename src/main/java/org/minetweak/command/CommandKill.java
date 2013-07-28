@@ -1,7 +1,10 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
+
+import java.util.ArrayList;
 
 public class CommandKill extends CommandExecutor {
 
@@ -14,10 +17,10 @@ public class CommandKill extends CommandExecutor {
             noPermission(sender, "kill players");
             return;
         }
-        Player targetPlayer = Minetweak.getPlayerByName(args[0]);
+        Player targetPlayer = Minetweak.getPlayerByName(args[0].toLowerCase());
 
         if (Minetweak.isPlayerOnline(args[0])) {
-            sender.sendMessage("You have killed " + args[0]);
+            sender.sendMessage("You have killed " + args[0].toLowerCase());
             targetPlayer.sendMessage("Ouch, that must have hurt");
             targetPlayer.killPlayer();
         } else {
@@ -30,4 +33,8 @@ public class CommandKill extends CommandExecutor {
         return "Kills a Player";
     }
 
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        TabCompletion.getPlayersOnlyCommand(input, completions);
+    }
 }

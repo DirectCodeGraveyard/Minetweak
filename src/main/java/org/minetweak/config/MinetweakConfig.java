@@ -59,7 +59,7 @@ public class MinetweakConfig {
     }
 
     public static boolean getBoolean(String key, boolean value) {
-        return get(new Property(key, "" + value)).equals("true");
+        return get(new Property(key, String.valueOf(value))).equals("true");
     }
 
     public static String get(String key, String value) {
@@ -67,7 +67,7 @@ public class MinetweakConfig {
     }
 
     public static int getInteger(String key, Integer value) {
-        return Integer.parseInt(get(new Property(key, "" + value.toString())));
+        return Integer.parseInt(get(new Property(key, value.toString())));
     }
 
     public static File getConfigFile() {

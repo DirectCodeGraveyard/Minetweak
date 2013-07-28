@@ -13,6 +13,7 @@ import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.utils.enums.EnumGameType;
 import org.minetweak.Minetweak;
 import org.minetweak.command.CommandSender;
+import org.minetweak.event.player.PlayerJoinEvent;
 import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
 import org.minetweak.permissions.PlayerWhitelist;
@@ -60,11 +61,11 @@ public class Player extends Entity implements CommandSender {
     /**
      * Register a player into Minetweak
      *
-     * @param playerUsername Player name we are registering
+     * @param playerMP EntityPlayerMP Instance
      */
-    public static boolean registerPlayer(String playerUsername) {
-        playerUsername = playerUsername.toLowerCase();
-        Player targetPlayerInstance = new Player(playerUsername);
+    public static boolean registerPlayer(EntityPlayerMP playerMP) {
+        Player targetPlayerInstance = new Player(playerMP);
+        String playerUsername = targetPlayerInstance.getName();
         if (Minetweak.isServerLockedDown()) {
             targetPlayerInstance.kickPlayer("This server is currently under lockdown.");
             return false;
@@ -75,14 +76,24 @@ public class Player extends Entity implements CommandSender {
                     return false;
                 }
             } else {
-                if (!PlayerWhitelist.isPlayerWhitelisted(playerUsername)) {
+                if (PlayerWhitelist.isWhitelistEnabled() && !PlayerWhitelist.isPlayerWhitelisted(playerUsername)) {
                     targetPlayerInstance.kickPlayer("You are not whitelisted on this server!");
                     return false;
                 }
                 Minetweak.getPlayers().put(playerUsername, targetPlayerInstance);
+                Minetweak.getEventBus().post(new PlayerJoinEvent(targetPlayerInstance));
             }
             return true;
         }
+    }
+
+    /**
+     * Register a player into Minetweak
+     *
+     * @param playerUsername Player name we are registering
+     */
+    public static boolean registerPlayer(String playerUsername) {
+        return registerPlayer(MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerUsername));
     }
 
     /**
@@ -162,6 +173,7 @@ public class Player extends Entity implements CommandSender {
      * @param permissionNode Target permission node
      * @return True if the player has the permission
      */
+    @Override
     public boolean hasPermission(String permissionNode) {
         return Permissions.hasPermission(playerDisplayName, permissionNode);
     }
@@ -406,6 +418,7 @@ public class Player extends Entity implements CommandSender {
      * @param z z coordinate
      */
     public void teleportToPosition(double x, double y, double z) {
+        getPlayerMP().mountEntity(null);
         getPlayerMP().setPosition(x, y, z);
     }
 

@@ -17,9 +17,9 @@ public class CommandKick extends CommandExecutor {
             noPermission(sender, "kick players");
             return;
         }
-        Player targetPlayer = Minetweak.getPlayerByName(args[0]);
+        Player targetPlayer = Minetweak.getPlayerByName(args[0].toLowerCase());
 
-        if (Minetweak.isPlayerOnline(args[0])) {
+        if (!Minetweak.isPlayerOnline(args[0].toLowerCase())) {
             sender.sendMessage("You cannot kick an offline player.");
         } else {
             if (args.length == 1) {

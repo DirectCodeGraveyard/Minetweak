@@ -24,6 +24,7 @@ public class Packet203AutoComplete extends Packet {
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
+    @Override
     public void readPacketData(DataInput input) throws IOException {
         this.text = readString(input, 32767);
     }
@@ -31,6 +32,7 @@ public class Packet203AutoComplete extends Packet {
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
+    @Override
     public void writePacketData(DataOutput output) throws IOException {
         writeString(StringUtils.substring(this.text, 0, 32767), output);
     }
@@ -38,6 +40,7 @@ public class Packet203AutoComplete extends Packet {
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
+    @Override
     public void processPacket(NetHandler netHandler) {
         netHandler.handleAutoComplete(this);
     }
@@ -45,6 +48,7 @@ public class Packet203AutoComplete extends Packet {
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
+    @Override
     public int getPacketSize() {
         return 2 + this.text.length() * 2;
     }
@@ -56,6 +60,7 @@ public class Packet203AutoComplete extends Packet {
     /**
      * only false for the abstract Packet class, all real packets return true
      */
+    @Override
     public boolean isRealPacket() {
         return true;
     }
@@ -64,6 +69,7 @@ public class Packet203AutoComplete extends Packet {
      * eg return packet30entity.entityId == entityId; WARNING : will throw if you compare a packet to a different packet
      * class
      */
+    @Override
     public boolean containsSameEntityIDAs(Packet packet) {
         return true;
     }

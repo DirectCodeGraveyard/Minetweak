@@ -37,7 +37,7 @@ public class MinetweakEventFactory {
     public static BlockPlaceEvent callBlockPlaceEvent(net.minecraft.world.World world, EntityPlayer who, IBlockState replacedBlockState, int clickedX, int clickedY, int clickedZ) {
         World craftWorld = world.getWorld();
 
-        Player player = (who == null) ? null : (Player) Minetweak.getPlayerByName(who.getEntityName());
+        Player player = (who == null) ? null : Minetweak.getPlayerByName(who.getEntityName());
 
         IBlock blockClicked = craftWorld.getBlockAt(clickedX, clickedY, clickedZ);
         IBlock placedBlock = replacedBlockState.getBlock();

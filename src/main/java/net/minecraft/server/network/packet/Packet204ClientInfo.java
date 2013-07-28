@@ -17,6 +17,7 @@ public class Packet204ClientInfo extends Packet {
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
+    @Override
     public void readPacketData(DataInput par1DataInput) throws IOException {
         this.language = readString(par1DataInput, 7);
         this.renderDistance = par1DataInput.readByte();
@@ -30,6 +31,7 @@ public class Packet204ClientInfo extends Packet {
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
+    @Override
     public void writePacketData(DataOutput par1DataOutput) throws IOException {
         writeString(this.language, par1DataOutput);
         par1DataOutput.writeByte(this.renderDistance);
@@ -41,6 +43,7 @@ public class Packet204ClientInfo extends Packet {
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
+    @Override
     public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleClientInfo(this);
     }
@@ -48,6 +51,7 @@ public class Packet204ClientInfo extends Packet {
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
+    @Override
     public int getPacketSize() {
         return 7;
     }
@@ -79,6 +83,7 @@ public class Packet204ClientInfo extends Packet {
     /**
      * only false for the abstract Packet class, all real packets return true
      */
+    @Override
     public boolean isRealPacket() {
         return true;
     }
@@ -87,6 +92,7 @@ public class Packet204ClientInfo extends Packet {
      * eg return packet30entity.entityId == entityId; WARNING : will throw if you compare a packet to a different packet
      * class
      */
+    @Override
     public boolean containsSameEntityIDAs(Packet par1Packet) {
         return true;
     }

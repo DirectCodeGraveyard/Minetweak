@@ -2,6 +2,7 @@ package org.minetweak.command;
 
 import org.minetweak.Minetweak;
 import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
 
 import java.util.ArrayList;
@@ -18,17 +19,17 @@ public class CommandTp extends CommandExecutor {
         Player target;
         if (args.length == 1) {
             player = Minetweak.getPlayerByName(sender.getName());
-            target = Minetweak.getPlayerByName(args[0]);
+            target = Minetweak.getPlayerByName(args[0].toLowerCase());
         } else {
-            player = Minetweak.getPlayerByName(args[0]);
-            target = Minetweak.getPlayerByName(args[1]);
+            player = Minetweak.getPlayerByName(args[0].toLowerCase());
+            target = Minetweak.getPlayerByName(args[1].toLowerCase());
         }
         if (player == null) {
-            sender.sendMessage(ChatFormatting.RED + args[0] + " is not online.");
+            sender.sendMessage(ChatFormatting.RED + args[0].toLowerCase() + " is not online.");
             return;
         }
         if (target == null) {
-            sender.sendMessage(ChatFormatting.RED + args[1] + " is not online.");
+            sender.sendMessage(ChatFormatting.RED + args[1].toLowerCase() + " is not online.");
             return;
         }
         sender.sendMessage(ChatFormatting.GOLD + "Teleporting " + ChatFormatting.BLUE + player.getName() + ChatFormatting.RESET + " to " + ChatFormatting.BLUE + target.getName());
@@ -50,9 +51,9 @@ public class CommandTp extends CommandExecutor {
 
         switch (length) {
             case 1:
-                completions.addAll(Minetweak.getPlayers().keySet());
+                completions.addAll(TabCompletion.getPlayersMatching(input));
             case 2:
-                completions.addAll(Minetweak.getPlayers().keySet());
+                completions.addAll(TabCompletion.getPlayersMatching(input));
         }
     }
 }

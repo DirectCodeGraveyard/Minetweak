@@ -2,7 +2,10 @@ package org.minetweak.command;
 
 import org.minetweak.Minetweak;
 import org.minetweak.Server;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
+
+import java.util.ArrayList;
 
 public class CommandOp extends CommandExecutor {
 
@@ -15,11 +18,11 @@ public class CommandOp extends CommandExecutor {
             noPermission(sender, "op players");
             return;
         }
-        Player targetPlayer = Minetweak.getPlayerByName(args[0]);
+        Player targetPlayer = Minetweak.getPlayerByName(args[0].toLowerCase());
 
-        Server.opPlayer(args[0]);
+        Server.opPlayer(args[0].toLowerCase());
 
-        if (Minetweak.isPlayerOnline(args[0])) {
+        if (Minetweak.isPlayerOnline(args[0].toLowerCase())) {
             targetPlayer.sendMessage("You have been opped by: " + sender.getName());
             sender.sendMessage("You opped " + args[0]);
         } else {
@@ -32,4 +35,8 @@ public class CommandOp extends CommandExecutor {
         return "Ops a Player";
     }
 
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        TabCompletion.getPlayersOnlyCommand(input, completions);
+    }
 }

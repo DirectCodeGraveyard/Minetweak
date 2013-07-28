@@ -19,6 +19,7 @@ public class Packet254ServerPing extends Packet {
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
+    @Override
     public void readPacketData(DataInput par1DataInput) throws IOException {
         try {
             par1DataInput.readByte();
@@ -40,6 +41,7 @@ public class Packet254ServerPing extends Packet {
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
+    @Override
     public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeByte(1);
         par1DataOutput.writeByte(field_140051_d);
@@ -53,6 +55,7 @@ public class Packet254ServerPing extends Packet {
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
+    @Override
     public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleServerPing(this);
     }
@@ -60,6 +63,7 @@ public class Packet254ServerPing extends Packet {
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
+    @Override
     public int getPacketSize() {
         return 3 + this.field_140052_b.length() * 2 + 4;
     }

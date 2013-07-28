@@ -2,8 +2,10 @@ package org.minetweak.command;
 
 import org.minetweak.Minetweak;
 import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class CommandHelp extends CommandExecutor {
@@ -11,6 +13,16 @@ public class CommandHelp extends CommandExecutor {
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         Set<String> commands = CmdHelper.getCommands();
+        if (args.length > 0 && !StringUtils.isInteger(args[0])) {
+            String command = args[0];
+            if (commands.contains(command)) {
+                String helpInfo = Minetweak.getCommandExecutors().get(command).getHelpInfo();
+                sender.sendMessage("/" + ChatFormatting.BLUE + command + ChatFormatting.RESET + " - " + helpInfo);
+                return;
+            } else {
+                sender.sendMessage("help: No Such Command: " + command);
+            }
+        }
         int start = 0;
         int numberOfCommands = commands.size();
         int page = 1;
@@ -35,4 +47,17 @@ public class CommandHelp extends CommandExecutor {
         return "Used to get help for commands";
     }
 
+    @Override
+    public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
+        String[] split = input.split(" ");
+        int length = split.length;
+
+        switch (length) {
+            case 1:
+                completions.addAll(Minetweak.getCommandExecutors().keySet());
+                return;
+            case 2:
+                completions.addAll(TabCompletion.getCommandsMatching(split[1]));
+        }
+    }
 }

@@ -1,16 +1,15 @@
 package net.minecraft.server.ban;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.src.LowerStringMap;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 public class BanList {
-    private final LowerStringMap theBanList = new LowerStringMap();
+    private final HashMap<String, BanEntry> theBanList = new HashMap<String, BanEntry>();
     private final File fileName;
 
     /**
@@ -33,7 +32,7 @@ public class BanList {
     /**
      * removes expired Bans before returning
      */
-    public Map getBannedList() {
+    public HashMap<String, BanEntry> getBannedList() {
         this.removeExpiredBans();
         return this.theBanList;
     }
@@ -48,7 +47,7 @@ public class BanList {
     }
 
     public void put(BanEntry par1BanEntry) {
-        this.theBanList.putLower(par1BanEntry.getBannedUsername(), par1BanEntry);
+        this.theBanList.put(par1BanEntry.getBannedUsername(), par1BanEntry);
         this.saveToFileWithHeader();
     }
 
@@ -90,7 +89,7 @@ public class BanList {
                         BanEntry var3 = BanEntry.parse(var2);
 
                         if (var3 != null) {
-                            this.theBanList.putLower(var3.getBannedUsername(), var3);
+                            this.theBanList.put(var3.getBannedUsername(), var3);
                         }
                     }
                 }

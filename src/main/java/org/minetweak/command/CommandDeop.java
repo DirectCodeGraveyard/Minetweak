@@ -1,6 +1,7 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
 import org.minetweak.permissions.ServerOps;
 
@@ -17,9 +18,9 @@ public class CommandDeop extends CommandExecutor {
             noPermission(sender, "deop players");
             return;
         }
-        Player targetPlayer = Minetweak.getPlayerByName(args[0]);
+        Player targetPlayer = Minetweak.getPlayerByName(args[0].toLowerCase());
 
-        ServerOps.removeOp(args[0]);
+        ServerOps.removeOp(args[0].toLowerCase());
 
         if (Minetweak.isPlayerOnline(args[0])) {
             targetPlayer.sendMessage("You have been deopped by: " + sender.getName());
@@ -36,12 +37,7 @@ public class CommandDeop extends CommandExecutor {
 
     @Override
     public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
-        int length = input.split(" ").length;
-
-        switch (length) {
-            case 1:
-                completions.addAll(Minetweak.getPlayers().keySet());
-        }
+        TabCompletion.getPlayersOnlyCommand(input, completions);
     }
 
 }

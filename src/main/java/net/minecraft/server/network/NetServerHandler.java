@@ -312,7 +312,7 @@ public class NetServerHandler extends NetHandler {
                     if (var29 >= -0.03125D) {
                         ++this.playerInAirTime;
 
-                        if (this.playerInAirTime > 80) {
+                        if (this.playerInAirTime > 20) {
                             this.mcServer.getLogAgent().logWarning(this.playerEntity.getCommandSenderName() + " was kicked for floating too long!");
                             this.kickPlayer("Flying is not enabled on this server");
                             return;
@@ -857,6 +857,10 @@ public class NetServerHandler extends NetHandler {
      */
     @Override
     public void handlePlayerAbilities(Packet202PlayerAbilities par1Packet202PlayerAbilities) {
+        if (!playerEntity.getGameType().isCreative() && par1Packet202PlayerAbilities.getFlying()) {
+            Minetweak.getPlayerByName(playerEntity.getEntityName()).kickPlayer("Stop Cheating or you WILL be banned.");
+            return;
+        }
         this.playerEntity.capabilities.isFlying = par1Packet202PlayerAbilities.getFlying() && this.playerEntity.capabilities.allowFlying;
     }
 

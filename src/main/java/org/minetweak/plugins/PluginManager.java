@@ -6,11 +6,13 @@ import org.minetweak.Minetweak;
 
 import java.io.File;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.jar.JarFile;
+import java.util.logging.Level;
 import java.util.zip.ZipEntry;
 
 public class PluginManager {
@@ -20,6 +22,7 @@ public class PluginManager {
     public static HashMap<String, IPlugin> plugins = new HashMap<String, IPlugin>();
     public static ArrayList<String> enabledPlugins = new ArrayList<String>();
     private Gson gson = new GsonBuilder().create();
+    private static ArrayList<String> loadFirst = new ArrayList<String>();
 
     /**
      * Creates an instance of PluginLoader and runs setupPlugins
@@ -69,11 +72,34 @@ public class PluginManager {
         HashMap<String, PluginInfo> pluginInformation = new HashMap<String, PluginInfo>();
         for (File f : files) {
             PluginInfo pluginInfo = getPluginInfo(f);
-            if (pluginInfo == null || pluginInfo.getMainClass() == null) {
-                Minetweak.getLogger().logInfo("Skipping Plugin JAR: " + f.getName() + ": Missing Required Plugin Information.");
+            if (pluginInfo == null) {
+                // This is probably a Library or a plugin without the required plugin.json
+                Minetweak.getLogger().getLogger().log(Level.FINE, "Found JAR '" + f.getName() + "'. Appears to not have a plugin.json, assuming it is a library.");
+                try {
+                    urls.add(f.toURI().toURL());
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
                 continue;
+            } else if (pluginInfo.getMainClass() == null || pluginInfo.getName() == null) {
+                Minetweak.getLogger().logWarning("Skipping Plugin JAR '" + f.getName() + "'. Missing Required plugin.json entries.");
             }
             pluginInformation.put(pluginInfo.getMainClass(), pluginInfo);
+            PluginInfo.LoadingConfig loadingConfig = pluginInfo.getLoadingConfig();
+            if (loadingConfig != null) {
+                int priority = loadingConfig.getPriority();
+                if (priority == 1) {
+                    loadFirst.add(pluginInfo.getName());
+                }
+            }
+            ArrayList<PluginInfo.SubPlugin> subPlugins = pluginInfo.getSubPlugins();
+            if (subPlugins != null) {
+                for (PluginInfo.SubPlugin subPlugin : subPlugins) {
+                    PluginInfo subPluginInfo = new PluginInfo(subPlugin.getMainClass(), pluginInfo.getName() + ":" + subPlugin.getName(), null);
+                    pluginInformation.put(subPlugin.getMainClass(), subPluginInfo);
+                    classes.add(subPluginInfo.getMainClass());
+                }
+            }
             try {
                 urls.add(f.toURI().toURL());
                 classes.add(pluginInfo.getMainClass());
@@ -209,5 +235,9 @@ public class PluginManager {
 
     public void registerLanguageFiles(JarFile file) {
         // Stub
+    }
+
+    public static ArrayList<String> getLoadFirstPlugins() {
+        return loadFirst;
     }
 }

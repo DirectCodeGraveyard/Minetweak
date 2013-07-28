@@ -37,7 +37,7 @@ public class CommandGamemode extends CommandExecutor {
                 return;
             }
 
-            Player player = Minetweak.getPlayerByName(sender.getName());
+            Player player = Minetweak.getPlayerByName(sender.getName().toLowerCase());
 
             if (gamemode == 0) player.setGameMode(GameMode.SURVIVAL);
             if (gamemode == 1) player.setGameMode(GameMode.CREATIVE);
@@ -47,7 +47,7 @@ public class CommandGamemode extends CommandExecutor {
             if (gamemode == 1) player.sendMessage("Your gamemode was set to creative");
             if (gamemode == 2) player.sendMessage("Your gamemode was set to adventure");
         } else {
-            Player player = Minetweak.getPlayerByName(args[1]);
+            Player player = Minetweak.getPlayerByName(args[1].toLowerCase());
 
             if (gamemode == 0) player.setGameMode(GameMode.SURVIVAL);
             if (gamemode == 1) player.setGameMode(GameMode.CREATIVE);

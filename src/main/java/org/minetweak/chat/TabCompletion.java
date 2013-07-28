@@ -30,7 +30,7 @@ public class TabCompletion {
             }
             Set<String> commands = getCommands();
             input = input.substring(1);
-            if (!input.equals("")) {
+            if (!input.isEmpty()) {
                 return new ArrayList<String>(getCommandsMatching(input));
             } else {
                 for (String command : commands) {
@@ -45,7 +45,7 @@ public class TabCompletion {
 
     public static Set<String> getPlayersMatching(String input) {
         Set<String> matches = new HashSet<String>();
-        if (input.equals("")) {
+        if (input.isEmpty()) {
             return Minetweak.getPlayers().keySet();
         } else {
             Set<String> players = Minetweak.getPlayers().keySet();
@@ -58,7 +58,7 @@ public class TabCompletion {
         return matches;
     }
 
-    public static Set<String> getCommandsMatching(String input) {
+    public static Set<String> getCommandsMatching(String input, boolean addSlash) {
         Set<String> commands = getCommands();
         Set<String> matches = new HashSet<String>();
         if (input.startsWith("/")) {
@@ -68,9 +68,27 @@ public class TabCompletion {
 
         for (String cmd : commands) {
             if (cmd.startsWith(input)) {
-                matches.add("/" + cmd);
+                if (addSlash) {
+                    matches.add("/" + cmd);
+                } else {
+                    matches.add(cmd);
+                }
             }
         }
         return matches;
+    }
+
+    public static Set<String> getCommandsMatching(String input) {
+        return getCommandsMatching(input, true);
+    }
+
+    public static void getPlayersOnlyCommand(String input, ArrayList<String> completions) {
+        String[] split = input.split(" ");
+
+        if (split.length == 1) {
+            completions.addAll(Minetweak.getPlayers().keySet());
+        } else if (split.length == 2) {
+            completions.addAll(TabCompletion.getPlayersMatching(split[1]));
+        }
     }
 }

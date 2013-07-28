@@ -60,7 +60,7 @@ public class ServerScoreboard extends Scoreboard {
     @Override
     public void func_96521_a(String par1Str, ScorePlayerTeam par2ScorePlayerTeam) {
         super.func_96521_a(par1Str, par2ScorePlayerTeam);
-        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Arrays.asList(par1Str), 3));
+        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Collections.singletonList(par1Str), 3));
         this.func_96551_b();
     }
 
@@ -71,7 +71,7 @@ public class ServerScoreboard extends Scoreboard {
     @Override
     public void removePlayerFromTeam(String par1Str, ScorePlayerTeam par2ScorePlayerTeam) {
         super.removePlayerFromTeam(par1Str, par2ScorePlayerTeam);
-        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Arrays.asList(par1Str), 4));
+        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Collections.singletonList(par1Str), 4));
         this.func_96551_b();
     }
 

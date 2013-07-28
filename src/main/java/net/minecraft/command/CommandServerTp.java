@@ -15,14 +15,17 @@ public class CommandServerTp extends CommandBase {
     /**
      * Return the required permission level for this command.
      */
+    @Override
     public int getRequiredPermissionLevel() {
         return 2;
     }
 
+    @Override
     public String getCommandUsage(ICommandSender par1ICommandSender) {
         return "commands.tp.usage";
     }
 
+    @Override
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         if (par2ArrayOfStr.length < 1) {
             throw new WrongUsageException("commands.tp.usage");
@@ -71,6 +74,7 @@ public class CommandServerTp extends CommandBase {
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
+    @Override
     public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         return par2ArrayOfStr.length != 1 && par2ArrayOfStr.length != 2 ? null : getListOfStringsMatchingLastWord(par2ArrayOfStr, MinecraftServer.getServer().getAllUsernames());
     }
@@ -78,6 +82,7 @@ public class CommandServerTp extends CommandBase {
     /**
      * Return whether the specified command parameter index is a username parameter.
      */
+    @Override
     public boolean isUsernameIndex(String[] par1ArrayOfStr, int par2) {
         return par2 == 0;
     }

@@ -46,6 +46,7 @@ public class Packet202PlayerAbilities extends Packet {
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
+    @Override
     public void readPacketData(DataInput par1DataInput) throws IOException {
         byte var2 = par1DataInput.readByte();
         this.setDisableDamage((var2 & 1) > 0);
@@ -60,6 +61,7 @@ public class Packet202PlayerAbilities extends Packet {
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
+    @Override
     public void writePacketData(DataOutput par1DataOutput) throws IOException {
         byte var2 = 0;
 
@@ -87,6 +89,7 @@ public class Packet202PlayerAbilities extends Packet {
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
+    @Override
     public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handlePlayerAbilities(this);
     }
@@ -94,6 +97,7 @@ public class Packet202PlayerAbilities extends Packet {
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
+    @Override
     public int getPacketSize() {
         return 2;
     }
@@ -153,6 +157,7 @@ public class Packet202PlayerAbilities extends Packet {
     /**
      * only false for the abstract Packet class, all real packets return true
      */
+    @Override
     public boolean isRealPacket() {
         return true;
     }
@@ -161,6 +166,7 @@ public class Packet202PlayerAbilities extends Packet {
      * eg return packet30entity.entityId == entityId; WARNING : will throw if you compare a packet to a different packet
      * class
      */
+    @Override
     public boolean containsSameEntityIDAs(Packet par1Packet) {
         return true;
     }

@@ -42,10 +42,10 @@ public class CommandGive extends CommandExecutor {
             return;
         }
 
-        Player player = Minetweak.getPlayerByName(args[1]);
+        Player player = Minetweak.getPlayerByName(args[1].toLowerCase());
 
         if (player == null) {
-            sender.sendMessage(args[1] + " is not online!");
+            sender.sendMessage(args[1].toLowerCase() + " is not online!");
             return;
         }
 

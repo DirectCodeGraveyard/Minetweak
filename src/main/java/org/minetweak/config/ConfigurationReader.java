@@ -8,6 +8,7 @@ import java.util.Map;
 /**
  * All Credits to samrg472
  */
+@SuppressWarnings("StringContatenationInLoop")
 public class ConfigurationReader {
 
     private File path;

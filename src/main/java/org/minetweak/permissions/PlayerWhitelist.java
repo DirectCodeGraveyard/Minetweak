@@ -20,12 +20,12 @@ public class PlayerWhitelist {
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public static void addPlayer(String name) {
-        whitelistedPlayers.add(name);
+        whitelistedPlayers.add(name.toLowerCase());
         save();
     }
 
     public static void removePlayer(String name) {
-        whitelistedPlayers.remove(name);
+        whitelistedPlayers.remove(name.toLowerCase());
         save();
     }
 
@@ -66,7 +66,7 @@ public class PlayerWhitelist {
     }
 
     public static boolean isPlayerWhitelisted(String name) {
-        return whitelistedPlayers.contains(name);
+        return whitelistedPlayers.contains(name.toLowerCase());
     }
 
     public static boolean isWhitelistEnabled() {
@@ -74,6 +74,6 @@ public class PlayerWhitelist {
     }
 
     public static void setWhitelistEnabled(boolean whitelistEnabled) {
-        MinetweakConfig.set("server.whitelist-enabled", "" + whitelistEnabled);
+        MinetweakConfig.set("server.whitelist-enabled", String.valueOf(whitelistEnabled));
     }
 }
