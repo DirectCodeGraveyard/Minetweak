@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
-import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.ChatColors;
 import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
 
@@ -25,14 +25,14 @@ public class CommandTp extends CommandExecutor {
             target = Minetweak.getPlayerByName(args[1].toLowerCase());
         }
         if (player == null) {
-            sender.sendMessage(ChatFormatting.RED + args[0].toLowerCase() + " is not online.");
+            sender.sendMessage(ChatColors.RED + args[0].toLowerCase() + " is not online.");
             return;
         }
         if (target == null) {
-            sender.sendMessage(ChatFormatting.RED + args[1].toLowerCase() + " is not online.");
+            sender.sendMessage(ChatColors.RED + args[1].toLowerCase() + " is not online.");
             return;
         }
-        sender.sendMessage(ChatFormatting.GOLD + "Teleporting " + ChatFormatting.BLUE + player.getName() + ChatFormatting.RESET + " to " + ChatFormatting.BLUE + target.getName());
+        sender.sendMessage(ChatColors.GOLD + "Teleporting " + ChatColors.BLUE + player.getName() + ChatColors.RESET + " to " + ChatColors.BLUE + target.getName());
         player.teleportToPosition(target.getX(), target.getY(), target.getZ());
     }
 

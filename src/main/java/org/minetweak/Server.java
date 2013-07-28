@@ -3,7 +3,7 @@ package org.minetweak;
 import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.utils.chat.ChatMessageComponent;
-import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.ChatColors;
 import org.minetweak.command.Console;
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
@@ -26,7 +26,7 @@ public class Server {
      */
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
-            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111077_e(String.format("[%s%s%s] %s", ChatFormatting.GOLD, "Server", ChatFormatting.RESET, message)));
+            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111077_e(String.format("[%s%s%s] %s", ChatColors.GOLD, "Server", ChatColors.RESET, message)));
             return true;
         } else {
             return false;
@@ -111,7 +111,7 @@ public class Server {
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
         } else {
-            player.addChatMessage(ChatFormatting.RED + "No Such Command: " + commandOnly);
+            player.addChatMessage(ChatColors.RED + "No Such Command: " + commandOnly);
         }
     }
 
@@ -133,7 +133,7 @@ public class Server {
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(console, commandOnly, args);
         } else {
-            console.sendMessage(ChatFormatting.RED + "No Such Command: " + commandOnly);
+            console.sendMessage(ChatColors.RED + "No Such Command: " + commandOnly);
         }
     }
 
@@ -174,7 +174,7 @@ public class Server {
      * @param message Message to send.
      */
     public static void sendToOps(String message) {
-        String out = "[" + ChatFormatting.GOLD + "Server" + ChatFormatting.RESET + "] " + message;
+        String out = "[" + ChatColors.GOLD + "Server" + ChatColors.RESET + "] " + message;
 
         if (ServerOps.getOps().size() == 0) return;
 

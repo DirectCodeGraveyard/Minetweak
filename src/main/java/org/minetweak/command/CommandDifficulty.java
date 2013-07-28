@@ -1,6 +1,6 @@
 package org.minetweak.command;
 
-import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.ChatColors;
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.server.Difficulty;
@@ -44,7 +44,7 @@ public class CommandDifficulty extends CommandExecutor {
         World world = player.getCurrentWorld();
         world.setDifficulty(difficulty);
 
-        world.broadcastMessage("Set difficulty to " + ChatFormatting.GREEN + difficulty.getName());
+        world.broadcastMessage("Set difficulty to " + ChatColors.GREEN + difficulty.getName());
     }
 
     @Override

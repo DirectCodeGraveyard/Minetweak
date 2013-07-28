@@ -2,7 +2,7 @@ package org.minetweak.command;
 
 import org.minetweak.Minetweak;
 import org.minetweak.Server;
-import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.ChatColors;
 import org.minetweak.util.StringUtils;
 
 public class CommandTime extends CommandExecutor {
@@ -30,12 +30,12 @@ public class CommandTime extends CommandExecutor {
             } else if (timeName.equals("midnight")) {
                 time = 18000;
             } else {
-                sender.sendMessage(ChatFormatting.RED + "Invalid Time: " + timeName);
+                sender.sendMessage(ChatColors.RED + "Invalid Time: " + timeName);
                 return;
             }
         }
         Minetweak.getOverworld().setWorldTime(time);
-        Server.sendToOps("Overworld time set to " + ChatFormatting.GREEN + timeName);
+        Server.sendToOps("Overworld time set to " + ChatColors.GREEN + timeName);
     }
 
     @Override

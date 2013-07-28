@@ -4,7 +4,7 @@ import net.minecraft.world.WorldInfo;
 import net.minecraft.world.WorldServer;
 import org.minetweak.Minetweak;
 import org.minetweak.block.TweakBlock;
-import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.ChatColors;
 import org.minetweak.entity.Player;
 import org.minetweak.server.Difficulty;
 
@@ -163,7 +163,7 @@ public class World {
     public void broadcastMessage(String message) {
         for (Player player : Minetweak.getPlayers().values()) {
             if (player.getCurrentWorld().getWorldServer() == getWorldServer()) {
-                player.sendMessage(String.format("[%s%s%s] %s", ChatFormatting.GOLD, "Server", ChatFormatting.RESET, message));
+                player.sendMessage(String.format("[%s%s%s] %s", ChatColors.GOLD, "Server", ChatColors.RESET, message));
             }
         }
     }

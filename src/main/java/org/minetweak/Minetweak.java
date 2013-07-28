@@ -2,7 +2,7 @@ package org.minetweak;
 
 import com.google.common.eventbus.EventBus;
 import net.minecraft.server.MinecraftServer;
-import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.ChatColors;
 import org.minetweak.command.*;
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
@@ -106,8 +106,8 @@ public class Minetweak {
         // Checks RAM usage to ensure that the server has enough
         ramCheck();
 
-        // Initialize ChatFormatting colorNodes ArrayList that contains the symbol and node
-        ChatFormatting.initializeColorNodes();
+        // Initialize ChatColors colorNodes ArrayList that contains the symbol and node
+        ChatColors.initializeColorNodes();
 
         // Finally, launch the Minecraft Server
         MinecraftServer.main(args);
