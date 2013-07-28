@@ -5,27 +5,27 @@ import net.minecraft.world.WorldServer;
 
 public class Location {
 
-    private int posX;
-    private int posY;
-    private int posZ;
+    private double posX;
+    private double posY;
+    private double posZ;
 
     private World world;
 
-    public Location(int posX, int posY, int posZ) {
+    public Location(double posX, double posY, double posZ) {
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;
         this.world = MinecraftServer.getServer().worldServerForDimension(0).getWorld();
     }
 
-    public Location(int posX, int posY, int posZ, WorldServer worldServer) {
+    public Location(double posX, double posY, double posZ, WorldServer worldServer) {
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;
         this.world = new World(worldServer);
     }
 
-    public Location(int posX, int posY, int posZ, World world) {
+    public Location(double posX, double posY, double posZ, World world) {
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;
@@ -37,7 +37,7 @@ public class Location {
      *
      * @return x position
      */
-    public int getPosX() {
+    public double getPosX() {
         return posX;
     }
 
@@ -46,7 +46,7 @@ public class Location {
      *
      * @return y position
      */
-    public int getPosY() {
+    public double getPosY() {
         return posY;
     }
 
@@ -55,7 +55,7 @@ public class Location {
      *
      * @return z position
      */
-    public int getPosZ() {
+    public double getPosZ() {
         return posZ;
     }
 
