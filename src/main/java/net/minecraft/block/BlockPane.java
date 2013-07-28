@@ -162,7 +162,7 @@ public class BlockPane extends Block {
      * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
      */
     @Override
-    protected boolean canSilkHarvest() {
+    public boolean canSilkHarvest() {
         return true;
     }
 

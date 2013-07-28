@@ -533,7 +533,7 @@ public class Block {
      * How many world ticks before ticking
      */
     public int tickRate(World par1World) {
-        return 10;
+        return 200;
     }
 
     /**
