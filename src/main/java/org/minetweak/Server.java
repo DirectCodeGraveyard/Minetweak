@@ -38,6 +38,11 @@ public class Server {
         return true;
     }
 
+    /**
+     * Bans a player
+     * @param playerName Player username to ban
+     * @return Success on ban
+     */
     public static boolean banPlayer(String playerName) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
         if (targetPlayer == null) return false;
@@ -45,6 +50,12 @@ public class Server {
         return true;
     }
 
+    /**
+     * Bans a player
+     * @param playerName Player username to ban
+     * @param banReason Reason to ban the player
+     * @return Success on ban
+     */
     public static boolean banPlayer(String playerName, String banReason) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
         if (targetPlayer == null) return false;
