@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.entity.EntityPlayerMP;
-import net.minecraft.item.ItemInWorldManager;
+import net.minecraft.world.ItemInWorldManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.player.IPlayerFileData;
 import net.minecraft.player.PlayerManager;
