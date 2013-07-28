@@ -104,6 +104,10 @@ public class Server {
         MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().remove(playerUsername);
     }
 
+    /**
+     * Check if the whitelist is enabled.
+     * @return True if the whitelist is enabled
+     */
     public static boolean isWhitelistEnabled() {
         return MinetweakConfig.getBoolean("server.whitelist-enabled");
     }
