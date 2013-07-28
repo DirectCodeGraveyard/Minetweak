@@ -922,7 +922,7 @@ public class Block {
     /**
      * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
      */
-    protected boolean canSilkHarvest() {
+    public boolean canSilkHarvest() {
         return this.renderAsNormalBlock() && !this.isBlockContainer;
     }
 
@@ -1166,10 +1166,6 @@ public class Block {
 
     public int getExpDrop(World world, int data, int enchantmentLevel) {
         return 0;
-    }
-
-    public boolean func_71906_q_CodeFix_Public() {
-        return canSilkHarvest();
     }
 
     public void func_71923_g_CodeFix_Public(World a, int b, int c, int d, int e) {
