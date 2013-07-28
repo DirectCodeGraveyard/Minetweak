@@ -11,10 +11,19 @@ import org.minetweak.permissions.ServerOps;
 import org.minetweak.util.StringUtils;
 
 /**
- * This is a class for managing the MinecraftServer
+ * Used for methods that may not fit anywhere else, or
+ * fit the "Server" name, those such as broadcastMessage
+ * belong here, but those such as kickPlayer are here
+ * for lazy people who don't want to define a player
+ * instance or store the player in a variable.
  */
 public class Server {
 
+    /**
+     * Broadcast a message to the entire server
+     * @param message Message to broadcast
+     * @return True on success for sent message(e.g. false on server not finished startup)
+     */
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
             MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111077_e(String.format("[%s%s%s] %s", ChatFormatting.GOLD, "Server", ChatFormatting.RESET, message)));
