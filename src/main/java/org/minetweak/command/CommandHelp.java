@@ -12,7 +12,7 @@ public class CommandHelp extends CommandExecutor {
 
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
-        Set<String> commands = CmdHelper.getCommands();
+        Set<String> commands = CommandHelper.getCommands();
         if (args.length > 0 && !StringUtils.isInteger(args[0])) {
             String command = args[0];
             if (commands.contains(command)) {
