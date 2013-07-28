@@ -1,14 +1,15 @@
-package net.minecraft.item;
+package net.minecraft.world;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.entity.EntityPlayerMP;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.server.network.packet.Packet53BlockChange;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.utils.enums.EnumGameType;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import org.minetweak.Minetweak;
 import org.minetweak.block.TweakBlock;
 import org.minetweak.event.block.BlockBreakEvent;
@@ -257,12 +258,16 @@ public class ItemInWorldManager {
                 }
             }
 
+            if (thisPlayerMP.getCurrentEquippedItem()==null)
+                // Used to fix bug MINETWEAK-16
+                event.setCancelled(false);
+
             Minetweak.getEventBus().post(event);
 
             if (event.isCancelled()) {
-                // Let the client know the tweakBlock still exists
+                // Let the client know the Block still exists
                 this.thisPlayerMP.playerNetServerHandler.sendPacket(new Packet53BlockChange(par1, par2, par3, this.theWorld));
-                // Update any tile entity data for this tweakBlock
+                // Update any tile entity data for this Block
                 TileEntity tileentity = this.theWorld.getBlockTileEntity(par1, par2, par3);
 
                 if (tileentity != null) {

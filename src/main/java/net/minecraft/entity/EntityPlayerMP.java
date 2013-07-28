@@ -10,7 +10,7 @@ import net.minecraft.inventory.InventoryMerchant;
 import net.minecraft.inventory.container.*;
 import net.minecraft.inventory.slot.SlotCrafting;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemInWorldManager;
+import net.minecraft.world.ItemInWorldManager;
 import net.minecraft.item.ItemMapBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
