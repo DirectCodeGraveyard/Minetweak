@@ -2,12 +2,12 @@ package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
-import org.minetweak.Server;
 import org.minetweak.chat.ChatColors;
 import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
+import org.minetweak.server.Server;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,8 +1,9 @@
-package org.minetweak;
+package org.minetweak.server;
 
 import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.utils.chat.ChatMessageComponent;
+import org.minetweak.Minetweak;
 import org.minetweak.chat.ChatColors;
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.console.Console;

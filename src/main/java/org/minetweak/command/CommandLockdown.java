@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
-import org.minetweak.Server;
+import org.minetweak.server.Server;
 
 /**
  * Command that will set the server under lockdown and

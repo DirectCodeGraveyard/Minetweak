@@ -20,12 +20,12 @@ import net.minecraft.world.WorldSettings;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.ChunkCoordinates;
 import org.minetweak.Minetweak;
-import org.minetweak.Server;
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.config.Property;
 import org.minetweak.console.Console;
 import org.minetweak.event.server.ServerFinishedStartupEvent;
 import org.minetweak.event.server.ServerInitializedEvent;
+import org.minetweak.server.Server;
 
 import java.io.File;
 import java.io.IOException;

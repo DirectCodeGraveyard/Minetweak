@@ -1,9 +1,9 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
-import org.minetweak.Server;
 import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
+import org.minetweak.server.Server;
 
 import java.util.ArrayList;
 

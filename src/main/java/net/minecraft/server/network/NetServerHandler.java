@@ -31,9 +31,9 @@ import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.utils.enums.EnumChatFormatting;
 import net.minecraft.world.WorldServer;
 import org.minetweak.Minetweak;
-import org.minetweak.Server;
 import org.minetweak.chat.TabCompletion;
 import org.minetweak.event.player.PlayerChatEvent;
+import org.minetweak.server.Server;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;

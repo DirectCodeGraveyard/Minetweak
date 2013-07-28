@@ -1,8 +1,8 @@
 package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
-import org.minetweak.Server;
 import org.minetweak.chat.TabCompletion;
+import org.minetweak.server.Server;
 
 import java.util.ArrayList;
 import java.util.Set;
