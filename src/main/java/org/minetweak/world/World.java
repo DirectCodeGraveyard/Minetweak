@@ -114,8 +114,8 @@ public class World {
      * @param y y
      * @param z z
      */
-    public void setSpawn(int x, int y, int z) {
-        getWorldServer().getWorldInfo().setSpawnPosition(x, y, z);
+    public void setSpawn(double x, double y, double z) {
+        getWorldServer().getWorldInfo().setSpawnPosition((int) x, (int) y, (int) z);
     }
 
     /**
