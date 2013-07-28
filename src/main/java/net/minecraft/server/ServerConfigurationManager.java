@@ -32,7 +32,6 @@ import net.minecraft.world.chunk.ChunkCoordinates;
 import org.minetweak.Minetweak;
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
-import org.minetweak.event.player.PlayerJoinEvent;
 import org.minetweak.event.player.PlayerLeaveEvent;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
@@ -217,8 +216,7 @@ public abstract class ServerConfigurationManager {
             par1EntityPlayerMP.playerNetServerHandler.sendPacket(new Packet201PlayerInfo(aPlayerEntityList.getCommandSenderName(), true, aPlayerEntityList.ping));
         }
 
-        Player.registerPlayer(par1EntityPlayerMP.getCommandSenderName().toLowerCase());
-        Minetweak.getEventBus().post(new PlayerJoinEvent(Minetweak.getPlayerByName(par1EntityPlayerMP.getEntityName())));
+        Player.registerPlayer(par1EntityPlayerMP);
     }
 
     /**

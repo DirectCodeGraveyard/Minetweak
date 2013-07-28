@@ -13,6 +13,7 @@ import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.utils.enums.EnumGameType;
 import org.minetweak.Minetweak;
 import org.minetweak.command.CommandSender;
+import org.minetweak.event.player.PlayerJoinEvent;
 import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
 import org.minetweak.permissions.PlayerWhitelist;
@@ -60,11 +61,11 @@ public class Player extends Entity implements CommandSender {
     /**
      * Register a player into Minetweak
      *
-     * @param playerUsername Player name we are registering
+     * @param playerMP EntityPlayerMP Instance
      */
-    public static boolean registerPlayer(String playerUsername) {
-        Player targetPlayerInstance = new Player(playerUsername);
-        playerUsername = playerUsername.toLowerCase();
+    public static boolean registerPlayer(EntityPlayerMP playerMP) {
+        Player targetPlayerInstance = new Player(playerMP);
+        String playerUsername = targetPlayerInstance.getName();
         if (Minetweak.isServerLockedDown()) {
             targetPlayerInstance.kickPlayer("This server is currently under lockdown.");
             return false;
@@ -80,9 +81,19 @@ public class Player extends Entity implements CommandSender {
                     return false;
                 }
                 Minetweak.getPlayers().put(playerUsername, targetPlayerInstance);
+                Minetweak.getEventBus().post(new PlayerJoinEvent(targetPlayerInstance));
             }
             return true;
         }
+    }
+
+    /**
+     * Register a player into Minetweak
+     *
+     * @param playerUsername Player name we are registering
+     */
+    public static boolean registerPlayer(String playerUsername) {
+        return registerPlayer(MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerUsername));
     }
 
     /**
