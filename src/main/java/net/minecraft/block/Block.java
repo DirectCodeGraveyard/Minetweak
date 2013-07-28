@@ -28,7 +28,7 @@ public class Block {
      * used as foreach item, if item.tab = current tab, display it on the screen
      */
     private CreativeTabs displayOnCreativeTab;
-    protected String field_111026_f;
+    protected String name;
 
     public static final StepSound soundPowderFootstep = new StepSound("stone", 1.0F, 1.0F);
     public static final StepSound soundWoodFootstep = new StepSound("wood", 1.0F, 1.0F);
@@ -1107,7 +1107,7 @@ public class Block {
     }
 
     protected Block func_111022_d(String par1Str) {
-        this.field_111026_f = par1Str;
+        this.name = par1Str;
         return this;
     }
 
