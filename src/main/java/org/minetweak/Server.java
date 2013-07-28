@@ -52,6 +52,9 @@ public class Server {
         return true;
     }
 
+    /**
+     * Initiate shutdown of the server
+     */
     public static void shutdownServer() {
         MinecraftServer.getServer().initiateShutdown();
         MinecraftServer.getServer().stopServer();
