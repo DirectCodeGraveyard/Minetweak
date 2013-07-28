@@ -248,7 +248,7 @@ public class Minetweak {
         registerCommand("pardon", new CommandPardon());
         registerCommand("reload", new CommandReload());
         registerCommand("loaddata", new CommandLoadData());
-        registerCommand("clear", new CommandClearInv());
+        registerCommand("clear", new CommandClearInventory());
         registerCommand("version", new CommandVersion());
         registerCommand("give", new CommandGive());
         registerCommand("save", new CommandSave());
