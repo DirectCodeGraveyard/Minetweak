@@ -20,8 +20,7 @@ public class ChatMessageComponent {
     private String field_111090_h;
     private List<ChatMessageComponent> field_111091_i;
 
-    public ChatMessageComponent() {
-    }
+    public ChatMessageComponent() {}
 
     public ChatMessageComponent(ChatMessageComponent par1ChatMessageComponent) {
         this.field_111087_b = par1ChatMessageComponent.field_111087_b;
