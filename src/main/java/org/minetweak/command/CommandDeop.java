@@ -7,6 +7,9 @@ import org.minetweak.permissions.ServerOps;
 
 import java.util.ArrayList;
 
+/**
+ * Used to deop players, whether offline or online.
+ */
 public class CommandDeop extends CommandExecutor {
 
     @Override

@@ -7,6 +7,9 @@ import org.minetweak.entity.Player;
 
 import java.util.ArrayList;
 
+/**
+ * Used to op players, whether offline or online.
+ */
 public class CommandOp extends CommandExecutor {
 
     @Override
