@@ -231,11 +231,11 @@ public class Block {
     public static final Block stairsNetherQuartz = (new BlockStairs(156, blockNetherQuartz, 0)).setUnlocalizedName("stairsQuartz");
     public static final Block railActivator = (new BlockRailPowered(157)).setHardness(0.7F).setStepSound(soundMetalFootstep).setUnlocalizedName("activatorRail").func_111022_d("rail_activator");
     public static final Block dropper = (new BlockDropper(158)).setHardness(3.5F).setStepSound(soundStoneFootstep).setUnlocalizedName("dropper").func_111022_d("dropper");
-    public static final Block field_111039_cA = (new BlockColored(159, Material.rock)).setHardness(1.25F).setResistance(7.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("clayHardenedStained").func_111022_d("hardened_clay_stained");
-    public static final Block field_111038_cB = (new BlockHay(170)).setHardness(0.5F).setStepSound(soundGrassFootstep).setUnlocalizedName("hayBlock").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("hay_block");
-    public static final Block field_111031_cC = (new BlockCarpet(171)).setHardness(0.1F).setStepSound(soundClothFootstep).setUnlocalizedName("woolCarpet").setLightOpacity(0);
-    public static final Block field_111032_cD = (new Block(172, Material.rock)).setHardness(1.25F).setResistance(7.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("clayHardened").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("hardened_clay");
-    public static final Block field_111034_cE = (new Block(173, Material.rock)).setHardness(5.0F).setResistance(10.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("blockCoal").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("coal_block");
+    public static final Block stainedClay = (new BlockColored(159, Material.rock)).setHardness(1.25F).setResistance(7.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("clayHardenedStained").func_111022_d("hardened_clay_stained");
+    public static final Block hayBlock = (new BlockHay(170)).setHardness(0.5F).setStepSound(soundGrassFootstep).setUnlocalizedName("hayBlock").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("hay_block");
+    public static final Block woolCarpet = (new BlockCarpet(171)).setHardness(0.1F).setStepSound(soundClothFootstep).setUnlocalizedName("woolCarpet").setLightOpacity(0);
+    public static final Block hardenedClay = (new Block(172, Material.rock)).setHardness(1.25F).setResistance(7.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("clayHardened").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("hardened_clay");
+    public static final Block coalBlock = (new Block(173, Material.rock)).setHardness(5.0F).setResistance(10.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("blockCoal").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("coal_block");
 
     /**
      * ID of the block.
@@ -1110,8 +1110,8 @@ public class Block {
 
     static {
         Item.itemsList[cloth.blockID] = (new ItemCloth(cloth.blockID - 256)).setUnlocalizedName("cloth");
-        Item.itemsList[field_111039_cA.blockID] = (new ItemCloth(field_111039_cA.blockID - 256)).setUnlocalizedName("clayHardenedStained");
-        Item.itemsList[field_111031_cC.blockID] = (new ItemCloth(field_111031_cC.blockID - 256)).setUnlocalizedName("woolCarpet");
+        Item.itemsList[stainedClay.blockID] = (new ItemCloth(stainedClay.blockID - 256)).setUnlocalizedName("clayHardenedStained");
+        Item.itemsList[woolCarpet.blockID] = (new ItemCloth(woolCarpet.blockID - 256)).setUnlocalizedName("woolCarpet");
         Item.itemsList[wood.blockID] = (new ItemMultiTextureTile(wood.blockID - 256, wood, BlockLog.woodType)).setUnlocalizedName("log");
         Item.itemsList[planks.blockID] = (new ItemMultiTextureTile(planks.blockID - 256, planks, BlockWood.woodType)).setUnlocalizedName("wood");
         Item.itemsList[silverfish.blockID] = (new ItemMultiTextureTile(silverfish.blockID - 256, silverfish, BlockSilverfish.silverfishStoneTypes)).setUnlocalizedName("monsterStoneEgg");
