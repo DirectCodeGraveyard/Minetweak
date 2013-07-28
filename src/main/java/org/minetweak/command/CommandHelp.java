@@ -17,7 +17,7 @@ public class CommandHelp extends CommandExecutor {
             String command = args[0];
             if (commands.contains(command)) {
                 String helpInfo = Minetweak.getCommandExecutors().get(command).getHelpInfo();
-                sender.sendMessage("/" + ChatFormatting.BLUE + command + ChatFormatting.RESET + " - " + helpInfo);
+                sender.sendMessage("/" + ChatFormatting.GREEN + command + ChatFormatting.RESET + " - " + helpInfo);
                 return;
             } else {
                 sender.sendMessage("help: No Such Command: " + command);
