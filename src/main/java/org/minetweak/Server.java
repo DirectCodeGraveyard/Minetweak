@@ -91,10 +91,18 @@ public class Server {
         }
     }
 
+    /**
+     * Op a player
+     * @param playerUsername Player username to op
+     */
     public static void opPlayer(String playerUsername) {
         ServerOps.addOp(playerUsername);
     }
 
+    /**
+     * Deop a player
+     * @param playerUsername Player username to deop
+     */
     public static void deopPlayer(String playerUsername) {
         ServerOps.removeOp(playerUsername);
     }
