@@ -253,7 +253,7 @@ public abstract class ServerConfigurationManager {
      */
     public String allowUserToConnect(SocketAddress par1SocketAddress, String par2Str) {
         if (this.bannedPlayers.isBanned(par2Str)) {
-            BanEntry var6 = (BanEntry) this.bannedPlayers.getBannedList().get(par2Str);
+            BanEntry var6 = this.bannedPlayers.getBannedList().get(par2Str);
             String var7 = "You are banned from this server!\nReason: " + var6.getBanReason();
 
             if (var6.getBanEndDate() != null) {
@@ -261,7 +261,7 @@ public abstract class ServerConfigurationManager {
             }
 
             return var7;
-        } else if (!this.isAllowedToLogin(par2Str)) {
+        } else if (PlayerWhitelist.isWhitelistEnabled() && !PlayerWhitelist.isPlayerWhitelisted(par2Str)) {
             return "You are not white-listed on this server!";
         } else {
             String var3 = par1SocketAddress.toString();
@@ -269,7 +269,7 @@ public abstract class ServerConfigurationManager {
             var3 = var3.substring(0, var3.indexOf(":"));
 
             if (this.bannedIPs.isBanned(var3)) {
-                BanEntry var4 = (BanEntry) this.bannedIPs.getBannedList().get(var3);
+                BanEntry var4 = this.bannedIPs.getBannedList().get(var3);
                 String var5 = "Your IP address is banned from this server!\nReason: " + var4.getBanReason();
 
                 if (var4.getBanEndDate() != null) {
