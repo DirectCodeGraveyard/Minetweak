@@ -99,7 +99,10 @@ public class Server {
         ServerOps.removeOp(playerUsername);
     }
 
-
+    /**
+     * Pardon a player
+     * @param playerUsername Player to pardon
+     */
     public static void pardonPlayer(String playerUsername) {
         MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().remove(playerUsername);
     }
