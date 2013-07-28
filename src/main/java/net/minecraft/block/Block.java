@@ -68,10 +68,11 @@ public class Block {
      */
     public static final int[] lightValue = new int[4096];
 
-    /**
-     * Flag if block ID should use the brightest neighbor light value as its own
-     */
     public static boolean[] useNeighborBrightness = new boolean[4096];
+
+    /**
+     * Minecraft Blocks. Its amazing, yeah.
+     */
     public static final Block stone = (new BlockStone(1)).setHardness(1.5F).setResistance(10.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("stone").func_111022_d("stone");
     public static final BlockGrass grass = (BlockGrass) (new BlockGrass(2)).setHardness(0.6F).setStepSound(soundGrassFootstep).setUnlocalizedName("grass").func_111022_d("grass");
     public static final Block dirt = (new BlockDirt(3)).setHardness(0.5F).setStepSound(soundGravelFootstep).setUnlocalizedName("dirt").func_111022_d("dirt");
@@ -82,10 +83,6 @@ public class Block {
     public static final BlockFluid waterMoving = (BlockFluid) (new BlockFlowing(8, Material.water)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").disableStats().func_111022_d("water_flow");
     public static final Block waterStill = (new BlockStationary(9, Material.water)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").disableStats().func_111022_d("water_still");
     public static final BlockFluid lavaMoving = (BlockFluid) (new BlockFlowing(10, Material.lava)).setHardness(0.0F).setLightValue(1.0F).setUnlocalizedName("lava").disableStats().func_111022_d("lava_flow");
-
-    /**
-     * Stationary lava source block
-     */
     public static final Block lavaStill = (new BlockStationary(11, Material.lava)).setHardness(100.0F).setLightValue(1.0F).setUnlocalizedName("lava").disableStats().func_111022_d("lava_still");
     public static final Block sand = (new BlockSand(12)).setHardness(0.5F).setStepSound(soundSandFootstep).setUnlocalizedName("sand").func_111022_d("sand");
     public static final Block gravel = (new BlockGravel(13)).setHardness(0.6F).setStepSound(soundGravelFootstep).setUnlocalizedName("gravel").func_111022_d("gravel");
