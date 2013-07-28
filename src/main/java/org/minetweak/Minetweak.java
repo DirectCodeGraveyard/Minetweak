@@ -320,16 +320,16 @@ public class Minetweak {
     }
 
     /**
-     * Sets the Servers Lockdown Mode
-     * @param lockdownEnabled whether the server lockdown is enabled
+     * Set the Server lockdown mode
+     * @param lockdownEnabled True if the server is locked down
      */
     public static void setLockedDown(boolean lockdownEnabled) {
         isLockedDown = lockdownEnabled;
     }
 
     /**
-     * Gets the Minetweak Overworld
-     * @return Overworld
+     * Get the Overworld WorldServer
+     * @return Overworld WorldServer
      */
     public static World getOverworld() {
         return new World(MinecraftServer.getServer().worldServerForDimension(0));
