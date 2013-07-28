@@ -57,6 +57,12 @@ public class Server {
         MinecraftServer.getServer().stopServer();
     }
 
+    /**
+     * Called by Minecraft code to hook in our commands system.
+     * WARNING: Should not be used in a plugin's point of view, it'll break stuff.
+     * @param player The player instance it was sent by.
+     * @param command Command sent by the player, in raw String form.
+     */
     public static void handleCommand(EntityPlayerMP player, String command) {
         if (command.startsWith("/")) {
             command = command.substring(1);
