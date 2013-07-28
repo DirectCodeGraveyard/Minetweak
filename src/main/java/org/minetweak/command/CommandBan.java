@@ -6,6 +6,11 @@ import org.minetweak.util.StringUtils;
 
 import java.util.ArrayList;
 
+/**
+ * Used to ban a player, has args
+ * that specify the player to be
+ * banned, and a reason(optional)
+ */
 public class CommandBan extends CommandExecutor {
 
     @Override
