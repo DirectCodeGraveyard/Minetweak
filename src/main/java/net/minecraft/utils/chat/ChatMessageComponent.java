@@ -31,7 +31,8 @@ public class ChatMessageComponent {
         this.field_111083_f = par1ChatMessageComponent.field_111083_f;
         this.field_111084_g = par1ChatMessageComponent.field_111084_g;
         this.field_111090_h = par1ChatMessageComponent.field_111090_h;
-        this.field_111091_i = par1ChatMessageComponent.field_111091_i == null ? null : Lists.newArrayList(par1ChatMessageComponent.field_111091_i);
+        if (par1ChatMessageComponent.field_111091_i == null) this.field_111091_i = null;
+        else this.field_111091_i = Lists.newArrayList(par1ChatMessageComponent.field_111091_i);
     }
 
     public ChatMessageComponent func_111059_a(EnumChatFormatting par1EnumChatFormatting) {
