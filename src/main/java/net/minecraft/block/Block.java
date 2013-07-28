@@ -1050,10 +1050,9 @@ public class Block {
     }
 
     /**
-     * currently only used by BlockCauldron to incrament meta-data during rain
+     * currently only used by BlockCauldron to increment meta-data during rain
      */
-    public void fillWithRain(World par1World, int par2, int par3, int par4) {
-    }
+    public void fillWithRain(World par1World, int par2, int par3, int par4) {}
 
     public boolean func_82506_l() {
         return true;
