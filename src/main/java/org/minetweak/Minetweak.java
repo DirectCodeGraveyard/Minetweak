@@ -2,7 +2,7 @@ package org.minetweak;
 
 import com.google.common.eventbus.EventBus;
 import net.minecraft.server.MinecraftServer;
-import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.ChatColors;
 import org.minetweak.command.*;
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.entity.Player;
@@ -25,28 +25,26 @@ import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 
 /**
- * Main entry point for Minetweak, basically defines fields
- * for use throughout the internal server, and even the API
- * itself. It gives most of the basic methods that you will
- * need to create a plugin, like registering a command,
- * or an event.
+ * Main entry point for Minetweak.
+ * It gives the basic methods that you
+ * will need to create a plugin, such as:
+ * registering a command, or an event.
  */
 @SuppressWarnings("FieldCanBeLocal")
 public class Minetweak {
 
     /**
-     * This is the Minecraft version we are currently running on.
+     * Minecraft version
      */
     private static final String minecraftVersion = "1.6.2";
 
     /**
-     * This is the Minetweak version we are currently running on.
+     * Minetweak API version
      */
     private static String serverVersion = "0.6.5";
 
     /**
-     * This boolean will return true if the server has finished loading, will
-     * be replaced by a ServerFinishedStartupEvent possibly.
+     * This field returns true if the server has finished the startup process.
      */
     private static boolean isServerDoneLoading = false;
 
@@ -108,8 +106,8 @@ public class Minetweak {
         // Checks RAM usage to ensure that the server has enough
         ramCheck();
 
-        // Initialize ChatFormatting colorNodes ArrayList that contains the symbol and node
-        ChatFormatting.initializeColorNodes();
+        // Initialize ChatColors colorNodes ArrayList that contains the symbol and node
+        ChatColors.initializeColorNodes();
 
         // Finally, launch the Minecraft Server
         MinecraftServer.main(args);
@@ -140,8 +138,7 @@ public class Minetweak {
     }
 
     /**
-     * Is the server done loading?
-     *
+     * Check if the server is done loading.
      * @return Server done loading
      */
     public static boolean isServerDoneLoading() {
@@ -157,7 +154,6 @@ public class Minetweak {
 
     /**
      * Check to see if the server is in "lockdown" mode
-     *
      * @return Lockdown status
      */
     public static boolean isServerLockedDown() {
@@ -166,7 +162,6 @@ public class Minetweak {
 
     /**
      * Get a specific player by their username, either online or offline, if they are online
-     *
      * @param playerName Player's username
      * @return Instance of player
      */
@@ -176,7 +171,6 @@ public class Minetweak {
 
     /**
      * Check to ensure that a command exists.
-     *
      * @param command Target command label
      * @return True if the command does exist
      */
@@ -186,7 +180,6 @@ public class Minetweak {
 
     /**
      * Get the class to the corresponding command label specified. Return null if no command exists with that label.
-     *
      * @param commandLabel PluginCommand label to get
      * @return CommandExecutor for specified command label
      */
@@ -197,7 +190,6 @@ public class Minetweak {
 
     /**
      * Register a command within Minetweak
-     *
      * @param commandLabel    Label that the command uses
      * @param commandExecutor CommandExecutor class that we will use to execute the command
      */
@@ -207,7 +199,6 @@ public class Minetweak {
 
     /**
      * Get the EventBus that handles all events that go on in the server
-     *
      * @return Server EventBus
      */
     public static EventBus getEventBus() {
@@ -215,8 +206,7 @@ public class Minetweak {
     }
 
     /**
-     * .* Registers a Guava Event Listener
-     *
+     * Registers a Guava Event Listener
      * @param object the instance of the listener
      */
     public static void registerListener(Object object) {
@@ -225,7 +215,6 @@ public class Minetweak {
 
     /**
      * Check whether a player is on by username
-     *
      * @param playerUsername The players username
      * @return if the player is online
      */
@@ -235,7 +224,6 @@ public class Minetweak {
 
     /**
      * MinetweakLog Minetweak Info to Console
-     *
      * @param line line to log
      */
     public static void info(String line) {
@@ -260,7 +248,7 @@ public class Minetweak {
         registerCommand("pardon", new CommandPardon());
         registerCommand("reload", new CommandReload());
         registerCommand("loaddata", new CommandLoadData());
-        registerCommand("clear", new CommandClearInv());
+        registerCommand("clear", new CommandClearInventory());
         registerCommand("version", new CommandVersion());
         registerCommand("give", new CommandGive());
         registerCommand("save", new CommandSave());
@@ -268,8 +256,8 @@ public class Minetweak {
         registerCommand("tps", new CommandTps());
         registerCommand("spawn", new CommandSpawn());
         registerCommand("whitelist", new CommandWhitelist());
-        registerCommand("tp", new CommandTp());
-        registerCommand("tpall", new CommandTpAll());
+        registerCommand("tp", new CommandTeleport());
+        registerCommand("tpall", new CommandTeleportAll());
         registerCommand("lockdown", new CommandLockdown());
         registerCommand("difficulty", new CommandDifficulty());
         registerCommand("setspawn", new CommandSetSpawn());
@@ -279,7 +267,6 @@ public class Minetweak {
 
     /**
      * Return the HashMap with the players. Key is the username, Value is the Player instance.
-     *
      * @return Players HashMap
      */
     public static HashMap<String, Player> getPlayers() {
@@ -288,7 +275,6 @@ public class Minetweak {
 
     /**
      * Gets the PluginCommand Executors for Strings
-     *
      * @return a HashMap of the commands to their executors
      */
     public static HashMap<String, CommandExecutor> getCommandExecutors() {
@@ -304,7 +290,6 @@ public class Minetweak {
 
     /**
      * Un-registers a command
-     *
      * @param label the commands name
      */
     public static void unregisterCommand(String label) {
@@ -312,7 +297,7 @@ public class Minetweak {
     }
 
     /**
-     * Does a Version Check from the Manifest.
+     * Perform a version check
      */
     private static void versionCheck() {
         URL url = Minetweak.class.getProtectionDomain().getCodeSource().getLocation();
@@ -335,18 +320,16 @@ public class Minetweak {
     }
 
     /**
-     * Sets the Servers Lockdown Mode
-     *
-     * @param lockdownEnabled whether the server lockdown is enabled
+     * Set the Server lockdown mode
+     * @param lockdownEnabled True if the server is locked down
      */
     public static void setLockedDown(boolean lockdownEnabled) {
-        Minetweak.isLockedDown = lockdownEnabled;
+        isLockedDown = lockdownEnabled;
     }
 
     /**
-     * Gets the Minetweak Overworld
-     *
-     * @return Overworld
+     * Get the Overworld WorldServer
+     * @return Overworld WorldServer
      */
     public static World getOverworld() {
         return new World(MinecraftServer.getServer().worldServerForDimension(0));

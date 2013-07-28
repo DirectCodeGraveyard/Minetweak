@@ -1,6 +1,7 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
+import org.minetweak.console.Console;
 import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;
 

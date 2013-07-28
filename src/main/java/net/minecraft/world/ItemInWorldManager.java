@@ -251,7 +251,7 @@ public class ItemInWorldManager {
             Block nmsBlock = Block.blocksList[this.theWorld.getBlockId(par1, par2, par3)];
 
             if (nmsBlock != null && !event.isCancelled() && !this.isCreative() && !this.thisPlayerMP.canHarvestBlock(nmsBlock)) {
-                if (!(nmsBlock.func_71906_q_CodeFix_Public() && EnchantmentHelper.getSilkTouchModifier(this.thisPlayerMP))) {
+                if (!(nmsBlock.canSilkHarvest() && EnchantmentHelper.getSilkTouchModifier(this.thisPlayerMP))) {
                     int data = tweakBlock.getData();
                     int bonusLevel = EnchantmentHelper.getFortuneModifier(this.thisPlayerMP);
                     event.setExpToDrop(nmsBlock.getExpDrop(this.theWorld, data, bonusLevel));

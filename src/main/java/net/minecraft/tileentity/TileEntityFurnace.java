@@ -305,7 +305,7 @@ public class TileEntityFurnace extends TileEntity implements ISidedInventory {
                     return 300;
                 }
 
-                if (var3 == Block.field_111034_cE) {
+                if (var3 == Block.coalBlock) {
                     return 16000;
                 }
             }

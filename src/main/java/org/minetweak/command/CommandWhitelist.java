@@ -2,12 +2,12 @@ package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
-import org.minetweak.Server;
-import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.ChatColors;
 import org.minetweak.chat.TabCompletion;
 import org.minetweak.entity.Player;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
+import org.minetweak.server.Server;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,18 +19,18 @@ public class CommandWhitelist extends CommandExecutor {
         if (args.length >= 1) {
             if (args[0].equals("on")) {
                 MinecraftServer.getServer().getConfigurationManager().setWhiteListEnabled(true);
-                Server.sendToOps("Whitelist has been enabled.", true);
+                Server.sendToOps("Whitelist has been enabled.");
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
-                    sender.sendMessage(ChatFormatting.GOLD + "Whitelist has been enabled.");
+                    sender.sendMessage(ChatColors.GOLD + "Whitelist has been enabled.");
                 }
                 return;
             }
 
             if (args[0].equals("off")) {
                 MinecraftServer.getServer().getConfigurationManager().setWhiteListEnabled(false);
-                Server.sendToOps("Whitelist Has been disabled.", true);
+                Server.sendToOps("Whitelist Has been disabled.");
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
-                    sender.sendMessage(ChatFormatting.GOLD + "Whitelist has been disabled.");
+                    sender.sendMessage(ChatColors.GOLD + "Whitelist has been disabled.");
                 }
                 return;
             }
@@ -38,7 +38,7 @@ public class CommandWhitelist extends CommandExecutor {
             if (args[0].equals("list")) {
                 ServerOps.load();
                 Set<String> players = PlayerWhitelist.getWhitelistedPlayers();
-                sender.sendMessage(ChatFormatting.GOLD + "Whitelisted Players" + ChatFormatting.RESET + ":");
+                sender.sendMessage(ChatColors.GOLD + "Whitelisted Players" + ChatColors.RESET + ":");
                 boolean flag = false;
                 String line = "";
                 for (String player : players) {
@@ -46,7 +46,7 @@ public class CommandWhitelist extends CommandExecutor {
                         sender.sendMessage(line + " " + player);
                         flag = false;
                     } else {
-                        line = ChatFormatting.BLUE + player;
+                        line = ChatColors.BLUE + player;
                         flag = true;
                     }
                 }
@@ -60,9 +60,9 @@ public class CommandWhitelist extends CommandExecutor {
                 }
                 PlayerWhitelist.addPlayer(args[1]);
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
-                    sender.sendMessage(ChatFormatting.GOLD + "Added " + ChatFormatting.GREEN + args[1] + ChatFormatting.GOLD + " to the whitelist.");
+                    sender.sendMessage(ChatColors.GOLD + "Added " + ChatColors.GREEN + args[1] + ChatColors.GOLD + " to the whitelist.");
                 }
-                Server.sendToOps("Added " + args[1] + " to the whitelist.", true);
+                Server.sendToOps("Added " + args[1] + " to the whitelist.");
                 return;
             }
 
@@ -73,18 +73,18 @@ public class CommandWhitelist extends CommandExecutor {
                 }
                 PlayerWhitelist.removePlayer(args[1]);
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
-                    sender.sendMessage(ChatFormatting.GOLD + "Removed " + ChatFormatting.GREEN + args[1] + ChatFormatting.GOLD + " from the whitelist.");
+                    sender.sendMessage(ChatColors.GOLD + "Removed " + ChatColors.GREEN + args[1] + ChatColors.GOLD + " from the whitelist.");
                 }
-                Server.sendToOps("Removed " + args[1] + " from whitelist.", true);
+                Server.sendToOps("Removed " + args[1] + " from whitelist.");
                 return;
             }
 
             if (args[0].equals("reload")) {
                 PlayerWhitelist.load();
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
-                    sender.sendMessage(ChatFormatting.GOLD + "Reloaded Whitelist");
+                    sender.sendMessage(ChatColors.GOLD + "Reloaded Whitelist");
                 }
-                Server.sendToOps("Loaded Whitelist.", true);
+                Server.sendToOps("Loaded Whitelist.");
                 return;
             }
         }

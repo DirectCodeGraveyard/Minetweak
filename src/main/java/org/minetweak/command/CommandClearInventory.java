@@ -6,7 +6,11 @@ import org.minetweak.entity.Player;
 
 import java.util.ArrayList;
 
-public class CommandClearInv extends CommandExecutor {
+/**
+ * Used as a player to clear their inventory
+ * of all items.
+ */
+public class CommandClearInventory extends CommandExecutor {
 
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {

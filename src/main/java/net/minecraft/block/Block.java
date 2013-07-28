@@ -28,7 +28,7 @@ public class Block {
      * used as foreach item, if item.tab = current tab, display it on the screen
      */
     private CreativeTabs displayOnCreativeTab;
-    protected String field_111026_f;
+    protected String name;
 
     public static final StepSound soundPowderFootstep = new StepSound("stone", 1.0F, 1.0F);
     public static final StepSound soundWoodFootstep = new StepSound("wood", 1.0F, 1.0F);
@@ -68,10 +68,11 @@ public class Block {
      */
     public static final int[] lightValue = new int[4096];
 
-    /**
-     * Flag if block ID should use the brightest neighbor light value as its own
-     */
     public static boolean[] useNeighborBrightness = new boolean[4096];
+
+    /**
+     * Minecraft Blocks. Its amazing, yeah.
+     */
     public static final Block stone = (new BlockStone(1)).setHardness(1.5F).setResistance(10.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("stone").func_111022_d("stone");
     public static final BlockGrass grass = (BlockGrass) (new BlockGrass(2)).setHardness(0.6F).setStepSound(soundGrassFootstep).setUnlocalizedName("grass").func_111022_d("grass");
     public static final Block dirt = (new BlockDirt(3)).setHardness(0.5F).setStepSound(soundGravelFootstep).setUnlocalizedName("dirt").func_111022_d("dirt");
@@ -82,10 +83,6 @@ public class Block {
     public static final BlockFluid waterMoving = (BlockFluid) (new BlockFlowing(8, Material.water)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").disableStats().func_111022_d("water_flow");
     public static final Block waterStill = (new BlockStationary(9, Material.water)).setHardness(100.0F).setLightOpacity(3).setUnlocalizedName("water").disableStats().func_111022_d("water_still");
     public static final BlockFluid lavaMoving = (BlockFluid) (new BlockFlowing(10, Material.lava)).setHardness(0.0F).setLightValue(1.0F).setUnlocalizedName("lava").disableStats().func_111022_d("lava_flow");
-
-    /**
-     * Stationary lava source block
-     */
     public static final Block lavaStill = (new BlockStationary(11, Material.lava)).setHardness(100.0F).setLightValue(1.0F).setUnlocalizedName("lava").disableStats().func_111022_d("lava_still");
     public static final Block sand = (new BlockSand(12)).setHardness(0.5F).setStepSound(soundSandFootstep).setUnlocalizedName("sand").func_111022_d("sand");
     public static final Block gravel = (new BlockGravel(13)).setHardness(0.6F).setStepSound(soundGravelFootstep).setUnlocalizedName("gravel").func_111022_d("gravel");
@@ -234,11 +231,11 @@ public class Block {
     public static final Block stairsNetherQuartz = (new BlockStairs(156, blockNetherQuartz, 0)).setUnlocalizedName("stairsQuartz");
     public static final Block railActivator = (new BlockRailPowered(157)).setHardness(0.7F).setStepSound(soundMetalFootstep).setUnlocalizedName("activatorRail").func_111022_d("rail_activator");
     public static final Block dropper = (new BlockDropper(158)).setHardness(3.5F).setStepSound(soundStoneFootstep).setUnlocalizedName("dropper").func_111022_d("dropper");
-    public static final Block field_111039_cA = (new BlockColored(159, Material.rock)).setHardness(1.25F).setResistance(7.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("clayHardenedStained").func_111022_d("hardened_clay_stained");
-    public static final Block field_111038_cB = (new BlockHay(170)).setHardness(0.5F).setStepSound(soundGrassFootstep).setUnlocalizedName("hayBlock").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("hay_block");
-    public static final Block field_111031_cC = (new BlockCarpet(171)).setHardness(0.1F).setStepSound(soundClothFootstep).setUnlocalizedName("woolCarpet").setLightOpacity(0);
-    public static final Block field_111032_cD = (new Block(172, Material.rock)).setHardness(1.25F).setResistance(7.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("clayHardened").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("hardened_clay");
-    public static final Block field_111034_cE = (new Block(173, Material.rock)).setHardness(5.0F).setResistance(10.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("blockCoal").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("coal_block");
+    public static final Block stainedClay = (new BlockColored(159, Material.rock)).setHardness(1.25F).setResistance(7.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("clayHardenedStained").func_111022_d("hardened_clay_stained");
+    public static final Block hayBlock = (new BlockHay(170)).setHardness(0.5F).setStepSound(soundGrassFootstep).setUnlocalizedName("hayBlock").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("hay_block");
+    public static final Block woolCarpet = (new BlockCarpet(171)).setHardness(0.1F).setStepSound(soundClothFootstep).setUnlocalizedName("woolCarpet").setLightOpacity(0);
+    public static final Block hardenedClay = (new Block(172, Material.rock)).setHardness(1.25F).setResistance(7.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("clayHardened").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("hardened_clay");
+    public static final Block coalBlock = (new Block(173, Material.rock)).setHardness(5.0F).setResistance(10.0F).setStepSound(soundStoneFootstep).setUnlocalizedName("blockCoal").setCreativeTab(CreativeTabs.tabBlock).func_111022_d("coal_block");
 
     /**
      * ID of the block.
@@ -254,12 +251,6 @@ public class Block {
      * Indicates the blocks resistance to explosions.
      */
     protected float blockResistance;
-
-    /**
-     * set to true when TweakBlock's constructor is called through the chain of super()'s. Note: Never used
-     *
-     * protected boolean blockConstructorCalled = true;
-     */
 
     /**
      * If this field is true, the block is counted for statistics (mined or placed)
@@ -542,7 +533,7 @@ public class Block {
      * How many world ticks before ticking
      */
     public int tickRate(World par1World) {
-        return 10;
+        return 200;
     }
 
     /**
@@ -931,7 +922,7 @@ public class Block {
     /**
      * Return true if a player with Silk Touch can harvest this block directly, and not its normal drops.
      */
-    protected boolean canSilkHarvest() {
+    public boolean canSilkHarvest() {
         return this.renderAsNormalBlock() && !this.isBlockContainer;
     }
 
@@ -1059,10 +1050,9 @@ public class Block {
     }
 
     /**
-     * currently only used by BlockCauldron to incrament meta-data during rain
+     * currently only used by BlockCauldron to increment meta-data during rain
      */
-    public void fillWithRain(World par1World, int par2, int par3, int par4) {
-    }
+    public void fillWithRain(World par1World, int par2, int par3, int par4) {}
 
     public boolean func_82506_l() {
         return true;
@@ -1107,14 +1097,14 @@ public class Block {
     }
 
     protected Block func_111022_d(String par1Str) {
-        this.field_111026_f = par1Str;
+        this.name = par1Str;
         return this;
     }
 
     static {
         Item.itemsList[cloth.blockID] = (new ItemCloth(cloth.blockID - 256)).setUnlocalizedName("cloth");
-        Item.itemsList[field_111039_cA.blockID] = (new ItemCloth(field_111039_cA.blockID - 256)).setUnlocalizedName("clayHardenedStained");
-        Item.itemsList[field_111031_cC.blockID] = (new ItemCloth(field_111031_cC.blockID - 256)).setUnlocalizedName("woolCarpet");
+        Item.itemsList[stainedClay.blockID] = (new ItemCloth(stainedClay.blockID - 256)).setUnlocalizedName("clayHardenedStained");
+        Item.itemsList[woolCarpet.blockID] = (new ItemCloth(woolCarpet.blockID - 256)).setUnlocalizedName("woolCarpet");
         Item.itemsList[wood.blockID] = (new ItemMultiTextureTile(wood.blockID - 256, wood, BlockLog.woodType)).setUnlocalizedName("log");
         Item.itemsList[planks.blockID] = (new ItemMultiTextureTile(planks.blockID - 256, planks, BlockWood.woodType)).setUnlocalizedName("wood");
         Item.itemsList[silverfish.blockID] = (new ItemMultiTextureTile(silverfish.blockID - 256, silverfish, BlockSilverfish.silverfishStoneTypes)).setUnlocalizedName("monsterStoneEgg");
@@ -1175,10 +1165,6 @@ public class Block {
 
     public int getExpDrop(World world, int data, int enchantmentLevel) {
         return 0;
-    }
-
-    public boolean func_71906_q_CodeFix_Public() {
-        return canSilkHarvest();
     }
 
     public void func_71923_g_CodeFix_Public(World a, int b, int c, int d, int e) {

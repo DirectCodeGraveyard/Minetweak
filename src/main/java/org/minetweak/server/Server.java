@@ -1,29 +1,44 @@
-package org.minetweak;
+package org.minetweak.server;
 
 import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.utils.chat.ChatMessageComponent;
-import org.minetweak.chat.ChatFormatting;
-import org.minetweak.command.Console;
+import org.minetweak.Minetweak;
+import org.minetweak.chat.ChatColors;
 import org.minetweak.config.MinetweakConfig;
+import org.minetweak.console.Console;
 import org.minetweak.entity.Player;
 import org.minetweak.permissions.ServerOps;
 import org.minetweak.util.StringUtils;
 
 /**
- * This is a class for managing the MinecraftServer
+ * Used for methods that may not fit anywhere else, or
+ * fit the "Server" name, those such as broadcastMessage
+ * belong here, but those such as kickPlayer are here
+ * for lazy developers who don't want to define a player
+ * instance or store the player in a variable.
  */
 public class Server {
 
+    /**
+     * Broadcast a message to the entire server
+     * @param message Message to broadcast
+     * @return True on success for sent message(e.g. false on server not finished startup)
+     */
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
-            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111077_e(String.format("[%s%s%s] %s", ChatFormatting.GOLD, "Server", ChatFormatting.RESET, message)));
+            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111077_e(String.format("[%s%s%s] %s", ChatColors.GOLD, "Server", ChatColors.RESET, message)));
             return true;
         } else {
             return false;
         }
     }
 
+    /**
+     * Kicks a player.
+     * @param playerName Player username to kick
+     * @return True on kick success
+     */
     public static boolean kickPlayer(String playerName) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
         if (targetPlayer == null) return false;
@@ -31,6 +46,12 @@ public class Server {
         return true;
     }
 
+    /**
+     * Kicks a player.
+     * @param playerName Player username to kick
+     * @param kickReason Reason to kick
+     * @return True on kick success
+     */
     public static boolean kickPlayer(String playerName, String kickReason) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
         if (targetPlayer == null) return false;
@@ -38,6 +59,11 @@ public class Server {
         return true;
     }
 
+    /**
+     * Bans a player.
+     * @param playerName Player username to ban
+     * @return True on ban success
+     */
     public static boolean banPlayer(String playerName) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
         if (targetPlayer == null) return false;
@@ -45,6 +71,12 @@ public class Server {
         return true;
     }
 
+    /**
+     * Bans a player.
+     * @param playerName Player username to ban
+     * @param banReason Reason to ban the player
+     * @return True on ban success
+     */
     public static boolean banPlayer(String playerName, String banReason) {
         Player targetPlayer = Minetweak.getPlayerByName(playerName);
         if (targetPlayer == null) return false;
@@ -52,11 +84,20 @@ public class Server {
         return true;
     }
 
+    /**
+     * Initiate shutdown of the server
+     */
     public static void shutdownServer() {
         MinecraftServer.getServer().initiateShutdown();
         MinecraftServer.getServer().stopServer();
     }
 
+    /**
+     * Called by Minecraft code to hook in our commands system.
+     * WARNING: Should not be used in a plugin's point of view, it'll break stuff.
+     * @param player The player instance it was sent by.
+     * @param command Command sent by the player, in raw String form.
+     */
     public static void handleCommand(EntityPlayerMP player, String command) {
         if (command.startsWith("/")) {
             command = command.substring(1);
@@ -71,10 +112,16 @@ public class Server {
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
         } else {
-            player.addChatMessage(ChatFormatting.RED + "No Such Command: " + commandOnly);
+            player.addChatMessage(ChatColors.RED + "No Such Command: " + commandOnly);
         }
     }
 
+    /**
+     * Called by Minecraft code to hook in our commands system.
+     * WARNING: Should not be used in a plugin's point of view, it'll break stuff.
+     * @param console The console instance it was sent by.
+     * @param command Command sent by the sender, in raw String form.
+     */
     public static void handleCommand(Console console, String command) {
         if (command.startsWith("/")) {
             command = command.substring(1);
@@ -87,43 +134,56 @@ public class Server {
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(console, commandOnly, args);
         } else {
-            console.sendMessage(ChatFormatting.RED + "No Such Command: " + commandOnly);
+            console.sendMessage(ChatColors.RED + "No Such Command: " + commandOnly);
         }
     }
 
+    /**
+     * Op a player
+     * @param playerUsername Player username to op
+     */
     public static void opPlayer(String playerUsername) {
         ServerOps.addOp(playerUsername);
     }
 
+    /**
+     * Deop a player
+     * @param playerUsername Player username to deop
+     */
     public static void deopPlayer(String playerUsername) {
         ServerOps.removeOp(playerUsername);
     }
 
-
+    /**
+     * Pardon a player
+     * @param playerUsername Player to pardon
+     */
     public static void pardonPlayer(String playerUsername) {
         MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().remove(playerUsername);
     }
 
+    /**
+     * Check if the whitelist is enabled.
+     * @return True if the whitelist is enabled
+     */
     public static boolean isWhitelistEnabled() {
         return MinetweakConfig.getBoolean("server.whitelist-enabled");
     }
 
+    /**
+     * Send a message to all operators on the server.
+     * @param message Message to send.
+     */
     public static void sendToOps(String message) {
-        sendToOps(message, false);
-    }
+        String out = "[" + ChatColors.GOLD + "Server" + ChatColors.RESET + "] " + message;
 
-    public static void sendToOps(String message, boolean pretty) {
-        String out = message;
-        if (pretty) {
-            out = "[" + ChatFormatting.GOLD + "Server" + ChatFormatting.RESET + "] " + message;
-        }
+        if (ServerOps.getOps().size() == 0) return;
 
         for (String op : ServerOps.getOps()) {
-            Player player = Minetweak.getPlayerByName(op);
-            if (player == null) {
-                continue;
+            if (Minetweak.isPlayerOnline(op)) {
+                Player player = Minetweak.getPlayerByName(op);
+                player.sendMessage(out);
             }
-            player.sendMessage(out);
         }
         Minetweak.info(message);
     }

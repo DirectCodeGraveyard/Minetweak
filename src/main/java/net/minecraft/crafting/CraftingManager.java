@@ -51,7 +51,7 @@ public class CraftingManager {
         this.addRecipe(new ItemStack(Block.fenceGate, 1), "#W#", "#W#", '#', Item.stick, 'W', Block.planks);
         this.addRecipe(new ItemStack(Block.jukebox, 1), "###", "#X#", "###", '#', Block.planks, 'X', Item.diamond);
         this.addRecipe(new ItemStack(Item.field_111214_ch, 2), "~~ ", "~O ", "  ~", '~', Item.silk, 'O', Item.slimeBall);
-        this.addRecipe(new ItemStack(Block.field_111038_cB, 1), "###", "###", "###", '#', Item.wheat);
+        this.addRecipe(new ItemStack(Block.hayBlock, 1), "###", "###", "###", '#', Item.wheat);
         this.addRecipe(new ItemStack(Block.music, 1), "###", "#X#", "###", '#', Block.planks, 'X', Item.redstone);
         this.addRecipe(new ItemStack(Block.bookShelf, 1), "###", "XXX", "###", '#', Block.planks, 'X', Item.book);
         this.addRecipe(new ItemStack(Block.blockSnow, 1), "##", "##", '#', Item.snowball);

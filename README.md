@@ -2,7 +2,7 @@ Minetweak
 ---------
 **About**
 
-_Minetweak_ is the Minecraft server application programming interface(API) that will allow you to interact with the server unlike never before. Minetweak is very far from finished, we are boasting some major features, like Bukkit compatibility.
+Minetweak is a modified Minecraft server that will allow major flexibility with plugins, that will allow plugin developers to easily change the server how the would like, without sacrificing major performance.
 
 **Who made Minetweak?**
 

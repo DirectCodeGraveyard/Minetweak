@@ -1,6 +1,7 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
+import org.minetweak.console.Console;
 import org.minetweak.entity.Player;
 import org.minetweak.server.GameMode;
 import org.minetweak.util.StringUtils;
@@ -42,20 +43,12 @@ public class CommandGamemode extends CommandExecutor {
             if (gamemode == 0) player.setGameMode(GameMode.SURVIVAL);
             if (gamemode == 1) player.setGameMode(GameMode.CREATIVE);
             if (gamemode == 2) player.setGameMode(GameMode.ADVENTURE);
-
-            if (gamemode == 0) player.sendMessage("Your gamemode was set to survival");
-            if (gamemode == 1) player.sendMessage("Your gamemode was set to creative");
-            if (gamemode == 2) player.sendMessage("Your gamemode was set to adventure");
         } else {
             Player player = Minetweak.getPlayerByName(args[1].toLowerCase());
 
             if (gamemode == 0) player.setGameMode(GameMode.SURVIVAL);
             if (gamemode == 1) player.setGameMode(GameMode.CREATIVE);
             if (gamemode == 2) player.setGameMode(GameMode.ADVENTURE);
-
-            if (gamemode == 0) player.sendMessage("Your gamemode was set to survival");
-            if (gamemode == 1) player.sendMessage("Your gamemode was set to creative");
-            if (gamemode == 2) player.sendMessage("Your gamemode was set to adventure");
         }
     }
 

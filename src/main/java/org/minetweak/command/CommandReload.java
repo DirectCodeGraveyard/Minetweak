@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
-import org.minetweak.Server;
 import org.minetweak.plugins.PluginManager;
+import org.minetweak.server.Server;
 
 public class CommandReload extends CommandExecutor {
     @Override

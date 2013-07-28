@@ -1,13 +1,14 @@
-package org.minetweak.command;
+package org.minetweak.console;
 
 import org.minetweak.Minetweak;
-import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.ChatColors;
+import org.minetweak.command.CommandSender;
 
 public class Console implements CommandSender {
 
     @Override
     public void sendMessage(String message) {
-        for (String s : ChatFormatting.getColorNodes()) {
+        for (String s : ChatColors.getColorNodes()) {
             message = message.replace(s, "");
         }
         Minetweak.info(message);

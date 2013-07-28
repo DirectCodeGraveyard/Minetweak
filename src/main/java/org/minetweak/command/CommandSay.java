@@ -1,6 +1,6 @@
 package org.minetweak.command;
 
-import org.minetweak.Server;
+import org.minetweak.server.Server;
 
 public class CommandSay extends CommandExecutor {
     @Override

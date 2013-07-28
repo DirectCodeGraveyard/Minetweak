@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
-import org.minetweak.chat.ChatFormatting;
+import org.minetweak.chat.ChatColors;
 import org.minetweak.chat.TabCompletion;
 import org.minetweak.util.StringUtils;
 
@@ -12,12 +12,12 @@ public class CommandHelp extends CommandExecutor {
 
     @Override
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
-        Set<String> commands = CmdHelper.getCommands();
+        Set<String> commands = CommandHelper.getCommands();
         if (args.length > 0 && !StringUtils.isInteger(args[0])) {
             String command = args[0];
             if (commands.contains(command)) {
                 String helpInfo = Minetweak.getCommandExecutors().get(command).getHelpInfo();
-                sender.sendMessage("/" + ChatFormatting.BLUE + command + ChatFormatting.RESET + " - " + helpInfo);
+                sender.sendMessage("/" + ChatColors.GREEN + command + ChatColors.RESET + " - " + helpInfo);
                 return;
             } else {
                 sender.sendMessage("help: No Such Command: " + command);
@@ -31,14 +31,14 @@ public class CommandHelp extends CommandExecutor {
             page = Integer.parseInt(args[0]);
             start = (5 * page) - 1;
             if (numberOfCommands < start) {
-                sender.sendMessage(ChatFormatting.GOLD + "Page Number too large. There are " + ChatFormatting.RESET + numberOfPages + " pages.");
+                sender.sendMessage(ChatColors.GOLD + "Page Number too large. There are " + ChatColors.RESET + numberOfPages + " pages.");
                 return;
             }
         }
         String[] cmds = commands.toArray(new String[commands.size()]);
         sender.sendMessage("Help Page #" + page + " of " + numberOfPages);
         for (int i = start; i < commands.size() && (i - start) != 5; i++) {
-            sender.sendMessage("/" + ChatFormatting.BLUE + cmds[i] + ChatFormatting.RESET + " - " + Minetweak.getCommandExecutors().get(cmds[i]).getHelpInfo());
+            sender.sendMessage("/" + ChatColors.BLUE + cmds[i] + ChatColors.RESET + " - " + Minetweak.getCommandExecutors().get(cmds[i]).getHelpInfo());
         }
     }
 

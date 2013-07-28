@@ -598,7 +598,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
                         var7 = 7.0F;
                         var5 = 180;
                         var6 = 3;
-                    } else if (var2.itemID == Block.field_111038_cB.blockID) {
+                    } else if (var2.itemID == Block.hayBlock.blockID) {
                         var7 = 20.0F;
                         var5 = 180;
                     } else if (var2.itemID == Item.appleRed.itemID) {

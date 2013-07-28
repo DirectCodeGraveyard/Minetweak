@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ChatMessageComponent {
     private static final Gson field_111089_a = (new GsonBuilder()).registerTypeAdapter(ChatMessageComponent.class, new MessageComponentSerializer()).create();
-    private EnumChatFormatting field_111087_b;
+    private EnumChatFormatting chatFormatting;
     private Boolean field_111088_c;
     private Boolean field_111085_d;
     private Boolean field_111086_e;
@@ -20,31 +20,31 @@ public class ChatMessageComponent {
     private String field_111090_h;
     private List<ChatMessageComponent> field_111091_i;
 
-    public ChatMessageComponent() {
-    }
+    public ChatMessageComponent() {}
 
     public ChatMessageComponent(ChatMessageComponent par1ChatMessageComponent) {
-        this.field_111087_b = par1ChatMessageComponent.field_111087_b;
+        this.chatFormatting = par1ChatMessageComponent.chatFormatting;
         this.field_111088_c = par1ChatMessageComponent.field_111088_c;
         this.field_111085_d = par1ChatMessageComponent.field_111085_d;
         this.field_111086_e = par1ChatMessageComponent.field_111086_e;
         this.field_111083_f = par1ChatMessageComponent.field_111083_f;
         this.field_111084_g = par1ChatMessageComponent.field_111084_g;
         this.field_111090_h = par1ChatMessageComponent.field_111090_h;
-        this.field_111091_i = par1ChatMessageComponent.field_111091_i == null ? null : Lists.newArrayList(par1ChatMessageComponent.field_111091_i);
+        if (par1ChatMessageComponent.field_111091_i == null) this.field_111091_i = null;
+        else this.field_111091_i = Lists.newArrayList(par1ChatMessageComponent.field_111091_i);
     }
 
     public ChatMessageComponent func_111059_a(EnumChatFormatting par1EnumChatFormatting) {
         if (par1EnumChatFormatting != null && !par1EnumChatFormatting.func_96302_c()) {
             throw new IllegalArgumentException("Argument is not a valid color!");
         } else {
-            this.field_111087_b = par1EnumChatFormatting;
+            this.chatFormatting = par1EnumChatFormatting;
             return this;
         }
     }
 
     public EnumChatFormatting func_111065_a() {
-        return this.field_111087_b;
+        return this.chatFormatting;
     }
 
     public ChatMessageComponent func_111071_a(Boolean par1) {
@@ -178,7 +178,7 @@ public class ChatMessageComponent {
 
     public String func_111070_a(boolean par1, EnumChatFormatting par2EnumChatFormatting, boolean par3, boolean par4, boolean par5, boolean par6) {
         StringBuilder var7 = new StringBuilder();
-        EnumChatFormatting var8 = this.field_111087_b == null ? par2EnumChatFormatting : this.field_111087_b;
+        EnumChatFormatting var8 = this.chatFormatting == null ? par2EnumChatFormatting : this.chatFormatting;
         boolean var9 = this.field_111088_c == null ? par3 : this.field_111088_c;
         boolean var10 = this.field_111085_d == null ? par4 : this.field_111085_d;
         boolean var11 = this.field_111086_e == null ? par5 : this.field_111086_e;

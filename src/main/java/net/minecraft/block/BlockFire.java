@@ -46,8 +46,8 @@ public class BlockFire extends Block {
         this.setBurnRate(tallGrass.blockID, 60, 100);
         this.setBurnRate(cloth.blockID, 30, 60);
         this.setBurnRate(vine.blockID, 15, 100);
-        this.setBurnRate(field_111034_cE.blockID, 5, 5);
-        this.setBurnRate(field_111038_cB.blockID, 60, 20);
+        this.setBurnRate(coalBlock.blockID, 5, 5);
+        this.setBurnRate(hayBlock.blockID, 60, 20);
     }
 
     /**
