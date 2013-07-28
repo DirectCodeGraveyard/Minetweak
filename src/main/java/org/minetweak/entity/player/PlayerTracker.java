@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
+import org.minetweak.entity.Player;
 import org.minetweak.event.player.NewPlayerEvent;
 import org.minetweak.event.player.PlayerJoinEvent;
 import org.minetweak.event.server.ServerInitializedEvent;
@@ -31,7 +32,8 @@ public class PlayerTracker {
 
     @Subscribe
     public void onJoin(PlayerJoinEvent event) {
-        if (!players.contains(event.getPlayer().getName())) {
+        Player player = event.getPlayer();
+        if (!players.contains(player.getName())) {
             // This player is new
             Minetweak.info("New Player: " + event.getPlayer().getName());
             players.add(event.getPlayer().getName());

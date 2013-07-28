@@ -63,8 +63,8 @@ public class Player extends Entity implements CommandSender {
      * @param playerUsername Player name we are registering
      */
     public static boolean registerPlayer(String playerUsername) {
-        playerUsername = playerUsername.toLowerCase();
         Player targetPlayerInstance = new Player(playerUsername);
+        playerUsername = playerUsername.toLowerCase();
         if (Minetweak.isServerLockedDown()) {
             targetPlayerInstance.kickPlayer("This server is currently under lockdown.");
             return false;
