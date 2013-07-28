@@ -297,7 +297,7 @@ public class Minetweak {
     }
 
     /**
-     * Does a Version Check from the Manifest.
+     * Perform a version check
      */
     private static void versionCheck() {
         URL url = Minetweak.class.getProtectionDomain().getCodeSource().getLocation();
