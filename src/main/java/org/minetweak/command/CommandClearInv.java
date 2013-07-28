@@ -16,7 +16,7 @@ public class CommandClearInv extends CommandExecutor {
             return;
         }
         if (args.length >= 1) {
-            username = args[0];
+            username = args[0].toLowerCase();
         } else {
             username = sender.getName();
         }

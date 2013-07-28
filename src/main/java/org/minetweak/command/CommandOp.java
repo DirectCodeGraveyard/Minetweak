@@ -18,11 +18,11 @@ public class CommandOp extends CommandExecutor {
             noPermission(sender, "op players");
             return;
         }
-        Player targetPlayer = Minetweak.getPlayerByName(args[0]);
+        Player targetPlayer = Minetweak.getPlayerByName(args[0].toLowerCase());
 
-        Server.opPlayer(args[0]);
+        Server.opPlayer(args[0].toLowerCase());
 
-        if (Minetweak.isPlayerOnline(args[0])) {
+        if (Minetweak.isPlayerOnline(args[0].toLowerCase())) {
             targetPlayer.sendMessage("You have been opped by: " + sender.getName());
             sender.sendMessage("You opped " + args[0]);
         } else {

@@ -18,9 +18,9 @@ public class CommandDeop extends CommandExecutor {
             noPermission(sender, "deop players");
             return;
         }
-        Player targetPlayer = Minetweak.getPlayerByName(args[0]);
+        Player targetPlayer = Minetweak.getPlayerByName(args[0].toLowerCase());
 
-        ServerOps.removeOp(args[0]);
+        ServerOps.removeOp(args[0].toLowerCase());
 
         if (Minetweak.isPlayerOnline(args[0])) {
             targetPlayer.sendMessage("You have been deopped by: " + sender.getName());

@@ -19,17 +19,17 @@ public class CommandTp extends CommandExecutor {
         Player target;
         if (args.length == 1) {
             player = Minetweak.getPlayerByName(sender.getName());
-            target = Minetweak.getPlayerByName(args[0]);
+            target = Minetweak.getPlayerByName(args[0].toLowerCase());
         } else {
-            player = Minetweak.getPlayerByName(args[0]);
-            target = Minetweak.getPlayerByName(args[1]);
+            player = Minetweak.getPlayerByName(args[0].toLowerCase());
+            target = Minetweak.getPlayerByName(args[1].toLowerCase());
         }
         if (player == null) {
-            sender.sendMessage(ChatFormatting.RED + args[0] + " is not online.");
+            sender.sendMessage(ChatFormatting.RED + args[0].toLowerCase() + " is not online.");
             return;
         }
         if (target == null) {
-            sender.sendMessage(ChatFormatting.RED + args[1] + " is not online.");
+            sender.sendMessage(ChatFormatting.RED + args[1].toLowerCase() + " is not online.");
             return;
         }
         sender.sendMessage(ChatFormatting.GOLD + "Teleporting " + ChatFormatting.BLUE + player.getName() + ChatFormatting.RESET + " to " + ChatFormatting.BLUE + target.getName());

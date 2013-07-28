@@ -76,7 +76,7 @@ public class Player extends Entity implements CommandSender {
                     return false;
                 }
             } else {
-                if (!PlayerWhitelist.isWhitelistEnabled() && !PlayerWhitelist.isPlayerWhitelisted(playerUsername)) {
+                if (PlayerWhitelist.isWhitelistEnabled() && !PlayerWhitelist.isPlayerWhitelisted(playerUsername)) {
                     targetPlayerInstance.kickPlayer("You are not whitelisted on this server!");
                     return false;
                 }

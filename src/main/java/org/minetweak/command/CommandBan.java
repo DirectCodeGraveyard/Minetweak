@@ -17,7 +17,7 @@ public class CommandBan extends CommandExecutor {
             noPermission(sender, "ban players");
             return;
         }
-        Player targetPlayer = Minetweak.getPlayerByName(args[0]);
+        Player targetPlayer = Minetweak.getPlayerByName(args[0].toLowerCase());
         if (args.length == 1) {
             targetPlayer.banPlayer();
         } else if (args.length >= 2) {

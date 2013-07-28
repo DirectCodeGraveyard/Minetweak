@@ -17,10 +17,10 @@ public class CommandKill extends CommandExecutor {
             noPermission(sender, "kill players");
             return;
         }
-        Player targetPlayer = Minetweak.getPlayerByName(args[0]);
+        Player targetPlayer = Minetweak.getPlayerByName(args[0].toLowerCase());
 
         if (Minetweak.isPlayerOnline(args[0])) {
-            sender.sendMessage("You have killed " + args[0]);
+            sender.sendMessage("You have killed " + args[0].toLowerCase());
             targetPlayer.sendMessage("Ouch, that must have hurt");
             targetPlayer.killPlayer();
         } else {
