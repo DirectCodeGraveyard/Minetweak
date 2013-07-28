@@ -253,12 +253,6 @@ public class Block {
     protected float blockResistance;
 
     /**
-     * set to true when TweakBlock's constructor is called through the chain of super()'s. Note: Never used
-     *
-     * protected boolean blockConstructorCalled = true;
-     */
-
-    /**
      * If this field is true, the block is counted for statistics (mined or placed)
      */
     protected boolean enableStats = true;
