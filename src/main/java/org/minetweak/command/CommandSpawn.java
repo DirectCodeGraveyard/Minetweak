@@ -2,6 +2,7 @@ package org.minetweak.command;
 
 import org.minetweak.Minetweak;
 import org.minetweak.chat.ChatColors;
+import org.minetweak.console.Console;
 import org.minetweak.entity.Player;
 
 public class CommandSpawn extends CommandExecutor {

@@ -1,7 +1,8 @@
-package org.minetweak.command;
+package org.minetweak.console;
 
 import org.minetweak.Minetweak;
 import org.minetweak.chat.ChatColors;
+import org.minetweak.command.CommandSender;
 
 public class Console implements CommandSender {
 
