@@ -75,6 +75,12 @@ public class Server {
         }
     }
 
+    /**
+     * Called by Minecraft code to hook in our commands system.
+     * WARNING: Should not be used in a plugin's point of view, it'll break stuff.
+     * @param console The console instance it was sent by.
+     * @param command Command sent by the sender, in raw String form.
+     */
     public static void handleCommand(Console console, String command) {
         if (command.startsWith("/")) {
             command = command.substring(1);
