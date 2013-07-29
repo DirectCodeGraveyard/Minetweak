@@ -12,7 +12,6 @@ public class MinetweakConfig {
     public static void initialize() {
         header("This is the Minetweak main configuration file");
         newLine();
-        get(new Property("player.autoOp").addComment("Allows for Whitelisted players to be oped on join"));
         get(new Property("server.stop.message").addComment("Sets the disconnect message to be displayed to users when the server is stopping"));
         String logLevel = get(new Property("minetweak.log.level", "INFO").addComment("Log Level for Minetweak: Values: INFO/DEBUG/FINE/SEVERE/WARNING"));
         Minetweak.getLogger().getLogger().setLevel(Level.parse(logLevel));
