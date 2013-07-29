@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
 import org.minetweak.chat.TextColor;
-import org.minetweak.config.MinetweakConfig;
+import org.minetweak.config.GameConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.server.Difficulty;
 import org.minetweak.util.StringUtils;
@@ -39,7 +39,7 @@ public class CommandDifficulty extends CommandExecutor {
         } else {
             id = Difficulty.getByName(arg1).getID();
         }
-        MinetweakConfig.set("server.difficulty", String.valueOf(id));
+        GameConfig.set("server.difficulty", String.valueOf(id));
         Difficulty difficulty = Difficulty.getByID(id);
         World world = player.getCurrentWorld();
         world.setDifficulty(difficulty);

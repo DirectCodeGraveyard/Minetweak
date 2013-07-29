@@ -20,7 +20,7 @@ import net.minecraft.world.WorldSettings;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.ChunkCoordinates;
 import org.minetweak.Minetweak;
-import org.minetweak.config.MinetweakConfig;
+import org.minetweak.config.GameConfig;
 import org.minetweak.config.Property;
 import org.minetweak.console.Console;
 import org.minetweak.event.server.ServerFinishedStartupEvent;
@@ -62,27 +62,27 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         var1.start();
 
         this.minetweakInfo("Loading Configuration");
-        this.setOnlineMode(MinetweakConfig.getBoolean("server.online", true));
-        this.setHostname(MinetweakConfig.get("server.ip", ""));
-        this.setCanSpawnAnimals(MinetweakConfig.getBoolean("server.spawn-animals", true));
-        this.setCanSpawnNPCs(MinetweakConfig.getBoolean("server.spawn-npcs", true));
-        this.setAllowPvp(MinetweakConfig.getBoolean("server.pvp", true));
-        this.setAllowFlight(MinetweakConfig.getBoolean("server.allow-flight", false));
-        this.setTexturePack(MinetweakConfig.get("server.texture-pack", ""));
-        this.setMOTD(MinetweakConfig.get("server.motd", "A Minetweak Server"));
+        this.setOnlineMode(GameConfig.getBoolean("server.online", true));
+        this.setHostname(GameConfig.get("server.ip", ""));
+        this.setCanSpawnAnimals(GameConfig.getBoolean("server.spawn-animals", true));
+        this.setCanSpawnNPCs(GameConfig.getBoolean("server.spawn-npcs", true));
+        this.setAllowPvp(GameConfig.getBoolean("server.pvp", true));
+        this.setAllowFlight(GameConfig.getBoolean("server.allow-flight", false));
+        this.setTexturePack(GameConfig.get("server.texture-pack", ""));
+        this.setMOTD(GameConfig.get("server.motd", "A Minetweak Server"));
 
-        MinetweakConfig.getBoolean("server.enable-command-block", true);
+        GameConfig.getBoolean("server.enable-command-block", true);
 
-        this.func_104055_i(MinetweakConfig.getBoolean("server.force-gamemode", false));
+        this.func_104055_i(GameConfig.getBoolean("server.force-gamemode", false));
 
-        if (MinetweakConfig.getInteger("server.difficulty", 1) < 0) {
-            MinetweakConfig.set("server.difficulty", ((Integer) 0).toString());
-        } else if (MinetweakConfig.getInteger("server.difficulty", 1) > 3) {
-            MinetweakConfig.getInteger("server.difficulty", 3);
+        if (GameConfig.getInteger("server.difficulty", 1) < 0) {
+            GameConfig.set("server.difficulty", ((Integer) 0).toString());
+        } else if (GameConfig.getInteger("server.difficulty", 1) > 3) {
+            GameConfig.getInteger("server.difficulty", 3);
         }
 
-        this.canSpawnStructures = MinetweakConfig.getBoolean("server.generate-structures", true);
-        int var2 = MinetweakConfig.getInteger("server.gamemode", EnumGameType.SURVIVAL.getID());
+        this.canSpawnStructures = GameConfig.getBoolean("server.generate-structures", true);
+        int var2 = GameConfig.getInteger("server.gamemode", EnumGameType.SURVIVAL.getID());
         this.gameType = WorldSettings.getGameTypeById(var2);
         this.logInfo("Default game type: " + this.gameType);
         InetAddress var3 = null;
@@ -92,7 +92,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         }
 
         if (this.getServerPort() < 0) {
-            this.setServerPort(MinetweakConfig.getInteger("server.port", 25565));
+            this.setServerPort(GameConfig.getInteger("server.port", 25565));
         }
 
         this.setKeyPair(CryptManager.generateKeyPair());
@@ -119,12 +119,12 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         long var4 = System.nanoTime();
 
         if (this.getFolderName() == null) {
-            this.setFolderName(MinetweakConfig.get("server.level-name", "world"));
+            this.setFolderName(GameConfig.get("server.level-name", "world"));
         }
 
-        String var6 = MinetweakConfig.get("server.level-seed");
-        String var7 = MinetweakConfig.get("server.level-type", "DEFAULT");
-        String var8 = MinetweakConfig.get("server.generator-settings", "");
+        String var6 = GameConfig.get("server.level-seed");
+        String var7 = GameConfig.get("server.level-type", "DEFAULT");
+        String var8 = GameConfig.get("server.generator-settings", "");
         long var9 = (new Random()).nextLong();
 
         if (var6.length() > 0) {
@@ -145,10 +145,10 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             var17 = WorldType.DEFAULT;
         }
 
-        this.setBuildLimit(MinetweakConfig.getInteger("server.max-build-height", 256));
+        this.setBuildLimit(GameConfig.getInteger("server.max-build-height", 256));
         this.setBuildLimit((this.getBuildLimit() + 8) / 16 * 16);
         this.setBuildLimit(MathHelper.clamp_int(this.getBuildLimit(), 64, 256));
-        MinetweakConfig.set("server.max-build-height", String.valueOf(this.getBuildLimit()));
+        GameConfig.set("server.max-build-height", String.valueOf(this.getBuildLimit()));
         this.logInfo("Preparing level \"" + this.getFolderName() + "\"");
         this.loadAllWorlds(this.getFolderName(), this.getFolderName(), var9, var17, var8);
         long var12 = System.nanoTime() - var4;
@@ -160,13 +160,13 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
         Minetweak.setServerDoneLoading();
 
-        if (MinetweakConfig.getBoolean("server.enable-query", false)) {
+        if (GameConfig.getBoolean("server.enable-query", false)) {
             this.logInfo("Starting GS4 status listener");
             this.theRConThreadQuery = new RConThreadQuery(this);
             this.theRConThreadQuery.startThread();
         }
 
-        if (MinetweakConfig.getBoolean("server.enable-rcon", false)) {
+        if (GameConfig.getBoolean("server.enable-rcon", false)) {
             this.logInfo("Starting remote control listener");
             this.theRConThreadMain = new RConThreadMain(this);
             this.theRConThreadMain.startThread();
@@ -190,7 +190,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
      */
     @Override
     public int getDifficulty() {
-        return MinetweakConfig.getInteger("server.difficulty");
+        return GameConfig.getInteger("server.difficulty");
     }
 
     /**
@@ -198,7 +198,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
      */
     @Override
     public boolean isHardcore() {
-        return MinetweakConfig.getBoolean("server.hardcore", false);
+        return GameConfig.getBoolean("server.hardcore", false);
     }
 
     /**
@@ -244,12 +244,12 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     @Override
     public boolean getAllowNether() {
-        return MinetweakConfig.getBoolean("server.allow-nether", true);
+        return GameConfig.getBoolean("server.allow-nether", true);
     }
 
     @Override
     public boolean allowSpawnMonsters() {
-        return MinetweakConfig.getBoolean("server.spawn-monsters", true);
+        return GameConfig.getBoolean("server.spawn-monsters", true);
     }
 
     @Override
@@ -264,7 +264,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
      */
     @Override
     public boolean isSnooperEnabled() {
-        return MinetweakConfig.getBoolean("server.snooper-enabled", true);
+        return GameConfig.getBoolean("server.snooper-enabled", true);
     }
 
     public void addPendingCommand(String par1Str, ICommandSender par2ICommandSender) {
@@ -303,7 +303,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
      */
     @Override
     public int getIntProperty(String par1Str, int par2) {
-        return Integer.parseInt(MinetweakConfig.get(new Property(par1Str, String.valueOf(par2))));
+        return Integer.parseInt(GameConfig.get(new Property(par1Str, String.valueOf(par2))));
     }
 
     /**
@@ -311,14 +311,14 @@ public class DedicatedServer extends MinecraftServer implements IServer {
      */
     @Override
     public String getStringProperty(String par1Str, String par2Str) {
-        return MinetweakConfig.get(par1Str, par2Str);
+        return GameConfig.get(par1Str, par2Str);
     }
 
     /**
      * Gets a boolean property. If it does not exist, set it to the specified value.
      */
     public boolean getBooleanProperty(String par1Str, boolean par2) {
-        return MinetweakConfig.get(new Property(par1Str, Boolean.toString(par2))).equals("true");
+        return GameConfig.get(new Property(par1Str, Boolean.toString(par2))).equals("true");
     }
 
     /**
@@ -326,7 +326,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
      */
     @Override
     public void setProperty(String par1Str, Object par2Obj) {
-        MinetweakConfig.set(par1Str, String.valueOf(par2Obj));
+        GameConfig.set(par1Str, String.valueOf(par2Obj));
     }
 
     /**
@@ -342,7 +342,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
      */
     @Override
     public String getSettingsFilename() {
-        File var1 = MinetweakConfig.getConfigFile();
+        File var1 = GameConfig.getConfigFile();
         return var1 != null ? var1.getAbsolutePath() : "No settings file";
     }
 
@@ -351,7 +351,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
      */
     @Override
     public boolean isCommandBlockEnabled() {
-        return MinetweakConfig.getBoolean("server.enable-command-block");
+        return GameConfig.getBoolean("server.enable-command-block");
     }
 
     /**
@@ -359,7 +359,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
      */
     @Override
     public int getSpawnProtectionSize() {
-        return MinetweakConfig.getInteger("server.spawn-protection");
+        return GameConfig.getInteger("server.spawn-protection");
     }
 
     @Override
@@ -388,7 +388,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     @Override
     public int func_110455_j() {
-        return MinetweakConfig.getInteger("server.op-permission-level", 4);
+        return GameConfig.getInteger("server.op-permission-level", 4);
     }
 
     @Override

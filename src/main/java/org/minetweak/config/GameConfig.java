@@ -5,7 +5,7 @@ import org.minetweak.Minetweak;
 import java.io.File;
 import java.util.logging.Level;
 
-public class MinetweakConfig {
+public class GameConfig {
     private static File configFile = new File("minetweak.cfg");
     private static Configuration config = new Configuration(configFile);
 

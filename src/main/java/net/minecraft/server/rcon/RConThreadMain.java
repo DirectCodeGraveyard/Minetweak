@@ -1,7 +1,7 @@
 package net.minecraft.server.rcon;
 
 import net.minecraft.server.IServer;
-import org.minetweak.config.MinetweakConfig;
+import org.minetweak.config.GameConfig;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -52,10 +52,10 @@ public class RConThreadMain extends RConThreadBase {
         if (0 == this.rconPort) {
             this.rconPort = serverPort + 10;
             this.logInfo("Setting default rcon port to " + this.rconPort);
-            MinetweakConfig.set("rcon.port", "" + this.rconPort);
+            GameConfig.set("rcon.port", "" + this.rconPort);
 
             if (0 == this.rconPassword.length()) {
-                MinetweakConfig.set("rcon.password", "");
+                GameConfig.set("rcon.password", "");
             }
         }
 

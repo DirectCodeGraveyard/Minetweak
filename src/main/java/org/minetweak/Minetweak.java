@@ -4,7 +4,7 @@ import com.google.common.eventbus.EventBus;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.chat.TextColor;
 import org.minetweak.command.*;
-import org.minetweak.config.MinetweakConfig;
+import org.minetweak.config.GameConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.entity.player.PlayerTracker;
 import org.minetweak.permissions.PermissionsLoader;
@@ -85,7 +85,7 @@ public class Minetweak {
         versionCheck();
         Minetweak.info("Starting Minetweak v" + serverVersion + " implementing Minecraft v" + getMinecraftVersion());
         // Load the most important things first
-        MinetweakConfig.initialize();
+        GameConfig.initialize();
         PermissionsLoader.load();
         PlayerWhitelist.load();
         ServerOps.load();
