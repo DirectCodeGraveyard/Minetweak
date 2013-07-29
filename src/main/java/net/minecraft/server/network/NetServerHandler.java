@@ -312,7 +312,7 @@ public class NetServerHandler extends NetHandler {
                     if (var29 >= -0.03125D) {
                         ++this.playerInAirTime;
 
-                        if (this.playerInAirTime > 20) {
+                        if (this.playerInAirTime > 80) {
                             this.mcServer.getLogAgent().logWarning(this.playerEntity.getCommandSenderName() + " was kicked for floating too long!");
                             this.kickPlayer("Flying is not enabled on this server");
                             return;
