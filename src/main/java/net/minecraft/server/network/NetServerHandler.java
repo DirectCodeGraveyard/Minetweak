@@ -154,7 +154,7 @@ public class NetServerHandler extends NetHandler {
     }
 
     @Override
-    public void func_110774_a(Packet27PlayerInput par1Packet27PlayerInput) {
+    public void handlePlayerInput(Packet27PlayerInput par1Packet27PlayerInput) {
         this.playerEntity.func_110430_a(par1Packet27PlayerInput.func_111010_d(), par1Packet27PlayerInput.func_111012_f(), par1Packet27PlayerInput.func_111013_g(), par1Packet27PlayerInput.func_111011_h());
     }
 
@@ -693,6 +693,16 @@ public class NetServerHandler extends NetHandler {
     @Override
     public boolean canProcessPacketsAsync() {
         return true;
+    }
+
+    @Override
+    public void handleUpdateAttributes(Packet44UpdateAttributes par1Packet44UpdateAttributes) {
+        this.func_110773_a(par1Packet44UpdateAttributes);
+    }
+
+    @Override
+    public void handleTileEditorOpen(Packet133TileEditorOpen par1Packet133TileEditorOpen) {
+        this.func_142031_a(par1Packet133TileEditorOpen);
     }
 
     /**

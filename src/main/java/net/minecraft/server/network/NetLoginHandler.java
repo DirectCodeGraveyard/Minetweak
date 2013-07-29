@@ -152,6 +152,14 @@ public class NetLoginHandler extends NetHandler {
     }
 
     @Override
+    public void handleUpdateAttributes(Packet44UpdateAttributes par1Packet44UpdateAttributes) {
+    }
+
+    @Override
+    public void handleTileEditorOpen(Packet133TileEditorOpen par1Packet133TileEditorOpen) {
+    }
+
+    @Override
     public void handleLogin(Packet1Login par1Packet1Login) {
     }
 

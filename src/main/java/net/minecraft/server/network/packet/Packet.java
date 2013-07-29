@@ -5,8 +5,9 @@ import net.minecraft.logging.ILogAgent;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.NetHandler;
 import net.minecraft.src.IntHashMap;
+import org.minetweak.network.INetworkHandler;
+import org.minetweak.network.IPacket;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -18,7 +19,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class Packet {
+public abstract class Packet implements IPacket {
     /**
      * Maps packet id to packet class
      */
@@ -62,21 +63,21 @@ public abstract class Packet {
     /**
      * Adds a two way mapping between the packet ID and packet class.
      */
-    static void addIdClassMapping(int par0, boolean par1, boolean par2, Class par3Class) {
-        if (packetIdToClassMap.containsItem(par0)) {
-            throw new IllegalArgumentException("Duplicate packet id:" + par0);
-        } else if (packetClassToIdMap.containsKey(par3Class)) {
-            throw new IllegalArgumentException("Duplicate packet class:" + par3Class);
+    static void addIdClassMapping(int id, boolean isClient, boolean isServer, Class<? extends Packet> packetClass) {
+        if (packetIdToClassMap.containsItem(id)) {
+            throw new IllegalArgumentException("Duplicate packet id:" + id);
+        } else if (packetClassToIdMap.containsKey(packetClass)) {
+            throw new IllegalArgumentException("Duplicate packet class:" + packetClass);
         } else {
-            packetIdToClassMap.addKey(par0, par3Class);
-            packetClassToIdMap.put(par3Class, par0);
+            packetIdToClassMap.addKey(id, packetClass);
+            packetClassToIdMap.put(packetClass, id);
 
-            if (par1) {
-                clientPacketIdList.add(par0);
+            if (isClient) {
+                clientPacketIdList.add(id);
             }
 
-            if (par2) {
-                serverPacketIdList.add(par0);
+            if (isServer) {
+                serverPacketIdList.add(id);
             }
         }
     }
@@ -214,21 +215,25 @@ public abstract class Packet {
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
+    @Override
     public abstract void readPacketData(DataInput var1) throws IOException;
 
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
+    @Override
     public abstract void writePacketData(DataOutput var1) throws IOException;
 
     /**
-     * Passes this Packet on to the NetHandler for processing.
+     * Passes this Packet on to the Network Handler for processing.
      */
-    public abstract void processPacket(NetHandler var1);
+    @Override
+    public abstract void processPacket(INetworkHandler handler);
 
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
+    @Override
     public abstract int getPacketSize();
 
     /**

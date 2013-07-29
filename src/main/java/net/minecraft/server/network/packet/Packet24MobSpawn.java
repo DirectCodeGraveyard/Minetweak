@@ -2,9 +2,9 @@ package net.minecraft.server.network.packet;
 
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.server.network.NetHandler;
 import net.minecraft.src.DataWatcher;
 import net.minecraft.utils.MathHelper;
+import org.minetweak.network.INetworkHandler;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -147,7 +147,7 @@ public class Packet24MobSpawn extends Packet {
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler) {
+    public void processPacket(INetworkHandler par1NetHandler) {
         par1NetHandler.handleMobSpawn(this);
     }
 

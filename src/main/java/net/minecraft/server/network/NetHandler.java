@@ -1,16 +1,19 @@
 package net.minecraft.server.network;
 
 import net.minecraft.server.network.packet.*;
+import org.minetweak.network.INetworkHandler;
 
-public abstract class NetHandler {
+public abstract class NetHandler implements INetworkHandler {
     /**
      * determine if it is a server handler
      */
+    @Override
     public abstract boolean isServerHandler();
 
     /**
      * Handle Packet51MapChunk (full chunk update of blocks, metadata, light levels, and optionally biome data)
      */
+    @Override
     public void handleMapChunk(Packet51MapChunk par1Packet51MapChunk) {
     }
 
@@ -18,68 +21,85 @@ public abstract class NetHandler {
      * Default handler called for packets that don't have their own handlers in NetServerHandler; kicks player from the
      * server.
      */
+    @Override
     public void unexpectedPacket(Packet par1Packet) {
     }
 
+    @Override
     public void handleErrorMessage(String par1Str, Object[] par2ArrayOfObj) {
     }
 
+    @Override
     public void handleKickDisconnect(Packet255KickDisconnect par1Packet255KickDisconnect) {
         this.unexpectedPacket(par1Packet255KickDisconnect);
     }
 
+    @Override
     public void handleLogin(Packet1Login par1Packet1Login) {
         this.unexpectedPacket(par1Packet1Login);
     }
 
+    @Override
     public void handleFlying(Packet10Flying par1Packet10Flying) {
         this.unexpectedPacket(par1Packet10Flying);
     }
 
+    @Override
     public void handleMultiBlockChange(Packet52MultiBlockChange par1Packet52MultiBlockChange) {
         this.unexpectedPacket(par1Packet52MultiBlockChange);
     }
 
+    @Override
     public void handleBlockDig(Packet14BlockDig par1Packet14BlockDig) {
         this.unexpectedPacket(par1Packet14BlockDig);
     }
 
+    @Override
     public void handleBlockChange(Packet53BlockChange par1Packet53BlockChange) {
         this.unexpectedPacket(par1Packet53BlockChange);
     }
 
+    @Override
     public void handleNamedEntitySpawn(Packet20NamedEntitySpawn par1Packet20NamedEntitySpawn) {
         this.unexpectedPacket(par1Packet20NamedEntitySpawn);
     }
 
+    @Override
     public void handleEntity(Packet30Entity par1Packet30Entity) {
         this.unexpectedPacket(par1Packet30Entity);
     }
 
+    @Override
     public void handleEntityTeleport(Packet34EntityTeleport par1Packet34EntityTeleport) {
         this.unexpectedPacket(par1Packet34EntityTeleport);
     }
 
+    @Override
     public void handlePlace(Packet15Place par1Packet15Place) {
         this.unexpectedPacket(par1Packet15Place);
     }
 
+    @Override
     public void handleBlockItemSwitch(Packet16BlockItemSwitch par1Packet16BlockItemSwitch) {
         this.unexpectedPacket(par1Packet16BlockItemSwitch);
     }
 
+    @Override
     public void handleDestroyEntity(Packet29DestroyEntity par1Packet29DestroyEntity) {
         this.unexpectedPacket(par1Packet29DestroyEntity);
     }
 
+    @Override
     public void handleCollect(Packet22Collect par1Packet22Collect) {
         this.unexpectedPacket(par1Packet22Collect);
     }
 
+    @Override
     public void handleChat(Packet3Chat par1Packet3Chat) {
         this.unexpectedPacket(par1Packet3Chat);
     }
 
+    @Override
     public void handleVehicleSpawn(Packet23VehicleSpawn par1Packet23VehicleSpawn) {
         this.unexpectedPacket(par1Packet23VehicleSpawn);
     }
@@ -230,7 +250,7 @@ public abstract class NetHandler {
         this.unexpectedPacket(par1Packet17Sleep);
     }
 
-    public void func_110774_a(Packet27PlayerInput par1Packet27PlayerInput) {
+    public void handlePlayerInput(Packet27PlayerInput par1Packet27PlayerInput) {
         this.unexpectedPacket(par1Packet27PlayerInput);
     }
 

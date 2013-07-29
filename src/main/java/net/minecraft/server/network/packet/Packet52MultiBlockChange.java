@@ -1,9 +1,9 @@
 package net.minecraft.server.network.packet;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.NetHandler;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import org.minetweak.network.INetworkHandler;
 
 import java.io.*;
 
@@ -106,7 +106,7 @@ public class Packet52MultiBlockChange extends Packet {
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler) {
+    public void processPacket(INetworkHandler par1NetHandler) {
         par1NetHandler.handleMultiBlockChange(this);
     }
 

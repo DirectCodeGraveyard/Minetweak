@@ -1,7 +1,7 @@
 package net.minecraft.server.network.packet;
 
-import net.minecraft.server.network.NetHandler;
 import org.apache.commons.lang3.StringUtils;
+import org.minetweak.network.INetworkHandler;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -41,7 +41,7 @@ public class Packet203AutoComplete extends Packet {
      * Passes this Packet on to the NetHandler for processing.
      */
     @Override
-    public void processPacket(NetHandler netHandler) {
+    public void processPacket(INetworkHandler netHandler) {
         netHandler.handleAutoComplete(this);
     }
 

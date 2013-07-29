@@ -7,6 +7,7 @@ import net.minecraft.server.network.NetHandler;
 import net.minecraft.server.network.packet.Packet;
 import net.minecraft.server.network.packet.Packet252SharedKey;
 import net.minecraft.src.CryptManager;
+import org.minetweak.network.IPacket;
 
 import javax.crypto.SecretKey;
 import java.io.*;
@@ -63,7 +64,7 @@ public class TcpConnection implements INetworkManager {
     /**
      * Linked list of packets that have been read and are awaiting processing.
      */
-    private List<Packet> readPackets = Collections.synchronizedList(new ArrayList<Packet>());
+    private List<IPacket> readPackets = Collections.synchronizedList(new ArrayList<IPacket>());
 
     /**
      * Linked list of packets awaiting sending.
@@ -387,8 +388,8 @@ public class TcpConnection implements INetworkManager {
         int var1 = 1000;
 
         while (!this.readPackets.isEmpty() && var1-- >= 0) {
-            Packet var2 = this.readPackets.remove(0);
-            var2.processPacket(this.theNetHandler);
+            IPacket packet = this.readPackets.remove(0);
+            packet.processPacket(this.theNetHandler);
         }
 
         this.wakeThreads();
