@@ -1,3 +1,5 @@
+import sys
+
 __author__ = 'Kenneth Endfinger'
 
 import json
@@ -25,8 +27,13 @@ for line in gradleScript:
     if re.search('def version =', line):
         data['version'] = line.split(' ')[3].replace('\'', '').strip('\r\n \n')
         break
+branch = 'unknown'
+if os.environ.__contains__('bamboo.repository.branch.name'):
+    branch = os.environ['bamboo.repository.branch.name']
 print('Minetweak Version: ' + data['version'])
 print('Minetweak Build Number: ' + build)
+print('Minetweak Branch: ' + branch)
+data['branch'] = branch
 
 # Adds the Build Data to the previous builds
 builds[build] = data
