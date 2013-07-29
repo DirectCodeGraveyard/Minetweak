@@ -1,8 +1,8 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
-import org.minetweak.chat.ChatColors;
 import org.minetweak.chat.TabCompletion;
+import org.minetweak.chat.TextColor;
 import org.minetweak.util.StringUtils;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class CommandHelp extends CommandExecutor {
             String command = args[0];
             if (commands.contains(command)) {
                 String helpInfo = Minetweak.getCommandExecutors().get(command).getHelpInfo();
-                sender.sendMessage("/" + ChatColors.GREEN + command + ChatColors.RESET + " - " + helpInfo);
+                sender.sendMessage("/" + TextColor.GREEN + command + TextColor.RESET + " - " + helpInfo);
                 return;
             } else {
                 sender.sendMessage("help: No Such Command: " + command);
@@ -31,14 +31,14 @@ public class CommandHelp extends CommandExecutor {
             page = Integer.parseInt(args[0]);
             start = (5 * page) - 1;
             if (numberOfCommands < start) {
-                sender.sendMessage(ChatColors.GOLD + "Page Number too large. There are " + ChatColors.RESET + numberOfPages + " pages.");
+                sender.sendMessage(TextColor.GOLD + "Page Number too large. There are " + TextColor.RESET + numberOfPages + " pages.");
                 return;
             }
         }
         String[] cmds = commands.toArray(new String[commands.size()]);
         sender.sendMessage("Help Page #" + page + " of " + numberOfPages);
         for (int i = start; i < commands.size() && (i - start) != 5; i++) {
-            sender.sendMessage("/" + ChatColors.BLUE + cmds[i] + ChatColors.RESET + " - " + Minetweak.getCommandExecutors().get(cmds[i]).getHelpInfo());
+            sender.sendMessage("/" + TextColor.BLUE + cmds[i] + TextColor.RESET + " - " + Minetweak.getCommandExecutors().get(cmds[i]).getHelpInfo());
         }
     }
 

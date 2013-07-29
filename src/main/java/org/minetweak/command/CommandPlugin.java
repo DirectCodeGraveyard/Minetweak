@@ -1,6 +1,6 @@
 package org.minetweak.command;
 
-import org.minetweak.chat.ChatColors;
+import org.minetweak.chat.TextColor;
 import org.minetweak.plugins.IPlugin;
 import org.minetweak.plugins.PluginInfo;
 import org.minetweak.plugins.PluginManager;
@@ -20,7 +20,7 @@ public class CommandPlugin extends CommandExecutor {
             String pluginName = args[0];
             IPlugin plugin = PluginManager.plugins.get(pluginName);
             if (plugin == null) {
-                sender.sendMessage(ChatColors.RED + "The Plugin \'" + pluginName + " does not exist!");
+                sender.sendMessage(TextColor.RED + "The Plugin \'" + pluginName + " does not exist!");
                 return;
             }
             PluginInfo i = plugin.getPluginInfo();
@@ -37,16 +37,16 @@ public class CommandPlugin extends CommandExecutor {
             if (flag) {
                 plugins += " " + plugin + "\n";
             } else {
-                plugins += ChatColors.BLUE + plugin;
+                plugins += TextColor.BLUE + plugin;
                 flag = true;
             }
         }
-        sender.sendMessage("There are " + ChatColors.GREEN + PluginManager.plugins.size() + ChatColors.RESET + " plugins.");
-        sender.sendMessage("There are " + ChatColors.GREEN + PluginManager.enabledPlugins.size() + ChatColors.RESET + " plugins enabled.");
+        sender.sendMessage("There are " + TextColor.GREEN + PluginManager.plugins.size() + TextColor.RESET + " plugins.");
+        sender.sendMessage("There are " + TextColor.GREEN + PluginManager.enabledPlugins.size() + TextColor.RESET + " plugins enabled.");
         sender.sendMessage(plugins);
     }
 
     public String format(String name, String value) {
-        return ChatColors.BLUE + name + ChatColors.RESET + ": " + value;
+        return TextColor.BLUE + name + TextColor.RESET + ": " + value;
     }
 }

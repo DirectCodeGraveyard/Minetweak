@@ -1,6 +1,6 @@
 package org.minetweak.command;
 
-import org.minetweak.chat.ChatColors;
+import org.minetweak.chat.TextColor;
 import org.minetweak.entity.Mob;
 import org.minetweak.entity.Player;
 
@@ -26,7 +26,7 @@ public class CommandSlaughter extends CommandExecutor {
         for (Mob mob : mobs) {
             mob.setDead();
         }
-        sender.sendMessage(ChatColors.GOLD + "Killed " + ChatColors.GREEN + mobs.size() + ChatColors.GOLD + " mobs.");
+        sender.sendMessage(TextColor.GOLD + "Killed " + TextColor.GREEN + mobs.size() + TextColor.GOLD + " mobs.");
     }
 
     @Override

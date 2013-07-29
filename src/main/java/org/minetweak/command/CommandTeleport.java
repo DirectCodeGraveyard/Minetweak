@@ -1,8 +1,8 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
-import org.minetweak.chat.ChatColors;
 import org.minetweak.chat.TabCompletion;
+import org.minetweak.chat.TextColor;
 import org.minetweak.entity.Player;
 
 import java.util.ArrayList;
@@ -25,14 +25,14 @@ public class CommandTeleport extends CommandExecutor {
             target = Minetweak.getPlayerByName(args[1].toLowerCase());
         }
         if (player == null) {
-            sender.sendMessage(ChatColors.RED + args[0].toLowerCase() + " is not online.");
+            sender.sendMessage(TextColor.RED + args[0].toLowerCase() + " is not online.");
             return;
         }
         if (target == null) {
-            sender.sendMessage(ChatColors.RED + args[1].toLowerCase() + " is not online.");
+            sender.sendMessage(TextColor.RED + args[1].toLowerCase() + " is not online.");
             return;
         }
-        sender.sendMessage(ChatColors.GOLD + "Teleporting " + ChatColors.BLUE + player.getName() + ChatColors.RESET + " to " + ChatColors.BLUE + target.getName());
+        sender.sendMessage(TextColor.GOLD + "Teleporting " + TextColor.BLUE + player.getName() + TextColor.RESET + " to " + TextColor.BLUE + target.getName());
         player.teleportToPosition(target.getX(), target.getY(), target.getZ());
     }
 

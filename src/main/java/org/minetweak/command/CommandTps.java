@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
-import org.minetweak.chat.ChatColors;
+import org.minetweak.chat.TextColor;
 
 import java.text.DecimalFormat;
 
@@ -12,11 +12,11 @@ public class CommandTps extends CommandExecutor {
     public void executeCommand(CommandSender sender, String overallCommand, String[] args) {
         String tps = getTPS(MinecraftServer.getServer().tickTimeArray);
         if (tps.equals("20")) {
-            tps = ChatColors.GREEN + tps;
+            tps = TextColor.GREEN + tps;
         } else {
-            tps = ChatColors.YELLOW + tps;
+            tps = TextColor.YELLOW + tps;
         }
-        sender.sendMessage(ChatColors.GOLD + "Server is running at" + ChatColors.RESET + " " + tps + ChatColors.GOLD + " TPS.");
+        sender.sendMessage(TextColor.GOLD + "Server is running at" + TextColor.RESET + " " + tps + TextColor.GOLD + " TPS.");
     }
 
     public String getTPS(long[] tickArray) {

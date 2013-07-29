@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
-import org.minetweak.chat.ChatColors;
+import org.minetweak.chat.TextColor;
 import org.minetweak.console.Console;
 import org.minetweak.entity.Player;
 
@@ -24,14 +24,14 @@ public class CommandSpawn extends CommandExecutor {
             }
             player = Minetweak.getPlayerByName(playerName);
             if (player == null) {
-                sender.sendMessage(ChatColors.RED + "Can't teleport an offline player.");
+                sender.sendMessage(TextColor.RED + "Can't teleport an offline player.");
                 return;
             }
         } else {
             noPermission(sender, "teleport players to spawn");
             return;
         }
-        player.sendMessage(ChatColors.GOLD + "Teleporting to Spawn");
+        player.sendMessage(TextColor.GOLD + "Teleporting to Spawn");
         player.teleportToPosition(player.getCurrentWorld().getSpawn());
     }
 

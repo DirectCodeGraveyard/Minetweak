@@ -2,8 +2,8 @@ package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
-import org.minetweak.chat.ChatColors;
 import org.minetweak.chat.TabCompletion;
+import org.minetweak.chat.TextColor;
 import org.minetweak.entity.Player;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
@@ -21,7 +21,7 @@ public class CommandWhitelist extends CommandExecutor {
                 MinecraftServer.getServer().getConfigurationManager().setWhiteListEnabled(true);
                 Server.sendToOps("Whitelist has been enabled.");
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
-                    sender.sendMessage(ChatColors.GOLD + "Whitelist has been enabled.");
+                    sender.sendMessage(TextColor.GOLD + "Whitelist has been enabled.");
                 }
                 return;
             }
@@ -30,7 +30,7 @@ public class CommandWhitelist extends CommandExecutor {
                 MinecraftServer.getServer().getConfigurationManager().setWhiteListEnabled(false);
                 Server.sendToOps("Whitelist Has been disabled.");
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
-                    sender.sendMessage(ChatColors.GOLD + "Whitelist has been disabled.");
+                    sender.sendMessage(TextColor.GOLD + "Whitelist has been disabled.");
                 }
                 return;
             }
@@ -38,7 +38,7 @@ public class CommandWhitelist extends CommandExecutor {
             if (args[0].equals("list")) {
                 ServerOps.load();
                 Set<String> players = PlayerWhitelist.getWhitelistedPlayers();
-                sender.sendMessage(ChatColors.GOLD + "Whitelisted Players" + ChatColors.RESET + ":");
+                sender.sendMessage(TextColor.GOLD + "Whitelisted Players" + TextColor.RESET + ":");
                 boolean flag = false;
                 String line = "";
                 for (String player : players) {
@@ -46,7 +46,7 @@ public class CommandWhitelist extends CommandExecutor {
                         sender.sendMessage(line + " " + player);
                         flag = false;
                     } else {
-                        line = ChatColors.BLUE + player;
+                        line = TextColor.BLUE + player;
                         flag = true;
                     }
                 }
@@ -60,7 +60,7 @@ public class CommandWhitelist extends CommandExecutor {
                 }
                 PlayerWhitelist.addPlayer(args[1]);
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
-                    sender.sendMessage(ChatColors.GOLD + "Added " + ChatColors.GREEN + args[1] + ChatColors.GOLD + " to the whitelist.");
+                    sender.sendMessage(TextColor.GOLD + "Added " + TextColor.GREEN + args[1] + TextColor.GOLD + " to the whitelist.");
                 }
                 Server.sendToOps("Added " + args[1] + " to the whitelist.");
                 return;
@@ -73,7 +73,7 @@ public class CommandWhitelist extends CommandExecutor {
                 }
                 PlayerWhitelist.removePlayer(args[1]);
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
-                    sender.sendMessage(ChatColors.GOLD + "Removed " + ChatColors.GREEN + args[1] + ChatColors.GOLD + " from the whitelist.");
+                    sender.sendMessage(TextColor.GOLD + "Removed " + TextColor.GREEN + args[1] + TextColor.GOLD + " from the whitelist.");
                 }
                 Server.sendToOps("Removed " + args[1] + " from whitelist.");
                 return;
@@ -82,7 +82,7 @@ public class CommandWhitelist extends CommandExecutor {
             if (args[0].equals("reload")) {
                 PlayerWhitelist.load();
                 if (sender.isPlayer() && !(((Player) sender).isOperator())) {
-                    sender.sendMessage(ChatColors.GOLD + "Reloaded Whitelist");
+                    sender.sendMessage(TextColor.GOLD + "Reloaded Whitelist");
                 }
                 Server.sendToOps("Loaded Whitelist.");
                 return;

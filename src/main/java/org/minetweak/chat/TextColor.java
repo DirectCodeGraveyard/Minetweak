@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 @SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "UnusedDeclaration"})
-public enum ChatColors {
+public enum TextColor {
     BLACK('0'),
     DARK_BLUE('1'),
     DARK_GREEN('2'),
@@ -30,8 +30,8 @@ public enum ChatColors {
     UNDERLINE('n', true),
     ITALIC('o', true),
     RESET('r');
-    private static final Map<Character, ChatColors> field_96321_w = new HashMap<Character, ChatColors>();
-    private static final Map<CharSequence, ChatColors> field_96331_x = new HashMap<CharSequence, ChatColors>();
+    private static final Map<Character, TextColor> field_96321_w = new HashMap<Character, TextColor>();
+    private static final Map<CharSequence, TextColor> field_96331_x = new HashMap<CharSequence, TextColor>();
     private static final Pattern field_96330_y = Pattern.compile("(?i)" + String.valueOf('\u00a7') + "[0-9A-FK-OR]");
     private final char field_96329_z;
     private final boolean field_96303_A;
@@ -39,11 +39,11 @@ public enum ChatColors {
 
     private static ArrayList<String> colorNodes = new ArrayList<String>();
 
-    private ChatColors(char par3) {
+    private TextColor(char par3) {
         this(par3, false);
     }
 
-    private ChatColors(char par3, boolean par4) {
+    private TextColor(char par3, boolean par4) {
         this.field_96329_z = par3;
         this.field_96303_A = par4;
         this.field_96304_B = "\u00a7" + par3;
@@ -98,16 +98,16 @@ public enum ChatColors {
         return this.field_96304_B;
     }
 
-    public static ChatColors func_96300_b(String par0Str) {
+    public static TextColor func_96300_b(String par0Str) {
         return par0Str == null ? null : field_96331_x.get(par0Str.toLowerCase());
     }
 
     public static Collection<CharSequence> func_96296_a(boolean par0, boolean par1) {
         ArrayList<CharSequence> var2 = new ArrayList<CharSequence>();
-        ChatColors[] var3 = values();
+        TextColor[] var3 = values();
         int var4 = var3.length;
 
-        for (ChatColors var6 : var3) {
+        for (TextColor var6 : var3) {
             if ((!var6.func_96302_c() || par0) && (!var6.func_96301_b() || par1)) {
                 var2.add(var6.func_96297_d());
             }
@@ -117,10 +117,10 @@ public enum ChatColors {
     }
 
     static {
-        ChatColors[] var0 = values();
+        TextColor[] var0 = values();
         int var1 = var0.length;
 
-        for (ChatColors var3 : var0) {
+        for (TextColor var3 : var0) {
             field_96321_w.put(var3.func_96298_a(), var3);
             field_96331_x.put(var3.func_96297_d(), var3);
         }

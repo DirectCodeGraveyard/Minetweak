@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
-import org.minetweak.chat.ChatColors;
+import org.minetweak.chat.TextColor;
 
 public class CommandWeather extends CommandExecutor {
     @Override
@@ -23,10 +23,10 @@ public class CommandWeather extends CommandExecutor {
                 Minetweak.getOverworld().setRaining(true);
                 sender.sendMessage("Done.");
             } else {
-                sender.sendMessage(ChatColors.RED + "Invalid Weather Type: " + id);
+                sender.sendMessage(TextColor.RED + "Invalid Weather Type: " + id);
                 return;
             }
-            Minetweak.getOverworld().broadcastMessage("Weather changed to " + ChatColors.GREEN + id);
+            Minetweak.getOverworld().broadcastMessage("Weather changed to " + TextColor.GREEN + id);
         } else {
             noPermission(sender, "change the weather");
         }

@@ -4,7 +4,7 @@ import net.minecraft.entity.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.utils.chat.ChatMessageComponent;
 import org.minetweak.Minetweak;
-import org.minetweak.chat.ChatColors;
+import org.minetweak.chat.TextColor;
 import org.minetweak.config.MinetweakConfig;
 import org.minetweak.console.Console;
 import org.minetweak.entity.Player;
@@ -28,7 +28,7 @@ public class Server {
      */
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
-            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.createPremade(String.format("[%s%s%s] %s", ChatColors.GOLD, "Server", ChatColors.RESET, message)));
+            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.createPremade(String.format("[%s%s%s] %s", TextColor.GOLD, "Server", TextColor.RESET, message)));
             return true;
         } else {
             return false;
@@ -118,7 +118,7 @@ public class Server {
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
         } else {
-            player.addChatMessage(ChatColors.RED + "No Such Command: " + commandOnly);
+            player.addChatMessage(TextColor.RED + "No Such Command: " + commandOnly);
         }
     }
 
@@ -141,7 +141,7 @@ public class Server {
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(console, commandOnly, args);
         } else {
-            console.sendMessage(ChatColors.RED + "No Such Command: " + commandOnly);
+            console.sendMessage(TextColor.RED + "No Such Command: " + commandOnly);
         }
     }
 
@@ -187,7 +187,7 @@ public class Server {
      * @param message Message to send.
      */
     public static void sendToOps(String message) {
-        String out = "[" + ChatColors.GOLD + "Server" + ChatColors.RESET + "] " + message;
+        String out = "[" + TextColor.GOLD + "Server" + TextColor.RESET + "] " + message;
 
         if (ServerOps.getOps().size() == 0) return;
 
