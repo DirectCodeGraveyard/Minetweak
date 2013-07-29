@@ -55,6 +55,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Initialises the server and starts it.
      */
+    @Override
     protected boolean startServer() throws IOException {
         DedicatedServerCommandThread var1 = new DedicatedServerCommandThread(this);
         var1.setDaemon(true);
@@ -147,7 +148,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.setBuildLimit(MinetweakConfig.getInteger("server.max-build-height", 256));
         this.setBuildLimit((this.getBuildLimit() + 8) / 16 * 16);
         this.setBuildLimit(MathHelper.clamp_int(this.getBuildLimit(), 64, 256));
-        MinetweakConfig.set("server.max-build-height", "" + this.getBuildLimit());
+        MinetweakConfig.set("server.max-build-height", String.valueOf(this.getBuildLimit()));
         this.logInfo("Preparing level \"" + this.getFolderName() + "\"");
         this.loadAllWorlds(this.getFolderName(), this.getFolderName(), var9, var17, var8);
         long var12 = System.nanoTime() - var4;
@@ -174,10 +175,12 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         return true;
     }
 
+    @Override
     public boolean canStructuresSpawn() {
         return this.canSpawnStructures;
     }
 
+    @Override
     public EnumGameType getGameType() {
         return this.gameType;
     }
@@ -185,6 +188,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Defaults to "1" (Easy) for the dedicated server, defaults to "2" (Normal) on the client.
      */
+    @Override
     public int getDifficulty() {
         return MinetweakConfig.getInteger("server.difficulty");
     }
@@ -192,6 +196,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Defaults to false.
      */
+    @Override
     public boolean isHardcore() {
         return MinetweakConfig.getBoolean("server.hardcore", false);
     }
@@ -199,6 +204,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Called on exit from the main run() loop.
      */
+    @Override
     protected void finalTick(CrashReport par1CrashReport) {
         while (this.isServerRunning()) {
             this.executePendingCommands();
@@ -214,6 +220,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Adds the server info, including from theWorldServer, to the crash report.
      */
+    @Override
     public CrashReport addServerInfoToCrashReport(CrashReport par1CrashReport) {
         par1CrashReport = super.addServerInfoToCrashReport(par1CrashReport);
         par1CrashReport.func_85056_g().addCrashSectionCallable("Is Modded", new CallableType(this));
@@ -224,23 +231,28 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Directly calls System.exit(0), instantly killing the program.
      */
+    @Override
     protected void systemExitNow() {
         System.exit(0);
     }
 
+    @Override
     public void updateTimeLightAndEntities() {
         super.updateTimeLightAndEntities();
         this.executePendingCommands();
     }
 
+    @Override
     public boolean getAllowNether() {
         return MinetweakConfig.getBoolean("server.allow-nether", true);
     }
 
+    @Override
     public boolean allowSpawnMonsters() {
         return MinetweakConfig.getBoolean("server.spawn-monsters", true);
     }
 
+    @Override
     public void addServerStatsToSnooper(PlayerUsageSnooper par1PlayerUsageSnooper) {
         par1PlayerUsageSnooper.addData("whitelist_enabled", this.getDedicatedPlayerList().isWhiteListEnabled());
         par1PlayerUsageSnooper.addData("whitelist_count", this.getDedicatedPlayerList().getWhiteListedPlayers().size());
@@ -250,6 +262,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Returns whether snooping is enabled or not.
      */
+    @Override
     public boolean isSnooperEnabled() {
         return MinetweakConfig.getBoolean("server.snooper-enabled", true);
     }
@@ -271,6 +284,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         }
     }
 
+    @Override
     public boolean isDedicatedServer() {
         return true;
     }
@@ -279,6 +293,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         return (DedicatedPlayerList) super.getConfigurationManager();
     }
 
+    @Override
     public NetworkListenThread getNetworkThread() {
         return this.networkThread;
     }
@@ -286,13 +301,15 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Gets an integer property. If it does not exist, set it to the specified value.
      */
+    @Override
     public int getIntProperty(String par1Str, int par2) {
-        return Integer.parseInt(MinetweakConfig.get(new Property(par1Str, "" + par2)));
+        return Integer.parseInt(MinetweakConfig.get(new Property(par1Str, String.valueOf(par2))));
     }
 
     /**
      * Gets a string property. If it does not exist, set it to the specified value.
      */
+    @Override
     public String getStringProperty(String par1Str, String par2Str) {
         return MinetweakConfig.get(par1Str, par2Str);
     }
@@ -307,13 +324,15 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Saves an Object with the given property name.
      */
+    @Override
     public void setProperty(String par1Str, Object par2Obj) {
-        MinetweakConfig.set(par1Str, "" + par2Obj);
+        MinetweakConfig.set(par1Str, String.valueOf(par2Obj));
     }
 
     /**
      * Saves all of the server properties to the properties file.
      */
+    @Override
     public void saveProperties() {
         this.settings.saveProperties();
     }
@@ -321,6 +340,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Returns the filename where server properties are stored
      */
+    @Override
     public String getSettingsFilename() {
         File var1 = MinetweakConfig.getConfigFile();
         return var1 != null ? var1.getAbsolutePath() : "No settings file";
@@ -329,6 +349,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Return whether command blocks are enabled.
      */
+    @Override
     public boolean isCommandBlockEnabled() {
         return MinetweakConfig.getBoolean("server.enable-command-block");
     }
@@ -336,10 +357,12 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     /**
      * Return the spawn protection area's size.
      */
+    @Override
     public int getSpawnProtectionSize() {
         return MinetweakConfig.getInteger("server.spawn-protection");
     }
 
+    @Override
     public boolean func_96290_a(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
         if (par1World.provider.dimensionId != 0) {
             return false;
@@ -358,14 +381,17 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         }
     }
 
+    @Override
     public ILogAgent getLogAgent() {
         return this.field_98131_l;
     }
 
+    @Override
     public int func_110455_j() {
         return MinetweakConfig.getInteger("server.op-permission-level", 4);
     }
 
+    @Override
     public ServerConfigurationManager getConfigurationManager() {
         return this.getDedicatedPlayerList();
     }

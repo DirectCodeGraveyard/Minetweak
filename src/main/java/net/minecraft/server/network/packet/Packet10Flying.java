@@ -55,6 +55,7 @@ public class Packet10Flying extends Packet {
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
+    @Override
     public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleFlying(this);
     }
@@ -62,6 +63,7 @@ public class Packet10Flying extends Packet {
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
+    @Override
     public void readPacketData(DataInput par1DataInput) throws IOException {
         this.onGround = par1DataInput.readUnsignedByte() != 0;
     }
@@ -69,6 +71,7 @@ public class Packet10Flying extends Packet {
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
+    @Override
     public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.write(this.onGround ? 1 : 0);
     }
@@ -76,6 +79,7 @@ public class Packet10Flying extends Packet {
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
+    @Override
     public int getPacketSize() {
         return 1;
     }

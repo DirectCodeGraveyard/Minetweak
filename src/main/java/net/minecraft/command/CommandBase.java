@@ -23,6 +23,7 @@ public abstract class CommandBase implements ICommand {
         return 4;
     }
 
+    @Override
     public List getCommandAliases() {
         return null;
     }
@@ -30,6 +31,7 @@ public abstract class CommandBase implements ICommand {
     /**
      * Returns true if the given command sender is allowed to use this command.
      */
+    @Override
     public boolean canCommandSenderUseCommand(ICommandSender par1ICommandSender) {
         return par1ICommandSender.canCommandSenderUseCommand(this.getRequiredPermissionLevel(), this.getCommandName());
     }
@@ -37,6 +39,7 @@ public abstract class CommandBase implements ICommand {
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
+    @Override
     public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         return null;
     }
@@ -66,9 +69,9 @@ public abstract class CommandBase implements ICommand {
         int var4 = parseInt(par0ICommandSender, par1Str);
 
         if (var4 < par2) {
-            throw new NumberInvalidException("commands.generic.num.tooSmall", var4, Integer.valueOf(par2));
+            throw new NumberInvalidException("commands.generic.num.tooSmall", var4, par2);
         } else if (var4 > par3) {
-            throw new NumberInvalidException("commands.generic.num.tooBig", var4, Integer.valueOf(par3));
+            throw new NumberInvalidException("commands.generic.num.tooBig", var4, par3);
         } else {
             return var4;
         }
@@ -278,14 +281,11 @@ public abstract class CommandBase implements ICommand {
      * Returns a List of strings (chosen from the given strings) which the last word in the given string array is a
      * beginning-match for. (Tab completion).
      */
-    public static List getListOfStringsMatchingLastWord(String[] par0ArrayOfStr, String... par1ArrayOfStr) {
+    public static List<String> getListOfStringsMatchingLastWord(String[] par0ArrayOfStr, String... par1ArrayOfStr) {
         String var2 = par0ArrayOfStr[par0ArrayOfStr.length - 1];
-        ArrayList var3 = new ArrayList();
-        int var5 = par1ArrayOfStr.length;
+        ArrayList<String> var3 = new ArrayList<String>();
 
-        for (int var6 = 0; var6 < var5; ++var6) {
-            String var7 = par1ArrayOfStr[var6];
-
+        for (String var7 : par1ArrayOfStr) {
             if (doesStringStartWith(var2, var7)) {
                 var3.add(var7);
             }
@@ -298,9 +298,9 @@ public abstract class CommandBase implements ICommand {
      * Returns a List of strings (chosen from the given string iterable) which the last word in the given string array
      * is a beginning-match for. (Tab completion).
      */
-    public static List getListOfStringsFromIterableMatchingLastWord(String[] par0ArrayOfStr, Iterable par1Iterable) {
+    public static List<String> getListOfStringsFromIterableMatchingLastWord(String[] par0ArrayOfStr, Iterable par1Iterable) {
         String var2 = par0ArrayOfStr[par0ArrayOfStr.length - 1];
-        ArrayList var3 = new ArrayList();
+        ArrayList<String> var3 = new ArrayList<String>();
 
         for (Object aPar1Iterable : par1Iterable) {
             String var5 = (String) aPar1Iterable;
@@ -316,6 +316,7 @@ public abstract class CommandBase implements ICommand {
     /**
      * Return whether the specified command parameter index is a username parameter.
      */
+    @Override
     public boolean isUsernameIndex(String[] par1ArrayOfStr, int par2) {
         return false;
     }
@@ -344,6 +345,7 @@ public abstract class CommandBase implements ICommand {
         return this.getCommandName().compareTo(par1ICommand.getCommandName());
     }
 
+    @Override
     public int compareTo(Object par1Obj) {
         return this.compareTo((ICommand) par1Obj);
     }

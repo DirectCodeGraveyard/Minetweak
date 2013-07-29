@@ -63,6 +63,7 @@ public class Packet34EntityTeleport extends Packet {
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
+    @Override
     public void readPacketData(DataInput par1DataInput) throws IOException {
         this.entityId = par1DataInput.readInt();
         this.xPosition = par1DataInput.readInt();
@@ -75,6 +76,7 @@ public class Packet34EntityTeleport extends Packet {
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
+    @Override
     public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeInt(this.entityId);
         par1DataOutput.writeInt(this.xPosition);
@@ -87,6 +89,7 @@ public class Packet34EntityTeleport extends Packet {
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
+    @Override
     public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleEntityTeleport(this);
     }
