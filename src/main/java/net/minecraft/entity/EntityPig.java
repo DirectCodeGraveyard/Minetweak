@@ -190,6 +190,7 @@ public class EntityPig extends EntityAnimal {
         if (!this.worldObj.isRemote) {
 
             var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+            var2.addRandomArmor();
             this.worldObj.spawnEntityInWorld(var2);
             this.setDead();
         }
