@@ -15,6 +15,10 @@ builds = json.loads(urlopen('http://repo.minetweak.org/builds.json').read().deco
 build = 'unknown'
 if os.path.exists('build-number.txt'):
     buildNumberFile = open('build-number.txt', 'r')
+    for line in buildNumberFile:
+        if re.search('build.number', line):
+            build = line.split('=')[1].strip('\r\n \n')
+            break
     build = buildNumberFile.read().strip('\r\n')
     buildNumberFile.close()
 
