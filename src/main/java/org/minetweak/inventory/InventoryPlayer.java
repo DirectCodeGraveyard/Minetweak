@@ -1,5 +1,6 @@
 package org.minetweak.inventory;
 
+import net.minecraft.inventory.IInventory;
 import org.minetweak.item.ItemStack;
 
 public class InventoryPlayer implements Inventory {
@@ -46,5 +47,9 @@ public class InventoryPlayer implements Inventory {
                 setStackInSlot(i, null);
             }
         }
+    }
+
+    public IInventory getMCInventory() {
+        return playerInventory;
     }
 }

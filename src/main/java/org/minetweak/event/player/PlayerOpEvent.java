@@ -4,21 +4,18 @@ import org.minetweak.entity.Player;
 
 public class PlayerOpEvent extends PlayerEvent {
 
-    private Player player;
-    private String username;
-
     private boolean isOfflinePlayer;
+    private String username;
 
     public PlayerOpEvent(Player playerInstance) {
         super(playerInstance);
-        this.username = playerInstance.getName();
         isOfflinePlayer = false;
     }
 
     public PlayerOpEvent(String playerUsername) {
         super(null);
-        this.username = playerUsername;
         isOfflinePlayer = true;
+        this.username = playerUsername;
     }
 
     /**
@@ -37,10 +34,5 @@ public class PlayerOpEvent extends PlayerEvent {
      */
     public String getPlayerUsername() {
         return username;
-    }
-
-    @Override
-    public Player getPlayer() {
-        return player;
     }
 }

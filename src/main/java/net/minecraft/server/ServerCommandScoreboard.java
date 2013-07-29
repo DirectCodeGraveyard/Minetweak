@@ -353,7 +353,7 @@ public class ServerCommandScoreboard extends CommandBase {
                 throw new CommandException("commands.scoreboard.teams.list.player.empty", var5.func_96661_b());
             }
 
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.scoreboard.teams.list.player.count", var6.size(), var5.func_96661_b()).func_111059_a(EnumChatFormatting.DARK_GREEN));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.scoreboard.teams.list.player.count", var6.size(), var5.func_96661_b()).func_111059_a(EnumChatFormatting.DARK_GREEN));
             par1ICommandSender.func_110122_a(ChatMessageComponent.func_111066_d(joinNiceString(var6.toArray())));
         } else {
             Collection<ScorePlayerTeam> var8 = var4.func_96525_g();
@@ -362,10 +362,10 @@ public class ServerCommandScoreboard extends CommandBase {
                 throw new CommandException("commands.scoreboard.teams.list.empty");
             }
 
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.scoreboard.teams.list.count", var8.size()).func_111059_a(EnumChatFormatting.DARK_GREEN));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.scoreboard.teams.list.count", var8.size()).func_111059_a(EnumChatFormatting.DARK_GREEN));
 
             for (ScorePlayerTeam var7 : var8) {
-                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.scoreboard.teams.list.entry", var7.func_96661_b(), var7.func_96669_c(), var7.getMembershipCollection().size()));
+                par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.scoreboard.teams.list.entry", var7.func_96661_b(), var7.func_96669_c(), var7.getMembershipCollection().size()));
             }
         }
     }
@@ -475,10 +475,10 @@ public class ServerCommandScoreboard extends CommandBase {
         if (var3.size() <= 0) {
             throw new CommandException("commands.scoreboard.objectives.list.empty");
         } else {
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.scoreboard.objectives.list.count", var3.size()).func_111059_a(EnumChatFormatting.DARK_GREEN));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.scoreboard.objectives.list.count", var3.size()).func_111059_a(EnumChatFormatting.DARK_GREEN));
 
             for (ScoreObjective aVar3 : var3) {
-                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.scoreboard.objectives.list.entry", aVar3.getName(), aVar3.getDisplayName(), aVar3.getCriteria().func_96636_a()));
+                par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.scoreboard.objectives.list.entry", aVar3.getName(), aVar3.getDisplayName(), aVar3.getCriteria().func_96636_a()));
             }
         }
     }
@@ -523,10 +523,10 @@ public class ServerCommandScoreboard extends CommandBase {
                 throw new CommandException("commands.scoreboard.players.list.player.empty", var5);
             }
 
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.scoreboard.players.list.player.count", var6.size(), var5).func_111059_a(EnumChatFormatting.DARK_GREEN));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.scoreboard.players.list.player.count", var6.size(), var5).func_111059_a(EnumChatFormatting.DARK_GREEN));
 
             for (Score o : var6.values()) {
-                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.scoreboard.players.list.player.entry", o.getScorePoints(), o.func_96645_d().getDisplayName(), o.func_96645_d().getName()));
+                par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.scoreboard.players.list.player.entry", o.getScorePoints(), o.func_96645_d().getDisplayName(), o.func_96645_d().getName()));
             }
         } else {
             Collection<String> var9 = var4.getObjectiveNames();
@@ -535,7 +535,7 @@ public class ServerCommandScoreboard extends CommandBase {
                 throw new CommandException("commands.scoreboard.players.list.empty");
             }
 
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.scoreboard.players.list.count", var9.size()).func_111059_a(EnumChatFormatting.DARK_GREEN));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.scoreboard.players.list.count", var9.size()).func_111059_a(EnumChatFormatting.DARK_GREEN));
             par1ICommandSender.func_110122_a(ChatMessageComponent.func_111066_d(joinNiceString(var9.toArray())));
         }
     }

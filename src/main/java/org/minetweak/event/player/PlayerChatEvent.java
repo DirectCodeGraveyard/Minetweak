@@ -32,4 +32,13 @@ public class PlayerChatEvent extends PlayerEvent implements Cancellable {
     public void setCancelled(boolean cancel) {
         cancelled = cancel;
     }
+
+    /**
+     * Sets the Message Sent
+     *
+     * @param message message
+     */
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

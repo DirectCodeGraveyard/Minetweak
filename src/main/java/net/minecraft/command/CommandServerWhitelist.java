@@ -39,7 +39,7 @@ public class CommandServerWhitelist extends CommandBase {
             }
 
             if (par2ArrayOfStr[0].equals("list")) {
-                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.whitelist.list", new Object[]{Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getWhiteListedPlayers().size()), Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getAvailablePlayerDat().length)}));
+                par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.whitelist.list", new Object[]{Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getWhiteListedPlayers().size()), Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getAvailablePlayerDat().length)}));
                 Set var3 = MinecraftServer.getServer().getConfigurationManager().getWhiteListedPlayers();
                 par1ICommandSender.func_110122_a(ChatMessageComponent.func_111066_d(joinNiceString(var3.toArray(new String[var3.size()]))));
                 return;

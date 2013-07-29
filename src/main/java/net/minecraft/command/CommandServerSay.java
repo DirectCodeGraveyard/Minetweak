@@ -25,7 +25,7 @@ public class CommandServerSay extends CommandBase {
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         if (par2ArrayOfStr.length > 0 && par2ArrayOfStr[0].length() > 0) {
             String var3 = func_82361_a(par1ICommandSender, par2ArrayOfStr, 0, true);
-            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111082_b("chat.type.announcement", par1ICommandSender.getCommandSenderName(), var3));
+            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.createWithType("chat.type.announcement", par1ICommandSender.getCommandSenderName(), var3));
         } else {
             throw new WrongUsageException("commands.say.usage");
         }

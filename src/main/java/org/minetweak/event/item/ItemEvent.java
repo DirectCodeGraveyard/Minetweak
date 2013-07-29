@@ -1,6 +1,6 @@
 package org.minetweak.event.item;
 
-import net.minecraft.item.ItemStack;
+import org.minetweak.item.ItemStack;
 
 public class ItemEvent {
     private ItemStack stack;
@@ -9,6 +9,11 @@ public class ItemEvent {
         this.stack = stack;
     }
 
+    /**
+     * Gets the ItemStack associated with the event
+     *
+     * @return ItemStack
+     */
     public ItemStack getStack() {
         return stack;
     }

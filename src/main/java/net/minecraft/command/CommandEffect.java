@@ -67,15 +67,15 @@ public class CommandEffect extends CommandBase {
 
                 if (var6 == 0) {
                     if (!var3.isPotionActive(var4)) {
-                        throw new CommandException("commands.effect.failure.notActive", new Object[]{ChatMessageComponent.func_111077_e(Potion.potionTypes[var4].getName()), var3.getEntityName()});
+                        throw new CommandException("commands.effect.failure.notActive", new Object[]{ChatMessageComponent.createPremade(Potion.potionTypes[var4].getName()), var3.getEntityName()});
                     }
 
                     var3.removePotionEffect(var4);
-                    notifyAdmins(par1ICommandSender, "commands.effect.success.removed", new Object[]{ChatMessageComponent.func_111077_e(Potion.potionTypes[var4].getName()), var3.getEntityName()});
+                    notifyAdmins(par1ICommandSender, "commands.effect.success.removed", new Object[]{ChatMessageComponent.createPremade(Potion.potionTypes[var4].getName()), var3.getEntityName()});
                 } else {
                     PotionEffect var8 = new PotionEffect(var4, var5, var7);
                     var3.addPotionEffect(var8);
-                    notifyAdmins(par1ICommandSender, "commands.effect.success", new Object[]{ChatMessageComponent.func_111077_e(var8.getEffectName()), Integer.valueOf(var4), Integer.valueOf(var7), var3.getEntityName(), Integer.valueOf(var6)});
+                    notifyAdmins(par1ICommandSender, "commands.effect.success", new Object[]{ChatMessageComponent.createPremade(var8.getEffectName()), Integer.valueOf(var4), Integer.valueOf(var7), var3.getEntityName(), Integer.valueOf(var6)});
                 }
             }
         }

@@ -167,7 +167,7 @@ public class DamageSource {
         EntityLivingBase var2 = par1EntityLivingBase.func_94060_bK();
         String var3 = "death.attack." + this.damageType;
         String var4 = var3 + ".player";
-        return var2 != null && StatCollector.func_94522_b(var4) ? ChatMessageComponent.func_111082_b(var4, par1EntityLivingBase.getTranslatedEntityName(), var2.getTranslatedEntityName()) : ChatMessageComponent.func_111082_b(var3, par1EntityLivingBase.getTranslatedEntityName());
+        return var2 != null && StatCollector.func_94522_b(var4) ? ChatMessageComponent.createWithType(var4, par1EntityLivingBase.getTranslatedEntityName(), var2.getTranslatedEntityName()) : ChatMessageComponent.createWithType(var3, par1EntityLivingBase.getTranslatedEntityName());
     }
 
     /**

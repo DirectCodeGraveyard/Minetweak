@@ -30,10 +30,10 @@ public class CommandServerBanlist extends CommandBase {
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         if (par2ArrayOfStr.length >= 1 && par2ArrayOfStr[0].equalsIgnoreCase("ips")) {
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.banlist.ips", new Object[]{Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getBannedIPs().getBannedList().size())}));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.banlist.ips", new Object[]{Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getBannedIPs().getBannedList().size())}));
             par1ICommandSender.func_110122_a(ChatMessageComponent.func_111066_d(joinNiceString(MinecraftServer.getServer().getConfigurationManager().getBannedIPs().getBannedList().keySet().toArray())));
         } else {
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.banlist.players", new Object[]{Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().getBannedList().size())}));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.banlist.players", new Object[]{Integer.valueOf(MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().getBannedList().size())}));
             par1ICommandSender.func_110122_a(ChatMessageComponent.func_111066_d(joinNiceString(MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().getBannedList().keySet().toArray())));
         }
     }

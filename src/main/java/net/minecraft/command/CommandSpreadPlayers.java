@@ -73,7 +73,7 @@ public class CommandSpreadPlayers extends CommandBase {
                     throw new PlayerNotFoundException();
                 }
 
-                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.spreadplayers.spreading." + (var12 ? "teams" : "players"), new Object[]{func_110663_b(var13), Double.valueOf(var4), Double.valueOf(var6), Double.valueOf(var8), Double.valueOf(var10)}));
+                par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.spreadplayers.spreading." + (var12 ? "teams" : "players"), new Object[]{func_110663_b(var13), Double.valueOf(var4), Double.valueOf(var6), Double.valueOf(var8), Double.valueOf(var10)}));
                 this.func_110669_a(par1ICommandSender, var13, new CommandSpreadPlayersPosition(var4, var6), var8, var10, ((EntityLivingBase) var13.get(0)).worldObj, var12);
                 return;
             }
@@ -92,7 +92,7 @@ public class CommandSpreadPlayers extends CommandBase {
         notifyAdmins(par1ICommandSender, "commands.spreadplayers.success." + (par9 ? "teams" : "players"), var19.length, par3CommandSpreadPlayersPosition.field_111101_a, Double.valueOf(par3CommandSpreadPlayersPosition.field_111100_b));
 
         if (var19.length > 1) {
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.spreadplayers.info." + (par9 ? "teams" : "players"), String.format("%.2f", new Object[]{Double.valueOf(var21)}), Integer.valueOf(var20)));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.spreadplayers.info." + (par9 ? "teams" : "players"), String.format("%.2f", new Object[]{Double.valueOf(var21)}), Integer.valueOf(var20)));
         }
     }
 

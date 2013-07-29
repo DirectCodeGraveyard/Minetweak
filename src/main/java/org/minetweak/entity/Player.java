@@ -14,6 +14,7 @@ import net.minecraft.utils.enums.EnumGameType;
 import org.minetweak.Minetweak;
 import org.minetweak.command.CommandSender;
 import org.minetweak.event.player.PlayerJoinEvent;
+import org.minetweak.inventory.Inventory;
 import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
 import org.minetweak.permissions.PlayerWhitelist;
@@ -489,5 +490,14 @@ public class Player extends Entity implements CommandSender {
      */
     public World getCurrentWorld() {
         return getPlayerMP().worldObj.getWorld();
+    }
+
+    /**
+     * Shows an Inventory to a Player
+     *
+     * @param inventory inventory to show
+     */
+    public void showInventory(Inventory inventory) {
+        getPlayerMP().displayGUIChest(inventory.getMCInventory());
     }
 }

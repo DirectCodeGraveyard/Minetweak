@@ -164,11 +164,13 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
         this.fireResistance = 20;
     }
 
+    @Override
     protected void func_110147_ax() {
         super.func_110147_ax();
         this.func_110140_aT().func_111150_b(SharedMonsterAttributes.field_111264_e).func_111128_a(1.0D);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(16, (byte) 0);
@@ -310,6 +312,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     /**
      * Return the amount of time this entity should stay in a portal before being transported.
      */
+    @Override
     public int getMaxInPortalTime() {
         return this.capabilities.disableDamage ? 0 : 80;
     }
@@ -317,10 +320,12 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     /**
      * Return the amount of cooldown before this entity can use a portal again.
      */
+    @Override
     public int getPortalCooldown() {
         return 10;
     }
 
+    @Override
     public void playSound(String par1Str, float par2, float par3) {
         this.worldObj.playSoundToNearExcept(this, par1Str, par2, par3);
     }
@@ -373,6 +378,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     /**
      * Dead and sleeping entities cannot move
      */
+    @Override
     protected boolean isMovementBlocked() {
         return this.func_110143_aJ() <= 0.0F || this.isPlayerSleeping();
     }
@@ -387,6 +393,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
     /**
      * Called when a player mounts an entity. e.g. mounts a pig, mounts a boat.
      */
+    @Override
     public void mountEntity(Entity par1Entity) {
         if (this.ridingEntity != null && par1Entity == null) {
             if (!this.worldObj.isRemote) {

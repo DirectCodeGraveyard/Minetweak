@@ -22,12 +22,13 @@ public class Server {
 
     /**
      * Broadcast a message to the entire server
+     *
      * @param message Message to broadcast
      * @return True on success for sent message(e.g. false on server not finished startup)
      */
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
-            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111077_e(String.format("[%s%s%s] %s", ChatColors.GOLD, "Server", ChatColors.RESET, message)));
+            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.createPremade(String.format("[%s%s%s] %s", ChatColors.GOLD, "Server", ChatColors.RESET, message)));
             return true;
         } else {
             return false;
@@ -36,6 +37,7 @@ public class Server {
 
     /**
      * Kicks a player.
+     *
      * @param playerName Player username to kick
      * @return True on kick success
      */
@@ -48,6 +50,7 @@ public class Server {
 
     /**
      * Kicks a player.
+     *
      * @param playerName Player username to kick
      * @param kickReason Reason to kick
      * @return True on kick success
@@ -61,6 +64,7 @@ public class Server {
 
     /**
      * Bans a player.
+     *
      * @param playerName Player username to ban
      * @return True on ban success
      */
@@ -73,8 +77,9 @@ public class Server {
 
     /**
      * Bans a player.
+     *
      * @param playerName Player username to ban
-     * @param banReason Reason to ban the player
+     * @param banReason  Reason to ban the player
      * @return True on ban success
      */
     public static boolean banPlayer(String playerName, String banReason) {
@@ -95,7 +100,8 @@ public class Server {
     /**
      * Called by Minecraft code to hook in our commands system.
      * WARNING: Should not be used in a plugin's point of view, it'll break stuff.
-     * @param player The player instance it was sent by.
+     *
+     * @param player  The player instance it was sent by.
      * @param command Command sent by the player, in raw String form.
      */
     public static void handleCommand(EntityPlayerMP player, String command) {
@@ -119,6 +125,7 @@ public class Server {
     /**
      * Called by Minecraft code to hook in our commands system.
      * WARNING: Should not be used in a plugin's point of view, it'll break stuff.
+     *
      * @param console The console instance it was sent by.
      * @param command Command sent by the sender, in raw String form.
      */
@@ -140,6 +147,7 @@ public class Server {
 
     /**
      * Op a player
+     *
      * @param playerUsername Player username to op
      */
     public static void opPlayer(String playerUsername) {
@@ -148,6 +156,7 @@ public class Server {
 
     /**
      * Deop a player
+     *
      * @param playerUsername Player username to deop
      */
     public static void deopPlayer(String playerUsername) {
@@ -156,6 +165,7 @@ public class Server {
 
     /**
      * Pardon a player
+     *
      * @param playerUsername Player to pardon
      */
     public static void pardonPlayer(String playerUsername) {
@@ -164,6 +174,7 @@ public class Server {
 
     /**
      * Check if the whitelist is enabled.
+     *
      * @return True if the whitelist is enabled
      */
     public static boolean isWhitelistEnabled() {
@@ -172,6 +183,7 @@ public class Server {
 
     /**
      * Send a message to all operators on the server.
+     *
      * @param message Message to send.
      */
     public static void sendToOps(String message) {

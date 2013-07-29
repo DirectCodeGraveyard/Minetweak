@@ -32,7 +32,7 @@ public abstract class EntityLivingBase extends Entity {
     private static final AttributeModifier field_110157_c = (new AttributeModifier(field_110156_b, "Sprinting speed boost", 0.30000001192092896D, 2)).func_111168_a(false);
     private BaseAttributeMap field_110155_d;
     private final CombatTracker _combatTracker = new CombatTracker(this);
-    private final HashMap activePotionsMap = new HashMap();
+    private final HashMap<Integer, PotionEffect> activePotionsMap = new HashMap<Integer, PotionEffect>();
 
     /**
      * The equipment this mob was previously wearing, used for syncing.
@@ -204,6 +204,7 @@ public abstract class EntityLivingBase extends Entity {
         this.stepHeight = 0.5F;
     }
 
+    @Override
     protected void entityInit() {
         this.dataWatcher.addObject(7, 0);
         this.dataWatcher.addObject(8, (byte) 0);
@@ -225,6 +226,7 @@ public abstract class EntityLivingBase extends Entity {
      * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
      * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
      */
+    @Override
     protected void updateFallState(double par1, boolean par3) {
         if (!this.isInWater()) {
             this.handleWaterMovement();
@@ -259,6 +261,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * Gets called every tick from main Entity class
      */
+    @Override
     public void onEntityUpdate() {
         this.prevSwingProgress = this.swingProgress;
         super.onEntityUpdate();
@@ -295,7 +298,7 @@ public abstract class EntityLivingBase extends Entity {
             this.extinguish();
 
             if (!this.worldObj.isRemote && this.isRiding() && this.ridingEntity instanceof EntityLivingBase) {
-                this.mountEntity((Entity) null);
+                this.mountEntity(null);
             }
         } else {
             this.setAir(300);
@@ -330,7 +333,7 @@ public abstract class EntityLivingBase extends Entity {
         }
 
         if (this.entityLivingToAttack != null && !this.entityLivingToAttack.isEntityAlive()) {
-            this.setRevengeTarget((EntityLivingBase) null);
+            this.setRevengeTarget(null);
         }
 
         this.updatePotionEffects();
@@ -443,6 +446,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         par1NBTTagCompound.setFloat("HealF", this.func_110143_aJ());
         par1NBTTagCompound.setShort("Health", (short) ((int) Math.ceil((double) this.func_110143_aJ())));
@@ -477,10 +481,8 @@ public abstract class EntityLivingBase extends Entity {
 
         if (!this.activePotionsMap.isEmpty()) {
             NBTTagList var6 = new NBTTagList();
-            Iterator var7 = this.activePotionsMap.values().iterator();
 
-            while (var7.hasNext()) {
-                PotionEffect var8 = (PotionEffect) var7.next();
+            for (PotionEffect var8 : this.activePotionsMap.values()) {
                 var6.appendTag(var8.writeCustomPotionEffectToNBT(new NBTTagCompound()));
             }
 
@@ -491,6 +493,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         this.func_110149_m(par1NBTTagCompound.getFloat("AbsorptionAmount"));
 
@@ -504,7 +507,7 @@ public abstract class EntityLivingBase extends Entity {
             for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
                 NBTTagCompound var4 = (NBTTagCompound) var2.tagAt(var3);
                 PotionEffect var5 = PotionEffect.readCustomPotionEffectFromNBT(var4);
-                this.activePotionsMap.put(Integer.valueOf(var5.getPotionID()), var5);
+                this.activePotionsMap.put(var5.getPotionID(), var5);
             }
         }
 
@@ -528,11 +531,11 @@ public abstract class EntityLivingBase extends Entity {
     }
 
     protected void updatePotionEffects() {
-        Iterator var1 = this.activePotionsMap.keySet().iterator();
+        Iterator<Integer> var1 = this.activePotionsMap.keySet().iterator();
 
         while (var1.hasNext()) {
-            Integer var2 = (Integer) var1.next();
-            PotionEffect var3 = (PotionEffect) this.activePotionsMap.get(var2);
+            Integer var2 = var1.next();
+            PotionEffect var3 = this.activePotionsMap.get(var2);
 
             if (!var3.onUpdate(this)) {
                 if (!this.worldObj.isRemote) {
@@ -549,13 +552,13 @@ public abstract class EntityLivingBase extends Entity {
         if (this.potionsNeedUpdate) {
             if (!this.worldObj.isRemote) {
                 if (this.activePotionsMap.isEmpty()) {
-                    this.dataWatcher.updateObject(8, Byte.valueOf((byte) 0));
-                    this.dataWatcher.updateObject(7, Integer.valueOf(0));
+                    this.dataWatcher.updateObject(8, (byte) 0);
+                    this.dataWatcher.updateObject(7, 0);
                     this.setInvisible(false);
                 } else {
                     var11 = PotionHelper.calcPotionLiquidColor(this.activePotionsMap.values());
-                    this.dataWatcher.updateObject(8, Byte.valueOf((byte) (PotionHelper.func_82817_b(this.activePotionsMap.values()) ? 1 : 0)));
-                    this.dataWatcher.updateObject(7, Integer.valueOf(var11));
+                    this.dataWatcher.updateObject(8, (byte) (PotionHelper.func_82817_b(this.activePotionsMap.values()) ? 1 : 0));
+                    this.dataWatcher.updateObject(7, var11);
                     this.setInvisible(this.isPotionActive(Potion.invisibility.id));
                 }
             }
@@ -567,7 +570,7 @@ public abstract class EntityLivingBase extends Entity {
         boolean var12 = this.dataWatcher.getWatchableObjectByte(8) > 0;
 
         if (var11 > 0) {
-            boolean var4 = false;
+            boolean var4;
 
             if (!this.isInvisible()) {
                 var4 = this.rand.nextBoolean();
@@ -582,18 +585,18 @@ public abstract class EntityLivingBase extends Entity {
             if (var4 && var11 > 0) {
                 double var5 = (double) (var11 >> 16 & 255) / 255.0D;
                 double var7 = (double) (var11 >> 8 & 255) / 255.0D;
-                double var9 = (double) (var11 >> 0 & 255) / 255.0D;
+                double var9 = (double) (var11 & 255) / 255.0D;
                 this.worldObj.spawnParticle(var12 ? "mobSpellAmbient" : "mobSpell", this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.width, this.posY + this.rand.nextDouble() * (double) this.height - (double) this.yOffset, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.width, var5, var7, var9);
             }
         }
     }
 
     public void clearActivePotions() {
-        Iterator var1 = this.activePotionsMap.keySet().iterator();
+        Iterator<Integer> var1 = this.activePotionsMap.keySet().iterator();
 
         while (var1.hasNext()) {
-            Integer var2 = (Integer) var1.next();
-            PotionEffect var3 = (PotionEffect) this.activePotionsMap.get(var2);
+            Integer var2 = var1.next();
+            PotionEffect var3 = this.activePotionsMap.get(var2);
 
             if (!this.worldObj.isRemote) {
                 var1.remove();
@@ -602,7 +605,7 @@ public abstract class EntityLivingBase extends Entity {
         }
     }
 
-    public Collection getActivePotionEffects() {
+    public Collection<PotionEffect> getActivePotionEffects() {
         return this.activePotionsMap.values();
     }
 
@@ -618,7 +621,7 @@ public abstract class EntityLivingBase extends Entity {
      * returns the PotionEffect for the supplied Potion if it is active, null otherwise.
      */
     public PotionEffect getActivePotionEffect(Potion par1Potion) {
-        return (PotionEffect) this.activePotionsMap.get(Integer.valueOf(par1Potion.id));
+        return this.activePotionsMap.get(Integer.valueOf(par1Potion.id));
     }
 
     /**
@@ -627,10 +630,10 @@ public abstract class EntityLivingBase extends Entity {
     public void addPotionEffect(PotionEffect par1PotionEffect) {
         if (this.isPotionApplicable(par1PotionEffect)) {
             if (this.activePotionsMap.containsKey(Integer.valueOf(par1PotionEffect.getPotionID()))) {
-                ((PotionEffect) this.activePotionsMap.get(Integer.valueOf(par1PotionEffect.getPotionID()))).combine(par1PotionEffect);
-                this.onChangedPotionEffect((PotionEffect) this.activePotionsMap.get(Integer.valueOf(par1PotionEffect.getPotionID())), true);
+                (this.activePotionsMap.get(Integer.valueOf(par1PotionEffect.getPotionID()))).combine(par1PotionEffect);
+                this.onChangedPotionEffect(this.activePotionsMap.get(Integer.valueOf(par1PotionEffect.getPotionID())), true);
             } else {
-                this.activePotionsMap.put(Integer.valueOf(par1PotionEffect.getPotionID()), par1PotionEffect);
+                this.activePotionsMap.put(par1PotionEffect.getPotionID(), par1PotionEffect);
                 this.onNewPotionEffect(par1PotionEffect);
             }
         }
@@ -659,7 +662,7 @@ public abstract class EntityLivingBase extends Entity {
      * Remove the specified potion effect from this entity.
      */
     public void removePotionEffect(int par1) {
-        PotionEffect var2 = (PotionEffect) this.activePotionsMap.remove(Integer.valueOf(par1));
+        PotionEffect var2 = this.activePotionsMap.remove(Integer.valueOf(par1));
 
         if (var2 != null) {
             this.onFinishedPotionEffect(var2);
@@ -707,12 +710,13 @@ public abstract class EntityLivingBase extends Entity {
     }
 
     public void setEntityHealth(float par1) {
-        this.dataWatcher.updateObject(6, Float.valueOf(MathHelper.func_76131_a(par1, 0.0F, this.func_110138_aP())));
+        this.dataWatcher.updateObject(6, MathHelper.func_76131_a(par1, 0.0F, this.func_110138_aP()));
     }
 
     /**
      * Called when the entity is attacked.
      */
+    @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
         if (this.isEntityInvulnerable()) {
             return false;
@@ -876,6 +880,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * knocks back this entity
      */
+    @SuppressWarnings("UnusedParameters")
     public void knockBack(Entity par1Entity, float par2, double par3, double par5) {
         if (this.rand.nextDouble() >= this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111126_e()) {
             this.isAirBorne = true;
@@ -931,6 +936,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * Checks whether target entity is alive.
      */
+    @Override
     public boolean isEntityAlive() {
         return !this.isDead && this.func_110143_aJ() > 0.0F;
     }
@@ -938,6 +944,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
+    @Override
     protected void fall(float par1) {
         super.fall(par1);
         PotionEffect var2 = this.getActivePotionEffect(Potion.jump);
@@ -967,11 +974,8 @@ public abstract class EntityLivingBase extends Entity {
     public int getTotalArmorValue() {
         int var1 = 0;
         ItemStack[] var2 = this.getInventory();
-        int var3 = var2.length;
 
-        for (int var4 = 0; var4 < var3; ++var4) {
-            ItemStack var5 = var2[var4];
-
+        for (ItemStack var5 : var2) {
             if (var5 != null && var5.getItem() instanceof ItemArmor) {
                 int var6 = ((ItemArmor) var5.getItem()).damageReduceAmount;
                 var1 += var6;
@@ -1002,9 +1006,6 @@ public abstract class EntityLivingBase extends Entity {
      * Reduces damage, depending on potions
      */
     protected float applyPotionDamageCalculations(DamageSource par1DamageSource, float par2) {
-        if (this instanceof EntityZombie) {
-            par2 = par2;
-        }
 
         int var3;
         int var4;
@@ -1062,7 +1063,7 @@ public abstract class EntityLivingBase extends Entity {
     }
 
     public EntityLivingBase func_94060_bK() {
-        return (EntityLivingBase) (this._combatTracker.func_94550_c() != null ? this._combatTracker.func_94550_c() : (this.attackingPlayer != null ? this.attackingPlayer : (this.entityLivingToAttack != null ? this.entityLivingToAttack : null)));
+        return this._combatTracker.func_94550_c() != null ? this._combatTracker.func_94550_c() : (this.attackingPlayer != null ? this.attackingPlayer : (this.entityLivingToAttack != null ? this.entityLivingToAttack : null));
     }
 
     public final float func_110138_aP() {
@@ -1108,6 +1109,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * sets the dead flag. Used when you fall off the bottom of the world.
      */
+    @Override
     protected void kill() {
         this.attackEntityFrom(DamageSource.outOfWorld, 4.0F);
     }
@@ -1164,11 +1166,13 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * Sets the held item, or an armor slot. Slot 0 is held item. Slot 1-4 is armor. Params: Item, slot
      */
+    @Override
     public abstract void setCurrentItemOrArmor(int var1, ItemStack var2);
 
     /**
      * Set sprinting switch for Entity.
      */
+    @Override
     public void setSprinting(boolean par1) {
         super.setSprinting(par1);
         AttributeInstance var2 = this.func_110148_a(SharedMonsterAttributes.field_111263_d);
@@ -1185,6 +1189,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * returns the inventory of this entity (only used in EntityPlayerMP it seems)
      */
+    @Override
     public abstract ItemStack[] getInventory();
 
     /**
@@ -1430,6 +1435,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
 
@@ -1653,12 +1659,10 @@ public abstract class EntityLivingBase extends Entity {
     }
 
     protected void collideWithNearbyEntities() {
-        List var1 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
+        List<Entity> var1 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
 
         if (var1 != null && !var1.isEmpty()) {
-            for (int var2 = 0; var2 < var1.size(); ++var2) {
-                Entity var3 = (Entity) var1.get(var2);
-
+            for (Entity var3 : var1) {
                 if (var3.canBePushed()) {
                     this.collideWithEntity(var3);
                 }
@@ -1673,6 +1677,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * Handles updating while being ridden by an entity
      */
+    @Override
     public void updateRidden() {
         super.updateRidden();
         this.field_70768_au = this.field_110154_aX;
@@ -1725,6 +1730,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * returns a (normalized) vector of where this entity is looking
      */
+    @Override
     public Vec3 getLookVec() {
         return this.getLook(1.0F);
     }
@@ -1765,6 +1771,7 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * Returns true if other Entities should be prevented from moving through this Entity.
      */
+    @Override
     public boolean canBeCollidedWith() {
         return !this.isDead;
     }
@@ -1772,10 +1779,12 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * Returns true if this entity should push and be pushed by other entities when colliding.
      */
+    @Override
     public boolean canBePushed() {
         return !this.isDead;
     }
 
+    @Override
     public float getEyeHeight() {
         return this.height * 0.85F;
     }
@@ -1783,10 +1792,12 @@ public abstract class EntityLivingBase extends Entity {
     /**
      * Sets that this entity has been attacked.
      */
+    @Override
     protected void setBeenAttacked() {
         this.velocityChanged = this.rand.nextDouble() >= this.func_110148_a(SharedMonsterAttributes.field_111266_c).func_111126_e();
     }
 
+    @Override
     public float getRotationYawHead() {
         return this.rotationYawHead;
     }

@@ -1,22 +1,22 @@
 package org.minetweak.event.item;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.chunk.ChunkCoordinates;
+import org.minetweak.world.Location;
 
-public class ItemBurnEvent {
-    private ItemStack itemStack;
-    private ChunkCoordinates coordinates;
+public class ItemBurnEvent extends ItemEvent {
+    private Location location;
 
-    public ItemBurnEvent(ItemStack itemStack, ChunkCoordinates coordinates) {
-        this.itemStack = itemStack;
-        this.coordinates = coordinates;
+    public ItemBurnEvent(ItemStack itemStack, Location location) {
+        super(new org.minetweak.item.ItemStack(itemStack));
+        this.location = location;
     }
 
-    public ItemStack getItemStack() {
-        return itemStack;
-    }
-
-    public ChunkCoordinates getCoordinates() {
-        return coordinates;
+    /**
+     * Gets the Location where this event occurred
+     *
+     * @return location
+     */
+    public Location getLocation() {
+        return location;
     }
 }

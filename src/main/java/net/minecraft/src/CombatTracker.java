@@ -51,7 +51,7 @@ public class CombatTracker {
 
     public ChatMessageComponent func_94546_b() {
         if (this.field_94556_a.size() == 0) {
-            return ChatMessageComponent.func_111082_b("death.attack.generic", this.field_94554_b.getTranslatedEntityName());
+            return ChatMessageComponent.createWithType("death.attack.generic", this.field_94554_b.getTranslatedEntityName());
         } else {
             CombatEntry var1 = this.func_94544_f();
             CombatEntry var2 = this.field_94556_a.get(this.field_94556_a.size() - 1);
@@ -68,23 +68,23 @@ public class CombatTracker {
                         ItemStack var8 = var9 instanceof EntityLivingBase ? ((EntityLivingBase) var9).getHeldItem() : null;
 
                         if (var8 != null && var8.hasDisplayName()) {
-                            var3 = ChatMessageComponent.func_111082_b("death.fell.assist.item", this.field_94554_b.getTranslatedEntityName(), var6, var8.getDisplayName());
+                            var3 = ChatMessageComponent.createWithType("death.fell.assist.item", this.field_94554_b.getTranslatedEntityName(), var6, var8.getDisplayName());
                         } else {
-                            var3 = ChatMessageComponent.func_111082_b("death.fell.assist", this.field_94554_b.getTranslatedEntityName(), var6);
+                            var3 = ChatMessageComponent.createWithType("death.fell.assist", this.field_94554_b.getTranslatedEntityName(), var6);
                         }
                     } else if (var4 != null) {
                         ItemStack var7 = var5 instanceof EntityLivingBase ? ((EntityLivingBase) var5).getHeldItem() : null;
 
                         if (var7 != null && var7.hasDisplayName()) {
-                            var3 = ChatMessageComponent.func_111082_b("death.fell.finish.item", this.field_94554_b.getTranslatedEntityName(), var4, var7.getDisplayName());
+                            var3 = ChatMessageComponent.createWithType("death.fell.finish.item", this.field_94554_b.getTranslatedEntityName(), var4, var7.getDisplayName());
                         } else {
-                            var3 = ChatMessageComponent.func_111082_b("death.fell.finish", this.field_94554_b.getTranslatedEntityName(), var4);
+                            var3 = ChatMessageComponent.createWithType("death.fell.finish", this.field_94554_b.getTranslatedEntityName(), var4);
                         }
                     } else {
-                        var3 = ChatMessageComponent.func_111082_b("death.fell.killer", this.field_94554_b.getTranslatedEntityName());
+                        var3 = ChatMessageComponent.createWithType("death.fell.killer", this.field_94554_b.getTranslatedEntityName());
                     }
                 } else {
-                    var3 = ChatMessageComponent.func_111082_b("death.fell.accident." + this.func_94548_b(var1), this.field_94554_b.getTranslatedEntityName());
+                    var3 = ChatMessageComponent.createWithType("death.fell.accident." + this.func_94548_b(var1), this.field_94554_b.getTranslatedEntityName());
                 }
             } else {
                 var3 = var2.func_94560_a().func_111181_b(this.field_94554_b);

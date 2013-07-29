@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ChatMessageComponent {
-    private static final Gson field_111089_a = (new GsonBuilder()).registerTypeAdapter(ChatMessageComponent.class, new MessageComponentSerializer()).create();
+    private static final Gson gson = (new GsonBuilder()).registerTypeAdapter(ChatMessageComponent.class, new MessageComponentSerializer()).create();
     private EnumChatFormatting chatFormatting;
     private Boolean field_111088_c;
     private Boolean field_111085_d;
@@ -20,7 +20,8 @@ public class ChatMessageComponent {
     private String field_111090_h;
     private List<ChatMessageComponent> field_111091_i;
 
-    public ChatMessageComponent() {}
+    public ChatMessageComponent() {
+    }
 
     public ChatMessageComponent(ChatMessageComponent par1ChatMessageComponent) {
         this.chatFormatting = par1ChatMessageComponent.chatFormatting;
@@ -130,12 +131,12 @@ public class ChatMessageComponent {
     public ChatMessageComponent func_111072_b(String par1Str) {
         if (this.field_111084_g == null && this.field_111090_h == null) {
             if (this.field_111091_i != null) {
-                this.field_111091_i.add(func_111077_e(par1Str));
+                this.field_111091_i.add(createPremade(par1Str));
             } else {
                 this.field_111090_h = par1Str;
             }
         } else {
-            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent(this), func_111077_e(par1Str));
+            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent(this), createPremade(par1Str));
             this.field_111084_g = null;
             this.field_111090_h = null;
         }
@@ -146,7 +147,7 @@ public class ChatMessageComponent {
     public ChatMessageComponent func_111080_a(String par1Str, Object... par2ArrayOfObj) {
         if (this.field_111084_g == null && this.field_111090_h == null) {
             if (this.field_111091_i != null) {
-                this.field_111091_i.add(func_111082_b(par1Str, par2ArrayOfObj));
+                this.field_111091_i.add(createWithType(par1Str, par2ArrayOfObj));
             } else {
                 this.field_111090_h = par1Str;
                 this.field_111091_i = Lists.newArrayList();
@@ -160,7 +161,7 @@ public class ChatMessageComponent {
                 }
             }
         } else {
-            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent(this), func_111082_b(par1Str, par2ArrayOfObj));
+            this.field_111091_i = Lists.newArrayList(new ChatMessageComponent(this), createWithType(par1Str, par2ArrayOfObj));
             this.field_111084_g = null;
             this.field_111090_h = null;
         }
@@ -186,7 +187,7 @@ public class ChatMessageComponent {
 
         if (this.field_111090_h != null) {
             if (par1) {
-                func_111060_a(var7, var8, var9, var10, var11, var12);
+                formatMessage(var7, var8, var9, var10, var11, var12);
             }
 
             if (this.field_111091_i != null) {
@@ -202,7 +203,7 @@ public class ChatMessageComponent {
             }
         } else if (this.field_111084_g != null) {
             if (par1) {
-                func_111060_a(var7, var8, var9, var10, var11, var12);
+                formatMessage(var7, var8, var9, var10, var11, var12);
             }
 
             var7.append(this.field_111084_g);
@@ -214,7 +215,7 @@ public class ChatMessageComponent {
                     var16 = var15.next();
 
                     if (par1) {
-                        func_111060_a(var7, var8, var9, var10, var11, var12);
+                        formatMessage(var7, var8, var9, var10, var11, var12);
                     }
                 }
             }
@@ -223,7 +224,7 @@ public class ChatMessageComponent {
         return var7.toString();
     }
 
-    private static void func_111060_a(StringBuilder par0StringBuilder, EnumChatFormatting par1EnumChatFormatting, boolean par2, boolean par3, boolean par4, boolean par5) {
+    private static void formatMessage(StringBuilder par0StringBuilder, EnumChatFormatting par1EnumChatFormatting, boolean par2, boolean par3, boolean par4, boolean par5) {
         if (par1EnumChatFormatting != null) {
             par0StringBuilder.append(par1EnumChatFormatting);
         } else if (par2 || par3 || par4 || par5) {
@@ -253,19 +254,19 @@ public class ChatMessageComponent {
         return var1;
     }
 
-    public static ChatMessageComponent func_111077_e(String par0Str) {
+    public static ChatMessageComponent createPremade(String par0Str) {
         ChatMessageComponent var1 = new ChatMessageComponent();
         var1.func_111072_b(par0Str);
         return var1;
     }
 
-    public static ChatMessageComponent func_111082_b(String par0Str, Object... par1ArrayOfObj) {
+    public static ChatMessageComponent createWithType(String par0Str, Object... par1ArrayOfObj) {
         ChatMessageComponent var2 = new ChatMessageComponent();
         var2.func_111080_a(par0Str, par1ArrayOfObj);
         return var2;
     }
 
     public String toJson() {
-        return field_111089_a.toJson(this);
+        return gson.toJson(this);
     }
 }

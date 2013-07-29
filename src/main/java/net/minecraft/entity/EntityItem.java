@@ -10,9 +10,9 @@ import net.minecraft.src.DamageSource;
 import net.minecraft.stats.StatCollector;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.ChunkCoordinates;
 import org.minetweak.Minetweak;
 import org.minetweak.event.item.ItemBurnEvent;
+import org.minetweak.world.Location;
 
 public class EntityItem extends Entity {
     /**
@@ -53,6 +53,7 @@ public class EntityItem extends Entity {
      * returns if this entity triggers TweakBlock.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
+    @Override
     protected boolean canTriggerWalking() {
         return false;
     }
@@ -65,6 +66,7 @@ public class EntityItem extends Entity {
         this.yOffset = this.height / 2.0F;
     }
 
+    @Override
     protected void entityInit() {
         this.getDataWatcher().addObjectByDataType(10, 5);
     }
@@ -72,6 +74,7 @@ public class EntityItem extends Entity {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
 
@@ -89,7 +92,7 @@ public class EntityItem extends Entity {
 
         if (var1 || this.ticksExisted % 25 == 0) {
             if (this.worldObj.getBlockMaterial(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ)) == Material.lava) {
-                ItemBurnEvent event = new ItemBurnEvent(this.getEntityItem(), new ChunkCoordinates(this.chunkCoordX, this.chunkCoordY, this.chunkCoordZ));
+                ItemBurnEvent event = new ItemBurnEvent(this.getEntityItem(), new Location(this.chunkCoordX, this.chunkCoordY, this.chunkCoordZ));
                 Minetweak.getEventBus().post(event);
 
                 this.motionY = 0.20000000298023224D;
@@ -187,6 +190,7 @@ public class EntityItem extends Entity {
     /**
      * Returns if this entity is in water and will end up adding the waters velocity to the entity
      */
+    @Override
     public boolean handleWaterMovement() {
         return this.worldObj.handleMaterialAcceleration(this.boundingBox, Material.water, this);
     }
@@ -195,6 +199,7 @@ public class EntityItem extends Entity {
      * Will deal the specified amount of damage to the entity if the entity isn't immune to fire damage. Args:
      * amountDamage
      */
+    @Override
     protected void dealFireDamage(int par1) {
         this.attackEntityFrom(DamageSource.inFire, (float) par1);
     }
@@ -202,6 +207,7 @@ public class EntityItem extends Entity {
     /**
      * Called when the entity is attacked.
      */
+    @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
         if (this.isEntityInvulnerable()) {
             return false;
@@ -222,6 +228,7 @@ public class EntityItem extends Entity {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         par1NBTTagCompound.setShort("Health", (short) ((byte) this.health));
         par1NBTTagCompound.setShort("Age", (short) this.age);
@@ -234,6 +241,7 @@ public class EntityItem extends Entity {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         this.health = par1NBTTagCompound.getShort("Health") & 255;
         this.age = par1NBTTagCompound.getShort("Age");
@@ -248,6 +256,7 @@ public class EntityItem extends Entity {
     /**
      * Called by a player entity when they collide with an entity
      */
+    @Override
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
         if (!this.worldObj.isRemote) {
             ItemStack var2 = this.getEntityItem();
@@ -283,6 +292,7 @@ public class EntityItem extends Entity {
     /**
      * Gets the username of the entity.
      */
+    @Override
     public String getEntityName() {
         return StatCollector.translateToLocal("item." + this.getEntityItem().getItemName());
     }
@@ -290,10 +300,12 @@ public class EntityItem extends Entity {
     /**
      * If returns false, the item will not inflict any damage against entities.
      */
+    @Override
     public boolean canAttackWithItem() {
         return false;
     }
 
+    @Override
     public void travelToTheEnd(int par1) {
         super.travelToTheEnd(par1);
 

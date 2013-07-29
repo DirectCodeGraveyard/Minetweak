@@ -10,7 +10,6 @@ import net.minecraft.inventory.InventoryMerchant;
 import net.minecraft.inventory.container.*;
 import net.minecraft.inventory.slot.SlotCrafting;
 import net.minecraft.item.Item;
-import net.minecraft.world.ItemInWorldManager;
 import net.minecraft.item.ItemMapBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -32,6 +31,7 @@ import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.utils.enums.EnumAction;
 import net.minecraft.utils.enums.EnumGameType;
 import net.minecraft.utils.enums.EnumStatus;
+import net.minecraft.world.ItemInWorldManager;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
@@ -423,6 +423,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Called whenever an item is picked up from walking over it. Args: pickedUpEntity, stackSize
      */
+    @Override
     public void onItemPickup(Entity par1Entity, int par2) {
         super.onItemPickup(par1Entity, par2);
         this.openContainer.detectAndSendChanges();
@@ -431,6 +432,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * puts player to sleep on specified bed if possible
      */
+    @Override
     public EnumStatus sleepInBedAt(int par1, int par2, int par3) {
         EnumStatus var4 = super.sleepInBedAt(par1, par2, par3);
 
@@ -447,6 +449,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Wake up the player if they're sleeping.
      */
+    @Override
     public void wakeUpPlayer(boolean par1, boolean par2, boolean par3) {
         if (this.isPlayerSleeping()) {
             this.getServerForPlayer().getEntityTracker().sendPacketToTrackedPlayersAndTrackedEntity(this, new Packet18Animation(this, 3));
@@ -510,6 +513,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         this.openContainer.onCraftGuiOpened(this);
     }
 
+    @Override
     public void displayGUIEnchantment(int par1, int par2, int par3, String par4Str) {
         this.getNextWindowId();
         this.playerNetServerHandler.sendPacket(new Packet100OpenWindow(this.currentWindowId, 4, par4Str == null ? "" : par4Str, 9, par4Str != null));
@@ -521,6 +525,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Displays the GUI for interacting with an anvil.
      */
+    @Override
     public void displayGUIAnvil(int par1, int par2, int par3) {
         this.getNextWindowId();
         this.playerNetServerHandler.sendPacket(new Packet100OpenWindow(this.currentWindowId, 8, "Repairing", 9, true));
@@ -532,6 +537,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Displays the GUI for interacting with a chest inventory. Args: chestInventory
      */
+    @Override
     public void displayGUIChest(IInventory par1IInventory) {
         if (this.openContainer != this.inventoryContainer) {
             this.closeScreen();
@@ -544,6 +550,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         this.openContainer.onCraftGuiOpened(this);
     }
 
+    @Override
     public void displayGUIHopper(TileEntityHopper par1TileEntityHopper) {
         this.getNextWindowId();
         this.playerNetServerHandler.sendPacket(new Packet100OpenWindow(this.currentWindowId, 9, par1TileEntityHopper.getInvName(), par1TileEntityHopper.getSizeInventory(), par1TileEntityHopper.isInvNameLocalized()));
@@ -552,6 +559,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         this.openContainer.onCraftGuiOpened(this);
     }
 
+    @Override
     public void displayGUIHopperMinecart(EntityMinecartHopper par1EntityMinecartHopper) {
         this.getNextWindowId();
         this.playerNetServerHandler.sendPacket(new Packet100OpenWindow(this.currentWindowId, 9, par1EntityMinecartHopper.getInvName(), par1EntityMinecartHopper.getSizeInventory(), par1EntityMinecartHopper.isInvNameLocalized()));
@@ -574,6 +582,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Displays the dipsenser GUI for the passed in dispenser entity. Args: TileEntityDispenser
      */
+    @Override
     public void displayGUIDispenser(TileEntityDispenser par1TileEntityDispenser) {
         this.getNextWindowId();
         this.playerNetServerHandler.sendPacket(new Packet100OpenWindow(this.currentWindowId, par1TileEntityDispenser instanceof TileEntityDropper ? 10 : 3, par1TileEntityDispenser.getInvName(), par1TileEntityDispenser.getSizeInventory(), par1TileEntityDispenser.isInvNameLocalized()));
@@ -743,13 +752,15 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Add a chat message to the player
      */
+    @Override
     public void addChatMessage(String par1Str) {
-        this.playerNetServerHandler.sendPacket(new Packet3Chat(ChatMessageComponent.func_111077_e(par1Str)));
+        this.playerNetServerHandler.sendPacket(new Packet3Chat(ChatMessageComponent.createPremade(par1Str)));
     }
 
     /**
      * Used for when item use count runs out, ie: eating completed
      */
+    @Override
     protected void onItemUseFinish() {
         this.playerNetServerHandler.sendPacket(new Packet38EntityStatus(this.entityId, (byte) 9));
         super.onItemUseFinish();
@@ -758,6 +769,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * sets the itemInUse when the use item button is clicked. Args: itemstack, int maxItemUseDuration
      */
+    @Override
     public void setItemInUse(ItemStack par1ItemStack, int par2) {
         super.setItemInUse(par1ItemStack, par2);
 
@@ -770,6 +782,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
      * Copies the values from the given player into this player if boolean par2 is true. Always clones Ender Chest
      * Inventory.
      */
+    @Override
     public void clonePlayer(EntityPlayer par1EntityPlayer, boolean par2) {
         super.clonePlayer(par1EntityPlayer, par2);
         this.lastExperience = -1;
@@ -778,16 +791,19 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         this.destroyedItemsNetCache.addAll(((EntityPlayerMP) par1EntityPlayer).destroyedItemsNetCache);
     }
 
+    @Override
     protected void onNewPotionEffect(PotionEffect par1PotionEffect) {
         super.onNewPotionEffect(par1PotionEffect);
         this.playerNetServerHandler.sendPacket(new Packet41EntityEffect(this.entityId, par1PotionEffect));
     }
 
+    @Override
     protected void onChangedPotionEffect(PotionEffect par1PotionEffect, boolean par2) {
         super.onChangedPotionEffect(par1PotionEffect, par2);
         this.playerNetServerHandler.sendPacket(new Packet41EntityEffect(this.entityId, par1PotionEffect));
     }
 
+    @Override
     protected void onFinishedPotionEffect(PotionEffect par1PotionEffect) {
         super.onFinishedPotionEffect(par1PotionEffect);
         this.playerNetServerHandler.sendPacket(new Packet42RemoveEntityEffect(this.entityId, par1PotionEffect));
@@ -796,6 +812,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Sets the position of the entity and updates the 'last' variables
      */
+    @Override
     public void setPositionAndUpdate(double par1, double par3, double par5) {
         this.playerNetServerHandler.setPlayerLocation(par1, par3, par5, this.rotationYaw, this.rotationPitch);
     }
@@ -803,10 +820,12 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Called when the player performs a critical hit on the Entity. Args: entity that was hit critically
      */
+    @Override
     public void onCriticalHit(Entity par1Entity) {
         this.getServerForPlayer().getEntityTracker().sendPacketToTrackedPlayersAndTrackedEntity(this, new Packet18Animation(par1Entity, 6));
     }
 
+    @Override
     public void onEnchantmentCritical(Entity par1Entity) {
         this.getServerForPlayer().getEntityTracker().sendPacketToTrackedPlayersAndTrackedEntity(this, new Packet18Animation(par1Entity, 7));
     }
@@ -814,6 +833,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Sends the player's abilities to the server (if there is one).
      */
+    @Override
     public void sendPlayerAbilities() {
         if (this.playerNetServerHandler != null) {
             this.playerNetServerHandler.sendPacket(new Packet202PlayerAbilities(this.capabilities));
@@ -827,6 +847,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Sets the player's game mode and sends it to them.
      */
+    @Override
     public void setGameType(EnumGameType par1EnumGameType) {
         this.theItemInWorldManager.setGameType(par1EnumGameType);
         this.playerNetServerHandler.sendPacket(new Packet70GameEvent(3, par1EnumGameType.getID()));
@@ -834,6 +855,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     /**
      * Gets the GameMode
+     *
      * @return gets the Game Type
      */
     public EnumGameType getGameType() {
@@ -852,6 +874,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Returns true if the command sender is allowed to use the given command.
      */
+    @Override
     public boolean canCommandSenderUseCommand(int par1, String par2Str) {
         return "seed".equals(par2Str) && !this.mcServer.isDedicatedServer() || (!(!"tell".equals(par2Str) && !"help".equals(par2Str) && !"me".equals(par2Str)) || (this.mcServer.getConfigurationManager().areCommandsAllowed(this.username) && this.mcServer.func_110455_j() >= par1));
     }
@@ -895,6 +918,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     /**
      * Return the position for this command sender.
      */
+    @Override
     public ChunkCoordinates getCommandSenderPosition() {
         return new ChunkCoordinates(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY + 0.5D), MathHelper.floor_double(this.posZ));
     }

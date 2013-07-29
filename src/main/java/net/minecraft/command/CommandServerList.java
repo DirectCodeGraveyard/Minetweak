@@ -20,7 +20,7 @@ public class CommandServerList extends CommandBase {
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
-        par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.players.list", new Object[]{Integer.valueOf(MinecraftServer.getServer().getCurrentPlayerCount()), Integer.valueOf(MinecraftServer.getServer().getMaxPlayers())}));
+        par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.players.list", new Object[]{Integer.valueOf(MinecraftServer.getServer().getCurrentPlayerCount()), Integer.valueOf(MinecraftServer.getServer().getMaxPlayers())}));
         par1ICommandSender.func_110122_a(ChatMessageComponent.func_111066_d(MinecraftServer.getServer().getConfigurationManager().getPlayerListAsString()));
     }
 }

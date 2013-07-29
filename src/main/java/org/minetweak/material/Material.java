@@ -35,6 +35,7 @@ public enum Material {
         this(id, stack, MaterialData.class);
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     private Material(final int id, final int stack, final int durability) {
         this(id, stack, durability, MaterialData.class);
     }
@@ -183,7 +184,8 @@ public enum Material {
 
         try {
             result = getMaterial(Integer.parseInt(name));
-        } catch (NumberFormatException ignored) {}
+        } catch (NumberFormatException ignored) {
+        }
 
         if (result == null) {
             String filtered = name.toUpperCase();

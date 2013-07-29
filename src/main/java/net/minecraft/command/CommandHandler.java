@@ -54,7 +54,7 @@ public class CommandHandler implements ICommandManager {
                             var5.processCommand(par1ICommandSender, var3);
                             ++var7;
                         } catch (CommandException var15) {
-                            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b(var15.getMessage(), var15.getErrorOjbects()).func_111059_a(EnumChatFormatting.RED));
+                            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType(var15.getMessage(), var15.getErrorOjbects()).func_111059_a(EnumChatFormatting.RED));
                         }
                     }
 
@@ -64,14 +64,14 @@ public class CommandHandler implements ICommandManager {
                     ++var7;
                 }
             } else {
-                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111077_e("commands.generic.permission").func_111059_a(EnumChatFormatting.RED));
+                par1ICommandSender.func_110122_a(ChatMessageComponent.createPremade("commands.generic.permission").func_111059_a(EnumChatFormatting.RED));
             }
         } catch (WrongUsageException var16) {
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.generic.usage", new Object[]{ChatMessageComponent.func_111082_b(var16.getMessage(), var16.getErrorOjbects())}).func_111059_a(EnumChatFormatting.RED));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.generic.usage", new Object[]{ChatMessageComponent.createWithType(var16.getMessage(), var16.getErrorOjbects())}).func_111059_a(EnumChatFormatting.RED));
         } catch (CommandException var17) {
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b(var17.getMessage(), var17.getErrorOjbects()).func_111059_a(EnumChatFormatting.RED));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType(var17.getMessage(), var17.getErrorOjbects()).func_111059_a(EnumChatFormatting.RED));
         } catch (Throwable var18) {
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111077_e("commands.generic.exception").func_111059_a(EnumChatFormatting.RED));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createPremade("commands.generic.exception").func_111059_a(EnumChatFormatting.RED));
             var18.printStackTrace();
         }
 

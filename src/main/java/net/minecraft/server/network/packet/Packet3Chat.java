@@ -44,6 +44,7 @@ public class Packet3Chat extends Packet {
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
+    @Override
     public void readPacketData(DataInput par1DataInput) throws IOException {
         this.message = readString(par1DataInput, 32767);
     }
@@ -51,6 +52,7 @@ public class Packet3Chat extends Packet {
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
+    @Override
     public void writePacketData(DataOutput par1DataOutput) throws IOException {
         writeString(this.message, par1DataOutput);
     }
@@ -58,6 +60,7 @@ public class Packet3Chat extends Packet {
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
+    @Override
     public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleChat(this);
     }
@@ -65,6 +68,7 @@ public class Packet3Chat extends Packet {
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
+    @Override
     public int getPacketSize() {
         return 2 + this.message.length() * 2;
     }

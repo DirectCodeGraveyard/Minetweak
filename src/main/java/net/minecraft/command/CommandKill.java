@@ -23,6 +23,6 @@ public class CommandKill extends CommandBase {
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         EntityPlayerMP var3 = getCommandSenderAsPlayer(par1ICommandSender);
         var3.attackEntityFrom(DamageSource.outOfWorld, Float.MAX_VALUE);
-        par1ICommandSender.func_110122_a(ChatMessageComponent.func_111077_e("commands.kill.success"));
+        par1ICommandSender.func_110122_a(ChatMessageComponent.createPremade("commands.kill.success"));
     }
 }

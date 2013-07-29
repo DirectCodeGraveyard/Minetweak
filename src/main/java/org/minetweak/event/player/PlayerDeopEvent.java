@@ -3,15 +3,12 @@ package org.minetweak.event.player;
 import org.minetweak.entity.Player;
 
 public class PlayerDeopEvent extends PlayerEvent {
-
-    private Player player;
     private String username;
 
     private boolean isOfflinePlayer;
 
     public PlayerDeopEvent(Player playerInstance) {
         super(playerInstance);
-        this.player = playerInstance;
         this.username = playerInstance.getName();
         isOfflinePlayer = false;
     }
@@ -38,10 +35,5 @@ public class PlayerDeopEvent extends PlayerEvent {
      */
     public String getPlayerUsername() {
         return username;
-    }
-
-    @Override
-    public Player getPlayer() {
-        return player;
     }
 }

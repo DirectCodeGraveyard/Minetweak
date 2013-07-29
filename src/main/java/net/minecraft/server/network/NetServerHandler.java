@@ -147,7 +147,7 @@ public class NetServerHandler extends NetHandler {
             this.playerEntity.mountEntityAndWakeUp();
             this.sendPacket(new Packet255KickDisconnect(par1Str));
             this.netManager.serverShutdown();
-            this.mcServer.getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111082_b("multiplayer.player.left", this.playerEntity.getTranslatedEntityName()).func_111059_a(EnumChatFormatting.YELLOW));
+            this.mcServer.getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.createWithType("multiplayer.player.left", this.playerEntity.getTranslatedEntityName()).func_111059_a(EnumChatFormatting.YELLOW));
             this.mcServer.getConfigurationManager().playerLoggedOut(this.playerEntity);
             this.connectionClosed = true;
         }
@@ -426,7 +426,7 @@ public class NetServerHandler extends NetHandler {
 
             this.playerEntity.theItemInWorldManager.tryUseItem(this.playerEntity, var2, var3);
         } else if (par1Packet15Place.getYPosition() >= this.mcServer.getBuildLimit() - 1 && (par1Packet15Place.getDirection() == 1 || par1Packet15Place.getYPosition() >= this.mcServer.getBuildLimit())) {
-            this.playerEntity.playerNetServerHandler.sendPacket(new Packet3Chat(ChatMessageComponent.func_111082_b("build.tooHigh", this.mcServer.getBuildLimit()).func_111059_a(EnumChatFormatting.RED)));
+            this.playerEntity.playerNetServerHandler.sendPacket(new Packet3Chat(ChatMessageComponent.createWithType("build.tooHigh", this.mcServer.getBuildLimit()).func_111059_a(EnumChatFormatting.RED)));
             var4 = true;
         } else {
             if (this.hasMoved && this.playerEntity.getDistanceSq((double) var5 + 0.5D, (double) var6 + 0.5D, (double) var7 + 0.5D) < 64.0D && !this.mcServer.func_96290_a(var2, var5, var6, var7, this.playerEntity)) {
@@ -489,7 +489,7 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void handleErrorMessage(String par1Str, Object[] par2ArrayOfObj) {
         this.mcServer.getLogAgent().logInfo(this.playerEntity.getCommandSenderName() + " lost connection: " + par1Str);
-        this.mcServer.getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.func_111082_b("multiplayer.player.left", this.playerEntity.getTranslatedEntityName()).func_111059_a(EnumChatFormatting.YELLOW));
+        this.mcServer.getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.createWithType("multiplayer.player.left", this.playerEntity.getTranslatedEntityName()).func_111059_a(EnumChatFormatting.YELLOW));
         this.mcServer.getConfigurationManager().playerLoggedOut(this.playerEntity);
         this.connectionClosed = true;
     }
@@ -544,7 +544,7 @@ public class NetServerHandler extends NetHandler {
     @Override
     public void handleChat(Packet3Chat par1Packet3Chat) {
         if (this.playerEntity.getChatVisibility() == 2) {
-            this.sendPacket(new Packet3Chat(ChatMessageComponent.func_111077_e("chat.cannotSend").func_111059_a(EnumChatFormatting.RED)));
+            this.sendPacket(new Packet3Chat(ChatMessageComponent.createPremade("chat.cannotSend").func_111059_a(EnumChatFormatting.RED)));
         } else {
             String var2 = par1Packet3Chat.message;
 
@@ -564,14 +564,14 @@ public class NetServerHandler extends NetHandler {
                     this.handleSlashCommand(var2);
                 } else {
                     if (this.playerEntity.getChatVisibility() == 1) {
-                        this.sendPacket(new Packet3Chat(ChatMessageComponent.func_111077_e("chat.cannotSend").func_111059_a(EnumChatFormatting.RED)));
+                        this.sendPacket(new Packet3Chat(ChatMessageComponent.createPremade("chat.cannotSend").func_111059_a(EnumChatFormatting.RED)));
                         return;
                     }
                     PlayerChatEvent event = new PlayerChatEvent(Minetweak.getPlayerByName(this.playerEntity.getEntityName()), var2);
                     Minetweak.getEventBus().post(event);
 
                     if (!event.isCancelled()) {
-                        ChatMessageComponent var4 = ChatMessageComponent.func_111082_b("chat.type.text", this.playerEntity.getTranslatedEntityName(), var2);
+                        ChatMessageComponent var4 = ChatMessageComponent.createWithType("chat.type.text", this.playerEntity.getTranslatedEntityName(), event.getMessage());
                         this.mcServer.getConfigurationManager().sendChatMessageToAll(var4, false);
                     } else return;
                 }
@@ -948,7 +948,7 @@ public class NetServerHandler extends NetHandler {
 
                 if ("MC|AdvCdm".equals(par1Packet250CustomPayload.channel)) {
                     if (!this.mcServer.isCommandBlockEnabled()) {
-                        this.playerEntity.sendChatToPlayer(ChatMessageComponent.func_111077_e("advMode.notEnabled"));
+                        this.playerEntity.sendChatToPlayer(ChatMessageComponent.createPremade("advMode.notEnabled"));
                     } else if (this.playerEntity.canCommandSenderUseCommand(2, "") && this.playerEntity.capabilities.isCreativeMode) {
                         try {
                             var2 = new DataInputStream(new ByteArrayInputStream(par1Packet250CustomPayload.data));
@@ -961,13 +961,13 @@ public class NetServerHandler extends NetHandler {
                             if (var7 != null && var7 instanceof TileEntityCommandBlock) {
                                 ((TileEntityCommandBlock) var7).setCommand(var6);
                                 this.playerEntity.worldObj.markBlockForUpdate(var14, var18, var5);
-                                this.playerEntity.sendChatToPlayer(ChatMessageComponent.func_111082_b("advMode.setCommand.success", var6));
+                                this.playerEntity.sendChatToPlayer(ChatMessageComponent.createWithType("advMode.setCommand.success", var6));
                             }
                         } catch (Exception var9) {
                             var9.printStackTrace();
                         }
                     } else {
-                        this.playerEntity.sendChatToPlayer(ChatMessageComponent.func_111077_e("advMode.notAllowed"));
+                        this.playerEntity.sendChatToPlayer(ChatMessageComponent.createPremade("advMode.notAllowed"));
                     }
                 } else if ("MC|Beacon".equals(par1Packet250CustomPayload.channel)) {
                     if (this.playerEntity.openContainer instanceof ContainerBeacon) {

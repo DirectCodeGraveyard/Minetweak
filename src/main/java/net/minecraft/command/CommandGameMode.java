@@ -31,7 +31,7 @@ public class CommandGameMode extends CommandBase {
             EntityPlayerMP var4 = par2ArrayOfStr.length >= 2 ? func_82359_c(par1ICommandSender, par2ArrayOfStr[1]) : getCommandSenderAsPlayer(par1ICommandSender);
             var4.setGameType(var3);
             var4.fallDistance = 0.0F;
-            ChatMessageComponent var5 = ChatMessageComponent.func_111077_e("gameMode." + var3.getName());
+            ChatMessageComponent var5 = ChatMessageComponent.createPremade("gameMode." + var3.getName());
 
             if (var4 != par1ICommandSender) {
                 notifyAdmins(par1ICommandSender, 1, "commands.gamemode.success.other", var4.getEntityName(), var5);

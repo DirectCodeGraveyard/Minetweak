@@ -21,7 +21,7 @@ public class CommandDefaultGameMode extends CommandGameMode {
         if (par2ArrayOfStr.length > 0) {
             EnumGameType var3 = this.getGameModeFromCommand(par1ICommandSender, par2ArrayOfStr[0]);
             this.setGameType(var3);
-            notifyAdmins(par1ICommandSender, "commands.defaultgamemode.success", new Object[]{ChatMessageComponent.func_111077_e("gameMode." + var3.getName())});
+            notifyAdmins(par1ICommandSender, "commands.defaultgamemode.success", new Object[]{ChatMessageComponent.createPremade("gameMode." + var3.getName())});
         } else {
             throw new WrongUsageException("commands.defaultgamemode.usage", new Object[0]);
         }

@@ -274,6 +274,7 @@ public class Minetweak {
         registerCommand("slaughter", new CommandSlaughter());
         registerCommand("time", new CommandTime());
         registerCommand("plugin", new CommandPlugin());
+        registerCommand("viewinv", new CommandViewInventory());
     }
 
     /**

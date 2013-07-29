@@ -8,6 +8,8 @@ import org.minetweak.chat.ChatColors;
 import org.minetweak.entity.Player;
 import org.minetweak.server.Difficulty;
 
+import java.util.ArrayList;
+
 public class World {
 
     private final WorldServer world;
@@ -238,5 +240,20 @@ public class World {
      */
     public void setThunderTime(int time) {
         getWorldServer().getWorldInfo().setThunderTime(time);
+    }
+
+    /**
+     * Gets all the players in the World
+     *
+     * @return list of players in the world
+     */
+    public ArrayList<Player> getPlayersInWorld() {
+        ArrayList<Player> players = new ArrayList<Player>();
+        for (Player player : Minetweak.getPlayers().values()) {
+            if (player.getCurrentWorld() == this) {
+                players.add(player);
+            }
+        }
+        return players;
     }
 }

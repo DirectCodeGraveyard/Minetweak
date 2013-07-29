@@ -43,8 +43,8 @@ public class CommandServerMessage extends CommandBase {
                 throw new PlayerNotFoundException("commands.message.sameTarget", new Object[0]);
             } else {
                 String var4 = func_82361_a(par1ICommandSender, par2ArrayOfStr, 1, !(par1ICommandSender instanceof EntityPlayer));
-                var3.func_110122_a(ChatMessageComponent.func_111082_b("commands.message.display.incoming", new Object[]{par1ICommandSender.getCommandSenderName(), var4}).func_111059_a(EnumChatFormatting.GRAY).func_111063_b(Boolean.valueOf(true)));
-                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b("commands.message.display.outgoing", new Object[]{var3.getCommandSenderName(), var4}).func_111059_a(EnumChatFormatting.GRAY).func_111063_b(Boolean.valueOf(true)));
+                var3.func_110122_a(ChatMessageComponent.createWithType("commands.message.display.incoming", new Object[]{par1ICommandSender.getCommandSenderName(), var4}).func_111059_a(EnumChatFormatting.GRAY).func_111063_b(Boolean.valueOf(true)));
+                par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.message.display.outgoing", new Object[]{var3.getCommandSenderName(), var4}).func_111059_a(EnumChatFormatting.GRAY).func_111063_b(Boolean.valueOf(true)));
             }
         }
     }

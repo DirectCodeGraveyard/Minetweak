@@ -23,7 +23,7 @@ public class CommandServerSaveAll extends CommandBase {
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         MinecraftServer var3 = MinecraftServer.getServer();
-        par1ICommandSender.func_110122_a(ChatMessageComponent.func_111077_e("commands.save.start"));
+        par1ICommandSender.func_110122_a(ChatMessageComponent.createPremade("commands.save.start"));
 
         if (var3.getConfigurationManager() != null) {
             var3.getConfigurationManager().saveAllPlayerData();
@@ -45,7 +45,7 @@ public class CommandServerSaveAll extends CommandBase {
             }
 
             if (par2ArrayOfStr.length > 0 && "flush".equals(par2ArrayOfStr[0])) {
-                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111077_e("commands.save.flushStart"));
+                par1ICommandSender.func_110122_a(ChatMessageComponent.createPremade("commands.save.flushStart"));
 
                 for (var4 = 0; var4 < var3.worldServers.length; ++var4) {
                     if (var3.worldServers[var4] != null) {
@@ -57,7 +57,7 @@ public class CommandServerSaveAll extends CommandBase {
                     }
                 }
 
-                par1ICommandSender.func_110122_a(ChatMessageComponent.func_111077_e("commands.save.flushEnd"));
+                par1ICommandSender.func_110122_a(ChatMessageComponent.createPremade("commands.save.flushEnd"));
             }
         } catch (MinecraftException var7) {
             notifyAdmins(par1ICommandSender, "commands.save.failed", var7.getMessage());

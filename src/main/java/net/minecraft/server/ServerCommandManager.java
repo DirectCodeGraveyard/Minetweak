@@ -65,7 +65,7 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
             var5 = false;
         }
 
-        ChatMessageComponent var6 = ChatMessageComponent.func_111082_b("chat.type.admin", par1ICommandSender.getCommandSenderName(), ChatMessageComponent.func_111082_b(par3Str, par4ArrayOfObj));
+        ChatMessageComponent var6 = ChatMessageComponent.createWithType("chat.type.admin", par1ICommandSender.getCommandSenderName(), ChatMessageComponent.createWithType(par3Str, par4ArrayOfObj));
         var6.func_111059_a(EnumChatFormatting.GRAY);
         var6.func_111063_b(true);
 
@@ -83,7 +83,7 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
         }
 
         if ((par2 & 1) != 1) {
-            par1ICommandSender.func_110122_a(ChatMessageComponent.func_111082_b(par3Str, par4ArrayOfObj));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType(par3Str, par4ArrayOfObj));
         }
     }
 }

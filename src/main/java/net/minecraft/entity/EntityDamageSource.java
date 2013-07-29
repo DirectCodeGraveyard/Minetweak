@@ -21,7 +21,7 @@ public class EntityDamageSource extends DamageSource {
         ItemStack var2 = this.damageSourceEntity instanceof EntityLivingBase ? ((EntityLivingBase) this.damageSourceEntity).getHeldItem() : null;
         String var3 = "death.attack." + this.damageType;
         String var4 = var3 + ".item";
-        return var2 != null && var2.hasDisplayName() && StatCollector.func_94522_b(var4) ? ChatMessageComponent.func_111082_b(var4, new Object[]{par1EntityLivingBase.getTranslatedEntityName(), this.damageSourceEntity.getTranslatedEntityName(), var2.getDisplayName()}) : ChatMessageComponent.func_111082_b(var3, new Object[]{par1EntityLivingBase.getTranslatedEntityName(), this.damageSourceEntity.getTranslatedEntityName()});
+        return var2 != null && var2.hasDisplayName() && StatCollector.func_94522_b(var4) ? ChatMessageComponent.createWithType(var4, new Object[]{par1EntityLivingBase.getTranslatedEntityName(), this.damageSourceEntity.getTranslatedEntityName(), var2.getDisplayName()}) : ChatMessageComponent.createWithType(var3, new Object[]{par1EntityLivingBase.getTranslatedEntityName(), this.damageSourceEntity.getTranslatedEntityName()});
     }
 
     /**

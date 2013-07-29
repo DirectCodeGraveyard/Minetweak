@@ -6,7 +6,6 @@ import net.minecraft.utils.enums.EnumChatFormatting;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class MessageComponentSerializer implements JsonDeserializer, JsonSerializer {
     public ChatMessageComponent func_111056_a(JsonElement par1JsonElement, Type par2Type, JsonDeserializationContext par3JsonDeserializationContext) {
@@ -49,11 +48,8 @@ public class MessageComponentSerializer implements JsonDeserializer, JsonSeriali
         if (var6 != null) {
             if (var6.isJsonArray()) {
                 JsonArray var18 = var6.getAsJsonArray();
-                Iterator<JsonElement> var14 = var18.iterator();
 
-                while (var14.hasNext()) {
-                    JsonElement var15 = var14.next();
-
+                for (JsonElement var15 : var18) {
                     if (var15.isJsonPrimitive()) {
                         var4.func_111079_a(var15.getAsString());
                     } else if (var15.isJsonObject()) {
