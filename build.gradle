@@ -120,7 +120,3 @@ idea {
         downloadSources = false
     }
 }
-
-task minetweakVersion {
-  println "Minetweak Version: " + version
-}
