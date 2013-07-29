@@ -9,3 +9,5 @@
 /.gradle
 *.*~
 /classes/
+/builds.json
+/build-number.txt
