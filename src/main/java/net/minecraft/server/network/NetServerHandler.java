@@ -340,7 +340,7 @@ public class NetServerHandler extends NetHandler {
         this.lastPosY = par3;
         this.lastPosZ = par5;
         this.playerEntity.setPositionAndRotation(par1, par3, par5, par7, par8);
-        this.playerEntity.playerNetServerHandler.sendPacket(new Packet13PlayerLookMove(par1, par3 + 1.6200000047683716D, par3, par5, par7, par8, false));
+        sendPacket(new Packet13PlayerLookMove(par1, par3 + 1.6200000047683716D, par3, par5, par7, par8, false));
     }
 
     @Override

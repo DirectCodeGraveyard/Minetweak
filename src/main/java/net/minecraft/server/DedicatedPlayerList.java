@@ -20,14 +20,16 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
         this.saveOpsList();
     }
 
+    @Override
     public void setWhiteListEnabled(boolean par1) {
         super.setWhiteListEnabled(par1);
-        MinetweakConfig.set("server.whitelist-enabled", "" + par1);
+        MinetweakConfig.set("server.whitelist-enabled", String.valueOf(par1));
     }
 
     /**
      * This adds a username to the ops list, then saves the op list
      */
+    @Override
     public void addOp(String par1Str) {
         super.addOp(par1Str);
         this.saveOpsList();
@@ -36,6 +38,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     /**
      * This removes a username from the ops list, then saves the op list
      */
+    @Override
     public void removeOp(String par1Str) {
         super.removeOp(par1Str);
         this.saveOpsList();
@@ -44,6 +47,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     /**
      * Remove the specified player from the whitelist.
      */
+    @Override
     public void removeFromWhitelist(String par1Str) {
         super.removeFromWhitelist(par1Str);
         this.saveWhiteList();
@@ -52,6 +56,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     /**
      * Add the specified player to the white list.
      */
+    @Override
     public void addToWhiteList(String par1Str) {
         super.addToWhiteList(par1Str);
         this.saveWhiteList();
@@ -60,6 +65,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     /**
      * Either does nothing, or calls readWhiteList.
      */
+    @Override
     public void loadWhiteList() {
         this.readWhiteList();
     }
@@ -83,6 +89,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     /**
      * Determine if the player is allowed to connect based on current server settings.
      */
+    @Override
     public boolean isAllowedToLogin(String par1Str) {
         par1Str = par1Str.trim().toLowerCase();
         return !MinetweakConfig.getBoolean("server.whitelist-enabled") || this.areCommandsAllowed(par1Str) || PlayerWhitelist.isPlayerWhitelisted(par1Str);
@@ -92,6 +99,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
         return (DedicatedServer) super.getServerInstance();
     }
 
+    @Override
     public MinecraftServer getServerInstance() {
         return this.getDedicatedServerInstance();
     }
