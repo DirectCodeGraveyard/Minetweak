@@ -19,7 +19,6 @@ if os.path.exists('build-number.txt'):
         if re.search('build.number', line):
             build = line.split('=')[1].strip('\r\n \n')
             break
-    build = buildNumberFile.read().strip('\r\n')
     buildNumberFile.close()
 
 for line in gradleScript:
