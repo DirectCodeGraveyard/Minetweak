@@ -15,6 +15,8 @@ public class WorldInfo {
     private WorldType terrainType;
     private String generatorOptions;
 
+    private String tweakVersion;
+
     /**
      * The spawn zone position X coordinate.
      */
@@ -174,6 +176,12 @@ public class WorldInfo {
         if (par1NBTTagCompound.hasKey("GameRules")) {
             this.theGameRules.readGameRulesFromNBT(par1NBTTagCompound.getCompoundTag("GameRules"));
         }
+
+        if (par1NBTTagCompound.hasKey("TweakVersion")) {
+            this.tweakVersion = par1NBTTagCompound.getString("TweakVersion");
+        } else {
+            this.tweakVersion = "0.0.0";
+        }
     }
 
     public WorldInfo(WorldSettings par1WorldSettings, String par2Str) {
@@ -219,6 +227,7 @@ public class WorldInfo {
         this.allowCommands = par1WorldInfo.allowCommands;
         this.initialized = par1WorldInfo.initialized;
         this.theGameRules = par1WorldInfo.theGameRules;
+        this.tweakVersion = par1WorldInfo.tweakVersion;
     }
 
     /**
@@ -263,6 +272,7 @@ public class WorldInfo {
         par1NBTTagCompound.setBoolean("allowCommands", this.allowCommands);
         par1NBTTagCompound.setBoolean("initialized", this.initialized);
         par1NBTTagCompound.setCompoundTag("GameRules", this.theGameRules.writeGameRulesToNBT());
+        par1NBTTagCompound.setString("TweakVersion", this.tweakVersion);
 
         if (par2NBTTagCompound != null) {
             par1NBTTagCompound.setCompoundTag("Player", par2NBTTagCompound);
@@ -503,6 +513,10 @@ public class WorldInfo {
         par1CrashReportCategory.addCrashSectionCallable("Level game mode", new CallableLevelGamemode(this));
     }
 
+    public String getTweakVersion() {
+        return this.tweakVersion;
+    }
+
     /**
      * Return the terrain type of a world
      */
@@ -581,5 +595,9 @@ public class WorldInfo {
 
     public static boolean func_85131_q(WorldInfo par0WorldInfo) {
         return par0WorldInfo.allowCommands;
+    }
+
+    public static String getTweakVersion(WorldInfo info) {
+        return info.tweakVersion;
     }
 }
