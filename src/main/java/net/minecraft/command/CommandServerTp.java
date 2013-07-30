@@ -64,8 +64,7 @@ public class CommandServerTp extends CommandBase {
                 int var4 = par2ArrayOfStr.length - 3;
                 double var5 = func_110666_a(par1ICommandSender, var3.posX, par2ArrayOfStr[var4++]);
                 double var7 = func_110665_a(par1ICommandSender, var3.posY, par2ArrayOfStr[var4++], 0, 0);
-                var4++;
-                double var9 = func_110666_a(par1ICommandSender, var3.posZ, par2ArrayOfStr[var4]);
+                double var9 = func_110666_a(par1ICommandSender, var3.posZ, par2ArrayOfStr[var4++]);
                 var3.mountEntity(null);
                 var3.setPositionAndUpdate(var5, var7, var9);
                 notifyAdmins(par1ICommandSender, "commands.tp.success.coordinates", var3.getEntityName(), var5, var7, var9);
