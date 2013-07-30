@@ -500,4 +500,8 @@ public class Player extends Entity implements CommandSender {
     public void showInventory(Inventory inventory) {
         getPlayerMP().displayGUIChest(inventory.getMCInventory());
     }
+
+    public Location getLocation() {
+        return new Location(getX(), getY(), getZ(), getCurrentWorld());
+    }
 }

@@ -67,4 +67,28 @@ public class Location {
     public World getWorld() {
         return world;
     }
+
+    /**
+     * Gets this locations X position
+     * @return integer of X position
+     */
+    public int getIntX() {
+        return (int) posX;
+    }
+
+    /**
+     * Gets this locations Y position
+     * @return integer of Y position
+     */
+    public int getIntY() {
+        return (int) posY;
+    }
+
+    /**
+     * Gets this locations Z position
+     * @return integer of Z position
+     */
+    public int getIntZ() {
+        return (int) posZ;
+    }
 }

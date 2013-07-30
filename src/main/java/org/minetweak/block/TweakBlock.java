@@ -3,6 +3,7 @@ package org.minetweak.block;
 import net.minecraft.block.Block;
 import org.minetweak.material.Material;
 import org.minetweak.world.Chunk;
+import org.minetweak.world.Location;
 import org.minetweak.world.World;
 
 public class TweakBlock implements IBlock {
@@ -128,5 +129,15 @@ public class TweakBlock implements IBlock {
     @Override
     public Block getMCBlock() {
         return Block.blocksList[getBlockID()];
+    }
+
+    @Override
+    public void breakBlock() {
+        getWorld().setBlock(getLocation(), 0);
+    }
+
+    @Override
+    public Location getLocation() {
+        return new Location(x, y, z, getWorld());
     }
 }

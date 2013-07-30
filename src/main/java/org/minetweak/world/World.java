@@ -3,6 +3,7 @@ package org.minetweak.world;
 import net.minecraft.world.WorldInfo;
 import net.minecraft.world.WorldServer;
 import org.minetweak.Minetweak;
+import org.minetweak.block.IBlock;
 import org.minetweak.block.TweakBlock;
 import org.minetweak.chat.TextColor;
 import org.minetweak.entity.Player;
@@ -255,5 +256,24 @@ public class World {
             }
         }
         return players;
+    }
+
+    /**
+     * Sets a Block to the Given ID
+     * @param location location of block
+     * @param id id of block
+     */
+    public void setBlock(Location location, int id) {
+        getWorldServer().setBlock((int) location.getPosX(), (int) location.getPosY(), (int) location.getPosZ(), id);
+    }
+
+
+    /**
+     * Gets the Block at the given Location
+     * @param location location of block
+     * @return block
+     */
+    public IBlock getBlockAt(Location location) {
+        return getBlockAt((int) location.getPosX(), (int) location.getPosY(), (int) location.getPosZ());
     }
 }

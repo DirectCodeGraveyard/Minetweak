@@ -3,6 +3,7 @@ package org.minetweak.block;
 import net.minecraft.block.Block;
 import org.minetweak.material.Material;
 import org.minetweak.world.Chunk;
+import org.minetweak.world.Location;
 import org.minetweak.world.World;
 
 public interface IBlock {
@@ -38,4 +39,8 @@ public interface IBlock {
     void setPowered(boolean powered);
 
     Block getMCBlock();
+
+    void breakBlock();
+
+    Location getLocation();
 }

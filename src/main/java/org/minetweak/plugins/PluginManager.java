@@ -195,9 +195,7 @@ public class PluginManager {
      */
     public static void reloadPlugins() {
         disableAll();
-        for (String pluginName : plugins.keySet()) {
-            plugins.remove(pluginName);
-        }
+        plugins.clear();
         initialize();
     }
 
