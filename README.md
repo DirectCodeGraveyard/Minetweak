@@ -4,6 +4,8 @@ Minetweak
 
 Minetweak is a modified Minecraft server that will allow major flexibility with plugins, that will allow plugin developers to easily change the server how the would like, without sacrificing major performance.
 
-**Who made Minetweak?**
+**Who makes Minetweak?**
 
-I, the one who typed this, Logan Gorence, takes all ownership towards Minetweak, also, I am not responsible for any damages that happen to you, or your computer as a cause of you downloading this server.
+The Minetweak Development Team includes Logan Gorence, samrg472, and Kenneth Endfinger. However people who contribute via Pull Request also help very much.
+
+For more information on Minetweak, visit the [Minetweak Wiki](http://wiki.minetweak.org/) or join our [IRC Channel](https://minetweak.atlassian.net/wiki/display/MINETWEAK/IRC+Channel)
