@@ -4,7 +4,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
 
-def version = '0.6.5-SNAPSHOT'
+def version = '0.6.5-dev'
 def groupId = 'org.minetweak'
 
 defaultTasks 'jar'

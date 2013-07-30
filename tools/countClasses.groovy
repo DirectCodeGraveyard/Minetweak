@@ -2,7 +2,7 @@ def mainDirectory = new File(getClass().protectionDomain.codeSource.location.pat
 def sourceDirectory = new File(mainDirectory, 'src/main/java/org/minetweak')
 int classCount = 0
 sourceDirectory.eachFileRecurse {
-    if (it.getName().endsWith(".java")) {
+    if (it.getName().endsWith('java')) {
         classCount++
     }
 }
