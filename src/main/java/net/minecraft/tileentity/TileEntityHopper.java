@@ -281,12 +281,12 @@ public class TileEntityHopper extends TileEntity implements Hopper {
         if (var1 != null) {
             byte var2 = 0;
 
-            if (var1 instanceof ISidedInventory && var2 > -1) {
+            if (var1 instanceof ISidedInventory) {
                 ISidedInventory var7 = (ISidedInventory) var1;
-                int[] var8 = var7.getSlotsForFace(var2);
+                int[] var8 = var7.getSlotsForFace(0);
 
                 for (int aVar8 : var8) {
-                    if (func_102012_a(par0Hopper, var1, aVar8, var2)) {
+                    if (func_102012_a(par0Hopper, var1, aVar8, 0)) {
                         return true;
                     }
                 }

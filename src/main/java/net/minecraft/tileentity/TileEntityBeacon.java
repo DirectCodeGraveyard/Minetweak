@@ -170,7 +170,6 @@ public class TileEntityBeacon extends TileEntity implements IInventory {
         if (this.levels >= 4) {
             for (int var2 = 0; var2 < 4; ++var2) {
                 Potion[] var3 = effectsList[var2];
-                int var4 = var3.length;
 
                 for (Potion var6 : var3) {
                     if (var6.id == par1) {

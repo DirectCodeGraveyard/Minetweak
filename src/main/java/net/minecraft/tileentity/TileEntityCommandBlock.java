@@ -82,7 +82,7 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     @Override
     public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setString("PluginCommand", this.command);
+        par1NBTTagCompound.setString("Command", this.command);
         par1NBTTagCompound.setInteger("SuccessCount", this.succesCount);
         par1NBTTagCompound.setString("CustomName", this.commandSenderName);
     }

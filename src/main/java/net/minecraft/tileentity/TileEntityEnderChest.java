@@ -37,7 +37,6 @@ public class TileEntityEnderChest extends TileEntity {
         }
 
         this.prevLidAngle = this.lidAngle;
-        float var1 = 0.1F;
         double var4;
 
         if (this.numUsingPlayers > 0 && this.lidAngle == 0.0F) {
@@ -50,18 +49,16 @@ public class TileEntityEnderChest extends TileEntity {
             float var8 = this.lidAngle;
 
             if (this.numUsingPlayers > 0) {
-                this.lidAngle += var1;
+                this.lidAngle += 0.1;
             } else {
-                this.lidAngle -= var1;
+                this.lidAngle -= 0.1;
             }
 
             if (this.lidAngle > 1.0F) {
                 this.lidAngle = 1.0F;
             }
 
-            float var3 = 0.5F;
-
-            if (this.lidAngle < var3 && var8 >= var3) {
+            if (this.lidAngle < 0.5 && var8 >= 0.5) {
                 var4 = (double) this.xCoord + 0.5D;
                 double var6 = (double) this.zCoord + 0.5D;
                 this.worldObj.playSoundEffect(var4, (double) this.yCoord + 0.5D, var6, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
