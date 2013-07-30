@@ -29,14 +29,12 @@ public class CommandHelp extends CommandBase {
     }
 
     public List getCommandAliases() {
-        return Arrays.asList(new String[]{"?"});
+        return Arrays.asList("?");
     }
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         List var3 = this.getSortedPossibleCommands(par1ICommandSender);
-        byte var4 = 7;
-        int var5 = (var3.size() - 1) / var4;
-        boolean var6 = false;
+        int var5 = (var3.size() - 1) / 7;
         ICommand var9;
         int var11;
 
@@ -47,16 +45,16 @@ public class CommandHelp extends CommandBase {
             var9 = (ICommand) var8.get(par2ArrayOfStr[0]);
 
             if (var9 != null) {
-                throw new WrongUsageException(var9.getCommandUsage(par1ICommandSender), new Object[0]);
+                throw new WrongUsageException(var9.getCommandUsage(par1ICommandSender));
             }
 
             throw new CommandNotFoundException();
         }
 
-        int var7 = Math.min((var11 + 1) * var4, var3.size());
-        par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.help.header", new Object[]{Integer.valueOf(var11 + 1), Integer.valueOf(var5 + 1)}).func_111059_a(EnumChatFormatting.DARK_GREEN));
+        int var7 = Math.min((var11 + 1) * 7, var3.size());
+        par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.help.header", var11 + 1, var5 + 1).func_111059_a(EnumChatFormatting.DARK_GREEN));
 
-        for (int var12 = var11 * var4; var12 < var7; ++var12) {
+        for (int var12 = var11 * 7; var12 < var7; ++var12) {
             var9 = (ICommand) var3.get(var12);
             par1ICommandSender.func_110122_a(ChatMessageComponent.createPremade(var9.getCommandUsage(par1ICommandSender)));
         }

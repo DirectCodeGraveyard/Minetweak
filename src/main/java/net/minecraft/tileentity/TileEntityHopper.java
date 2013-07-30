@@ -79,7 +79,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
     }
 
     /**
-     * Called when an the contents of an Inventory change, usually
+     * Called when an the contents of an ContainerInventory change, usually
      */
     @Override
     public void onInventoryChanged() {
@@ -349,7 +349,7 @@ public class TileEntityHopper extends TileEntity implements Hopper {
     }
 
     /**
-     * Inserts a stack into an inventory. Args: Inventory, stack, side. Returns leftover items.
+     * Inserts a stack into an inventory. Args: ContainerInventory, stack, side. Returns leftover items.
      */
     public static ItemStack insertStack(IInventory par0IInventory, ItemStack par1ItemStack, int par2) {
         if (par0IInventory instanceof ISidedInventory && par2 > -1) {

@@ -28,17 +28,17 @@ public class CommandEffect extends CommandBase {
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         if (par2ArrayOfStr.length < 2) {
-            throw new WrongUsageException("commands.effect.usage", new Object[0]);
+            throw new WrongUsageException("commands.effect.usage");
         } else {
             EntityPlayerMP var3 = func_82359_c(par1ICommandSender, par2ArrayOfStr[0]);
 
             if (par2ArrayOfStr[1].equals("clear")) {
                 if (var3.getActivePotionEffects().isEmpty()) {
-                    throw new CommandException("commands.effect.failure.notActive.all", new Object[]{var3.getEntityName()});
+                    throw new CommandException("commands.effect.failure.notActive.all", var3.getEntityName());
                 }
 
                 var3.clearActivePotions();
-                notifyAdmins(par1ICommandSender, "commands.effect.success.removed.all", new Object[]{var3.getEntityName()});
+                notifyAdmins(par1ICommandSender, "commands.effect.success.removed.all", var3.getEntityName());
             } else {
                 int var4 = parseIntWithMin(par1ICommandSender, par2ArrayOfStr[1], 1);
                 int var5 = 600;
@@ -46,7 +46,7 @@ public class CommandEffect extends CommandBase {
                 int var7 = 0;
 
                 if (var4 < 0 || var4 >= Potion.potionTypes.length || Potion.potionTypes[var4] == null) {
-                    throw new NumberInvalidException("commands.effect.notFound", new Object[]{Integer.valueOf(var4)});
+                    throw new NumberInvalidException("commands.effect.notFound", var4);
                 }
 
                 if (par2ArrayOfStr.length >= 3) {
@@ -67,15 +67,15 @@ public class CommandEffect extends CommandBase {
 
                 if (var6 == 0) {
                     if (!var3.isPotionActive(var4)) {
-                        throw new CommandException("commands.effect.failure.notActive", new Object[]{ChatMessageComponent.createPremade(Potion.potionTypes[var4].getName()), var3.getEntityName()});
+                        throw new CommandException("commands.effect.failure.notActive", ChatMessageComponent.createPremade(Potion.potionTypes[var4].getName()), var3.getEntityName());
                     }
 
                     var3.removePotionEffect(var4);
-                    notifyAdmins(par1ICommandSender, "commands.effect.success.removed", new Object[]{ChatMessageComponent.createPremade(Potion.potionTypes[var4].getName()), var3.getEntityName()});
+                    notifyAdmins(par1ICommandSender, "commands.effect.success.removed", ChatMessageComponent.createPremade(Potion.potionTypes[var4].getName()), var3.getEntityName());
                 } else {
                     PotionEffect var8 = new PotionEffect(var4, var5, var7);
                     var3.addPotionEffect(var8);
-                    notifyAdmins(par1ICommandSender, "commands.effect.success", new Object[]{ChatMessageComponent.createPremade(var8.getEffectName()), Integer.valueOf(var4), Integer.valueOf(var7), var3.getEntityName(), Integer.valueOf(var6)});
+                    notifyAdmins(par1ICommandSender, "commands.effect.success", ChatMessageComponent.createPremade(var8.getEffectName()), var4, var7, var3.getEntityName(), var6);
                 }
             }
         }

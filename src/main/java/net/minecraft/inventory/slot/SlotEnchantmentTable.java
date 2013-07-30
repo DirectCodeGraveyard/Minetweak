@@ -24,7 +24,7 @@ public class SlotEnchantmentTable extends InventoryBasic {
     }
 
     /**
-     * Called when an the contents of an Inventory change, usually
+     * Called when an the contents of an ContainerInventory change, usually
      */
     public void onInventoryChanged() {
         super.onInventoryChanged();

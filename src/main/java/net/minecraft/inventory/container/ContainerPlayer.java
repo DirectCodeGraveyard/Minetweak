@@ -76,7 +76,7 @@ public class ContainerPlayer extends Container {
             }
         }
 
-        this.craftResult.setInventorySlotContents(0, (ItemStack) null);
+        this.craftResult.setInventorySlotContents(0, null);
     }
 
     public boolean canInteractWith(EntityPlayer par1EntityPlayer) {
@@ -127,7 +127,7 @@ public class ContainerPlayer extends Container {
             }
 
             if (var5.stackSize == 0) {
-                var4.putStack((ItemStack) null);
+                var4.putStack(null);
             } else {
                 var4.onSlotChanged();
             }

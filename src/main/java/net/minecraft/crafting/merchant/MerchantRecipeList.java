@@ -25,11 +25,10 @@ public class MerchantRecipeList extends ArrayList {
             MerchantRecipe var6 = (MerchantRecipe) this.get(par3);
             return par1ItemStack.itemID == var6.getItemToBuy().itemID && (par2ItemStack == null && !var6.hasSecondItemToBuy() || var6.hasSecondItemToBuy() && par2ItemStack != null && var6.getSecondItemToBuy().itemID == par2ItemStack.itemID) && par1ItemStack.stackSize >= var6.getItemToBuy().stackSize && (!var6.hasSecondItemToBuy() || par2ItemStack.stackSize >= var6.getSecondItemToBuy().stackSize) ? var6 : null;
         } else {
-            for (int var4 = 0; var4 < this.size(); ++var4) {
-                MerchantRecipe var5 = (MerchantRecipe) this.get(var4);
-
-                if (par1ItemStack.itemID == var5.getItemToBuy().itemID && par1ItemStack.stackSize >= var5.getItemToBuy().stackSize && (!var5.hasSecondItemToBuy() && par2ItemStack == null || var5.hasSecondItemToBuy() && par2ItemStack != null && var5.getSecondItemToBuy().itemID == par2ItemStack.itemID && par2ItemStack.stackSize >= var5.getSecondItemToBuy().stackSize)) {
-                    return var5;
+            for (Object o : this) {
+                MerchantRecipe recipe = (MerchantRecipe) o;
+                if (par1ItemStack.itemID == recipe.getItemToBuy().itemID && par1ItemStack.stackSize >= recipe.getItemToBuy().stackSize && (!recipe.hasSecondItemToBuy() && par2ItemStack == null || recipe.hasSecondItemToBuy() && par2ItemStack != null && recipe.getSecondItemToBuy().itemID == par2ItemStack.itemID && par2ItemStack.stackSize >= recipe.getSecondItemToBuy().stackSize)) {
+                    return recipe;
                 }
             }
 
@@ -59,8 +58,8 @@ public class MerchantRecipeList extends ArrayList {
     public void writeRecipiesToStream(DataOutputStream par1DataOutputStream) throws IOException {
         par1DataOutputStream.writeByte((byte) (this.size() & 255));
 
-        for (int var2 = 0; var2 < this.size(); ++var2) {
-            MerchantRecipe var3 = (MerchantRecipe) this.get(var2);
+        for (Object o : this) {
+            MerchantRecipe var3 = (MerchantRecipe) o;
             Packet.writeItemStack(var3.getItemToBuy(), par1DataOutputStream);
             Packet.writeItemStack(var3.getItemToSell(), par1DataOutputStream);
             ItemStack var4 = var3.getSecondItemToBuy();
@@ -87,8 +86,8 @@ public class MerchantRecipeList extends ArrayList {
         NBTTagCompound var1 = new NBTTagCompound();
         NBTTagList var2 = new NBTTagList("Recipes");
 
-        for (int var3 = 0; var3 < this.size(); ++var3) {
-            MerchantRecipe var4 = (MerchantRecipe) this.get(var3);
+        for (Object o : this) {
+            MerchantRecipe var4 = (MerchantRecipe) o;
             var2.appendTag(var4.writeToTags());
         }
 

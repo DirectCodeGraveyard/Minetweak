@@ -3,10 +3,10 @@ package org.minetweak.inventory;
 import net.minecraft.inventory.IInventory;
 import org.minetweak.item.ItemStack;
 
-public interface Inventory {
+public interface ContainerInventory {
 
     /**
-     * Gets Inventory size
+     * Gets ContainerInventory size
      *
      * @return size of inventory
      */
@@ -34,9 +34,9 @@ public interface Inventory {
     public void clear();
 
     /**
-     * Gets the MC Inventory. Used to display the Inventory to the player
+     * Gets the MC ContainerInventory. Used to display the ContainerInventory to the player
      *
-     * @return MC Inventory
+     * @return MC ContainerInventory
      */
     public IInventory getMCInventory();
 }

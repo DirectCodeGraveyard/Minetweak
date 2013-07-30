@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityVillager;
 import net.minecraft.src.RandomPositionGenerator;
 import net.minecraft.src.Vec3;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class EntityAIPlay extends EntityAIBase {
@@ -31,10 +30,9 @@ public class EntityAIPlay extends EntityAIBase {
         } else {
             List var1 = this.villagerObj.worldObj.getEntitiesWithinAABB(EntityVillager.class, this.villagerObj.boundingBox.expand(6.0D, 3.0D, 6.0D));
             double var2 = Double.MAX_VALUE;
-            Iterator var4 = var1.iterator();
 
-            while (var4.hasNext()) {
-                EntityVillager var5 = (EntityVillager) var4.next();
+            for (Object aVar1 : var1) {
+                EntityVillager var5 = (EntityVillager) aVar1;
 
                 if (var5 != this.villagerObj && !var5.isPlaying() && var5.getGrowingAge() < 0) {
                     double var6 = var5.getDistanceSqToEntity(this.villagerObj);

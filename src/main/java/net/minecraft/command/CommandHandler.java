@@ -13,12 +13,12 @@ public class CommandHandler implements ICommandManager {
     /**
      * Map of Strings to the ICommand objects they represent
      */
-    private final Map commandMap = new HashMap();
+    private final Map<String, ICommand> commandMap = new HashMap<String, ICommand>();
 
     /**
      * The set of ICommand objects currently loaded.
      */
-    private final Set commandSet = new HashSet();
+    private final Set<ICommand> commandSet = new HashSet<ICommand>();
 
     public int executeCommand(ICommandSender par1ICommandSender, String par2Str) {
         par2Str = par2Str.trim();
@@ -30,7 +30,7 @@ public class CommandHandler implements ICommandManager {
         String[] var3 = par2Str.split(" ");
         String var4 = var3[0];
         var3 = dropFirstString(var3);
-        ICommand var5 = (ICommand) this.commandMap.get(var4);
+        ICommand var5 = this.commandMap.get(var4);
         int var6 = this.getUsernameIndex(var5, var3);
         int var7 = 0;
 
@@ -43,11 +43,8 @@ public class CommandHandler implements ICommandManager {
                 if (var6 > -1) {
                     EntityPlayerMP[] var8 = PlayerSelector.matchPlayers(par1ICommandSender, var3[var6]);
                     String var9 = var3[var6];
-                    EntityPlayerMP[] var10 = var8;
-                    int var11 = var8.length;
 
-                    for (int var12 = 0; var12 < var11; ++var12) {
-                        EntityPlayerMP var13 = var10[var12];
+                    for (EntityPlayerMP var13 : var8) {
                         var3[var6] = var13.getEntityName();
 
                         try {
@@ -67,7 +64,7 @@ public class CommandHandler implements ICommandManager {
                 par1ICommandSender.func_110122_a(ChatMessageComponent.createPremade("commands.generic.permission").func_111059_a(EnumChatFormatting.RED));
             }
         } catch (WrongUsageException var16) {
-            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.generic.usage", new Object[]{ChatMessageComponent.createWithType(var16.getMessage(), var16.getErrorOjbects())}).func_111059_a(EnumChatFormatting.RED));
+            par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType("commands.generic.usage", ChatMessageComponent.createWithType(var16.getMessage(), var16.getErrorOjbects())).func_111059_a(EnumChatFormatting.RED));
         } catch (CommandException var17) {
             par1ICommandSender.func_110122_a(ChatMessageComponent.createWithType(var17.getMessage(), var17.getErrorOjbects()).func_111059_a(EnumChatFormatting.RED));
         } catch (Throwable var18) {
@@ -87,11 +84,10 @@ public class CommandHandler implements ICommandManager {
         this.commandSet.add(par1ICommand);
 
         if (var2 != null) {
-            Iterator var3 = var2.iterator();
 
-            while (var3.hasNext()) {
-                String var4 = (String) var3.next();
-                ICommand var5 = (ICommand) this.commandMap.get(var4);
+            for (Object aVar2 : var2) {
+                String var4 = (String) aVar2;
+                ICommand var5 = this.commandMap.get(var4);
 
                 if (var5 == null || !var5.getCommandName().equals(var4)) {
                     this.commandMap.put(var4, par1ICommand);
@@ -108,9 +104,7 @@ public class CommandHandler implements ICommandManager {
     private static String[] dropFirstString(String[] par0ArrayOfStr) {
         String[] var1 = new String[par0ArrayOfStr.length - 1];
 
-        for (int var2 = 1; var2 < par0ArrayOfStr.length; ++var2) {
-            var1[var2 - 1] = par0ArrayOfStr[var2];
-        }
+        System.arraycopy(par0ArrayOfStr, 1, var1, 0, par0ArrayOfStr.length - 1);
 
         return var1;
     }
@@ -123,13 +117,10 @@ public class CommandHandler implements ICommandManager {
         String var4 = var3[0];
 
         if (var3.length == 1) {
-            ArrayList var8 = new ArrayList();
-            Iterator var6 = this.commandMap.entrySet().iterator();
+            ArrayList<String> var8 = new ArrayList<String>();
 
-            while (var6.hasNext()) {
-                Entry var7 = (Entry) var6.next();
-
-                if (CommandBase.doesStringStartWith(var4, (String) var7.getKey()) && ((ICommand) var7.getValue()).canCommandSenderUseCommand(par1ICommandSender)) {
+            for (Entry<String, ICommand> var7 : this.commandMap.entrySet()) {
+                if (CommandBase.doesStringStartWith(var4, var7.getKey()) && (var7.getValue()).canCommandSenderUseCommand(par1ICommandSender)) {
                     var8.add(var7.getKey());
                 }
             }
@@ -137,7 +128,7 @@ public class CommandHandler implements ICommandManager {
             return var8;
         } else {
             if (var3.length > 1) {
-                ICommand var5 = (ICommand) this.commandMap.get(var4);
+                ICommand var5 = this.commandMap.get(var4);
 
                 if (var5 != null) {
                     return var5.addTabCompletionOptions(par1ICommandSender, dropFirstString(var3));
@@ -152,12 +143,9 @@ public class CommandHandler implements ICommandManager {
      * returns all commands that the commandSender can use
      */
     public List getPossibleCommands(ICommandSender par1ICommandSender) {
-        ArrayList var2 = new ArrayList();
-        Iterator var3 = this.commandSet.iterator();
+        ArrayList<ICommand> var2 = new ArrayList<ICommand>();
 
-        while (var3.hasNext()) {
-            ICommand var4 = (ICommand) var3.next();
-
+        for (ICommand var4 : this.commandSet) {
             if (var4.canCommandSenderUseCommand(par1ICommandSender)) {
                 var2.add(var4);
             }

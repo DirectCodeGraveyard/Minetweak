@@ -46,9 +46,7 @@ public class ContainerFurnace extends Container {
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (int var1 = 0; var1 < this.crafters.size(); ++var1) {
-            ICrafting var2 = this.crafters.get(var1);
-
+        for (ICrafting var2 : this.crafters) {
             if (this.lastCookTime != this.furnace.furnaceCookTime) {
                 var2.sendProgressBarUpdate(this, 0, this.furnace.furnaceCookTime);
             }
@@ -109,7 +107,7 @@ public class ContainerFurnace extends Container {
             }
 
             if (var5.stackSize == 0) {
-                var4.putStack((ItemStack) null);
+                var4.putStack(null);
             } else {
                 var4.onSlotChanged();
             }
@@ -122,5 +120,21 @@ public class ContainerFurnace extends Container {
         }
 
         return var3;
+    }
+
+    public ItemStack getFuel() {
+        return inventoryItemStacks.get(1);
+    }
+
+    public ItemStack getCooking() {
+        return inventoryItemStacks.get(0);
+    }
+
+    public void setCooking(ItemStack stack) {
+        inventoryItemStacks.set(0, stack);
+    }
+
+    public void setFuel(ItemStack stack) {
+        inventoryItemStacks.set(1, stack);
     }
 }

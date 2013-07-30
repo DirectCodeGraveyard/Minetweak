@@ -29,7 +29,7 @@ public class CommandEnchant extends CommandBase {
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         if (par2ArrayOfStr.length < 2) {
-            throw new WrongUsageException("commands.enchant.usage", new Object[0]);
+            throw new WrongUsageException("commands.enchant.usage");
         } else {
             EntityPlayerMP var3 = func_82359_c(par1ICommandSender, par2ArrayOfStr[0]);
             int var4 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[1], 0, Enchantment.enchantmentsList.length - 1);
@@ -37,14 +37,14 @@ public class CommandEnchant extends CommandBase {
             ItemStack var6 = var3.getCurrentEquippedItem();
 
             if (var6 == null) {
-                throw new CommandException("commands.enchant.noItem", new Object[0]);
+                throw new CommandException("commands.enchant.noItem");
             } else {
                 Enchantment var7 = Enchantment.enchantmentsList[var4];
 
                 if (var7 == null) {
-                    throw new NumberInvalidException("commands.enchant.notFound", new Object[]{Integer.valueOf(var4)});
+                    throw new NumberInvalidException("commands.enchant.notFound", var4);
                 } else if (!var7.func_92089_a(var6)) {
-                    throw new CommandException("commands.enchant.cantEnchant", new Object[0]);
+                    throw new CommandException("commands.enchant.cantEnchant");
                 } else {
                     if (par2ArrayOfStr.length >= 3) {
                         var5 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[2], var7.getMinLevel(), var7.getMaxLevel());
@@ -61,7 +61,7 @@ public class CommandEnchant extends CommandBase {
                                     Enchantment var11 = Enchantment.enchantmentsList[var10];
 
                                     if (!var11.canApplyTogether(var7)) {
-                                        throw new CommandException("commands.enchant.cantCombine", new Object[]{var7.getTranslatedName(var5), var11.getTranslatedName(((NBTTagCompound) var8.tagAt(var9)).getShort("lvl"))});
+                                        throw new CommandException("commands.enchant.cantCombine", var7.getTranslatedName(var5), var11.getTranslatedName(((NBTTagCompound) var8.tagAt(var9)).getShort("lvl")));
                                     }
                                 }
                             }
@@ -69,7 +69,7 @@ public class CommandEnchant extends CommandBase {
                     }
 
                     var6.addEnchantment(var7, var5);
-                    notifyAdmins(par1ICommandSender, "commands.enchant.success", new Object[0]);
+                    notifyAdmins(par1ICommandSender, "commands.enchant.success");
                 }
             }
         }

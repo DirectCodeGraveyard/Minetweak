@@ -33,9 +33,9 @@ public class CommandGameRule extends CommandBase {
 
             if (var8.hasRule(var6)) {
                 var8.setOrCreateGameRule(var6, var7);
-                notifyAdmins(par1ICommandSender, "commands.gamerule.success", new Object[0]);
+                notifyAdmins(par1ICommandSender, "commands.gamerule.success");
             } else {
-                notifyAdmins(par1ICommandSender, "commands.gamerule.norule", new Object[]{var6});
+                notifyAdmins(par1ICommandSender, "commands.gamerule.norule", var6);
             }
         } else if (par2ArrayOfStr.length == 1) {
             var6 = par2ArrayOfStr[0];
@@ -45,13 +45,13 @@ public class CommandGameRule extends CommandBase {
                 String var5 = var4.getGameRuleStringValue(var6);
                 par1ICommandSender.func_110122_a(ChatMessageComponent.func_111066_d(var6).func_111079_a(" = ").func_111079_a(var5));
             } else {
-                notifyAdmins(par1ICommandSender, "commands.gamerule.norule", new Object[]{var6});
+                notifyAdmins(par1ICommandSender, "commands.gamerule.norule", var6);
             }
         } else if (par2ArrayOfStr.length == 0) {
             GameRules var3 = this.getGameRules();
             par1ICommandSender.func_110122_a(ChatMessageComponent.func_111066_d(joinNiceString(var3.getRules())));
         } else {
-            throw new WrongUsageException("commands.gamerule.usage", new Object[0]);
+            throw new WrongUsageException("commands.gamerule.usage");
         }
     }
 
@@ -59,7 +59,7 @@ public class CommandGameRule extends CommandBase {
      * Adds the strings available in this command to the given list of tab completion options.
      */
     public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
-        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, this.getGameRules().getRules()) : (par2ArrayOfStr.length == 2 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, new String[]{"true", "false"}) : null);
+        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, this.getGameRules().getRules()) : (par2ArrayOfStr.length == 2 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, "true", "false") : null);
     }
 
     /**

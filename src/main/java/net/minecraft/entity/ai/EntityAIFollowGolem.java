@@ -3,7 +3,6 @@ package net.minecraft.entity.ai;
 import net.minecraft.entity.EntityIronGolem;
 import net.minecraft.entity.EntityVillager;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class EntityAIFollowGolem extends EntityAIBase {
@@ -31,10 +30,9 @@ public class EntityAIFollowGolem extends EntityAIBase {
             if (var1.isEmpty()) {
                 return false;
             } else {
-                Iterator var2 = var1.iterator();
 
-                while (var2.hasNext()) {
-                    EntityIronGolem var3 = (EntityIronGolem) var2.next();
+                for (Object aVar1 : var1) {
+                    EntityIronGolem var3 = (EntityIronGolem) aVar1;
 
                     if (var3.getHoldRoseTick() > 0) {
                         this.theGolem = var3;

@@ -16,7 +16,7 @@ public class EnchantmentKnockback extends Enchantment {
     }
 
     /**
-     * Returns the maximum value of enchantability nedded on the enchantment level passed.
+     * Returns the maximum value of enchantability needed on the enchantment level passed.
      */
     public int getMaxEnchantability(int par1) {
         return super.getMinEnchantability(par1) + 50;

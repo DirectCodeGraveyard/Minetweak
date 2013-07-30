@@ -10,12 +10,12 @@ public class InventoryLargeChest implements IInventory {
     private String name;
 
     /**
-     * Inventory object corresponding to double chest upper part
+     * ContainerInventory object corresponding to double chest upper part
      */
     private IInventory upperChest;
 
     /**
-     * Inventory object corresponding to double chest lower part
+     * ContainerInventory object corresponding to double chest lower part
      */
     private IInventory lowerChest;
 
@@ -106,7 +106,7 @@ public class InventoryLargeChest implements IInventory {
     }
 
     /**
-     * Called when an the contents of an Inventory change, usually
+     * Called when an the contents of an ContainerInventory change, usually
      */
     public void onInventoryChanged() {
         this.upperChest.onInventoryChanged();

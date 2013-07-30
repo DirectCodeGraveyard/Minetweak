@@ -5,14 +5,13 @@ import net.minecraft.utils.callable.CallableBlockLocation;
 import net.minecraft.utils.callable.CallableBlockType;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
 
 public class CrashReportCategory {
     private final CrashReport theCrashReport;
     private final String field_85076_b;
-    private final List field_85077_c = new ArrayList();
+    private final List<CrashReportCategoryEntry> field_85077_c = new ArrayList<CrashReportCategoryEntry>();
     private StackTraceElement[] stackTrace = new StackTraceElement[0];
 
     public CrashReportCategory(CrashReport par1CrashReport, String par2Str) {
@@ -53,7 +52,7 @@ public class CrashReportCategory {
             var10 = var5 << 4;
             var11 = (var4 + 1 << 4) - 1;
             var12 = (var5 + 1 << 4) - 1;
-            var3.append(String.format("Chunk: (at %d,%d,%d in %d,%d; contains blocks %d,0,%d to %d,255,%d)", new Object[]{var6, var7, var8, var4, var5, var9, var10, Integer.valueOf(var11), Integer.valueOf(var12)}));
+            var3.append(String.format("Chunk: (at %d,%d,%d in %d,%d; contains blocks %d,0,%d to %d,255,%d)", new Object[]{var6, var7, var8, var4, var5, var9, var10, var11, var12}));
         } catch (Throwable var15) {
             var3.append("(Error finding chunk loc)");
         }
@@ -71,7 +70,7 @@ public class CrashReportCategory {
             var11 = var5 << 9;
             var12 = (var4 + 1 << 9) - 1;
             int var13 = (var5 + 1 << 9) - 1;
-            var3.append(String.format("Region: (%d,%d; contains chunks %d,%d to %d,%d, blocks %d,0,%d to %d,255,%d)", new Object[]{Integer.valueOf(var4), Integer.valueOf(var5), Integer.valueOf(var6), Integer.valueOf(var7), Integer.valueOf(var8), Integer.valueOf(var9), Integer.valueOf(var10), Integer.valueOf(var11), Integer.valueOf(var12), Integer.valueOf(var13)}));
+            var3.append(String.format("Region: (%d,%d; contains chunks %d,%d to %d,%d, blocks %d,0,%d to %d,255,%d)", new Object[]{var4, var5, var6, var7, var8, var9, var10, var11, var12, var13}));
         } catch (Throwable var14) {
             var3.append("(Error finding world loc)");
         }
@@ -82,7 +81,7 @@ public class CrashReportCategory {
     /**
      * Adds a Crashreport section with the given name with the value set to the result of the given Callable;
      */
-    public void addCrashSectionCallable(String par1Str, Callable par2Callable) {
+    public void addCrashSectionCallable(String par1Str, Callable<String> par2Callable) {
         try {
             this.addCrashSection(par1Str, par2Callable.call());
         } catch (Throwable var4) {
@@ -116,7 +115,7 @@ public class CrashReportCategory {
             StackTraceElement var3 = this.stackTrace[0];
 
             if (var3.isNativeMethod() == par1StackTraceElement.isNativeMethod() && var3.getClassName().equals(par1StackTraceElement.getClassName()) && var3.getFileName().equals(par1StackTraceElement.getFileName()) && var3.getMethodName().equals(par1StackTraceElement.getMethodName())) {
-                if (par2StackTraceElement != null != this.stackTrace.length > 1) {
+                if (par2StackTraceElement == null == this.stackTrace.length > 1) {
                     return false;
                 } else if (par2StackTraceElement != null && !this.stackTrace[1].equals(par2StackTraceElement)) {
                     return false;
@@ -141,23 +140,19 @@ public class CrashReportCategory {
     public void func_85072_a(StringBuilder par1StringBuilder) {
         par1StringBuilder.append("-- ").append(this.field_85076_b).append(" --\n");
         par1StringBuilder.append("Details:");
-        Iterator var2 = this.field_85077_c.iterator();
 
-        while (var2.hasNext()) {
-            CrashReportCategoryEntry var3 = (CrashReportCategoryEntry) var2.next();
+        for (CrashReportCategoryEntry aField_85077_c : this.field_85077_c) {
             par1StringBuilder.append("\n\t");
-            par1StringBuilder.append(var3.func_85089_a());
+            par1StringBuilder.append(aField_85077_c.func_85089_a());
             par1StringBuilder.append(": ");
-            par1StringBuilder.append(var3.func_85090_b());
+            par1StringBuilder.append(aField_85077_c.func_85090_b());
         }
 
         if (this.stackTrace != null && this.stackTrace.length > 0) {
             par1StringBuilder.append("\nStacktrace:");
             StackTraceElement[] var6 = this.stackTrace;
-            int var7 = var6.length;
 
-            for (int var4 = 0; var4 < var7; ++var4) {
-                StackTraceElement var5 = var6[var4];
+            for (StackTraceElement var5 : var6) {
                 par1StringBuilder.append("\n\tat ");
                 par1StringBuilder.append(var5.toString());
             }

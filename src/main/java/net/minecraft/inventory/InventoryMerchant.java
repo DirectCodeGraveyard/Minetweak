@@ -41,8 +41,8 @@ public class InventoryMerchant implements IInventory {
             ItemStack var3;
 
             if (par1 == 2) {
-                var3 = this.theInventory[par1];
-                this.theInventory[par1] = null;
+                var3 = this.theInventory[2];
+                this.theInventory[2] = null;
                 return var3;
             } else if (this.theInventory[par1].stackSize <= par2) {
                 var3 = this.theInventory[par1];
@@ -151,7 +151,7 @@ public class InventoryMerchant implements IInventory {
     }
 
     /**
-     * Called when an the contents of an Inventory change, usually
+     * Called when an the contents of an ContainerInventory change, usually
      */
     public void onInventoryChanged() {
         this.resetRecipeAndSlots();

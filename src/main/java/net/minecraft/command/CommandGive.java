@@ -34,7 +34,7 @@ public class CommandGive extends CommandBase {
             int var6 = 0;
 
             if (Item.itemsList[var4] == null) {
-                throw new NumberInvalidException("commands.give.notFound", new Object[]{var4});
+                throw new NumberInvalidException("commands.give.notFound", var4);
             } else {
                 if (par2ArrayOfStr.length >= 3) {
                     var5 = parseIntBounded(par1ICommandSender, par2ArrayOfStr[2], 1, 64);
@@ -47,10 +47,10 @@ public class CommandGive extends CommandBase {
                 ItemStack var7 = new ItemStack(var4, var5, var6);
                 EntityItem var8 = var3.dropPlayerItem(var7);
                 var8.delayBeforeCanPickup = 0;
-                notifyAdmins(par1ICommandSender, "commands.give.success", new Object[]{Item.itemsList[var4].getItemStackDisplayName(var7), Integer.valueOf(var4), Integer.valueOf(var5), var3.getEntityName()});
+                notifyAdmins(par1ICommandSender, "commands.give.success", Item.itemsList[var4].getItemStackDisplayName(var7), var4, var5, var3.getEntityName());
             }
         } else {
-            throw new WrongUsageException("commands.give.usage", new Object[0]);
+            throw new WrongUsageException("commands.give.usage");
         }
     }
 

@@ -49,7 +49,7 @@ public interface IInventory {
     int getInventoryStackLimit();
 
     /**
-     * Called when an the contents of an Inventory change, usually
+     * Called when an the contents of an ContainerInventory change, usually
      */
     void onInventoryChanged();
 

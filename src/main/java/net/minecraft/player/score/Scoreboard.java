@@ -68,8 +68,8 @@ public class Scoreboard {
         return var4;
     }
 
-    public Collection func_96534_i(ScoreObjective par1ScoreObjective) {
-        ArrayList var2 = new ArrayList();
+    public Collection<Score> func_96534_i(ScoreObjective par1ScoreObjective) {
+        ArrayList<Score> var2 = new ArrayList<Score>();
 
         for (Map<ScoreObjective, Score> var4 : this.field_96544_c.values()) {
             Score var5 = var4.get(par1ScoreObjective);

@@ -3,13 +3,13 @@ package org.minetweak.inventory;
 import net.minecraft.inventory.IInventory;
 import org.minetweak.item.ItemStack;
 
-public class InventoryPlayer implements Inventory {
+public class InventoryPlayer implements ContainerInventory {
     private net.minecraft.inventory.InventoryPlayer playerInventory;
 
     /**
-     * Creates an Inventory from MC's Inventory Player
+     * Creates an ContainerInventory from MC's ContainerInventory Player
      *
-     * @param playerInventory Minetweak Inventory
+     * @param playerInventory Minetweak ContainerInventory
      */
     public InventoryPlayer(net.minecraft.inventory.InventoryPlayer playerInventory) {
         this.playerInventory = playerInventory;

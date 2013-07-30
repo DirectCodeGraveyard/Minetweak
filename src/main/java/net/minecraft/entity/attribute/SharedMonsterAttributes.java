@@ -5,7 +5,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.UUID;
 
 public class SharedMonsterAttributes {
@@ -17,10 +16,9 @@ public class SharedMonsterAttributes {
 
     public static NBTTagList func_111257_a(BaseAttributeMap par0BaseAttributeMap) {
         NBTTagList var1 = new NBTTagList();
-        Iterator var2 = par0BaseAttributeMap.func_111146_a().iterator();
 
-        while (var2.hasNext()) {
-            AttributeInstance var3 = (AttributeInstance) var2.next();
+        for (Object o : par0BaseAttributeMap.func_111146_a()) {
+            AttributeInstance var3 = (AttributeInstance) o;
             var1.appendTag(func_111261_a(var3));
         }
 
@@ -36,10 +34,9 @@ public class SharedMonsterAttributes {
 
         if (var3 != null && !var3.isEmpty()) {
             NBTTagList var4 = new NBTTagList();
-            Iterator var5 = var3.iterator();
 
-            while (var5.hasNext()) {
-                AttributeModifier var6 = (AttributeModifier) var5.next();
+            for (Object aVar3 : var3) {
+                AttributeModifier var6 = (AttributeModifier) aVar3;
 
                 if (var6.func_111165_e()) {
                     var4.appendTag(func_111262_a(var6));

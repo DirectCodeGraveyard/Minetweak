@@ -22,7 +22,7 @@ public class EntityAIMoveThroughVillage extends EntityAIBase {
     private PathEntity entityPathNavigate;
     private VillageDoorInfo doorInfo;
     private boolean isNocturnal;
-    private List doorList = new ArrayList();
+    private List<VillageDoorInfo> doorList = new ArrayList<VillageDoorInfo>();
 
     public EntityAIMoveThroughVillage(EntityCreature par1EntityCreature, double par2, boolean par4) {
         this.theEntity = par1EntityCreature;
@@ -105,11 +105,9 @@ public class EntityAIMoveThroughVillage extends EntityAIBase {
     private VillageDoorInfo func_75412_a(Village par1Village) {
         VillageDoorInfo var2 = null;
         int var3 = Integer.MAX_VALUE;
-        List var4 = par1Village.getVillageDoorInfoList();
-        Iterator var5 = var4.iterator();
+        List<VillageDoorInfo> var4 = par1Village.getVillageDoorInfoList();
 
-        while (var5.hasNext()) {
-            VillageDoorInfo var6 = (VillageDoorInfo) var5.next();
+        for (VillageDoorInfo var6 : var4) {
             int var7 = var6.getDistanceSquared(MathHelper.floor_double(this.theEntity.posX), MathHelper.floor_double(this.theEntity.posY), MathHelper.floor_double(this.theEntity.posZ));
 
             if (var7 < var3 && !this.func_75413_a(var6)) {
@@ -122,7 +120,7 @@ public class EntityAIMoveThroughVillage extends EntityAIBase {
     }
 
     private boolean func_75413_a(VillageDoorInfo par1VillageDoorInfo) {
-        Iterator var2 = this.doorList.iterator();
+        Iterator<VillageDoorInfo> var2 = this.doorList.iterator();
         VillageDoorInfo var3;
 
         do {
@@ -130,7 +128,7 @@ public class EntityAIMoveThroughVillage extends EntityAIBase {
                 return false;
             }
 
-            var3 = (VillageDoorInfo) var2.next();
+            var3 = var2.next();
         }
         while (par1VillageDoorInfo.posX != var3.posX || par1VillageDoorInfo.posY != var3.posY || par1VillageDoorInfo.posZ != var3.posZ);
 

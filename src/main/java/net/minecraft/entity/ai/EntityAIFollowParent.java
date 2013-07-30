@@ -2,7 +2,6 @@ package net.minecraft.entity.ai;
 
 import net.minecraft.entity.EntityAnimal;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class EntityAIFollowParent extends EntityAIBase {
@@ -29,10 +28,9 @@ public class EntityAIFollowParent extends EntityAIBase {
             List var1 = this.childAnimal.worldObj.getEntitiesWithinAABB(this.childAnimal.getClass(), this.childAnimal.boundingBox.expand(8.0D, 4.0D, 8.0D));
             EntityAnimal var2 = null;
             double var3 = Double.MAX_VALUE;
-            Iterator var5 = var1.iterator();
 
-            while (var5.hasNext()) {
-                EntityAnimal var6 = (EntityAnimal) var5.next();
+            for (Object aVar1 : var1) {
+                EntityAnimal var6 = (EntityAnimal) aVar1;
 
                 if (var6.getGrowingAge() >= 0) {
                     double var7 = this.childAnimal.getDistanceSqToEntity(var6);

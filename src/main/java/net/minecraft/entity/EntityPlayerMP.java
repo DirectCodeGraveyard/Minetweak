@@ -780,7 +780,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 
     /**
      * Copies the values from the given player into this player if boolean par2 is true. Always clones Ender Chest
-     * Inventory.
+     * ContainerInventory.
      */
     @Override
     public void clonePlayer(EntityPlayer par1EntityPlayer, boolean par2) {

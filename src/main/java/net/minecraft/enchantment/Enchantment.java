@@ -213,7 +213,7 @@ public abstract class Enchantment {
     }
 
     /**
-     * Returns the correct traslated name of the enchantment and the level in roman numbers.
+     * Returns the correct translated name of the enchantment and the level in roman numbers.
      */
     public String getTranslatedName(int par1) {
         String var2 = StatCollector.translateToLocal(this.getName());
@@ -225,18 +225,15 @@ public abstract class Enchantment {
     }
 
     static {
-        ArrayList var0 = new ArrayList();
+        ArrayList<Enchantment> var0 = new ArrayList<Enchantment>();
         Enchantment[] var1 = enchantmentsList;
-        int var2 = var1.length;
 
-        for (int var3 = 0; var3 < var2; ++var3) {
-            Enchantment var4 = var1[var3];
-
+        for (Enchantment var4 : var1) {
             if (var4 != null) {
                 var0.add(var4);
             }
         }
 
-        field_92090_c = (Enchantment[]) var0.toArray(new Enchantment[0]);
+        field_92090_c = var0.toArray(new Enchantment[var0.size()]);
     }
 }

@@ -29,9 +29,9 @@ public class CommandClearInventory extends CommandBase {
         var3.sendContainerToPlayer(var3.inventoryContainer);
 
         if (var6 == 0) {
-            throw new CommandException("commands.clear.failure", new Object[]{var3.getEntityName()});
+            throw new CommandException("commands.clear.failure", var3.getEntityName());
         } else {
-            notifyAdmins(par1ICommandSender, "commands.clear.success", new Object[]{var3.getEntityName(), Integer.valueOf(var6)});
+            notifyAdmins(par1ICommandSender, "commands.clear.success", var3.getEntityName(), var6);
         }
     }
 

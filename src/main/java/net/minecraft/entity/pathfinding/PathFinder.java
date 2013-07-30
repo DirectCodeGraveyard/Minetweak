@@ -73,7 +73,7 @@ public class PathFinder {
         this.path.clearPath();
         this.pointMap.clearMap();
         boolean var9 = this.isPathingInWater;
-        int var10 = MathHelper.floor_double(par1Entity.boundingBox.minY + 0.5D);
+        int var10;
 
         if (this.canEntityDrown && par1Entity.isInWater()) {
             var10 = (int) par1Entity.boundingBox.minY;
@@ -240,7 +240,7 @@ public class PathFinder {
     /**
      * Returns a mapped point or creates and adds one
      */
-    private final PathPoint openPoint(int par1, int par2, int par3) {
+    private PathPoint openPoint(int par1, int par2, int par3) {
         int var4 = PathPoint.makeHash(par1, par2, par3);
         PathPoint var5 = (PathPoint) this.pointMap.lookup(var4);
 

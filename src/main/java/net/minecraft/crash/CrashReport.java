@@ -118,8 +118,8 @@ public class CrashReport {
                 if (var2 != null) {
                     var2.close();
                 }
-            } catch (IOException var10) {
-                ;
+            } catch (IOException ignored) {
+
             }
         }
 

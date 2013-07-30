@@ -84,7 +84,7 @@ public class ShapedRecipes implements IRecipe {
                 ItemStack var10 = par1InventoryCrafting.getStackInRowAndColumn(var5, var6);
 
                 if (var10 != null || var9 != null) {
-                    if (var10 == null && var9 != null || var10 != null && var9 == null) {
+                    if (var10 == null || var9 == null) {
                         return false;
                     }
 

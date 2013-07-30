@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityAnimal;
 import net.minecraft.entity.EntityXPOrb;
 import net.minecraft.world.World;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -80,10 +79,9 @@ public class EntityAIMate extends EntityAIBase {
         List var2 = this.theWorld.getEntitiesWithinAABB(this.theAnimal.getClass(), this.theAnimal.boundingBox.expand((double) var1, (double) var1, (double) var1));
         double var3 = Double.MAX_VALUE;
         EntityAnimal var5 = null;
-        Iterator var6 = var2.iterator();
 
-        while (var6.hasNext()) {
-            EntityAnimal var7 = (EntityAnimal) var6.next();
+        for (Object aVar2 : var2) {
+            EntityAnimal var7 = (EntityAnimal) aVar2;
 
             if (this.theAnimal.canMateWith(var7) && this.theAnimal.getDistanceSqToEntity(var7) < var3) {
                 var5 = var7;

@@ -28,9 +28,9 @@ public class CommandDifficulty extends CommandBase {
         if (par2ArrayOfStr.length > 0) {
             int var3 = this.getDifficultyForName(par1ICommandSender, par2ArrayOfStr[0]);
             MinecraftServer.getServer().setDifficultyForAllWorlds(var3);
-            notifyAdmins(par1ICommandSender, "commands.difficulty.success", new Object[]{ChatMessageComponent.createPremade(difficulties[var3])});
+            notifyAdmins(par1ICommandSender, "commands.difficulty.success", ChatMessageComponent.createPremade(difficulties[var3]));
         } else {
-            throw new WrongUsageException("commands.difficulty.usage", new Object[0]);
+            throw new WrongUsageException("commands.difficulty.usage");
         }
     }
 
@@ -45,6 +45,6 @@ public class CommandDifficulty extends CommandBase {
      * Adds the strings available in this command to the given list of tab completion options.
      */
     public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
-        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, new String[]{"peaceful", "easy", "normal", "hard"}) : null;
+        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, "peaceful", "easy", "normal", "hard") : null;
     }
 }

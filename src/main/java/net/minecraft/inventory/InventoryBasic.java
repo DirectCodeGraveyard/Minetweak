@@ -138,7 +138,7 @@ public class InventoryBasic implements IInventory {
     }
 
     /**
-     * Called when an the contents of an Inventory change, usually
+     * Called when an the contents of an ContainerInventory change, usually
      */
     @Override
     public void onInventoryChanged() {

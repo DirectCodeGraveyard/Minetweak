@@ -46,9 +46,9 @@ public class CommandServerBan extends CommandBase {
                 var3.playerNetServerHandler.kickPlayer("You are banned from this server.");
             }
 
-            notifyAdmins(par1ICommandSender, "commands.ban.success", new Object[]{par2ArrayOfStr[0]});
+            notifyAdmins(par1ICommandSender, "commands.ban.success", par2ArrayOfStr[0]);
         } else {
-            throw new WrongUsageException("commands.ban.usage", new Object[0]);
+            throw new WrongUsageException("commands.ban.usage");
         }
     }
 

@@ -2,7 +2,6 @@ package net.minecraft.entity.ai;
 
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.entity.EntityVillager;
-import net.minecraft.inventory.container.Container;
 
 public class EntityAITradePlayer extends EntityAIBase {
     private EntityVillager villager;
@@ -26,7 +25,7 @@ public class EntityAITradePlayer extends EntityAIBase {
             return false;
         } else {
             EntityPlayer var1 = this.villager.getCustomer();
-            return var1 == null ? false : (this.villager.getDistanceSqToEntity(var1) > 16.0D ? false : var1.openContainer instanceof Container);
+            return var1 != null && (this.villager.getDistanceSqToEntity(var1) <= 16.0D && var1.openContainer != null);
         }
     }
 

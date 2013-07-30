@@ -10,12 +10,12 @@ public class EntityAITasks {
     /**
      * A list of EntityAITaskEntrys in EntityAITasks.
      */
-    private List taskEntries = new ArrayList();
+    private List<EntityAITaskEntry> taskEntries = new ArrayList<EntityAITaskEntry>();
 
     /**
      * A list of EntityAITaskEntrys that are currently being executed.
      */
-    private List executingTaskEntries = new ArrayList();
+    private List<EntityAITaskEntry> executingTaskEntries = new ArrayList<EntityAITaskEntry>();
 
     /**
      * Instance of Profiler.
@@ -36,10 +36,10 @@ public class EntityAITasks {
      * removes the indicated task from the entity's AI tasks.
      */
     public void removeTask(EntityAIBase par1EntityAIBase) {
-        Iterator var2 = this.taskEntries.iterator();
+        Iterator<EntityAITaskEntry> var2 = this.taskEntries.iterator();
 
         while (var2.hasNext()) {
-            EntityAITaskEntry var3 = (EntityAITaskEntry) var2.next();
+            EntityAITaskEntry var3 = var2.next();
             EntityAIBase var4 = var3.action;
 
             if (var4 == par1EntityAIBase) {
@@ -54,15 +54,15 @@ public class EntityAITasks {
     }
 
     public void onUpdateTasks() {
-        ArrayList var1 = new ArrayList();
-        Iterator var2;
+        ArrayList<EntityAITaskEntry> var1 = new ArrayList<EntityAITaskEntry>();
+        Iterator<EntityAITaskEntry> var2;
         EntityAITaskEntry var3;
 
         if (this.field_75778_d++ % this.field_75779_e == 0) {
             var2 = this.taskEntries.iterator();
 
             while (var2.hasNext()) {
-                var3 = (EntityAITaskEntry) var2.next();
+                var3 = var2.next();
                 boolean var4 = this.executingTaskEntries.contains(var3);
 
                 if (var4) {
@@ -83,7 +83,7 @@ public class EntityAITasks {
             var2 = this.executingTaskEntries.iterator();
 
             while (var2.hasNext()) {
-                var3 = (EntityAITaskEntry) var2.next();
+                var3 = var2.next();
 
                 if (!var3.action.continueExecuting()) {
                     var3.action.resetTask();
@@ -96,7 +96,7 @@ public class EntityAITasks {
         var2 = var1.iterator();
 
         while (var2.hasNext()) {
-            var3 = (EntityAITaskEntry) var2.next();
+            var3 = var2.next();
             this.theProfiler.startSection(var3.action.getClass().getSimpleName());
             var3.action.startExecuting();
             this.theProfiler.endSection();
@@ -107,7 +107,7 @@ public class EntityAITasks {
         var2 = this.executingTaskEntries.iterator();
 
         while (var2.hasNext()) {
-            var3 = (EntityAITaskEntry) var2.next();
+            var3 = var2.next();
             var3.action.updateTask();
         }
 
@@ -130,11 +130,8 @@ public class EntityAITasks {
      */
     private boolean canUse(EntityAITaskEntry par1EntityAITaskEntry) {
         this.theProfiler.startSection("canUse");
-        Iterator var2 = this.taskEntries.iterator();
 
-        while (var2.hasNext()) {
-            EntityAITaskEntry var3 = (EntityAITaskEntry) var2.next();
-
+        for (EntityAITaskEntry var3 : this.taskEntries) {
             if (var3 != par1EntityAITaskEntry) {
                 if (par1EntityAITaskEntry.priority >= var3.priority) {
                     if (this.executingTaskEntries.contains(var3) && !this.areTasksCompatible(par1EntityAITaskEntry, var3)) {

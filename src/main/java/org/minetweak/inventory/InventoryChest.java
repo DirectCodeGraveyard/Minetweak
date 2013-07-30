@@ -4,8 +4,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.ContainerChest;
 import org.minetweak.item.ItemStack;
 
-public class InventoryChest implements Inventory {
+public class InventoryChest implements ContainerInventory {
     private ContainerChest chest;
+
+    public InventoryChest(ContainerChest chest) {
+        this.chest = chest;
+    }
 
     @Override
     public int getSize() {

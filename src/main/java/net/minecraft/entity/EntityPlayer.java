@@ -45,7 +45,7 @@ import java.util.List;
 
 public abstract class EntityPlayer extends EntityLivingBase implements ICommandSender {
     /**
-     * Inventory of the player
+     * ContainerInventory of the player
      */
     public InventoryPlayer inventory = new InventoryPlayer(this);
     private InventoryEnderChest theInventoryEnderChest = new InventoryEnderChest();
@@ -1650,7 +1650,7 @@ public abstract class EntityPlayer extends EntityLivingBase implements ICommandS
 
     /**
      * Copies the values from the given player into this player if boolean par2 is true. Always clones Ender Chest
-     * Inventory.
+     * ContainerInventory.
      */
     public void clonePlayer(EntityPlayer par1EntityPlayer, boolean par2) {
         if (par2) {

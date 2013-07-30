@@ -146,7 +146,7 @@ public class PathNavigate {
      */
     public boolean tryMoveToEntityLiving(Entity par1Entity, double par2) {
         PathEntity var4 = this.getPathToEntityLiving(par1Entity);
-        return var4 != null ? this.setPath(var4, par2) : false;
+        return var4 != null && this.setPath(var4, par2);
     }
 
     /**
@@ -349,8 +349,8 @@ public class PathNavigate {
                 par5 -= 2;
                 double var16 = 1.0D / Math.abs(var8);
                 double var18 = 1.0D / Math.abs(var10);
-                double var20 = (double) (var6 * 1) - par1Vec3.xCoord;
-                double var22 = (double) (var7 * 1) - par1Vec3.zCoord;
+                double var20 = (double) (var6) - par1Vec3.xCoord;
+                double var22 = (double) (var7) - par1Vec3.zCoord;
 
                 if (var8 >= 0.0D) {
                     ++var20;

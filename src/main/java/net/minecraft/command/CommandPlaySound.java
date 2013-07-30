@@ -22,11 +22,11 @@ public class CommandPlaySound extends CommandBase {
 
     public void processCommand(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         if (par2ArrayOfStr.length < 2) {
-            throw new WrongUsageException(this.getCommandUsage(par1ICommandSender), new Object[0]);
+            throw new WrongUsageException(this.getCommandUsage(par1ICommandSender));
         } else {
             byte var3 = 0;
-            int var36 = var3 + 1;
-            String var4 = par2ArrayOfStr[var3];
+            int var36 = 1;
+            String var4 = par2ArrayOfStr[0];
             EntityPlayerMP var5 = func_82359_c(par1ICommandSender, par2ArrayOfStr[var36++]);
             double var6 = (double) var5.getCommandSenderPosition().posX;
             double var8 = (double) var5.getCommandSenderPosition().posY;
@@ -64,7 +64,7 @@ public class CommandPlaySound extends CommandBase {
 
             if (var20 > var18) {
                 if (var16 <= 0.0D) {
-                    throw new CommandException("commands.playsound.playerTooFar", new Object[]{var5.getEntityName()});
+                    throw new CommandException("commands.playsound.playerTooFar", var5.getEntityName());
                 }
 
                 double var22 = var6 - var5.posX;
@@ -86,7 +86,7 @@ public class CommandPlaySound extends CommandBase {
                 var5.playerNetServerHandler.sendPacket(new Packet62LevelSound(var4, var6, var8, var10, (float) var12, (float) var14));
             }
 
-            notifyAdmins(par1ICommandSender, "commands.playsound.success", new Object[]{var4, var5.getEntityName()});
+            notifyAdmins(par1ICommandSender, "commands.playsound.success", var4, var5.getEntityName());
         }
     }
 }

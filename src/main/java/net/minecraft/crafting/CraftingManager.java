@@ -111,7 +111,7 @@ public class CraftingManager {
         this.addRecipe(new ItemStack(Block.stairsWoodSpruce, 4), "#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 1));
         this.addRecipe(new ItemStack(Block.stairsWoodJungle, 4), "#  ", "## ", "###", '#', new ItemStack(Block.planks, 1, 3));
         this.addRecipe(new ItemStack(Item.fishingRod, 1), "  #", " #X", "# X", '#', Item.stick, 'X', Item.silk);
-        this.addRecipe(new ItemStack(Item.carrotOnAStick, 1), new Object[]{"# ", " X", '#', Item.fishingRod, 'X', Item.carrot}).func_92100_c();
+        this.addRecipe(new ItemStack(Item.carrotOnAStick, 1), "# ", " X", '#', Item.fishingRod, 'X', Item.carrot).func_92100_c();
         this.addRecipe(new ItemStack(Block.stairsCobblestone, 4), "#  ", "## ", "###", '#', Block.cobblestone);
         this.addRecipe(new ItemStack(Block.stairsBrick, 4), "#  ", "## ", "###", '#', Block.brick);
         this.addRecipe(new ItemStack(Block.stairsStoneBrick, 4), "#  ", "## ", "###", '#', Block.stoneBrick);

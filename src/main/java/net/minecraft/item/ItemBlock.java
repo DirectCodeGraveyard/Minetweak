@@ -68,7 +68,6 @@ public class ItemBlock extends Item {
         } else if (par5 == 255 && Block.blocksList[this.blockID].blockMaterial.isSolid()) {
             return false;
         } else if (par3World.canPlaceEntityOnSide(this.blockID, par4, par5, par6, false, par7, par2EntityPlayer, par1ItemStack)) {
-            Block var12 = Block.blocksList[this.blockID];
             int var13 = this.getMetadata(par1ItemStack.getItemDamage());
             int var14 = Block.blocksList[this.blockID].onBlockPlaced(par3World, par4, par5, par6, par7, par8, par9, par10, var13);
 
