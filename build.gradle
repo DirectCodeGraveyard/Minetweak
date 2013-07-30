@@ -11,10 +11,7 @@ defaultTasks 'jar'
 
 repositories {
     mavenCentral()
-
-    maven {
-        url 'https://repository.apache.org/content/repositories/releases/'
-    }
+    jcenter()
 }
 
 configurations {
@@ -72,6 +69,7 @@ task standaloneJar(type: Jar) {
     classifier = 'standalone'
     from sourceSets.main.output
     from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    exclude 'META-INF', 'META-INF/**/*'
 
     manifest {
         attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': version)
