@@ -2,10 +2,6 @@ package net.minecraft.stats;
 
 import net.minecraft.player.achievement.AchievementMap;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Locale;
-
 public class StatBase {
     /**
      * The Stat ID
@@ -23,9 +19,7 @@ public class StatBase {
      */
     public String statGuid;
     private final IStatType type;
-    private static NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.US);
     public static IStatType simpleStatType = new StatTypeSimple();
-    private static DecimalFormat decimalFormat = new DecimalFormat("########0.00");
     public static IStatType timeStatType = new StatTypeTime();
     public static IStatType distanceStatType = new StatTypeDistance();
     public static IStatType field_111202_k = new StatTypeFloat();
@@ -53,11 +47,11 @@ public class StatBase {
      * Register the stat into StatList.
      */
     public StatBase registerStat() {
-        if (StatList.oneShotStats.containsKey(Integer.valueOf(this.statId))) {
-            throw new RuntimeException("Duplicate stat id: \"" + ((StatBase) StatList.oneShotStats.get(Integer.valueOf(this.statId))).statName + "\" and \"" + this.statName + "\" at id " + this.statId);
+        if (StatList.oneShotStats.containsKey(this.statId)) {
+            throw new RuntimeException("Duplicate stat id: \"" + (StatList.oneShotStats.get(this.statId)).statName + "\" and \"" + this.statName + "\" at id " + this.statId);
         } else {
             StatList.allStats.add(this);
-            StatList.oneShotStats.put(Integer.valueOf(this.statId), this);
+            StatList.oneShotStats.put(this.statId, this);
             this.statGuid = AchievementMap.getGuid(this.statId);
             return this;
         }

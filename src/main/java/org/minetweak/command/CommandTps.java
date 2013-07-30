@@ -19,7 +19,7 @@ public class CommandTps extends CommandExecutor {
         sender.sendMessage(TextColor.GOLD + "Server is running at" + TextColor.RESET + " " + tps + TextColor.GOLD + " TPS.");
     }
 
-    public String getTPS(long[] tickArray) {
+    public static String getTPS(long[] tickArray) {
         double tps = calcTicksInSecond(tickArray);
         if (tps < 50)
             return "20";
@@ -27,7 +27,7 @@ public class CommandTps extends CommandExecutor {
             return DF.format(1000 / tps);
     }
 
-    private double calcTicksInSecond(long[] tickArray) {
+    private static double calcTicksInSecond(long[] tickArray) {
         long var2 = 0L;
 
         for (long var7 : tickArray) {

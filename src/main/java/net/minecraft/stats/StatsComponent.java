@@ -43,7 +43,6 @@ public class StatsComponent extends JComponent {
             }
         }
 
-        double var5 = 12500.0D;
         this.field_120038_b[this.field_120039_c++ & 255] = (int) (this.func_120035_a(this.field_120037_e.sentPacketSizeArray) * 100.0D / 12500.0D);
         this.repaint();
     }
@@ -51,8 +50,8 @@ public class StatsComponent extends JComponent {
     private double func_120035_a(long[] par1ArrayOfLong) {
         long var2 = 0L;
 
-        for (int var4 = 0; var4 < par1ArrayOfLong.length; ++var4) {
-            var2 += par1ArrayOfLong[var4];
+        for (long aPar1ArrayOfLong : par1ArrayOfLong) {
+            var2 += aPar1ArrayOfLong;
         }
 
         return (double) var2 / (double) par1ArrayOfLong.length;

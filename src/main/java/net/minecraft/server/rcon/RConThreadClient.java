@@ -88,7 +88,6 @@ public class RConThreadClient extends RConThreadBase {
 
                         case 3:
                             String var7 = RConUtils.getBytesAsString(this.buffer, var21, var2);
-                            int var10000 = var21 + var7.length();
 
                             if (0 != var7.length() && var7.equals(this.rconPassword)) {
                                 this.loggedIn = true;

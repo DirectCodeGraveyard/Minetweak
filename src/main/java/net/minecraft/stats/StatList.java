@@ -14,15 +14,15 @@ public class StatList {
     /**
      * Tracks one-off stats.
      */
-    protected static Map oneShotStats = new HashMap();
-    public static List allStats = new ArrayList();
-    public static List generalStats = new ArrayList();
-    public static List itemStats = new ArrayList();
+    protected static Map<Integer, StatBase> oneShotStats = new HashMap<Integer, StatBase>();
+    public static List<StatBase> allStats = new ArrayList<StatBase>();
+    public static List<StatBasic> generalStats = new ArrayList<StatBasic>();
+    public static List<StatCrafting> itemStats = new ArrayList<StatCrafting>();
 
     /**
      * Tracks the number of times a given block or item has been mined.
      */
-    public static List objectMineStats = new ArrayList();
+    public static List<StatCrafting> objectMineStats = new ArrayList<StatCrafting>();
 
     /**
      * times the game has been started
@@ -189,7 +189,7 @@ public class StatList {
                 IRecipe var2 = (IRecipe) var1.next();
 
                 if (var2.getRecipeOutput() != null) {
-                    var0.add(Integer.valueOf(var2.getRecipeOutput().itemID));
+                    var0.add(var2.getRecipeOutput().itemID);
                 }
             }
 
@@ -197,7 +197,7 @@ public class StatList {
 
             while (var1.hasNext()) {
                 ItemStack var4 = (ItemStack) var1.next();
-                var0.add(Integer.valueOf(var4.itemID));
+                var0.add(var4.itemID);
             }
 
             objectCraftStats = new StatBase[32000];
@@ -206,9 +206,9 @@ public class StatList {
             while (var1.hasNext()) {
                 Integer var5 = (Integer) var1.next();
 
-                if (Item.itemsList[var5.intValue()] != null) {
-                    String var3 = StatCollector.translateToLocalFormatted("stat.craftItem", new Object[]{Item.itemsList[var5.intValue()].getStatName()});
-                    objectCraftStats[var5.intValue()] = (new StatCrafting(16842752 + var5.intValue(), var3, var5.intValue())).registerStat();
+                if (Item.itemsList[var5] != null) {
+                    String var3 = StatCollector.translateToLocalFormatted("stat.craftItem", Item.itemsList[var5].getStatName());
+                    objectCraftStats[var5] = (new StatCrafting(16842752 + var5, var3, var5)).registerStat();
                 }
             }
 
@@ -224,7 +224,7 @@ public class StatList {
 
         for (int var3 = 0; var3 < 256; ++var3) {
             if (Block.blocksList[var3] != null && Block.blocksList[var3].getEnableStats()) {
-                String var4 = StatCollector.translateToLocalFormatted(par0Str, new Object[]{Block.blocksList[var3].getLocalizedName()});
+                String var4 = StatCollector.translateToLocalFormatted(par0Str, Block.blocksList[var3].getLocalizedName());
                 var2[var3] = (new StatCrafting(par1 + var3, var4, var3)).registerStat();
                 objectMineStats.add((StatCrafting) var2[var3]);
             }
@@ -244,7 +244,7 @@ public class StatList {
 
         for (int var5 = par3; var5 < par4; ++var5) {
             if (Item.itemsList[var5] != null) {
-                String var6 = StatCollector.translateToLocalFormatted(par1Str, new Object[]{Item.itemsList[var5].getStatName()});
+                String var6 = StatCollector.translateToLocalFormatted(par1Str, Item.itemsList[var5].getStatName());
                 par0ArrayOfStatBase[var5] = (new StatCrafting(par2 + var5, var6, var5)).registerStat();
 
                 if (var5 >= 256) {
@@ -264,7 +264,7 @@ public class StatList {
 
         for (int var5 = par3; var5 < par4; ++var5) {
             if (Item.itemsList[var5] != null && Item.itemsList[var5].isDamageable()) {
-                String var6 = StatCollector.translateToLocalFormatted(par1Str, new Object[]{Item.itemsList[var5].getStatName()});
+                String var6 = StatCollector.translateToLocalFormatted(par1Str, Item.itemsList[var5].getStatName());
                 par0ArrayOfStatBase[var5] = (new StatCrafting(par2 + var5, var6, var5)).registerStat();
             }
         }
