@@ -227,7 +227,11 @@ public class WorldInfo {
         this.allowCommands = par1WorldInfo.allowCommands;
         this.initialized = par1WorldInfo.initialized;
         this.theGameRules = par1WorldInfo.theGameRules;
-        this.tweakVersion = par1WorldInfo.tweakVersion;
+        if (par1WorldInfo.tweakVersion == null || par1WorldInfo.tweakVersion.isEmpty()) {
+            this.tweakVersion = "0.0.0";
+        } else {
+            this.tweakVersion = par1WorldInfo.tweakVersion;
+        }
     }
 
     /**
@@ -272,6 +276,9 @@ public class WorldInfo {
         par1NBTTagCompound.setBoolean("allowCommands", this.allowCommands);
         par1NBTTagCompound.setBoolean("initialized", this.initialized);
         par1NBTTagCompound.setCompoundTag("GameRules", this.theGameRules.writeGameRulesToNBT());
+        if (tweakVersion == null || tweakVersion.isEmpty()) {
+            tweakVersion = "0.0.0";
+        }
         par1NBTTagCompound.setString("TweakVersion", this.tweakVersion);
 
         if (par2NBTTagCompound != null) {
