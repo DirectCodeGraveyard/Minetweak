@@ -197,6 +197,10 @@ public class Server {
                 player.sendMessage(out);
             }
         }
+
+        for (String s : TextColor.getColorNodes()) {
+            message = message.replace(s, "");
+        }
         Minetweak.info(message);
     }
 }
