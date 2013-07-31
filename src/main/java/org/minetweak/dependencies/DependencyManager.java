@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class DependencyManager {
 
     public static Gson gson = new GsonBuilder().create();
@@ -28,8 +29,9 @@ public class DependencyManager {
     public static void createDependenciesFolder() {
         if (dependencyFolder.exists()) return;
 
-        dependencyFolder.mkdir();
-
+        if (!dependencyFolder.mkdir()) {
+            Minetweak.getLogger().logWarning("Unable to create Dependency Folder!");
+        }
     }
 
     public static void updateList() {
