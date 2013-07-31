@@ -22,9 +22,10 @@ public class DependencyManager {
     private static String repoJson = "http://repo.minetweak.org/dependenciesList.json";
     private static File repoJsonLocal = new File("dependenciesList.json");
 
-    private static String json;
+    public static String json;
 
     private static boolean localJsonDownloaded = repoJsonLocal.exists();
+    private static boolean localJsonParsed = false;
 
     public static void createDependenciesFolder() {
         if (dependencyFolder.exists()) return;
@@ -47,6 +48,7 @@ public class DependencyManager {
             e.printStackTrace();
         }
         config = gson.fromJson(json, DependencyConfig.class);
+        localJsonParsed = true;
     }
 
     public static boolean dependencyExistsLocally(String name, String version) {
@@ -54,10 +56,10 @@ public class DependencyManager {
     }
 
     public static File retrieveDependency(String name, String version) {
-        if (!localJsonDownloaded) return null;
+        while(!localJsonDownloaded);
 
         for (DependencyConfig.Dependency dep : config.dependencies) {
-            if (dep.name.equals(name) && dep.currentVersion.equals(version)) {
+            if (dep.name.equalsIgnoreCase(name) && dep.version.equalsIgnoreCase(version)) {
                 File folder = new File("lib/" + name + "/" + version + "/");
                 File jar = new File(folder, name + ".jar");
                 if (jar.exists()) return null;
