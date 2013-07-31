@@ -1,11 +1,10 @@
 apply plugin: 'java'
-apply plugin: 'project-report'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
+apply plugin: 'project-report'
 
-def version = '0.6.5-dev'
-def groupId = 'org.minetweak'
+def tweakVersion = '0.6.5-SNAPSHOT'
 
 defaultTasks 'jar'
 
@@ -43,7 +42,7 @@ compileJava {
 
 jar {
     manifest {
-        attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': version)
+        attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': tweakVersion)
     }
 }
 
@@ -72,7 +71,7 @@ task standaloneJar(type: Jar) {
     exclude 'META-INF', 'META-INF/**/*'
 
     manifest {
-        attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': version)
+        attributes('Main-class': 'org.minetweak.Minetweak', 'Minetweak-version': tweakVersion)
     }
 }
 
@@ -92,23 +91,51 @@ artifacts {
     archives apiJar
 }
 
-def username = ''
-def password = ''
-Properties props = new Properties()
-File file = new File(System.getProperty("user.home") + "/.gradle/minetweak.props")
-if (file.exists()) {
-    props.load(new FileInputStream(file))
-    username = props.getProperty("username")
-    password = props.getProperty("password")
-}
+if (!properties.containsKey('sonatypeUsername')) {sonatypeUsername = ''}
+if (!properties.containsKey('sonatypePassword')) {sonatypePassword = ''}
+
 uploadArchives {
     repositories.mavenDeployer {
-        configuration = configurations.deployerJars
-        repository(url: 'ftp://minetweak.org/var/www/snapshots/') {
-            authentication(userName: username, password: password)
+
+        repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+            authentication(userName: sonatypeUsername, password: sonatypePassword)
         }
-        pom.version = version
-        pom.groupId = groupId
+
+        snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+            authentication(userName: sonatypeUsername, password: sonatypePassword)
+        }
+
+        pom {
+            groupId = 'org.minetweak'
+            version = tweakVersion
+            artifactId = project.name
+            project {
+                name project.name
+                packaging 'jar'
+                description 'Minetweak API Implementation'
+                inceptionYear '2013'
+                url 'http://www.minetweak.org/'
+
+                scm {
+                    url 'https://github.com/Minetweak/Minetweak/'
+                    connection 'scm:git:git://github.com/Minetweak/Minetweak.git'
+                    developerConnection 'scm:git:git@github.com:Minetweak/Minetweak.git'
+                }
+
+                issueManagement {
+                    system 'jira'
+                    url 'https://minetweak.atlassian.net/'
+                }
+
+                licenses {
+                    license {
+                        name 'GNU Lesser General Public License (LGPL), Version 3'
+                        url 'http://www.gnu.org/licenses/lgpl.txt'
+                        distribution 'repo'
+                    }
+                }
+            }
+        }
     }
 }
 

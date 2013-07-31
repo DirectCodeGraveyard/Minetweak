@@ -6,9 +6,9 @@ def mainDir = new File(getClass().protectionDomain.codeSource.location.path).par
 def gradleScript = new File(mainDir, 'build.gradle')
 def tmpFile = new File('build.gradle.tmp')
 gradleScript.each {
-    if (it.startsWith('def version')) {
+    if (it.startsWith('def tweakVersion')) {
         println 'Found Version: ' + evaluate(it)
-        it = 'def version = \'' + args[0] + '\''
+        it = 'def tweakVersion = \'' + args[0] + '\''
     }
     tmpFile.append(it + '\n')
 }
