@@ -5,6 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import org.minetweak.chat.TextColor;
 import org.minetweak.command.*;
 import org.minetweak.config.GameConfig;
+import org.minetweak.dependencies.DependencyManager;
 import org.minetweak.entity.Player;
 import org.minetweak.entity.player.PlayerTracker;
 import org.minetweak.permissions.PermissionsLoader;
@@ -12,7 +13,6 @@ import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
 import org.minetweak.plugins.PluginLoadingHook;
 import org.minetweak.recipe.RecipeManager;
-import org.minetweak.thread.DependencyThread;
 import org.minetweak.thread.ManagementThread;
 import org.minetweak.util.MinetweakLog;
 import org.minetweak.world.World;
@@ -91,8 +91,10 @@ public class Minetweak {
         PlayerWhitelist.load();
         ServerOps.load();
 
-        // Register the DependencyThread early, since it might cut down on issues
-        registerListener(DependencyThread.getInstance());
+        // Parse dependencies outside of the thread to ensure it works properly
+        DependencyManager.createDependenciesFolder();
+        DependencyManager.updateList();
+        DependencyManager.readJson();
 
         // Ensure Server Commands get registered first, so they can be overridden
         registerServerCommands();
