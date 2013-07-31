@@ -251,37 +251,37 @@ public class Minetweak {
      */
     protected static void registerServerCommands() {
         registerCommand("ban", new CommandBan());
+        registerCommand("clear", new CommandClearInventory());
+        registerCommand("debug", new CommandDebug());
         registerCommand("deop", new CommandDeop());
+        registerCommand("difficulty", new CommandDifficulty());
         registerCommand("gamemode", new CommandGamemode());
+        registerCommand("give", new CommandGive());
         registerCommand("help", new CommandHelp());
         registerCommand("kick", new CommandKick());
         registerCommand("kill", new CommandKill());
-        registerCommand("players", new CommandListPlayers());
-        registerCommand("op", new CommandOp());
         registerCommand("say", new CommandSay());
-        registerCommand("stop", new CommandStop());
-        registerCommand("motd", new CommandMotd());
-        registerCommand("pardon", new CommandPardon());
-        registerCommand("reload", new CommandReload());
-        registerCommand("loaddata", new CommandLoadData());
-        registerCommand("clear", new CommandClearInventory());
-        registerCommand("version", new CommandVersion());
-        registerCommand("give", new CommandGive());
         registerCommand("save", new CommandSave());
-        registerCommand("weather", new CommandWeather());
-        registerCommand("tps", new CommandTps());
-        registerCommand("spawn", new CommandSpawn());
-        registerCommand("whitelist", new CommandWhitelist());
-        registerCommand("tp", new CommandTeleport());
-        registerCommand("tpall", new CommandTeleportAll());
+        registerCommand("stop", new CommandStop());
+        registerCommand("loaddata", new CommandLoadData());
         registerCommand("lockdown", new CommandLockdown());
-        registerCommand("difficulty", new CommandDifficulty());
+        registerCommand("motd", new CommandMotd());
+        registerCommand("op", new CommandOp());
+        registerCommand("pardon", new CommandPardon());
+        registerCommand("players", new CommandListPlayers());
+        registerCommand("plugin", new CommandPlugin());
+        registerCommand("reload", new CommandReload());
         registerCommand("setspawn", new CommandSetSpawn());
         registerCommand("slaughter", new CommandSlaughter());
+        registerCommand("spawn", new CommandSpawn());
         registerCommand("time", new CommandTime());
-        registerCommand("plugin", new CommandPlugin());
+        registerCommand("tp", new CommandTeleport());
+        registerCommand("tpall", new CommandTeleportAll());
+        registerCommand("tps", new CommandTps());
+        registerCommand("version", new CommandVersion());
         registerCommand("viewinv", new CommandViewInventory());
-        registerCommand("debug", new CommandDebug());
+        registerCommand("weather", new CommandWeather());
+        registerCommand("whitelist", new CommandWhitelist());
     }
 
     /**
