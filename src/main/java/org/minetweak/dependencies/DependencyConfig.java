@@ -7,7 +7,8 @@ public class DependencyConfig {
 
     class Dependency {
         public String name;
-        public String currentVersion;
+        public String groupId;
+        public String version;
         public String url;
     }
 }
