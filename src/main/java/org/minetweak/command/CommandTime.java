@@ -11,12 +11,13 @@ public class CommandTime extends CommandExecutor {
         if (!sender.hasPermission("minetweak.command.time")) {
             noPermission(sender, "change time");
             return;
-        }
-        if (args.length != 1) {
-            sender.sendMessage("Usage: /" + overallCommand + " TIME");
+        } else if (args.length != 2) {
+            sender.sendMessage("Usage: /" + overallCommand + " set <time>");
             return;
         }
-        String timeName = args[0];
+
+
+        String timeName = args[1];
         long time;
         if (StringUtils.isInteger(timeName)) {
             time = Long.parseLong(timeName);
