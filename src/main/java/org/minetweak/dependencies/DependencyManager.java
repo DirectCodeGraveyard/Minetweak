@@ -56,7 +56,7 @@ public class DependencyManager {
     }
 
     public static File retrieveDependency(String name, String version) {
-        while(!localJsonDownloaded);
+        while (!localJsonDownloaded) ;
 
         for (DependencyConfig.Dependency dep : config.dependencies) {
             if (dep.name.equalsIgnoreCase(name) && dep.version.equalsIgnoreCase(version)) {
@@ -64,7 +64,10 @@ public class DependencyManager {
                 File jar = new File(folder, name + ".jar");
                 if (jar.exists()) return null;
 
-                folder.mkdirs();
+                if (!folder.mkdirs()) {
+                    Minetweak.getLogger().logWarning("Unable to make the directories for dependency \'" + dep.name + "\'!");
+                    return null;
+                }
 
                 Minetweak.getLogger().logInfo("Downloading dependency: " + name + " v" + version);
                 HttpUtils.downloadFile(jar.getAbsolutePath(), dep.url);
@@ -73,7 +76,7 @@ public class DependencyManager {
             }
         }
 
-        System.out.println("The dependency: " + name + " v" + version + " could not be downloaded.");
+        Minetweak.getLogger().logWarning("The dependency: " + name + " v" + version + " could not be downloaded.");
         return null;
     }
 
