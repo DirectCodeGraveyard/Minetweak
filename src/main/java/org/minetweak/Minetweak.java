@@ -12,6 +12,7 @@ import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
 import org.minetweak.plugins.PluginLoadingHook;
 import org.minetweak.recipe.RecipeManager;
+import org.minetweak.thread.DependencyThread;
 import org.minetweak.thread.ManagementThread;
 import org.minetweak.util.MinetweakLog;
 import org.minetweak.world.World;
@@ -89,6 +90,9 @@ public class Minetweak {
         PermissionsLoader.load();
         PlayerWhitelist.load();
         ServerOps.load();
+
+        // Register the DependencyThread early, since it might cut down on issues
+        registerListener(DependencyThread.getInstance());
 
         // Ensure Server Commands get registered first, so they can be overridden
         registerServerCommands();
