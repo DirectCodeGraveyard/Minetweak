@@ -167,4 +167,11 @@ public class Entity {
     public void dismount() {
         entity.mountEntity(null);
     }
+
+    /**
+     * Sets the Entity as Preventable
+     */
+    public void noSpawn() {
+        entity.preventEntitySpawning = true;
+    }
 }

@@ -5,6 +5,7 @@ apply plugin: 'maven'
 apply plugin: 'project-report'
 
 def tweakVersion = '0.6.5-SNAPSHOT'
+def includeGroovy = false
 
 defaultTasks 'jar'
 
@@ -23,7 +24,9 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'commons-io:commons-io:2.4'
     compile 'org.apache.commons:commons-lang3:3.1'
+    compile 'org.codehaus.groovy:groovy-all:2.1.6'
     compile 'org.bouncycastle:bcprov-jdk15on:1.47'
+    if (includeGroovy) compile 'org.codehaus.groovy:groovy-all:2.1.6'
     testCompile 'junit:junit:4.10'
     deployerJars 'org.apache.maven.wagon:wagon-ftp:2.2'
 }
@@ -91,8 +94,12 @@ artifacts {
     archives apiJar
 }
 
-if (!properties.containsKey('sonatypeUsername')) {sonatypeUsername = ''}
-if (!properties.containsKey('sonatypePassword')) {sonatypePassword = ''}
+if (!properties.containsKey('sonatypeUsername')) {
+    sonatypeUsername = ''
+}
+if (!properties.containsKey('sonatypePassword')) {
+    sonatypePassword = ''
+}
 
 uploadArchives {
     repositories.mavenDeployer {
