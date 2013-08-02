@@ -7,7 +7,7 @@ import org.minetweak.language.LanguageObject;
 import java.util.ArrayList;
 
 /**
- * Base Class for Plugins
+ * Base Class for Minetweak Plugins
  */
 public abstract class MinetweakPlugin implements IPlugin {
     private PluginInfo pluginInfo;

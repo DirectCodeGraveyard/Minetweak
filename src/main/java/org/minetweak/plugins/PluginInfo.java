@@ -2,6 +2,9 @@ package org.minetweak.plugins;
 
 import java.util.ArrayList;
 
+/**
+ * Stores metadata about a Plugin
+ */
 public class PluginInfo {
     /**
      * The Plugin's Main class

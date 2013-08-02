@@ -14,6 +14,9 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Manages Players on the Whitelist
+ */
 public class PlayerWhitelist {
     private static Set<String> whitelistedPlayers = new HashSet<String>();
     private static File whitelistFile = new File("whitelist.json");

@@ -11,6 +11,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Used to load permissions
+ */
 public class PermissionsLoader {
     private static File file = new File("./permissions.json");
     private static Gson gson = new GsonBuilder().setPrettyPrinting().create();

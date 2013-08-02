@@ -13,6 +13,9 @@ import java.lang.reflect.Type;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Manages Server Ops
+ */
 public class ServerOps {
     private static Set<String> ops = new HashSet<String>();
     private static File opListFile = new File("ops.json");

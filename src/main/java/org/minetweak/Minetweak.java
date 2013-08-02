@@ -31,7 +31,6 @@ import java.util.jar.JarFile;
  * will need to create a plugin, such as:
  * registering a command, or an event.
  */
-@SuppressWarnings("FieldCanBeLocal")
 public class Minetweak {
 
     /**

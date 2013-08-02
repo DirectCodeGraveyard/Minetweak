@@ -7,6 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.minetweak.event.server.CraftingReadyEvent;
 
+/**
+ * Manages Recipes
+ */
 public class RecipeManager {
     private static final RecipeManager instance = new RecipeManager();
     private CraftingManager craftingManager;

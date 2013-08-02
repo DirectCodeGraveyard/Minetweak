@@ -2,6 +2,9 @@ package org.minetweak.entity;
 
 import net.minecraft.entity.EntityMob;
 
+/**
+ * Base Class for Mobs
+ */
 public class Mob extends Entity {
 
     /**

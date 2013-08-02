@@ -6,6 +6,9 @@ import net.minecraft.utils.AxisAlignedBB;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Base Class for Entities
+ */
 public class Entity {
     protected net.minecraft.entity.Entity entity;
 

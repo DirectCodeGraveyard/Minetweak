@@ -15,6 +15,9 @@ import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.zip.ZipEntry;
 
+/**
+ * Manages Plugins
+ */
 public class PluginManager {
 
     private ArrayList<File> files = new ArrayList<File>();
