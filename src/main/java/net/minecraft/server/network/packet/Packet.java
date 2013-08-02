@@ -123,7 +123,11 @@ public abstract class Packet implements IPacket {
      * Returns the ID of this packet.
      */
     public final int getPacketId() {
-        return packetClassToIdMap.get(this.getClass());
+        Integer id = packetClassToIdMap.get(this.getClass());
+        if (id==null) {
+            id = 130; // Bug fix for signs
+        }
+        return id;
     }
 
     /**
