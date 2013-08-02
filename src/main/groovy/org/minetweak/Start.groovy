@@ -1,18 +1,22 @@
 package org.minetweak
 
+import groovy.grape.Grape
 import org.codehaus.groovy.tools.shell.Main as GroovyShellMain
-
 /**
  * Starts Minetweak
  */
 class Start {
     static def main(String[] args) {
+        // Checks args
         if (args.contains('--dev-console')) {
-            List<String> arguments = args.toList()
+            Grape.grab('jline:jline:1.0')
+            def arguments = args.toList()
             arguments.remove('--dev-console')
+            // Puts the User in a Development Console
             GroovyShellMain.main(arguments.toArray(new String[arguments.size()]))
-            return
+        } else {
+            // Launches Minetweak
+            Minetweak.main(args)
         }
-        Minetweak.main(args)
     }
 }

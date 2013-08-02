@@ -203,8 +203,6 @@ public abstract class Packet implements IPacket {
 
         if (var2 > par1) {
             throw new IOException("Received string length longer than maximum allowed (" + var2 + " > " + par1 + ")");
-        } else if (var2 < 0) {
-            throw new IOException("Received string length is less than zero! Weird string!");
         } else {
             StringBuilder var3 = new StringBuilder();
 
