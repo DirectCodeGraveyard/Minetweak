@@ -3,7 +3,6 @@ def mainDir = new File(getClass().protectionDomain.codeSource.location.path).par
 def osName = System.properties['os.name'] as String
 def cmd
 if (osName.contains('windows')) {
-    windows = true
     cmd = 'gradlew jar'
 } else {
     cmd = './gradlew jar'
@@ -15,3 +14,5 @@ def reader = process.inputStream.newReader()
 reader.eachLine {
     println it
 }
+
+reader.close()
