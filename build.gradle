@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven'
@@ -103,11 +104,11 @@ uploadArchives {
         //beforeDeployment { deployment ->
         //    signing.signPom(deployment)
         //}
-        repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+        repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2') {
             authentication(userName: sonatypeUsername, password: sonatypePassword)
         }
 
-        snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+        snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots') {
             authentication(userName: sonatypeUsername, password: sonatypePassword)
         }
 
@@ -153,5 +154,5 @@ idea {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "1.7-rc-2"
+    gradleVersion = '1.7-rc-2'
 }
