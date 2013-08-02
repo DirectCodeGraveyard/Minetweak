@@ -85,11 +85,11 @@ task apiJar(type: Jar) {
 }
 
 artifacts {
-    archives sourcesJar
-    archives javadocJar
     archives jar
     archives standaloneJar
     archives apiJar
+    archives sourcesJar
+    archives javadocJar
 }
 
 //signing { sign configurations.archives }
@@ -149,4 +149,8 @@ idea {
         downloadJavadoc = true
         downloadSources = false
     }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "1.7-rc-2"
 }
