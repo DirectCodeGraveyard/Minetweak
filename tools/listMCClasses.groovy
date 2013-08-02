@@ -6,5 +6,5 @@ def mcClassDir = new File(srcDir, 'net/minecraft/')
 mcClassDir.eachFileRecurse (FileType.FILES) {
     if (!it.getName().endsWith('.java')) {return}
     def className = it.getCanonicalPath().replace(srcDir.absolutePath, '').replace('/', '.').substring(1).replace('.java', '')
-    println(className)
+    println className
 }

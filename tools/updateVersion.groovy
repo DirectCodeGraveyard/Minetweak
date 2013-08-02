@@ -13,4 +13,4 @@ gradleScript.eachLine {
 }
 gradleScript.delete()
 tmpFile.renameTo(gradleScript)
-println('Set Version to ' + args[0])
+println 'Set Version to ' + args[0]
