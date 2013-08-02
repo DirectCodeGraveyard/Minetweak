@@ -9,7 +9,6 @@ class Start {
     static def main(String[] args) {
         // Checks args
         if (args.contains('--dev-console')) {
-            Grape.grab('jline:jline:1.0')
             def arguments = args.toList()
             arguments.remove('--dev-console')
             // Puts the User in a Development Console
