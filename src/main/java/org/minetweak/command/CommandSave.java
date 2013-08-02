@@ -31,15 +31,6 @@ public class CommandSave extends CommandExecutor {
                 }
             }
 
-            for (var4 = 0; var4 < var3.worldServers.length; ++var4) {
-                if (var3.worldServers[var4] != null) {
-                    var5 = var3.worldServers[var4];
-                    var6 = var5.levelSaving;
-                    var5.levelSaving = false;
-                    var5.func_104140_m();
-                    var5.levelSaving = var6;
-                }
-            }
             Server.broadcastMessage("World Save Complete.");
         } catch (MinecraftException var7) {
             Server.broadcastMessage("World Save Failed.");
