@@ -38,17 +38,12 @@ public class CommandGamemode extends CommandExecutor {
                 return;
             }
 
-            Player player = Minetweak.getPlayerByName(sender.getName().toLowerCase());
-
-            if (gamemode == 0) player.setGameMode(GameMode.SURVIVAL);
-            if (gamemode == 1) player.setGameMode(GameMode.CREATIVE);
-            if (gamemode == 2) player.setGameMode(GameMode.ADVENTURE);
+            Player player = (Player) sender;
+            setPlayerGamemode(player, gamemode);
         } else {
             Player player = Minetweak.getPlayerByName(args[1].toLowerCase());
-
-            if (gamemode == 0) player.setGameMode(GameMode.SURVIVAL);
-            if (gamemode == 1) player.setGameMode(GameMode.CREATIVE);
-            if (gamemode == 2) player.setGameMode(GameMode.ADVENTURE);
+            if (player==null) {sender.sendMessage("Sorry, you can't change an offline players Gamemode."); return;}
+            setPlayerGamemode(player, gamemode);
         }
     }
 
@@ -69,4 +64,9 @@ public class CommandGamemode extends CommandExecutor {
         }
     }
 
+    public static void setPlayerGamemode(Player player, int gamemode) {
+        if (gamemode == 0) player.setGameMode(GameMode.SURVIVAL);
+        if (gamemode == 1) player.setGameMode(GameMode.CREATIVE);
+        if (gamemode == 2) player.setGameMode(GameMode.ADVENTURE);
+    }
 }

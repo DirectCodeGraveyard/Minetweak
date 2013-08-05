@@ -246,16 +246,18 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             if (var10 == 2) {
                 var11 = 1;
             }
-
+            WorldServer server;
             if (var10 == 0) {
-                this.worldServers[var10] = new WorldServer(this, var7, par2Str, var11, var8, this.profiler, this.getLogAgent());
+                server = new WorldServer(this, var7, par2Str, var11, var8, this.profiler, this.getLogAgent());
             } else {
-                this.worldServers[var10] = new WorldServerMulti(this, var7, par2Str, var11, var8, this.worldServers[0], this.profiler, this.getLogAgent());
+                server = new WorldServerMulti(this, var7, par2Str, var11, var8, this.worldServers[0], this.profiler, this.getLogAgent());
             }
 
-            this.worldServers[var10].addWorldAccess(new WorldManager(this, this.worldServers[var10]));
+            server.addWorldAccess(new WorldManager(this, server));
 
-            this.worldServers[var10].getWorldInfo().setGameType(this.getGameType());
+            server.getWorldInfo().setGameType(this.getGameType());
+
+            org.minetweak.world.WorldManager.addWorldServer(server);
 
             this.serverConfigManager.setPlayerManager(this.worldServers);
         }

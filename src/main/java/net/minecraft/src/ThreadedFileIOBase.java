@@ -15,9 +15,9 @@ public class ThreadedFileIOBase implements Runnable {
     private volatile boolean isThreadWaiting;
 
     private ThreadedFileIOBase() {
-        Thread var1 = new Thread(this, "File IO Thread");
-        var1.setPriority(1);
-        var1.start();
+        Thread thread = new Thread(this, "File IO Thread");
+        thread.setPriority(1);
+        thread.start();
     }
 
     @Override
