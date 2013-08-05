@@ -21,7 +21,7 @@ public class Packet130UpdateSign extends Packet {
         this.xPosition = par1;
         this.yPosition = par2;
         this.zPosition = par3;
-        this.signLines = par4ArrayOfStr;
+        this.signLines = new String[]{par4ArrayOfStr[0], par4ArrayOfStr[1], par4ArrayOfStr[2], par4ArrayOfStr[3]};
     }
 
     /**
@@ -41,18 +41,17 @@ public class Packet130UpdateSign extends Packet {
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
+    @Override
     public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeInt(this.xPosition);
         par1DataOutput.writeShort(this.yPosition);
         par1DataOutput.writeInt(this.zPosition);
 
-        for (String line : signLines) {
-            if (line==null) {
-                line = "";
-            }
-            writeString(line, par1DataOutput);
+        for (int var2 = 0; var2 < 4; ++var2) {
+            writeString(this.signLines[var2], par1DataOutput);
         }
     }
+
 
     /**
      * Passes this Packet on to the NetHandler for processing.

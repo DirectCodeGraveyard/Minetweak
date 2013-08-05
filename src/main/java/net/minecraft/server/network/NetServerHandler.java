@@ -826,9 +826,10 @@ public class NetServerHandler extends NetHandler {
                     }
                 }
 
-                if (!var5) {
+                // Bug Fix for Signs
+                /*if (!var5) {
                     par1Packet130UpdateSign.signLines[var8] = "!?";
-                }
+                }*/
             }
 
             if (var3 instanceof TileEntitySign) {
