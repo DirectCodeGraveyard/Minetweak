@@ -56,18 +56,21 @@ tasks.withType(Test) {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
+    group = 'other'
     description = 'Makes a JAR with Minetweak Sources'
     classifier = 'sources'
     from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
+    group = 'documentation'
     description = 'Makes a JAR with Minetweak Javadoc'
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
 
 task standaloneJar(type: Jar) {
+    group = 'build'
     description = 'Makes a JAR with Minetweak dependencies inside'
     classifier = 'standalone'
     from sourceSets.main.output
@@ -80,6 +83,7 @@ task standaloneJar(type: Jar) {
 }
 
 task apiJar(type: Jar) {
+    group = 'build'
     description = 'Makes a JAR containing only the Minetweak API'
     classifier = 'api'
     from sourceSets.main.output
