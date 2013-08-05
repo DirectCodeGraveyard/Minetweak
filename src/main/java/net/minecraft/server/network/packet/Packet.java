@@ -123,11 +123,7 @@ public abstract class Packet implements IPacket {
      * Returns the ID of this packet.
      */
     public final int getPacketId() {
-        Integer id = packetClassToIdMap.get(this.getClass());
-        if (id==null) {
-            id = 130; // Bug fix for signs
-        }
-        return id;
+        return packetClassToIdMap.get(this.getClass());
     }
 
     /**
@@ -397,6 +393,7 @@ public abstract class Packet implements IPacket {
         addIdClassMapping(130, true, true, Packet130UpdateSign.class);
         addIdClassMapping(131, true, false, Packet131MapData.class);
         addIdClassMapping(132, true, false, Packet132TileEntityData.class);
+        addIdClassMapping(133, true, false, Packet133TileEditorOpen.class);
         addIdClassMapping(200, true, false, Packet200Statistic.class);
         addIdClassMapping(201, true, false, Packet201PlayerInfo.class);
         addIdClassMapping(202, true, true, Packet202PlayerAbilities.class);
