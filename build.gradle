@@ -97,8 +97,8 @@ artifacts {
 
 //signing { sign configurations.archives }
 
-if (!properties.containsKey('sonatypeUsername')) {def sonatypeUsername = ''}
-if (!properties.containsKey('sonatypePassword')) {def sonatypePassword = ''}
+if (!hasProperty('sonatypeUsername')) {def sonatypeUsername = ''}
+if (!hasProperty('sonatypePassword')) {def sonatypePassword = ''}
 
 uploadArchives {
     repositories.mavenDeployer {
