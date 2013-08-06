@@ -4,6 +4,8 @@ import net.minecraft.entity.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.network.packet.Packet;
 import net.minecraft.server.network.packet.Packet130UpdateSign;
+import org.minetweak.Minetweak;
+import org.minetweak.event.world.SignUpdateEvent;
 
 public class TileEntitySign extends TileEntity {
     /**
@@ -55,7 +57,14 @@ public class TileEntitySign extends TileEntity {
     public Packet getDescriptionPacket() {
         String[] var1 = new String[4];
         System.arraycopy(this.signText, 0, var1, 0, 4);
-        return new Packet130UpdateSign(this.xCoord, this.yCoord, this.zCoord, var1);
+        SignUpdateEvent event = new SignUpdateEvent(var1);
+        Minetweak.getEventBus().post(event);
+
+        if (!event.isCancelled()) {
+            return new Packet130UpdateSign(this.xCoord, this.yCoord, this.zCoord, event.getSignText());
+        } else {
+            return null;
+        }
     }
 
     public boolean isEditable() {
