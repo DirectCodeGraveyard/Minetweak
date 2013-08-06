@@ -444,7 +444,7 @@ public class Player extends Entity implements CommandSender {
      * @param location the location instance
      */
     public void teleportToPosition(Location location) {
-        teleportToPosition(location.getPosX(), location.getPosY(), location.getPosZ())
+        teleportToPosition(location.getPosX(), location.getPosY(), location.getPosZ());
     }
 
     /**
