@@ -508,4 +508,11 @@ public class Player extends Entity implements CommandSender {
     public Location getLocation() {
         return new Location(getX(), getY(), getZ(), getCurrentWorld());
     }
+
+    /**
+     * Closes the Current GUI
+     */
+    public void closeGUI() {
+        getPlayerMP().closeContainer();
+    }
 }

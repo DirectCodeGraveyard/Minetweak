@@ -20,7 +20,7 @@ public class CommandPlugin extends CommandExecutor {
             String pluginName = args[0];
             IPlugin plugin = PluginManager.plugins.get(pluginName);
             if (plugin == null) {
-                sender.sendMessage(TextColor.RED + "The Plugin \'" + pluginName + " does not exist!");
+                sender.sendMessage(TextColor.RED + "The Plugin \'" + pluginName + "\' does not exist!");
                 return;
             }
             PluginInfo i = plugin.getPluginInfo();

@@ -32,15 +32,6 @@ public class Chunk {
     }
 
     /**
-     * Gets the MC World the Chunk is in
-     *
-     * @return world of chunk
-     */
-    public World getCraftWorld() {
-        return getWorld();
-    }
-
-    /**
      * Gets the MC Chunk
      *
      * @return minecraft chunk

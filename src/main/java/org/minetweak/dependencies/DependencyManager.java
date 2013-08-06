@@ -36,7 +36,7 @@ public class DependencyManager {
     }
 
     public static void updateList() {
-        Minetweak.getLogger().logInfo("Dependencies repo was updated");
+        // Minetweak.getLogger().logInfo("Dependencies repo was updated");
         HttpUtils.downloadFile(repoJsonLocal.getAbsolutePath(), repoJson);
         localJsonDownloaded = true;
     }
