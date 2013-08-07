@@ -1,4 +1,4 @@
-package net.minecraft.src;
+package org.minetweak.util;
 
 public class Tuple {
     /**

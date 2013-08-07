@@ -17,7 +17,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.IMob;
 import net.minecraft.src.INpc;
-import net.minecraft.src.Tuple;
+import org.minetweak.util.Tuple;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
@@ -43,13 +43,13 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
     private int timeUntilReset;
 
     /**
-     * addDefaultEquipmentAndRecipies is called if this is true
+     * addDefaultEquipmentAndRecipes is called if this is true
      */
-    private boolean needsInitilization;
+    private boolean needsInitialization;
     private int wealth;
 
     /**
-     * Last player to trade with this villager, used for aggressivity.
+     * Last player to trade with this villager, used for agressivness.
      */
     private String lastBuyingPlayer;
     private boolean field_82190_bM;
@@ -58,12 +58,12 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
     /**
      * Selling list of Villagers items.
      */
-    private static final Map villagersSellingList = new HashMap();
+    public static final Map<Integer, Tuple> villagersSellingList = new HashMap<Integer, Tuple>();
 
     /**
      * Selling list of Blacksmith items.
      */
-    private static final Map blacksmithSellingList = new HashMap();
+    public static final Map<Integer, Tuple> blacksmithSellingList = new HashMap<Integer, Tuple>();
 
     public EntityVillager(World par1World) {
         this(par1World, 0);
@@ -130,21 +130,19 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
             --this.timeUntilReset;
 
             if (this.timeUntilReset <= 0) {
-                if (this.needsInitilization) {
+                if (this.needsInitialization) {
                     if (this.buyingList.size() > 1) {
-                        Iterator var3 = this.buyingList.iterator();
 
-                        while (var3.hasNext()) {
-                            MerchantRecipe var2 = (MerchantRecipe) var3.next();
+                        for (Object aBuyingList : this.buyingList) {
 
-                            if (var2.func_82784_g()) {
-                                var2.func_82783_a(this.rand.nextInt(6) + this.rand.nextInt(6) + 2);
+                            if (((MerchantRecipe) aBuyingList).func_82784_g()) {
+                                ((MerchantRecipe) aBuyingList).func_82783_a(this.rand.nextInt(6) + this.rand.nextInt(6) + 2);
                             }
                         }
                     }
 
                     this.addDefaultEquipmentAndRecipies(1);
-                    this.needsInitilization = false;
+                    this.needsInitialization = false;
 
                     if (this.villageObj != null && this.lastBuyingPlayer != null) {
                         this.worldObj.setEntityState(this, (byte) 14);
@@ -180,7 +178,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
 
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(16, Integer.valueOf(0));
+        this.dataWatcher.addObject(16, 0);
     }
 
     /**
@@ -239,7 +237,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
     }
 
     public void setProfession(int par1) {
-        this.dataWatcher.updateObject(16, Integer.valueOf(par1));
+        this.dataWatcher.updateObject(16, par1);
     }
 
     public int getProfession() {
@@ -328,7 +326,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
 
         if (par1MerchantRecipe.hasSameIDsAs((MerchantRecipe) this.buyingList.get(this.buyingList.size() - 1))) {
             this.timeUntilReset = 40;
-            this.needsInitilization = true;
+            this.needsInitialization = true;
 
             if (this.buyingPlayer != null) {
                 this.lastBuyingPlayer = this.buyingPlayer.getCommandSenderName();
@@ -429,7 +427,6 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
                 addBlacksmithItem(var2, Item.redstone.itemID, this.rand, this.func_82188_j(0.4F));
                 addBlacksmithItem(var2, Block.glowStone.blockID, this.rand, this.func_82188_j(0.3F));
                 int[] var3 = new int[]{Item.swordIron.itemID, Item.swordDiamond.itemID, Item.plateIron.itemID, Item.plateDiamond.itemID, Item.axeIron.itemID, Item.axeDiamond.itemID, Item.pickaxeIron.itemID, Item.pickaxeDiamond.itemID};
-                int[] var4 = var3;
                 int var5 = var3.length;
                 var6 = 0;
 
@@ -438,7 +435,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
                         break label50;
                     }
 
-                    int var7 = var4[var6];
+                    int var7 = var3[var6];
 
                     if (this.rand.nextFloat() < this.func_82188_j(0.05F)) {
                         var2.add(new MerchantRecipe(new ItemStack(var7, 1, 0), new ItemStack(Item.emerald, 2 + this.rand.nextInt(3), 0), EnchantmentHelper.addRandomEnchantment(this.rand, new ItemStack(var7, 1, 0), 5 + this.rand.nextInt(15))));
@@ -521,8 +518,8 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
      * default to 1, and villagerStockList contains a min/max amount for each index
      */
     private static int getRandomCountForItem(int par0, Random par1Random) {
-        Tuple var2 = (Tuple) villagersSellingList.get(Integer.valueOf(par0));
-        return var2 == null ? 1 : (((Integer) var2.getFirst()).intValue() >= ((Integer) var2.getSecond()).intValue() ? ((Integer) var2.getFirst()).intValue() : ((Integer) var2.getFirst()).intValue() + par1Random.nextInt(((Integer) var2.getSecond()).intValue() - ((Integer) var2.getFirst()).intValue()));
+        Tuple var2 = villagersSellingList.get(par0);
+        return var2 == null ? 1 : ((Integer) var2.getFirst() >= (Integer) var2.getSecond() ? (Integer) var2.getFirst() : (Integer) var2.getFirst() + par1Random.nextInt((Integer) var2.getSecond() - (Integer) var2.getFirst()));
     }
 
     private static void addBlacksmithItem(MerchantRecipeList par0MerchantRecipeList, int par1, Random par2Random, float par3) {
@@ -544,8 +541,8 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
     }
 
     private static int getRandomCountForBlacksmithItem(int par0, Random par1Random) {
-        Tuple var2 = (Tuple) blacksmithSellingList.get(Integer.valueOf(par0));
-        return var2 == null ? 1 : (((Integer) var2.getFirst()).intValue() >= ((Integer) var2.getSecond()).intValue() ? ((Integer) var2.getFirst()).intValue() : ((Integer) var2.getFirst()).intValue() + par1Random.nextInt(((Integer) var2.getSecond()).intValue() - ((Integer) var2.getFirst()).intValue()));
+        Tuple var2 = blacksmithSellingList.get(par0);
+        return var2 == null ? 1 : ((Integer) var2.getFirst() >= (Integer) var2.getSecond() ? (Integer) var2.getFirst() : (Integer) var2.getFirst() + par1Random.nextInt((Integer) var2.getSecond() - (Integer) var2.getFirst()));
     }
 
     public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
@@ -560,7 +557,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
 
     public EntityVillager func_90012_b(EntityAgeable par1EntityAgeable) {
         EntityVillager var2 = new EntityVillager(this.worldObj);
-        var2.func_110161_a((EntityLivingData) null);
+        var2.func_110161_a(null);
         return var2;
     }
 
@@ -573,69 +570,69 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
     }
 
     static {
-        villagersSellingList.put(Integer.valueOf(Item.coal.itemID), new Tuple(Integer.valueOf(16), Integer.valueOf(24)));
-        villagersSellingList.put(Integer.valueOf(Item.ingotIron.itemID), new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
-        villagersSellingList.put(Integer.valueOf(Item.ingotGold.itemID), new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
-        villagersSellingList.put(Integer.valueOf(Item.diamond.itemID), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
-        villagersSellingList.put(Integer.valueOf(Item.paper.itemID), new Tuple(Integer.valueOf(24), Integer.valueOf(36)));
-        villagersSellingList.put(Integer.valueOf(Item.book.itemID), new Tuple(Integer.valueOf(11), Integer.valueOf(13)));
-        villagersSellingList.put(Integer.valueOf(Item.writtenBook.itemID), new Tuple(Integer.valueOf(1), Integer.valueOf(1)));
-        villagersSellingList.put(Integer.valueOf(Item.enderPearl.itemID), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
-        villagersSellingList.put(Integer.valueOf(Item.eyeOfEnder.itemID), new Tuple(Integer.valueOf(2), Integer.valueOf(3)));
-        villagersSellingList.put(Integer.valueOf(Item.porkRaw.itemID), new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
-        villagersSellingList.put(Integer.valueOf(Item.beefRaw.itemID), new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
-        villagersSellingList.put(Integer.valueOf(Item.chickenRaw.itemID), new Tuple(Integer.valueOf(14), Integer.valueOf(18)));
-        villagersSellingList.put(Integer.valueOf(Item.fishCooked.itemID), new Tuple(Integer.valueOf(9), Integer.valueOf(13)));
-        villagersSellingList.put(Integer.valueOf(Item.seeds.itemID), new Tuple(Integer.valueOf(34), Integer.valueOf(48)));
-        villagersSellingList.put(Integer.valueOf(Item.melonSeeds.itemID), new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
-        villagersSellingList.put(Integer.valueOf(Item.pumpkinSeeds.itemID), new Tuple(Integer.valueOf(30), Integer.valueOf(38)));
-        villagersSellingList.put(Integer.valueOf(Item.wheat.itemID), new Tuple(Integer.valueOf(18), Integer.valueOf(22)));
-        villagersSellingList.put(Integer.valueOf(Block.cloth.blockID), new Tuple(Integer.valueOf(14), Integer.valueOf(22)));
-        villagersSellingList.put(Integer.valueOf(Item.rottenFlesh.itemID), new Tuple(Integer.valueOf(36), Integer.valueOf(64)));
-        blacksmithSellingList.put(Integer.valueOf(Item.flintAndSteel.itemID), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
-        blacksmithSellingList.put(Integer.valueOf(Item.shears.itemID), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
-        blacksmithSellingList.put(Integer.valueOf(Item.swordIron.itemID), new Tuple(Integer.valueOf(7), Integer.valueOf(11)));
-        blacksmithSellingList.put(Integer.valueOf(Item.swordDiamond.itemID), new Tuple(Integer.valueOf(12), Integer.valueOf(14)));
-        blacksmithSellingList.put(Integer.valueOf(Item.axeIron.itemID), new Tuple(Integer.valueOf(6), Integer.valueOf(8)));
-        blacksmithSellingList.put(Integer.valueOf(Item.axeDiamond.itemID), new Tuple(Integer.valueOf(9), Integer.valueOf(12)));
-        blacksmithSellingList.put(Integer.valueOf(Item.pickaxeIron.itemID), new Tuple(Integer.valueOf(7), Integer.valueOf(9)));
-        blacksmithSellingList.put(Integer.valueOf(Item.pickaxeDiamond.itemID), new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
-        blacksmithSellingList.put(Integer.valueOf(Item.shovelIron.itemID), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
-        blacksmithSellingList.put(Integer.valueOf(Item.shovelDiamond.itemID), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
-        blacksmithSellingList.put(Integer.valueOf(Item.hoeIron.itemID), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
-        blacksmithSellingList.put(Integer.valueOf(Item.hoeDiamond.itemID), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
-        blacksmithSellingList.put(Integer.valueOf(Item.bootsIron.itemID), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
-        blacksmithSellingList.put(Integer.valueOf(Item.bootsDiamond.itemID), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
-        blacksmithSellingList.put(Integer.valueOf(Item.helmetIron.itemID), new Tuple(Integer.valueOf(4), Integer.valueOf(6)));
-        blacksmithSellingList.put(Integer.valueOf(Item.helmetDiamond.itemID), new Tuple(Integer.valueOf(7), Integer.valueOf(8)));
-        blacksmithSellingList.put(Integer.valueOf(Item.plateIron.itemID), new Tuple(Integer.valueOf(10), Integer.valueOf(14)));
-        blacksmithSellingList.put(Integer.valueOf(Item.plateDiamond.itemID), new Tuple(Integer.valueOf(16), Integer.valueOf(19)));
-        blacksmithSellingList.put(Integer.valueOf(Item.legsIron.itemID), new Tuple(Integer.valueOf(8), Integer.valueOf(10)));
-        blacksmithSellingList.put(Integer.valueOf(Item.legsDiamond.itemID), new Tuple(Integer.valueOf(11), Integer.valueOf(14)));
-        blacksmithSellingList.put(Integer.valueOf(Item.bootsChain.itemID), new Tuple(Integer.valueOf(5), Integer.valueOf(7)));
-        blacksmithSellingList.put(Integer.valueOf(Item.helmetChain.itemID), new Tuple(Integer.valueOf(5), Integer.valueOf(7)));
-        blacksmithSellingList.put(Integer.valueOf(Item.plateChain.itemID), new Tuple(Integer.valueOf(11), Integer.valueOf(15)));
-        blacksmithSellingList.put(Integer.valueOf(Item.legsChain.itemID), new Tuple(Integer.valueOf(9), Integer.valueOf(11)));
-        blacksmithSellingList.put(Integer.valueOf(Item.bread.itemID), new Tuple(Integer.valueOf(-4), Integer.valueOf(-2)));
-        blacksmithSellingList.put(Integer.valueOf(Item.melon.itemID), new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
-        blacksmithSellingList.put(Integer.valueOf(Item.appleRed.itemID), new Tuple(Integer.valueOf(-8), Integer.valueOf(-4)));
-        blacksmithSellingList.put(Integer.valueOf(Item.cookie.itemID), new Tuple(Integer.valueOf(-10), Integer.valueOf(-7)));
-        blacksmithSellingList.put(Integer.valueOf(Block.glass.blockID), new Tuple(Integer.valueOf(-5), Integer.valueOf(-3)));
-        blacksmithSellingList.put(Integer.valueOf(Block.bookShelf.blockID), new Tuple(Integer.valueOf(3), Integer.valueOf(4)));
-        blacksmithSellingList.put(Integer.valueOf(Item.plateLeather.itemID), new Tuple(Integer.valueOf(4), Integer.valueOf(5)));
-        blacksmithSellingList.put(Integer.valueOf(Item.bootsLeather.itemID), new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
-        blacksmithSellingList.put(Integer.valueOf(Item.helmetLeather.itemID), new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
-        blacksmithSellingList.put(Integer.valueOf(Item.legsLeather.itemID), new Tuple(Integer.valueOf(2), Integer.valueOf(4)));
-        blacksmithSellingList.put(Integer.valueOf(Item.saddle.itemID), new Tuple(Integer.valueOf(6), Integer.valueOf(8)));
-        blacksmithSellingList.put(Integer.valueOf(Item.expBottle.itemID), new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
-        blacksmithSellingList.put(Integer.valueOf(Item.redstone.itemID), new Tuple(Integer.valueOf(-4), Integer.valueOf(-1)));
-        blacksmithSellingList.put(Integer.valueOf(Item.compass.itemID), new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
-        blacksmithSellingList.put(Integer.valueOf(Item.pocketSundial.itemID), new Tuple(Integer.valueOf(10), Integer.valueOf(12)));
-        blacksmithSellingList.put(Integer.valueOf(Block.glowStone.blockID), new Tuple(Integer.valueOf(-3), Integer.valueOf(-1)));
-        blacksmithSellingList.put(Integer.valueOf(Item.porkCooked.itemID), new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
-        blacksmithSellingList.put(Integer.valueOf(Item.beefCooked.itemID), new Tuple(Integer.valueOf(-7), Integer.valueOf(-5)));
-        blacksmithSellingList.put(Integer.valueOf(Item.chickenCooked.itemID), new Tuple(Integer.valueOf(-8), Integer.valueOf(-6)));
-        blacksmithSellingList.put(Integer.valueOf(Item.eyeOfEnder.itemID), new Tuple(Integer.valueOf(7), Integer.valueOf(11)));
-        blacksmithSellingList.put(Integer.valueOf(Item.arrow.itemID), new Tuple(Integer.valueOf(-12), Integer.valueOf(-8)));
+        villagersSellingList.put(Item.coal.itemID, new Tuple(16, 24));
+        villagersSellingList.put(Item.ingotIron.itemID, new Tuple(8, 10));
+        villagersSellingList.put(Item.ingotGold.itemID, new Tuple(8, 10));
+        villagersSellingList.put(Item.diamond.itemID, new Tuple(4, 6));
+        villagersSellingList.put(Item.paper.itemID, new Tuple(24, 36));
+        villagersSellingList.put(Item.book.itemID, new Tuple(11, 13));
+        villagersSellingList.put(Item.writtenBook.itemID, new Tuple(1, 1));
+        villagersSellingList.put(Item.enderPearl.itemID, new Tuple(3, 4));
+        villagersSellingList.put(Item.eyeOfEnder.itemID, new Tuple(2, 3));
+        villagersSellingList.put(Item.porkRaw.itemID, new Tuple(14, 18));
+        villagersSellingList.put(Item.beefRaw.itemID, new Tuple(14, 18));
+        villagersSellingList.put(Item.chickenRaw.itemID, new Tuple(14, 18));
+        villagersSellingList.put(Item.fishCooked.itemID, new Tuple(9, 13));
+        villagersSellingList.put(Item.seeds.itemID, new Tuple(34, 48));
+        villagersSellingList.put(Item.melonSeeds.itemID, new Tuple(30, 38));
+        villagersSellingList.put(Item.pumpkinSeeds.itemID, new Tuple(30, 38));
+        villagersSellingList.put(Item.wheat.itemID, new Tuple(18, 22));
+        villagersSellingList.put(Block.cloth.blockID, new Tuple(14, 22));
+        villagersSellingList.put(Item.rottenFlesh.itemID, new Tuple(36, 64));
+        blacksmithSellingList.put(Item.flintAndSteel.itemID, new Tuple(3, 4));
+        blacksmithSellingList.put(Item.shears.itemID, new Tuple(3, 4));
+        blacksmithSellingList.put(Item.swordIron.itemID, new Tuple(7, 11));
+        blacksmithSellingList.put(Item.swordDiamond.itemID, new Tuple(12, 14));
+        blacksmithSellingList.put(Item.axeIron.itemID, new Tuple(6, 8));
+        blacksmithSellingList.put(Item.axeDiamond.itemID, new Tuple(9, 12));
+        blacksmithSellingList.put(Item.pickaxeIron.itemID, new Tuple(7, 9));
+        blacksmithSellingList.put(Item.pickaxeDiamond.itemID, new Tuple(10, 12));
+        blacksmithSellingList.put(Item.shovelIron.itemID, new Tuple(4, 6));
+        blacksmithSellingList.put(Item.shovelDiamond.itemID, new Tuple(7, 8));
+        blacksmithSellingList.put(Item.hoeIron.itemID, new Tuple(4, 6));
+        blacksmithSellingList.put(Item.hoeDiamond.itemID, new Tuple(7, 8));
+        blacksmithSellingList.put(Item.bootsIron.itemID, new Tuple(4, 6));
+        blacksmithSellingList.put(Item.bootsDiamond.itemID, new Tuple(7, 8));
+        blacksmithSellingList.put(Item.helmetIron.itemID, new Tuple(4, 6));
+        blacksmithSellingList.put(Item.helmetDiamond.itemID, new Tuple(7, 8));
+        blacksmithSellingList.put(Item.plateIron.itemID, new Tuple(10, 14));
+        blacksmithSellingList.put(Item.plateDiamond.itemID, new Tuple(16, 19));
+        blacksmithSellingList.put(Item.legsIron.itemID, new Tuple(8, 10));
+        blacksmithSellingList.put(Item.legsDiamond.itemID, new Tuple(11, 14));
+        blacksmithSellingList.put(Item.bootsChain.itemID, new Tuple(5, 7));
+        blacksmithSellingList.put(Item.helmetChain.itemID, new Tuple(5, 7));
+        blacksmithSellingList.put(Item.plateChain.itemID, new Tuple(11, 15));
+        blacksmithSellingList.put(Item.legsChain.itemID, new Tuple(9, 11));
+        blacksmithSellingList.put(Item.bread.itemID, new Tuple(-4, -2));
+        blacksmithSellingList.put(Item.melon.itemID, new Tuple(-8, -4));
+        blacksmithSellingList.put(Item.appleRed.itemID, new Tuple(-8, -4));
+        blacksmithSellingList.put(Item.cookie.itemID, new Tuple(-10, -7));
+        blacksmithSellingList.put(Block.glass.blockID, new Tuple(-5, -3));
+        blacksmithSellingList.put(Block.bookShelf.blockID, new Tuple(3, 4));
+        blacksmithSellingList.put(Item.plateLeather.itemID, new Tuple(4, 5));
+        blacksmithSellingList.put(Item.bootsLeather.itemID, new Tuple(2, 4));
+        blacksmithSellingList.put(Item.helmetLeather.itemID, new Tuple(2, 4));
+        blacksmithSellingList.put(Item.legsLeather.itemID, new Tuple(2, 4));
+        blacksmithSellingList.put(Item.saddle.itemID, new Tuple(6, 8));
+        blacksmithSellingList.put(Item.expBottle.itemID, new Tuple(-4, -1));
+        blacksmithSellingList.put(Item.redstone.itemID, new Tuple(-4, -1));
+        blacksmithSellingList.put(Item.compass.itemID, new Tuple(10, 12));
+        blacksmithSellingList.put(Item.pocketSundial.itemID, new Tuple(10, 12));
+        blacksmithSellingList.put(Block.glowStone.blockID, new Tuple(-3, -1));
+        blacksmithSellingList.put(Item.porkCooked.itemID, new Tuple(-7, -5));
+        blacksmithSellingList.put(Item.beefCooked.itemID, new Tuple(-7, -5));
+        blacksmithSellingList.put(Item.chickenCooked.itemID, new Tuple(-8, -6));
+        blacksmithSellingList.put(Item.eyeOfEnder.itemID, new Tuple(7, 11));
+        blacksmithSellingList.put(Item.arrow.itemID, new Tuple(-12, -8));
     }
 }

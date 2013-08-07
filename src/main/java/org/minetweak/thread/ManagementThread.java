@@ -23,15 +23,15 @@ public class ManagementThread extends Thread {
             loadPlayers();
             loadWhitelist();
             loadOps();
+            for (Runnable runnable : runnables) {
+                runnable.run();
+                runnables.remove(runnable);
+            }
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
                 Minetweak.getLogger().logWarningException("Stopping Management Thread", e);
                 break;
-            }
-            for (Runnable runnable : runnables) {
-                runnable.run();
-                runnables.remove(runnable);
             }
         }
     }
