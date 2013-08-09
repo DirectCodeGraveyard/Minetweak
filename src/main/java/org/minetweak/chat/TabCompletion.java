@@ -78,6 +78,11 @@ public class TabCompletion {
         return matches;
     }
 
+    /**
+     * Gets the Commands Matching the Input
+     * @param input input line
+     * @return Commands Matching Input
+     */
     public static Set<String> getCommandsMatching(String input) {
         return getCommandsMatching(input, true);
     }

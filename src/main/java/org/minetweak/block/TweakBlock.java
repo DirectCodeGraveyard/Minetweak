@@ -1,6 +1,7 @@
 package org.minetweak.block;
 
 import net.minecraft.block.Block;
+import org.bouncycastle.crypto.engines.AESFastEngine;
 import org.minetweak.material.Material;
 import org.minetweak.world.Chunk;
 import org.minetweak.world.Location;
@@ -12,12 +13,20 @@ public class TweakBlock implements IBlock {
     private final int y;
     private final int z;
     private boolean powered;
+    private boolean isInWorld = true;
+    private Block block;
 
     public TweakBlock(Chunk chunk, int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.chunk = chunk;
+    }
+
+    public TweakBlock(Block block) {
+        this(null, 0, 0, 0);
+        this.isInWorld = false;
+        this.block = block;
     }
 
     @Override
@@ -128,6 +137,9 @@ public class TweakBlock implements IBlock {
 
     @Override
     public Block getMCBlock() {
+        if (!isInWorld) {
+            return block;
+        }
         return Block.blocksList[getBlockID()];
     }
 
