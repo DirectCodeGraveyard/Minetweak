@@ -800,10 +800,9 @@ public class WorldServer extends World {
             this.blockEventCacheIndex ^= 1;
 
             for (Object o : this.blockEventCache[var1]) {
-                BlockEventData var3 = (BlockEventData) o;
 
-                if (this.onBlockEventReceived(var3)) {
-                    this.mcServer.getConfigurationManager().sendPacketToPlayersAroundPoint((double) var3.getX(), (double) var3.getY(), (double) var3.getZ(), 64.0D, this.provider.dimensionId, new Packet54PlayNoteBlock(var3.getX(), var3.getY(), var3.getZ(), var3.getBlockID(), var3.getEventID(), var3.getEventParameter()));
+                if (this.onBlockEventReceived((BlockEventData) o)) {
+                    this.mcServer.getConfigurationManager().sendPacketToPlayersAroundPoint((double) ((BlockEventData) o).getX(), (double) ((BlockEventData) o).getY(), (double) ((BlockEventData) o).getZ(), 64.0D, this.provider.dimensionId, new Packet54PlayNoteBlock(((BlockEventData) o).getX(), ((BlockEventData) o).getY(), ((BlockEventData) o).getZ(), ((BlockEventData) o).getBlockID(), ((BlockEventData) o).getEventID(), ((BlockEventData) o).getEventParameter()));
                 }
             }
 

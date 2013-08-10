@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+@SuppressWarnings("UnusedParameters")
 public abstract class StructureComponent {
     public StructureBoundingBox boundingBox;
 

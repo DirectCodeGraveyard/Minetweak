@@ -2,6 +2,7 @@ package org.minetweak.plugins;
 
 import org.minetweak.command.CommandExecutor;
 import org.minetweak.language.LanguageObject;
+import org.minetweak.util.TweakLogger;
 
 /**
  * Base Class for Plugins
@@ -63,4 +64,16 @@ public interface IPlugin {
      * @param executor the command executor
      */
     public void registerCommand(String label, CommandExecutor executor);
+
+    /**
+     * Sets the Plugin's Logger
+     * @param logger logger
+     */
+    public void setLogger(TweakLogger logger);
+
+    /**
+     * Gets the Plugins's Logger
+     * @return logger
+     */
+    public TweakLogger getLogger();
 }

@@ -21,10 +21,6 @@ public class LogFormatter extends Formatter {
         StringBuilder builder = new StringBuilder();
         builder.append(this.dateFormat.format(record.getMillis()));
 
-        if (TweakLogger.getLogPrefix(this.logger) != null) {
-            builder.append(TweakLogger.getLogPrefix(this.logger));
-        }
-
         builder.append(" [").append(record.getLevel().getName()).append("] ");
         builder.append(this.formatMessage(record));
         builder.append('\n');

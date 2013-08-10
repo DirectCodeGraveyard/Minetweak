@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
+@SuppressWarnings("UnusedParameters")
 public abstract class StructureStart {
     /**
      * List of all StructureComponents that are part of this structure

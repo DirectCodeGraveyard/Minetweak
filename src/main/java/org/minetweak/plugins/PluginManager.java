@@ -3,6 +3,7 @@ package org.minetweak.plugins;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.minetweak.Minetweak;
+import org.minetweak.util.TweakLogger;
 
 import java.io.File;
 import java.io.InputStreamReader;
@@ -117,6 +118,7 @@ public class PluginManager {
                 Class pc = Class.forName(c, true, loader);
                 IPlugin plugin = (IPlugin) pc.newInstance();
                 plugin.setPluginInfo(pluginInformation.get(c));
+                plugin.setLogger(new TweakLogger(pluginInformation.get(c).getName()));
                 // Note that we override plugins even if they exist. This allows for alphabetical file-name plugin overriding
                 plugins.put(plugin.getPluginInfo().getName(), plugin);
             } catch (Exception e) {

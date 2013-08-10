@@ -3,6 +3,7 @@ package org.minetweak.plugins;
 import org.minetweak.Minetweak;
 import org.minetweak.command.CommandExecutor;
 import org.minetweak.language.LanguageObject;
+import org.minetweak.util.TweakLogger;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ public abstract class MinetweakPlugin implements IPlugin {
     private ArrayList<String> commands = new ArrayList<String>();
     private ArrayList<Object> listeners = new ArrayList<Object>();
     private ArrayList<LanguageObject> languageObjects = new ArrayList<LanguageObject>();
+    private TweakLogger logger;
 
     @Override
     public void onEnable() {
@@ -63,5 +65,15 @@ public abstract class MinetweakPlugin implements IPlugin {
     @Override
     public String getTranslatedName(LanguageObject languageObject) {
         return languageObject.getTranslatedName();
+    }
+
+    @Override
+    public void setLogger(TweakLogger logger) {
+        this.logger = logger;
+    }
+
+    @Override
+    public TweakLogger getLogger() {
+        return logger;
     }
 }

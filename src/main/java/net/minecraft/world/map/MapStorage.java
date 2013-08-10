@@ -40,7 +40,7 @@ public class MapStorage {
      * Loads an existing MapDataBase corresponding to the given String id from disk, instantiating the given Class, or
      * returns null if none such file exists. args: Class to instantiate, String dataID
      */
-    public WorldSavedData loadData(Class par1Class, String par2Str) {
+    public WorldSavedData loadData(Class<?> par1Class, String par2Str) {
         WorldSavedData var3 = this.loadedDataMap.get(par2Str);
 
         if (var3 != null) {

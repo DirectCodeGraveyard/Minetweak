@@ -1,7 +1,5 @@
 package org.minetweak.util;
 
-import net.minecraft.logging.ILogAgent;
-
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -10,13 +8,13 @@ import java.util.logging.Logger;
 /**
  * Base Logger for Minetweak Operations
  */
-public class TweakLogger implements ILogAgent {
+public class TweakLogger {
     private final Logger serverLogger;
     private final String prefix;
 
-    public TweakLogger(String loggerName, String prefix) {
+    public TweakLogger(String loggerName) {
         this.serverLogger = Logger.getLogger(loggerName);
-        this.prefix = prefix;
+        this.prefix = loggerName;
         this.setupLogger();
     }
 
@@ -37,47 +35,70 @@ public class TweakLogger implements ILogAgent {
         this.serverLogger.addHandler(consoleHandler);
     }
 
-    @Override
     public Logger getLogger() {
         return this.serverLogger;
     }
 
-    @Override
-    public void logInfo(String line) {
+    /**
+     * Logs info to the Console
+     * @param line line to log
+     */
+    public void info(String line) {
         this.serverLogger.log(Level.INFO, "[" + prefix + "] " + line);
     }
 
-    @Override
+    /**
+     * Logs warning to the Console
+     * @param line line to log
+     */
     public void logWarning(String line) {
-        this.serverLogger.log(Level.WARNING, "[" + prefix + "] " + line);
+        this.serverLogger.log(Level.WARNING, "[" + prefix + "] " +  line);
     }
 
-    @Override
+    /**
+     * Logs warning that is formatted to the Console
+     * @param line line to log
+     */
     public void logWarningFormatted(String line, Object... objects) {
         this.serverLogger.log(Level.WARNING, "[" + prefix + "] " + line, objects);
     }
 
-    @Override
+    /**
+     * Logs warning with an exception to the Console
+     * @param line line to log
+     */
     public void logWarningException(String line, Throwable exception) {
         this.serverLogger.log(Level.WARNING, "[" + prefix + "] " + line, exception);
     }
 
-    @Override
+    /**
+     * Logs severe to the Console
+     * @param line line to log
+     */
     public void logSevere(String line) {
         this.serverLogger.log(Level.SEVERE, "[" + prefix + "] " + line);
     }
 
-    @Override
+    /**
+     * Logs severe with an exception to the Console
+     * @param line line to log
+     */
     public void logSevereException(String line, Throwable exception) {
         this.serverLogger.log(Level.SEVERE, "[" + prefix + "] " + line, exception);
     }
 
-    @Override
+    /**
+     * Logs info without a prefix to the Console
+     * @param line line to log
+     */
     public void logNoPrefix(String line) {
         this.serverLogger.log(Level.INFO, line);
     }
 
-    public static String getLogPrefix(TweakLogger logger) {
+    /**
+     * Gets the Loggers prefixs
+     */
+    public static String getPrefix(TweakLogger logger) {
         return logger.prefix;
     }
 }

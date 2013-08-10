@@ -73,7 +73,10 @@ public class Minetweak {
      */
     private static EventBus eventBus = new EventBus();
 
-    private static TweakLogger logger = new TweakLogger("Minetweak", null);
+    /**
+     * The Main logger for Minetweak
+     */
+    private static TweakLogger logger = new TweakLogger("Minetweak");
 
     /**
      * Runs the Minetweak Server.
@@ -242,7 +245,7 @@ public class Minetweak {
      * @param line line to log
      */
     public static void info(String line) {
-        getLogger().logInfo(line);
+        getLogger().info(line);
     }
 
     /**
