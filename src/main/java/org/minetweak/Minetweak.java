@@ -14,7 +14,7 @@ import org.minetweak.permissions.ServerOps;
 import org.minetweak.plugins.PluginLoadingHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
-import org.minetweak.util.MinetweakLog;
+import org.minetweak.util.TweakLogger;
 import org.minetweak.world.World;
 
 import java.io.File;
@@ -73,7 +73,7 @@ public class Minetweak {
      */
     private static EventBus eventBus = new EventBus();
 
-    private static MinetweakLog logger = new MinetweakLog("Minetweak", null);
+    private static TweakLogger logger = new TweakLogger("Minetweak", null);
 
     /**
      * Runs the Minetweak Server.
@@ -237,7 +237,7 @@ public class Minetweak {
     }
 
     /**
-     * MinetweakLog Minetweak Info to Console
+     * TweakLogger Minetweak Info to Console
      *
      * @param line line to log
      */
@@ -281,6 +281,7 @@ public class Minetweak {
         registerCommand("viewinv", new CommandViewInventory());
         registerCommand("weather", new CommandWeather());
         registerCommand("whitelist", new CommandWhitelist());
+        registerCommand("heal", new CommandHeal());
     }
 
     /**
@@ -304,7 +305,7 @@ public class Minetweak {
     /**
      * Gets the Minetweak Logger
      */
-    public static MinetweakLog getLogger() {
+    public static TweakLogger getLogger() {
         return logger;
     }
 

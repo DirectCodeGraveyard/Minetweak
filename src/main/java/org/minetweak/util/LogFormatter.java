@@ -9,9 +9,9 @@ import java.util.logging.LogRecord;
 public class LogFormatter extends Formatter {
     private SimpleDateFormat dateFormat;
 
-    final MinetweakLog logger;
+    final TweakLogger logger;
 
-    protected LogFormatter(MinetweakLog logger) {
+    protected LogFormatter(TweakLogger logger) {
         this.logger = logger;
         this.dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
@@ -21,8 +21,8 @@ public class LogFormatter extends Formatter {
         StringBuilder builder = new StringBuilder();
         builder.append(this.dateFormat.format(record.getMillis()));
 
-        if (MinetweakLog.getLogPrefix(this.logger) != null) {
-            builder.append(MinetweakLog.getLogPrefix(this.logger));
+        if (TweakLogger.getLogPrefix(this.logger) != null) {
+            builder.append(TweakLogger.getLogPrefix(this.logger));
         }
 
         builder.append(" [").append(record.getLevel().getName()).append("] ");

@@ -8,12 +8,12 @@ public class NibbleArray {
     public final byte[] data;
 
     /**
-     * MinetweakLog base 2 of the chunk height (128); applied as a shift on Z coordinate
+     * TweakLogger base 2 of the chunk height (128); applied as a shift on Z coordinate
      */
     private final int depthBits;
 
     /**
-     * MinetweakLog base 2 of the chunk height (128) * width (16); applied as a shift on X coordinate
+     * TweakLogger base 2 of the chunk height (128) * width (16); applied as a shift on X coordinate
      */
     private final int depthBitsPlusFour;
 

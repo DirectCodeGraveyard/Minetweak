@@ -7,11 +7,14 @@ import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MinetweakLog implements ILogAgent {
+/**
+ * Base Logger for Minetweak Operations
+ */
+public class TweakLogger implements ILogAgent {
     private final Logger serverLogger;
     private final String prefix;
 
-    public MinetweakLog(String loggerName, String prefix) {
+    public TweakLogger(String loggerName, String prefix) {
         this.serverLogger = Logger.getLogger(loggerName);
         this.prefix = prefix;
         this.setupLogger();
@@ -41,32 +44,32 @@ public class MinetweakLog implements ILogAgent {
 
     @Override
     public void logInfo(String line) {
-        this.serverLogger.log(Level.INFO, "[Minetweak] " + line);
+        this.serverLogger.log(Level.INFO, "[" + prefix + "] " + line);
     }
 
     @Override
     public void logWarning(String line) {
-        this.serverLogger.log(Level.WARNING, "[Minetweak] " + line);
+        this.serverLogger.log(Level.WARNING, "[" + prefix + "] " + line);
     }
 
     @Override
     public void logWarningFormatted(String line, Object... objects) {
-        this.serverLogger.log(Level.WARNING, "[Minetweak] " + line, objects);
+        this.serverLogger.log(Level.WARNING, "[" + prefix + "] " + line, objects);
     }
 
     @Override
     public void logWarningException(String line, Throwable exception) {
-        this.serverLogger.log(Level.WARNING, "[Minetweak] " + line, exception);
+        this.serverLogger.log(Level.WARNING, "[" + prefix + "] " + line, exception);
     }
 
     @Override
     public void logSevere(String line) {
-        this.serverLogger.log(Level.SEVERE, "[Minetweak] " + line);
+        this.serverLogger.log(Level.SEVERE, "[" + prefix + "] " + line);
     }
 
     @Override
     public void logSevereException(String line, Throwable exception) {
-        this.serverLogger.log(Level.SEVERE, "[Minetweak] " + line, exception);
+        this.serverLogger.log(Level.SEVERE, "[" + prefix + "] " + line, exception);
     }
 
     @Override
@@ -74,7 +77,7 @@ public class MinetweakLog implements ILogAgent {
         this.serverLogger.log(Level.INFO, line);
     }
 
-    public static String getLogPrefix(MinetweakLog logger) {
+    public static String getLogPrefix(TweakLogger logger) {
         return logger.prefix;
     }
 }

@@ -9,6 +9,7 @@ import org.minetweak.event.server.CraftingReadyEvent;
 
 /**
  * Manages Recipes
+ * NOTE; This currently is buggy, but will be improved.
  */
 public class RecipeManager {
     private static final RecipeManager instance = new RecipeManager();

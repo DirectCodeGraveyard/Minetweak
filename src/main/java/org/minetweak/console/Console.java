@@ -4,6 +4,9 @@ import org.minetweak.Minetweak;
 import org.minetweak.chat.TextColor;
 import org.minetweak.command.CommandSender;
 
+/**
+ * Represents the Console
+ */
 public class Console implements CommandSender {
 
     @Override

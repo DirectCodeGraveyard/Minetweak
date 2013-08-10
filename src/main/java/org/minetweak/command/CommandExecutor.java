@@ -2,6 +2,7 @@ package org.minetweak.command;
 
 import net.minecraft.utils.enums.EnumChatFormatting;
 import org.minetweak.chat.TabCompletion;
+import org.minetweak.chat.TextColor;
 import org.minetweak.util.StringUtils;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public abstract class CommandExecutor implements ICommandExecutor {
      * @param sender the Command Sender
      */
     public void noPermission(CommandSender sender) {
-        sender.sendMessage(EnumChatFormatting.RED + "You do not have permission to do that.");
+        sender.sendMessage(TextColor.RED + "You do not have permission to do that.");
     }
 
     /**
@@ -47,6 +48,14 @@ public abstract class CommandExecutor implements ICommandExecutor {
      * @param action the Action to be Performed
      */
     public void noPermission(CommandSender sender, String action) {
-        sender.sendMessage(EnumChatFormatting.RED + "You do not have permission to " + action + ".");
+        sender.sendMessage(TextColor.RED + "You do not have permission to " + action + ".");
+    }
+
+    /**
+     * Tells the Sender that this command is not for Consoles
+     * @param sender the Command Sender
+     */
+    public void notPlayer(CommandSender sender) {
+        sender.sendMessage(TextColor.RED + "This command cannot be used by Consoles.");
     }
 }
