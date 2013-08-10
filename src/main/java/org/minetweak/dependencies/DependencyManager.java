@@ -36,7 +36,7 @@ public class DependencyManager {
     }
 
     public static void updateList() {
-        // Minetweak.getLogger().logInfo("Dependencies repo was updated");
+        // Minetweak.getLogger().info("Dependencies repo was updated");
         HttpUtils.downloadFile(repoJsonLocal.getAbsolutePath(), repoJson);
         localJsonDownloaded = true;
     }
@@ -69,7 +69,7 @@ public class DependencyManager {
                     return null;
                 }
 
-                Minetweak.getLogger().logInfo("Downloading dependency: " + name + " v" + version);
+                Minetweak.getLogger().info("Downloading dependency: " + name + " v" + version);
                 HttpUtils.downloadFile(jar.getAbsolutePath(), dep.url);
 
                 return jar;
