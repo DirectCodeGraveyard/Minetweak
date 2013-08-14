@@ -23,7 +23,6 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-@SuppressWarnings({"MismatchedReadAndWriteOfArray", "UnusedDeclaration", "FieldCanBeLocal"})
 public class EntityHorse extends EntityAnimal implements IInvBasic {
     private static final IEntitySelector field_110276_bu = new EntityHorseBredSelector();
     private static final Attribute horseAttributes = (new RangedAttribute("horse.jumpStrength", 0.7D, 0.0D, 2.0D)).func_111117_a("Jump Strength").func_111112_a(true);
@@ -1172,7 +1171,6 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
 
     public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
         Object par1EntityLivingData1 = super.func_110161_a(par1EntityLivingData);
-        boolean var2 = false;
         int var3 = 0;
         int var7;
 

@@ -18,4 +18,8 @@ public class LanguageObject {
         return translatedName;
     }
 
+    @Override
+    public String toString() {
+        return translatedName;
+    }
 }

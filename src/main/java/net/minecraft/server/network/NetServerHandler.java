@@ -813,25 +813,6 @@ public class NetServerHandler extends NetHandler {
             int var6;
             int var8;
 
-            for (var8 = 0; var8 < 4; ++var8) {
-                boolean var5 = true;
-
-                if (par1Packet130UpdateSign.signLines[var8].length() > 15) {
-                    var5 = false;
-                } else {
-                    for (var6 = 0; var6 < par1Packet130UpdateSign.signLines[var8].length(); ++var6) {
-                        if (ChatAllowedCharacters.allowedCharacters.indexOf(par1Packet130UpdateSign.signLines[var8].charAt(var6)) < 0) {
-                            var5 = false;
-                        }
-                    }
-                }
-
-                // Bug Fix for Signs
-                /*if (!var5) {
-                    par1Packet130UpdateSign.signLines[var8] = "!?";
-                }*/
-            }
-
             if (var3 instanceof TileEntitySign) {
                 var8 = par1Packet130UpdateSign.xPosition;
                 int var9 = par1Packet130UpdateSign.yPosition;

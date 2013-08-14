@@ -28,7 +28,7 @@ public abstract class Packet implements IPacket {
     /**
      * Maps packet class to packet id
      */
-    private static Map<Class, Integer> packetClassToIdMap = new HashMap<Class, Integer>();
+    private static Map<Class<? extends IPacket>, Integer> packetClassToIdMap = new HashMap<Class<? extends IPacket>, Integer>();
 
     /**
      * List of the client's packet IDs.
@@ -87,7 +87,7 @@ public abstract class Packet implements IPacket {
      */
     public static Packet getNewPacket(ILogAgent par0ILogAgent, int par1) {
         try {
-            Class var2 = (Class) packetIdToClassMap.lookup(par1);
+            Class<?> var2 = (Class<?>) packetIdToClassMap.lookup(par1);
             return var2 == null ? null : (Packet) var2.newInstance();
         } catch (Exception var3) {
             var3.printStackTrace();

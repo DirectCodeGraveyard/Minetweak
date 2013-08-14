@@ -1,12 +1,20 @@
 package org.minetweak.world;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 
 public class Location {
 
+    @Expose
+    @SerializedName("x")
     private double posX;
+    @Expose
+    @SerializedName("y")
     private double posY;
+    @Expose
+    @SerializedName("z")
     private double posZ;
 
     private World world;

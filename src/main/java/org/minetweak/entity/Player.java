@@ -515,4 +515,9 @@ public class Player extends Entity implements CommandSender {
     public void closeGUI() {
         getPlayerMP().closeContainer();
     }
+
+    @Override
+    public String toString() {
+        return playerDisplayName;
+    }
 }
