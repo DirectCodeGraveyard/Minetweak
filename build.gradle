@@ -99,8 +99,8 @@ artifacts {
 
 //signing { sign configurations.archives }
 
-if (!hasProperty('sonatypeUsername')) {def sonatypeUsername = ''}
-if (!hasProperty('sonatypePassword')) {def sonatypePassword = ''}
+if (!hasProperty('sonatypeUsername')) {ext.sonatypeUsername = ''}
+if (!hasProperty('sonatypePassword')) {ext.sonatypePassword = ''}
 
 uploadArchives {
     repositories.mavenDeployer {
@@ -122,7 +122,7 @@ uploadArchives {
             project {
                 name project.name
                 packaging 'jar'
-                description 'Minetweak API Implementation'
+                description 'A fast and reliable Minecraft Server with an API.'
                 inceptionYear '2013'
                 url 'http://www.minetweak.org/'
 
