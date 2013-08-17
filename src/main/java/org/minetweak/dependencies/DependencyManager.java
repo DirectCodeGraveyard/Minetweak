@@ -2,6 +2,7 @@ package org.minetweak.dependencies;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import groovy.lang.GroovyClassLoader;
 import org.apache.commons.io.IOUtils;
 import org.minetweak.Minetweak;
 import org.minetweak.util.HttpUtils;
@@ -9,6 +10,7 @@ import org.minetweak.util.HttpUtils;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class DependencyManager {
@@ -21,6 +23,7 @@ public class DependencyManager {
 
     private static String repoJson = "http://repo.minetweak.org/dependenciesList.json";
     private static File repoJsonLocal = new File("dependenciesList.json");
+    private static GroovyClassLoader classLoader = new GroovyClassLoader(ClassLoader.getSystemClassLoader());
 
     public static String json;
 
@@ -62,7 +65,7 @@ public class DependencyManager {
             if (dep.name.equalsIgnoreCase(name) && dep.version.equalsIgnoreCase(version)) {
                 File folder = new File("lib/" + name + "/" + version + "/");
                 File jar = new File(folder, name + ".jar");
-                if (jar.exists()) return null;
+                if (jar.exists()) return jar;
 
                 if (!folder.mkdirs()) {
                     Minetweak.getLogger().logWarning("Unable to make the directories for dependency \'" + dep.name + "\'!");
@@ -80,4 +83,18 @@ public class DependencyManager {
         return null;
     }
 
+    public static void loadDependency(File file) {
+        if (file==null) {
+            Minetweak.getLogger().logSevere("Tried to load a null dependency file.");
+        }
+        try {
+            classLoader.addURL(file.toURI().toURL());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static GroovyClassLoader getClassLoader() {
+        return classLoader;
+    }
 }
