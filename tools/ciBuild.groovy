@@ -29,4 +29,6 @@ def process = builder.start()
 
 System.out << process.inputStream
 
-println 'Build Completed.'
+println "Build Completed with exit status ${process.exitValue()}"
+
+System.exit(process.exitValue())
