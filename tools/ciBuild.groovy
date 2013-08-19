@@ -1,5 +1,5 @@
 def mainDir = new File(getClass().protectionDomain.codeSource.location.path).parentFile.parentFile
-def targetList = new File(mainDir, 'tools/ci.targets')
+def targetList = new File(mainDir, 'tools/ciBuild.cfg')
 def cmd = []
 
 def osName = System.properties['os.name'] as String
