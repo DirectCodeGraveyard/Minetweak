@@ -15,8 +15,6 @@ targetList.eachLine {
     cmd.add(it.trim())
 }
 
-def env = System.getenv()
-
 println 'Starting Build.'
 
 def builder = new ProcessBuilder(cmd as String[])
@@ -27,7 +25,7 @@ builder.redirectErrorStream(true)
 
 def process = builder.start()
 
-System.out << process.inputStream
+System.out << process.in
 
 println "Build Completed with exit status ${process.exitValue()}"
 

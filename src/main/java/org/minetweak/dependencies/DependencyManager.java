@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class DependencyManager {
@@ -86,12 +87,17 @@ public class DependencyManager {
     public static void loadDependency(File file) {
         if (file==null) {
             Minetweak.getLogger().logSevere("Tried to load a null dependency file.");
+            return;
         }
         try {
-            classLoader.addURL(file.toURI().toURL());
+            loadDependency(file.toURI().toURL());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void loadDependency(URL url) {
+        classLoader.addURL(url);
     }
 
     public static GroovyClassLoader getClassLoader() {
