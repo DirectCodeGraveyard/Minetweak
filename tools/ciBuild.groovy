@@ -27,6 +27,8 @@ def process = builder.start()
 
 System.out << process.in
 
-println "Build Completed with exit status ${process.exitValue()}"
+def exit = process.waitFor()
 
-System.exit(process.exitValue())
+println "Build Completed with exit status ${exit}"
+
+System.exit(exit)
