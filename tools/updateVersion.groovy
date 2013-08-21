@@ -7,7 +7,7 @@ def tmpFile = new File('build.gradle.tmp')
 gradleScript.eachLine {
     if (it.startsWith('def tweakVersion')) {
         println 'Found Version: ' + evaluate(it)
-        it = 'def tweakVersion = \'' + args[0] + '\''
+        it = "def tweakVersion = '${args[0]}'"
     }
     tmpFile.append(it + '\n')
 }

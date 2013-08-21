@@ -5,4 +5,4 @@ def loadJSON = { String jsonURL -> return new JsonSlurper().parse(url.toURL().op
 def branchInfo = loadJSON url
 def branches = []
 branchInfo.each {branches.add(it.get('name'))}
-println 'Branches:\n   ' + branches.join('\n   ')
+println "Branches:\n\t${branches.join('\n\t')}"

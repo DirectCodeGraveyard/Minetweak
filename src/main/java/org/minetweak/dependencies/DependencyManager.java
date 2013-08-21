@@ -55,7 +55,7 @@ public class DependencyManager {
         localJsonParsed = true;
     }
 
-    public static boolean dependencyExistsLocally(String name, String version) {
+    public static boolean dependencyInstalled(String name, String version) {
         return new File("lib/" + name + "/" + version + "/" + name + ".jar").exists();
     }
 

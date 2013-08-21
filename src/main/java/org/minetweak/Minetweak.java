@@ -288,9 +288,9 @@ public class Minetweak {
     }
 
     /**
-     * Return the HashMap with the players. Key is the username, Value is the Player instance.
+     * Return the Map with the players. Key is the username, Value is the Player instance.
      *
-     * @return Players HashMap
+     * @return Player Map
      */
     public static HashMap<String, Player> getPlayers() {
         return players;
@@ -322,7 +322,7 @@ public class Minetweak {
     }
 
     /**
-     * Perform a version check
+     * Perform a version check using the Manifest
      */
     private static void versionCheck() {
         URL url = Minetweak.class.getProtectionDomain().getCodeSource().getLocation();
