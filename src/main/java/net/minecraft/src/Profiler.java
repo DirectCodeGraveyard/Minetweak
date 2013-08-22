@@ -16,7 +16,7 @@ public class Profiler {
     /**
      * Flag profiling enabled
      */
-    public boolean profilingEnabled;
+    public boolean profilingEnabled = false;
 
     /**
      * Current profiling section
@@ -41,6 +41,7 @@ public class Profiler {
      * Start section
      */
     public void startSection(String par1Str) {
+        profilingEnabled = false;
         if (this.profilingEnabled) {
             if (this.profilingSection.length() > 0) {
                 this.profilingSection = this.profilingSection + ".";
@@ -56,6 +57,7 @@ public class Profiler {
      * End section
      */
     public void endSection() {
+        profilingEnabled = false;
         if (this.profilingEnabled) {
             long var1 = System.nanoTime();
             long var3 = this.timestampList.remove(this.timestampList.size() - 1);
@@ -80,6 +82,7 @@ public class Profiler {
      * Get profiling data
      */
     public List<ProfilerResult> getProfilingData(String par1Str) {
+        profilingEnabled = false;
         if (!this.profilingEnabled) {
             return null;
         } else {
@@ -145,11 +148,13 @@ public class Profiler {
      * End current section and start a new section
      */
     public void endStartSection(String par1Str) {
+        profilingEnabled = false;
         this.endSection();
         this.startSection(par1Str);
     }
 
     public String getNameOfLastSection() {
+        profilingEnabled = false;
         return this.sectionList.size() == 0 ? "[UNKNOWN]" : this.sectionList.get(this.sectionList.size() - 1);
     }
 }

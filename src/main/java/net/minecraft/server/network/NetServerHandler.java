@@ -573,7 +573,9 @@ public class NetServerHandler extends NetHandler {
                     if (!event.isCancelled()) {
                         ChatMessageComponent var4 = ChatMessageComponent.createWithType("chat.type.text", this.playerEntity.getTranslatedEntityName(), event.getMessage());
                         this.mcServer.getConfigurationManager().sendChatMessageToAll(var4, false);
-                    } else return;
+                    } else {
+                        return;
+                    }
                 }
 
                 this.chatSpamThresholdCount += 20;
