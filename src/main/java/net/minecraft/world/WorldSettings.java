@@ -117,4 +117,8 @@ public final class WorldSettings {
     public String func_82749_j() {
         return this.field_82751_h;
     }
+
+    public void setCommandsAllowed(boolean commandsAllowed) {
+        this.commandsAllowed = commandsAllowed;
+    }
 }

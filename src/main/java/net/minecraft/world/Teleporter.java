@@ -27,7 +27,7 @@ public class Teleporter {
     private final LongHashMap destinationCoordinateCache = new LongHashMap();
 
     /**
-     * A list of valid keys for the destinationCoordainteCache. These are based on the X & Z of the players initial
+     * A list of valid keys for the destinationCoordinateCache. These are based on the X & Z of the players initial
      * location.
      */
     private final List<Long> destinationCoordinateKeys = new ArrayList<Long>();

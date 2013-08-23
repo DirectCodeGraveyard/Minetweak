@@ -126,7 +126,7 @@ public class ItemMonsterPlacer extends Item {
                     var8.setLocationAndAngles(par2, par4, par6, MathHelper.wrapAngleTo180_float(par0World.rand.nextFloat() * 360.0F), 0.0F);
                     var10.rotationYawHead = var10.rotationYaw;
                     var10.renderYawOffset = var10.rotationYaw;
-                    var10.func_110161_a((EntityLivingData) null);
+                    var10.func_110161_a(null);
                     par0World.spawnEntityInWorld(var8);
                     var10.playLivingSound();
                 }

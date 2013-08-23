@@ -98,9 +98,9 @@ public class WorldType {
     }
 
     public static WorldType parseWorldType(String par0Str) {
-        for (WorldType worldType1 : worldTypes) {
-            if (worldType1 != null && worldType1.worldType.equalsIgnoreCase(par0Str)) {
-                return worldType1;
+        for (WorldType type : worldTypes) {
+            if (type != null && type.worldType.equalsIgnoreCase(par0Str)) {
+                return type;
             }
         }
 
