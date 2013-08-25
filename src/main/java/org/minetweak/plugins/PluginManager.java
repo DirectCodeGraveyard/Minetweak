@@ -2,6 +2,7 @@ package org.minetweak.plugins;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import groovy.lang.GroovyClassLoader;
 import org.minetweak.Minetweak;
 import org.minetweak.util.TweakLogger;
 
@@ -9,7 +10,6 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.jar.JarFile;
@@ -22,7 +22,7 @@ import java.util.zip.ZipEntry;
 public class PluginManager {
 
     private ArrayList<File> files = new ArrayList<File>();
-    public static URLClassLoader loader;
+    public static GroovyClassLoader loader;
     public static HashMap<String, IPlugin> plugins = new HashMap<String, IPlugin>();
     public static ArrayList<String> enabledPlugins = new ArrayList<String>();
     private Gson gson = new GsonBuilder().create();
@@ -112,7 +112,10 @@ public class PluginManager {
             }
 
         }
-        loader = new URLClassLoader(urls.toArray(new URL[urls.size()]), this.getClass().getClassLoader());
+        loader = new GroovyClassLoader();
+        for (URL url : urls) {
+            loader.addURL(url);
+        }
         for (String c : classes) {
             try {
                 Class pc = Class.forName(c, true, loader);
