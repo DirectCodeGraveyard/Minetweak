@@ -17,11 +17,9 @@ public class CommandWeather extends CommandExecutor {
             } else if (id.equalsIgnoreCase("clear")) {
                 Minetweak.getOverworld().setRaining(false);
                 Minetweak.getOverworld().setThundering(false);
-                sender.sendMessage("Done.");
             } else if (id.equals("thunder")) {
                 Minetweak.getOverworld().setThundering(true);
                 Minetweak.getOverworld().setRaining(true);
-                sender.sendMessage("Done.");
             } else {
                 sender.sendMessage(TextColor.RED + "Invalid Weather Type: " + id);
                 return;

@@ -96,7 +96,7 @@ public class TweakLogger {
     }
 
     /**
-     * Gets the Loggers prefixs
+     * Gets the Loggers prefixes
      */
     public static String getPrefix(TweakLogger logger) {
         return logger.prefix;
