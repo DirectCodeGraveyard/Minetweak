@@ -50,7 +50,7 @@ public class EntityItem extends Entity {
     }
 
     /**
-     * returns if this entity triggers TweakBlock.onEntityWalking on the blocks they walk on. used for spiders and wolves to
+     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
     @Override
@@ -316,7 +316,7 @@ public class EntityItem extends Entity {
 
     /**
      * Returns the ItemStack corresponding to the Entity (Note: if no item exists, will log an error but still return an
-     * ItemStack containing TweakBlock.stone)
+     * ItemStack containing Block.stone)
      */
     public ItemStack getEntityItem() {
         ItemStack var1 = this.getDataWatcher().getWatchableObjectItemStack(10);

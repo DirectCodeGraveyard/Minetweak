@@ -8,17 +8,17 @@ import java.io.IOException;
 
 public class Packet14BlockDig extends Packet {
     /**
-     * TweakBlock X position.
+     * Block X position.
      */
     public int xPosition;
 
     /**
-     * TweakBlock Y position.
+     * Block Y position.
      */
     public int yPosition;
 
     /**
-     * TweakBlock Z position.
+     * Block Z position.
      */
     public int zPosition;
 

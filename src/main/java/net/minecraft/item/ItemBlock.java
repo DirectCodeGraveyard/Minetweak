@@ -4,12 +4,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.world.World;
-import org.minetweak.block.TweakBlockState;
+import org.minetweak.block.BlockState;
 import org.minetweak.event.helper.MinetweakEventFactory;
 
 public class ItemBlock extends Item {
     /**
-     * The block ID of the TweakBlock associated with this ItemBlock
+     * The block ID of the Block associated with this ItemBlock
      */
     private int blockID;
 
@@ -78,7 +78,7 @@ public class ItemBlock extends Item {
     }
 
     public static boolean processBlockPlace(final World world, final EntityPlayer entityplayer, final ItemStack itemstack, final int x, final int y, final int z, final int id, final int data, final int clickedX, final int clickedY, final int clickedZ) {
-        TweakBlockState blockstate = TweakBlockState.getBlockState(world, x, y, z);
+        BlockState blockstate = BlockState.getBlockState(world, x, y, z);
         world.callingPlaceEvent = true;
         world.setBlock(x, y, z, id, data, 2);
         org.minetweak.event.block.BlockPlaceEvent event = MinetweakEventFactory.callBlockPlaceEvent(world, entityplayer, blockstate, clickedX, clickedY, clickedZ);

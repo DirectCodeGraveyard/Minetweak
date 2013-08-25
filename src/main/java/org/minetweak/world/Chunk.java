@@ -2,7 +2,7 @@ package org.minetweak.world;
 
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.EmptyChunk;
-import org.minetweak.block.TweakBlock;
+import org.minetweak.block.Block;
 
 import java.lang.ref.WeakReference;
 
@@ -81,7 +81,7 @@ public class Chunk {
      * @param z z-position
      * @return block
      */
-    public TweakBlock getBlock(int x, int y, int z) {
-        return new TweakBlock(this, (getX() << 4) | (x & 0xF), y & 0xFF, (getZ() << 4) | (z & 0xF));
+    public Block getBlock(int x, int y, int z) {
+        return new Block(this, (getX() << 4) | (x & 0xF), y & 0xFF, (getZ() << 4) | (z & 0xF));
     }
 }

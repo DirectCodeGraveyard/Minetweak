@@ -4,8 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.world.World;
+import org.minetweak.block.BlockState;
 import org.minetweak.block.IBlockState;
-import org.minetweak.block.TweakBlockState;
 import org.minetweak.event.helper.MinetweakEventFactory;
 
 public class ItemFlintAndSteel extends Item {
@@ -56,7 +56,7 @@ public class ItemFlintAndSteel extends Item {
                     return false;
                 }
 
-                IBlockState tweakBlockState = TweakBlockState.getBlockState(par3World, par4, par5, par6);
+                IBlockState tweakBlockState = BlockState.getBlockState(par3World, par4, par5, par6);
                 par3World.playSoundEffect((double) par4 + 0.5D, (double) par5 + 0.5D, (double) par6 + 0.5D, "fire.ignite", 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
                 par3World.setBlock(par4, par5, par6, Block.fire.blockID);
                 org.minetweak.event.block.BlockPlaceEvent placeEvent = MinetweakEventFactory.callBlockPlaceEvent(par3World, par2EntityPlayer, tweakBlockState, clickedX, clickedY, clickedZ);

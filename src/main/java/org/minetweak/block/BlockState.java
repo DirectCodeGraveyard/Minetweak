@@ -5,7 +5,7 @@ import org.minetweak.material.MaterialData;
 import org.minetweak.world.Chunk;
 import org.minetweak.world.World;
 
-public class TweakBlockState implements IBlockState {
+public class BlockState implements IBlockState {
     private final World world;
     private final Chunk chunk;
     private final int x;
@@ -14,7 +14,7 @@ public class TweakBlockState implements IBlockState {
     protected int type;
     protected MaterialData data;
 
-    public TweakBlockState(final TweakBlock tweakBlock) {
+    public BlockState(final Block tweakBlock) {
         this.world = tweakBlock.getWorld();
         this.x = tweakBlock.getX();
         this.y = tweakBlock.getY();
@@ -25,8 +25,8 @@ public class TweakBlockState implements IBlockState {
         createData(tweakBlock.getData());
     }
 
-    public static TweakBlockState getBlockState(net.minecraft.world.World world, int x, int y, int z) {
-        return new TweakBlockState(world.getWorld().getBlockAt(x, y, z));
+    public static BlockState getBlockState(net.minecraft.world.World world, int x, int y, int z) {
+        return new BlockState(world.getWorld().getBlockAt(x, y, z));
     }
 
     @Override
@@ -99,7 +99,7 @@ public class TweakBlockState implements IBlockState {
     }
 
     @Override
-    public TweakBlock getBlock() {
+    public Block getBlock() {
         return world.getBlockAt(x, y, z);
     }
 
@@ -115,7 +115,7 @@ public class TweakBlockState implements IBlockState {
 
     @Override
     public boolean update(boolean force, boolean applyPhysics) {
-        TweakBlock tweakBlock = getBlock();
+        Block tweakBlock = getBlock();
 
         if (tweakBlock.getType() != getType()) {
             if (force) {
@@ -158,7 +158,7 @@ public class TweakBlockState implements IBlockState {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final TweakBlockState other = (TweakBlockState) obj;
+        final BlockState other = (BlockState) obj;
         return !(this.world != other.world && (this.world == null || !this.world.equals(other.world))) && this.x == other.x && this.y == other.y && this.z == other.z && this.type == other.type && !(this.data != other.data && (this.data == null || !this.data.equals(other.data)));
     }
 

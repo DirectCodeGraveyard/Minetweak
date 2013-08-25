@@ -32,7 +32,7 @@ public class MinetweakEventFactory {
     }
 
     /**
-     * TweakBlock place methods
+     * Block place methods
      */
     public static BlockPlaceEvent callBlockPlaceEvent(net.minecraft.world.World world, EntityPlayer who, IBlockState replacedBlockState, int clickedX, int clickedY, int clickedZ) {
         World craftWorld = world.getWorld();

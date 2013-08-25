@@ -1,29 +1,27 @@
 package org.minetweak.block;
 
-import net.minecraft.block.Block;
-import org.bouncycastle.crypto.engines.AESFastEngine;
 import org.minetweak.material.Material;
 import org.minetweak.world.Chunk;
 import org.minetweak.world.Location;
 import org.minetweak.world.World;
 
-public class TweakBlock implements IBlock {
+public class Block implements IBlock {
     private final Chunk chunk;
     private final int x;
     private final int y;
     private final int z;
     private boolean powered;
     private boolean isInWorld = true;
-    private Block block;
+    private net.minecraft.block.Block block;
 
-    public TweakBlock(Chunk chunk, int x, int y, int z) {
+    public Block(Chunk chunk, int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.chunk = chunk;
     }
 
-    public TweakBlock(Block block) {
+    public Block(net.minecraft.block.Block block) {
         this(null, 0, 0, 0);
         this.isInWorld = false;
         this.block = block;
@@ -63,13 +61,13 @@ public class TweakBlock implements IBlock {
         chunk.getHandle().worldObj.setBlockMetadata(x, y, z, data, 3);
     }
 
-    public TweakBlockState getState() {
+    public BlockState getState() {
         Material material = getType();
         if (material == null)
-            return new TweakBlockState(this);
+            return new BlockState(this);
         switch (material) {
             default:
-                return new TweakBlockState(this);
+                return new BlockState(this);
         }
     }
 
@@ -136,11 +134,11 @@ public class TweakBlock implements IBlock {
     }
 
     @Override
-    public Block getMCBlock() {
+    public net.minecraft.block.Block getMCBlock() {
         if (!isInWorld) {
             return block;
         }
-        return Block.blocksList[getBlockID()];
+        return net.minecraft.block.Block.blocksList[getBlockID()];
     }
 
     @Override

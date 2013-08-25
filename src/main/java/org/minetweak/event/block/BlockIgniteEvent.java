@@ -7,7 +7,7 @@ import org.minetweak.event.helper.Cancellable;
 /**
  * Called when a block is ignited. If you want to catch when a Player places fire, you need to use {@link BlockPlaceEvent}.
  * <p/>
- * If a TweakBlock Ignite event is cancelled, the block will not be ignited.
+ * If a Block Ignite event is cancelled, the block will not be ignited.
  */
 public class BlockIgniteEvent extends BlockEvent implements Cancellable {
     private final IgniteCause cause;
@@ -63,7 +63,7 @@ public class BlockIgniteEvent extends BlockEvent implements Cancellable {
     /**
      * Gets the block who ignited this block
      *
-     * @return The TweakBlock that placed/ignited the fire block, or null if not ignited by a TweakBlock.
+     * @return The Block that placed/ignited the fire block, or null if not ignited by a Block.
      */
     public IBlock getIgnitingBlock() {
         return ignitingBlock;
@@ -75,31 +75,31 @@ public class BlockIgniteEvent extends BlockEvent implements Cancellable {
     public enum IgniteCause {
 
         /**
-         * TweakBlock ignition caused by lava.
+         * Block ignition caused by lava.
          */
         LAVA,
         /**
-         * TweakBlock ignition caused by a player or dispenser using flint-and-steel.
+         * Block ignition caused by a player or dispenser using flint-and-steel.
          */
         FLINT_AND_STEEL,
         /**
-         * TweakBlock ignition caused by dynamic spreading of fire.
+         * Block ignition caused by dynamic spreading of fire.
          */
         SPREAD,
         /**
-         * TweakBlock ignition caused by lightning.
+         * Block ignition caused by lightning.
          */
         LIGHTNING,
         /**
-         * TweakBlock ignition caused by an entity using a fireball.
+         * Block ignition caused by an entity using a fireball.
          */
         FIREBALL,
         /**
-         * TweakBlock ignition caused by an Ender Crystal.
+         * Block ignition caused by an Ender Crystal.
          */
         ENDER_CRYSTAL,
         /**
-         * TweakBlock ignition caused by explosion.
+         * Block ignition caused by explosion.
          */
         EXPLOSION,
     }

@@ -5,12 +5,12 @@ import net.minecraft.world.World;
 
 public class ItemSeedFood extends ItemFood {
     /**
-     * TweakBlock ID of the crop this seed food should place.
+     * Block ID of the crop this seed food should place.
      */
     private int cropId;
 
     /**
-     * TweakBlock ID of the soil this seed food should be planted on.
+     * Block ID of the soil this seed food should be planted on.
      */
     private int soilId;
 

@@ -35,7 +35,7 @@ public class ExtendedBlockStorage {
     private NibbleArray blockMetadataArray;
 
     /**
-     * The NibbleArray containing a block of TweakBlock-light data.
+     * The NibbleArray containing a block of Block-light data.
      */
     private NibbleArray blocklightArray;
 
@@ -115,7 +115,7 @@ public class ExtendedBlockStorage {
     }
 
     /**
-     * Sets the metadata of the TweakBlock at the given coordinates in this ExtendedBlockStorage to the given metadata.
+     * Sets the metadata of the Block at the given coordinates in this ExtendedBlockStorage to the given metadata.
      */
     public void setExtBlockMetadata(int par1, int par2, int par3, int par4) {
         this.blockMetadataArray.set(par1, par2, par3, par4);
@@ -158,14 +158,14 @@ public class ExtendedBlockStorage {
     }
 
     /**
-     * Sets the saved TweakBlock-light value in the extended block storage structure.
+     * Sets the saved Block-light value in the extended block storage structure.
      */
     public void setExtBlocklightValue(int par1, int par2, int par3, int par4) {
         this.blocklightArray.set(par1, par2, par3, par4);
     }
 
     /**
-     * Gets the saved TweakBlock-light value in the extended block storage structure.
+     * Gets the saved Block-light value in the extended block storage structure.
      */
     public int getExtBlocklightValue(int par1, int par2, int par3) {
         return this.blocklightArray.get(par1, par2, par3);
@@ -216,7 +216,7 @@ public class ExtendedBlockStorage {
     }
 
     /**
-     * Returns the NibbleArray instance containing TweakBlock-light data.
+     * Returns the NibbleArray instance containing Block-light data.
      */
     public NibbleArray getBlocklightArray() {
         return this.blocklightArray;
@@ -251,7 +251,7 @@ public class ExtendedBlockStorage {
     }
 
     /**
-     * Sets the NibbleArray instance used for TweakBlock-light values in this particular storage block.
+     * Sets the NibbleArray instance used for Block-light values in this particular storage block.
      */
     public void setBlocklightArray(NibbleArray par1NibbleArray) {
         this.blocklightArray = par1NibbleArray;

@@ -61,7 +61,7 @@ public class BlockFarmland extends Block {
     }
 
     /**
-     * TweakBlock's chance to react to an entity falling on it.
+     * Block's chance to react to an entity falling on it.
      */
     @Override
     public void onFallenUpon(World par1World, int par2, int par3, int par4, Entity par5Entity, float par6) {

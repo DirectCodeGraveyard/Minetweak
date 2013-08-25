@@ -7,12 +7,12 @@ public class FlatLayerInfo {
     private int layerCount;
 
     /**
-     * TweakBlock type used on this set of layers.
+     * Block type used on this set of layers.
      */
     private int layerFillBlock;
 
     /**
-     * TweakBlock metadata used on this set of layers.
+     * Block metadata used on this set of layers.
      */
     private int layerFillBlockMeta;
     private int layerMinimumY;

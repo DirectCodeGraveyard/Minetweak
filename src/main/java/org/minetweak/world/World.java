@@ -3,8 +3,8 @@ package org.minetweak.world;
 import net.minecraft.world.WorldInfo;
 import net.minecraft.world.WorldServer;
 import org.minetweak.Minetweak;
+import org.minetweak.block.Block;
 import org.minetweak.block.IBlock;
-import org.minetweak.block.TweakBlock;
 import org.minetweak.chat.TextColor;
 import org.minetweak.entity.Player;
 import org.minetweak.server.Difficulty;
@@ -27,7 +27,7 @@ public class World {
      * @param z z coord
      * @return Block at position
      */
-    public TweakBlock getBlockAt(int x, int y, int z) {
+    public Block getBlockAt(int x, int y, int z) {
         return getChunkAt(x >> 4, z >> 4).getBlock(x & 0xF, y & 0xFF, z & 0xF);
     }
 
@@ -60,7 +60,7 @@ public class World {
      * @param tweakBlock the block
      * @return the chunk
      */
-    public Chunk getChunkAt(TweakBlock tweakBlock) {
+    public Chunk getChunkAt(Block tweakBlock) {
         return getChunkAt(tweakBlock.getX() >> 4, tweakBlock.getZ() >> 4);
     }
 

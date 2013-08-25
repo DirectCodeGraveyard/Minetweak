@@ -264,7 +264,7 @@ public class Block {
     protected boolean needsRandomTick;
 
     /**
-     * true if the TweakBlock contains a Tile Entity
+     * true if the Block contains a Tile Entity
      */
     protected boolean isBlockContainer;
 
@@ -305,7 +305,7 @@ public class Block {
     public float blockParticleGravity;
 
     /**
-     * TweakBlock material definition.
+     * Block material definition.
      */
     public final Material blockMaterial;
 
@@ -1017,7 +1017,7 @@ public class Block {
     }
 
     /**
-     * TweakBlock's chance to react to an entity falling on it.
+     * Block's chance to react to an entity falling on it.
      */
     public void onFallenUpon(World par1World, int par2, int par3, int par4, Entity par5Entity, float par6) {
     }

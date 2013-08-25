@@ -22,7 +22,7 @@ public class Chunk {
     public static boolean isLit;
 
     /**
-     * Used to store block IDs, block MSBs, Sky-light maps, TweakBlock-light maps, and metadata. Each entry corresponds to a
+     * Used to store block IDs, block MSBs, Sky-light maps, Block-light maps, and metadata. Each entry corresponds to a
      * logical segment of 16x16x16 blocks, stacked vertically.
      */
     private ExtendedBlockStorage[] storageArrays;

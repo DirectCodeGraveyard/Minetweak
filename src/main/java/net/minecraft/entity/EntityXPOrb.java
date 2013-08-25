@@ -52,7 +52,7 @@ public class EntityXPOrb extends Entity {
     }
 
     /**
-     * returns if this entity triggers TweakBlock.onEntityWalking on the blocks they walk on. used for spiders and wolves to
+     * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
     protected boolean canTriggerWalking() {
