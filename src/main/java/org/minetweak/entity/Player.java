@@ -503,6 +503,7 @@ public class Player extends Entity implements CommandSender {
 
     /**
      * Gets the Players Current Location
+     *
      * @return location
      */
     public Location getLocation() {

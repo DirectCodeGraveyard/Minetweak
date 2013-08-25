@@ -10,7 +10,7 @@ public class TeleportHelper {
      *
      * @param entity       Entity to Move
      * @param dimension    dimension to move to
-     * @param oldServer  original server
+     * @param oldServer    original server
      * @param targetServer new server
      */
     public static void transferEntityToWorld(Entity entity, int dimension, WorldServer oldServer, WorldServer targetServer) {

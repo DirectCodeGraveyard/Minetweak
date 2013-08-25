@@ -78,6 +78,7 @@ public class Location {
 
     /**
      * Gets this locations X position
+     *
      * @return integer of X position
      */
     public int getIntX() {
@@ -86,6 +87,7 @@ public class Location {
 
     /**
      * Gets this locations Y position
+     *
      * @return integer of Y position
      */
     public int getIntY() {
@@ -94,6 +96,7 @@ public class Location {
 
     /**
      * Gets this locations Z position
+     *
      * @return integer of Z position
      */
     public int getIntZ() {

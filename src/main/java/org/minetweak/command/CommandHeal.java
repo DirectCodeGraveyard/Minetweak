@@ -16,11 +16,11 @@ public class CommandHeal extends CommandExecutor {
             return;
         }
         Player player = (Player) sender;
-        if (args.length>1) {
+        if (args.length > 1) {
             sender.sendMessage("Usage: /heal [player]");
-        } else if (args.length==1) {
+        } else if (args.length == 1) {
             player = Minetweak.getPlayerByName(args[0]);
-            if (player==null) {
+            if (player == null) {
                 sender.sendMessage(TextColor.RED + "Can't heal an offline player.");
                 return;
             }

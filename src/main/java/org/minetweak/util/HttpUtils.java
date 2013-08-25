@@ -16,8 +16,9 @@ public class HttpUtils {
 
     /**
      * Downloads a file to a path
+     *
      * @param path the path to the file
-     * @param url url to download
+     * @param url  url to download
      */
     public static void downloadFile(String path, String url) {
         File file = new File(path);

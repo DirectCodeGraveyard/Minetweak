@@ -1,6 +1,5 @@
 package org.minetweak.command;
 
-import net.minecraft.utils.enums.EnumChatFormatting;
 import org.minetweak.chat.TabCompletion;
 import org.minetweak.chat.TextColor;
 import org.minetweak.util.StringUtils;
@@ -53,6 +52,7 @@ public abstract class CommandExecutor implements ICommandExecutor {
 
     /**
      * Tells the Sender that this command is not for Consoles
+     *
      * @param sender the Command Sender
      */
     public void notPlayer(CommandSender sender) {

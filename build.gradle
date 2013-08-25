@@ -99,8 +99,12 @@ artifacts {
 
 // signing { sign configurations.archives }
 
-if (!hasProperty('sonatypeUsername')) {ext.sonatypeUsername = ''}
-if (!hasProperty('sonatypePassword')) {ext.sonatypePassword = ''}
+if (!hasProperty('sonatypeUsername')) {
+    ext.sonatypeUsername = ''
+}
+if (!hasProperty('sonatypePassword')) {
+    ext.sonatypePassword = ''
+}
 
 uploadArchives {
     repositories.mavenDeployer {

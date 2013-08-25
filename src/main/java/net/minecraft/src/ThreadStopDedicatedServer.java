@@ -10,7 +10,7 @@ public final class ThreadStopDedicatedServer extends Thread {
     }
 
     public void run() {
-        if (dedicatedServer!=null) {
+        if (dedicatedServer != null) {
             this.dedicatedServer.stopServer();
         }
     }

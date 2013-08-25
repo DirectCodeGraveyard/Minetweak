@@ -14,6 +14,7 @@ import org.minetweak.permissions.ServerOps;
 import org.minetweak.plugins.PluginLoadingHook;
 import org.minetweak.recipe.RecipeManager;
 import org.minetweak.thread.ManagementThread;
+import org.minetweak.util.ReflectionUtils;
 import org.minetweak.util.TweakLogger;
 import org.minetweak.world.World;
 
@@ -79,6 +80,11 @@ public class Minetweak {
     private static TweakLogger logger = new TweakLogger("Minetweak");
 
     /**
+     * Is this server using the Minetweak Launcher?
+     */
+    private static boolean usingLauncher = false;
+
+    /**
      * Runs the Minetweak Server.
      *
      * @param args the arguments to pass to MinecraftServer
@@ -86,6 +92,7 @@ public class Minetweak {
     public static void main(String[] args) {
         // Runs a quick utility to get the Server Version
         versionCheck();
+        launcherCheck();
         Minetweak.info("Starting Minetweak v" + serverVersion + " implementing Minecraft v" + getMinecraftVersion());
         // Load the most important things first
         GameConfig.initialize();
@@ -360,5 +367,30 @@ public class Minetweak {
      */
     public static World getOverworld() {
         return new World(MinecraftServer.getServer().worldServerForDimension(0));
+    }
+
+    /**
+     * Is Minetweak running using the Launcher?
+     *
+     * @return is using launcher
+     */
+    public static boolean isUsingLauncher() {
+        return usingLauncher;
+    }
+
+    /**
+     * Sets if Minetweak is running on the Launcher
+     *
+     * @param usingLauncher is it using the launcher
+     */
+    public static void setUsingLauncher(boolean usingLauncher) {
+        Minetweak.usingLauncher = usingLauncher;
+    }
+
+    /**
+     * Checks if Minetweak is running on the Launcher
+     */
+    private static void launcherCheck() {
+        setUsingLauncher(ReflectionUtils.classExists("org.minetweak.launcher.Launcher"));
     }
 }

@@ -43,7 +43,8 @@ public class PermissionsLoader {
                 lastData = data;
             }
 
-            Type dataType = new TypeToken<HashMap<String, ArrayList<String>>>(){}.getType();
+            Type dataType = new TypeToken<HashMap<String, ArrayList<String>>>() {
+            }.getType();
             HashMap<String, ArrayList<String>> permissions = gson.fromJson(data, dataType);
             if (permissions == null) {
                 return;

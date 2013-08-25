@@ -257,7 +257,7 @@ public class ItemInWorldManager {
                 }
             }
 
-            if (thisPlayerMP.getCurrentEquippedItem()==null)
+            if (thisPlayerMP.getCurrentEquippedItem() == null)
                 // Used to fix bug MINETWEAK-16
                 event.setCancelled(false);
 

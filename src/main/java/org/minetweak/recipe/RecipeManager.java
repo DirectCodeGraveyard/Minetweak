@@ -3,7 +3,6 @@ package org.minetweak.recipe;
 import com.google.common.eventbus.Subscribe;
 import net.minecraft.crafting.CraftingManager;
 import net.minecraft.crafting.FurnaceRecipes;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.minetweak.event.server.CraftingReadyEvent;
 

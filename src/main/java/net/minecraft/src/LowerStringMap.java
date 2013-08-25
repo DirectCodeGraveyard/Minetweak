@@ -1,6 +1,9 @@
 package net.minecraft.src;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class LowerStringMap implements Map {
     private final Map<String, Object> internalMap = new LinkedHashMap<String, Object>();

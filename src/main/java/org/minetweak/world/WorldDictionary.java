@@ -15,7 +15,8 @@ public class WorldDictionary {
 
     /**
      * Registers a Value for an ID
-     * @param id ID
+     *
+     * @param id    ID
      * @param value Value
      */
     public static void register(String id, Object value) {
@@ -24,6 +25,7 @@ public class WorldDictionary {
 
     /**
      * Gets the Entries for an ID
+     *
      * @param id id
      * @return entries
      */
@@ -33,6 +35,7 @@ public class WorldDictionary {
 
     /**
      * Gets all the Entries
+     *
      * @return Entries
      */
     public static Multimap<String, Object> getEntries() {

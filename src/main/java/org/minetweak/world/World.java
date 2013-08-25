@@ -260,8 +260,9 @@ public class World {
 
     /**
      * Sets a Block to the Given ID
+     *
      * @param location location of block
-     * @param id id of block
+     * @param id       id of block
      */
     public void setBlock(Location location, int id) {
         getWorldServer().setBlock((int) location.getPosX(), (int) location.getPosY(), (int) location.getPosZ(), id);
@@ -270,6 +271,7 @@ public class World {
 
     /**
      * Gets the Block at the given Location
+     *
      * @param location location of block
      * @return block
      */

@@ -37,7 +37,8 @@ public class StringTranslate {
                     }
                 }
             }
-        } catch (IOException ignored) {}
+        } catch (IOException ignored) {
+        }
     }
 
     /**

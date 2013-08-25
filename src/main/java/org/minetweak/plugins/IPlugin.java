@@ -67,12 +67,14 @@ public interface IPlugin {
 
     /**
      * Sets the Plugin's Logger
+     *
      * @param logger logger
      */
     public void setLogger(TweakLogger logger);
 
     /**
      * Gets the Plugins's Logger
+     *
      * @return logger
      */
     public TweakLogger getLogger();

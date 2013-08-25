@@ -41,6 +41,7 @@ public class TweakLogger {
 
     /**
      * Logs info to the Console
+     *
      * @param line line to log
      */
     public void info(String line) {
@@ -49,14 +50,16 @@ public class TweakLogger {
 
     /**
      * Logs warning to the Console
+     *
      * @param line line to log
      */
     public void logWarning(String line) {
-        this.serverLogger.log(Level.WARNING, "[" + prefix + "] " +  line);
+        this.serverLogger.log(Level.WARNING, "[" + prefix + "] " + line);
     }
 
     /**
      * Logs warning that is formatted to the Console
+     *
      * @param line line to log
      */
     public void logWarningFormatted(String line, Object... objects) {
@@ -65,6 +68,7 @@ public class TweakLogger {
 
     /**
      * Logs warning with an exception to the Console
+     *
      * @param line line to log
      */
     public void logWarningException(String line, Throwable exception) {
@@ -73,6 +77,7 @@ public class TweakLogger {
 
     /**
      * Logs severe to the Console
+     *
      * @param line line to log
      */
     public void logSevere(String line) {
@@ -81,6 +86,7 @@ public class TweakLogger {
 
     /**
      * Logs severe with an exception to the Console
+     *
      * @param line line to log
      */
     public void logSevereException(String line, Throwable exception) {
@@ -89,6 +95,7 @@ public class TweakLogger {
 
     /**
      * Logs info without a prefix to the Console
+     *
      * @param line line to log
      */
     public void logNoPrefix(String line) {

@@ -15,8 +15,10 @@ public class WorldManager {
     }
 
     public static World getWorld(int id) {
-        WorldServer server =  worldServers.get(id);
-        if (server==null) {return null;}
+        WorldServer server = worldServers.get(id);
+        if (server == null) {
+            return null;
+        }
         return server.getWorld();
     }
 }

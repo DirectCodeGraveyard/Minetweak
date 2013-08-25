@@ -146,6 +146,7 @@ public class PluginInfo {
 
     /**
      * Gets the Loading Configuration
+     *
      * @return loading configuration
      */
     public LoadingConfig getLoadingConfig() {
@@ -172,6 +173,7 @@ public class PluginInfo {
 
     class LoadingConfig {
         private int priority;
+
         public LoadingConfig(int priority) {
             this.priority = priority;
         }

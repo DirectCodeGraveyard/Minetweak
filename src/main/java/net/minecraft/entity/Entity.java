@@ -1456,7 +1456,8 @@ public abstract class Entity {
                 this.ridingEntity.updateRiderPosition();
                 this.entityRiderYawDelta += (double) (this.ridingEntity.rotationYaw - this.ridingEntity.prevRotationYaw);
 
-                for (this.entityRiderPitchDelta += (double) (this.ridingEntity.rotationPitch - this.ridingEntity.prevRotationPitch); this.entityRiderYawDelta >= 180.0D; this.entityRiderYawDelta -= 360.0D);
+                for (this.entityRiderPitchDelta += (double) (this.ridingEntity.rotationPitch - this.ridingEntity.prevRotationPitch); this.entityRiderYawDelta >= 180.0D; this.entityRiderYawDelta -= 360.0D)
+                    ;
 
                 while (this.entityRiderYawDelta < -180.0D) {
                     this.entityRiderYawDelta += 360.0D;

@@ -11,6 +11,7 @@ import java.util.Set;
 public class TabCompletion {
     /**
      * Gets all Commands that are Registered
+     *
      * @return List of Commands Registered
      */
     public static Set<String> getCommands() {
@@ -19,8 +20,9 @@ public class TabCompletion {
 
     /**
      * Used to get all matches for the input
+     *
      * @param sender Command Sender
-     * @param input input to parse
+     * @param input  input to parse
      * @return matches
      */
     public static ArrayList<String> getMatches(CommandSender sender, String input) {
@@ -55,6 +57,7 @@ public class TabCompletion {
 
     /**
      * Gets all Players Matching the Input
+     *
      * @param input input to parse
      * @return players matching input
      */
@@ -75,7 +78,8 @@ public class TabCompletion {
 
     /**
      * Gets the Commands Matching the Input
-     * @param input input line
+     *
+     * @param input    input line
      * @param addSlash whether to add the slash to the output
      * @return Commands Matching Input
      */
@@ -101,6 +105,7 @@ public class TabCompletion {
 
     /**
      * Gets the Commands Matching the Input with the Slashes added
+     *
      * @param input input line
      * @return Commands Matching Input
      */
@@ -110,7 +115,8 @@ public class TabCompletion {
 
     /**
      * Gets the Players for a command that only needs players in the completions
-     * @param input input to parse
+     *
+     * @param input       input to parse
      * @param completions completions list to add to
      */
     public static void getPlayersOnlyCommand(String input, ArrayList<String> completions) {

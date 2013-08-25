@@ -1,8 +1,5 @@
 package org.minetweak.network;
 
-import net.minecraft.server.network.packet.*;
-
-import java.util.HashMap;
 import java.util.Hashtable;
 
 public class PacketManager {
@@ -11,6 +8,7 @@ public class PacketManager {
 
     /**
      * A useless registration system that will NOT work.
+     *
      * @param packet Packet
      */
     public static void registerPacket(IPacket packet) {

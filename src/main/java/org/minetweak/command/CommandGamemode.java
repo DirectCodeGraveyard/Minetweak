@@ -42,7 +42,10 @@ public class CommandGamemode extends CommandExecutor {
             setPlayerGamemode(player, gamemode);
         } else {
             Player player = Minetweak.getPlayerByName(args[1].toLowerCase());
-            if (player==null) {sender.sendMessage("Sorry, you can't change an offline players Gamemode."); return;}
+            if (player == null) {
+                sender.sendMessage("Sorry, you can't change an offline players Gamemode.");
+                return;
+            }
             setPlayerGamemode(player, gamemode);
         }
     }

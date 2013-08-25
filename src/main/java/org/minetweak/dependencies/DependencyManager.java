@@ -85,7 +85,7 @@ public class DependencyManager {
     }
 
     public static void loadDependency(File file) {
-        if (file==null) {
+        if (file == null) {
             Minetweak.getLogger().logSevere("Tried to load a null dependency file.");
             return;
         }

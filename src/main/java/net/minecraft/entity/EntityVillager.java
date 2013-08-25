@@ -17,13 +17,16 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.src.DamageSource;
 import net.minecraft.src.IMob;
 import net.minecraft.src.INpc;
-import org.minetweak.util.Tuple;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.village.Village;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkCoordinates;
+import org.minetweak.util.Tuple;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
     private int randomTickDivider;
