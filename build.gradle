@@ -37,7 +37,7 @@ javadoc {
 }
 
 compileJava {
-    options.compilerArgs = ['-Xlint:none']
+    options.compilerArgs = ['-Xlint:none', '-XDignore.symbol.file']
     sourceCompatibility = '1.6'
     targetCompatibility = '1.6'
 }
@@ -97,7 +97,7 @@ artifacts {
     archives javadocJar
 }
 
-//signing { sign configurations.archives }
+// signing { sign configurations.archives }
 
 if (!hasProperty('sonatypeUsername')) {ext.sonatypeUsername = ''}
 if (!hasProperty('sonatypePassword')) {ext.sonatypePassword = ''}

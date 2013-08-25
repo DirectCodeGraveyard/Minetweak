@@ -6,7 +6,6 @@ import org.minetweak.world.World;
 
 /**
  * Represents a captured state of a block, which will not change automatically.
- * <p/>
  * Unlike Block, which only one object can exist per coordinate, BlockState can
  * exist multiple times for any given Block. Note that another plugin may change
  * the state of the block and you will not know, or they may change the block to
@@ -88,7 +87,6 @@ public interface IBlockState {
     /**
      * Attempts to update the block represented by this state, setting it to the
      * new values as defined by this state.
-     * <p/>
      * This has the same effect as calling update(false). That is to say,
      * this will not modify the state of a block if it is no longer the same
      * type as it was when this state was taken. It will return false in this
@@ -102,7 +100,6 @@ public interface IBlockState {
     /**
      * Attempts to update the block represented by this state, setting it to the
      * new values as defined by this state.
-     * <p/>
      * This has the same effect as calling update(force, true). That is to say,
      * this will trigger a physics update to surrounding blocks.
      *
@@ -114,14 +111,11 @@ public interface IBlockState {
     /**
      * Attempts to update the block represented by this state, setting it to the
      * new values as defined by this state.
-     * <p/>
      * Unless force is true, this will not modify the state of a block if it is
      * no longer the same type as it was when this state was taken. It will return
      * false in this eventuality.
-     * <p/>
      * If force is true, it will set the type of the block to match the new state,
      * set the state data and then return true.
-     * <p/>
      * If applyPhysics is true, it will trigger a physics update on surrounding
      * blocks which could cause them to update or disappear.
      *
