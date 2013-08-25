@@ -123,13 +123,10 @@ public class WorldServer extends World {
             this.wakeAllPlayers();
         }
 
-        this.theProfiler.startSection("mobSpawner");
-
         if (this.getGameRules().getGameRuleBooleanValue("doMobSpawning")) {
             this.field_135059_Q.findChunksForSpawning(this, this.spawnHostileMobs, this.spawnPeacefulMobs, this.worldInfo.getWorldTotalTime() % 400L == 0L);
         }
 
-        this.theProfiler.endStartSection("chunkSource");
         this.chunkProvider.unloadQueuedChunks();
         int var3 = this.calculateSkylightSubtracted(1.0F);
 
@@ -143,18 +140,12 @@ public class WorldServer extends World {
             this.worldInfo.setWorldTime(this.worldInfo.getWorldTime() + 1L);
         }
 
-        this.theProfiler.endStartSection("tickPending");
         this.tickUpdates(false);
-        this.theProfiler.endStartSection("tickTiles");
         this.tickBlocksAndAmbiance();
-        this.theProfiler.endStartSection("chunkMap");
         this.thePlayerManager.updatePlayerInstances();
-        this.theProfiler.endStartSection("village");
         this.villageCollectionObj.tick();
         this.villageSiegeObj.tick();
-        this.theProfiler.endStartSection("portalForcer");
         this.field_85177_Q.removeStalePortalLocations(this.getTotalWorldTime());
-        this.theProfiler.endSection();
         this.sendAndApplyBlockEvents();
     }
 

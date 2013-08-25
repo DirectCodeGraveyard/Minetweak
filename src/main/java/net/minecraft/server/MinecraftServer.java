@@ -29,6 +29,7 @@ import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import org.minetweak.Minetweak;
 import org.minetweak.event.server.WorldsLoadingEvent;
+import org.minetweak.server.TickScheduler;
 
 import java.awt.*;
 import java.io.File;
@@ -496,23 +497,13 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         AxisAlignedBB.getAABBPool().cleanPool();
         ++this.tickCounter;
 
-        if (this.startProfiling) {
-            this.startProfiling = false;
-            this.profiler.profilingEnabled = true;
-            this.profiler.clearProfiling();
-        }
-
-        this.profiler.startSection("root");
         this.updateTimeLightAndEntities();
 
         if (this.tickCounter % 900 == 0) {
-            this.profiler.startSection("save");
             this.serverConfigManager.saveAllPlayerData();
             this.saveAllWorlds(true);
-            this.profiler.endSection();
         }
 
-        this.profiler.startSection("tallying");
         this.tickTimeArray[this.tickCounter % 100] = System.nanoTime() - var1;
         this.sentPacketCountArray[this.tickCounter % 100] = Packet.sentID - this.lastSentPacketID;
         this.lastSentPacketID = Packet.sentID;
@@ -522,23 +513,10 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
         this.lastReceivedID = Packet.receivedID;
         this.receivedPacketSizeArray[this.tickCounter % 100] = Packet.receivedSize - this.lastReceivedSize;
         this.lastReceivedSize = Packet.receivedSize;
-        this.profiler.endSection();
-        this.profiler.startSection("snooper");
-
-        if (!this.usageSnooper.isSnooperRunning() && this.tickCounter > 100) {
-            this.usageSnooper.startSnooper();
-        }
-
-        if (this.tickCounter % 6000 == 0) {
-            this.usageSnooper.addMemoryStatsToSnooper();
-        }
-
-        this.profiler.endSection();
-        this.profiler.endSection();
+        TickScheduler.tick();
     }
 
     public void updateTimeLightAndEntities() {
-        this.profiler.startSection("levels");
         int var1;
 
         for (var1 = 0; var1 < this.worldServers.length; ++var1) {
@@ -546,18 +524,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
             if (var1 == 0 || this.getAllowNether()) {
                 WorldServer var4 = this.worldServers[var1];
-                this.profiler.startSection(var4.getWorldInfo().getWorldName());
-                this.profiler.startSection("pools");
                 var4.getWorldVec3Pool().clear();
-                this.profiler.endSection();
 
                 if (this.tickCounter % 20 == 0) {
-                    this.profiler.startSection("timeSync");
                     this.serverConfigManager.sendPacketToAllPlayersInDimension(new Packet4UpdateTime(var4.getTotalWorldTime(), var4.getWorldTime(), var4.getGameRules().getGameRuleBooleanValue("doDaylightCycle")), var4.provider.dimensionId);
-                    this.profiler.endSection();
                 }
 
-                this.profiler.startSection("tick");
                 CrashReport var6;
 
                 try {
@@ -576,27 +548,18 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                     throw new ReportedException(var6);
                 }
 
-                this.profiler.endSection();
-                this.profiler.startSection("tracker");
                 var4.getEntityTracker().updateTrackedEntities();
-                this.profiler.endSection();
-                this.profiler.endSection();
             }
 
             this.timeOfLastDimensionTick[var1][this.tickCounter % 100] = System.nanoTime() - var2;
         }
 
-        this.profiler.endStartSection("connection");
         this.getNetworkThread().handleNetworkListenThread();
-        this.profiler.endStartSection("players");
         this.serverConfigManager.onTick();
-        this.profiler.endStartSection("tickables");
 
         for (var1 = 0; var1 < this.playersOnline.size(); ++var1) {
             (this.playersOnline.get(var1)).update();
         }
-
-        this.profiler.endSection();
     }
 
     public boolean getAllowNether() {
