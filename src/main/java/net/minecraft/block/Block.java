@@ -1176,6 +1176,6 @@ public class Block {
      * Returns true or false based on whether the block this block is attached to is providing indirect power.
      */
     public boolean isIndirectlyPowered(World par1World, int par2, int par3, int par4) {
-        return false;
+        return par1World.isBlockIndirectlyGettingPowered(par2, par3, par4);
     }
 }

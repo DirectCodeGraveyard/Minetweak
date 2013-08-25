@@ -2,6 +2,9 @@ package net.minecraft.entity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import org.minetweak.Minetweak;
+import org.minetweak.entity.EntityTNT;
+import org.minetweak.event.entity.TNTPrimeEvent;
 
 public class EntityTNTPrimed extends Entity {
     /**
@@ -9,9 +12,14 @@ public class EntityTNTPrimed extends Entity {
      */
     public int fuse;
     private EntityLivingBase tntPlacedBy;
+    public float radius = 4.0F;
+    public TNTPrimeEvent event;
 
     public EntityTNTPrimed(World par1World) {
         super(par1World);
+        this.event = new TNTPrimeEvent(new EntityTNT(this));
+        Minetweak.getEventBus().post(event);
+
         this.preventEntitySpawning = true;
         this.setSize(0.98F, 0.98F);
         this.yOffset = this.height / 2.0F;
@@ -53,6 +61,9 @@ public class EntityTNTPrimed extends Entity {
      * Called to update the entity's position/logic.
      */
     public void onUpdate() {
+        if (event.isCancelled()) {
+            this.setDead();
+        }
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
@@ -79,9 +90,8 @@ public class EntityTNTPrimed extends Entity {
         }
     }
 
-    private void explode() {
-        float var1 = 4.0F;
-        this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, var1, true);
+    public void explode() {
+        this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, radius, true);
     }
 
     /**

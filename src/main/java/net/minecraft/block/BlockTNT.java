@@ -65,10 +65,10 @@ public class BlockTNT extends Block {
      */
     @Override
     public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
-        this.func_94391_a(par1World, par2, par3, par4, par5, null);
+        this.explodeByPlayer(par1World, par2, par3, par4, par5, null);
     }
 
-    public void func_94391_a(World par1World, int par2, int par3, int par4, int par5, EntityLivingBase par6EntityLivingBase) {
+    public void explodeByPlayer(World par1World, int par2, int par3, int par4, int par5, EntityLivingBase par6EntityLivingBase) {
         if (!par1World.isRemote) {
             if ((par5 & 1) == 1) {
                 EntityTNTPrimed var7 = new EntityTNTPrimed(par1World, (double) ((float) par2 + 0.5F), (double) ((float) par3 + 0.5F), (double) ((float) par4 + 0.5F), par6EntityLivingBase);
@@ -84,7 +84,7 @@ public class BlockTNT extends Block {
     @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
         if (par5EntityPlayer.getCurrentEquippedItem() != null && par5EntityPlayer.getCurrentEquippedItem().itemID == Item.flintAndSteel.itemID) {
-            this.func_94391_a(par1World, par2, par3, par4, 1, par5EntityPlayer);
+            this.explodeByPlayer(par1World, par2, par3, par4, 1, par5EntityPlayer);
             par1World.setBlockToAir(par2, par3, par4);
             par5EntityPlayer.getCurrentEquippedItem().damageItem(1, par5EntityPlayer);
             return true;
@@ -102,7 +102,7 @@ public class BlockTNT extends Block {
             EntityArrow var6 = (EntityArrow) par5Entity;
 
             if (var6.isBurning()) {
-                this.func_94391_a(par1World, par2, par3, par4, 1, var6.shootingEntity instanceof EntityLivingBase ? (EntityLivingBase) var6.shootingEntity : null);
+                this.explodeByPlayer(par1World, par2, par3, par4, 1, var6.shootingEntity instanceof EntityLivingBase ? (EntityLivingBase) var6.shootingEntity : null);
                 par1World.setBlockToAir(par2, par3, par4);
             }
         }
