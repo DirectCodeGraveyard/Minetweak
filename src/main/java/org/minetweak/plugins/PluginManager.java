@@ -221,10 +221,8 @@ public class PluginManager {
      */
     private void createDir() {
         File f = new File("plugins");
-        if (!f.isDirectory() || !f.exists()) {
-            if (!f.mkdir()) {
-                throw new RuntimeException("Unable to create plugins folder!");
-            }
+        if (!f.isDirectory() && !f.mkdir()) {
+            throw new RuntimeException("Unable to create plugins folder!");
         }
     }
 
