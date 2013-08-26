@@ -127,7 +127,7 @@ public class PluginManager {
                 // Note that we override plugins even if they exist. This allows for alphabetical file-name plugin overriding
                 plugins.put(plugin.getPluginInfo().getName(), plugin);
 
-                if (info.getLoadingConfig() != null && info.getLoadingConfig().isCore()) {
+                if (info.getLoadingConfig() != null && info.getLoadingConfig().isCorePlugin()) {
                     plugin.onLoad();
                 }
             } catch (Exception e) {
@@ -210,6 +210,9 @@ public class PluginManager {
     public static void reloadPlugins() {
         disableAll();
         plugins.clear();
+        enabledPlugins.clear();
+        loader = null;
+        loadFirst.clear();
         initialize();
     }
 
@@ -218,7 +221,7 @@ public class PluginManager {
      */
     private void createDir() {
         File f = new File("plugins");
-        if (!f.isDirectory()) {
+        if (!f.isDirectory() || !f.exists()) {
             if (!f.mkdir()) {
                 throw new RuntimeException("Unable to create plugins folder!");
             }

@@ -171,21 +171,40 @@ public class PluginInfo {
         }
     }
 
+    /**
+     * The Loading Configuration for this Plugin
+     */
     class LoadingConfig {
+        /**
+         * Plugin Loading Priority
+         */
         private int priority;
-        private boolean core;
+        /**
+         * If the plugin is a Core Plugin
+         */
+        private boolean corePlugin;
 
-        public LoadingConfig(int priority, boolean core) {
+        public LoadingConfig(int priority, boolean corePlugin) {
             this.priority = priority;
-            this.core = core;
+            this.corePlugin = corePlugin;
         }
 
+        /**
+         * Gets this plugins loading priority
+         *
+         * @return loading priority
+         */
         public int getPriority() {
             return priority;
         }
 
-        public boolean isCore() {
-            return core;
+        /**
+         * Gets whether or not this plugin is a Core plugin
+         *
+         * @return is plugin a core plugin
+         */
+        public boolean isCorePlugin() {
+            return corePlugin;
         }
     }
 }
