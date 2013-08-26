@@ -10,11 +10,6 @@ public class ChatAllowedCharacters {
     public static final String allowedCharacters = getAllowedCharacters();
 
     /**
-     * Array of the special characters that are allowed in any text drawing of Minecraft.
-     */
-    public static final char[] allowedCharactersArray = new char[]{'/', '\n', '\r', '\t', '\u0000', '\f', '`', '?', '*', '\\', '<', '>', '|', '\"', ':'};
-
-    /**
      * Load the font.txt resource file, that is on UTF-8 format. This file contains the characters that minecraft can
      * render Strings on screen.
      */

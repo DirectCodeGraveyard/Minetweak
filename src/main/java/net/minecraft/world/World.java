@@ -393,9 +393,7 @@ public abstract class World implements IBlockAccess {
                 }
 
                 boolean var9 = var7.setBlockIDWithMetadata(par1 & 15, par2, par3 & 15, par4, par5);
-                this.theProfiler.startSection("checkLight");
                 this.updateAllLightTypes(par1, par2, par3);
-                this.theProfiler.endSection();
 
                 if (var9) {
                     if ((par6 & 2) != 0 && (!this.isRemote || (par6 & 4) == 0)) {
@@ -1330,8 +1328,6 @@ public abstract class World implements IBlockAccess {
      * Updates (and cleans up) entities and tile entities
      */
     public void updateEntities() {
-        this.theProfiler.startSection("entities");
-        this.theProfiler.startSection("global");
         int var1;
         Entity var2;
         CrashReport var4;
@@ -1361,7 +1357,6 @@ public abstract class World implements IBlockAccess {
             }
         }
 
-        this.theProfiler.endStartSection("remove");
         this.loadedEntityList.removeAll(this.unloadedEntityList);
         int var3;
         int var13;
@@ -1381,7 +1376,6 @@ public abstract class World implements IBlockAccess {
         }
 
         this.unloadedEntityList.clear();
-        this.theProfiler.endStartSection("regular");
 
         for (var1 = 0; var1 < this.loadedEntityList.size(); ++var1) {
             var2 = this.loadedEntityList.get(var1);
@@ -1395,8 +1389,6 @@ public abstract class World implements IBlockAccess {
                 var2.ridingEntity = null;
             }
 
-            this.theProfiler.startSection("tick");
-
             if (!var2.isDead) {
                 try {
                     this.updateEntity(var2);
@@ -1407,9 +1399,6 @@ public abstract class World implements IBlockAccess {
                     throw new ReportedException(var4);
                 }
             }
-
-            this.theProfiler.endSection();
-            this.theProfiler.startSection("remove");
 
             if (var2.isDead) {
                 var3 = var2.chunkCoordX;
@@ -1423,10 +1412,8 @@ public abstract class World implements IBlockAccess {
                 this.onEntityRemoved(var2);
             }
 
-            this.theProfiler.endSection();
         }
 
-        this.theProfiler.endStartSection("tileEntities");
         this.scanningTileEntities = true;
         Iterator<TileEntity> var14 = this.loadedTileEntityList.iterator();
 
@@ -1464,8 +1451,6 @@ public abstract class World implements IBlockAccess {
             this.entityRemoval.clear();
         }
 
-        this.theProfiler.endStartSection("pendingTileEntities");
-
         if (!this.addedTileEntityList.isEmpty()) {
             for (TileEntity var12 : this.addedTileEntityList) {
                 if (!var12.isInvalid()) {
@@ -1487,9 +1472,6 @@ public abstract class World implements IBlockAccess {
 
             this.addedTileEntityList.clear();
         }
-
-        this.theProfiler.endSection();
-        this.theProfiler.endSection();
     }
 
     public void addTileEntity(Collection<TileEntity> par1Collection) {
@@ -1533,8 +1515,6 @@ public abstract class World implements IBlockAccess {
                 }
             }
 
-            this.theProfiler.startSection("chunkCheck");
-
             if (Double.isNaN(par1Entity.posX) || Double.isInfinite(par1Entity.posX)) {
                 par1Entity.posX = par1Entity.lastTickPosX;
             }
@@ -1571,8 +1551,6 @@ public abstract class World implements IBlockAccess {
                     par1Entity.addedToChunk = false;
                 }
             }
-
-            this.theProfiler.endSection();
 
             if (par2 && par1Entity.addedToChunk && par1Entity.riddenByEntity != null) {
                 if (!par1Entity.riddenByEntity.isDead && par1Entity.riddenByEntity.ridingEntity == par1Entity) {
@@ -2195,7 +2173,6 @@ public abstract class World implements IBlockAccess {
 
     protected void setActivePlayerChunksAndCheckLight() {
         this.activeChunkSet.clear();
-        this.theProfiler.startSection("buildList");
         int var1;
         EntityPlayer var2;
         int var3;
@@ -2214,13 +2191,9 @@ public abstract class World implements IBlockAccess {
             }
         }
 
-        this.theProfiler.endSection();
-
         if (this.ambientTickCountdown > 0) {
             --this.ambientTickCountdown;
         }
-
-        this.theProfiler.startSection("playerCheckLight");
 
         if (!this.playerEntities.isEmpty()) {
             var1 = this.rand.nextInt(this.playerEntities.size());
@@ -2230,12 +2203,9 @@ public abstract class World implements IBlockAccess {
             int var8 = MathHelper.floor_double(var2.posZ) + this.rand.nextInt(11) - 5;
             this.updateAllLightTypes(var3, var4, var8);
         }
-
-        this.theProfiler.endSection();
     }
 
     protected void moodSoundAndLightCheck(int par1, int par2, Chunk par3Chunk) {
-        this.theProfiler.endStartSection("moodSound");
 
         if (this.ambientTickCountdown == 0 && !this.isRemote) {
             this.updateLCG = this.updateLCG * 3 + 1013904223;
@@ -2257,7 +2227,6 @@ public abstract class World implements IBlockAccess {
             }
         }
 
-        this.theProfiler.endStartSection("checkLight");
         par3Chunk.enqueueRelightChecks();
     }
 
@@ -2406,7 +2375,6 @@ public abstract class World implements IBlockAccess {
         if (this.doChunksNearChunkExist(par2, par3, par4, 17)) {
             int var5 = 0;
             int var6 = 0;
-            this.theProfiler.startSection("getBrightness");
             int var7 = this.getSavedLightValue(par1EnumSkyBlock, par2, par3, par4);
             int var8 = this.computeLightValue(par2, par3, par4, par1EnumSkyBlock);
             int var9;
@@ -2460,9 +2428,6 @@ public abstract class World implements IBlockAccess {
                 var5 = 0;
             }
 
-            this.theProfiler.endSection();
-            this.theProfiler.startSection("checkedPosition < toCheckCount");
-
             while (var5 < var6) {
                 var9 = this.lightUpdateBlockList[var5++];
                 var10 = (var9 & 63) - 32 + par2;
@@ -2508,8 +2473,6 @@ public abstract class World implements IBlockAccess {
                     }
                 }
             }
-
-            this.theProfiler.endSection();
         }
     }
 
@@ -2666,7 +2629,6 @@ public abstract class World implements IBlockAccess {
     }
 
     public PathEntity getPathEntityToEntity(Entity par1Entity, Entity par2Entity, float par3, boolean par4, boolean par5, boolean par6, boolean par7) {
-        this.theProfiler.startSection("pathfind");
         int var8 = MathHelper.floor_double(par1Entity.posX);
         int var9 = MathHelper.floor_double(par1Entity.posY + 1.0D);
         int var10 = MathHelper.floor_double(par1Entity.posZ);
@@ -2678,13 +2640,10 @@ public abstract class World implements IBlockAccess {
         int var16 = var9 + var11;
         int var17 = var10 + var11;
         ChunkCache var18 = new ChunkCache(this, var12, var13, var14, var15, var16, var17, 0);
-        PathEntity var19 = (new PathFinder(var18, par4, par5, par6, par7)).createEntityPathTo(par1Entity, par2Entity, par3);
-        this.theProfiler.endSection();
-        return var19;
+        return (new PathFinder(var18, par4, par5, par6, par7)).createEntityPathTo(par1Entity, par2Entity, par3);
     }
 
     public PathEntity getEntityPathToXYZ(Entity par1Entity, int par2, int par3, int par4, float par5, boolean par6, boolean par7, boolean par8, boolean par9) {
-        this.theProfiler.startSection("pathfind");
         int var10 = MathHelper.floor_double(par1Entity.posX);
         int var11 = MathHelper.floor_double(par1Entity.posY);
         int var12 = MathHelper.floor_double(par1Entity.posZ);
@@ -2696,9 +2655,7 @@ public abstract class World implements IBlockAccess {
         int var18 = var11 + var13;
         int var19 = var12 + var13;
         ChunkCache var20 = new ChunkCache(this, var14, var15, var16, var17, var18, var19, 0);
-        PathEntity var21 = (new PathFinder(var20, par6, par7, par8, par9)).createEntityPathTo(par1Entity, par2, par3, par4, par5);
-        this.theProfiler.endSection();
-        return var21;
+        return (new PathFinder(var20, par6, par7, par8, par9)).createEntityPathTo(par1Entity, par2, par3, par4, par5);
     }
 
     /**

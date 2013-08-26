@@ -222,12 +222,9 @@ public class WorldServer extends World {
         for (ChunkCoordIntPair var4 : this.activeChunkSet) {
             int var5 = var4.chunkXPos * 16;
             int var6 = var4.chunkZPos * 16;
-            this.theProfiler.startSection("getChunk");
             Chunk var7 = this.getChunkFromChunkCoords(var4.chunkXPos, var4.chunkZPos);
             this.moodSoundAndLightCheck(var5, var6, var7);
-            this.theProfiler.endStartSection("tickChunk");
             var7.updateSkylight();
-            this.theProfiler.endStartSection("thunder");
             int var8;
             int var9;
             int var10;
@@ -245,7 +242,6 @@ public class WorldServer extends World {
                 }
             }
 
-            this.theProfiler.endStartSection("iceandsnow");
             int var13;
 
             if (this.rand.nextInt(16) == 0) {
@@ -276,7 +272,6 @@ public class WorldServer extends World {
                 }
             }
 
-            this.theProfiler.endStartSection("tickTiles");
             ExtendedBlockStorage[] var19 = var7.getBlockStorageArray();
             var9 = var19.length;
 
@@ -299,8 +294,6 @@ public class WorldServer extends World {
                     }
                 }
             }
-
-            this.theProfiler.endSection();
         }
     }
 
@@ -412,7 +405,6 @@ public class WorldServer extends World {
                 var2 = 1000;
             }
 
-            this.theProfiler.startSection("cleaning");
             NextTickListEntry var4;
 
             for (int var3 = 0; var3 < var2; ++var3) {
@@ -427,8 +419,6 @@ public class WorldServer extends World {
                 this.pendingTickListEntriesThisTick.add(var4);
             }
 
-            this.theProfiler.endSection();
-            this.theProfiler.startSection("ticking");
             Iterator<NextTickListEntry> var14 = this.pendingTickListEntriesThisTick.iterator();
 
             while (var14.hasNext()) {
@@ -462,7 +452,6 @@ public class WorldServer extends World {
                 }
             }
 
-            this.theProfiler.endSection();
             this.pendingTickListEntriesThisTick.clear();
             return !this.pendingTickListEntriesTreeSet.isEmpty();
         }
