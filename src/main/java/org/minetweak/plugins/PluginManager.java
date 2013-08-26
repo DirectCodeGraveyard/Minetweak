@@ -2,6 +2,7 @@ package org.minetweak.plugins;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import groovy.lang.Closure;
 import groovy.lang.GroovyClassLoader;
 import org.minetweak.Minetweak;
 import org.minetweak.util.TweakLogger;
@@ -120,10 +121,15 @@ public class PluginManager {
             try {
                 Class pc = Class.forName(c, true, loader);
                 IPlugin plugin = (IPlugin) pc.newInstance();
-                plugin.setPluginInfo(pluginInformation.get(c));
+                PluginInfo info = pluginInformation.get(c);
+                plugin.setPluginInfo(info);
                 plugin.setLogger(new TweakLogger(pluginInformation.get(c).getName()));
                 // Note that we override plugins even if they exist. This allows for alphabetical file-name plugin overriding
                 plugins.put(plugin.getPluginInfo().getName(), plugin);
+
+                if (info.getLoadingConfig() != null && info.getLoadingConfig().isCore()) {
+                    plugin.onLoad();
+                }
             } catch (Exception e) {
                 throw new RuntimeException("Error loading plugin", e);
             }
@@ -245,5 +251,11 @@ public class PluginManager {
 
     public static ArrayList<String> getLoadFirstPlugins() {
         return loadFirst;
+    }
+
+    public static void eachPlugin(Closure closure) {
+        for (IPlugin plugin : plugins.values()) {
+            closure.call(plugin);
+        }
     }
 }

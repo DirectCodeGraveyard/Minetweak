@@ -78,4 +78,9 @@ public interface IPlugin {
      * @return logger
      */
     public TweakLogger getLogger();
+
+    /**
+     * Executed if the Plugin is a Core Plugin
+     */
+    public void onLoad();
 }

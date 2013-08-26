@@ -76,4 +76,9 @@ public abstract class MinetweakPlugin implements IPlugin {
     public TweakLogger getLogger() {
         return logger;
     }
+
+    @Override
+    public void onLoad() {
+        // This is not required
+    }
 }

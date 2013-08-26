@@ -13,6 +13,7 @@ public class PluginLoadingThread extends Thread {
         for (String pluginName : PluginManager.getLoadFirstPlugins()) {
             PluginManager.enable(pluginName);
         }
+
         for (String pluginName : PluginManager.plugins.keySet()) {
             if (!PluginManager.isPluginEnabled(pluginName)) {
                 PluginManager.enable(pluginName);

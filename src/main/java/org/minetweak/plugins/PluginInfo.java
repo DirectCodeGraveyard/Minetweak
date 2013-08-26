@@ -173,13 +173,19 @@ public class PluginInfo {
 
     class LoadingConfig {
         private int priority;
+        private boolean core;
 
-        public LoadingConfig(int priority) {
+        public LoadingConfig(int priority, boolean core) {
             this.priority = priority;
+            this.core = core;
         }
 
         public int getPriority() {
             return priority;
+        }
+
+        public boolean isCore() {
+            return core;
         }
     }
 }
