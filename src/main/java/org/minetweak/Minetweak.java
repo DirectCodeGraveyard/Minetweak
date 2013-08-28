@@ -129,7 +129,7 @@ public class Minetweak {
 
     private static void ramCheck() {
         if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
-            System.out.println("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar MinetweakLauncher.jar\"");
+            Minetweak.getLogger().logWarning("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar MinetweakLauncher.jar\"");
         }
     }
 
