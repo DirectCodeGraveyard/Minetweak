@@ -135,7 +135,7 @@ public class PluginManager {
                         field.set(plugin, logger);
                     }
 
-                    if (ReflectionUtils.annotationExists(Plugin.PluginInformation.class, field)) {
+                    if (ReflectionUtils.annotationExists(Plugin.Info.class, field)) {
                         field.set(plugin, logger);
                     }
                 }
