@@ -23,7 +23,7 @@ public @interface Plugin {
     // Injects the PluginInfo into your Plugin
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    public @interface PluginInformation {}
+    public @interface Info {}
 
     // Marks the Method to be called on Enable
     @Retention(RetentionPolicy.RUNTIME)
