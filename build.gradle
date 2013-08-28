@@ -31,7 +31,7 @@ dependencies {
 }
 
 javadoc {
-    title 'Minetweak v' + version
+    title 'Minetweak v' + tweakVersion
     exclude '**/net/minecraft/**'
     classpath = configurations.compile + sourceSets.main.output
 }
