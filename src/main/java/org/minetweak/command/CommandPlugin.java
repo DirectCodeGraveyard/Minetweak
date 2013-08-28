@@ -1,7 +1,6 @@
 package org.minetweak.command;
 
 import org.minetweak.chat.TextColor;
-import org.minetweak.plugins.IPlugin;
 import org.minetweak.plugins.PluginInfo;
 import org.minetweak.plugins.PluginManager;
 
@@ -18,12 +17,12 @@ public class CommandPlugin extends CommandExecutor {
         }
         if (args.length == 1) {
             String pluginName = args[0];
-            IPlugin plugin = PluginManager.plugins.get(pluginName);
+            Object plugin = PluginManager.plugins.get(pluginName);
             if (plugin == null) {
                 sender.sendMessage(TextColor.RED + "The Plugin \'" + pluginName + "\' does not exist!");
                 return;
             }
-            PluginInfo i = plugin.getPluginInfo();
+            PluginInfo i = new PluginInfo(plugin.getClass().getName(), pluginName);
             sender.sendMessage(new String[]{
                     format("ID", i.getName()),
                     format("Author", i.getAuthor()),

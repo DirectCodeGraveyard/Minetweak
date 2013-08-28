@@ -1,6 +1,6 @@
 package org.minetweak.language;
 
-import org.minetweak.plugins.IPlugin;
+import org.minetweak.plugins.Plugin;
 
 public class LanguageRegistry {
 
@@ -10,11 +10,11 @@ public class LanguageRegistry {
      * @param targetPlugin   Plugin to register object to
      * @param languageObject LanguageObject that contains the object and translation
      */
-    public static void addName(IPlugin targetPlugin, LanguageObject languageObject) {
-        targetPlugin.registerLanguageObject(languageObject);
+    public static void addName(Plugin targetPlugin, LanguageObject languageObject) {
+        // targetPlugin.registerLanguageObject(languageObject);
     }
 
-    public static void getTranslatedName(IPlugin targetPlugin, LanguageObject languageObject) {
-        targetPlugin.getTranslatedName(languageObject);
+    public static void getTranslatedName(Plugin targetPlugin, LanguageObject languageObject) {
+        // targetPlugin.getTranslatedName(languageObject);
     }
 }

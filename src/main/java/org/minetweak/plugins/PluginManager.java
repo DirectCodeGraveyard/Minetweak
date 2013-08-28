@@ -5,10 +5,12 @@ import com.google.gson.GsonBuilder;
 import groovy.lang.Closure;
 import groovy.lang.GroovyClassLoader;
 import org.minetweak.Minetweak;
+import org.minetweak.util.ReflectionUtils;
 import org.minetweak.util.TweakLogger;
 
 import java.io.File;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class PluginManager {
 
     private ArrayList<File> files = new ArrayList<File>();
     public static GroovyClassLoader loader;
-    public static HashMap<String, IPlugin> plugins = new HashMap<String, IPlugin>();
+    public static HashMap<String, Object> plugins = new HashMap<String, Object>();
     public static ArrayList<String> enabledPlugins = new ArrayList<String>();
     private Gson gson = new GsonBuilder().create();
     private static ArrayList<String> loadFirst = new ArrayList<String>();
@@ -45,9 +47,8 @@ public class PluginManager {
      */
     public static void enable(String pluginName) {
         if (doesPluginExist(pluginName)) {
-            IPlugin plugin = plugins.get(pluginName);
-            plugin.registerListener(plugin);
-            plugin.onEnable();
+            Object plugin = plugins.get(pluginName);
+            ReflectionUtils.runFirstAnnotation(Plugin.Enable.class, plugin);
             enabledPlugins.add(pluginName);
         }
     }
@@ -58,10 +59,10 @@ public class PluginManager {
      * @param pluginName the plugin name
      */
     public static void disable(String pluginName) {
-        IPlugin plugin = plugins.get(pluginName);
+
         if (isPluginEnabled(pluginName)) {
-            plugin.purgeRegistrations();
-            plugin.onDisable();
+            Object plugin = plugins.get(pluginName);
+            ReflectionUtils.runFirstAnnotation(Plugin.Disable.class, plugin);
             enabledPlugins.remove(pluginName);
         }
     }
@@ -119,16 +120,31 @@ public class PluginManager {
         }
         for (String c : classes) {
             try {
-                Class pc = Class.forName(c, true, loader);
-                IPlugin plugin = (IPlugin) pc.newInstance();
+                Class<?> pc = Class.forName(c, true, loader);
+                Object plugin =  pc.newInstance();
                 PluginInfo info = pluginInformation.get(c);
-                plugin.setPluginInfo(info);
-                plugin.setLogger(new TweakLogger(pluginInformation.get(c).getName()));
+
+                TweakLogger logger = new TweakLogger(pluginInformation.get(c).getName());
+
+                for (Field field : plugin.getClass().getFields()) {
+                    if (ReflectionUtils.annotationExists(Plugin.Instance.class, field)) {
+                        field.set(null, plugin);
+                    }
+
+                    if (ReflectionUtils.annotationExists(Plugin.Logger.class, field)) {
+                        field.set(plugin, logger);
+                    }
+
+                    if (ReflectionUtils.annotationExists(Plugin.PluginInformation.class, field)) {
+                        field.set(plugin, logger);
+                    }
+                }
+
                 // Note that we override plugins even if they exist. This allows for alphabetical file-name plugin overriding
-                plugins.put(plugin.getPluginInfo().getName(), plugin);
+                plugins.put(pluginInformation.get(c).getName(), plugin);
 
                 if (info.getLoadingConfig() != null && info.getLoadingConfig().isCorePlugin()) {
-                    plugin.onLoad();
+                    ReflectionUtils.runFirstAnnotation(Plugin.Load.class, plugin);
                 }
             } catch (Exception e) {
                 throw new RuntimeException("Error loading plugin", e);
@@ -255,7 +271,7 @@ public class PluginManager {
     }
 
     public static void eachPlugin(Closure closure) {
-        for (IPlugin plugin : plugins.values()) {
+        for (Object plugin : plugins.values()) {
             closure.call(plugin);
         }
     }
