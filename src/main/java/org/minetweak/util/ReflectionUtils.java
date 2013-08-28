@@ -1,9 +1,12 @@
 package org.minetweak.util;
 
+import org.minetweak.plugins.Plugin;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public class ReflectionUtils {
     /**
@@ -66,12 +69,50 @@ public class ReflectionUtils {
         return true;
     }
 
-    public static void runFirstAnnotation(Class<? extends Annotation> annotation, Object object) {
+    public static void runFirstAnnotation(Class<? extends Annotation> annotation, Object object, Object... args) {
         for (Method method : object.getClass().getDeclaredMethods()) {
             if (annotationExists(annotation, method)) {
-                runIfExists(object, method.getName());
+                runIfExists(object, method.getName(), args);
                 return;
             }
         }
+    }
+
+    public static Method getFirstAnnotatedMethod(Class<? extends Annotation> annotation, Object object) {
+        for (Method method : object.getClass().getDeclaredMethods()) {
+            if (annotationExists(annotation, method)) {
+                return method;
+            }
+        }
+        return null;
+    }
+
+    public static ArrayList<Method> getAnnotatedMethods(Class<? extends Annotation> annotation, Object object) {
+        ArrayList<Method> methods = new ArrayList<Method>();
+        for (Method method : object.getClass().getDeclaredMethods()) {
+            if (annotationExists(annotation, method)) {
+                methods.add(method);
+            }
+        }
+        return methods;
+    }
+
+    public static void executeEvent(Object object, Object event) {
+        ArrayList<Method> methods = getAnnotatedMethods(Plugin.Handler.class, object);
+        for (Method method : methods) {
+            if (paramEquals(0, method, event.getClass())) {
+                try {
+                    method.invoke(object, event);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public static boolean paramEquals(int index, Method method, Class<?> clazz) {
+        return method.getParameterTypes().length >= (index + 1) && method.getParameterTypes()[index].equals(clazz);
     }
 }

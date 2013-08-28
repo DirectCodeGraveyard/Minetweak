@@ -13,30 +13,41 @@ public @interface Plugin {
     // Marks the Field for Minetweak to set the current instance of your plugin
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    public @interface Instance {}
+    public @interface Instance {
+    }
 
     // Injects the Logger into your Plugin
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    public @interface Logger {}
+    public @interface Logger {
+    }
 
     // Injects the PluginInfo into your Plugin
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
-    public @interface Info {}
+    public @interface Info {
+    }
 
     // Marks the Method to be called on Enable
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
-    public @interface Enable {}
+    public @interface Enable {
+    }
 
     // Marks the Method to be called on Disable
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
-    public @interface Disable {}
+    public @interface Disable {
+    }
 
     // Marks the Method to be called on Load
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
-    public @interface Load {}
+    public @interface Load {
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.METHOD)
+    public @interface Handler {
+    }
 }

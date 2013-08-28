@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import groovy.lang.Closure;
 import groovy.lang.GroovyClassLoader;
 import org.minetweak.Minetweak;
+import org.minetweak.plugins.event.PluginDisableEvent;
+import org.minetweak.plugins.event.PluginEnableEvent;
+import org.minetweak.plugins.event.PluginLoadEvent;
 import org.minetweak.util.ReflectionUtils;
 import org.minetweak.util.TweakLogger;
 
@@ -30,6 +33,7 @@ public class PluginManager {
     public static ArrayList<String> enabledPlugins = new ArrayList<String>();
     private Gson gson = new GsonBuilder().create();
     private static ArrayList<String> loadFirst = new ArrayList<String>();
+    public static HashMap<String, PluginInfo> pluginInformation = new HashMap<String, PluginInfo>();
 
     /**
      * Creates an instance of PluginLoader and runs setupPlugins
@@ -48,7 +52,7 @@ public class PluginManager {
     public static void enable(String pluginName) {
         if (doesPluginExist(pluginName)) {
             Object plugin = plugins.get(pluginName);
-            ReflectionUtils.runFirstAnnotation(Plugin.Enable.class, plugin);
+            ReflectionUtils.executeEvent(plugin, new PluginEnableEvent(pluginInformation.get(plugin.getClass().getName())));
             enabledPlugins.add(pluginName);
         }
     }
@@ -59,10 +63,9 @@ public class PluginManager {
      * @param pluginName the plugin name
      */
     public static void disable(String pluginName) {
-
         if (isPluginEnabled(pluginName)) {
             Object plugin = plugins.get(pluginName);
-            ReflectionUtils.runFirstAnnotation(Plugin.Disable.class, plugin);
+            ReflectionUtils.executeEvent(plugin, new PluginDisableEvent(pluginInformation.get(plugin.getClass().getName())));
             enabledPlugins.remove(pluginName);
         }
     }
@@ -75,7 +78,6 @@ public class PluginManager {
         getPluginFiles();
         ArrayList<String> classes = new ArrayList<String>();
         ArrayList<URL> urls = new ArrayList<URL>();
-        HashMap<String, PluginInfo> pluginInformation = new HashMap<String, PluginInfo>();
         for (File f : files) {
             PluginInfo pluginInfo = getPluginInfo(f);
             if (pluginInfo == null) {
@@ -144,7 +146,7 @@ public class PluginManager {
                 plugins.put(pluginInformation.get(c).getName(), plugin);
 
                 if (info.getLoadingConfig() != null && info.getLoadingConfig().isCorePlugin()) {
-                    ReflectionUtils.runFirstAnnotation(Plugin.Load.class, plugin);
+                    ReflectionUtils.executeEvent(plugin, new PluginLoadEvent(pluginInformation.get(c)));
                 }
             } catch (Exception e) {
                 throw new RuntimeException("Error loading plugin", e);
@@ -229,6 +231,7 @@ public class PluginManager {
         enabledPlugins.clear();
         loader = null;
         loadFirst.clear();
+        pluginInformation.clear();
         initialize();
     }
 
