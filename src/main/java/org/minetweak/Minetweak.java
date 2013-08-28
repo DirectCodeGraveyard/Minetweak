@@ -93,7 +93,6 @@ public class Minetweak {
         // Runs a quick utility to get the Server Version
         versionCheck();
         launcherCheck();
-        Minetweak.info("Starting Minetweak v" + serverVersion + " implementing Minecraft v" + getMinecraftVersion());
         // Load the most important things first
         GameConfig.initialize();
         PermissionsLoader.load();

@@ -5,6 +5,7 @@ package org.minetweak;
  */
 public class Start {
     public static void main(String[] args) {
+        Minetweak.info("Starting Minetweak v" + Minetweak.getAPIVersion() + " implementing Minecraft v" + Minetweak.getMinecraftVersion());
         Minetweak.main(args);
     }
 }

@@ -11,10 +11,15 @@ public class WorldGeneration {
      *
      * @param generator the world gen to add
      */
-    public static void addWorldGenerator(WorldGenerator generator) {
+    public void addWorldGenerator(WorldGenerator generator) {
 
     }
 
+    /**
+     * Gets the WorldGeneration Instance
+     *
+     * @return
+     */
     public static WorldGeneration getInstance() {
         return instance;
     }
