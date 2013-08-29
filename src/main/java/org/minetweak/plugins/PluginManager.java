@@ -52,6 +52,7 @@ public class PluginManager {
     public static void enable(String pluginName) {
         if (doesPluginExist(pluginName)) {
             Object plugin = plugins.get(pluginName);
+            Minetweak.getEventBus().register(plugin);
             ReflectionUtils.executeEvent(plugin, new PluginEnableEvent(pluginInformation.get(plugin.getClass().getName())));
             enabledPlugins.add(pluginName);
         }
@@ -65,6 +66,7 @@ public class PluginManager {
     public static void disable(String pluginName) {
         if (isPluginEnabled(pluginName)) {
             Object plugin = plugins.get(pluginName);
+            Minetweak.getEventBus().unregister(plugin);
             ReflectionUtils.executeEvent(plugin, new PluginDisableEvent(pluginInformation.get(plugin.getClass().getName())));
             enabledPlugins.remove(pluginName);
         }
@@ -114,39 +116,44 @@ public class PluginManager {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-
         }
+
         loader = new GroovyClassLoader();
+
         for (URL url : urls) {
             loader.addURL(url);
         }
+
         for (String c : classes) {
             try {
                 Class<?> pc = Class.forName(c, true, loader);
                 Object plugin =  pc.newInstance();
                 PluginInfo info = pluginInformation.get(c);
 
-                TweakLogger logger = new TweakLogger(pluginInformation.get(c).getName());
+                TweakLogger logger = new TweakLogger(info.getName());
 
-                for (Field field : plugin.getClass().getFields()) {
+                for (Field field : plugin.getClass().getDeclaredFields()) {
+                    if (!field.isAccessible()) {
+                        field.setAccessible(true);
+                    }
                     if (ReflectionUtils.annotationExists(Plugin.Instance.class, field)) {
                         field.set(null, plugin);
                     }
 
                     if (ReflectionUtils.annotationExists(Plugin.Logger.class, field)) {
-                        field.set(plugin, logger);
+                        field.set(null, logger);
                     }
 
                     if (ReflectionUtils.annotationExists(Plugin.Info.class, field)) {
-                        field.set(plugin, pluginInformation.get(c));
+                        field.set(plugin, info);
                     }
                 }
 
                 // Note that we override plugins even if they exist. This allows for alphabetical file-name plugin overriding
-                plugins.put(pluginInformation.get(c).getName(), plugin);
+                plugins.put(info.getName(), plugin);
 
                 if (info.getLoadingConfig() != null && info.getLoadingConfig().isCorePlugin()) {
-                    ReflectionUtils.executeEvent(plugin, new PluginLoadEvent(pluginInformation.get(c)));
+                    ReflectionUtils.executeEvent(plugin, new PluginLoadEvent(info));
                 }
             } catch (Exception e) {
                 throw new RuntimeException("Error loading plugin", e);

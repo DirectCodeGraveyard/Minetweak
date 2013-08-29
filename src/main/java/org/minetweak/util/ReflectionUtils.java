@@ -113,6 +113,6 @@ public class ReflectionUtils {
     }
 
     public static boolean paramEquals(int index, Method method, Class<?> clazz) {
-        return method.getParameterTypes().length >= (index + 1) && method.getParameterTypes()[index].equals(clazz);
+        return index < method.getParameterTypes().length && method.getParameterTypes()[index].equals(clazz);
     }
 }
