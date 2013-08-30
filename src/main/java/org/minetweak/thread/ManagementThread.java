@@ -23,7 +23,8 @@ public class ManagementThread extends Thread {
             loadPlayers();
             loadWhitelist();
             loadOps();
-            for (Runnable runnable : runnables) {
+            ArrayList<Runnable> temp = new ArrayList<Runnable>(runnables);
+            for (Runnable runnable : temp) {
                 runnable.run();
                 runnables.remove(runnable);
             }

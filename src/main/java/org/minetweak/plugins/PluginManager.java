@@ -272,14 +272,29 @@ public class PluginManager {
         return plugins.keySet().contains(pluginName);
     }
 
+    /**
+     * Registers Language Files
+     *
+     * @param file Jar
+     */
     public void registerLanguageFiles(JarFile file) {
         // Stub - This may be a bit hard
     }
 
+    /**
+     * Gets the List of Plugins that will be loaded before others
+     *
+     * @return list of plugins to load first
+     */
     public static ArrayList<String> getLoadFirstPlugins() {
         return loadFirst;
     }
 
+    /**
+     * Runs a Closure for Each Plugin
+     *
+     * @param closure Closure
+     */
     public static void eachPlugin(Closure closure) {
         for (Object plugin : plugins.values()) {
             closure.call(plugin);
