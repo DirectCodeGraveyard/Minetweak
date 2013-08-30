@@ -1,10 +1,11 @@
 package org.minetweak.util;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
+import java.net.URLConnection;
 
 /**
  * Methods that have to do with HTTP
@@ -22,17 +23,27 @@ public class HttpUtils {
         try {
             if (!file.exists()) {
                 if (!file.createNewFile()) {
-                    throw new RuntimeException("Unable to download " + url + "! Cannot create file " + file.getAbsolutePath());
+                    return false;
                 }
             } else {
                 if (!file.delete()) {
-                    throw new RuntimeException("Unable to download " + url + "! Cannot delete file " + file.getAbsolutePath());
+                    return false;
                 }
             }
+            PrintStream out = new PrintStream(file);
             URL urlC = new URL(url);
-            ReadableByteChannel rbc = Channels.newChannel(urlC.openStream());
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+            URLConnection connection = urlC.openConnection();
+            connection.setReadTimeout(1);
+            connection.setUseCaches(false);
+            connection.setConnectTimeout(1);
+            connection.connect();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                out.println(line);
+            }
+            reader.close();
+            out.close();
         } catch (Exception e) {
             return false;
         }

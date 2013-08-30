@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
+/**
+ * This is the Log Formatter for TweakLoggers
+ */
 public class LogFormatter extends Formatter {
     private SimpleDateFormat dateFormat;
 
@@ -22,6 +25,10 @@ public class LogFormatter extends Formatter {
         builder.append(this.dateFormat.format(record.getMillis()));
 
         builder.append(" [").append(record.getLevel().getName()).append("] ");
+
+        // Add the Name of the Logger
+        builder.append("[").append(record.getLoggerName()).append("] ");
+
         builder.append(this.formatMessage(record));
         builder.append('\n');
         Throwable exception = record.getThrown();

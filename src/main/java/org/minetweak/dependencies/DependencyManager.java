@@ -16,17 +16,17 @@ import java.net.URL;
 @SuppressWarnings("FieldCanBeLocal")
 public class DependencyManager {
 
-    public static Gson gson = new GsonBuilder().create();
+    private static Gson gson = new GsonBuilder().create();
 
-    public static DependencyConfig config;
+    private static DependencyConfig config;
 
     private static File dependencyFolder = new File("lib/");
 
     private static String repoJson = "http://repo.minetweak.org/dependenciesList.json";
     private static File repoJsonLocal = new File("dependenciesList.json");
-    private static GroovyClassLoader classLoader = new GroovyClassLoader(ClassLoader.getSystemClassLoader());
+    private static GroovyClassLoader classLoader = new GroovyClassLoader(DependencyManager.class.getClassLoader());
 
-    public static String json;
+    private static String json;
 
     private static boolean localJsonDownloaded = repoJsonLocal.exists();
     private static boolean localJsonParsed = false;
@@ -49,10 +49,14 @@ public class DependencyManager {
     }
 
     public static void readJson() {
-        try {
-            json = IOUtils.toString(new FileReader(repoJsonLocal));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!repoJsonLocal.exists()) {
+            json = "{}";
+        } else {
+            try {
+                json = IOUtils.toString(new FileReader(repoJsonLocal));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         config = gson.fromJson(json, DependencyConfig.class);
         localJsonParsed = true;

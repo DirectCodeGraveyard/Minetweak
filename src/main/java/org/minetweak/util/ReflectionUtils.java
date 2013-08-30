@@ -8,6 +8,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+/**
+ * Useful Reflection Methods
+ */
 public class ReflectionUtils {
     /**
      * Checks if a Class Exists
@@ -26,8 +29,9 @@ public class ReflectionUtils {
 
     /**
      * Checks if an Annotation Exists on a Field
+     *
      * @param annotation annotation class
-     * @param field field to check
+     * @param field      field to check
      * @return if it exists
      */
     public static boolean annotationExists(Class<? extends Annotation> annotation, Field field) {
@@ -36,8 +40,9 @@ public class ReflectionUtils {
 
     /**
      * Checks if an Annotation Exists on a Class
+     *
      * @param annotation annotation class
-     * @param clazz class to check
+     * @param clazz      class to check
      * @return if it exists
      */
     public static boolean annotationExists(Class<? extends Annotation> annotation, Class<?> clazz) {
@@ -46,14 +51,23 @@ public class ReflectionUtils {
 
     /**
      * Checks if an Annotation Exists on a Method
+     *
      * @param annotation annotation class
-     * @param method method to check
+     * @param method     method to check
      * @return if it exists
      */
     public static boolean annotationExists(Class<? extends Annotation> annotation, Method method) {
         return method.isAnnotationPresent(annotation);
     }
 
+    /**
+     * Runs a Method if it exists
+     *
+     * @param object     Object
+     * @param methodName Name of Method
+     * @param args       arguments to pass
+     * @return if the method was invoked
+     */
     public static boolean runIfExists(Object object, String methodName, Object... args) {
         try {
             Method method = object.getClass().getMethod(methodName);
@@ -69,6 +83,13 @@ public class ReflectionUtils {
         return true;
     }
 
+    /**
+     * Executes the first Method with the Given Annotation
+     *
+     * @param annotation Annotation
+     * @param object     Object
+     * @param args       Arguments to pass
+     */
     public static void runFirstAnnotation(Class<? extends Annotation> annotation, Object object, Object... args) {
         for (Method method : object.getClass().getDeclaredMethods()) {
             if (annotationExists(annotation, method)) {
@@ -78,6 +99,13 @@ public class ReflectionUtils {
         }
     }
 
+    /**
+     * Returns the First Method that is annotated with the Given Annotation
+     *
+     * @param annotation Annotation
+     * @param object     Object
+     * @return method
+     */
     public static Method getFirstAnnotatedMethod(Class<? extends Annotation> annotation, Object object) {
         for (Method method : object.getClass().getDeclaredMethods()) {
             if (annotationExists(annotation, method)) {
@@ -87,6 +115,13 @@ public class ReflectionUtils {
         return null;
     }
 
+    /**
+     * Gets all Method annotated with the given annotation
+     *
+     * @param annotation Annotation
+     * @param object     Object
+     * @return list of methods
+     */
     public static ArrayList<Method> getAnnotatedMethods(Class<? extends Annotation> annotation, Object object) {
         ArrayList<Method> methods = new ArrayList<Method>();
         for (Method method : object.getClass().getDeclaredMethods()) {
@@ -97,6 +132,12 @@ public class ReflectionUtils {
         return methods;
     }
 
+    /**
+     * Executes a Plugin Handler Event on the given Object
+     *
+     * @param object Plugin Object
+     * @param event  Event to Execute
+     */
     public static void executeEvent(Object object, Object event) {
         ArrayList<Method> methods = getAnnotatedMethods(Plugin.Handler.class, object);
         for (Method method : methods) {
@@ -112,6 +153,14 @@ public class ReflectionUtils {
         }
     }
 
+    /**
+     * Checks if the parameter type is equal
+     *
+     * @param index  index of parameter
+     * @param method method to check
+     * @param clazz  class of parameter
+     * @return if the parameter exists
+     */
     public static boolean paramEquals(int index, Method method, Class<?> clazz) {
         return index < method.getParameterTypes().length && method.getParameterTypes()[index].equals(clazz);
     }

@@ -127,7 +127,7 @@ public class PluginManager {
         for (String c : classes) {
             try {
                 Class<?> pc = Class.forName(c, true, loader);
-                Object plugin =  pc.newInstance();
+                Object plugin = pc.newInstance();
                 PluginInfo info = pluginInformation.get(c);
 
                 TweakLogger logger = new TweakLogger(info.getName());
@@ -273,7 +273,7 @@ public class PluginManager {
     }
 
     public void registerLanguageFiles(JarFile file) {
-        // Stub
+        // Stub - This may be a bit hard
     }
 
     public static ArrayList<String> getLoadFirstPlugins() {

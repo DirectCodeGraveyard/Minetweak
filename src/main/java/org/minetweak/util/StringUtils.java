@@ -1,5 +1,8 @@
 package org.minetweak.util;
 
+/**
+ * String Utilities
+ */
 public class StringUtils {
     /**
      * Drops the first String

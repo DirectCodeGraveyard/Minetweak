@@ -19,8 +19,6 @@ import org.minetweak.util.TweakLogger;
 import org.minetweak.world.World;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.jar.Attributes;
@@ -336,16 +334,14 @@ public class Minetweak {
 
         if (isJar) {
             try {
-                try {
-                    JarFile file = new JarFile(new File(url.toURI()));
-                    Attributes attributes = file.getManifest().getMainAttributes();
-                    String version = attributes.getValue("Minetweak-version");
-                    if (version != null) {
-                        serverVersion = version;
-                    }
-                } catch (URISyntaxException ignored) {
+                JarFile file = new JarFile(new File(url.toURI()));
+                Attributes attributes = file.getManifest().getMainAttributes();
+                String version = attributes.getValue("Minetweak-version");
+                if (version != null) {
+                    serverVersion = version;
                 }
-            } catch (IOException ignored) {
+                file.close();
+            } catch (Exception ignored) {
             }
         }
     }
@@ -365,7 +361,7 @@ public class Minetweak {
      * @return Overworld WorldServer
      */
     public static World getOverworld() {
-        return new World(MinecraftServer.getServer().worldServerForDimension(0));
+        return MinecraftServer.getServer().worldServerForDimension(0).getWorld();
     }
 
     /**

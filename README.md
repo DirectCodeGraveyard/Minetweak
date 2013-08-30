@@ -13,7 +13,7 @@ Minetweak is a modified Minecraft Server implementation with support for Plugins
 - [psgs](https://github.com/psgs/) - Developer and Training Manager
 - [Clank](https://github.com/RedefinedClank/) - Wiki Contributor
 
-Want to help develop MineTweak? Pull requests are welcome! We'd love to have you help.
+Want to help develop Minetweak? Pull requests are welcome! We'd love to have you help.
 
 **More Information**
 

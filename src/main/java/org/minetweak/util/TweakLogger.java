@@ -9,11 +9,16 @@ import java.util.logging.Logger;
  * Base Logger for Minetweak Operations
  */
 public class TweakLogger {
-    private final Logger serverLogger;
+    private final Logger logger;
     private final String prefix;
 
+    /**
+     * Makes a Logger Instance
+     *
+     * @param loggerName Name of Logger
+     */
     public TweakLogger(String loggerName) {
-        this.serverLogger = Logger.getLogger(loggerName);
+        this.logger = Logger.getLogger(loggerName);
         this.prefix = loggerName;
         this.setupLogger();
     }
@@ -22,21 +27,26 @@ public class TweakLogger {
      * Sets up the logger for usage.
      */
     private void setupLogger() {
-        this.serverLogger.setUseParentHandlers(false);
-        Handler[] handlers = this.serverLogger.getHandlers();
+        this.logger.setUseParentHandlers(false);
+        Handler[] handlers = this.logger.getHandlers();
 
         for (Handler handler : handlers) {
-            this.serverLogger.removeHandler(handler);
+            this.logger.removeHandler(handler);
         }
 
         LogFormatter formatter = new LogFormatter(this);
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setFormatter(formatter);
-        this.serverLogger.addHandler(consoleHandler);
+        this.logger.addHandler(consoleHandler);
     }
 
+    /**
+     * Gets the Java Logger
+     *
+     * @return logger
+     */
     public Logger getLogger() {
-        return this.serverLogger;
+        return this.logger;
     }
 
     /**
@@ -45,7 +55,7 @@ public class TweakLogger {
      * @param line line to log
      */
     public void info(String line) {
-        this.serverLogger.log(Level.INFO, "[" + prefix + "] " + line);
+        this.logger.log(Level.INFO, line);
     }
 
     /**
@@ -54,7 +64,7 @@ public class TweakLogger {
      * @param line line to log
      */
     public void logWarning(String line) {
-        this.serverLogger.log(Level.WARNING, "[" + prefix + "] " + line);
+        this.logger.log(Level.WARNING, line);
     }
 
     /**
@@ -63,7 +73,7 @@ public class TweakLogger {
      * @param line line to log
      */
     public void logWarningFormatted(String line, Object... objects) {
-        this.serverLogger.log(Level.WARNING, "[" + prefix + "] " + line, objects);
+        this.logger.log(Level.WARNING, line, objects);
     }
 
     /**
@@ -72,7 +82,7 @@ public class TweakLogger {
      * @param line line to log
      */
     public void logWarningException(String line, Throwable exception) {
-        this.serverLogger.log(Level.WARNING, "[" + prefix + "] " + line, exception);
+        this.logger.log(Level.WARNING, line, exception);
     }
 
     /**
@@ -81,7 +91,7 @@ public class TweakLogger {
      * @param line line to log
      */
     public void logSevere(String line) {
-        this.serverLogger.log(Level.SEVERE, "[" + prefix + "] " + line);
+        this.logger.log(Level.SEVERE, line);
     }
 
     /**
@@ -90,16 +100,7 @@ public class TweakLogger {
      * @param line line to log
      */
     public void logSevereException(String line, Throwable exception) {
-        this.serverLogger.log(Level.SEVERE, "[" + prefix + "] " + line, exception);
-    }
-
-    /**
-     * Logs info without a prefix to the Console
-     *
-     * @param line line to log
-     */
-    public void logNoPrefix(String line) {
-        this.serverLogger.log(Level.INFO, line);
+        this.logger.log(Level.SEVERE, line, exception);
     }
 
     /**
