@@ -9,6 +9,7 @@ public class DependencyConfig {
         public String name;
         public String groupId;
         public String version;
+        public String sha1;
         public String url;
     }
 }

@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import groovy.lang.GroovyClassLoader;
 import org.apache.commons.io.IOUtils;
 import org.minetweak.Minetweak;
+import org.minetweak.util.HashUtils;
 import org.minetweak.util.HttpUtils;
 
 import java.io.File;
@@ -73,15 +74,29 @@ public class DependencyManager {
             if (dep.name.equalsIgnoreCase(name) && dep.version.equalsIgnoreCase(version)) {
                 File folder = new File("lib/" + name + "/" + version + "/");
                 File jar = new File(folder, name + ".jar");
-                if (jar.exists()) return jar;
 
-                if (!folder.mkdirs()) {
+                if (jar.exists() && dep.sha1 != null) {
+                    if (!HashUtils.validateSHA1(jar, dep.sha1)) {
+                        Minetweak.info("Re-downloading dependency: " + name + " v" + ". File Invalid.");
+                    } else {
+                        return jar;
+                    }
+                }
+
+                if (!folder.exists() && !folder.mkdirs()) {
                     Minetweak.getLogger().logWarning("Unable to make the directories for dependency \'" + dep.name + "\'!");
                     return null;
                 }
 
                 Minetweak.getLogger().info("Downloading dependency: " + name + " v" + version);
                 HttpUtils.downloadFile(jar.getAbsolutePath(), dep.url);
+
+                if (dep.sha1 != null) {
+                    if (!HashUtils.validateSHA1(jar, dep.sha1)) {
+                        Minetweak.getLogger().logSevere("Unable to download dependency: " + name + " v" + version + ". File Invalid.");
+                        return null;
+                    }
+                }
 
                 return jar;
             }
