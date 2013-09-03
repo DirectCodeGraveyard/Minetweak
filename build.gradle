@@ -90,6 +90,11 @@ task apiJar(type: Jar) {
     include('org/bukkit/**/*')
 }
 
+// This executes a CI Build for Minetweak
+task('ciBuild') {
+    dependsOn 'test', 'uploadArchives'
+}
+
 artifacts {
     archives jar
     archives standaloneJar
