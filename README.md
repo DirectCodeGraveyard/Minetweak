@@ -9,9 +9,6 @@ Minetweak is a modified Minecraft Server implementation with support for Plugins
 - [Logan Gorence](https://github.com/logangorence/) - Leader
 - [Kenneth Endfinger](https://github.com/kaendfinger/) - Developer and Co-Leader
 - [samrg472](https://github.com/samrg472/) - Developer and Manager
-- [niel](https://github.com/Neil5043/) - Wiki and Issue Manager
-- [psgs](https://github.com/psgs/) - Developer and Training Manager
-- [Clank](https://github.com/RedefinedClank/) - Wiki Contributor
 
 Want to help develop MineTweak? Pull requests are welcome! We'd love to have your help!
 
