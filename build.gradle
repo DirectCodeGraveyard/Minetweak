@@ -16,10 +16,6 @@ repositories {
     jcenter()
 }
 
-configurations {
-    compile
-}
-
 dependencies {
     compile 'com.google.guava:guava:14.0.1'
     compile 'com.google.code.gson:gson:2.2.4'
