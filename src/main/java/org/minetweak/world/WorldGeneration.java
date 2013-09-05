@@ -4,10 +4,10 @@ import net.minecraft.world.gen.world.WorldGenerator;
 
 @SuppressWarnings("UnusedDeclaration")
 public class WorldGeneration {
-    private static WorldGeneration instance = new WorldGeneration();
+    private static final WorldGeneration instance = new WorldGeneration();
 
     /**
-     * This is a stub
+     * Stub - This will be used to add a WorldGenerator
      *
      * @param generator the world gen to add
      */
@@ -17,8 +17,7 @@ public class WorldGeneration {
 
     /**
      * Gets the WorldGeneration Instance
-     *
-     * @return
+     * @return Instance
      */
     public static WorldGeneration getInstance() {
         return instance;

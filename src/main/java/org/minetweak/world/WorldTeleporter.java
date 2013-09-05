@@ -3,7 +3,7 @@ package org.minetweak.world;
 import org.minetweak.entity.Player;
 
 public class WorldTeleporter {
-    private World destination;
+    private final World destination;
 
     /**
      * Constructs a World Teleporter

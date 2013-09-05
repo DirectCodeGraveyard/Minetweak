@@ -57,13 +57,13 @@ public class Minetweak {
      * This is where we store the player's information at, inside of the Player
      * class contains their NetServerHandler and EntityPlayerMP.
      */
-    private static HashMap<String, Player> players = new HashMap<String, Player>();
+    private static final HashMap<String, Player> players = new HashMap<String, Player>();
 
     /**
      * This is where we store the command executors for our base commands, and even
      * for other plugins. It will need some work later on for duplicates, etc.
      */
-    private static HashMap<String, CommandExecutor> commandExecutors = new HashMap<String, CommandExecutor>();
+    private static final HashMap<String, CommandExecutor> commandExecutors = new HashMap<String, CommandExecutor>();
 
     /**
      * The Guava EventBus that allows us to create our own events. This is basically
@@ -75,7 +75,7 @@ public class Minetweak {
     /**
      * The Main logger for Minetweak
      */
-    private static TweakLogger logger = new TweakLogger("Minetweak");
+    private static final TweakLogger logger = new TweakLogger("Minetweak");
 
     /**
      * Is this server using the Minetweak Launcher?
@@ -90,7 +90,10 @@ public class Minetweak {
     public static void main(String[] args) {
         // Runs a quick utility to get the Server Version
         versionCheck();
+
+        // Check to see if we are using the Launcher
         launcherCheck();
+
         // Load the most important things first
         GameConfig.initialize();
         PermissionsLoader.load();

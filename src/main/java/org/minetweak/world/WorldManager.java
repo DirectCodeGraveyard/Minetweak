@@ -9,7 +9,7 @@ import java.util.Hashtable;
  * Manages Worlds, which includes dimensions
  */
 public class WorldManager {
-    private static Hashtable<Integer, WorldServer> worldServers = new Hashtable<Integer, WorldServer>();
+    private static final Hashtable<Integer, WorldServer> worldServers = new Hashtable<Integer, WorldServer>();
     private static int worldServerCount = -1;
 
     /**

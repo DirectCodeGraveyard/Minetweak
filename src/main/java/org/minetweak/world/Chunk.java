@@ -6,6 +6,9 @@ import org.minetweak.block.Block;
 
 import java.lang.ref.WeakReference;
 
+/**
+ * Represents a Chunk in a World
+ */
 public class Chunk {
     private WeakReference<net.minecraft.world.chunk.Chunk> weakChunk;
     private final WorldServer worldServer;
