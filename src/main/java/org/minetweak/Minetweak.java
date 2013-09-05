@@ -40,7 +40,7 @@ public class Minetweak {
     /**
      * Minetweak API version
      */
-    private static String serverVersion = "0.6.6";
+    private static String serverVersion = "0.6.7";
 
     /**
      * This field returns true if the server has finished the startup process.
