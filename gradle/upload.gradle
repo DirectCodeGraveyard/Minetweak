@@ -1,0 +1,49 @@
+apply plugin: 'maven'
+
+def credentials = [
+        userName: System.getProperty('minetweak.deploy.username'),
+        password: System.getProperty('minetweak.deploy.password')
+]
+
+uploadArchives {
+    repositories.mavenDeployer {
+        //beforeDeployment { deployment ->
+        //    signing.signPom(deployment)
+        //}
+        repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2', authentication: credentials)
+
+        snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots', authentication: credentials)
+
+        pom {
+            groupId = 'org.minetweak'
+            version = tweakVersion
+            artifactId = project.name
+            project {
+                name project.name
+                packaging 'jar'
+                description 'A fast and reliable Minecraft Server with an API.'
+                inceptionYear '2013'
+                url 'http://www.minetweak.org/'
+
+                scm {
+                    url 'https://github.com/Minetweak/Minetweak/'
+                    connection 'scm:git:git://github.com/Minetweak/Minetweak.git'
+                    developerConnection 'scm:git:git@github.com:Minetweak/Minetweak.git'
+                }
+
+                issueManagement {
+                    system 'jira'
+                    url 'https://minetweak.atlassian.net/'
+                }
+
+                licenses {
+                    license {
+                        name 'GNU Lesser General Public License (LGPL), Version 3'
+                        url 'http://www.gnu.org/licenses/lgpl.txt'
+                        distribution 'repo'
+                    }
+                }
+            }
+        }
+    }
+}

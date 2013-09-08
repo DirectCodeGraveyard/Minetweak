@@ -1,0 +1,3 @@
+task('ciBuild') {
+    dependsOn 'test', 'uploadArchives', 'buildDashboard'
+}

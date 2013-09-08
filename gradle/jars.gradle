@@ -1,0 +1,52 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+
+jar {
+    manifest {
+        attributes('Main-class': mainClass, 'Minetweak-version': tweakVersion)
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    group = 'other'
+    description = 'Makes a JAR with Minetweak Sources'
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    group = 'documentation'
+    description = 'Makes a JAR with Minetweak Javadoc'
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+task standaloneJar(type: Jar) {
+    group = 'build'
+    description = 'Makes a JAR with Minetweak dependencies inside'
+    classifier = 'standalone'
+    from sourceSets.main.output
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    exclude 'META-INF', 'META-INF/**/*'
+
+    manifest {
+        attributes('Main-class': mainClass, 'Minetweak-version': tweakVersion)
+    }
+}
+
+task apiJar(type: Jar) {
+    group = 'build'
+    description = 'Makes a JAR containing only the Minetweak API'
+    classifier = 'api'
+    from sourceSets.main.output
+    include('org/minetweak/**/*')
+    include('org/bukkit/**/*')
+}
+
+artifacts {
+    archives jar
+    archives standaloneJar
+    archives apiJar
+    archives sourcesJar
+    archives javadocJar
+}

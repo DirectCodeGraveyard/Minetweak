@@ -1,23 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-apply plugin: 'maven'
 apply plugin: 'project-report'
-apply plugin: 'build-dashboard'
-
-def tweakVersion = '0.6.7-SNAPSHOT'
-def mainClass = 'org.minetweak.Start'
 
 defaultTasks 'jar'
+
+ext.tweakVersion = '0.6.7-SNAPSHOT'
+ext.mainClass = 'org.minetweak.Start'
 
 repositories {
     mavenCentral()
     jcenter()
-}
-
-configurations {
-    compile
 }
 
 dependencies {
@@ -32,7 +24,7 @@ dependencies {
 }
 
 javadoc {
-    title 'Minetweak v' + tweakVersion
+    title "Minetweak v${tweakVersion}"
     exclude '**/net/minecraft/**'
     classpath = configurations.compile + sourceSets.main.output
 }
@@ -43,129 +35,12 @@ compileJava {
     targetCompatibility = '1.6'
 }
 
-jar {
-    manifest {
-        attributes('Main-class': mainClass, 'Minetweak-version': tweakVersion)
-    }
-}
-
-tasks.withType(Test) {
-    scanForTestClasses = false
-    include '**/*Test*.class'
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    group = 'other'
-    description = 'Makes a JAR with Minetweak Sources'
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    group = 'documentation'
-    description = 'Makes a JAR with Minetweak Javadoc'
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-task standaloneJar(type: Jar) {
-    group = 'build'
-    description = 'Makes a JAR with Minetweak dependencies inside'
-    classifier = 'standalone'
-    from sourceSets.main.output
-    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    exclude 'META-INF', 'META-INF/**/*'
-
-    manifest {
-        attributes('Main-class': mainClass, 'Minetweak-version': tweakVersion)
-    }
-}
-
-task apiJar(type: Jar) {
-    group = 'build'
-    description = 'Makes a JAR containing only the Minetweak API'
-    classifier = 'api'
-    from sourceSets.main.output
-    include('org/minetweak/**/*')
-    include('org/bukkit/**/*')
-}
-
-// This executes a CI Build for Minetweak
-task('ciBuild') {
-    dependsOn 'test', 'uploadArchives', 'buildDashboard'
-}
-
-artifacts {
-    archives jar
-    archives standaloneJar
-    archives apiJar
-    archives sourcesJar
-    archives javadocJar
-}
-
-// signing { sign configurations.archives }
-
-if (!hasProperty('sonatypeUsername')) {
-    ext.sonatypeUsername = ''
-}
-if (!hasProperty('sonatypePassword')) {
-    ext.sonatypePassword = ''
-}
-
-uploadArchives {
-    repositories.mavenDeployer {
-        //beforeDeployment { deployment ->
-        //    signing.signPom(deployment)
-        //}
-        repository(url: 'https://oss.sonatype.org/service/local/staging/deploy/maven2') {
-            authentication(userName: sonatypeUsername, password: sonatypePassword)
-        }
-
-        snapshotRepository(url: 'https://oss.sonatype.org/content/repositories/snapshots') {
-            authentication(userName: sonatypeUsername, password: sonatypePassword)
-        }
-
-        pom {
-            groupId = 'org.minetweak'
-            version = tweakVersion
-            artifactId = project.name
-            project {
-                name project.name
-                packaging 'jar'
-                description 'A fast and reliable Minecraft Server with an API.'
-                inceptionYear '2013'
-                url 'http://www.minetweak.org/'
-
-                scm {
-                    url 'https://github.com/Minetweak/Minetweak/'
-                    connection 'scm:git:git://github.com/Minetweak/Minetweak.git'
-                    developerConnection 'scm:git:git@github.com:Minetweak/Minetweak.git'
-                }
-
-                issueManagement {
-                    system 'jira'
-                    url 'https://minetweak.atlassian.net/'
-                }
-
-                licenses {
-                    license {
-                        name 'GNU Lesser General Public License (LGPL), Version 3'
-                        url 'http://www.gnu.org/licenses/lgpl.txt'
-                        distribution 'repo'
-                    }
-                }
-            }
-        }
-    }
-}
-
-idea {
-    module {
-        downloadJavadoc = true
-        downloadSources = false
-    }
-}
-
 task wrapper(type: Wrapper) {
     gradleVersion = '1.7'
 }
+
+apply from: 'gradle/ide.gradle'
+apply from: 'gradle/ci.gradle'
+apply from: 'gradle/jars.gradle'
+apply from: 'gradle/tests.gradle'
+apply from: 'gradle/upload.gradle'
