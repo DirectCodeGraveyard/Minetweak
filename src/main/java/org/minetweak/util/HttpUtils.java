@@ -12,14 +12,17 @@ import java.net.URL;
 public class HttpUtils {
 
     /**
-     * Downloads a file to a path
+     * Downloads a file to the specified location
      *
      * @param file file to download to
      * @param url  url to download
+     * @return if the file was downloaded
      */
     public static boolean downloadFile(File file, String url) {
         if (file.exists()) {
-            file.delete();
+            if (!file.delete()) {
+                return false;
+            }
         }
         try {
             FileUtils.copyURLToFile(new URL(url), file);
@@ -29,6 +32,13 @@ public class HttpUtils {
         return file.exists();
     }
 
+    /**
+     * Downloads a file to the specified location
+     *
+     * @param path path to download to
+     * @param url  url to download
+     * @return if the file was downloaded
+     */
     public static boolean downloadFile(String path, String url) {
         return downloadFile(new File(path), url);
     }
