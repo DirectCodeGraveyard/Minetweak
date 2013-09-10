@@ -2,6 +2,9 @@ package org.minetweak.item;
 
 import net.minecraft.enchantment.Enchantment;
 
+/**
+ * Represents an ItemStack
+ */
 public class ItemStack {
     private net.minecraft.item.ItemStack stack;
     private TweakItem tweakItem;

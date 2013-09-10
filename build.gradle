@@ -4,8 +4,11 @@ apply plugin: 'project-report'
 
 defaultTasks 'jar'
 
-ext.tweakVersion = '0.6.7-SNAPSHOT'
+ext.version = '0.6.7'
+ext.tweakVersion = "${ext.version}-SNAPSHOT"
 ext.mainClass = 'org.minetweak.Start'
+
+version = tweakVersion
 
 repositories {
     mavenCentral()
@@ -44,3 +47,4 @@ apply from: 'gradle/ci.gradle'
 apply from: 'gradle/jars.gradle'
 apply from: 'gradle/tests.gradle'
 apply from: 'gradle/upload.gradle'
+apply from: 'gradle/util.gradle'

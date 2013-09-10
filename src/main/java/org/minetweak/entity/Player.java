@@ -72,10 +72,8 @@ public class Player extends Entity implements CommandSender {
             return false;
         } else {
             if (Minetweak.getPlayers().containsKey(playerUsername)) {
-                if (Minetweak.isPlayerOnline(playerUsername)) {
-                    targetPlayerInstance.kickPlayer("There was a problem connecting you to the server");
-                    return false;
-                }
+                playerMP.playerNetServerHandler.kickPlayer("There was a problem connecting you to the server");
+                return false;
             } else {
                 if (PlayerWhitelist.isWhitelistEnabled() && !PlayerWhitelist.isPlayerWhitelisted(playerUsername)) {
                     targetPlayerInstance.kickPlayer("You are not whitelisted on this server!");

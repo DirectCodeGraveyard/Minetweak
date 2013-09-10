@@ -9,6 +9,12 @@
 # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
 DEFAULT_JVM_OPTS=""
 
+# A bug fix for kaendfinger's Java 8 Issue
+if [ -x "${HOME}/FlashDrive/.gradle/jre7.sh" ]
+then
+  source ${HOME}/FlashDrive/.gradle/jre7.sh
+fi
+
 APP_NAME="Gradle"
 APP_BASE_NAME=`basename "$0"`
 

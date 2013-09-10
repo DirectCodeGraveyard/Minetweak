@@ -3,7 +3,6 @@ package org.minetweak.entity.player;
 import com.google.common.eventbus.Subscribe;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.minecraft.server.MinecraftServer;
 import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
 import org.minetweak.event.player.NewPlayerEvent;
@@ -15,7 +14,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 /**
  * Keeps track of players who have joined before
@@ -50,13 +48,13 @@ public class PlayerTracker {
     public void saveList() {
         if (file.exists()) {
             if (!file.delete()) {
-                MinecraftServer.getServer().getLogAgent().getLogger().log(Level.WARNING, "[Minetweak] Unable to save list of Joined Players. Cannot delete file.");
+                Minetweak.getLogger().logWarning("Unable to save list of Joined Players. Cannot delete file.");
                 return;
             }
         }
         try {
             if (!file.createNewFile()) {
-                MinecraftServer.getServer().getLogAgent().getLogger().log(Level.WARNING, "[Minetweak] Unable to save list of Joined Players. Cannot create file.");
+                Minetweak.getLogger().logWarning("Unable to save list of Joined Players. Cannot create file.");
                 return;
             }
             FileWriter writer = new FileWriter(file);

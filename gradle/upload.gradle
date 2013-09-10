@@ -6,7 +6,7 @@ def credentials = [
 ]
 
 uploadArchives {
-    repositories.mavenDeployer {
+    mavenDeployer {
         //beforeDeployment { deployment ->
         //    signing.signPom(deployment)
         //}
