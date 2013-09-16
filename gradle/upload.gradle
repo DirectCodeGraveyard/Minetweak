@@ -16,7 +16,7 @@ uploadArchives {
 
         pom {
             groupId = 'org.minetweak'
-            version = tweakVersion
+            version = "${tweakVersion}-SNAPSHOT"
             artifactId = project.name
             project {
                 name project.name
