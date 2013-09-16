@@ -8,8 +8,6 @@ ext.version = '0.6.7'
 ext.tweakVersion = "${ext.version}-SNAPSHOT"
 ext.mainClass = 'org.minetweak.Start'
 
-version = tweakVersion
-
 repositories {
     mavenCentral()
     jcenter()

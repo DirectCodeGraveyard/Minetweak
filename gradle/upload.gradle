@@ -16,10 +16,10 @@ uploadArchives {
 
         pom {
             groupId = 'org.minetweak'
-            version = "${tweakVersion}-SNAPSHOT"
-            artifactId = project.name
+            version = "${tweakVersion}"
+            artifactId = "${project.name}"
             project {
-                name project.name
+                name "${project.name}"
                 packaging 'jar'
                 description 'A fast and reliable Minecraft Server with an API.'
                 inceptionYear '2013'
