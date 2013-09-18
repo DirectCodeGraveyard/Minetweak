@@ -1,5 +1,6 @@
 package org.minetweak.util;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.minetweak.plugins.Plugin;
 
 import java.lang.annotation.Annotation;
@@ -16,15 +17,26 @@ public class ReflectionUtils {
      * Checks if a Class Exists
      *
      * @param name Class name
+     * @param loader ClassLoader
      * @return if class exists
      */
-    public static boolean classExists(String name) {
+    public static boolean classExists(ClassLoader loader, String name) {
         try {
-            Class.forName(name);
+            ClassUtils.getClass(loader, name);
         } catch (ClassNotFoundException ignored) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Checks if a Class Exists
+     *
+     * @param name Class name
+     * @return if class exists
+     */
+    public static boolean classExists(String name) {
+        return classExists(ReflectionUtils.class.getClassLoader(), name);
     }
 
     /**
