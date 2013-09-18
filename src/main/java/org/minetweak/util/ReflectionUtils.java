@@ -138,7 +138,7 @@ public class ReflectionUtils {
      * @param object Plugin Object
      * @param event  Event to Execute
      */
-    public static void executeEvent(Object object, Object event) {
+    public static void executePluginEvent(Object object, Object event) {
         ArrayList<Method> methods = getAnnotatedMethods(Plugin.Handler.class, object);
         for (Method method : methods) {
             if (paramEquals(0, method, event.getClass())) {

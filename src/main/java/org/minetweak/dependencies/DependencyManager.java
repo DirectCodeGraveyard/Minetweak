@@ -32,6 +32,9 @@ public class DependencyManager {
     private static boolean localJsonDownloaded = repoJsonLocal.exists();
     private static boolean localJsonParsed = false;
 
+    /**
+     * Creates the Dependencies Folder if it doesn't already exist
+     */
     public static void createDependenciesFolder() {
         if (dependencyFolder.exists()) return;
 
@@ -40,15 +43,26 @@ public class DependencyManager {
         }
     }
 
+    /**
+     * Download the list then read it.
+     */
     public static void updateList() {
-        // Minetweak.getLogger().info("Dependencies repo was updated");
+        createDependenciesFolder();
         boolean wasDownloaded = HttpUtils.downloadFile(repoJsonLocal.getAbsolutePath(), repoJson);
         if (!wasDownloaded) {
             Minetweak.getLogger().logSevere("Unable to retrieve Dependency List.");
+            return;
         }
+        readJson();
         localJsonDownloaded = true;
+        if (config.verbose) {
+            Minetweak.getLogger().info("Dependencies repo was updated");
+        }
     }
 
+    /**
+     * Reads the Dependency Configuration JSON File
+     */
     public static void readJson() {
         if (!repoJsonLocal.exists()) {
             json = "{}";
@@ -67,6 +81,13 @@ public class DependencyManager {
         return new File("lib/" + name + "/" + version + "/" + name + ".jar").exists();
     }
 
+    /**
+     * Downloads a Dependency
+     *
+     * @param name    name
+     * @param version version
+     * @return File downloaded to
+     */
     public static File retrieveDependency(String name, String version) {
         while (!localJsonDownloaded) ;
 
@@ -106,6 +127,11 @@ public class DependencyManager {
         return null;
     }
 
+    /**
+     * Loads a Dependency via a File
+     *
+     * @param file File
+     */
     public static void loadDependency(File file) {
         if (file == null) {
             Minetweak.getLogger().logSevere("Tried to load a null dependency file.");
@@ -118,10 +144,20 @@ public class DependencyManager {
         }
     }
 
+    /**
+     * Loads a Dependency via a URL
+     *
+     * @param url URL
+     */
     public static void loadDependency(URL url) {
         classLoader.addURL(url);
     }
 
+    /**
+     * Gets the ClassLoader used in Dependency Management
+     *
+     * @return ClassLoader
+     */
     public static GroovyClassLoader getClassLoader() {
         return classLoader;
     }

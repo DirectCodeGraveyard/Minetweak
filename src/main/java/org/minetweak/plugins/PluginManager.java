@@ -53,7 +53,7 @@ public class PluginManager {
         if (doesPluginExist(pluginName)) {
             Object plugin = plugins.get(pluginName);
             Minetweak.getEventBus().register(plugin);
-            ReflectionUtils.executeEvent(plugin, new PluginEnableEvent(pluginInformation.get(plugin.getClass().getName())));
+            ReflectionUtils.executePluginEvent(plugin, new PluginEnableEvent(pluginInformation.get(plugin.getClass().getName())));
             enabledPlugins.add(pluginName);
         }
     }
@@ -67,7 +67,7 @@ public class PluginManager {
         if (isPluginEnabled(pluginName)) {
             Object plugin = plugins.get(pluginName);
             Minetweak.getEventBus().unregister(plugin);
-            ReflectionUtils.executeEvent(plugin, new PluginDisableEvent(pluginInformation.get(plugin.getClass().getName())));
+            ReflectionUtils.executePluginEvent(plugin, new PluginDisableEvent(pluginInformation.get(plugin.getClass().getName())));
             enabledPlugins.remove(pluginName);
         }
     }
@@ -153,7 +153,7 @@ public class PluginManager {
                 plugins.put(info.getName(), plugin);
 
                 if (info.getLoadingConfig() != null && info.getLoadingConfig().isCorePlugin()) {
-                    ReflectionUtils.executeEvent(plugin, new PluginLoadEvent(info));
+                    ReflectionUtils.executePluginEvent(plugin, new PluginLoadEvent(info));
                 }
             } catch (Exception e) {
                 throw new RuntimeException("Error loading plugin", e);

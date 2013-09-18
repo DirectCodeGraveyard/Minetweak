@@ -11,9 +11,9 @@ public class Tuple {
      */
     private Object second;
 
-    public Tuple(Object par1Obj, Object par2Obj) {
-        this.first = par1Obj;
-        this.second = par2Obj;
+    public Tuple(Object first, Object second) {
+        this.first = first;
+        this.second = second;
     }
 
     /**

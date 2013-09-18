@@ -75,7 +75,7 @@ public class Entity {
         double posX = entity.posX;
         double posY = entity.posY;
         double posZ = entity.posZ;
-        List<net.minecraft.entity.Entity> entityList = entity.worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + range, posY + range, posZ + range));
+        List<net.minecraft.entity.Entity> entityList = entity.worldObj.getEntitiesWithinAABB(EntityMob.class, AxisAlignedBB.getBoundingBox(posX - range, posY - range, posZ - range, posX + range, posY + range, posZ + range));
         for (net.minecraft.entity.Entity entity : entityList) {
             if (entity instanceof EntityMob) {
                 mobs.add(new Mob((EntityMob) entity));

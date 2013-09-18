@@ -101,9 +101,7 @@ public class Minetweak {
         ServerOps.load();
 
         // Parse dependencies outside of the thread to ensure it works properly
-        DependencyManager.createDependenciesFolder();
         DependencyManager.updateList();
-        DependencyManager.readJson();
 
         // Ensure Server Commands get registered first, so they can be overridden
         registerServerCommands();
