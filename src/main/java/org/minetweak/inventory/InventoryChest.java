@@ -4,6 +4,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.ContainerChest;
 import org.minetweak.item.ItemStack;
 
+/**
+ * Represents a Chest
+ */
 public class InventoryChest implements ContainerInventory {
     private ContainerChest chest;
 

@@ -1,7 +1,6 @@
 package org.minetweak.entity;
 
 import net.minecraft.entity.EntityPlayerMP;
-import net.minecraft.inventory.InventoryEnderChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.player.achievement.Achievement;
 import net.minecraft.potion.PotionEffect;
@@ -9,17 +8,18 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ban.BanEntry;
 import net.minecraft.server.network.NetServerHandler;
 import net.minecraft.src.DamageSource;
-import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.utils.enums.EnumGameType;
 import org.minetweak.Minetweak;
 import org.minetweak.command.CommandSender;
 import org.minetweak.event.player.PlayerJoinEvent;
 import org.minetweak.inventory.ContainerInventory;
+import org.minetweak.inventory.EnderChest;
 import org.minetweak.inventory.InventoryPlayer;
 import org.minetweak.permissions.Permissions;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
 import org.minetweak.server.GameMode;
+import org.minetweak.server.Server;
 import org.minetweak.world.Location;
 import org.minetweak.world.World;
 
@@ -37,16 +37,17 @@ import java.util.ArrayList;
  */
 public class Player extends Entity implements CommandSender {
 
-    private String playerDisplayName;
+    private String username;
+    private boolean isKickable;
 
     /**
      * Initialize a player
      *
-     * @param playerDisplayName Player's username
+     * @param username Player's username
      */
-    public Player(String playerDisplayName) {
-        super(MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerDisplayName));
-        this.playerDisplayName = playerDisplayName;
+    public Player(String username) {
+        super(MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(username));
+        this.username = username;
     }
 
     /**
@@ -56,7 +57,7 @@ public class Player extends Entity implements CommandSender {
      */
     public Player(EntityPlayerMP playerMP) {
         super(playerMP);
-        this.playerDisplayName = playerMP.getEntityName();
+        this.username = playerMP.getEntityName();
     }
 
     /**
@@ -110,7 +111,7 @@ public class Player extends Entity implements CommandSender {
      * @return Player's display name
      */
     public String getDisplayName() {
-        return playerDisplayName.toLowerCase();
+        return username.toLowerCase();
     }
 
     /**
@@ -142,7 +143,7 @@ public class Player extends Entity implements CommandSender {
      * @param banReason Reason why the player was banned(will show up on their disconnected screen)
      */
     public void banPlayer(String banReason) {
-        BanEntry banEntry = new BanEntry(playerDisplayName);
+        BanEntry banEntry = new BanEntry(username);
         MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().put(banEntry);
         getNetServerHandler().kickPlayer(banReason);
     }
@@ -154,7 +155,7 @@ public class Player extends Entity implements CommandSender {
      * @return True if the permission was successfully added, and that the permission did not already exist
      */
     protected boolean givePermission(String permissionNode) {
-        return Permissions.addPermission(playerDisplayName, permissionNode);
+        return Permissions.addPermission(username, permissionNode);
     }
 
     /**
@@ -163,7 +164,7 @@ public class Player extends Entity implements CommandSender {
      * @return String list of permissions
      */
     public ArrayList<String> getPlayerPermissions() {
-        return Permissions.getPermissions(playerDisplayName);
+        return Permissions.getPermissions(username);
     }
 
     /**
@@ -174,7 +175,7 @@ public class Player extends Entity implements CommandSender {
      */
     @Override
     public boolean hasPermission(String permissionNode) {
-        return Permissions.hasPermission(playerDisplayName, permissionNode);
+        return Permissions.hasPermission(username, permissionNode);
     }
 
     /**
@@ -185,7 +186,7 @@ public class Player extends Entity implements CommandSender {
     @Override
     public void sendMessage(String message) {
         /* Old code that doesn't work anymore. getPlayerMP().sendChatToPlayer(message);*/
-        getPlayerMP().sendChatToPlayer(new ChatMessageComponent().func_111072_b(message));
+        getPlayerMP().addChatMessage(message);
     }
 
     /**
@@ -205,7 +206,7 @@ public class Player extends Entity implements CommandSender {
      */
     @Override
     public boolean isKickable() {
-        return true;
+        return isKickable;
     }
 
     /**
@@ -251,21 +252,21 @@ public class Player extends Entity implements CommandSender {
      * @return True if the player is an op
      */
     public boolean isOperator() {
-        return ServerOps.isPlayerOp(playerDisplayName.toLowerCase());
+        return ServerOps.isPlayerOp(username);
     }
 
     /**
      * Op this player
      */
     public void opPlayer() {
-        MinecraftServer.getServer().getConfigurationManager().addOp(playerDisplayName.toLowerCase());
+        Server.opPlayer(username);
     }
 
     /**
      * Deop this player
      */
     public void deopPlayer() {
-        MinecraftServer.getServer().getConfigurationManager().removeOp(playerDisplayName.toLowerCase());
+        Server.deopPlayer(username);
     }
 
     /**
@@ -281,7 +282,7 @@ public class Player extends Entity implements CommandSender {
      * @return True if the player is sleeping
      */
     public boolean isPlayerSleeping() {
-        return getNetServerHandler().playerEntity.isPlayerSleeping();
+        return getPlayerMP().isPlayerSleeping();
     }
 
     /**
@@ -381,8 +382,8 @@ public class Player extends Entity implements CommandSender {
      *
      * @return player's ender chest
      */
-    public InventoryEnderChest getEnderChest() {
-        return getPlayerMP().getInventoryEnderChest();
+    public EnderChest getEnderChest() {
+        return new EnderChest(this);
     }
 
     /**
@@ -421,7 +422,25 @@ public class Player extends Entity implements CommandSender {
      * @return True if the player is in creative mode
      */
     public boolean isInCreativeMode() {
-        return getPlayerMP().capabilities.isCreativeMode;
+        return getPlayerMP().getGameType().isCreative();
+    }
+
+    /**
+     * Is the Player in adventure mode?
+     *
+     * @return True if the player is in adventure mode
+     */
+    public boolean isInAdventureMode() {
+        return getPlayerMP().getGameType().isAdventure();
+    }
+
+    /**
+     * Is the Player in Survival mode?
+     *
+     * @return True if the player is in survival mode
+     */
+    public boolean isInSurvivalMode() {
+        return !(getPlayerMP().getGameType().isCreative()) && !(getPlayerMP().getGameType().isAdventure());
     }
 
     /**
@@ -517,6 +536,15 @@ public class Player extends Entity implements CommandSender {
 
     @Override
     public String toString() {
-        return playerDisplayName;
+        return username;
+    }
+
+    /**
+     * Toggles the Kickable status
+     *
+     * @param kickable is kickable
+     */
+    public boolean setKickable(boolean kickable) {
+        return this.isKickable = kickable;
     }
 }
