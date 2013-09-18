@@ -84,12 +84,7 @@ public class ReflectionUtils {
         try {
             Method method = object.getClass().getMethod(methodName);
             method.invoke(object, args);
-        } catch (NoSuchMethodException e) {
-            return false;
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IllegalAccessException e) {
+        } catch (Exception e) {
             return false;
         }
         return true;
