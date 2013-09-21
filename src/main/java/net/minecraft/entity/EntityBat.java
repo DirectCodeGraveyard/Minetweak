@@ -21,14 +21,16 @@ public class EntityBat extends EntityAmbientCreature {
         this.setIsBatHanging(true);
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(16, new Byte((byte) 0));
+        this.dataWatcher.addObject(16, (byte) 0);
     }
 
     /**
      * Returns the volume for the sounds this mob makes.
      */
+    @Override
     protected float getSoundVolume() {
         return 0.1F;
     }
@@ -36,6 +38,7 @@ public class EntityBat extends EntityAmbientCreature {
     /**
      * Gets the pitch of living sounds in living entities.
      */
+    @Override
     protected float getSoundPitch() {
         return super.getSoundPitch() * 0.95F;
     }
@@ -43,6 +46,7 @@ public class EntityBat extends EntityAmbientCreature {
     /**
      * Returns the sound this mob makes while it's alive.
      */
+    @Override
     protected String getLivingSound() {
         return this.getIsBatHanging() && this.rand.nextInt(4) != 0 ? null : "mob.bat.idle";
     }
@@ -50,6 +54,7 @@ public class EntityBat extends EntityAmbientCreature {
     /**
      * Returns the sound this mob makes when it is hurt.
      */
+    @Override
     protected String getHurtSound() {
         return "mob.bat.hurt";
     }
@@ -57,6 +62,7 @@ public class EntityBat extends EntityAmbientCreature {
     /**
      * Returns the sound this mob makes on death.
      */
+    @Override
     protected String getDeathSound() {
         return "mob.bat.death";
     }
@@ -64,16 +70,16 @@ public class EntityBat extends EntityAmbientCreature {
     /**
      * Returns true if this entity should push and be pushed by other entities when colliding.
      */
+    @Override
     public boolean canBePushed() {
         return false;
     }
 
+    @Override
     protected void collideWithEntity(Entity par1Entity) {
     }
 
-    protected void func_85033_bc() {
-    }
-
+    @Override
     protected void func_110147_ax() {
         super.func_110147_ax();
         this.func_110148_a(SharedMonsterAttributes.field_111267_a).func_111128_a(6.0D);
@@ -87,15 +93,16 @@ public class EntityBat extends EntityAmbientCreature {
         byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
         if (par1) {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) (var2 | 1)));
+            this.dataWatcher.updateObject(16, (byte) (var2 | 1));
         } else {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) (var2 & -2)));
+            this.dataWatcher.updateObject(16, (byte) (var2 & -2));
         }
     }
 
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     protected boolean isAIEnabled() {
         return true;
     }
@@ -103,6 +110,7 @@ public class EntityBat extends EntityAmbientCreature {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
 
@@ -114,13 +122,14 @@ public class EntityBat extends EntityAmbientCreature {
         }
     }
 
+    @Override
     protected void updateAITasks() {
         super.updateAITasks();
 
         if (this.getIsBatHanging()) {
             if (!this.worldObj.isBlockNormalCube(MathHelper.floor_double(this.posX), (int) this.posY + 1, MathHelper.floor_double(this.posZ))) {
                 this.setIsBatHanging(false);
-                this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1015, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+                this.worldObj.playAuxSFXAtEntity(null, 1015, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
             } else {
                 if (this.rand.nextInt(200) == 0) {
                     this.rotationYawHead = (float) this.rand.nextInt(360);
@@ -128,7 +137,7 @@ public class EntityBat extends EntityAmbientCreature {
 
                 if (this.worldObj.getClosestPlayerToEntity(this, 4.0D) != null) {
                     this.setIsBatHanging(false);
-                    this.worldObj.playAuxSFXAtEntity((EntityPlayer) null, 1015, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
+                    this.worldObj.playAuxSFXAtEntity(null, 1015, (int) this.posX, (int) this.posY, (int) this.posZ, 0);
                 }
             }
         } else {
@@ -161,6 +170,7 @@ public class EntityBat extends EntityAmbientCreature {
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
+    @Override
     protected boolean canTriggerWalking() {
         return false;
     }
@@ -168,6 +178,7 @@ public class EntityBat extends EntityAmbientCreature {
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
+    @Override
     protected void fall(float par1) {
     }
 
@@ -175,12 +186,14 @@ public class EntityBat extends EntityAmbientCreature {
      * Takes in the distance the entity has fallen this tick and whether its on the ground to update the fall distance
      * and deal fall damage if landing on the ground.  Args: distanceFallenThisTick, onGround
      */
+    @Override
     protected void updateFallState(double par1, boolean par3) {
     }
 
     /**
      * Return whether this entity should NOT trigger a pressure plate or a tripwire.
      */
+    @Override
     public boolean doesEntityNotTriggerPressurePlate() {
         return true;
     }
@@ -188,6 +201,7 @@ public class EntityBat extends EntityAmbientCreature {
     /**
      * Called when the entity is attacked.
      */
+    @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
         if (this.isEntityInvulnerable()) {
             return false;
@@ -203,14 +217,16 @@ public class EntityBat extends EntityAmbientCreature {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
-        this.dataWatcher.updateObject(16, Byte.valueOf(par1NBTTagCompound.getByte("BatFlags")));
+        this.dataWatcher.updateObject(16, par1NBTTagCompound.getByte("BatFlags"));
     }
 
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setByte("BatFlags", this.dataWatcher.getWatchableObjectByte(16));
@@ -219,6 +235,7 @@ public class EntityBat extends EntityAmbientCreature {
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
+    @Override
     public boolean getCanSpawnHere() {
         int var1 = MathHelper.floor_double(this.boundingBox.minY);
 
@@ -239,7 +256,7 @@ public class EntityBat extends EntityAmbientCreature {
                 var5 = 7;
             }
 
-            return var4 > this.rand.nextInt(var5) ? false : super.getCanSpawnHere();
+            return var4 <= this.rand.nextInt(var5) && super.getCanSpawnHere();
         }
     }
 }

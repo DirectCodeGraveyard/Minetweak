@@ -849,7 +849,7 @@ public abstract class EntityLiving extends EntityLivingBase {
         }
     }
 
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
+    public EntityLivingData updateLivingData(EntityLivingData par1EntityLivingData) {
         this.func_110148_a(SharedMonsterAttributes.field_111265_b).func_111121_a(new AttributeModifier("Random spawn bonus", this.rand.nextGaussian() * 0.05D, 1));
         return par1EntityLivingData;
     }

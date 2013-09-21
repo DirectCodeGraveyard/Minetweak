@@ -21,7 +21,7 @@ public class EntitySpawner {
                     var8.setLocationAndAngles(par2, par4, par6, MathHelper.wrapAngleTo180_float(world.getWorldServer().rand.nextFloat() * 360.0F), 0.0F);
                     var10.rotationYawHead = var10.rotationYaw;
                     var10.renderYawOffset = var10.rotationYaw;
-                    var10.func_110161_a(null);
+                    var10.updateLivingData(null);
                     world.getWorldServer().spawnEntityInWorld(var8);
                     var10.playLivingSound();
                 }

@@ -94,7 +94,7 @@ public class EntityLeashKnot extends EntityHanging {
 
     public static EntityLeashKnot func_110129_a(World par0World, int par1, int par2, int par3) {
         EntityLeashKnot var4 = new EntityLeashKnot(par0World, par1, par2, par3);
-        var4.field_98038_p = true;
+        var4.isBeingRidden = true;
         par0World.spawnEntityInWorld(var4);
         return var4;
     }

@@ -10,26 +10,26 @@ public class InventoryBasic implements IInventory {
     private String inventoryTitle;
     private int slotsCount;
     private ItemStack[] inventoryContents;
-    private List<IInvBasic> field_70480_d;
-    private boolean field_94051_e;
+    private List<IInvBasic> inventories;
+    private boolean bool;
 
     public InventoryBasic(String par1Str, boolean par2, int par3) {
         this.inventoryTitle = par1Str;
-        this.field_94051_e = par2;
+        this.bool = par2;
         this.slotsCount = par3;
         this.inventoryContents = new ItemStack[par3];
     }
 
-    public void func_110134_a(IInvBasic par1IInvBasic) {
-        if (this.field_70480_d == null) {
-            this.field_70480_d = new ArrayList<IInvBasic>();
+    public void addSubInventory(IInvBasic par1IInvBasic) {
+        if (this.inventories == null) {
+            this.inventories = new ArrayList<IInvBasic>();
         }
 
-        this.field_70480_d.add(par1IInvBasic);
+        this.inventories.add(par1IInvBasic);
     }
 
     public void setEntity(IInvBasic par1IInvBasic) {
-        this.field_70480_d.remove(par1IInvBasic);
+        this.inventories.remove(par1IInvBasic);
     }
 
     /**
@@ -88,11 +88,11 @@ public class InventoryBasic implements IInventory {
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
      */
     @Override
-    public void setInventorySlotContents(int par1, ItemStack par2ItemStack) {
-        this.inventoryContents[par1] = par2ItemStack;
+    public void setInventorySlotContents(int slot, ItemStack stack) {
+        this.inventoryContents[slot] = stack;
 
-        if (par2ItemStack != null && par2ItemStack.stackSize > this.getInventoryStackLimit()) {
-            par2ItemStack.stackSize = this.getInventoryStackLimit();
+        if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
+            stack.stackSize = this.getInventoryStackLimit();
         }
 
         this.onInventoryChanged();
@@ -120,11 +120,11 @@ public class InventoryBasic implements IInventory {
      */
     @Override
     public boolean isInvNameLocalized() {
-        return this.field_94051_e;
+        return this.bool;
     }
 
     public void setInventoryTitle(String par1Str) {
-        this.field_94051_e = true;
+        this.bool = true;
         this.inventoryTitle = par1Str;
     }
 
@@ -142,9 +142,9 @@ public class InventoryBasic implements IInventory {
      */
     @Override
     public void onInventoryChanged() {
-        if (this.field_70480_d != null) {
-            for (IInvBasic aField_70480_d : this.field_70480_d) {
-                aField_70480_d.onInventoryChanged(this);
+        if (this.inventories != null) {
+            for (IInvBasic inv : this.inventories) {
+                inv.onInventoryChanged(this);
             }
         }
     }

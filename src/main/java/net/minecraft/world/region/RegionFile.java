@@ -212,7 +212,7 @@ public class RegionFile {
                 }
             }
 
-            this.setChunkTimestamp(par1, par2, (int) (MinecraftServer.func_130071_aq() / 1000L));
+            this.setChunkTimestamp(par1, par2, (int) (MinecraftServer.getCurrentMillis() / 1000L));
         } catch (IOException var12) {
             var12.printStackTrace();
         }

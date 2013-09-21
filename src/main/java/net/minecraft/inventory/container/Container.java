@@ -17,7 +17,7 @@ public abstract class Container {
     /**
      * the list of all items(stacks) for the corresponding slot
      */
-    public List<ItemStack> inventoryItemStacks = new ArrayList<ItemStack>();
+    public List<ItemStack> stacks = new ArrayList<ItemStack>();
 
     /**
      * the list of all slots in the inventory
@@ -26,7 +26,7 @@ public abstract class Container {
     public int windowId;
     private int field_94535_f = -1;
     private int field_94536_g;
-    private final Set<Slot> field_94537_h = new HashSet<Slot>();
+    private final Set<Slot> slots = new HashSet<Slot>();
 
     /**
      * list of all people that need to be notified when this craftinventory changes
@@ -40,7 +40,7 @@ public abstract class Container {
     protected Slot addSlotToContainer(Slot par1Slot) {
         par1Slot.slotNumber = this.inventorySlots.size();
         this.inventorySlots.add(par1Slot);
-        this.inventoryItemStacks.add(null);
+        this.stacks.add(null);
         return par1Slot;
     }
 
@@ -73,11 +73,11 @@ public abstract class Container {
     public void detectAndSendChanges() {
         for (int var1 = 0; var1 < this.inventorySlots.size(); ++var1) {
             ItemStack var2 = (this.inventorySlots.get(var1)).getStack();
-            ItemStack var3 = this.inventoryItemStacks.get(var1);
+            ItemStack var3 = this.stacks.get(var1);
 
             if (!ItemStack.areItemStacksEqual(var3, var2)) {
                 var3 = var2 == null ? null : var2.copy();
-                this.inventoryItemStacks.set(var1, var3);
+                this.stacks.set(var1, var3);
 
                 for (ICrafting crafter : this.crafters) {
                     crafter.sendSlotContents(this, var1, var3);
@@ -134,26 +134,26 @@ public abstract class Container {
 
                 if (func_94528_d(this.field_94535_f)) {
                     this.field_94536_g = 1;
-                    this.field_94537_h.clear();
+                    this.slots.clear();
                 } else {
                     this.func_94533_d();
                 }
             } else if (this.field_94536_g == 1) {
                 Slot var8 = this.inventorySlots.get(par1);
 
-                if (var8 != null && func_94527_a(var8, var6.getItemStack(), true) && var8.isItemValid(var6.getItemStack()) && var6.getItemStack().stackSize > this.field_94537_h.size() && this.canDragIntoSlot(var8)) {
-                    this.field_94537_h.add(var8);
+                if (var8 != null && func_94527_a(var8, var6.getItemStack(), true) && var8.isItemValid(var6.getItemStack()) && var6.getItemStack().stackSize > this.slots.size() && this.canDragIntoSlot(var8)) {
+                    this.slots.add(var8);
                 }
             } else if (this.field_94536_g == 2) {
-                if (!this.field_94537_h.isEmpty()) {
+                if (!this.slots.isEmpty()) {
                     var17 = var6.getItemStack().copy();
                     var9 = var6.getItemStack().stackSize;
 
-                    for (Slot var11 : this.field_94537_h) {
-                        if (var11 != null && func_94527_a(var11, var6.getItemStack(), true) && var11.isItemValid(var6.getItemStack()) && var6.getItemStack().stackSize >= this.field_94537_h.size() && this.canDragIntoSlot(var11)) {
+                    for (Slot var11 : this.slots) {
+                        if (var11 != null && func_94527_a(var11, var6.getItemStack(), true) && var11.isItemValid(var6.getItemStack()) && var6.getItemStack().stackSize >= this.slots.size() && this.canDragIntoSlot(var11)) {
                             ItemStack var12 = var17.copy();
                             int var13 = var11.getHasStack() ? var11.getStack().stackSize : 0;
-                            func_94525_a(this.field_94537_h, this.field_94535_f, var12, var13);
+                            func_94525_a(this.slots, this.field_94535_f, var12, var13);
 
                             if (var12.stackSize > var12.getMaxStackSize()) {
                                 var12.stackSize = var12.getMaxStackSize();
@@ -532,7 +532,7 @@ public abstract class Container {
 
     protected void func_94533_d() {
         this.field_94536_g = 0;
-        this.field_94537_h.clear();
+        this.slots.clear();
     }
 
     public static boolean func_94527_a(Slot par0Slot, ItemStack par1ItemStack, boolean par2) {

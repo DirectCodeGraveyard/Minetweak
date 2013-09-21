@@ -77,7 +77,7 @@ public class NetServerHandler extends NetHandler {
     /**
      * The Java Random object.
      */
-    private static Random rndmObj = new Random();
+    private static Random random = new Random();
     private long ticksOfLastKeepAlive;
     private int chatSpamThresholdCount;
     private int creativeItemCreationSpamThresholdTally;
@@ -101,14 +101,14 @@ public class NetServerHandler extends NetHandler {
      * is true when the player has moved since his last movement packet
      */
     private boolean hasMoved = true;
-    private IntHashMap field_72586_s = new IntHashMap();
+    private IntHashMap ints = new IntHashMap();
 
-    public NetServerHandler(MinecraftServer par1MinecraftServer, INetworkManager par2INetworkManager, EntityPlayerMP par3EntityPlayerMP) {
+    public NetServerHandler(MinecraftServer par1MinecraftServer, INetworkManager networkManager, EntityPlayerMP entityPlayer) {
         this.mcServer = par1MinecraftServer;
-        this.netManager = par2INetworkManager;
-        par2INetworkManager.setNetHandler(this);
-        this.playerEntity = par3EntityPlayerMP;
-        par3EntityPlayerMP.playerNetServerHandler = this;
+        this.netManager = networkManager;
+        networkManager.setNetHandler(this);
+        this.playerEntity = entityPlayer;
+        entityPlayer.playerNetServerHandler = this;
     }
 
     /**
@@ -123,7 +123,7 @@ public class NetServerHandler extends NetHandler {
         if ((long) this.currentTicks - this.ticksOfLastKeepAlive > 20L) {
             this.ticksOfLastKeepAlive = (long) this.currentTicks;
             this.keepAliveTimeSent = System.nanoTime() / 1000000L;
-            this.keepAliveRandomID = rndmObj.nextInt();
+            this.keepAliveRandomID = random.nextInt();
             this.sendPacket(new Packet0KeepAlive(this.keepAliveRandomID));
         }
 
@@ -134,9 +134,6 @@ public class NetServerHandler extends NetHandler {
         if (this.creativeItemCreationSpamThresholdTally > 0) {
             --this.creativeItemCreationSpamThresholdTally;
         }
-
-        this.mcServer.profiler.endStartSection("playerTick");
-        this.mcServer.profiler.endSection();
     }
 
     /**
@@ -160,7 +157,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void handleFlying(Packet10Flying par1Packet10Flying) {
-        WorldServer var2 = this.mcServer.worldServerForDimension(this.playerEntity.dimension);
+        WorldServer worldServer = this.mcServer.worldServerForDimension(this.playerEntity.dimension);
 
         if (!this.playerEntity.playerConqueredTheEnd) {
             double var3;
@@ -208,14 +205,14 @@ public class NetServerHandler extends NetHandler {
                         this.lastPosZ = this.playerEntity.posZ;
                     }
 
-                    var2.updateEntity(this.playerEntity);
+                    worldServer.updateEntity(this.playerEntity);
                     return;
                 }
 
                 if (this.playerEntity.isPlayerSleeping()) {
                     this.playerEntity.onUpdateEntity();
                     this.playerEntity.setPositionAndRotation(this.lastPosX, this.lastPosY, this.lastPosZ, this.playerEntity.rotationYaw, this.playerEntity.rotationPitch);
-                    var2.updateEntity(this.playerEntity);
+                    worldServer.updateEntity(this.playerEntity);
                     return;
                 }
 
@@ -272,7 +269,7 @@ public class NetServerHandler extends NetHandler {
                 double var25;
 
                 float var27 = 0.0625F;
-                boolean var28 = var2.getCollidingBoundingBoxes(this.playerEntity, this.playerEntity.boundingBox.copy().contract((double) var27, (double) var27, (double) var27)).isEmpty();
+                boolean var28 = worldServer.getCollidingBoundingBoxes(this.playerEntity, this.playerEntity.boundingBox.copy().contract((double) var27, (double) var27, (double) var27)).isEmpty();
 
                 if (this.playerEntity.onGround && !par1Packet10Flying.onGround && var15 > 0.0D) {
                     this.playerEntity.addExhaustion(0.2F);
@@ -299,7 +296,7 @@ public class NetServerHandler extends NetHandler {
                 }
 
                 this.playerEntity.setPositionAndRotation(var5, var7, var9, var11, var12);
-                boolean var32 = var2.getCollidingBoundingBoxes(this.playerEntity, this.playerEntity.boundingBox.copy().contract((double) var27, (double) var27, (double) var27)).isEmpty();
+                boolean var32 = worldServer.getCollidingBoundingBoxes(this.playerEntity, this.playerEntity.boundingBox.copy().contract((double) var27, (double) var27, (double) var27)).isEmpty();
 
                 if (var28 && (var31 || !var32) && !this.playerEntity.isPlayerSleeping()) {
                     this.setPlayerLocation(this.lastPosX, this.lastPosY, this.lastPosZ, var11, var12);
@@ -308,7 +305,7 @@ public class NetServerHandler extends NetHandler {
 
                 AxisAlignedBB var33 = this.playerEntity.boundingBox.copy().expand((double) var27, (double) var27, (double) var27).addCoord(0.0D, -0.55D, 0.0D);
 
-                if (!this.mcServer.isFlightAllowed() && !this.playerEntity.theItemInWorldManager.isCreative() && !var2.checkBlockCollision(var33)) {
+                if (!this.mcServer.isFlightAllowed() && !this.playerEntity.theItemInWorldManager.isCreative() && !worldServer.checkBlockCollision(var33)) {
                     if (var29 >= -0.03125D) {
                         ++this.playerInAirTime;
 
@@ -731,7 +728,7 @@ public class NetServerHandler extends NetHandler {
                 this.playerEntity.updateHeldItem();
                 this.playerEntity.isChangingQuantityOnly = false;
             } else {
-                this.field_72586_s.addKey(this.playerEntity.openContainer.windowId, par1Packet102WindowClick.action);
+                this.ints.addKey(this.playerEntity.openContainer.windowId, par1Packet102WindowClick.action);
                 this.playerEntity.playerNetServerHandler.sendPacket(new Packet106Transaction(par1Packet102WindowClick.window_Id, par1Packet102WindowClick.action, false));
                 this.playerEntity.openContainer.setCanCraft(this.playerEntity, false);
                 ArrayList<ItemStack> var3 = new ArrayList<ItemStack>();
@@ -786,7 +783,7 @@ public class NetServerHandler extends NetHandler {
 
     @Override
     public void handleTransaction(Packet106Transaction par1Packet106Transaction) {
-        Short var2 = (Short) this.field_72586_s.lookup(this.playerEntity.openContainer.windowId);
+        Short var2 = (Short) this.ints.lookup(this.playerEntity.openContainer.windowId);
 
         if (var2 != null && par1Packet106Transaction.shortWindowId == var2 && this.playerEntity.openContainer.windowId == par1Packet106Transaction.windowId && !this.playerEntity.openContainer.getCanCraft(this.playerEntity)) {
             this.playerEntity.openContainer.setCanCraft(this.playerEntity, true);

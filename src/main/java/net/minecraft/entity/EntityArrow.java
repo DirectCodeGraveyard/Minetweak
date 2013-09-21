@@ -110,13 +110,15 @@ public class EntityArrow extends Entity implements IProjectile {
         this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, par3 * 1.5F, 1.0F);
     }
 
+    @Override
     protected void entityInit() {
-        this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
+        this.dataWatcher.addObject(16, (byte) 0);
     }
 
     /**
      * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
      */
+    @Override
     public void setThrowableHeading(double par1, double par3, double par5, float par7, float par8) {
         float var9 = MathHelper.sqrt_double(par1 * par1 + par3 * par3 + par5 * par5);
         par1 /= (double) var9;
@@ -140,6 +142,7 @@ public class EntityArrow extends Entity implements IProjectile {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
 
@@ -243,7 +246,7 @@ public class EntityArrow extends Entity implements IProjectile {
                         var24 += this.rand.nextInt(var24 / 2 + 2);
                     }
 
-                    DamageSource var22 = null;
+                    DamageSource var22;
 
                     if (this.shootingEntity == null) {
                         var22 = DamageSource.causeArrowDamage(this, this);
@@ -329,9 +332,8 @@ public class EntityArrow extends Entity implements IProjectile {
             var20 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-            for (this.rotationPitch = (float) (Math.atan2(this.motionY, (double) var20) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
+            for (this.rotationPitch = (float) (Math.atan2(this.motionY, (double) var20) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
                 ;
-            }
 
             while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
                 this.prevRotationPitch += 360.0F;
@@ -371,6 +373,7 @@ public class EntityArrow extends Entity implements IProjectile {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         par1NBTTagCompound.setShort("xTile", (short) this.xTile);
         par1NBTTagCompound.setShort("yTile", (short) this.yTile);
@@ -386,6 +389,7 @@ public class EntityArrow extends Entity implements IProjectile {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         this.xTile = par1NBTTagCompound.getShort("xTile");
         this.yTile = par1NBTTagCompound.getShort("yTile");
@@ -409,6 +413,7 @@ public class EntityArrow extends Entity implements IProjectile {
     /**
      * Called by a player entity when they collide with an entity
      */
+    @Override
     public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
         if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0) {
             boolean var2 = this.canBePickedUp == 1 || this.canBePickedUp == 2 && par1EntityPlayer.capabilities.isCreativeMode;
@@ -429,6 +434,7 @@ public class EntityArrow extends Entity implements IProjectile {
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
+    @Override
     protected boolean canTriggerWalking() {
         return false;
     }
@@ -451,6 +457,7 @@ public class EntityArrow extends Entity implements IProjectile {
     /**
      * If returns false, the item will not inflict any damage against entities.
      */
+    @Override
     public boolean canAttackWithItem() {
         return false;
     }
@@ -462,9 +469,9 @@ public class EntityArrow extends Entity implements IProjectile {
         byte var2 = this.dataWatcher.getWatchableObjectByte(16);
 
         if (par1) {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) (var2 | 1)));
+            this.dataWatcher.updateObject(16, (byte) (var2 | 1));
         } else {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) (var2 & -2)));
+            this.dataWatcher.updateObject(16, (byte) (var2 & -2));
         }
     }
 

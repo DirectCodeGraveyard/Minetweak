@@ -170,13 +170,13 @@ public class EntitySpider extends EntityMob {
         this.dataWatcher.updateObject(16, Byte.valueOf(var2));
     }
 
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
-        Object par1EntityLivingData1 = super.func_110161_a(par1EntityLivingData);
+    public EntityLivingData updateLivingData(EntityLivingData par1EntityLivingData) {
+        Object par1EntityLivingData1 = super.updateLivingData(par1EntityLivingData);
 
         if (this.worldObj.rand.nextInt(100) == 0) {
             EntitySkeleton var2 = new EntitySkeleton(this.worldObj);
             var2.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
-            var2.func_110161_a((EntityLivingData) null);
+            var2.updateLivingData((EntityLivingData) null);
             this.worldObj.spawnEntityInWorld(var2);
             var2.mountEntity(this);
         }

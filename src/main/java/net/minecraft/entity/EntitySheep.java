@@ -229,8 +229,8 @@ public class EntitySheep extends EntityAnimal {
         }
     }
 
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
-        par1EntityLivingData = super.func_110161_a(par1EntityLivingData);
+    public EntityLivingData updateLivingData(EntityLivingData par1EntityLivingData) {
+        par1EntityLivingData = super.updateLivingData(par1EntityLivingData);
         this.setFleeceColor(getRandomFleeceColor(this.worldObj.rand));
         return par1EntityLivingData;
     }

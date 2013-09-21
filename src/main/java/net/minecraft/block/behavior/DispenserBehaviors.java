@@ -5,7 +5,7 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.item.Item;
 
 public class DispenserBehaviors {
-    public static void func_96467_a() {
+    public static void registerBehaviors() {
         BlockDispenser.dispenseBehaviorRegistry.putObject(Item.arrow, new DispenserBehaviorArrow());
         BlockDispenser.dispenseBehaviorRegistry.putObject(Item.egg, new DispenserBehaviorEgg());
         BlockDispenser.dispenseBehaviorRegistry.putObject(Item.snowball, new DispenserBehaviorSnowball());

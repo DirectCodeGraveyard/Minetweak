@@ -177,7 +177,7 @@ public class TcpConnection implements INetworkManager {
             int var10001;
             int[] var10000;
 
-            if (this.field_74468_e == 0 || !this.dataPackets.isEmpty() && MinecraftServer.func_130071_aq() - (this.dataPackets.get(0)).creationTimeMillis >= (long) this.field_74468_e) {
+            if (this.field_74468_e == 0 || !this.dataPackets.isEmpty() && MinecraftServer.getCurrentMillis() - (this.dataPackets.get(0)).creationTimeMillis >= (long) this.field_74468_e) {
                 var2 = this.func_74460_a(false);
 
                 if (var2 != null) {
@@ -198,7 +198,7 @@ public class TcpConnection implements INetworkManager {
                 }
             }
 
-            if (this.chunkDataPacketsDelay-- <= 0 && (this.field_74468_e == 0 || !this.chunkDataPackets.isEmpty() && MinecraftServer.func_130071_aq() - (this.chunkDataPackets.get(0)).creationTimeMillis >= (long) this.field_74468_e)) {
+            if (this.chunkDataPacketsDelay-- <= 0 && (this.field_74468_e == 0 || !this.chunkDataPackets.isEmpty() && MinecraftServer.getCurrentMillis() - (this.chunkDataPackets.get(0)).creationTimeMillis >= (long) this.field_74468_e)) {
                 var2 = this.func_74460_a(true);
 
                 if (var2 != null) {

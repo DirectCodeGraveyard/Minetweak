@@ -62,7 +62,7 @@ public class HttpUtil {
      */
     private static String sendPost(ILogAgent par0ILogAgent, URL par1URL, String par2Str, boolean par3) {
         try {
-            Proxy var4 = MinecraftServer.getServer() == null ? null : MinecraftServer.getServer().func_110454_ao();
+            Proxy var4 = MinecraftServer.getServer() == null ? null : MinecraftServer.getServer().getProxy();
 
             if (var4 == null) {
                 var4 = Proxy.NO_PROXY;

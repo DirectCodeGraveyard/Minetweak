@@ -123,18 +123,18 @@ public class ContainerFurnace extends Container {
     }
 
     public ItemStack getFuel() {
-        return inventoryItemStacks.get(1);
+        return stacks.get(1);
     }
 
     public ItemStack getCooking() {
-        return inventoryItemStacks.get(0);
+        return stacks.get(0);
     }
 
     public void setCooking(ItemStack stack) {
-        inventoryItemStacks.set(0, stack);
+        stacks.set(0, stack);
     }
 
     public void setFuel(ItemStack stack) {
-        inventoryItemStacks.set(1, stack);
+        stacks.set(1, stack);
     }
 }

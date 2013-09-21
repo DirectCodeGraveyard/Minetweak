@@ -281,8 +281,8 @@ public class EntityOcelot extends EntityTameable {
         return this.hasCustomNameTag() ? this.getCustomNameTag() : (this.isTamed() ? "entity.Cat.name" : super.getEntityName());
     }
 
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
-        par1EntityLivingData = super.func_110161_a(par1EntityLivingData);
+    public EntityLivingData updateLivingData(EntityLivingData par1EntityLivingData) {
+        par1EntityLivingData = super.updateLivingData(par1EntityLivingData);
 
         if (this.worldObj.rand.nextInt(7) == 0) {
             for (int var2 = 0; var2 < 2; ++var2) {

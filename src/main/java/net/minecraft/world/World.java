@@ -1083,7 +1083,7 @@ public abstract class World implements IBlockAccess {
     public boolean spawnEntityInWorld(Entity par1Entity) {
         int var2 = MathHelper.floor_double(par1Entity.posX / 16.0D);
         int var3 = MathHelper.floor_double(par1Entity.posZ / 16.0D);
-        boolean var4 = par1Entity.field_98038_p;
+        boolean var4 = par1Entity.isBeingRidden;
 
         if (par1Entity instanceof EntityPlayer) {
             var4 = true;
@@ -3107,7 +3107,7 @@ public abstract class World implements IBlockAccess {
      */
     public Calendar getCurrentDate() {
         if (this.getTotalWorldTime() % 600L == 0L) {
-            this.theCalendar.setTimeInMillis(MinecraftServer.func_130071_aq());
+            this.theCalendar.setTimeInMillis(MinecraftServer.getCurrentMillis());
         }
         return this.theCalendar;
     }

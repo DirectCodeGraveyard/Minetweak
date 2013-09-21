@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class EntityHorse extends EntityAnimal implements IInvBasic {
-    private static final IEntitySelector field_110276_bu = new EntityHorseBredSelector();
+    private static final IEntitySelector bredSelector = new EntityHorseBredSelector();
     private static final Attribute horseAttributes = (new RangedAttribute("horse.jumpStrength", 0.7D, 0.0D, 2.0D)).func_111117_a("Jump Strength").func_111112_a(true);
     private static final int[] field_110272_by = new int[]{0, 5, 7, 11};
     private int field_110289_bD;
@@ -45,7 +45,6 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     private float field_110287_bN;
     private float field_110288_bO;
     private int field_110285_bP;
-    private String field_110286_bQ;
 
     public EntityHorse(World par1World) {
         super(par1World);
@@ -64,6 +63,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         this.addInventory();
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(16, 0);
@@ -153,6 +153,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         return var1 >= 0 ? 1.0F : 0.5F + (float) (-24000 - var1) / -24000.0F * 0.5F;
     }
 
+    @Override
     public void func_98054_a(boolean par1) {
         if (par1) {
             this.func_98055_j(this.func_110254_bY());
@@ -173,6 +174,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         this.field_110275_br = par1;
     }
 
+    @Override
     public boolean func_110164_bC() {
         return !this.func_110256_cu() && super.func_110164_bC();
     }
@@ -242,6 +244,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Called when the entity is attacked.
      */
+    @Override
     public boolean attackEntityFrom(DamageSource par1DamageSource, float par2) {
         Entity var3 = par1DamageSource.getEntity();
 
@@ -258,6 +261,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Returns the current armor value as determined by a call to InventoryPlayer.getTotalArmorValue
      */
+    @Override
     public int getTotalArmorValue() {
         return field_110272_by[this.func_110241_cb()];
     }
@@ -265,6 +269,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Returns true if this entity should push and be pushed by other entities when colliding.
      */
+    @Override
     public boolean canBePushed() {
         return this.riddenByEntity == null;
     }
@@ -291,6 +296,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Called when the mob is falling. Calculates and applies fall damage.
      */
+    @Override
     protected void fall(float par1) {
         if (par1 > 1.0F) {
             this.playSound("mob.horse.land", 0.4F, 1.0F);
@@ -337,7 +343,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
             }
         }
 
-        this.animalInventory.func_110134_a(this);
+        this.animalInventory.addSubInventory(this);
         this.func_110232_cE();
     }
 
@@ -354,6 +360,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Called by InventoryBasic.onInventoryChanged() on a array that is never filled.
      */
+    @Override
     public void onInventoryChanged(InventoryBasic par1InventoryBasic) {
         int var2 = this.func_110241_cb();
         boolean var3 = this.func_110257_ck();
@@ -373,6 +380,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
+    @Override
     public boolean getCanSpawnHere() {
         this.func_110262_ch();
         return super.getCanSpawnHere();
@@ -381,7 +389,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     protected EntityHorse func_110250_a(Entity par1Entity, double par2) {
         double var4 = Double.MAX_VALUE;
         Entity var6 = null;
-        List var7 = this.worldObj.getEntitiesWithinAABBExcludingEntity(par1Entity, par1Entity.boundingBox.addCoord(par2, par2, par2), field_110276_bu);
+        List var7 = this.worldObj.getEntitiesWithinAABBExcludingEntity(par1Entity, par1Entity.boundingBox.addCoord(par2, par2, par2), bredSelector);
 
         for (Object aVar7 : var7) {
             Entity var9 = (Entity) aVar7;
@@ -403,6 +411,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Returns the sound this mob makes on death.
      */
+    @Override
     protected String getDeathSound() {
         this.func_110249_cI();
         int var1 = this.func_110265_bP();
@@ -412,6 +421,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Returns the item ID for the item the mob drops on death.
      */
+    @Override
     protected int getDropItemId() {
         boolean var1 = this.rand.nextInt(4) == 0;
         int var2 = this.func_110265_bP();
@@ -421,6 +431,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Returns the sound this mob makes when it is hurt.
      */
+    @Override
     protected String getHurtSound() {
         this.func_110249_cI();
 
@@ -439,6 +450,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Returns the sound this mob makes while it's alive.
      */
+    @Override
     protected String getLivingSound() {
         this.func_110249_cI();
 
@@ -460,6 +472,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Plays step sound at given x, y, z for the entity
      */
+    @Override
     protected void playStepSound(int par1, int par2, int par3, int par4) {
         StepSound var5 = Block.blocksList[par4].stepSound;
 
@@ -490,6 +503,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         }
     }
 
+    @Override
     protected void func_110147_ax() {
         super.func_110147_ax();
         this.func_110140_aT().func_111150_b(horseAttributes);
@@ -500,6 +514,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Will return how many at most can spawn in a chunk at once.
      */
+    @Override
     public int getMaxSpawnedInChunk() {
         return 6;
     }
@@ -511,6 +526,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Returns the volume for the sounds this mob makes.
      */
+    @Override
     protected float getSoundVolume() {
         return 0.8F;
     }
@@ -518,6 +534,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Get number of ticks, at least during which the living entity will be silent.
      */
+    @Override
     public int getTalkInterval() {
         return 400;
     }
@@ -532,6 +549,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
+    @Override
     public boolean interact(EntityPlayer par1EntityPlayer) {
         ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 
@@ -700,6 +718,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Dead and sleeping entities cannot move
      */
+    @Override
     protected boolean isMovementBlocked() {
         return this.riddenByEntity != null && this.func_110257_ck() || this.func_110204_cc() || this.func_110209_cd();
     }
@@ -717,6 +736,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
      * Checks if the parameter is an item which this animal can be fed to breed it (wheat, carrots or seeds depending on
      * the animal type)
      */
+    @Override
     public boolean isBreedingItem(ItemStack par1ItemStack) {
         return false;
     }
@@ -728,6 +748,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Called when the mob's health reaches 0.
      */
+    @Override
     public void onDeath(DamageSource par1DamageSource) {
         super.onDeath(par1DamageSource);
 
@@ -740,6 +761,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         if (this.rand.nextInt(200) == 0) {
             this.func_110210_cH();
@@ -775,6 +797,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Called to update the entity's position/logic.
      */
+    @Override
     public void onUpdate() {
         super.onUpdate();
 
@@ -869,12 +892,14 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Will get destroyed next tick.
      */
+    @Override
     public void setDead() {
         if (this.worldObj.isRemote || !this.func_110248_bS() && !this.func_110205_ce() || this.func_110143_aJ() <= 0.0F) {
             super.setDead();
         }
     }
 
+    @Override
     public void setEating(boolean par1) {
         this.func_110208_b(32, par1);
     }
@@ -933,6 +958,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Moves the entity based on the specified heading.  Args: strafe, forward
      */
+    @Override
     public void moveEntityWithHeading(float par1, float par2) {
         if (this.riddenByEntity != null && this.func_110257_ck()) {
             this.prevRotationYaw = this.rotationYaw = this.riddenByEntity.rotationYaw;
@@ -1007,6 +1033,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setBoolean("EatingHaystack", this.func_110204_cc());
@@ -1047,6 +1074,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.func_110227_p(par1NBTTagCompound.getBoolean("EatingHaystack"));
@@ -1103,6 +1131,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * Returns true if the mob is currently able to mate with the specified mob.
      */
+    @Override
     public boolean canMateWith(EntityAnimal par1EntityAnimal) {
         if (par1EntityAnimal == this) {
             return false;
@@ -1121,6 +1150,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         }
     }
 
+    @Override
     public EntityAgeable createChild(EntityAgeable par1EntityAgeable) {
         EntityHorse var2 = (EntityHorse) par1EntityAgeable;
         EntityHorse var3 = new EntityHorse(this.worldObj);
@@ -1169,14 +1199,15 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         return var3;
     }
 
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
-        Object par1EntityLivingData1 = super.func_110161_a(par1EntityLivingData);
+    @Override
+    public EntityLivingData updateLivingData(EntityLivingData original) {
+        EntityHorseGroupData livingData = (EntityHorseGroupData) super.updateLivingData(original);
         int var3 = 0;
         int var7;
 
-        if (par1EntityLivingData1 instanceof EntityHorseGroupData) {
-            var7 = ((EntityHorseGroupData) par1EntityLivingData1).field_111107_a;
-            var3 = ((EntityHorseGroupData) par1EntityLivingData1).field_111106_b & 255 | this.rand.nextInt(5) << 8;
+        if (livingData instanceof EntityHorseGroupData) {
+            var7 = livingData.field_111107_a;
+            var3 = livingData.field_111106_b & 255 | this.rand.nextInt(5) << 8;
         } else {
             if (this.rand.nextInt(10) == 0) {
                 var7 = 1;
@@ -1187,7 +1218,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
                 var3 = var4 | var5 << 8;
             }
 
-            par1EntityLivingData1 = new EntityHorseGroupData(var7, var3);
+            livingData = new EntityHorseGroupData(var7, var3);
         }
 
         this.func_110214_p(var7);
@@ -1217,12 +1248,13 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         }
 
         this.setEntityHealth(this.func_110138_aP());
-        return (EntityLivingData) par1EntityLivingData1;
+        return livingData;
     }
 
     /**
      * Returns true if the newer Entity AI code should be run
      */
+    @Override
     protected boolean isAIEnabled() {
         return true;
     }
@@ -1242,6 +1274,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
         }
     }
 
+    @Override
     public void updateRiderPosition() {
         super.updateRiderPosition();
 
@@ -1277,6 +1310,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic {
     /**
      * returns true if this entity is by a ladder, false otherwise
      */
+    @Override
     public boolean isOnLadder() {
         return false;
     }

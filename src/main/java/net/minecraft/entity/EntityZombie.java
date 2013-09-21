@@ -183,7 +183,7 @@ public class EntityZombie extends EntityMob {
                         if (this.worldObj.checkNoEntityCollision(var7.boundingBox) && this.worldObj.getCollidingBoundingBoxes(var7, var7.boundingBox).isEmpty() && !this.worldObj.isAnyLiquid(var7.boundingBox)) {
                             this.worldObj.spawnEntityInWorld(var7);
                             var7.setAttackTarget(var3);
-                            var7.func_110161_a(null);
+                            var7.updateLivingData(null);
                             this.func_110148_a(reinforcementsAttribute).func_111121_a(new AttributeModifier("Zombie reinforcement caller charge", -0.05000000074505806D, 0));
                             var7.func_110148_a(reinforcementsAttribute).func_111121_a(new AttributeModifier("Zombie reinforcement callee charge", -0.05000000074505806D, 0));
                             break;
@@ -344,7 +344,7 @@ public class EntityZombie extends EntityMob {
             EntityZombie var2 = new EntityZombie(this.worldObj);
             var2.copyLocationAndAnglesFrom(par1EntityLivingBase);
             this.worldObj.removeEntity(par1EntityLivingBase);
-            var2.func_110161_a(null);
+            var2.updateLivingData(null);
             var2.setVillager(true);
 
             if (par1EntityLivingBase.isChild()) {
@@ -356,8 +356,8 @@ public class EntityZombie extends EntityMob {
         }
     }
 
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
-        Object par1EntityLivingData1 = super.func_110161_a(par1EntityLivingData);
+    public EntityLivingData updateLivingData(EntityLivingData par1EntityLivingData) {
+        Object par1EntityLivingData1 = super.updateLivingData(par1EntityLivingData);
         float var2 = this.worldObj.func_110746_b(this.posX, this.posY, this.posZ);
         this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * var2);
 
@@ -457,7 +457,7 @@ public class EntityZombie extends EntityMob {
     protected void convertToVillager() {
         EntityVillager var1 = new EntityVillager(this.worldObj);
         var1.copyLocationAndAnglesFrom(this);
-        var1.func_110161_a(null);
+        var1.updateLivingData(null);
         var1.func_82187_q();
 
         if (this.isChild()) {

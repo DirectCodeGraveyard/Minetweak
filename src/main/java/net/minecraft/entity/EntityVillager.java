@@ -548,8 +548,8 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         return var2 == null ? 1 : ((Integer) var2.getFirst() >= (Integer) var2.getSecond() ? (Integer) var2.getFirst() : (Integer) var2.getFirst() + par1Random.nextInt((Integer) var2.getSecond() - (Integer) var2.getFirst()));
     }
 
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
-        par1EntityLivingData = super.func_110161_a(par1EntityLivingData);
+    public EntityLivingData updateLivingData(EntityLivingData par1EntityLivingData) {
+        par1EntityLivingData = super.updateLivingData(par1EntityLivingData);
         this.setProfession(this.worldObj.rand.nextInt(5));
         return par1EntityLivingData;
     }
@@ -560,7 +560,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
 
     public EntityVillager func_90012_b(EntityAgeable par1EntityAgeable) {
         EntityVillager var2 = new EntityVillager(this.worldObj);
-        var2.func_110161_a(null);
+        var2.updateLivingData(null);
         return var2;
     }
 

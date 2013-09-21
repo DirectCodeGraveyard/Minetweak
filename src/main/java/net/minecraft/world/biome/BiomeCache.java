@@ -47,7 +47,7 @@ public class BiomeCache {
             this.cache.add(var5);
         }
 
-        var5.lastAccessTime = MinecraftServer.func_130071_aq();
+        var5.lastAccessTime = MinecraftServer.getCurrentMillis();
         return var5;
     }
 
@@ -62,7 +62,7 @@ public class BiomeCache {
      * Removes BiomeCacheBlocks from this cache that haven't been accessed in at least 30 seconds.
      */
     public void cleanupCache() {
-        long var1 = MinecraftServer.func_130071_aq();
+        long var1 = MinecraftServer.getCurrentMillis();
         long var3 = var1 - this.lastCleanupTime;
 
         if (var3 > 7500L || var3 < 0L) {

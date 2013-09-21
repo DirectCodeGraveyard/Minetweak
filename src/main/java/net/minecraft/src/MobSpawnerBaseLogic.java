@@ -183,7 +183,7 @@ public abstract class MobSpawnerBaseLogic {
                 var9 = var5;
             }
         } else if (par1Entity instanceof EntityLivingBase && par1Entity.worldObj != null) {
-            ((EntityLiving) par1Entity).func_110161_a(null);
+            ((EntityLiving) par1Entity).updateLivingData(null);
             this.getSpawnerWorld().spawnEntityInWorld(par1Entity);
         }
 

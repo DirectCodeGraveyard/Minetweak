@@ -40,7 +40,7 @@ public class EntityCaveSpider extends EntitySpider {
         }
     }
 
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
+    public EntityLivingData updateLivingData(EntityLivingData par1EntityLivingData) {
         return par1EntityLivingData;
     }
 }

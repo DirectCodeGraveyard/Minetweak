@@ -41,7 +41,7 @@ public class CommandDebug extends CommandBase {
             if (par2ArrayOfStr[0].equals("start")) {
                 notifyAdmins(par1ICommandSender, "commands.debug.start");
                 MinecraftServer.getServer().enableProfiling();
-                this.startTime = MinecraftServer.func_130071_aq();
+                this.startTime = MinecraftServer.getCurrentMillis();
                 this.startTicks = MinecraftServer.getServer().getTickCounter();
                 return;
             }
@@ -51,7 +51,7 @@ public class CommandDebug extends CommandBase {
                     throw new CommandException("commands.debug.notStarted");
                 }
 
-                long var3 = MinecraftServer.func_130071_aq();
+                long var3 = MinecraftServer.getCurrentMillis();
                 int var5 = MinecraftServer.getServer().getTickCounter();
                 long var6 = var3 - this.startTime;
                 int var8 = var5 - this.startTicks;

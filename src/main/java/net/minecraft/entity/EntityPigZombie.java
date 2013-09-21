@@ -200,8 +200,8 @@ public class EntityPigZombie extends EntityZombie {
         this.setCurrentItemOrArmor(0, new ItemStack(Item.swordGold));
     }
 
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
-        super.func_110161_a(par1EntityLivingData);
+    public EntityLivingData updateLivingData(EntityLivingData par1EntityLivingData) {
+        super.updateLivingData(par1EntityLivingData);
         this.setVillager(false);
         return par1EntityLivingData;
     }

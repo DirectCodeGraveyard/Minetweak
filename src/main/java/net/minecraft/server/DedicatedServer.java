@@ -10,7 +10,6 @@ import net.minecraft.server.network.NetworkListenThread;
 import net.minecraft.server.rcon.RConThreadMain;
 import net.minecraft.server.rcon.RConThreadQuery;
 import net.minecraft.src.CryptManager;
-import net.minecraft.src.PropertyManager;
 import net.minecraft.utils.MathHelper;
 import net.minecraft.utils.callable.CallableServerType;
 import net.minecraft.utils.callable.CallableType;
@@ -38,17 +37,16 @@ import java.util.Random;
 @SuppressWarnings("FieldCanBeLocal")
 public class DedicatedServer extends MinecraftServer implements IServer {
     private final List pendingCommandList = Collections.synchronizedList(new ArrayList());
-    private final ILogAgent field_98131_l;
+    private final ILogAgent logAgent;
     private RConThreadQuery theRConThreadQuery;
     private RConThreadMain theRConThreadMain;
-    private PropertyManager settings;
     private boolean canSpawnStructures;
     private EnumGameType gameType;
     private NetworkListenThread networkThread;
 
     public DedicatedServer(File par1File) {
         super(par1File);
-        this.field_98131_l = new LogAgent("Minecraft-Server", null);
+        this.logAgent = new LogAgent("Minecraft-Server", null);
         new DedicatedServerSleepThread(this);
     }
 
@@ -334,7 +332,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
      */
     @Override
     public void saveProperties() {
-        this.settings.saveProperties();
+        // No Need to Save Now
     }
 
     /**
@@ -383,11 +381,11 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     @Override
     public ILogAgent getLogAgent() {
-        return this.field_98131_l;
+        return this.logAgent;
     }
 
     @Override
-    public int func_110455_j() {
+    public int getOpPermissionLevel() {
         return GameConfig.getInteger("server.op-permission-level", 4);
     }
 

@@ -12,7 +12,7 @@ public class ConvertingProgressUpdate implements IProgressUpdate {
 
     public ConvertingProgressUpdate(MinecraftServer par1MinecraftServer) {
         this.mcServer = par1MinecraftServer;
-        this.field_96245_b = MinecraftServer.func_130071_aq();
+        this.field_96245_b = MinecraftServer.getCurrentMillis();
     }
 
     /**
@@ -27,8 +27,8 @@ public class ConvertingProgressUpdate implements IProgressUpdate {
      */
     @Override
     public void setLoadingProgress(int par1) {
-        if (MinecraftServer.func_130071_aq() - this.field_96245_b >= 1000L) {
-            this.field_96245_b = MinecraftServer.func_130071_aq();
+        if (MinecraftServer.getCurrentMillis() - this.field_96245_b >= 1000L) {
+            this.field_96245_b = MinecraftServer.getCurrentMillis();
             this.mcServer.logInfo("Converting... " + par1 + "%");
         }
     }

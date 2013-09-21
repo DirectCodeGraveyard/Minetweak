@@ -8,6 +8,7 @@ public abstract class EntityAmbientCreature extends EntityLiving implements IAni
         super(par1World);
     }
 
+    @Override
     public boolean func_110164_bC() {
         return false;
     }
@@ -15,6 +16,7 @@ public abstract class EntityAmbientCreature extends EntityLiving implements IAni
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
+    @Override
     protected boolean interact(EntityPlayer par1EntityPlayer) {
         return false;
     }

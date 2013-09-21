@@ -146,7 +146,7 @@ public final class SpawnerAnimals {
                                                             if (var41.getCanSpawnHere()) {
                                                                 ++var17;
                                                                 par1WorldServer.spawnEntityInWorld(var41);
-                                                                var24 = var41.func_110161_a(var24);
+                                                                var24 = var41.updateLivingData(var24);
 
                                                                 if (var17 >= var41.getMaxSpawnedInChunk()) {
                                                                     continue label110;
@@ -228,7 +228,7 @@ public final class SpawnerAnimals {
 
                             var22.setLocationAndAngles((double) var19, (double) var20, (double) var21, par6Random.nextFloat() * 360.0F, 0.0F);
                             par0World.spawnEntityInWorld(var22);
-                            var9 = var22.func_110161_a(var9);
+                            var9 = var22.updateLivingData(var9);
                             var16 = true;
                         }
 

@@ -220,8 +220,8 @@ public class EntitySkeleton extends EntityMob implements IRangedAttackMob {
         this.setCurrentItemOrArmor(0, new ItemStack(Item.bow));
     }
 
-    public EntityLivingData func_110161_a(EntityLivingData par1EntityLivingData) {
-        par1EntityLivingData = super.func_110161_a(par1EntityLivingData);
+    public EntityLivingData updateLivingData(EntityLivingData par1EntityLivingData) {
+        par1EntityLivingData = super.updateLivingData(par1EntityLivingData);
 
         if (this.worldObj.provider instanceof WorldProviderHell && this.getRNG().nextInt(5) > 0) {
             this.tasks.addTask(4, this.aiAttackOnCollide);

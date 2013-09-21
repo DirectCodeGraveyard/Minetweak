@@ -18,6 +18,7 @@ public abstract class EntityAgeable extends EntityCreature {
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
      */
+    @Override
     public boolean interact(EntityPlayer par1EntityPlayer) {
         ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
 
@@ -54,6 +55,7 @@ public abstract class EntityAgeable extends EntityCreature {
         }
     }
 
+    @Override
     protected void entityInit() {
         super.entityInit();
         this.dataWatcher.addObject(12, 0);
@@ -91,6 +93,7 @@ public abstract class EntityAgeable extends EntityCreature {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
+    @Override
     public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeEntityToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setInteger("Age", this.getGrowingAge());
@@ -99,6 +102,7 @@ public abstract class EntityAgeable extends EntityCreature {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
+    @Override
     public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readEntityFromNBT(par1NBTTagCompound);
         this.setGrowingAge(par1NBTTagCompound.getInteger("Age"));
@@ -108,6 +112,7 @@ public abstract class EntityAgeable extends EntityCreature {
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
+    @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
 
@@ -129,6 +134,7 @@ public abstract class EntityAgeable extends EntityCreature {
     /**
      * If Animal, checks if the age timer is negative
      */
+    @Override
     public boolean isChild() {
         return this.getGrowingAge() < 0;
     }
@@ -140,6 +146,7 @@ public abstract class EntityAgeable extends EntityCreature {
     /**
      * Sets the width and height of the entity. Args: width, height
      */
+    @Override
     protected final void setSize(float par1, float par2) {
         boolean var3 = this.field_98056_d > 0.0F;
         this.field_98056_d = par1;

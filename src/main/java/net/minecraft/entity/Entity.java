@@ -48,7 +48,7 @@ public abstract class Entity {
      * The entity we are currently riding
      */
     public Entity ridingEntity;
-    public boolean field_98038_p;
+    public boolean isBeingRidden;
 
     /**
      * Reference to the World object.
@@ -1698,7 +1698,6 @@ public abstract class Entity {
         } else {
             boolean var17 = !this.worldObj.isBlockFullCube(var7 - 1, var8, var9);
             boolean var18 = !this.worldObj.isBlockFullCube(var7 + 1, var8, var9);
-            boolean var19 = !this.worldObj.isBlockFullCube(var7, var8 - 1, var9);
             boolean var20 = !this.worldObj.isBlockFullCube(var7, var8 + 1, var9);
             boolean var21 = !this.worldObj.isBlockFullCube(var7, var8, var9 - 1);
             boolean var22 = !this.worldObj.isBlockFullCube(var7, var8, var9 + 1);

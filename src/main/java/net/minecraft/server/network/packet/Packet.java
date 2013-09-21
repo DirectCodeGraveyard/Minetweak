@@ -44,7 +44,7 @@ public abstract class Packet implements IPacket {
     /**
      * the system time in milliseconds when this packet was created.
      */
-    public final long creationTimeMillis = MinecraftServer.func_130071_aq();
+    public final long creationTimeMillis = MinecraftServer.getCurrentMillis();
     public static long receivedID;
     public static long receivedSize;
 

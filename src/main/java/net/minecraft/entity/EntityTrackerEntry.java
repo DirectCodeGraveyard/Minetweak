@@ -296,7 +296,7 @@ public class EntityTrackerEntry {
             double var4 = par1EntityPlayerMP.posZ - (double) (this.encodedPosZ / 32);
 
             if (var2 >= (double) (-this.trackingDistanceThreshold) && var2 <= (double) this.trackingDistanceThreshold && var4 >= (double) (-this.trackingDistanceThreshold) && var4 <= (double) this.trackingDistanceThreshold) {
-                if (!this.trackingPlayers.contains(par1EntityPlayerMP) && (this.isPlayerWatchingThisChunk(par1EntityPlayerMP) || this.trackedEntity.field_98038_p)) {
+                if (!this.trackingPlayers.contains(par1EntityPlayerMP) && (this.isPlayerWatchingThisChunk(par1EntityPlayerMP) || this.trackedEntity.isBeingRidden)) {
                     this.trackingPlayers.add(par1EntityPlayerMP);
                     Packet var6 = this.getSpawnPacket();
                     par1EntityPlayerMP.playerNetServerHandler.sendPacket(var6);

@@ -146,7 +146,7 @@ public class VillageSiege {
 
             try {
                 var2 = new EntityZombie(this.worldObj);
-                var2.func_110161_a(null);
+                var2.updateLivingData(null);
                 var2.setVillager(false);
             } catch (Exception var4) {
                 var4.printStackTrace();

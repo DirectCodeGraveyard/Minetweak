@@ -183,7 +183,7 @@ public class RConThreadQuery extends RConThreadBase {
      * Creates a query response as a byte array for the specified query DatagramPacket
      */
     private byte[] createQueryResponse(DatagramPacket par1DatagramPacket) throws IOException {
-        long var2 = MinecraftServer.func_130071_aq();
+        long var2 = MinecraftServer.getCurrentMillis();
 
         if (var2 < this.lastQueryResponseTime + 5000L) {
             byte[] var7 = this.output.toByteArray();
@@ -272,7 +272,7 @@ public class RConThreadQuery extends RConThreadBase {
      */
     private void cleanQueryClientsMap() {
         if (this.running) {
-            long var1 = MinecraftServer.func_130071_aq();
+            long var1 = MinecraftServer.getCurrentMillis();
 
             if (var1 >= this.lastAuthCheckTime + 30000L) {
                 this.lastAuthCheckTime = var1;
@@ -292,7 +292,7 @@ public class RConThreadQuery extends RConThreadBase {
     @Override
     public void run() {
         this.logInfo("Query running on " + this.serverHostname + ":" + this.queryPort);
-        this.lastAuthCheckTime = MinecraftServer.func_130071_aq();
+        this.lastAuthCheckTime = MinecraftServer.getCurrentMillis();
         this.incomingPacket = new DatagramPacket(this.buffer, this.buffer.length);
 
         try {

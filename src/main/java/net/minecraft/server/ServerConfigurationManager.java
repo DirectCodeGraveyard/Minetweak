@@ -130,10 +130,10 @@ public abstract class ServerConfigurationManager {
             Entity var10 = EntityList.createEntityFromNBT(var3.getCompoundTag("Riding"), var5);
 
             if (var10 != null) {
-                var10.field_98038_p = true;
+                var10.isBeingRidden = true;
                 var5.spawnEntityInWorld(var10);
                 par2EntityPlayerMP.mountEntity(var10);
-                var10.field_98038_p = false;
+                var10.isBeingRidden = false;
             }
         }
     }

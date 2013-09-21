@@ -21,17 +21,17 @@ public class InventoryChest implements ContainerInventory {
 
     @Override
     public void setStackInSlot(Integer slotID, ItemStack stack) {
-        chest.inventoryItemStacks.set(slotID, stack.getItemStack());
+        chest.stacks.set(slotID, stack.getItemStack());
     }
 
     @Override
     public ItemStack getStackInSlot(Integer slotID) {
-        return new ItemStack(chest.inventoryItemStacks.get(slotID));
+        return new ItemStack(chest.stacks.get(slotID));
     }
 
     @Override
     public void clear() {
-        chest.inventoryItemStacks.clear();
+        chest.stacks.clear();
     }
 
     @Override
