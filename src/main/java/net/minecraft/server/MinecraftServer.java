@@ -626,9 +626,9 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             Runtime.getRuntime().addShutdownHook(new ThreadStopDedicatedServer(var16));
         } catch (Exception var15) {
             if (logAgent != null) {
-                logAgent.logSevereException("Failed to start the minecraft server", var15);
+                logAgent.logSevereException("Failed to start the Server", var15);
             } else {
-                Logger.getAnonymousLogger().log(Level.SEVERE, "Failed to start the minecraft server", var15);
+                Logger.getAnonymousLogger().log(Level.SEVERE, "Failed to start the Server", var15);
             }
         }
     }

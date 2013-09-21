@@ -124,11 +124,11 @@ public class RConThreadMain extends RConThreadBase {
                     this.serverSocket.setSoTimeout(500);
                     super.startThread();
                 } catch (IOException var2) {
-                    this.logWarning("Unable to initialise rcon on " + this.hostname + ":" + this.rconPort + " : " + var2.getMessage());
+                    this.logWarning("Unable to initialize RCon on " + this.hostname + ":" + this.rconPort + " : " + var2.getMessage());
                 }
             }
         } else {
-            this.logWarning("Invalid rcon port " + this.rconPort + " found in \'" + this.server.getSettingsFilename() + "\', rcon disabled!");
+            this.logWarning("Invalid RCon port " + this.rconPort + " found in \'" + this.server.getSettingsFilename() + "\', RCon disabled!");
         }
     }
 }

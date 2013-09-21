@@ -354,11 +354,11 @@ public class RConThreadQuery extends RConThreadBase {
             this.querySocket.setSoTimeout(500);
             return true;
         } catch (SocketException var2) {
-            this.logWarning("Unable to initialise query system on " + this.serverHostname + ":" + this.queryPort + " (Socket): " + var2.getMessage());
+            this.logWarning("Unable to initialize query system on " + this.serverHostname + ":" + this.queryPort + " (Socket): " + var2.getMessage());
         } catch (UnknownHostException var3) {
-            this.logWarning("Unable to initialise query system on " + this.serverHostname + ":" + this.queryPort + " (Unknown Host): " + var3.getMessage());
+            this.logWarning("Unable to initialize query system on " + this.serverHostname + ":" + this.queryPort + " (Unknown Host): " + var3.getMessage());
         } catch (Exception var4) {
-            this.logWarning("Unable to initialise query system on " + this.serverHostname + ":" + this.queryPort + " (E): " + var4.getMessage());
+            this.logWarning("Unable to initialize query system on " + this.serverHostname + ":" + this.queryPort + " (E): " + var4.getMessage());
         }
 
         return false;

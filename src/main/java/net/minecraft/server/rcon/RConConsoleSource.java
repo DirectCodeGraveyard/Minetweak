@@ -5,8 +5,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.utils.chat.ChatMessageComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkCoordinates;
+import org.minetweak.command.CommandSender;
 
-public class RConConsoleSource implements ICommandSender {
+public class RConConsoleSource implements ICommandSender, CommandSender {
     /**
      * Single instance of RConConsoleSource
      */
@@ -63,5 +64,37 @@ public class RConConsoleSource implements ICommandSender {
     @Override
     public World getOverworld() {
         return MinecraftServer.getServer().getOverworld();
+    }
+
+    @Override
+    public void sendMessage(String message) {
+        this.buffer.append(message);
+    }
+
+    @Override
+    public void sendMessage(String[] messages) {
+        for (String message : messages) {
+            this.sendMessage(message);
+        }
+    }
+
+    @Override
+    public String getName() {
+        return "RCon";
+    }
+
+    @Override
+    public boolean isKickable() {
+        return false;
+    }
+
+    @Override
+    public boolean isPlayer() {
+        return false;
+    }
+
+    @Override
+    public boolean hasPermission(String permission) {
+        return true;
     }
 }

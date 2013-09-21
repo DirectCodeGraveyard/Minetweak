@@ -39,27 +39,27 @@ public class LogAgent implements ILogAgent {
 
     @Override
     public void logInfo(String par1Str) {
-        this.serverLogger.log(Level.INFO, "[Minecraft] " + par1Str);
+        this.serverLogger.log(Level.INFO, "[Server] " + par1Str);
     }
 
     @Override
     public void logWarning(String par1Str) {
-        this.serverLogger.log(Level.WARNING, "[Minecraft] " + par1Str);
+        this.serverLogger.log(Level.WARNING, "[Server] " + par1Str);
     }
 
     @Override
     public void logWarningFormatted(String par1Str, Object... par2ArrayOfObj) {
-        this.serverLogger.log(Level.WARNING, "[Minecraft] " + par1Str, par2ArrayOfObj);
+        this.serverLogger.log(Level.WARNING, "[Server] " + par1Str, par2ArrayOfObj);
     }
 
     @Override
     public void logWarningException(String par1Str, Throwable par2Throwable) {
-        this.serverLogger.log(Level.WARNING, "[Minecraft] " + par1Str, par2Throwable);
+        this.serverLogger.log(Level.WARNING, "[Server] " + par1Str, par2Throwable);
     }
 
     @Override
     public void logSevere(String par1Str) {
-        this.serverLogger.log(Level.SEVERE, "[Minecraft] " + par1Str);
+        this.serverLogger.log(Level.SEVERE, "[Server] " + par1Str);
     }
 
     @Override

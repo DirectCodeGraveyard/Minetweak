@@ -12,6 +12,7 @@ class DedicatedServerSleepThread extends Thread {
         this.start();
     }
 
+    @Override
     public void run() {
         while (true) {
             try {
