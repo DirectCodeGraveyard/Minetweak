@@ -22,6 +22,7 @@ dependencies {
     compile 'org.bouncycastle:bcprov-jdk15on:1.47'
     compile 'commons-codec:commons-codec:1.8'
     testCompile 'junit:junit:4.11'
+    testCompile 'org.codehaus.groovy:groovy-all:2.1.7'
 }
 
 javadoc {
@@ -37,7 +38,7 @@ compileJava {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.7'
+    gradleVersion = "1.8-rc-2"
 }
 
 apply from: 'gradle/ide.gradle'

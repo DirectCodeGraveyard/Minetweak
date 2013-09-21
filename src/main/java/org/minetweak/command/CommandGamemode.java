@@ -1,12 +1,14 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
+import org.minetweak.chat.TabCompletion;
 import org.minetweak.console.Console;
 import org.minetweak.entity.Player;
 import org.minetweak.server.GameMode;
 import org.minetweak.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CommandGamemode extends CommandExecutor {
 
@@ -57,13 +59,13 @@ public class CommandGamemode extends CommandExecutor {
 
     @Override
     public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
-        String newInput = input.substring(input.lastIndexOf(" "));
-        if (StringUtils.isInteger(newInput)) {
+        String[] split = input.split(" ");
+        if (split.length == 0 || !split[0].equals("")) {
+            completions.addAll(Arrays.asList("survival", "creative", "adventure"));
+        } else if (split.length == 1) {
             completions.addAll(Minetweak.getPlayers().keySet());
-        } else {
-            completions.add("0");
-            completions.add("1");
-            completions.add("2");
+        } else if (split.length == 2) {
+            completions.addAll(TabCompletion.getPlayersMatching(split[1]));
         }
     }
 

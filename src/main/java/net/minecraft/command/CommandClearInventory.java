@@ -17,6 +17,7 @@ public class CommandClearInventory extends CommandBase {
     /**
      * Return the required permission level for this command.
      */
+    @Override
     public int getRequiredPermissionLevel() {
         return 2;
     }

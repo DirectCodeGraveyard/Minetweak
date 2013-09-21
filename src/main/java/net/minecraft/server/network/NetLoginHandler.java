@@ -194,15 +194,15 @@ public class NetLoginHandler extends NetHandler {
      */
     @Override
     public void handleServerPing(Packet254ServerPing par1Packet254ServerPing) {
-        Minetweak.info("Received Server Query from Client using address " + par1Packet254ServerPing.field_140052_b + ":" + par1Packet254ServerPing.field_140053_c);
+        // Minetweak.info("Received Server Query from Client using address " + par1Packet254ServerPing.field_140052_b + ":" + par1Packet254ServerPing.field_140053_c);
         try {
-            ServerConfigurationManager var2 = this.mcServer.getConfigurationManager();
+            ServerConfigurationManager configManager = this.mcServer.getConfigurationManager();
             String var3 = null;
 
             if (par1Packet254ServerPing.func_140050_d()) {
-                var3 = this.mcServer.getMOTD() + "\u00a7" + var2.getCurrentPlayerCount() + "\u00a7" + var2.getMaxPlayers();
+                var3 = this.mcServer.getMOTD() + "\u00a7" + configManager.getCurrentPlayerCount() + "\u00a7" + configManager.getMaxPlayers();
             } else {
-                List var4 = Arrays.asList(1, Minetweak.getProtocolVersion(), this.mcServer.getMinecraftVersion(), this.mcServer.getMOTD(), var2.getCurrentPlayerCount(), var2.getMaxPlayers());
+                List var4 = Arrays.asList(1, Minetweak.getProtocolVersion(), this.mcServer.getMinecraftVersion(), this.mcServer.getMOTD(), configManager.getCurrentPlayerCount(), configManager.getMaxPlayers());
                 Object var6;
 
                 for (Iterator var5 = var4.iterator(); var5.hasNext(); var3 = var3 + var6.toString().replaceAll("\u0000", "")) {

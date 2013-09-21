@@ -1,11 +1,15 @@
 package org.minetweak.util;
 
+import org.codehaus.groovy.runtime.DefaultGroovyMethods;
+
+import java.util.List;
+
 /**
  * String Utilities
  */
 public class StringUtils {
     /**
-     * Drops the first String
+     * Drops the first String in the given Array
      *
      * @param array Array of Strings
      * @return Array of Strings without first String
@@ -17,23 +21,34 @@ public class StringUtils {
     }
 
     /**
+     * Drops the first String in the given List
+     *
+     * @param list List of Strings
+     * @return List of Strings without first String
+     */
+    public static List<String> dropFirstString(List<String> list) {
+        list.remove(0);
+        return list;
+    }
+
+    /**
      * Makes a String out of a String array
      *
      * @param array Array of Strings
      * @return stringed array
      */
     public static String toString(String[] array) {
-        StringBuilder builder = new StringBuilder();
-        int count = 0;
-        for (String string : array) {
-            count++;
-            if (count == array.length) {
-                builder.append(string);
-            } else {
-                builder.append(string).append(" ");
-            }
-        }
-        return builder.toString();
+        return DefaultGroovyMethods.join(array, " ");
+    }
+
+    /**
+     * Makes a String out of a String List
+     *
+     * @param list List of Strings
+     * @return Stringed List
+     */
+    public static String toString(List<String> list) {
+        return DefaultGroovyMethods.join(list, " ");
     }
 
     /**
