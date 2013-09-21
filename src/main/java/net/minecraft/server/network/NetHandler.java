@@ -104,6 +104,7 @@ public abstract class NetHandler implements INetworkHandler {
         this.unexpectedPacket(par1Packet23VehicleSpawn);
     }
 
+    @Override
     public void handleAnimation(Packet18Animation par1Packet18Animation) {
         this.unexpectedPacket(par1Packet18Animation);
     }
@@ -111,30 +112,37 @@ public abstract class NetHandler implements INetworkHandler {
     /**
      * runs registerPacket on the given Packet19EntityAction
      */
+    @Override
     public void handleEntityAction(Packet19EntityAction par1Packet19EntityAction) {
         this.unexpectedPacket(par1Packet19EntityAction);
     }
 
+    @Override
     public void handleClientProtocol(Packet2ClientProtocol par1Packet2ClientProtocol) {
         this.unexpectedPacket(par1Packet2ClientProtocol);
     }
 
+    @Override
     public void handleServerAuthData(Packet253ServerAuthData par1Packet253ServerAuthData) {
         this.unexpectedPacket(par1Packet253ServerAuthData);
     }
 
+    @Override
     public void handleSharedKey(Packet252SharedKey par1Packet252SharedKey) {
         this.unexpectedPacket(par1Packet252SharedKey);
     }
 
+    @Override
     public void handleMobSpawn(Packet24MobSpawn par1Packet24MobSpawn) {
         this.unexpectedPacket(par1Packet24MobSpawn);
     }
 
+    @Override
     public void handleUpdateTime(Packet4UpdateTime par1Packet4UpdateTime) {
         this.unexpectedPacket(par1Packet4UpdateTime);
     }
 
+    @Override
     public void handleSpawnPosition(Packet6SpawnPosition par1Packet6SpawnPosition) {
         this.unexpectedPacket(par1Packet6SpawnPosition);
     }
@@ -142,6 +150,7 @@ public abstract class NetHandler implements INetworkHandler {
     /**
      * Packet handler
      */
+    @Override
     public void handleEntityVelocity(Packet28EntityVelocity par1Packet28EntityVelocity) {
         this.unexpectedPacket(par1Packet28EntityVelocity);
     }
@@ -149,6 +158,7 @@ public abstract class NetHandler implements INetworkHandler {
     /**
      * Packet handler
      */
+    @Override
     public void handleEntityMetadata(Packet40EntityMetadata par1Packet40EntityMetadata) {
         this.unexpectedPacket(par1Packet40EntityMetadata);
     }
@@ -156,10 +166,12 @@ public abstract class NetHandler implements INetworkHandler {
     /**
      * Packet handler
      */
+    @Override
     public void handleAttachEntity(Packet39AttachEntity par1Packet39AttachEntity) {
         this.unexpectedPacket(par1Packet39AttachEntity);
     }
 
+    @Override
     public void handleUseEntity(Packet7UseEntity par1Packet7UseEntity) {
         this.unexpectedPacket(par1Packet7UseEntity);
     }
@@ -167,6 +179,7 @@ public abstract class NetHandler implements INetworkHandler {
     /**
      * Packet handler
      */
+    @Override
     public void handleEntityStatus(Packet38EntityStatus par1Packet38EntityStatus) {
         this.unexpectedPacket(par1Packet38EntityStatus);
     }
@@ -174,6 +187,7 @@ public abstract class NetHandler implements INetworkHandler {
     /**
      * Recieves player health from the server and then proceeds to set it locally on the client.
      */
+    @Override
     public void handleUpdateHealth(Packet8UpdateHealth par1Packet8UpdateHealth) {
         this.unexpectedPacket(par1Packet8UpdateHealth);
     }
@@ -181,30 +195,37 @@ public abstract class NetHandler implements INetworkHandler {
     /**
      * respawns the player
      */
+    @Override
     public void handleRespawn(Packet9Respawn par1Packet9Respawn) {
         this.unexpectedPacket(par1Packet9Respawn);
     }
 
+    @Override
     public void handleExplosion(Packet60Explosion par1Packet60Explosion) {
         this.unexpectedPacket(par1Packet60Explosion);
     }
 
+    @Override
     public void handleOpenWindow(Packet100OpenWindow par1Packet100OpenWindow) {
         this.unexpectedPacket(par1Packet100OpenWindow);
     }
 
+    @Override
     public void handleCloseWindow(Packet101CloseWindow par1Packet101CloseWindow) {
         this.unexpectedPacket(par1Packet101CloseWindow);
     }
 
+    @Override
     public void handleWindowClick(Packet102WindowClick par1Packet102WindowClick) {
         this.unexpectedPacket(par1Packet102WindowClick);
     }
 
+    @Override
     public void handleSetSlot(Packet103SetSlot par1Packet103SetSlot) {
         this.unexpectedPacket(par1Packet103SetSlot);
     }
 
+    @Override
     public void handleWindowItems(Packet104WindowItems par1Packet104WindowItems) {
         this.unexpectedPacket(par1Packet104WindowItems);
     }
@@ -212,18 +233,22 @@ public abstract class NetHandler implements INetworkHandler {
     /**
      * Updates Client side signs
      */
+    @Override
     public void handleUpdateSign(Packet130UpdateSign par1Packet130UpdateSign) {
         this.unexpectedPacket(par1Packet130UpdateSign);
     }
 
+    @Override
     public void handleUpdateProgressbar(Packet105UpdateProgressbar par1Packet105UpdateProgressbar) {
         this.unexpectedPacket(par1Packet105UpdateProgressbar);
     }
 
+    @Override
     public void handlePlayerInventory(Packet5PlayerInventory par1Packet5PlayerInventory) {
         this.unexpectedPacket(par1Packet5PlayerInventory);
     }
 
+    @Override
     public void handleTransaction(Packet106Transaction par1Packet106Transaction) {
         this.unexpectedPacket(par1Packet106Transaction);
     }

@@ -688,7 +688,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      * Returns the server's Minecraft version as string.
      */
     public String getMinecraftVersion() {
-        return "1.6.2";
+        return Minetweak.getMinecraftVersion();
     }
 
     /**

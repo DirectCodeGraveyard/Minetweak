@@ -1,5 +1,7 @@
 package net.minecraft.player;
 
+import org.minetweak.Minetweak;
+
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.net.MalformedURLException;
@@ -61,7 +63,7 @@ public class PlayerUsageSnooper {
         this.addData("os_version", System.getProperty("os.version"));
         this.addData("os_architecture", System.getProperty("os.arch"));
         this.addData("java_version", System.getProperty("java.version"));
-        this.addData("version", "1.6.2");
+        this.addData("version", Minetweak.getMinecraftVersion());
         this.playerStatsCollector.addServerTypeToSnooper(this);
     }
 

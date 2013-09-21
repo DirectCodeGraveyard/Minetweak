@@ -1,6 +1,7 @@
 package net.minecraft.utils.callable;
 
 import net.minecraft.crash.CrashReport;
+import org.minetweak.Minetweak;
 
 import java.util.concurrent.Callable;
 
@@ -18,7 +19,7 @@ public class CallableMinecraftVersion implements Callable<String> {
      * The current version of Minecraft
      */
     public String minecraftVersion() {
-        return "1.6.2";
+        return Minetweak.getMinecraftVersion();
     }
 
     @Override

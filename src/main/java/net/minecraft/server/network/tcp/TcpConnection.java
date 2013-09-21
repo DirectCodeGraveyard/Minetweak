@@ -160,8 +160,6 @@ public class TcpConnection implements INetworkManager {
                 this.sendQueueByteLength += par1Packet.getPacketSize() + 1;
                 if (this.dataPackets != null) {
                     this.dataPackets.add(par1Packet);
-                } else {
-                    MinecraftServer.getServer().logSevere("Oh Crap. It seems something has happened!");
                 }
             }
         }

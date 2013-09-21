@@ -8,6 +8,7 @@ import net.minecraft.server.network.packet.*;
 import net.minecraft.server.network.tcp.TcpConnection;
 import net.minecraft.src.ThreadLoginVerifier;
 import net.minecraft.utils.StringUtils;
+import org.minetweak.Minetweak;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
@@ -106,9 +107,9 @@ public class NetLoginHandler extends NetHandler {
         } else {
             PublicKey var2 = this.mcServer.getKeyPair().getPublic();
 
-            if (par1Packet2ClientProtocol.getProtocolVersion() != 74) {
-                if (par1Packet2ClientProtocol.getProtocolVersion() > 74) {
-                    this.kickUser("Outdated server!");
+            if (par1Packet2ClientProtocol.getProtocolVersion() != Minetweak.getProtocolVersion()) {
+                if (par1Packet2ClientProtocol.getProtocolVersion() > Minetweak.getProtocolVersion()) {
+                    this.kickUser("Outdated server! Mismatched Protocol Version \'" + par1Packet2ClientProtocol.getProtocolVersion() + "'");
                 } else {
                     this.kickUser("Outdated client!");
                 }

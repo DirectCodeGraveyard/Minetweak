@@ -1,6 +1,7 @@
 package net.minecraft.server.ban;
 
 import net.minecraft.server.MinecraftServer;
+import org.minetweak.Minetweak;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -113,7 +114,7 @@ public class BanList {
             PrintWriter var2 = new PrintWriter(new FileWriter(this.fileName, false));
 
             if (par1) {
-                var2.println("# Updated " + (new SimpleDateFormat()).format(new Date()) + " by Minecraft " + "1.6.2");
+                var2.println("# Updated " + (new SimpleDateFormat()).format(new Date()) + " by Minecraft " + Minetweak.getMinecraftVersion());
                 var2.println("# victim name | ban date | banned by | banned until | reason");
                 var2.println();
             }

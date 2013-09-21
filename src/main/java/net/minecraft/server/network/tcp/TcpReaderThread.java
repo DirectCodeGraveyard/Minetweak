@@ -1,5 +1,7 @@
 package net.minecraft.server.network.tcp;
 
+import org.minetweak.util.ThreadUtils;
+
 class TcpReaderThread extends Thread {
     final TcpConnection theTcpConnection;
 
@@ -16,11 +18,7 @@ class TcpReaderThread extends Thread {
             while (TcpConnection.isRunning(this.theTcpConnection) && !TcpConnection.isServerTerminating(this.theTcpConnection)) {
                 while (true) {
                     if (!TcpConnection.readNetworkPacket(this.theTcpConnection)) {
-                        try {
-                            sleep(2L);
-                        } catch (InterruptedException ignored) {
-
-                        }
+                        ThreadUtils.sleepSafe(2L);
                     }
                 }
             }

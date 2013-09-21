@@ -28,8 +28,6 @@ class TcpWriterThread extends Thread {
                     if (!TcpConnection.isTerminating(this.theTcpConnection)) {
                         TcpConnection.sendError(this.theTcpConnection, var8);
                     }
-
-                    var8.printStackTrace();
                 }
 
                 try {

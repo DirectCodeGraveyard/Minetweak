@@ -15,6 +15,7 @@ public class Packet2ClientProtocol extends Packet {
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
+    @Override
     public void readPacketData(DataInput par1DataInput) throws IOException {
         this.protocolVersion = par1DataInput.readByte();
         this.username = readString(par1DataInput, 16);
@@ -25,6 +26,7 @@ public class Packet2ClientProtocol extends Packet {
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
+    @Override
     public void writePacketData(DataOutput par1DataOutput) throws IOException {
         par1DataOutput.writeByte(this.protocolVersion);
         writeString(this.username, par1DataOutput);
@@ -35,6 +37,7 @@ public class Packet2ClientProtocol extends Packet {
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
+    @Override
     public void processPacket(INetworkHandler par1NetHandler) {
         par1NetHandler.handleClientProtocol(this);
     }
@@ -42,6 +45,7 @@ public class Packet2ClientProtocol extends Packet {
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
+    @Override
     public int getPacketSize() {
         return 3 + 2 * this.username.length();
     }
