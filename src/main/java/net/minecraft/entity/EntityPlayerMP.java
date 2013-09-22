@@ -627,7 +627,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
                 ByteArrayOutputStream var5 = new ByteArrayOutputStream();
                 DataOutputStream var6 = new DataOutputStream(var5);
                 var6.writeInt(this.currentWindowId);
-                var4.writeRecipiesToStream(var6);
+                var4.writeRecipesToStream(var6);
                 this.playerNetServerHandler.sendPacket(new Packet250CustomPayload("MC|TrList", var5.toByteArray()));
             } catch (IOException var7) {
                 var7.printStackTrace();

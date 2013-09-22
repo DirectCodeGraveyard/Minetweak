@@ -24,7 +24,7 @@ public class CallableSuspiciousClasses implements Callable<String> {
         try {
             Field var2 = ClassLoader.class.getDeclaredField("classes");
             var2.setAccessible(true);
-            var3 = new ArrayList<Class>((Vector) var2.get(CrashReport.class.getClassLoader()));
+            var3 = new ArrayList<Class>((Vector<Class>) var2.get(CrashReport.class.getClassLoader()));
         } catch (Exception ex) {
             return "";
         }

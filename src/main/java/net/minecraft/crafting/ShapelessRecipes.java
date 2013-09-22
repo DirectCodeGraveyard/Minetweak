@@ -23,6 +23,7 @@ public class ShapelessRecipes implements IRecipe {
         this.recipeItems = par2List;
     }
 
+    @Override
     public ItemStack getRecipeOutput() {
         return this.recipeOutput;
     }
@@ -30,6 +31,7 @@ public class ShapelessRecipes implements IRecipe {
     /**
      * Used to check if a crafting matches current crafting inventory
      */
+    @Override
     public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
         ArrayList<ItemStack> var3 = new ArrayList<ItemStack>(this.recipeItems);
 
@@ -61,6 +63,7 @@ public class ShapelessRecipes implements IRecipe {
     /**
      * Returns an Item that is the result of this crafting
      */
+    @Override
     public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
         return this.recipeOutput.copy();
     }
@@ -68,6 +71,7 @@ public class ShapelessRecipes implements IRecipe {
     /**
      * Returns the size of the crafting area
      */
+    @Override
     public int getRecipeSize() {
         return this.recipeItems.size();
     }

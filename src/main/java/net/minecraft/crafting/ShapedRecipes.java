@@ -40,6 +40,7 @@ public class ShapedRecipes implements IRecipe {
         this.recipeOutput = par4ItemStack;
     }
 
+    @Override
     public ItemStack getRecipeOutput() {
         return this.recipeOutput;
     }
@@ -47,6 +48,7 @@ public class ShapedRecipes implements IRecipe {
     /**
      * Used to check if a crafting matches current crafting inventory
      */
+    @Override
     public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
         for (int var3 = 0; var3 <= 3 - this.recipeWidth; ++var3) {
             for (int var4 = 0; var4 <= 3 - this.recipeHeight; ++var4) {
@@ -105,6 +107,7 @@ public class ShapedRecipes implements IRecipe {
     /**
      * Returns an Item that is the result of this crafting
      */
+    @Override
     public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
         ItemStack var2 = this.getRecipeOutput().copy();
 
@@ -124,6 +127,7 @@ public class ShapedRecipes implements IRecipe {
     /**
      * Returns the size of the crafting area
      */
+    @Override
     public int getRecipeSize() {
         return this.recipeWidth * this.recipeHeight;
     }

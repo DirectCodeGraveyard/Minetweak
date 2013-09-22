@@ -11,13 +11,14 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 
 public class RecipeFireworks implements IRecipe {
-    private ItemStack field_92102_a;
+    private ItemStack stack;
 
     /**
      * Used to check if a crafting matches current crafting inventory
      */
+    @Override
     public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
-        this.field_92102_a = null;
+        this.stack = null;
         int var3 = 0;
         int var4 = 0;
         int var5 = 0;
@@ -64,7 +65,7 @@ public class RecipeFireworks implements IRecipe {
             NBTTagCompound var18;
 
             if (var4 >= 1 && var3 == 1 && var7 == 0) {
-                this.field_92102_a = new ItemStack(Item.firework);
+                this.stack = new ItemStack(Item.firework);
 
                 if (var6 > 0) {
                     var15 = new NBTTagCompound();
@@ -82,12 +83,12 @@ public class RecipeFireworks implements IRecipe {
                     var18.setTag("Explosions", var25);
                     var18.setByte("Flight", (byte) var4);
                     var15.setTag("Fireworks", var18);
-                    this.field_92102_a.setTagCompound(var15);
+                    this.stack.setTagCompound(var15);
                 }
 
                 return true;
             } else if (var4 == 1 && var3 == 0 && var6 == 0 && var5 > 0 && var8 <= 1) {
-                this.field_92102_a = new ItemStack(Item.fireworkCharge);
+                this.stack = new ItemStack(Item.fireworkCharge);
                 var15 = new NBTTagCompound();
                 var18 = new NBTTagCompound("Explosion");
                 byte var21 = 0;
@@ -124,7 +125,7 @@ public class RecipeFireworks implements IRecipe {
                 var18.setIntArray("Colors", var24);
                 var18.setByte("Type", var21);
                 var15.setTag("Explosion", var18);
-                this.field_92102_a.setTagCompound(var15);
+                this.stack.setTagCompound(var15);
                 return true;
             } else if (var4 == 0 && var3 == 0 && var6 == 1 && var5 > 0 && var5 == var7) {
                 ArrayList<Integer> var16 = new ArrayList<Integer>();
@@ -136,8 +137,8 @@ public class RecipeFireworks implements IRecipe {
                         if (var11.itemID == Item.dyePowder.itemID) {
                             var16.add(ItemDye.dyeColors[var11.getItemDamage()]);
                         } else if (var11.itemID == Item.fireworkCharge.itemID) {
-                            this.field_92102_a = var11.copy();
-                            this.field_92102_a.stackSize = 1;
+                            this.stack = var11.copy();
+                            this.stack.stackSize = 1;
                         }
                     }
                 }
@@ -148,8 +149,8 @@ public class RecipeFireworks implements IRecipe {
                     var17[var19] = var16.get(var19);
                 }
 
-                if (this.field_92102_a != null && this.field_92102_a.hasTagCompound()) {
-                    NBTTagCompound var23 = this.field_92102_a.getTagCompound().getCompoundTag("Explosion");
+                if (this.stack != null && this.stack.hasTagCompound()) {
+                    NBTTagCompound var23 = this.stack.getTagCompound().getCompoundTag("Explosion");
 
                     if (var23 == null) {
                         return false;
@@ -171,18 +172,21 @@ public class RecipeFireworks implements IRecipe {
     /**
      * Returns an Item that is the result of this crafting
      */
+    @Override
     public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
-        return this.field_92102_a.copy();
+        return this.stack.copy();
     }
 
     /**
      * Returns the size of the crafting area
      */
+    @Override
     public int getRecipeSize() {
         return 10;
     }
 
+    @Override
     public ItemStack getRecipeOutput() {
-        return this.field_92102_a;
+        return this.stack;
     }
 }

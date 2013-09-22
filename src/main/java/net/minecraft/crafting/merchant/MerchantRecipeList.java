@@ -9,12 +9,12 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class MerchantRecipeList extends ArrayList {
+public class MerchantRecipeList extends ArrayList<MerchantRecipe> {
     public MerchantRecipeList() {
     }
 
     public MerchantRecipeList(NBTTagCompound par1NBTTagCompound) {
-        this.readRecipiesFromTags(par1NBTTagCompound);
+        this.readRecipesFromTags(par1NBTTagCompound);
     }
 
     /**
@@ -22,7 +22,7 @@ public class MerchantRecipeList extends ArrayList {
      */
     public MerchantRecipe canRecipeBeUsed(ItemStack par1ItemStack, ItemStack par2ItemStack, int par3) {
         if (par3 > 0 && par3 < this.size()) {
-            MerchantRecipe var6 = (MerchantRecipe) this.get(par3);
+            MerchantRecipe var6 = this.get(par3);
             return par1ItemStack.itemID == var6.getItemToBuy().itemID && (par2ItemStack == null && !var6.hasSecondItemToBuy() || var6.hasSecondItemToBuy() && par2ItemStack != null && var6.getSecondItemToBuy().itemID == par2ItemStack.itemID) && par1ItemStack.stackSize >= var6.getItemToBuy().stackSize && (!var6.hasSecondItemToBuy() || par2ItemStack.stackSize >= var6.getSecondItemToBuy().stackSize) ? var6 : null;
         } else {
             for (Object o : this) {
@@ -37,11 +37,11 @@ public class MerchantRecipeList extends ArrayList {
     }
 
     /**
-     * checks if there is a recipie for the same ingredients already on the list, and replaces it. otherwise, adds it
+     * checks if there is a recipe for the same ingredients already on the list, and replaces it. otherwise, adds it
      */
     public void addToListWithCheck(MerchantRecipe par1MerchantRecipe) {
         for (int var2 = 0; var2 < this.size(); ++var2) {
-            MerchantRecipe var3 = (MerchantRecipe) this.get(var2);
+            MerchantRecipe var3 = this.get(var2);
 
             if (par1MerchantRecipe.hasSameIDsAs(var3)) {
                 if (par1MerchantRecipe.hasSameItemsAs(var3)) {
@@ -55,7 +55,7 @@ public class MerchantRecipeList extends ArrayList {
         this.add(par1MerchantRecipe);
     }
 
-    public void writeRecipiesToStream(DataOutputStream par1DataOutputStream) throws IOException {
+    public void writeRecipesToStream(DataOutputStream par1DataOutputStream) throws IOException {
         par1DataOutputStream.writeByte((byte) (this.size() & 255));
 
         for (Object o : this) {
@@ -73,7 +73,7 @@ public class MerchantRecipeList extends ArrayList {
         }
     }
 
-    public void readRecipiesFromTags(NBTTagCompound par1NBTTagCompound) {
+    public void readRecipesFromTags(NBTTagCompound par1NBTTagCompound) {
         NBTTagList var2 = par1NBTTagCompound.getTagList("Recipes");
 
         for (int var3 = 0; var3 < var2.tagCount(); ++var3) {
@@ -82,7 +82,7 @@ public class MerchantRecipeList extends ArrayList {
         }
     }
 
-    public NBTTagCompound getRecipiesAsTags() {
+    public NBTTagCompound getRecipesAsTags() {
         NBTTagCompound var1 = new NBTTagCompound();
         NBTTagList var2 = new NBTTagList("Recipes");
 

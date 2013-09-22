@@ -9,6 +9,7 @@ public class RecipesMapCloning implements IRecipe {
     /**
      * Used to check if a crafting matches current crafting inventory
      */
+    @Override
     public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
         int var3 = 0;
         ItemStack var4 = null;
@@ -39,6 +40,7 @@ public class RecipesMapCloning implements IRecipe {
     /**
      * Returns an Item that is the result of this crafting
      */
+    @Override
     public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
         int var2 = 0;
         ItemStack var3 = null;
@@ -79,10 +81,12 @@ public class RecipesMapCloning implements IRecipe {
     /**
      * Returns the size of the crafting area
      */
+    @Override
     public int getRecipeSize() {
         return 9;
     }
 
+    @Override
     public ItemStack getRecipeOutput() {
         return null;
     }

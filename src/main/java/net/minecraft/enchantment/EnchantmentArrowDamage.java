@@ -11,13 +11,15 @@ public class EnchantmentArrowDamage extends Enchantment {
     /**
      * Returns the minimal value of enchantability needed on the enchantment level passed.
      */
+    @Override
     public int getMinEnchantability(int par1) {
         return 1 + (par1 - 1) * 10;
     }
 
     /**
-     * Returns the maximum value of enchantability nedded on the enchantment level passed.
+     * Returns the maximum value of enchantability needed on the enchantment level passed.
      */
+    @Override
     public int getMaxEnchantability(int par1) {
         return this.getMinEnchantability(par1) + 15;
     }
@@ -25,6 +27,7 @@ public class EnchantmentArrowDamage extends Enchantment {
     /**
      * Returns the maximum level that the enchantment can have.
      */
+    @Override
     public int getMaxLevel() {
         return 5;
     }

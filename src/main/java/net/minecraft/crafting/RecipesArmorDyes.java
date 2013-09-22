@@ -15,6 +15,7 @@ public class RecipesArmorDyes implements IRecipe {
     /**
      * Used to check if a crafting matches current crafting inventory
      */
+    @Override
     public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
         ItemStack var3 = null;
         ArrayList<ItemStack> var4 = new ArrayList<ItemStack>();
@@ -47,6 +48,7 @@ public class RecipesArmorDyes implements IRecipe {
     /**
      * Returns an Item that is the result of this crafting
      */
+    @Override
     public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
         ItemStack var2 = null;
         int[] var3 = new int[3];
@@ -123,10 +125,12 @@ public class RecipesArmorDyes implements IRecipe {
     /**
      * Returns the size of the crafting area
      */
+    @Override
     public int getRecipeSize() {
         return 10;
     }
 
+    @Override
     public ItemStack getRecipeOutput() {
         return null;
     }

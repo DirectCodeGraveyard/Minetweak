@@ -16,6 +16,7 @@ final class EnchantmentModifierLiving implements IEnchantmentModifier {
     /**
      * Generic method use to calculate modifiers of offensive or defensive enchantment values.
      */
+    @Override
     public void calculateModifier(Enchantment par1Enchantment, int par2) {
         this.livingModifier += par1Enchantment.calcModifierLiving(par2, this.entityLiving);
     }

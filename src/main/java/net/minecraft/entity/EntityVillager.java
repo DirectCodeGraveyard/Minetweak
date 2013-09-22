@@ -193,7 +193,7 @@ public class EntityVillager extends EntityAgeable implements IMerchant, INpc {
         par1NBTTagCompound.setInteger("Riches", this.wealth);
 
         if (this.buyingList != null) {
-            par1NBTTagCompound.setCompoundTag("Offers", this.buyingList.getRecipiesAsTags());
+            par1NBTTagCompound.setCompoundTag("Offers", this.buyingList.getRecipesAsTags());
         }
     }
 

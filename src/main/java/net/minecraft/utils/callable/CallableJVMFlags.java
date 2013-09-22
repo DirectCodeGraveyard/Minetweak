@@ -21,20 +21,19 @@ public class CallableJVMFlags implements Callable<String> {
      * Returns the number of JVM Flags along with the passed JVM Flags.
      */
     public String getJVMFlagsAsString() {
-        RuntimeMXBean var1 = ManagementFactory.getRuntimeMXBean();
-        List var2 = var1.getInputArguments();
+        RuntimeMXBean bean = ManagementFactory.getRuntimeMXBean();
+        List<String> var2 = bean.getInputArguments();
         int var3 = 0;
         StringBuilder var4 = new StringBuilder();
 
-        for (Object aVar2 : var2) {
-            String var6 = (String) aVar2;
+        for (String opt : var2) {
 
-            if (var6.startsWith("-X")) {
+            if (opt.startsWith("-X")) {
                 if (var3++ > 0) {
                     var4.append(" ");
                 }
 
-                var4.append(var6);
+                var4.append(opt);
             }
         }
 

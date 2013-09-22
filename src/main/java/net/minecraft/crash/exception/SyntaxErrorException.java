@@ -4,7 +4,7 @@ import net.minecraft.command.CommandException;
 
 public class SyntaxErrorException extends CommandException {
     public SyntaxErrorException() {
-        this("commands.generic.snytax");
+        this("commands.generic.syntax");
     }
 
     public SyntaxErrorException(String par1Str, Object... par2ArrayOfObj) {
