@@ -9,6 +9,10 @@ class GroovyLoader {
 
     static def shell = new GroovyShell()
 
+    static boolean loaded = {
+        return load()
+    }()
+
     static def load() {
         scriptDir.eachFileRecurse(FileType.FILES) {
             if (!it.name.endsWith(".groovy")) return
@@ -16,10 +20,11 @@ class GroovyLoader {
             Minetweak.registerListener(script)
             script.run()
         }
+        return true
     }
 
     static def prepare(String scriptText) {
         def s = System.lineSeparator()
-        return "import ${Subscribe.class.name}${s}import org.minetweak.Minetweak${s}${scriptText}"
+        return "import ${Subscribe.class.name}${s}import ${Minetweak.class.name}${s}${scriptText}"
     }
 }

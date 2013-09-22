@@ -29,6 +29,7 @@ import net.minecraft.world.map.MapStorage;
 import net.minecraft.world.provider.WorldProvider;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldSavedData;
+import org.minetweak.Minetweak;
 
 import java.util.*;
 
@@ -1101,6 +1102,7 @@ public abstract class World implements IBlockAccess {
             this.getChunkFromChunkCoords(var2, var3).addEntity(par1Entity);
             this.loadedEntityList.add(par1Entity);
             this.onEntityAdded(par1Entity);
+            Minetweak.getEventBus().post(new org.minetweak.entity.Entity(par1Entity));
             return true;
         }
     }

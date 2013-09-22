@@ -237,6 +237,7 @@ public class PluginManager {
         plugins.clear();
         enabledPlugins.clear();
         loader = null;
+        System.gc();
         loadFirst.clear();
         pluginInformation.clear();
         initialize();

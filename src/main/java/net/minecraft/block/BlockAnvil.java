@@ -15,7 +15,6 @@ public class BlockAnvil extends BlockSand {
      * List of types/statues the Anvil can be in.
      */
     public static final String[] statuses = new String[]{"intact", "slightlyDamaged", "veryDamaged"};
-    private static final String[] anvilIconNames = new String[]{"anvil_top_damaged_0", "anvil_top_damaged_1", "anvil_top_damaged_2"};
 
     protected BlockAnvil(int par1) {
         super(par1, Material.anvil);

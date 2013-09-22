@@ -10,11 +10,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public abstract class BlockBasePressurePlate extends Block {
-    private String pressurePlateIconName;
 
     protected BlockBasePressurePlate(int par1, String par2Str, Material par3Material) {
         super(par1, par3Material);
-        this.pressurePlateIconName = par2Str;
         this.setCreativeTab(CreativeTabs.tabRedstone);
         this.setTickRandomly(true);
         this.func_94353_c_(this.getMetaFromWeight(15));

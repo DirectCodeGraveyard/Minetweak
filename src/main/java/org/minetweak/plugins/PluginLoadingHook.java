@@ -1,6 +1,7 @@
 package org.minetweak.plugins;
 
 import com.google.common.eventbus.Subscribe;
+import org.minetweak.Minetweak;
 import org.minetweak.event.server.ServerInitializedEvent;
 import org.minetweak.groovy.GroovyLoader;
 
@@ -13,6 +14,8 @@ public class PluginLoadingHook {
         PluginManager.initialize();
 
         // Load Groovy Scripts
-        GroovyLoader.load();
+        if (!GroovyLoader.isLoaded()) {
+            Minetweak.info("Unable to load Groovy Scripts!");
+        }
     }
 }

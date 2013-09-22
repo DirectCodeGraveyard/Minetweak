@@ -3,6 +3,7 @@ package org.minetweak.entity.player;
 import com.google.common.eventbus.Subscribe;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import org.minetweak.Minetweak;
 import org.minetweak.entity.Player;
 import org.minetweak.event.player.NewPlayerEvent;
@@ -13,7 +14,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Keeps track of players who have joined before
@@ -21,8 +23,8 @@ import java.util.ArrayList;
 public class PlayerTracker {
     private static PlayerTracker instance = new PlayerTracker();
     private File file = new File("./players.json");
-    private ArrayList<String> players = new ArrayList<String>();
-    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Map<String, PlayerInfo> players = new HashMap<String, PlayerInfo>();
+    private Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
 
     public static PlayerTracker getInstance() {
         return instance;
@@ -31,10 +33,11 @@ public class PlayerTracker {
     @Subscribe
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (!players.contains(player.getName())) {
+
+        if (!players.containsKey(player.getName())) {
             // This player is new
             Minetweak.info("New Player: " + event.getPlayer().getName());
-            players.add(event.getPlayer().getName());
+            players.put(player.getName(), new PlayerInfo(player.getName()));
             Minetweak.getEventBus().post(new NewPlayerEvent(event.getPlayer()));
             saveList();
         }
@@ -58,7 +61,7 @@ public class PlayerTracker {
                 return;
             }
             FileWriter writer = new FileWriter(file);
-            writer.write(gson.toJson(new PlayerListFile(players)));
+            writer.write(gson.toJson(players));
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,12 +74,12 @@ public class PlayerTracker {
                 return;
             }
             FileReader reader = new FileReader(file);
-            PlayerListFile playerList = gson.fromJson(reader, PlayerListFile.class);
-            if (playerList == null || playerList.players == null) {
+            Map<String, PlayerInfo> playerList = gson.fromJson(reader, new TypeToken<Map<String, PlayerInfo>>(){}.getType());
+            if (playerList == null) {
                 reader.close();
                 return;
             }
-            players = playerList.players;
+            players = playerList;
         } catch (Exception e) {
             e.printStackTrace();
         }

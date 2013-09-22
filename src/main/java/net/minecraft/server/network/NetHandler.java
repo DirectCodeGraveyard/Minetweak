@@ -253,196 +253,189 @@ public abstract class NetHandler implements INetworkHandler {
         this.unexpectedPacket(par1Packet106Transaction);
     }
 
-    /**
-     * Packet handler
-     */
+    @Override
     public void handleEntityPainting(Packet25EntityPainting par1Packet25EntityPainting) {
-        this.unexpectedPacket(par1Packet25EntityPainting);
+
     }
 
+    @Override
     public void handleBlockEvent(Packet54PlayNoteBlock par1Packet54PlayNoteBlock) {
-        this.unexpectedPacket(par1Packet54PlayNoteBlock);
+
     }
 
-    /**
-     * runs registerPacket on the given Packet200Statistic
-     */
+    @Override
     public void handleStatistic(Packet200Statistic par1Packet200Statistic) {
-        this.unexpectedPacket(par1Packet200Statistic);
+
     }
 
+    @Override
     public void handleSleep(Packet17Sleep par1Packet17Sleep) {
-        this.unexpectedPacket(par1Packet17Sleep);
+
     }
 
+    @Override
     public void handlePlayerInput(Packet27PlayerInput par1Packet27PlayerInput) {
-        this.unexpectedPacket(par1Packet27PlayerInput);
+
     }
 
+    @Override
     public void handleGameEvent(Packet70GameEvent par1Packet70GameEvent) {
-        this.unexpectedPacket(par1Packet70GameEvent);
+
     }
 
-    /**
-     * Handles weather packet
-     */
+    @Override
     public void handleWeather(Packet71Weather par1Packet71Weather) {
-        this.unexpectedPacket(par1Packet71Weather);
+
     }
 
-    /**
-     * Contains logic for handling packets containing arbitrary unique item data. Currently this is only for maps.
-     */
+    @Override
     public void handleMapData(Packet131MapData par1Packet131MapData) {
-        this.unexpectedPacket(par1Packet131MapData);
+
     }
 
+    @Override
     public void handleDoorChange(Packet61DoorChange par1Packet61DoorChange) {
-        this.unexpectedPacket(par1Packet61DoorChange);
+
     }
 
-    /**
-     * Handle a server ping packet.
-     */
+    @Override
     public void handleServerPing(Packet254ServerPing par1Packet254ServerPing) {
-        this.unexpectedPacket(par1Packet254ServerPing);
+
     }
 
-    /**
-     * Handle an entity effect packet.
-     */
+    @Override
     public void handleEntityEffect(Packet41EntityEffect par1Packet41EntityEffect) {
-        this.unexpectedPacket(par1Packet41EntityEffect);
+
     }
 
-    /**
-     * Handle a remove entity effect packet.
-     */
+    @Override
     public void handleRemoveEntityEffect(Packet42RemoveEntityEffect par1Packet42RemoveEntityEffect) {
-        this.unexpectedPacket(par1Packet42RemoveEntityEffect);
+
     }
 
-    /**
-     * Handle a player information packet.
-     */
+    @Override
     public void handlePlayerInfo(Packet201PlayerInfo par1Packet201PlayerInfo) {
-        this.unexpectedPacket(par1Packet201PlayerInfo);
+
     }
 
-    /**
-     * Handle a keep alive packet.
-     */
+    @Override
     public void handleKeepAlive(Packet0KeepAlive par1Packet0KeepAlive) {
-        this.unexpectedPacket(par1Packet0KeepAlive);
+
     }
 
-    /**
-     * Handle an experience packet.
-     */
+    @Override
     public void handleExperience(Packet43Experience par1Packet43Experience) {
-        this.unexpectedPacket(par1Packet43Experience);
+
     }
 
-    /**
-     * Handle a creative slot packet.
-     */
+    @Override
     public void handleCreativeSetSlot(Packet107CreativeSetSlot par1Packet107CreativeSetSlot) {
-        this.unexpectedPacket(par1Packet107CreativeSetSlot);
+
     }
 
-    /**
-     * Handle a entity experience orb packet.
-     */
+    @Override
     public void handleEntityExpOrb(Packet26EntityExpOrb par1Packet26EntityExpOrb) {
-        this.unexpectedPacket(par1Packet26EntityExpOrb);
+
     }
 
+    @Override
     public void handleEnchantItem(Packet108EnchantItem par1Packet108EnchantItem) {
+
     }
 
+    @Override
     public void handleCustomPayload(Packet250CustomPayload par1Packet250CustomPayload) {
+
     }
 
+    @Override
     public void handleEntityHeadRotation(Packet35EntityHeadRotation par1Packet35EntityHeadRotation) {
-        this.unexpectedPacket(par1Packet35EntityHeadRotation);
+
     }
 
+    @Override
     public void handleTileEntityData(Packet132TileEntityData par1Packet132TileEntityData) {
-        this.unexpectedPacket(par1Packet132TileEntityData);
+
     }
 
-    /**
-     * Handle a player abilities packet.
-     */
+    @Override
     public void handlePlayerAbilities(Packet202PlayerAbilities par1Packet202PlayerAbilities) {
-        this.unexpectedPacket(par1Packet202PlayerAbilities);
+
     }
 
+    @Override
     public void handleAutoComplete(Packet203AutoComplete par1Packet203AutoComplete) {
-        this.unexpectedPacket(par1Packet203AutoComplete);
+
     }
 
+    @Override
     public void handleClientInfo(Packet204ClientInfo par1Packet204ClientInfo) {
-        this.unexpectedPacket(par1Packet204ClientInfo);
+
     }
 
+    @Override
     public void handleLevelSound(Packet62LevelSound par1Packet62LevelSound) {
-        this.unexpectedPacket(par1Packet62LevelSound);
+
     }
 
+    @Override
     public void handleBlockDestroy(Packet55BlockDestroy par1Packet55BlockDestroy) {
-        this.unexpectedPacket(par1Packet55BlockDestroy);
+
     }
 
+    @Override
     public void handleClientCommand(Packet205ClientCommand par1Packet205ClientCommand) {
+
     }
 
+    @Override
     public void handleMapChunks(Packet56MapChunks par1Packet56MapChunks) {
-        this.unexpectedPacket(par1Packet56MapChunks);
+
     }
 
-    /**
-     * If this returns false, all packets will be queued for the main thread to handle, even if they would otherwise be
-     * processed asynchronously. Used to avoid processing packets on the client before the world has been downloaded
-     * (which happens on the main thread)
-     */
+    @Override
     public boolean canProcessPacketsAsync() {
         return false;
     }
 
-    /**
-     * Handle a set objective packet.
-     */
+    @Override
     public void handleSetObjective(Packet206SetObjective par1Packet206SetObjective) {
-        this.unexpectedPacket(par1Packet206SetObjective);
+
     }
 
-    /**
-     * Handle a set score packet.
-     */
+    @Override
     public void handleSetScore(Packet207SetScore par1Packet207SetScore) {
-        this.unexpectedPacket(par1Packet207SetScore);
+
     }
 
-    /**
-     * Handle a set display objective packet.
-     */
+    @Override
     public void handleSetDisplayObjective(Packet208SetDisplayObjective par1Packet208SetDisplayObjective) {
-        this.unexpectedPacket(par1Packet208SetDisplayObjective);
+
     }
 
-    /**
-     * Handle a set player team packet.
-     */
+    @Override
     public void handleSetPlayerTeam(Packet209SetPlayerTeam par1Packet209SetPlayerTeam) {
-        this.unexpectedPacket(par1Packet209SetPlayerTeam);
+
     }
 
-    /**
-     * Handle a world particles packet.
-     */
+    @Override
     public void handleWorldParticles(Packet63WorldParticles par1Packet63WorldParticles) {
-        this.unexpectedPacket(par1Packet63WorldParticles);
+
+    }
+
+    @Override
+    public void handleUpdateAttributes(Packet44UpdateAttributes par1Packet44UpdateAttributes) {
+
+    }
+
+    @Override
+    public void handleTileEditorOpen(Packet133TileEditorOpen par1Packet133TileEditorOpen) {
+
+    }
+
+    @Override
+    public boolean func_142032_c() {
+        return false;
     }
 
     public void func_110773_a(Packet44UpdateAttributes par1Packet44UpdateAttributes) {
@@ -450,9 +443,6 @@ public abstract class NetHandler implements INetworkHandler {
     }
 
     public void func_142031_a(Packet133TileEditorOpen par1Packet133TileEditorOpen) {
-    }
-
-    public boolean func_142032_c() {
-        return false;
+        this.unexpectedPacket(par1Packet133TileEditorOpen);
     }
 }

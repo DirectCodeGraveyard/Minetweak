@@ -52,7 +52,7 @@ public class ServerListenThread extends Thread {
                     this.pendingConnections.remove(var2--);
                 }
 
-                var3.myTCPConnection.wakeThreads();
+                var3.connection.wakeThreads();
             }
         }
     }
