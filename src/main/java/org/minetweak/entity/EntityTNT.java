@@ -3,7 +3,7 @@ package org.minetweak.entity;
 import net.minecraft.entity.EntityTNTPrimed;
 
 /**
- * TNT - Explodes, and shit
+ * TNT - Explodes, and stuff
  */
 public class EntityTNT extends Entity {
     public EntityTNT(EntityTNTPrimed mcEntity) {
