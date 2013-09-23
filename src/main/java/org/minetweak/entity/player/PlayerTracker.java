@@ -51,13 +51,13 @@ public class PlayerTracker {
     public void saveList() {
         if (file.exists()) {
             if (!file.delete()) {
-                Minetweak.getLogger().logWarning("Unable to save list of Joined Players. Cannot delete file.");
+                Minetweak.getLogger().logWarning("Unable to save list of joined players. Cannot delete file.");
                 return;
             }
         }
         try {
             if (!file.createNewFile()) {
-                Minetweak.getLogger().logWarning("Unable to save list of Joined Players. Cannot create file.");
+                Minetweak.getLogger().logWarning("Unable to save list of joined players. Cannot create file.");
                 return;
             }
             FileWriter writer = new FileWriter(file);
