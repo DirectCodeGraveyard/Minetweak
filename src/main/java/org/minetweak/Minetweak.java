@@ -88,7 +88,7 @@ public class Minetweak {
     private static boolean usingLauncher = false;
 
     /**
-     * Runs the Minetweak Server.
+     * Primary entry point
      *
      * @param args the arguments to pass to MinecraftServer
      */
@@ -121,7 +121,7 @@ public class Minetweak {
         // Loads joined player list
         registerListener(PlayerTracker.getInstance());
 
-        // Checks RAM usage to ensure that the server has enough
+        // Check RAM amount
         ramCheck();
 
         // Initialize TextColor colorNodes ArrayList that contains the symbol and node
@@ -133,7 +133,7 @@ public class Minetweak {
 
     private static void ramCheck() {
         if (Runtime.getRuntime().maxMemory() / 1024L / 1024L < 512L) {
-            Minetweak.getLogger().logWarning("To start the server with more ram, launch it as \"java -Xmx1024M -Xms1024M -jar MinetweakLauncher.jar\"");
+            Minetweak.getLogger().logWarning("You might need to allocate more RAM.");
         }
     }
 
@@ -231,7 +231,7 @@ public class Minetweak {
     }
 
     /**
-     * Registers a Guava Event Listener
+     * Registers a Guava event listener
      *
      * @param object the instance of the listener
      */
@@ -240,7 +240,7 @@ public class Minetweak {
     }
 
     /**
-     * Check whether a player is on by username
+     * Check if a player is online
      *
      * @param playerUsername The players username
      * @return if the player is online
@@ -250,7 +250,7 @@ public class Minetweak {
     }
 
     /**
-     * TweakLogger Minetweak Info to Console
+     * Log to the Minetweak console
      *
      * @param line line to log
      */
@@ -259,7 +259,7 @@ public class Minetweak {
     }
 
     /**
-     * Registers Default Server Commands
+     * Register the default server commands
      */
     protected static void registerServerCommands() {
         registerCommand("ban", new CommandBan());
@@ -298,16 +298,16 @@ public class Minetweak {
     }
 
     /**
-     * Return the Map with the players. Key is the username, Value is the Player instance.
+     * Return the map with the players. Key is the username, Value is the player instance.
      *
-     * @return Player Map
+     * @return Player map
      */
     public static HashMap<String, Player> getPlayers() {
         return players;
     }
 
     /**
-     * Gets the PluginCommand Executors for Strings
+     * Get the command executors
      *
      * @return a HashMap of the commands to their executors
      */
@@ -332,7 +332,7 @@ public class Minetweak {
     }
 
     /**
-     * Perform a version check using the Manifest
+     * Perform a version check using the manifest
      */
     private static void versionCheck() {
         URL url = Minetweak.class.getProtectionDomain().getCodeSource().getLocation();
@@ -353,7 +353,7 @@ public class Minetweak {
     }
 
     /**
-     * Set the Server lockdown mode
+     * Set the server lockdown mode
      *
      * @param lockdownEnabled True if the server is locked down
      */
@@ -362,16 +362,16 @@ public class Minetweak {
     }
 
     /**
-     * Get the Overworld WorldServer
+     * Get the overworld WorldServer
      *
-     * @return Overworld WorldServer
+     * @return overworld WorldServer
      */
     public static World getOverworld() {
         return MinecraftServer.getServer().worldServerForDimension(0).getWorld();
     }
 
     /**
-     * Is Minetweak running using the Launcher?
+     * Is Minetweak running using the launcher?
      *
      * @return is using launcher
      */
@@ -380,7 +380,7 @@ public class Minetweak {
     }
 
     /**
-     * Sets if Minetweak is running on the Launcher
+     * Sets if Minetweak is running on the launcher
      *
      * @param usingLauncher is it using the launcher
      */
@@ -389,14 +389,14 @@ public class Minetweak {
     }
 
     /**
-     * Checks if Minetweak is running on the Launcher
+     * Checks if Minetweak is running on the launcher
      */
     private static void launcherCheck() {
         setUsingLauncher(ReflectionUtils.classExists("org.minetweak.launcher.Launcher"));
     }
 
     /**
-     * Gets the Minecraft Protocol Version
+     * Get the Minecraft protocol version
      *
      * @return Protocol Version
      */
