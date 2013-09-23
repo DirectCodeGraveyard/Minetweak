@@ -72,7 +72,8 @@ public class PlayerTracker {
                 return;
             }
             FileReader reader = new FileReader(file);
-            Map<String, PlayerInfo> playerList = gson.fromJson(reader, new TypeToken<Map<String, PlayerInfo>>(){}.getType());
+            Map<String, PlayerInfo> playerList = gson.fromJson(reader, new TypeToken<Map<String, PlayerInfo>>() {
+            }.getType());
             if (playerList == null) {
                 reader.close();
                 return;

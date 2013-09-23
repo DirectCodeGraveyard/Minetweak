@@ -1,3 +1,4 @@
 package org.minetweak.event.plugin;
 
-public class PluginEvent {}
+public class PluginEvent {
+}

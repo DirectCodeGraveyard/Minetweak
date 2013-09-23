@@ -17,6 +17,7 @@ public class WorldGeneration {
 
     /**
      * Gets the WorldGeneration Instance
+     *
      * @return Instance
      */
     public static WorldGeneration getInstance() {

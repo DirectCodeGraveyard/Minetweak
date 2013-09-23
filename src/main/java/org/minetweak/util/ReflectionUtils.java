@@ -16,7 +16,7 @@ public class ReflectionUtils {
     /**
      * Checks if a Class Exists
      *
-     * @param name Class name
+     * @param name   Class name
      * @param loader ClassLoader
      * @return if class exists
      */

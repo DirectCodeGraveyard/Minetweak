@@ -1,6 +1,5 @@
 package org.minetweak.material;
 
-
 import net.minecraft.item.ItemStack;
 
 /**
