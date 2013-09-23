@@ -5,9 +5,9 @@ import com.google.gson.GsonBuilder;
 import groovy.lang.Closure;
 import groovy.lang.GroovyClassLoader;
 import org.minetweak.Minetweak;
-import org.minetweak.plugins.event.PluginDisableEvent;
-import org.minetweak.plugins.event.PluginEnableEvent;
-import org.minetweak.plugins.event.PluginLoadEvent;
+import org.minetweak.event.plugin.PluginDisableEvent;
+import org.minetweak.event.plugin.PluginEnableEvent;
+import org.minetweak.event.plugin.PluginLoadEvent;
 import org.minetweak.util.ReflectionUtils;
 import org.minetweak.util.TweakLogger;
 

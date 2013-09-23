@@ -1,12 +1,13 @@
-package org.minetweak.plugins.event;
+package org.minetweak.event.plugin;
 
 import org.minetweak.Minetweak;
+import org.minetweak.command.CommandExecutor;
 import org.minetweak.plugins.PluginInfo;
 
-public class PluginLoadEvent extends PluginEvent {
+public class PluginEnableEvent extends PluginEvent {
     private PluginInfo pluginInfo;
 
-    public PluginLoadEvent(PluginInfo pluginInfo) {
+    public PluginEnableEvent(PluginInfo pluginInfo) {
         this.pluginInfo = pluginInfo;
     }
 
@@ -16,5 +17,9 @@ public class PluginLoadEvent extends PluginEvent {
 
     public void registerListener(Object object) {
         Minetweak.registerListener(object);
+    }
+
+    public void registerCommand(String name, CommandExecutor executor) {
+        Minetweak.registerCommand(name, executor);
     }
 }

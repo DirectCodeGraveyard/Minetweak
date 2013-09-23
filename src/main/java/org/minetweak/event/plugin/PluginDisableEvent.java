@@ -1,4 +1,4 @@
-package org.minetweak.plugins.event;
+package org.minetweak.event.plugin;
 
 import org.minetweak.Minetweak;
 import org.minetweak.plugins.PluginInfo;
