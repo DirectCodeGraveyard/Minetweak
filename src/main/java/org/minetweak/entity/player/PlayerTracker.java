@@ -35,8 +35,6 @@ public class PlayerTracker {
         Player player = event.getPlayer();
 
         if (!players.containsKey(player.getName())) {
-            // This player is new
-            Minetweak.info("New Player: " + event.getPlayer().getName());
             players.put(player.getName(), new PlayerInfo(player.getName()));
             Minetweak.getEventBus().post(new NewPlayerEvent(event.getPlayer()));
             saveList();
