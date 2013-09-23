@@ -56,6 +56,6 @@ public abstract class CommandExecutor implements ICommandExecutor {
      * @param sender the Command Sender
      */
     public void notPlayer(CommandSender sender) {
-        sender.sendMessage(TextColor.RED + "This command cannot be used by Consoles.");
+        sender.sendMessage(TextColor.RED + "This command cannot be used by consoles.");
     }
 }
