@@ -31,7 +31,7 @@ public enum Difficulty {
                 return difficulty;
             }
         }
-        return NORMAL;
+        return null;
     }
 
     public String getName() {
