@@ -27,7 +27,7 @@ public enum Difficulty {
     public static Difficulty getByName(String name) {
         Difficulty[] difficulties = values();
         for (Difficulty difficulty : difficulties) {
-            if (difficulty.name.equals(name)) {
+            if (difficulty.name.equalsIgnoreCase(name)) {
                 return difficulty;
             }
         }
