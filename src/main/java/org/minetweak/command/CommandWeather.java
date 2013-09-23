@@ -1,6 +1,5 @@
 package org.minetweak.command;
 
-import org.minetweak.Minetweak;
 import org.minetweak.chat.TextColor;
 import org.minetweak.util.StringUtils;
 
@@ -17,22 +16,22 @@ public class CommandWeather extends CommandExecutor {
         if (sender.hasPermission("minetweak.command.weather")) {
             String id = args[0].toLowerCase();
             if (id.equalsIgnoreCase("rain") && args.length == 1) {
-                Minetweak.getOverworld().setRaining(true);
+                getOverworld().setRaining(true);
             } else if (id.equalsIgnoreCase("rain") && args.length == 2) {
                 int rainTime = Integer.parseInt(args[1]);
-                Minetweak.getOverworld().setRaining(true);
-                Minetweak.getOverworld().setRainTime(rainTime);
+                getOverworld().setRaining(true);
+                getOverworld().setRainTime(rainTime);
             } else if (id.equalsIgnoreCase("clear")) {
-                Minetweak.getOverworld().setRaining(false);
-                Minetweak.getOverworld().setThundering(false);
+                getOverworld().setRaining(false);
+                getOverworld().setThundering(false);
             } else if (id.equalsIgnoreCase("thunder")) {
-                Minetweak.getOverworld().setThundering(true);
-                Minetweak.getOverworld().setRaining(true);
+                getOverworld().setThundering(true);
+                getOverworld().setRaining(true);
             } else {
                 sender.sendMessage(TextColor.RED + "Invalid Weather Type: " + id);
                 return;
             }
-            Minetweak.getOverworld().broadcastMessage("Weather changed to " + TextColor.GREEN + id);
+            getOverworld().broadcastMessage("Weather changed to " + TextColor.GREEN + id);
         } else {
             noPermission(sender, "change the weather");
         }

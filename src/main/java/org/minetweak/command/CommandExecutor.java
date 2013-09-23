@@ -1,8 +1,10 @@
 package org.minetweak.command;
 
+import org.minetweak.Minetweak;
 import org.minetweak.chat.TabCompletion;
 import org.minetweak.chat.TextColor;
 import org.minetweak.util.StringUtils;
+import org.minetweak.world.World;
 
 import java.util.ArrayList;
 
@@ -57,5 +59,13 @@ public abstract class CommandExecutor implements ICommandExecutor {
      */
     public void notPlayer(CommandSender sender) {
         sender.sendMessage(TextColor.RED + "This command cannot be used by consoles.");
+    }
+
+    public World getOverworld() {
+        return Minetweak.getOverworld();
+    }
+
+    public int getProtocolVersion() {
+        return Minetweak.getProtocolVersion();
     }
 }

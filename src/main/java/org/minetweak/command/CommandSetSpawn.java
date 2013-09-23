@@ -1,6 +1,5 @@
 package org.minetweak.command;
 
-import org.minetweak.Minetweak;
 import org.minetweak.chat.TextColor;
 import org.minetweak.entity.Player;
 import org.minetweak.world.Location;
@@ -16,13 +15,13 @@ public class CommandSetSpawn extends CommandExecutor {
                 return;
             }
             Player player = (Player) sender;
-            Minetweak.getOverworld().setSpawn(new Location((int) player.getX(), (int) player.getY(), (int) player.getZ()));
+            getOverworld().setSpawn(new Location((int) player.getX(), (int) player.getY(), (int) player.getZ()));
             sender.sendMessage(TextColor.GOLD + "Spawn Location Set.");
         }
     }
 
     @Override
     public String getHelpInfo() {
-        return "Sets the Worlds Spawn";
+        return "Set the world spawn";
     }
 }
