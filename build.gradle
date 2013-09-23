@@ -1,4 +1,3 @@
-apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'project-report'
 
@@ -31,7 +30,10 @@ javadoc {
     classpath = configurations.compile + sourceSets.main.output
 }
 
-compileJava {
+sourceSets.main.java.srcDirs = []
+sourceSets.main.groovy.srcDirs += ["src/main/java"]
+
+compileGroovy {
     options.compilerArgs = ['-Xlint:none', '-XDignore.symbol.file']
     sourceCompatibility = '1.6'
     targetCompatibility = '1.6'
