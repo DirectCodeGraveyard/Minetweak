@@ -6,11 +6,11 @@ import java.io.File;
 import java.util.logging.Level;
 
 public class GameConfig {
-    private static File configFile = new File("minetweak.cfg");
+    private static File configFile = new File("server.config");
     private static Configuration config = new Configuration(configFile);
 
     public static void initialize() {
-        header("This is the Minetweak main configuration file");
+        header("Minetweak configuration file");
         newLine();
         get(new Property("server.stop.message").addComment("Sets the disconnect message to be displayed to users when the server is stopping"));
         String logLevel = get(new Property("minetweak.log.level", "INFO").addComment("Log Level for Minetweak: Values: INFO/DEBUG/FINE/SEVERE/WARNING"));

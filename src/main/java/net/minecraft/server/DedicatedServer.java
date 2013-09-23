@@ -110,7 +110,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
             this.getLogAgent().logWarning("**** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!");
             this.getLogAgent().logWarning("The server will make no attempt to authenticate usernames. Beware.");
             this.getLogAgent().logWarning("While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.");
-            this.getLogAgent().logWarning("To change this, set \"online-mode\" to \"true\" in the minetweak.cfg file.");
+            this.getLogAgent().logWarning("To change this, set \"online-mode\" to \"true\" in the configuration file.");
         }
 
         this.setConfigurationManager(new DedicatedPlayerList(this));
