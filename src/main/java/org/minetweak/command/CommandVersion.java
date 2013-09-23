@@ -1,7 +1,7 @@
 package org.minetweak.command;
 
-import net.minecraft.utils.enums.EnumChatFormatting;
 import org.minetweak.Minetweak;
+import org.minetweak.chat.TextColor;
 
 public class CommandVersion extends CommandExecutor {
 
@@ -12,7 +12,7 @@ public class CommandVersion extends CommandExecutor {
             return;
         }
 
-        sender.sendMessage("You are running " + EnumChatFormatting.BLUE + "Minetweak" + EnumChatFormatting.RESET + " v" + Minetweak.getAPIVersion() + ", using Minecraft v" + Minetweak.getMinecraftVersion());
+        sender.sendMessage(TextColor.GREEN + "You are running " + "Minetweak" + " v" + Minetweak.getAPIVersion() + ", using Minecraft v" + Minetweak.getMinecraftVersion());
     }
 
     @Override
