@@ -12,12 +12,12 @@ public class CommandVersion extends CommandExecutor {
             return;
         }
 
-        sender.sendMessage(TextColor.GREEN + "You are running " + "Minetweak" + " v" + Minetweak.getAPIVersion() + ", using Minecraft v" + Minetweak.getMinecraftVersion());
+        sender.sendMessage(TextColor.GREEN + "You are running " + "Minetweak" + " v" + Minetweak.getAPIVersion() + ", implementing Minecraft v" + Minetweak.getMinecraftVersion());
     }
 
     @Override
     public String getHelpInfo() {
-        return "Gets the Server Version";
+        return "Get the server version";
     }
 
 }
