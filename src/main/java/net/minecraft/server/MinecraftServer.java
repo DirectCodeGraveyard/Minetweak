@@ -204,21 +204,12 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     protected void convertMapIfNeeded(String par1Str) {
         if (this.getActiveAnvilConverter().isOldMapFormat(par1Str)) {
             this.getLogAgent().logInfo("Converting map!");
-            this.setUserMessage("menu.convertingLevel");
             this.getActiveAnvilConverter().convertMapFormat(par1Str, new ConvertingProgressUpdate(this));
         }
     }
 
-    /**
-     * Typically "menu.convertingLevel", "menu.loadingLevel" or others.
-     */
-    protected synchronized void setUserMessage(String par1Str) {
-        this.userMessage = par1Str;
-    }
-
     protected void loadAllWorlds(String folderName, String par2Str, long par3, WorldType par5WorldType, String par6Str) {
         this.convertMapIfNeeded(folderName);
-        this.setUserMessage("menu.loadingLevel");
         this.worldServers = new WorldServer[10];
         this.timeOfLastDimensionTick = new long[this.worldServers.length][100];
         ISaveHandler saveHandler = this.anvilConverter.getSaveLoader(folderName, true);
@@ -269,7 +260,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
     protected void initialWorldChunkLoad() {
         int var5 = 0;
-        this.setUserMessage("menu.generatingTerrain");
         byte var6 = 0;
         this.logInfo("Preparing start region for level " + var6);
         WorldServer var7 = this.worldServers[var6];
