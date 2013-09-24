@@ -12,7 +12,7 @@ Who makes Minetweak?
 - [Kenneth Endfinger](https://github.com/kaendfinger/) - Developer and Co-Leader
 - [samrg472](https://github.com/samrg472/) - Developer and Manager
 
-Want to help develop MineTweak? Pull requests are welcome! We'd love to have your help!
+Want to help develop Minetweak? Pull requests are welcome! We'd love to have your help!
 
 More Information
 ----------------
