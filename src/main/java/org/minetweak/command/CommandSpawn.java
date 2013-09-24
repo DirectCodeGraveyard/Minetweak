@@ -2,7 +2,6 @@ package org.minetweak.command;
 
 import org.minetweak.Minetweak;
 import org.minetweak.chat.TextColor;
-import org.minetweak.console.Console;
 import org.minetweak.entity.Player;
 
 public class CommandSpawn extends CommandExecutor {
@@ -13,9 +12,8 @@ public class CommandSpawn extends CommandExecutor {
             if (args.length > 1) {
                 sender.sendMessage("Usage: /" + overallCommand + " [player]");
                 return;
-            }
-            if (sender instanceof Console) {
-                sender.sendMessage("Console has no need to teleport to spawn.");
+            } else if (!(sender instanceof Player)) {
+                sender.sendMessage("You must be a player to use this command.");
                 return;
             }
             String playerName = sender.getName();
@@ -31,7 +29,7 @@ public class CommandSpawn extends CommandExecutor {
             noPermission(sender, "teleport players to spawn");
             return;
         }
-        player.sendMessage(TextColor.GOLD + "Teleporting to Spawn");
+        player.sendMessage(TextColor.GREEN + "Teleporting to Spawn");
         player.teleportToPosition(player.getCurrentWorld().getSpawn());
     }
 

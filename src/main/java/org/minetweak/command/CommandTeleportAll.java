@@ -16,7 +16,7 @@ public class CommandTeleportAll extends CommandExecutor {
             noPermission(sender, "teleport all players");
             return;
         } else if (!(sender instanceof Player)) {
-            sender.sendMessage("You must be a player to run this command.");
+            sender.sendMessage("You must be a player to use this command.");
             return;
         }
 
