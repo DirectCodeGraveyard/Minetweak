@@ -21,6 +21,6 @@ public class CommandMotd extends CommandExecutor {
 
     @Override
     public String getHelpInfo() {
-        return "Gets/Sets the MOTD";
+        return "MOTD management";
     }
 }
