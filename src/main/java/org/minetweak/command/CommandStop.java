@@ -14,17 +14,12 @@ public class CommandStop extends CommandExecutor {
         }
 
         Server.broadcastMessage("Stopping the server...");
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         Server.shutdownServer();
     }
 
     @Override
     public String getHelpInfo() {
-        return "Stops the Server";
+        return "Stop the server";
     }
 
 }

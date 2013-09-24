@@ -261,7 +261,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     protected void initialWorldChunkLoad() {
         int var5 = 0;
         byte var6 = 0;
-        this.logInfo("Preparing start region for level " + var6);
         WorldServer var7 = this.worldServers[var6];
         ChunkCoordinates var8 = var7.getSpawnPoint();
         long var9 = getCurrentMillis();
@@ -328,10 +327,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
 
             for (WorldServer var5 : var2) {
                 if (var5 != null) {
-                    if (!par1) {
-                        this.getLogAgent().logInfo("Saving chunks for level \'" + var5.getWorldInfo().getWorldName() + "\'/" + var5.provider.getDimensionName());
-                    }
-
                     try {
                         var5.saveAllChunks(true, null);
                     } catch (MinecraftException var7) {
@@ -347,19 +342,15 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      */
     public void stopServer() {
         if (!this.worldIsBeingDeleted) {
-            this.getLogAgent().logInfo("Stopping server");
-
             if (this.getNetworkThread() != null) {
                 this.getNetworkThread().stopListening();
             }
 
             if (this.serverConfigManager != null) {
-                this.getLogAgent().logInfo("Saving players");
                 this.serverConfigManager.saveAllPlayerData();
                 this.serverConfigManager.removeAllPlayers();
             }
 
-            this.getLogAgent().logInfo("Saving worlds");
             this.saveAllWorlds(false);
 
             for (WorldServer var2 : this.worldServers) {

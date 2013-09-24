@@ -80,7 +80,6 @@ public class ManagementThread extends Thread {
      */
     @Subscribe
     public void serverReadyCallback(ServerFinishedStartupEvent event) {
-        Minetweak.info("Starting Management Thread");
         this.setDaemon(true);
         this.start();
     }

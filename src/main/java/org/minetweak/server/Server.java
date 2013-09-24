@@ -124,10 +124,10 @@ public class Server {
 
     /**
      * Called by Minecraft code to hook in our commands system.
-     * WARNING: Should not be used in a plugin's point of view, it'll break stuff.
+     * WARNING: Should not be used in a plugin's point of view, it will break stuff.
      *
      * @param console The console instance it was sent by.
-     * @param command Command sent by the sender, in raw String form.
+     * @param command Command sent by the sender, in raw string form.
      */
     public static void handleCommand(Console console, String command) {
         if (command.startsWith("/")) {
@@ -187,7 +187,7 @@ public class Server {
      * @param message Message to send.
      */
     public static void sendToOps(String message) {
-        String out = "[" + TextColor.GOLD + "Server" + TextColor.RESET + "] " + message;
+        String out = "[" + TextColor.DARK_PURPLE + "Server" + TextColor.RESET + "] " + message;
 
         if (ServerOps.getOps().size() == 0) return;
 

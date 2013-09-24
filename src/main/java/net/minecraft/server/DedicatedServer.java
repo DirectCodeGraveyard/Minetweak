@@ -59,7 +59,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         var1.setDaemon(true);
         var1.start();
 
-        this.minetweakInfo("Loading Configuration");
         this.setOnlineMode(GameConfig.getBoolean("server.online", true));
         this.setHostname(GameConfig.get("server.ip", ""));
         this.setCanSpawnAnimals(GameConfig.getBoolean("server.spawn-animals", true));
@@ -82,7 +81,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.canSpawnStructures = GameConfig.getBoolean("server.generate-structures", true);
         int var2 = GameConfig.getInteger("server.gamemode", EnumGameType.SURVIVAL.getID());
         this.gameType = WorldSettings.getGameTypeById(var2);
-        this.logInfo("Default game type: " + this.gameType);
         InetAddress var3 = null;
 
         if (this.getServerHostname().length() > 0) {
@@ -100,17 +98,14 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         try {
             this.networkThread = new DedicatedServerListenThread(this, var3, this.getServerPort());
         } catch (IOException var16) {
-            this.getLogAgent().logSevere("**** FAILED TO BIND TO PORT!");
-            this.getLogAgent().logWarningFormatted("The exception was: {0}", var16.toString());
-            this.getLogAgent().logSevere("Perhaps a server is already running on that port?");
+            this.getLogAgent().logSevere("Error: Failed to bind to port.");
+            this.getLogAgent().logSevere("There may be another server running on the same port.");
             return false;
         }
 
         if (!this.isServerInOnlineMode()) {
-            this.getLogAgent().logWarning("**** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!");
-            this.getLogAgent().logWarning("The server will make no attempt to authenticate usernames. Beware.");
-            this.getLogAgent().logWarning("While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.");
-            this.getLogAgent().logWarning("To change this, set \"online-mode\" to \"true\" in the configuration file.");
+            this.getLogAgent().logWarning("Attention: You are running in offline mode.");
+            this.getLogAgent().logWarning("This opens up the server to anyone and everyone, using any username, no authentication required.");
         }
 
         this.setConfigurationManager(new DedicatedPlayerList(this));
@@ -147,16 +142,15 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.setBuildLimit((this.getBuildLimit() + 8) / 16 * 16);
         this.setBuildLimit(MathHelper.clamp_int(this.getBuildLimit(), 64, 256));
         GameConfig.set("server.max-build-height", String.valueOf(this.getBuildLimit()));
-        this.logInfo("Preparing level \"" + this.getFolderName() + "\"");
         this.loadAllWorlds(this.getFolderName(), this.getFolderName(), var9, var17, var8);
         long var12 = System.nanoTime() - var4;
         String var14 = String.format("%.3fs", (double) var12 / 1.0E9D);
 
         Minetweak.getEventBus().post(new ServerFinishedStartupEvent());
 
-        this.logInfo("Done (" + var14 + ")! For help, type help");
-
         Minetweak.setServerDoneLoading();
+
+        this.logInfo("Finished Startup (" + var14 + ")! Type help for a list of commands.");
 
         if (GameConfig.getBoolean("server.enable-query", false)) {
             this.logInfo("Starting GS4 status listener");
