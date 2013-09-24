@@ -24,7 +24,7 @@ public class CommandSpawn extends CommandExecutor {
             }
             player = Minetweak.getPlayerByName(playerName);
             if (player == null) {
-                sender.sendMessage(TextColor.RED + "Can't teleport an offline player.");
+                sender.sendMessage(TextColor.RED + "Player does not exist.");
                 return;
             }
         } else {

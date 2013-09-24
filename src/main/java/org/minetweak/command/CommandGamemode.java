@@ -45,7 +45,7 @@ public class CommandGamemode extends CommandExecutor {
         } else {
             Player player = Minetweak.getPlayerByName(args[1].toLowerCase());
             if (player == null) {
-                sender.sendMessage("Sorry, you can't change an offline players Gamemode.");
+                sender.sendMessage("Player does not exist.");
                 return;
             }
             setPlayerGamemode(player, gamemode);
@@ -54,7 +54,7 @@ public class CommandGamemode extends CommandExecutor {
 
     @Override
     public String getHelpInfo() {
-        return "Changes a Players Gamemode";
+        return "Set player's gamemode";
     }
 
     @Override

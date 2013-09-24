@@ -24,7 +24,7 @@ public class CommandKill extends CommandExecutor {
             targetPlayer.sendMessage("Ouch, that must have hurt");
             targetPlayer.killPlayer();
         } else {
-            sender.sendMessage("You cannot kill a offline player");
+            sender.sendMessage("Player does not exist.");
         }
     }
 

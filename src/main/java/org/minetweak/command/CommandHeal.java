@@ -21,7 +21,7 @@ public class CommandHeal extends CommandExecutor {
         } else if (args.length == 1) {
             player = Minetweak.getPlayerByName(args[0]);
             if (player == null) {
-                sender.sendMessage(TextColor.RED + "Can't heal an offline player.");
+                sender.sendMessage(TextColor.RED + "Player does not exist.");
                 return;
             }
         }

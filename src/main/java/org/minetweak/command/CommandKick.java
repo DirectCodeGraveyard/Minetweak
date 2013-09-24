@@ -20,7 +20,7 @@ public class CommandKick extends CommandExecutor {
         Player targetPlayer = Minetweak.getPlayerByName(args[0].toLowerCase());
 
         if (!Minetweak.isPlayerOnline(args[0].toLowerCase())) {
-            sender.sendMessage("You cannot kick an offline player.");
+            sender.sendMessage("Player does not exist.");
         } else {
             if (args.length == 1) {
                 targetPlayer.kickPlayer();
