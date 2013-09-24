@@ -153,13 +153,11 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         this.logInfo("Finished Startup (" + var14 + ")! Type help for a list of commands.");
 
         if (GameConfig.getBoolean("server.enable-query", false)) {
-            this.logInfo("Starting GS4 status listener");
             this.theRConThreadQuery = new RConThreadQuery(this);
             this.theRConThreadQuery.startThread();
         }
 
         if (GameConfig.getBoolean("server.enable-rcon", false)) {
-            this.logInfo("Starting remote control listener");
             this.theRConThreadMain = new RConThreadMain(this);
             this.theRConThreadMain.startThread();
         }
@@ -218,14 +216,6 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         par1CrashReport.func_85056_g().addCrashSectionCallable("Is Modded", new CallableType(this));
         par1CrashReport.func_85056_g().addCrashSectionCallable("Type", new CallableServerType(this));
         return par1CrashReport;
-    }
-
-    /**
-     * Directly calls System.exit(0), instantly killing the program.
-     */
-    @Override
-    protected void systemExitNow() {
-        System.exit(0);
     }
 
     @Override

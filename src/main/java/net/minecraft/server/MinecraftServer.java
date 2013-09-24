@@ -451,7 +451,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             } catch (Throwable var46) {
                 var46.printStackTrace();
             } finally {
-                this.systemExitNow();
+                System.exit(0);
             }
         }
     }
@@ -464,12 +464,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
      * Called on exit from the main run() loop.
      */
     protected void finalTick(CrashReport par1CrashReport) {
-    }
-
-    /**
-     * Directly calls System.exit(0), instantly killing the program.
-     */
-    protected void systemExitNow() {
     }
 
     /**
