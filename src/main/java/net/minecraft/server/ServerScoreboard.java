@@ -39,7 +39,7 @@ public class ServerScoreboard extends Scoreboard {
         super.func_96530_a(par1, par2ScoreObjective);
 
         if (var3 != par2ScoreObjective && var3 != null) {
-            if (this.func_96552_h(var3) > 0) {
+            if (this.indexOf(var3) > 0) {
                 this.minecraftServer.getConfigurationManager().sendPacketToAllPlayers(new Packet208SetDisplayObjective(par1, par2ScoreObjective));
             } else {
                 this.func_96546_g(var3);
@@ -190,7 +190,7 @@ public class ServerScoreboard extends Scoreboard {
         this.objectives.remove(par1ScoreObjective);
     }
 
-    public int func_96552_h(ScoreObjective par1ScoreObjective) {
+    public int indexOf(ScoreObjective par1ScoreObjective) {
         int var2 = 0;
 
         for (int var3 = 0; var3 < 3; ++var3) {
