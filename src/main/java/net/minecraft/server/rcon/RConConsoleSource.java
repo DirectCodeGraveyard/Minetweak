@@ -7,6 +7,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkCoordinates;
 import org.minetweak.command.CommandSender;
 
+import java.util.List;
+
 public class RConConsoleSource implements ICommandSender, CommandSender {
     /**
      * Single instance of RConConsoleSource
@@ -76,6 +78,11 @@ public class RConConsoleSource implements ICommandSender, CommandSender {
         for (String message : messages) {
             this.sendMessage(message);
         }
+    }
+
+    @Override
+    public void sendMessage(List<String> messages) {
+        sendMessage(messages.toArray(new String[messages.size()]));
     }
 
     @Override

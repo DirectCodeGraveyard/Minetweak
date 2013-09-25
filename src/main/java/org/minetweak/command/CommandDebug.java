@@ -13,9 +13,11 @@ public class CommandDebug extends CommandExecutor {
             return;
         }
 
-        sender.sendMessage("TPS: " + CommandTps.getTPS(MinecraftServer.getServer().tickTimeArray));
-        sender.sendMessage("Total Memory: " + Runtime.getRuntime().totalMemory() / mb + "mb");
-        sender.sendMessage("Free Memory: " + Runtime.getRuntime().freeMemory() / mb + "mb");
-        sender.sendMessage("Maximum Memory: " + Runtime.getRuntime().maxMemory() / mb + "mb");
+        sender.sendMessage(new String[]{
+                "TPS: " + CommandTps.getTPS(MinecraftServer.getServer().tickTimeArray),
+                "Total Memory: " + Runtime.getRuntime().totalMemory() / mb + "mb",
+                "Free Memory: " + Runtime.getRuntime().freeMemory() / mb + "mb",
+                "Maximum Memory: " + Runtime.getRuntime().maxMemory() / mb + "mb"
+        });
     }
 }

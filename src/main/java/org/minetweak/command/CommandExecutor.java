@@ -3,7 +3,6 @@ package org.minetweak.command;
 import org.minetweak.Minetweak;
 import org.minetweak.chat.TabCompletion;
 import org.minetweak.chat.TextColor;
-import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;
 import org.minetweak.world.World;
 
@@ -16,7 +15,7 @@ public abstract class CommandExecutor implements ICommandExecutor {
 
     @Override
     public String getHelpInfo() {
-        return "Not specified";
+        return "Not Specified";
     }
 
     @Override
@@ -62,11 +61,6 @@ public abstract class CommandExecutor implements ICommandExecutor {
         sender.sendMessage(TextColor.RED + "This command cannot be used by consoles.");
     }
 
-    /**
-     * Get the overworld for the server.
-     *
-     * @return Server overworld
-     */
     public World getOverworld() {
         return Minetweak.getOverworld();
     }

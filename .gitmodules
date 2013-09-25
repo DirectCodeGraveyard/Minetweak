@@ -1,3 +1,4 @@
 [submodule "tools"]
 	path = tools
 	url = git://github.com/Minetweak/buildtools.git
+	pushurl = git@github.com:Minetweak/Minetweak.git

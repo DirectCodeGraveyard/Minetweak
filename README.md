@@ -17,4 +17,4 @@ Want to help develop Minetweak? Pull requests are welcome! We'd love to have you
 More Information
 ----------------
 
-For more information on Minetweak, visit the [Minetweak Wiki](http://wiki.minetweak.org/) or join our [IRC Channel](https://minetweak.atlassian.net/wiki/display/MINETWEAK/IRC+Channel)
+For more information on Minetweak, visit the [Minetweak Wiki](http://wiki.minetweak.org/) or join our [IRC Channel](http://wiki.minetweak.org/Main_Page#IRC)
