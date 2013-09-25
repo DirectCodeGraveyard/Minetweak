@@ -4,6 +4,8 @@ import org.minetweak.Minetweak;
 import org.minetweak.chat.TextColor;
 import org.minetweak.command.CommandSender;
 
+import java.util.List;
+
 /**
  * Represents the Console
  */
@@ -11,10 +13,7 @@ public class Console implements CommandSender {
 
     @Override
     public void sendMessage(String message) {
-        for (String s : TextColor.getColorNodes()) {
-            message = message.replace(s, "");
-        }
-        Minetweak.info(message);
+        Minetweak.info(cleanMessage(message));
     }
 
     @Override
@@ -22,6 +21,11 @@ public class Console implements CommandSender {
         for (String message : messages) {
             sendMessage(message);
         }
+    }
+
+    @Override
+    public void sendMessage(List<String> messages) {
+        sendMessage(messages.toArray(new String[messages.size()]));
     }
 
     @Override
@@ -42,5 +46,13 @@ public class Console implements CommandSender {
     @Override
     public boolean hasPermission(String permission) {
         return true;
+    }
+
+    public static String cleanMessage(String original) {
+        String newMsg = "";
+        for (String s : TextColor.getColorNodes()) {
+            newMsg = newMsg.replace(s, "");
+        }
+        return newMsg;
     }
 }

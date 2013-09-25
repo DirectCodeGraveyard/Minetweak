@@ -24,6 +24,7 @@ import org.minetweak.world.Location;
 import org.minetweak.world.World;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents the player, and allows you to
@@ -386,16 +387,16 @@ public class Player extends Entity implements CommandSender {
         return new EnderChest(this);
     }
 
-    /**
-     * Send the player an array of Strings.
-     *
-     * @param messages Array of Messages to send
-     */
     @Override
     public void sendMessage(String[] messages) {
         for (String message : messages) {
             sendMessage(message);
         }
+    }
+
+    @Override
+    public void sendMessage(List<String> messages) {
+        sendMessage(messages.toArray(new String[messages.size()]));
     }
 
     /**

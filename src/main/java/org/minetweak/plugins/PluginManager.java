@@ -254,7 +254,7 @@ public class PluginManager {
     }
 
     /**
-     * Detect if a plugin is enabled
+     * Detect if a plugin is enabled.
      *
      * @param pluginName name of plugin
      * @return if the plugin is enabled
@@ -264,7 +264,7 @@ public class PluginManager {
     }
 
     /**
-     * Detect if a plugin is registered. This does not mean they are enabled
+     * Detect if a plugin is registered. This does not mean they are enabled.
      *
      * @param pluginName name of plugin
      * @return if the plugin is registered
@@ -298,7 +298,8 @@ public class PluginManager {
      */
     public static void eachPlugin(Closure closure) {
         for (Object plugin : plugins.values()) {
-            closure.call(plugin);
+            Object returned = closure.call(plugin);
+            if (returned instanceof Boolean && (Boolean) returned) return;
         }
     }
 }

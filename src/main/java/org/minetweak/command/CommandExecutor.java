@@ -20,7 +20,7 @@ public abstract class CommandExecutor implements ICommandExecutor {
 
     @Override
     public void getTabCompletion(CommandSender sender, String input, ArrayList<String> completions) {
-        completions.addAll(TabCompletion.getPlayersMatching(input));
+        TabCompletion.getPlayersOnlyCommand(input, completions);
     }
 
     /**
@@ -63,9 +63,5 @@ public abstract class CommandExecutor implements ICommandExecutor {
 
     public World getOverworld() {
         return Minetweak.getOverworld();
-    }
-
-    public int getProtocolVersion() {
-        return Minetweak.getProtocolVersion();
     }
 }

@@ -1,5 +1,7 @@
 package org.minetweak.command;
 
+import java.util.List;
+
 public interface CommandSender {
 
     /**
@@ -15,6 +17,13 @@ public interface CommandSender {
      * @param messages Array of Messages to send
      */
     public void sendMessage(String[] messages);
+
+    /**
+     * Sends multiple messages - Useful in multi-line situations
+     *
+     * @param messages List of Messages to send
+     */
+    public void sendMessage(List<String> messages);
 
     /**
      * Gets the Sender's name
