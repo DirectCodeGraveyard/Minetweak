@@ -433,9 +433,9 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             File var3 = new File(new File(this.getDataDirectory(), "crash-reports"), "crash-" + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss")).format(new Date()) + "-server.txt");
 
             if (var2.saveToFile(var3, this.getLogAgent())) {
-                this.getLogAgent().logSevere("This crash report has been saved to: " + var3.getAbsolutePath());
+                this.getLogAgent().logSevere("Crash report saved to: " + var3.getAbsolutePath());
             } else {
-                this.getLogAgent().logSevere("We were unable to save this crash report to disk.");
+                this.getLogAgent().logSevere("Crash report could not be saved");
             }
 
             this.finalTick(var2);
