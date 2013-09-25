@@ -560,21 +560,11 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
                 String var11 = var9 == par0ArrayOfStr.length - 1 ? null : par0ArrayOfStr[var9 + 1];
                 boolean var12 = false;
 
-                if (var10.equals("--port") && var11 != null) {
-                    var12 = true;
-
-                    try {
-                        var8 = Integer.parseInt(var11);
-                    } catch (NumberFormatException ignored) {
-
-                    }
-                } else if (var10.equals("--bonusChest")) {
+                if (var10.equals("--bonusChest")) {
                     var7 = true;
                 }
 
-                if (var12) {
-                    ++var9;
-                }
+                ++var9;
             }
 
             DedicatedServer var16 = new DedicatedServer(new File(var4));
@@ -596,9 +586,9 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             Runtime.getRuntime().addShutdownHook(new ThreadStopDedicatedServer(var16));
         } catch (Exception var15) {
             if (logAgent != null) {
-                logAgent.logSevereException("Failed to start the Server", var15);
+                logAgent.logSevereException("Failed to start the server.", var15);
             } else {
-                Logger.getAnonymousLogger().log(Level.SEVERE, "Failed to start the Server", var15);
+                Logger.getAnonymousLogger().log(Level.SEVERE, "Failed to start the server.", var15);
             }
         }
     }
@@ -724,7 +714,7 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
     }
 
     public String getServerModName() {
-        return "vanilla";
+        return "minetweak";
     }
 
     /**
