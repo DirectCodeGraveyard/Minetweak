@@ -1,7 +1,5 @@
 package net.minecraft.server.gui;
 
-import net.minecraft.server.MinecraftServer;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +18,7 @@ class MinecraftServerGuiINNER2 implements ActionListener {
         String var2 = this.field_120025_a.getText().trim();
 
         if (var2.length() > 0) {
-            MinecraftServerGui.func_120017_a(this.field_120024_b).addPendingCommand(var2, MinecraftServer.getServer());
+            MinecraftServerGui.func_120017_a(this.field_120024_b).addPendingCommand(var2);
         }
 
         this.field_120025_a.setText("");

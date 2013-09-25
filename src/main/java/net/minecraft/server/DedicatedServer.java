@@ -1,6 +1,5 @@
 package net.minecraft.server;
 
-import net.minecraft.command.ICommandSender;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.entity.EntityPlayer;
 import net.minecraft.logging.ILogAgent;
@@ -249,14 +248,13 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         return GameConfig.getBoolean("server.snooper-enabled", true);
     }
 
-    public void addPendingCommand(String par1Str, ICommandSender par2ICommandSender) {
+    public void addPendingCommand(String par1Str) {
         Console console = new Console();
         if (Minetweak.doesCommandExist(par1Str.split(" ")[0])) {
             Server.handleCommand(console, par1Str);
         } else {
             console.sendMessage("That command doesn't exist. Type help for help.");
         }
-        //this.pendingCommandList.add(new ServerCommand(par1Str, par2ICommandSender));
     }
 
     public void executePendingCommands() {
@@ -281,7 +279,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     }
 
     /**
-     * Gets an integer property. If it does not exist, set it to the specified value.
+     * Get an integer property. If it doesn't exist, set it to the specified value.
      */
     @Override
     public int getIntProperty(String par1Str, int par2) {
@@ -289,7 +287,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     }
 
     /**
-     * Gets a string property. If it does not exist, set it to the specified value.
+     * Get a string property. If it doesn't exist, set it to the specified value.
      */
     @Override
     public String getStringProperty(String par1Str, String par2Str) {
@@ -297,14 +295,14 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     }
 
     /**
-     * Gets a boolean property. If it does not exist, set it to the specified value.
+     * Get a boolean property. If it doesn't exist, set it to the specified value.
      */
     public boolean getBooleanProperty(String par1Str, boolean par2) {
         return GameConfig.get(new Property(par1Str, Boolean.toString(par2))).equals("true");
     }
 
     /**
-     * Saves an Object with the given property name.
+     * Save an object with the given property name.
      */
     @Override
     public void setProperty(String par1Str, Object par2Obj) {
@@ -312,15 +310,13 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     }
 
     /**
-     * Saves all of the server properties to the properties file.
+     * Save all of the server properties to the properties file.
      */
     @Override
-    public void saveProperties() {
-        // No Need to Save Now
-    }
+    public void saveProperties() {}
 
     /**
-     * Returns the filename where server properties are stored
+     * Return the filename where server properties are stored.
      */
     @Override
     public String getSettingsFilename() {
@@ -363,6 +359,10 @@ public class DedicatedServer extends MinecraftServer implements IServer {
         }
     }
 
+    /**
+     * Get the log agent for the dedicated server.
+     * @return Dedicated server logger
+     */
     @Override
     public ILogAgent getLogAgent() {
         return this.logAgent;

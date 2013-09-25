@@ -17,7 +17,7 @@ class DedicatedServerCommandThread extends Thread {
 
         try {
             while (!this.server.isServerStopped() && this.server.isServerRunning() && (var2 = var1.readLine()) != null) {
-                this.server.addPendingCommand(var2, this.server);
+                this.server.addPendingCommand(var2);
             }
         } catch (IOException var4) {
             var4.printStackTrace();

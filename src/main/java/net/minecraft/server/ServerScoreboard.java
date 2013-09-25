@@ -7,20 +7,20 @@ import net.minecraft.server.network.packet.*;
 import java.util.*;
 
 public class ServerScoreboard extends Scoreboard {
-    private final MinecraftServer field_96555_a;
-    private final Set<ScoreObjective> field_96553_b = new HashSet<ScoreObjective>();
+    private final MinecraftServer minecraftServer;
+    private final Set<ScoreObjective> objectives = new HashSet<ScoreObjective>();
     private ScoreboardSaveData field_96554_c;
 
     public ServerScoreboard(MinecraftServer par1MinecraftServer) {
-        this.field_96555_a = par1MinecraftServer;
+        this.minecraftServer = par1MinecraftServer;
     }
 
     @Override
     public void func_96536_a(Score par1Score) {
         super.func_96536_a(par1Score);
 
-        if (this.field_96553_b.contains(par1Score.func_96645_d())) {
-            this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet207SetScore(par1Score, 0));
+        if (this.objectives.contains(par1Score.func_96645_d())) {
+            this.minecraftServer.getConfigurationManager().sendPacketToAllPlayers(new Packet207SetScore(par1Score, 0));
         }
 
         this.func_96551_b();
@@ -29,7 +29,7 @@ public class ServerScoreboard extends Scoreboard {
     @Override
     public void func_96516_a(String par1Str) {
         super.func_96516_a(par1Str);
-        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet207SetScore(par1Str));
+        this.minecraftServer.getConfigurationManager().sendPacketToAllPlayers(new Packet207SetScore(par1Str));
         this.func_96551_b();
     }
 
@@ -40,17 +40,17 @@ public class ServerScoreboard extends Scoreboard {
 
         if (var3 != par2ScoreObjective && var3 != null) {
             if (this.func_96552_h(var3) > 0) {
-                this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet208SetDisplayObjective(par1, par2ScoreObjective));
+                this.minecraftServer.getConfigurationManager().sendPacketToAllPlayers(new Packet208SetDisplayObjective(par1, par2ScoreObjective));
             } else {
                 this.func_96546_g(var3);
             }
         }
 
         if (par2ScoreObjective != null) {
-            if (this.field_96553_b.contains(par2ScoreObjective)) {
-                this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet208SetDisplayObjective(par1, par2ScoreObjective));
+            if (this.objectives.contains(par2ScoreObjective)) {
+                this.minecraftServer.getConfigurationManager().sendPacketToAllPlayers(new Packet208SetDisplayObjective(par1, par2ScoreObjective));
             } else {
-                this.func_96549_e(par2ScoreObjective);
+                this.addObjective(par2ScoreObjective);
             }
         }
 
@@ -60,7 +60,7 @@ public class ServerScoreboard extends Scoreboard {
     @Override
     public void func_96521_a(String par1Str, ScorePlayerTeam par2ScorePlayerTeam) {
         super.func_96521_a(par1Str, par2ScorePlayerTeam);
-        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Collections.singletonList(par1Str), 3));
+        this.minecraftServer.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Collections.singletonList(par1Str), 3));
         this.func_96551_b();
     }
 
@@ -71,7 +71,7 @@ public class ServerScoreboard extends Scoreboard {
     @Override
     public void removePlayerFromTeam(String par1Str, ScorePlayerTeam par2ScorePlayerTeam) {
         super.removePlayerFromTeam(par1Str, par2ScorePlayerTeam);
-        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Collections.singletonList(par1Str), 4));
+        this.minecraftServer.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par2ScorePlayerTeam, Collections.singletonList(par1Str), 4));
         this.func_96551_b();
     }
 
@@ -85,8 +85,8 @@ public class ServerScoreboard extends Scoreboard {
     public void func_96532_b(ScoreObjective par1ScoreObjective) {
         super.func_96532_b(par1ScoreObjective);
 
-        if (this.field_96553_b.contains(par1ScoreObjective)) {
-            this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet206SetObjective(par1ScoreObjective, 2));
+        if (this.objectives.contains(par1ScoreObjective)) {
+            this.minecraftServer.getConfigurationManager().sendPacketToAllPlayers(new Packet206SetObjective(par1ScoreObjective, 2));
         }
 
         this.func_96551_b();
@@ -96,7 +96,7 @@ public class ServerScoreboard extends Scoreboard {
     public void func_96533_c(ScoreObjective par1ScoreObjective) {
         super.func_96533_c(par1ScoreObjective);
 
-        if (this.field_96553_b.contains(par1ScoreObjective)) {
+        if (this.objectives.contains(par1ScoreObjective)) {
             this.func_96546_g(par1ScoreObjective);
         }
 
@@ -106,21 +106,21 @@ public class ServerScoreboard extends Scoreboard {
     @Override
     public void func_96523_a(ScorePlayerTeam par1ScorePlayerTeam) {
         super.func_96523_a(par1ScorePlayerTeam);
-        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par1ScorePlayerTeam, 0));
+        this.minecraftServer.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par1ScorePlayerTeam, 0));
         this.func_96551_b();
     }
 
     @Override
     public void func_96538_b(ScorePlayerTeam par1ScorePlayerTeam) {
         super.func_96538_b(par1ScorePlayerTeam);
-        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par1ScorePlayerTeam, 2));
+        this.minecraftServer.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par1ScorePlayerTeam, 2));
         this.func_96551_b();
     }
 
     @Override
     public void func_96513_c(ScorePlayerTeam par1ScorePlayerTeam) {
         super.func_96513_c(par1ScorePlayerTeam);
-        this.field_96555_a.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par1ScorePlayerTeam, 1));
+        this.minecraftServer.getConfigurationManager().sendPacketToAllPlayers(new Packet209SetPlayerTeam(par1ScorePlayerTeam, 1));
         this.func_96551_b();
     }
 
@@ -152,17 +152,17 @@ public class ServerScoreboard extends Scoreboard {
         return var2;
     }
 
-    public void func_96549_e(ScoreObjective par1ScoreObjective) {
+    public void addObjective(ScoreObjective par1ScoreObjective) {
         List<Packet> var2 = this.func_96550_d(par1ScoreObjective);
 
-        for (EntityPlayerMP var4 : this.field_96555_a.getConfigurationManager().playerEntityList) {
+        for (EntityPlayerMP var4 : this.minecraftServer.getConfigurationManager().playerEntityList) {
 
             for (Packet var6 : var2) {
                 var4.playerNetServerHandler.sendPacket(var6);
             }
         }
 
-        this.field_96553_b.add(par1ScoreObjective);
+        this.objectives.add(par1ScoreObjective);
     }
 
     public List<Packet> func_96548_f(ScoreObjective par1ScoreObjective) {
@@ -181,13 +181,13 @@ public class ServerScoreboard extends Scoreboard {
     public void func_96546_g(ScoreObjective par1ScoreObjective) {
         List<Packet> var2 = this.func_96548_f(par1ScoreObjective);
 
-        for (EntityPlayerMP var4 : this.field_96555_a.getConfigurationManager().playerEntityList) {
+        for (EntityPlayerMP var4 : this.minecraftServer.getConfigurationManager().playerEntityList) {
             for (Packet var6 : var2) {
                 var4.playerNetServerHandler.sendPacket(var6);
             }
         }
 
-        this.field_96553_b.remove(par1ScoreObjective);
+        this.objectives.remove(par1ScoreObjective);
     }
 
     public int func_96552_h(ScoreObjective par1ScoreObjective) {
