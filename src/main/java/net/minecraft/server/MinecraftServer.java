@@ -269,11 +269,6 @@ public abstract class MinecraftServer implements ICommandSender, Runnable, IPlay
             for (int var12 = -192; var12 <= 192 && this.isServerRunning(); var12 += 16) {
                 long var13 = getCurrentMillis();
 
-                if (var13 - var9 > 1000L) {
-                    this.outputPercentRemaining("Preparing spawn area", var5 * 100 / 625);
-                    var9 = var13;
-                }
-
                 ++var5;
                 var7.theChunkProviderServer.loadChunk(var8.posX + var11 >> 4, var8.posZ + var12 >> 4);
             }
