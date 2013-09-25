@@ -3,6 +3,7 @@ package org.minetweak.command;
 import org.minetweak.Minetweak;
 import org.minetweak.chat.TabCompletion;
 import org.minetweak.chat.TextColor;
+import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;
 import org.minetweak.world.World;
 
