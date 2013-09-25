@@ -2,6 +2,7 @@ package org.minetweak.command;
 
 import org.minetweak.Minetweak;
 import org.minetweak.chat.TabCompletion;
+import org.minetweak.chat.TextColor;
 import org.minetweak.console.Console;
 import org.minetweak.entity.Player;
 import org.minetweak.server.GameMode;
@@ -45,7 +46,7 @@ public class CommandGamemode extends CommandExecutor {
         } else {
             Player player = Minetweak.getPlayerByName(args[1].toLowerCase());
             if (player == null) {
-                sender.sendMessage("Player does not exist.");
+                sender.sendMessage(TextColor.RED + "Player does not exist.");
                 return;
             }
             setPlayerGamemode(player, gamemode);

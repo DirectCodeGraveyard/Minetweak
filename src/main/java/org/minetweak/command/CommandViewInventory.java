@@ -1,6 +1,7 @@
 package org.minetweak.command;
 
 import org.minetweak.Minetweak;
+import org.minetweak.chat.TextColor;
 import org.minetweak.entity.Player;
 
 public class CommandViewInventory extends CommandExecutor {
@@ -10,18 +11,16 @@ public class CommandViewInventory extends CommandExecutor {
         if (!sender.hasPermission("minetweak.command.viewinv")) {
             noPermission(sender, "view inventories");
             return;
-        }
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("Only Players can use this command.");
+        } else if (!(sender instanceof Player)) {
+            sender.sendMessage("");
             return;
-        }
-        if (args.length < 1) {
-            sender.sendMessage("Usage: /" + overallCommand + " player");
+        } else if (args.length != 1) {
+            notPlayer(sender);
             return;
         }
         Player target = Minetweak.getPlayerByName(args[0]);
         if (target == null) {
-            sender.sendMessage(args[0] + " is offline.");
+            sender.sendMessage(TextColor.RED + "Player does not exist.");
             return;
         }
         Player player = (Player) sender;

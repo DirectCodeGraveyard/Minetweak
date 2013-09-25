@@ -2,6 +2,7 @@ package org.minetweak.command;
 
 import org.minetweak.Minetweak;
 import org.minetweak.chat.TabCompletion;
+import org.minetweak.chat.TextColor;
 import org.minetweak.entity.Player;
 import org.minetweak.permissions.ServerOps;
 
@@ -25,17 +26,13 @@ public class CommandDeop extends CommandExecutor {
 
         ServerOps.removeOp(args[0].toLowerCase());
 
-        if (Minetweak.isPlayerOnline(args[0])) {
-            targetPlayer.sendMessage("You have been deopped by: " + sender.getName());
-            sender.sendMessage("You deopped " + args[0]);
-        } else {
-            sender.sendMessage("You deopped " + args[0] + ", who is offline");
-        }
+        targetPlayer.sendMessage(TextColor.GREEN + "You are no longer op!");
+        sender.sendMessage(TextColor.GREEN + "You deopped " + args[0]);
     }
 
     @Override
     public String getHelpInfo() {
-        return "Deops a Player";
+        return "Deop a player";
     }
 
     @Override

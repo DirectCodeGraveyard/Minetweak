@@ -3,6 +3,7 @@ package org.minetweak.command;
 import org.minetweak.Minetweak;
 import org.minetweak.chat.TabCompletion;
 import org.minetweak.chat.TextColor;
+import org.minetweak.entity.Player;
 import org.minetweak.util.StringUtils;
 import org.minetweak.world.World;
 
@@ -15,7 +16,7 @@ public abstract class CommandExecutor implements ICommandExecutor {
 
     @Override
     public String getHelpInfo() {
-        return "Not Specified";
+        return "Not specified";
     }
 
     @Override
@@ -61,11 +62,67 @@ public abstract class CommandExecutor implements ICommandExecutor {
         sender.sendMessage(TextColor.RED + "This command cannot be used by consoles.");
     }
 
+    /**
+     * Get the overworld for the server.
+     *
+     * @return Server overworld
+     */
     public World getOverworld() {
         return Minetweak.getOverworld();
     }
 
+    /**
+     * Get the Minecraft protocol version
+     *
+     * @see <a href="http://wiki.vg/Protocol">Protocol</a>
+     * @return Protocol version
+     */
     public int getProtocolVersion() {
         return Minetweak.getProtocolVersion();
+    }
+
+    /**
+     * Kill a player.
+     *
+     * @param player Player to kill
+     */
+    public void killPlayer(Player player) {
+        player.killPlayer();
+    }
+
+    /**
+     * Kick player from the server.
+     *
+     * @param player Player to kick
+     */
+    public void kickPlayer(Player player) {
+        player.kickPlayer();
+    }
+
+    /**
+     * Kick player from the server with a reason.
+     *
+     * @param player Player to kick
+     * @param reason Reason player was kicked
+     */
+    public void kickPlayer(Player player, String reason) {
+        player.kickPlayer(reason);
+    }
+
+    /**
+     * Ban player from the server.
+     * @param player Player to ban
+     */
+    public void banPlayer(Player player) {
+        player.banPlayer();
+    }
+
+    /**
+     * Ban player from the server with a reason.
+     * @param player Player to ban
+     * @param reason Reason player was banned
+     */
+    public void banPlayer(Player player, String reason) {
+        player.banPlayer(reason);
     }
 }

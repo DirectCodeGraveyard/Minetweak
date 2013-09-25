@@ -2,6 +2,7 @@ package org.minetweak.command;
 
 import org.minetweak.Minetweak;
 import org.minetweak.chat.TabCompletion;
+import org.minetweak.chat.TextColor;
 import org.minetweak.entity.Player;
 import org.minetweak.server.Server;
 
@@ -25,17 +26,13 @@ public class CommandOp extends CommandExecutor {
 
         Server.opPlayer(args[0].toLowerCase());
 
-        if (Minetweak.isPlayerOnline(args[0].toLowerCase())) {
-            targetPlayer.sendMessage("You have been opped by: " + sender.getName());
-            sender.sendMessage("You opped " + args[0]);
-        } else {
-            sender.sendMessage("You opped " + args[0] + " which is offline");
-        }
+        targetPlayer.sendMessage(TextColor.GREEN + "You are now op!");
+        sender.sendMessage(TextColor.GREEN + "You opped " + args[0]);
     }
 
     @Override
     public String getHelpInfo() {
-        return "Ops a Player";
+        return "Op a player";
     }
 
     @Override
