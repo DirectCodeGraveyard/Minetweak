@@ -10,9 +10,9 @@ import java.util.Set;
 
 public class TabCompletion {
     /**
-     * Gets all Commands that are Registered
+     * Get all Commands that are registered
      *
-     * @return List of Commands Registered
+     * @return List of commands registered
      */
     public static Set<String> getCommands() {
         return Minetweak.getCommandExecutors().keySet();
@@ -21,9 +21,9 @@ public class TabCompletion {
     /**
      * Used to get all matches for the input
      *
-     * @param sender Command Sender
-     * @param input  input to parse
-     * @return matches
+     * @param sender Command sender
+     * @param input Input to parse
+     * @return Matches
      */
     public static ArrayList<String> getMatches(CommandSender sender, String input) {
         ArrayList<String> matches = new ArrayList<String>();
@@ -56,10 +56,10 @@ public class TabCompletion {
     }
 
     /**
-     * Gets all Players Matching the Input
+     * Get all players matching the input
      *
-     * @param input input to parse
-     * @return players matching input
+     * @param input Input to parse
+     * @return Players matching input
      */
     public static Set<String> getPlayersMatching(String input) {
         Set<String> matches = new HashSet<String>();
@@ -77,11 +77,11 @@ public class TabCompletion {
     }
 
     /**
-     * Gets the Commands Matching the Input
+     * Get the commands matching the input
      *
-     * @param input    input line
-     * @param addSlash whether to add the slash to the output
-     * @return Commands Matching Input
+     * @param input Input to parse
+     * @param addSlash Add the slash
+     * @return Commands matching input
      */
     public static Set<String> getCommandsMatching(String input, boolean addSlash) {
         Set<String> commands = getCommands();
@@ -104,20 +104,20 @@ public class TabCompletion {
     }
 
     /**
-     * Gets the Commands Matching the Input with the Slashes added
+     * Get the commands matching the input with the slashes added
      *
-     * @param input input line
-     * @return Commands Matching Input
+     * @param input Input line
+     * @return Commands matching input
      */
     public static Set<String> getCommandsMatching(String input) {
         return getCommandsMatching(input, true);
     }
 
     /**
-     * Gets the Players for a command that only needs players in the completions
+     * Get the players for a command that only needs players in the completions
      *
-     * @param input       input to parse
-     * @param completions completions list to add to
+     * @param input Input to parse
+     * @param completions Completions list to add to
      */
     public static void getPlayersOnlyCommand(String input, ArrayList<String> completions) {
         String[] split = input.split(" ");
