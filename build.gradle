@@ -40,7 +40,7 @@ compileGroovy {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "1.8-rc-2"
+    gradleVersion = "1.8"
 }
 
 apply from: 'gradle/ide.gradle'
