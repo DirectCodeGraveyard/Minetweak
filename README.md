@@ -14,8 +14,8 @@ Who makes Minetweak?
 
 Want to help develop Minetweak? Pull requests are welcome! We'd love to have your help!
 
-Reporting Bugs and Making Feature Requests
-==========================================
+Bugs and Feature Requests
+=========================
 
 To report bugs/request features, use the [Minetweak JIRA](https://minetweak.atlassian.net/secure/Dashboard.jspa).
 
