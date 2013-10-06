@@ -8,9 +8,9 @@ Minetweak is a modified Minecraft Server implementation with support for Plugins
 
 Who makes Minetweak?
 --------------------
-- [Logan Gorence](https://github.com/logangorence/) - Developer and Founder
-- [Kenneth Endfinger](https://github.com/kaendfinger/) - Developer and Project Manager
-- [samrg472](https://github.com/samrg472/) - Developer and Contributor
+- [Logan Gorence](https://github.com/logangorence/) - Project Founder and Maintainer
+- [Kenneth Endfinger](https://github.com/kaendfinger/) - Developer
+- [samrg472](https://github.com/samrg472/) - Developer
 
 Want to help develop Minetweak? Pull requests are welcome! We'd love to have your help!
 
