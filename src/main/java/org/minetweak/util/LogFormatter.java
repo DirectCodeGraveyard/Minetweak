@@ -1,5 +1,9 @@
 package org.minetweak.util;
 
+import org.minetweak.config.GameConfig;
+import org.minetweak.groovy.GTools;
+
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
@@ -11,6 +15,7 @@ import java.util.logging.LogRecord;
  */
 public class LogFormatter extends Formatter {
     private SimpleDateFormat dateFormat;
+    private static File file = new File("./minetweak.log");
 
     final TweakLogger logger;
 
@@ -30,13 +35,17 @@ public class LogFormatter extends Formatter {
         builder.append("[").append(record.getLoggerName()).append("] ");
 
         builder.append(this.formatMessage(record));
-        builder.append('\n');
+        builder.append(System.lineSeparator());
         Throwable exception = record.getThrown();
 
         if (exception != null) {
             StringWriter writer = new StringWriter();
             exception.printStackTrace(new PrintWriter(writer));
             builder.append(writer.toString());
+        }
+
+        if (GameConfig.getBoolean("logger.writeToFile")) {
+            GTools.write(file, builder.toString());
         }
 
         return builder.toString();
