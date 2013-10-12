@@ -30,12 +30,12 @@ public enum TextColor {
     UNDERLINE('n', true),
     ITALIC('o', true),
     RESET('r');
-    private static final Map<Character, TextColor> field_96321_w = new HashMap<Character, TextColor>();
-    private static final Map<CharSequence, TextColor> field_96331_x = new HashMap<CharSequence, TextColor>();
-    private static final Pattern field_96330_y = Pattern.compile("(?i)" + String.valueOf('\u00a7') + "[0-9A-FK-OR]");
-    private final char field_96329_z;
-    private final boolean field_96303_A;
-    private final String field_96304_B;
+    private static final Map<Character, TextColor> ids = new HashMap<Character, TextColor>();
+    private static final Map<CharSequence, TextColor> colors = new HashMap<CharSequence, TextColor>();
+    private static final Pattern pattern = Pattern.compile("(?i)" + String.valueOf('\u00a7') + "[0-9A-FK-OR]");
+    private final char id;
+    private final boolean isFormatting;
+    private final String out;
 
     private static ArrayList<String> colorNodes = new ArrayList<String>();
 
@@ -44,9 +44,9 @@ public enum TextColor {
     }
 
     private TextColor(char par3, boolean par4) {
-        this.field_96329_z = par3;
-        this.field_96303_A = par4;
-        this.field_96304_B = "\u00a7" + par3;
+        this.id = par3;
+        this.isFormatting = par4;
+        this.out = "\u00a7" + par3;
     }
 
     public static void initializeColorNodes() {
@@ -78,38 +78,38 @@ public enum TextColor {
         return colorNodes;
     }
 
-    public char func_96298_a() {
-        return this.field_96329_z;
+    public char getID() {
+        return this.id;
     }
 
-    public boolean func_96301_b() {
-        return this.field_96303_A;
+    public boolean isFormatting() {
+        return this.isFormatting;
     }
 
-    public boolean func_96302_c() {
-        return !this.field_96303_A && this != RESET;
+    public boolean isColor() {
+        return !this.isFormatting && this != RESET;
     }
 
-    public String func_96297_d() {
+    public String getName() {
         return this.name().toLowerCase();
     }
 
     public String toString() {
-        return this.field_96304_B;
+        return this.out;
     }
 
     public static TextColor func_96300_b(String par0Str) {
-        return par0Str == null ? null : field_96331_x.get(par0Str.toLowerCase());
+        return par0Str == null ? null : colors.get(par0Str.toLowerCase());
     }
 
-    public static Collection<CharSequence> func_96296_a(boolean par0, boolean par1) {
+    public static Collection<CharSequence> getList(boolean par0, boolean par1) {
         ArrayList<CharSequence> var2 = new ArrayList<CharSequence>();
         TextColor[] var3 = values();
         int var4 = var3.length;
 
         for (TextColor var6 : var3) {
-            if ((!var6.func_96302_c() || par0) && (!var6.func_96301_b() || par1)) {
-                var2.add(var6.func_96297_d());
+            if ((!var6.isColor() || par0) && (!var6.isFormatting() || par1)) {
+                var2.add(var6.getName());
             }
         }
 
@@ -121,8 +121,8 @@ public enum TextColor {
         int var1 = var0.length;
 
         for (TextColor var3 : var0) {
-            field_96321_w.put(var3.func_96298_a(), var3);
-            field_96331_x.put(var3.func_96297_d(), var3);
+            ids.put(var3.getID(), var3);
+            colors.put(var3.getName(), var3);
         }
     }
 }

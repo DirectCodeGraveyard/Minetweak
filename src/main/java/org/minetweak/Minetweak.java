@@ -121,11 +121,11 @@ public class Minetweak {
         // Loads joined player list
         registerListener(PlayerTracker.getInstance());
 
+        // Load Text Colors
+        TextColor.initializeColorNodes();
+
         // Check RAM amount
         ramCheck();
-
-        // Initialize TextColor colorNodes ArrayList that contains the symbol and node
-        TextColor.initializeColorNodes();
 
         // Finally, launch the Minecraft Server
         MinecraftServer.main(args);

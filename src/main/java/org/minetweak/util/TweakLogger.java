@@ -1,9 +1,7 @@
 package org.minetweak.util;
 
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Handler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.IOException;
+import java.util.logging.*;
 
 /**
  * Base Logger for Minetweak Operations
@@ -38,6 +36,13 @@ public class TweakLogger {
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setFormatter(formatter);
         this.logger.addHandler(consoleHandler);
+        try {
+            FileHandler fileHandler = new FileHandler("minetweak.log", true);
+            fileHandler.setFormatter(formatter);
+            this.logger.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -13,9 +13,9 @@ public class PluginLoadingHook {
     public void onServerInitialized(ServerInitializedEvent event) {
         PluginManager.initialize();
 
-        // Load Groovy Scripts
-        if (!GroovyLoader.isLoaded()) {
-            Minetweak.info("Unable to load Groovy Scripts!");
-        }
+        // Load Groovy Scripts (Bugged)
+        // if (!GroovyLoader.isLoaded()) {
+        //    Minetweak.info("Unable to load Groovy Scripts!");
+        // }
     }
 }

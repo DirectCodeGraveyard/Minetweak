@@ -198,7 +198,7 @@ public class Server {
             }
         }
 
-        for (String s : TextColor.getColorNodes()) {
+        for (CharSequence s : TextColor.getColorNodes()) {
             message = message.replace(s, "");
         }
         Minetweak.info(message);

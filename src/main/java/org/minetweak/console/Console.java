@@ -48,11 +48,10 @@ public class Console implements CommandSender {
         return true;
     }
 
-    public static String cleanMessage(String original) {
-        String newMsg = "";
+    public static String cleanMessage(String message) {
         for (String s : TextColor.getColorNodes()) {
-            newMsg = newMsg.replace(s, "");
+            message = message.replace(s, "");
         }
-        return newMsg;
+        return message;
     }
 }
