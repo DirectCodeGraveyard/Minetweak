@@ -1,3 +1,3 @@
 task('ciBuild') {
-    dependsOn 'test', 'uploadArchives', 'buildDashboard'
+    dependsOn 'clean', 'test', 'uploadArchives', 'buildDashboard'
 }

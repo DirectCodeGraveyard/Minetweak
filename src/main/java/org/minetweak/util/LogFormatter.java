@@ -35,7 +35,7 @@ public class LogFormatter extends Formatter {
         builder.append("[").append(record.getLoggerName()).append("] ");
 
         builder.append(this.formatMessage(record));
-        builder.append(System.lineSeparator());
+        builder.append(System.getProperty("line.separator"));
         Throwable exception = record.getThrown();
 
         if (exception != null) {

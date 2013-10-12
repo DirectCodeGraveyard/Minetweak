@@ -1,11 +1,26 @@
 apply plugin: 'groovy'
 apply plugin: 'project-report'
 
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath 'com.github.ben-manes:gradle-versions-plugin:0.4'
+  }
+}
+
+
+apply plugin: 'versions'
 defaultTasks 'jar'
 
 ext.version = '0.6.8'
 ext.tweakVersion = "${ext.version}-SNAPSHOT"
 ext.mainClass = 'org.minetweak.Start'
+
+sourceCompatibility = '1.6'
+targetCompatibility = '1.6'
 
 repositories {
     mavenCentral()
@@ -13,12 +28,12 @@ repositories {
 }
 
 dependencies {
-    compile 'com.google.guava:guava:15.0-rc1'
+    compile 'com.google.guava:guava:15.0'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'commons-io:commons-io:2.4'
     compile 'org.apache.commons:commons-lang3:3.1'
     compile 'org.codehaus.groovy:groovy-all:2.1.7'
-    compile 'org.bouncycastle:bcprov-jdk15on:1.47'
+    compile 'org.bouncycastle:bcprov-jdk15on:1.49'
     compile 'commons-codec:commons-codec:1.8'
     testCompile 'junit:junit:4.11'
     testCompile 'org.codehaus.groovy:groovy-all:2.1.7'
@@ -35,8 +50,6 @@ sourceSets.main.groovy.srcDirs += ["src/main/java"]
 
 compileGroovy {
     options.compilerArgs = ['-Xlint:none', '-XDignore.symbol.file']
-    sourceCompatibility = '1.6'
-    targetCompatibility = '1.6'
 }
 
 task wrapper(type: Wrapper) {
