@@ -22,7 +22,7 @@ public class TabCompletion {
      * Used to get all matches for the input
      *
      * @param sender Command sender
-     * @param input Input to parse
+     * @param input  Input to parse
      * @return Matches
      */
     public static ArrayList<String> getMatches(CommandSender sender, String input) {
@@ -79,7 +79,7 @@ public class TabCompletion {
     /**
      * Get the commands matching the input
      *
-     * @param input Input to parse
+     * @param input    Input to parse
      * @param addSlash Add the slash
      * @return Commands matching input
      */
@@ -116,7 +116,7 @@ public class TabCompletion {
     /**
      * Get the players for a command that only needs players in the completions
      *
-     * @param input Input to parse
+     * @param input       Input to parse
      * @param completions Completions list to add to
      */
     public static void getPlayersOnlyCommand(String input, ArrayList<String> completions) {

@@ -1,6 +1,7 @@
 package org.minetweak.util;
 
-import java.io.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;

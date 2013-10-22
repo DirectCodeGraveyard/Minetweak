@@ -2,13 +2,13 @@ apply plugin: 'groovy'
 apply plugin: 'project-report'
 
 buildscript {
-  repositories {
-    mavenCentral()
-  }
+    repositories {
+        mavenCentral()
+    }
 
-  dependencies {
-    classpath 'com.github.ben-manes:gradle-versions-plugin:0.4'
-  }
+    dependencies {
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.4'
+    }
 }
 
 

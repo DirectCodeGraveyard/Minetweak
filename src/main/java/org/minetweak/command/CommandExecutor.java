@@ -69,8 +69,8 @@ public abstract class CommandExecutor implements ICommandExecutor {
     /**
      * Get the Minecraft protocol version
      *
-     * @see <a href="http://wiki.vg/Protocol">Protocol</a>
      * @return Protocol version
+     * @see <a href="http://wiki.vg/Protocol">Protocol</a>
      */
     public int getProtocolVersion() {
         return Minetweak.getProtocolVersion();
@@ -106,6 +106,7 @@ public abstract class CommandExecutor implements ICommandExecutor {
 
     /**
      * Ban player from the server.
+     *
      * @param player Player to ban
      */
     public void banPlayer(Player player) {
@@ -114,6 +115,7 @@ public abstract class CommandExecutor implements ICommandExecutor {
 
     /**
      * Ban player from the server with a reason.
+     *
      * @param player Player to ban
      * @param reason Reason player was banned
      */

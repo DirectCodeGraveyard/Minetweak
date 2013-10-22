@@ -1,14 +1,17 @@
 package org.minetweak.util;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 
 /**
  * Methods that have to do with HTTP
  */
+@SuppressWarnings("deprecation")
 public class HttpUtils {
 
     /**
@@ -41,6 +44,21 @@ public class HttpUtils {
      */
     public static boolean downloadFile(String path, String url) {
         return downloadFile(new File(path), url);
+    }
+
+    /**
+     * Gets the Content of the URL into a String
+     *
+     * @param url url to parse
+     * @return URL Content
+     */
+    public static String getText(String url) {
+        try {
+            return IOUtils.toString(URI.create(url));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

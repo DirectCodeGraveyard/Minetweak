@@ -1,5 +1,7 @@
 package org.minetweak.util;
 
+import org.minetweak.Start;
+
 import java.io.IOException;
 import java.util.logging.*;
 
@@ -33,9 +35,13 @@ public class TweakLogger {
         }
 
         LogFormatter formatter = new LogFormatter(this);
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(formatter);
-        this.logger.addHandler(consoleHandler);
+
+        if (Start.getInstance() != null && !Start.getInstance().isQuiet()) {
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setFormatter(formatter);
+            this.logger.addHandler(consoleHandler);
+        }
+
         try {
             FileHandler fileHandler = new FileHandler("minetweak.log", true);
             fileHandler.setFormatter(formatter);

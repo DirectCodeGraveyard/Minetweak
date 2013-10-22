@@ -313,7 +313,8 @@ public class DedicatedServer extends MinecraftServer implements IServer {
      * Save all of the server properties to the properties file.
      */
     @Override
-    public void saveProperties() {}
+    public void saveProperties() {
+    }
 
     /**
      * Return the filename where server properties are stored.
@@ -361,6 +362,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
 
     /**
      * Get the log agent for the dedicated server.
+     *
      * @return Dedicated server logger
      */
     @Override

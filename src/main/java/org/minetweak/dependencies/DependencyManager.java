@@ -14,6 +14,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * Manages Dependencies. Downloads them to a Groovy ClassLoader.
+ */
 @SuppressWarnings("FieldCanBeLocal")
 public class DependencyManager {
 
