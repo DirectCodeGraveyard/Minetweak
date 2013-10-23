@@ -2,6 +2,8 @@ package org.minetweak.test
 
 import org.minetweak.util.StringUtils
 
+import static org.junit.Assert.*
+
 class StringUtilsTest extends GroovyTestCase {
     void testDropFirst() {
         def original = ["Hi", "Hello", "Super", "Not"]
