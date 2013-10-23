@@ -10,42 +10,71 @@ import java.lang.annotation.Target;
  */
 public @interface Plugin {
 
-    // Marks the Field for Minetweak to set the current instance of your plugin
+    /**
+     * Injects the Plugin Instance into the static annotated field
+     */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
     public @interface Instance {
     }
 
-    // Injects the Logger into your Plugin
+    /**
+     * Injects the Logger in the annotated field
+     */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
     public @interface Logger {
     }
 
-    // Injects the PluginInfo into your Plugin
+    /**
+     * Injects the PluginInfo in the annotated field
+     */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.FIELD)
     public @interface Info {
     }
 
-    // Marks the Method to be called on Enable
+    /**
+     * Marks a Method for Enable
+     *
+     * @see org.minetweak.plugins.Plugin.Handler
+     */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
+    @Deprecated
     public @interface Enable {
     }
 
-    // Marks the Method to be called on Disable
+    /**
+     * Marks a Method for Disable
+     * @see org.minetweak.plugins.Plugin.Handler
+     */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
+    @Deprecated
     public @interface Disable {
     }
 
-    // Marks the Method to be called on Load
+    /**
+     * Marks a Method for Disable
+     *
+     * @see org.minetweak.plugins.Plugin.Handler
+     */
+    @Deprecated
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
     public @interface Load {
     }
 
+    /**
+     * Marks a Method to handle Plugin Events
+     * <p>Valid Event Types</p>
+     * <ul>
+     *     <li>PluginLoadEvent</li>
+     *     <li>PluginEnableEvent</li>
+     *     <li>PluginDisableEvent</li>
+     * </ul>
+     */
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.METHOD)
     public @interface Handler {
