@@ -56,7 +56,6 @@ task wrapper(type: Wrapper) {
     gradleVersion = "1.8"
 }
 
-apply from: 'gradle/ide.gradle'
 apply from: 'gradle/ci.gradle'
 apply from: 'gradle/jars.gradle'
 apply from: 'gradle/tests.gradle'
