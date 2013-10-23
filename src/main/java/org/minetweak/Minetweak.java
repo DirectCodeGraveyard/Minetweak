@@ -35,17 +35,17 @@ public class Minetweak {
     /**
      * Minecraft version
      */
-    private static final String minecraftVersion = "1.6.4";
+    private static final String minecraftVersion = "1.7.1";
 
     /**
      * Minetweak API version
      */
-    private static String serverVersion = "0.6.8";
+    private static String serverVersion = "0.7.0";
 
     /**
      * Minecraft Protocol Version
      */
-    private static int protocolVersion = 78;
+    private static int protocolVersion = 3;
 
     /**
      * This field returns true if the server has finished the startup process.
