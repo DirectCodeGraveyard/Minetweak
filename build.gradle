@@ -17,7 +17,7 @@ apply plugin: 'versions'
 defaultTasks 'jar'
 
 ext.version = '0.6.8'
-ext.tweakVersion = "${ext.version}-SNAPSHOT"
+ext.tweakVersion = "${ext.version}"
 ext.mainClass = 'org.minetweak.Start'
 
 sourceCompatibility = '1.6'
