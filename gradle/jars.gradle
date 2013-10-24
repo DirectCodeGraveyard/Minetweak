@@ -1,12 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'groovy'
-apply plugin: 'signing'
-
-ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
-
-ext."signing.keyId" = System.getProperty('signing.keyId')
-ext."signing.signing.password" = System.getProperty('signing.password')
-ext."signing.secretKeyRingFile" = System.getProperty('signing.secretKeyRingFile')
 
 jar {
     manifest {
@@ -56,9 +49,4 @@ artifacts {
     archives apiJar
     archives sourcesJar
     archives javadocJar
-}
-
-signing {
-    required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
-    sign configurations.archives
 }
