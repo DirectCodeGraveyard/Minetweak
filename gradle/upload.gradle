@@ -1,8 +1,8 @@
 apply plugin: 'maven'
 
 def credentials = [
-        userName: getProperty("minetweak.deploy.username") ?: System.getProperty("minetweak.deploy.username"),
-        password: getProperty("minetweak.deploy.password") ?: System.getProperty("minetweak.deploy.password")
+        userName: getProperty("minetweak.deploy.username") ?: System.getProperty("minetweak.deploy.username") ?: "",
+        password: getProperty("minetweak.deploy.password") ?: System.getProperty("minetweak.deploy.password") ?: ""
 ]
 
 configurations {

@@ -16,7 +16,7 @@ public class TweakConfig {
      * Initializes Minetweak Config
      */
     public static void initialize() {
-        header("Minetweak configuration file");
+        header("Minetweak Configuration File");
         newLine();
         get(new Property("server.stop.message").addComment("Sets the disconnect message to be displayed to users when the server is stopping"));
         String logLevel = get(new Property("minetweak.log.level", "INFO").addComment("Log Level for Minetweak: Values: INFO/DEBUG/FINE/SEVERE/WARNING"));
@@ -35,6 +35,7 @@ public class TweakConfig {
 
     /**
      * Gets a Config Option
+     *
      * @param key Config Key
      * @return Config Value
      */
@@ -44,6 +45,7 @@ public class TweakConfig {
 
     /**
      * Gets a Config Property
+     *
      * @param property Config Property
      * @return Config Value
      */
@@ -67,6 +69,7 @@ public class TweakConfig {
 
     /**
      * Adds a Comment to the Config File
+     *
      * @param comment Comment
      */
     public static void comment(String comment) {
@@ -75,6 +78,7 @@ public class TweakConfig {
 
     /**
      * Sets the Config File Header
+     *
      * @param header Header
      */
     public static void header(String header) {
@@ -90,6 +94,7 @@ public class TweakConfig {
 
     /**
      * Gets an Option as an Integer
+     *
      * @param key Config Key
      * @return Config Value as Integer
      */
@@ -99,6 +104,7 @@ public class TweakConfig {
 
     /**
      * Gets an Option as a boolean
+     *
      * @param key Config Key
      * @return Config Value
      */
@@ -108,7 +114,8 @@ public class TweakConfig {
 
     /**
      * Gets an Option as a boolean with a default value
-     * @param key Config Key
+     *
+     * @param key   Config Key
      * @param value Default Value
      * @return Config Value
      */
@@ -118,7 +125,8 @@ public class TweakConfig {
 
     /**
      * Gets a Config Option
-     * @param key Config Key
+     *
+     * @param key   Config Key
      * @param value Default Value
      * @return Config Value
      */
@@ -128,7 +136,8 @@ public class TweakConfig {
 
     /**
      * Gets an Option as an Integer
-     * @param key Config Key
+     *
+     * @param key   Config Key
      * @param value Default Value
      * @return Config Value as Integer
      */
@@ -138,6 +147,7 @@ public class TweakConfig {
 
     /**
      * Gets the Config File
+     *
      * @return Config File
      */
     public static File getConfigFile() {
