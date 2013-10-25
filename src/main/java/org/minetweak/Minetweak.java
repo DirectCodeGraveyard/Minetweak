@@ -4,7 +4,7 @@ import com.google.common.eventbus.EventBus;
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.chat.TextColor;
 import org.minetweak.command.*;
-import org.minetweak.config.GameConfig;
+import org.minetweak.config.TweakConfig;
 import org.minetweak.dependencies.DependencyManager;
 import org.minetweak.entity.Player;
 import org.minetweak.entity.player.PlayerTracker;
@@ -100,7 +100,7 @@ public class Minetweak {
         launcherCheck();
 
         // Load the most important things first
-        GameConfig.initialize();
+        TweakConfig.initialize();
         PermissionsLoader.load();
         PlayerWhitelist.load();
         ServerOps.load();

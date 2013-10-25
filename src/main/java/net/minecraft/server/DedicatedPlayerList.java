@@ -1,6 +1,6 @@
 package net.minecraft.server;
 
-import org.minetweak.config.GameConfig;
+import org.minetweak.config.TweakConfig;
 import org.minetweak.permissions.PlayerWhitelist;
 import org.minetweak.permissions.ServerOps;
 
@@ -23,7 +23,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     @Override
     public void setWhiteListEnabled(boolean par1) {
         super.setWhiteListEnabled(par1);
-        GameConfig.set("server.whitelist-enabled", String.valueOf(par1));
+        TweakConfig.set("server.whitelist-enabled", String.valueOf(par1));
     }
 
     /**
@@ -92,7 +92,7 @@ public class DedicatedPlayerList extends ServerConfigurationManager {
     @Override
     public boolean isAllowedToLogin(String par1Str) {
         par1Str = par1Str.trim().toLowerCase();
-        return !GameConfig.getBoolean("server.whitelist-enabled") || this.areCommandsAllowed(par1Str) || PlayerWhitelist.isPlayerWhitelisted(par1Str);
+        return !TweakConfig.getBoolean("server.whitelist-enabled") || this.areCommandsAllowed(par1Str) || PlayerWhitelist.isPlayerWhitelisted(par1Str);
     }
 
     public DedicatedServer getDedicatedServerInstance() {

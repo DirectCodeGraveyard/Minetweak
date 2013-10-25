@@ -30,7 +30,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.ChunkCoordinates;
 import org.minetweak.Minetweak;
-import org.minetweak.config.GameConfig;
+import org.minetweak.config.TweakConfig;
 import org.minetweak.entity.Player;
 import org.minetweak.event.player.PlayerLeaveEvent;
 import org.minetweak.permissions.PlayerWhitelist;
@@ -827,7 +827,7 @@ public abstract class ServerConfigurationManager {
      */
     public void removeAllPlayers() {
         while (!this.playerEntityList.isEmpty()) {
-            (this.playerEntityList.get(0)).playerNetServerHandler.kickPlayer(GameConfig.get("server"));
+            (this.playerEntityList.get(0)).playerNetServerHandler.kickPlayer(TweakConfig.get("server"));
         }
     }
 

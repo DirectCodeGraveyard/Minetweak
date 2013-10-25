@@ -2,7 +2,7 @@ package org.minetweak.command;
 
 import net.minecraft.server.MinecraftServer;
 import org.minetweak.chat.TextColor;
-import org.minetweak.config.GameConfig;
+import org.minetweak.config.TweakConfig;
 import org.minetweak.server.Difficulty;
 import org.minetweak.server.Server;
 
@@ -23,7 +23,7 @@ public class CommandDifficulty extends CommandExecutor {
 
         Difficulty parsedDifficulty = Difficulty.getByName(args[0]);
         if (parsedDifficulty != null) {
-            GameConfig.set("server.difficulty", String.valueOf(parsedDifficulty.getID()));
+            TweakConfig.set("server.difficulty", String.valueOf(parsedDifficulty.getID()));
             MinecraftServer.getServer().setDifficultyForAllWorlds(parsedDifficulty.getID());
             Server.sendToOps(TextColor.GREEN + "Difficulty was changed to: " + TextColor.RED + "peaceful");
         } else {

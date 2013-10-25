@@ -1,15 +1,17 @@
 package org.minetweak.chat;
 
-import org.minetweak.config.GameConfig;
 import org.minetweak.config.Property;
+import org.minetweak.config.TweakConfig;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
-@SuppressWarnings({"MismatchedQueryAndUpdateOfCollection", "UnusedDeclaration"})
+/**
+ * Enumerator representing Text Formatting Options (Mainly Colors)
+ * <p>Colors may also be configurable via the TweakConfig</p>
+ */
 public enum TextColor {
     BLACK('0'),
     DARK_BLUE('1'),
@@ -33,9 +35,7 @@ public enum TextColor {
     UNDERLINE('n', true),
     ITALIC('o', true),
     RESET('r');
-    private static final Map<Character, TextColor> ids = new HashMap<Character, TextColor>();
     private static final Map<CharSequence, TextColor> colors = new HashMap<CharSequence, TextColor>();
-    private static final Pattern pattern = Pattern.compile("(?i)" + String.valueOf('\u00a7') + "[0-9A-FK-OR]");
     private final char id;
     private final boolean isFormatting;
     private final String out;
@@ -112,22 +112,20 @@ public enum TextColor {
         return colors.get(requested);
     }
 
-    public static Collection<CharSequence> getList(boolean par0, boolean par1) {
-        ArrayList<CharSequence> var2 = new ArrayList<CharSequence>();
-        TextColor[] var3 = values();
-        int var4 = var3.length;
+    public static Collection<CharSequence> getColorList(boolean includeColors, boolean includeOther) {
+        ArrayList<CharSequence> colorList = new ArrayList<CharSequence>();
 
-        for (TextColor var6 : var3) {
-            if ((!var6.isColor() || par0) && (!var6.isFormatting() || par1)) {
-                var2.add(var6.getName());
+        for (TextColor color : TextColor.values()) {
+            if ((!color.isColor() || includeColors) && (!color.isFormatting() || includeOther)) {
+                colorList.add(color.getName());
             }
         }
 
-        return var2;
+        return colorList;
     }
 
     public static TextColor getConfigurableColor(String name, TextColor defaultColor) {
-        String colorName = GameConfig.get(new Property(name).addComment("Type: Color"));
+        String colorName = TweakConfig.get(new Property(name).addComment("Type: Color"));
         if (colorName==null) {
             return defaultColor;
         }
@@ -139,12 +137,8 @@ public enum TextColor {
     }
 
     static {
-        TextColor[] var0 = values();
-        int var1 = var0.length;
-
-        for (TextColor var3 : var0) {
-            ids.put(var3.getID(), var3);
-            colors.put(var3.getName(), var3);
+        for (TextColor color : TextColor.values()) {
+            colors.put(color.getName(), color);
         }
     }
 }

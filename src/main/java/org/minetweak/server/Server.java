@@ -5,7 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.utils.chat.ChatMessageComponent;
 import org.minetweak.Minetweak;
 import org.minetweak.chat.TextColor;
-import org.minetweak.config.GameConfig;
+import org.minetweak.config.TweakConfig;
 import org.minetweak.console.Console;
 import org.minetweak.entity.Player;
 import org.minetweak.permissions.ServerOps;
@@ -178,7 +178,7 @@ public class Server {
      * @return True if the whitelist is enabled
      */
     public static boolean isWhitelistEnabled() {
-        return GameConfig.getBoolean("server.whitelist-enabled");
+        return TweakConfig.getBoolean("server.whitelist-enabled");
     }
 
     /**

@@ -2,7 +2,7 @@ package net.minecraft.server.rcon;
 
 import net.minecraft.server.IServer;
 import net.minecraft.server.MinecraftServer;
-import org.minetweak.config.GameConfig;
+import org.minetweak.config.TweakConfig;
 
 import java.io.IOException;
 import java.net.*;
@@ -111,8 +111,8 @@ public class RConThreadQuery extends RConThreadBase {
         if (0 == this.queryPort) {
             this.queryPort = this.serverPort;
             this.logInfo("Setting default query port to " + this.queryPort);
-            GameConfig.set("query.port", "" + this.queryPort);
-            GameConfig.set("debug", "" + false);
+            TweakConfig.set("query.port", "" + this.queryPort);
+            TweakConfig.set("debug", "" + false);
         }
 
         this.field_72644_p = new HashMap();
