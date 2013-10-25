@@ -62,10 +62,14 @@ public class TaskScheduler {
         return new TimerTask() {
             @Override
             public void run() {
+                if (task.isCanceled()) {
+                    this.cancel();
+                    return;
+                }
                 if (useThread) {
-                    task.runInThread();
+                    new Thread(task).start();
                 } else {
-                    task.run();
+                    task.execute();
                 }
             }
         };

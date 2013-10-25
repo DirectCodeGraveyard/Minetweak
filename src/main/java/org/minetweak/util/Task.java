@@ -1,51 +1,37 @@
 package org.minetweak.util;
 
-import groovy.lang.Closure;
-
-/**
- * Represents a Task to run on a Scheduler
- * Note: Task implements Runnable
- */
 public abstract class Task implements Runnable {
 
+    private boolean canceled;
+
     /**
-     * Creates a new Task from a Runnable
-     *
-     * @param runner runnable
-     * @return task
+     * Used to run in Threads
      */
-    public static Task newTask(final Runnable runner) {
-        return new Task() {
-            @Override
-            public void run() {
-                runner.run();
-            }
-        };
+    @Override
+    public void run() {
+        execute();
     }
 
     /**
-     * Creates a new Task from a Closure
-     *
-     * @param closure closure
-     * @return task
+     * Executes this Task
      */
-    public static Task newTask(final Closure closure) {
-        return new Task() {
-            @Override
-            public void run() {
-                closure.call();
-            }
-        };
+    public abstract void execute();
+
+    /**
+     * Is this task Cancelled
+     *
+     * @return true if canceled
+     */
+    public boolean isCanceled() {
+        return canceled;
     }
 
     /**
-     * Runs this Task in a new Thread
+     * Sets if the Task is Canceled
      *
-     * @return thread
+     * @param canceled task canceled
      */
-    public Thread runInThread() {
-        Thread thread = new Thread(this);
-        thread.start();
-        return thread;
+    public void setCanceled(boolean canceled) {
+        this.canceled = canceled;
     }
 }

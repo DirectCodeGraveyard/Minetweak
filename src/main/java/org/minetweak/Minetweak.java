@@ -35,7 +35,7 @@ public class Minetweak {
     /**
      * Minecraft version
      */
-    private static final String minecraftVersion = "1.7.1";
+    private static final String minecraftVersion = "1.7.2";
 
     /**
      * Minetweak API version
