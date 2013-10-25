@@ -1,9 +1,22 @@
 apply plugin: 'maven'
 
-def credentials = [
-        userName: getProperty("minetweak.deploy.username") ?: System.getProperty("minetweak.deploy.username") ?: "",
-        password: getProperty("minetweak.deploy.password") ?: System.getProperty("minetweak.deploy.password") ?: ""
-]
+def credentials = []
+
+if (hasProperty("minetweak.deploy.username")) {
+    credentials['userName'] = getProperty("minetweak.deploy.username")
+} else if (System.hasProperty("minetweak.deploy.username")) {
+    credentials['userName'] = System.getProperty("minetweak.deploy.username")
+} else {
+    credentials['userName'] = ""
+}
+
+if (hasProperty("minetweak.deploy.password")) {
+    credentials['password'] = getProperty("minetweak.deploy.password")
+} else if (System.hasProperty("minetweak.deploy.password")) {
+    credentials['password'] = System.getProperty("minetweak.deploy.password")
+} else {
+    credentials['password'] = ""
+}
 
 configurations {
     deployerJars
