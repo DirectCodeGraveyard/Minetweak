@@ -1,5 +1,8 @@
 package org.minetweak.chat;
 
+import org.minetweak.config.GameConfig;
+import org.minetweak.config.Property;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -98,8 +101,15 @@ public enum TextColor {
         return this.out;
     }
 
-    public static TextColor func_96300_b(String par0Str) {
-        return par0Str == null ? null : colors.get(par0Str.toLowerCase());
+    public static TextColor getByName(String requested) {
+        if (requested==null) {
+            return null;
+        }
+        requested = requested.toLowerCase();
+        if (!colors.containsKey(requested)) {
+            return null;
+        }
+        return colors.get(requested);
     }
 
     public static Collection<CharSequence> getList(boolean par0, boolean par1) {
@@ -114,6 +124,18 @@ public enum TextColor {
         }
 
         return var2;
+    }
+
+    public static TextColor getConfigurableColor(String name, TextColor defaultColor) {
+        String colorName = GameConfig.get(new Property(name).addComment("Type: Color"));
+        if (colorName==null) {
+            return defaultColor;
+        }
+        TextColor color = getByName(colorName);
+        if (color==null) {
+            return defaultColor;
+        }
+        return color;
     }
 
     static {

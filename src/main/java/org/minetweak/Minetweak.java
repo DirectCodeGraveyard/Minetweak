@@ -45,7 +45,7 @@ public class Minetweak {
     /**
      * Minecraft Protocol Version
      */
-    private static int protocolVersion = 3;
+    private static int protocolVersion = 78;
 
     /**
      * This field returns true if the server has finished the startup process.

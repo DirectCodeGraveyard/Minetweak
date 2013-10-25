@@ -28,7 +28,7 @@ public class Server {
      */
     public static boolean broadcastMessage(String message) {
         if (Minetweak.isServerDoneLoading()) {
-            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.createPremade(String.format("[%s%s%s] %s", TextColor.GOLD, "Server", TextColor.RESET, message)));
+            MinecraftServer.getServer().getConfigurationManager().sendChatMessageToAll(ChatMessageComponent.createPremade(String.format("[%s%s%s] %s", TextColor.getConfigurableColor("broadcast.server.color", TextColor.DARK_PURPLE), "Server", TextColor.RESET, message)));
             return true;
         } else {
             return false;
@@ -118,7 +118,7 @@ public class Server {
         if (Minetweak.doesCommandExist(commandWithArgs[0])) {
             Minetweak.getCommandByName(commandWithArgs[0]).executeCommand(Minetweak.getPlayerByName(player.getEntityName()), commandOnly, args);
         } else {
-            player.addChatMessage(TextColor.RED + "No Such Command: " + commandOnly);
+            player.addChatMessage(TextColor.getConfigurableColor("command.notfound.color", TextColor.RED) + "No Such Command: " + commandOnly);
         }
     }
 
