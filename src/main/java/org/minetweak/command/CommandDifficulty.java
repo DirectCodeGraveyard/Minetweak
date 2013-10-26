@@ -25,7 +25,7 @@ public class CommandDifficulty extends CommandExecutor {
         if (parsedDifficulty != null) {
             TweakConfig.set("server.difficulty", String.valueOf(parsedDifficulty.getID()));
             MinecraftServer.getServer().setDifficultyForAllWorlds(parsedDifficulty.getID());
-            Server.sendToOps(TextColor.GREEN + "Difficulty was changed to: " + TextColor.RED + "peaceful");
+            Server.sendToOps(TextColor.GREEN + "Difficulty was changed to: " + TextColor.GREEN + parsedDifficulty.toString().toLowerCase());
         } else {
             sender.sendMessage(TextColor.RED + "That difficulty does not exist.");
         }
