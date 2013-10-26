@@ -1,5 +1,5 @@
 task('ciBuild') {
-    dependsOn 'clean', 'test', 'buildDashboard'
+    dependsOn 'test', 'assemble', 'buildDashboard'
 }
 
 task('mainCIBuild') {
