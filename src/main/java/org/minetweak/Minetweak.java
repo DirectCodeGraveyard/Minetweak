@@ -371,6 +371,24 @@ public class Minetweak {
     }
 
     /**
+     * Get the nether WorldServer
+     *
+     * @return nether WorldServer
+     */
+    public static World getNether() {
+        return MinecraftServer.getServer().worldServerForDimension(-1).getWorld();
+    }
+
+    /**
+     * Get the end WorldServer
+     *
+     * @return end WorldServer
+     */
+    public static World getEnd() {
+        return MinecraftServer.getServer().worldServerForDimension(1).getWorld();
+    }
+
+    /**
      * Is Minetweak running using the launcher?
      *
      * @return is using launcher
