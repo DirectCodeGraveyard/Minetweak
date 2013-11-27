@@ -25,6 +25,7 @@ public class Start {
     public void start(String[] args, boolean sayVersion) {
         if (sayVersion) {
             Minetweak.info("Starting Minetweak v" + Minetweak.getAPIVersion() + " implementing Minecraft v" + Minetweak.getMinecraftVersion());
+            Minetweak.info("Keep in mind, this isn't a 1.7 compatible server. It is just the branch, which does not support 1.7 yet. We are likely moving to a Forge-based platform.");
         }
         Minetweak.main(args);
     }
